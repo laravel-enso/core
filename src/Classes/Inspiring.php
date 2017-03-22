@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace LaravelEnso\Core\Classes;
 
 use Illuminate\Support\Collection;
 

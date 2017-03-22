@@ -22,5 +22,10 @@
         "laravel-enso/datatable": "^1.0",
         "laravel-enso/nullablefields": "^1.0.0",
         "laravel-enso/actionlogger": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\Core\\": "src/"
+        }
     }
 }

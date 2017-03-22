@@ -6,7 +6,6 @@ class MenuGenerator
 {
     private $menus;
     private $activeMenusIds;
-    private $currentMenuDetector;
     public $html;
 
     public function __construct($menus)
