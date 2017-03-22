@@ -1,0 +1,26 @@
+{
+    "name": "laravel-enso/core",
+    "description": "Laravel Enso Core v3.0. A solid base for all laravel-enso packages.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mishu",
+            "email": "mishu@xtelecom.ro"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.4.*",
+        "laracasts/flash": "^2.0",
+        "jenssegers/date": "^3.2",
+        "guzzlehttp/guzzle": "~6.0",
+        "doctrine/dbal": "^2.5",
+        "laravel-enso/helpers": "^1.0",
+        "laravel-enso/charts": "^1.0",
+        "laravel-enso/select": "^1.0.0",
+        "laravel-enso/filemanager": "^1.0.0",
+        "laravel-enso/datatable": "^1.0",
+        "laravel-enso/nullablefields": "^1.0.0",
+        "laravel-enso/actionlogger": "^1.0"
+    }
+}
