@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePermissionsGroupsTable extends Migration
 {
@@ -13,12 +13,10 @@ class CreatePermissionsGroupsTable extends Migration
     public function up()
     {
         Schema::create('permissions_groups', function (Blueprint $table) {
-
             $table->increments('id');
             $table->string('name');
             $table->string('description');
             $table->timestamps();
-
         });
 
         DB::insert(
@@ -44,7 +42,7 @@ class CreatePermissionsGroupsTable extends Migration
                 ('core.preferences','Preferences Group')"
         );
 
-        $now = "'" . date("Y-m-d H:i:s") . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `permissions_groups` set created_at = $now, updated_at = $now");
     }

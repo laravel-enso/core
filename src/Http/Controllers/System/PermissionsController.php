@@ -3,17 +3,16 @@
 namespace LaravelEnso\Core\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\Models\Role;
 use LaravelEnso\Core\DataTable\PermissionsTableStructure;
 use LaravelEnso\Core\Enums\PermissionTypesEnum;
 use LaravelEnso\Core\Http\Requests\ValidatePermissionRequest;
 use LaravelEnso\Core\Models\Permission;
 use LaravelEnso\Core\Models\PermissionsGroup;
+use LaravelEnso\Core\Models\Role;
 use LaravelEnso\DataTable\Traits\DataTable;
 
 class PermissionsController extends Controller
 {
-
     use DataTable;
     protected $tableStructureClass = PermissionsTableStructure::class;
 
@@ -42,9 +41,9 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        $permissionTypeEnum    = new PermissionTypesEnum;
+        $permissionTypeEnum = new PermissionTypesEnum();
         $permissionTypeOptions = $permissionTypeEnum->getData();
-        $permissionsGroups     = PermissionsGroup::all()->pluck('name', 'id');
+        $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
 
         return view('core::pages.system.permissions.create', compact('permissionTypeOptions', 'permissionsGroups'));
     }
@@ -53,7 +52,7 @@ class PermissionsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ValidatePermissionRequest $request
-     * @param Permission $permission
+     * @param Permission                $permission
      *
      * @return \Illuminate\Http\Response
      */
@@ -62,30 +61,29 @@ class PermissionsController extends Controller
         $permission->fill($request->all());
 
         \DB::transaction(function () use ($permission) {
-
             $permission->save();
             $permission->roles()->attach(1);
 
-            flash()->success(__("Permission created"));
+            flash()->success(__('Permission created'));
         });
 
-        return redirect('system/permissions/' . $permission->id . '/edit');
+        return redirect('system/permissions/'.$permission->id.'/edit');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function edit(Permission $permission)
     {
         $permission->load('permissions_group');
-        $permissionTypeEnum    = new PermissionTypesEnum;
+        $permissionTypeEnum = new PermissionTypesEnum();
         $permissionTypeOptions = $permissionTypeEnum->getData();
-        $permissionsGroups     = PermissionsGroup::all()->pluck('name', 'id');
-        $roles                 = Role::all()->pluck('name', 'id');
+        $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
+        $roles = Role::all()->pluck('name', 'id');
         $permission->roles_list;
 
         return view('core::pages.system.permissions.edit', compact('permission', 'permissionTypeOptions', 'permissionsGroups', 'roles'));
@@ -94,21 +92,20 @@ class PermissionsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update(ValidatePermissionRequest $request, Permission $permission)
     {
         \DB::transaction(function () use ($request, $permission) {
-
             $permission->fill($request->all());
             $permission->save();
             $roles_list = $request->roles_list ? $request->roles_list : [];
             $permission->roles()->sync($roles_list);
 
-            flash()->success(__("The Changes have been saved!"));
+            flash()->success(__('The Changes have been saved!'));
         });
 
         return back();
@@ -120,7 +117,7 @@ class PermissionsController extends Controller
 
         return [
             'level'   => 'success',
-            'message' => __("Operation was successfull"),
+            'message' => __('Operation was successfull'),
         ];
     }
 }

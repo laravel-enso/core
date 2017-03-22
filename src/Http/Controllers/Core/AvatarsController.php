@@ -10,7 +10,6 @@ use LaravelEnso\FileManager\FileManager;
 
 class AvatarsController extends Controller
 {
-
     private $fileManager;
 
     public function __construct()
@@ -21,12 +20,11 @@ class AvatarsController extends Controller
     public function store()
     {
         if (!request()->file('avatar')->isValid()) {
-
             return reponse()->json([
                 [
-                    'level' => 'error',
-                    'message' => __('File is not valid')
-                ]
+                    'level'   => 'error',
+                    'message' => __('File is not valid'),
+                ],
             ], 500);
         }
 
@@ -35,7 +33,7 @@ class AvatarsController extends Controller
 
     public function show($avatar)
     {
-        $file = Storage::get(env('AVATARS_PATH') . '/' . $avatar);
+        $file = Storage::get(env('AVATARS_PATH').'/'.$avatar);
 
         return response($file, 200);
     }
@@ -43,7 +41,6 @@ class AvatarsController extends Controller
     public function destroy(Avatar $avatar)
     {
         if (!request()->user()->can('updateProfile', $avatar->user)) {
-
             return false;
         }
 
@@ -55,12 +52,12 @@ class AvatarsController extends Controller
 
     private function uploadAvatar()
     {
-         $avatar = null;
+        $avatar = null;
 
-         \DB::transaction(function () use (&$avatar) {
+        \DB::transaction(function () use (&$avatar) {
             $file = request()->file('avatar');
             $this->fileManager->startSingleFileUpload($file);
-            $avatar    = new Avatar($this->fileManager->uploadedFiles->first());
+            $avatar = new Avatar($this->fileManager->uploadedFiles->first());
 
             //fixme -> modify users.show to hide upload button when user has avatar
             $oldAvatar = Avatar::whereUserId(request()->user()->id)->first();

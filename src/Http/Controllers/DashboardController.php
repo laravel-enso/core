@@ -11,16 +11,16 @@ use LaravelEnso\Charts\Classes\RadarChart;
 
 class DashboardController extends Controller
 {
-
     public function index()
     {
         $localPreferences = request()->user()->getPreferences('dashboard');
+
         return view('core::pages.dashboard.index', compact('localPreferences'));
     }
 
     public function getLineChartData()
     {
-        $labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
         $datasets = [
 
@@ -51,7 +51,7 @@ class DashboardController extends Controller
 
     public function getPieChartData()
     {
-        $labels = ["Green", "Red", "Azzure"];
+        $labels = ['Green', 'Red', 'Azzure'];
 
         $datasets = [400, 50, 100];
 
@@ -62,7 +62,7 @@ class DashboardController extends Controller
 
     public function getRadarChartData()
     {
-        $labels = ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
+        $labels = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
 
         $datasets = [
 
@@ -77,7 +77,7 @@ class DashboardController extends Controller
 
     public function getPolarChartData()
     {
-        $labels = ["Green", "Red", "Azzure", "Portocaliu", "Bleu"];
+        $labels = ['Green', 'Red', 'Azzure', 'Portocaliu', 'Bleu'];
 
         $datasets = [11, 16, 7, 14, 14];
 

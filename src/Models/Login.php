@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Login extends Model
 {
-
-	protected $fillable = ['user_id', 'ip'];
+    protected $fillable = ['user_id', 'ip'];
 
     public function user()
     {
@@ -16,6 +15,6 @@ class Login extends Model
 
     public function create(Login $login)
     {
-    	$login->save;
+        $login->save;
     }
 }

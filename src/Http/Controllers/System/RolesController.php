@@ -15,8 +15,8 @@ class RolesController extends Controller
 {
     use DataTable, SelectListBuilderTrait;
 
-    protected $selectSourceClass   = 'LaravelEnso\Core\Models\Role';
-    protected $selectPivotParams   = ['owner_id' => 'owners'];
+    protected $selectSourceClass = 'LaravelEnso\Core\Models\Role';
+    protected $selectPivotParams = ['owner_id' => 'owners'];
     protected $tableStructureClass = RolesTableStructure::class;
 
     public static function getTableQuery()
@@ -33,11 +33,11 @@ class RolesController extends Controller
 
     public function getPermissions(Role $role)
     {
-        $menusList           = ['menus' => Menu::all()];
-        $permissionsGroups   = PermissionsGroup::with('permissions')->get();
-        $roleMenusList       = $role->menus->pluck('id');
+        $menusList = ['menus' => Menu::all()];
+        $permissionsGroups = PermissionsGroup::with('permissions')->get();
+        $roleMenusList = $role->menus->pluck('id');
         $rolePermissionsList = $role->permissions->pluck('id');
-        $permissionsList     = $this->buildPermissionsGroupsStructure($permissionsGroups);
+        $permissionsList = $this->buildPermissionsGroupsStructure($permissionsGroups);
 
         return [
             'menusList'           => $menusList,
@@ -57,7 +57,7 @@ class RolesController extends Controller
 
         return [
             'level'   => 'success',
-            'message' => __("Operation was successfull"),
+            'message' => __('Operation was successfull'),
         ];
     }
 
@@ -70,12 +70,12 @@ class RolesController extends Controller
 
     public function store(ValidateRoleRequest $request)
     {
-        $role = new Role;
+        $role = new Role();
         $role->fill($request->all());
         $role->save();
         flash()->success(__('Role Created'));
 
-        return redirect('system/roles/' . $role->id . '/edit');
+        return redirect('system/roles/'.$role->id.'/edit');
     }
 
     public function edit(Role $role)
@@ -89,7 +89,7 @@ class RolesController extends Controller
     {
         $role->fill($request->all());
         $role->save();
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
@@ -100,24 +100,23 @@ class RolesController extends Controller
 
         return [
             'level'   => 'success',
-            'message' => __("Operation was successfull"),
+            'message' => __('Operation was successfull'),
         ];
     }
 
     private function buildPermissionsGroupsStructure($permissionsGroups, $label = null)
     {
         $structure = [];
-        $labels    = [];
+        $labels = [];
 
         foreach ($permissionsGroups as $permissionsGroup) {
             if (!$label || strpos($permissionsGroup->name, $label) === 0) {
                 if ($permissionsGroup->name == $label) {
-
                     return $permissionsGroup->permissions;
                 } else {
                     $remainingLabels = $label ? substr($permissionsGroup->name, strlen($label) + 1) : $permissionsGroup->name;
-                    $labelsArray     = explode('.', $remainingLabels);
-                    $labels[]        = $labelsArray[0];
+                    $labelsArray = explode('.', $remainingLabels);
+                    $labels[] = $labelsArray[0];
                 }
             }
         }
@@ -125,7 +124,7 @@ class RolesController extends Controller
         $labels = array_unique($labels);
 
         foreach ($labels as $currentLabel) {
-            $structure[$currentLabel] = $this->buildPermissionsGroupsStructure($permissionsGroups, $label ? $label . '.' . $currentLabel : $currentLabel);
+            $structure[$currentLabel] = $this->buildPermissionsGroupsStructure($permissionsGroups, $label ? $label.'.'.$currentLabel : $currentLabel);
         }
 
         return $structure;

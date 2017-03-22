@@ -9,13 +9,12 @@ use LaravelEnso\Core\Models\Preference;
 
 class PreferencesController extends Controller
 {
-
     public static function getPreferences($page)
     {
         $userPreferences = request()->user()->preferences
             ->where('key', $page)->first();
 
-        $defaultPreferencesEnum = new DefaultPreferencesEnum;
+        $defaultPreferencesEnum = new DefaultPreferencesEnum();
 
         $result = $userPreferences ?
             $userPreferences->value
@@ -30,10 +29,9 @@ class PreferencesController extends Controller
             ->where('key', request()->key)->first();
 
         if (!$preferences) {
-
-            $preferences          = new Preference;
+            $preferences = new Preference();
             $preferences->user_id = request()->user()->id;
-            $preferences->key     = request()->key;
+            $preferences->key = request()->key;
         }
 
         $preferences->value = request()->value;
@@ -46,11 +44,10 @@ class PreferencesController extends Controller
         $preferences = request()->user()->preferences
             ->where('key', request()->key)->first();
 
-        $defaultPreferencesEnum = new DefaultPreferencesEnum;
+        $defaultPreferencesEnum = new DefaultPreferencesEnum();
         $defaultPreferences = json_encode($defaultPreferencesEnum->getValueByKey(request()->key));
 
-        if($preferences) {
-
+        if ($preferences) {
             $preferences->value = $defaultPreferences;
             $preferences->save();
         }

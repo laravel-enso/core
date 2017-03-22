@@ -8,13 +8,13 @@ use LaravelEnso\Core\Http\Requests\ValidatePermissionsGroupRequest;
 use LaravelEnso\Core\Models\PermissionsGroup;
 use LaravelEnso\DataTable\Traits\DataTable;
 
-class PermissionsGroupsController extends Controller {
-
+class PermissionsGroupsController extends Controller
+{
     use DataTable;
-    protected $tableStructureClass    = PermissionsGroupsTableStructure::class;
+    protected $tableStructureClass = PermissionsGroupsTableStructure::class;
 
-    public static function getTableQuery() {
-
+    public static function getTableQuery()
+    {
         $query = PermissionsGroup::select(\DB::raw('permissions_groups.id as DT_RowId, permissions_groups.name, permissions_groups.description, permissions_groups.created_at, permissions_groups.updated_at'));
 
         return $query;
@@ -44,7 +44,7 @@ class PermissionsGroupsController extends Controller {
      * Store a newly created resource in storage.
      *
      * @param ValidatePermissionsGroupRequest $request
-     * @param PermissionsGroup $permissionsGroup
+     * @param PermissionsGroup                $permissionsGroup
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,15 +53,15 @@ class PermissionsGroupsController extends Controller {
         $permissionsGroup->fill($request->all());
         $permissionsGroup->save();
 
-        flash()->success(__("Permission created"));
+        flash()->success(__('Permission created'));
 
-        return redirect('system/permissionsGroups/' . $permissionsGroup->id . '/edit');
+        return redirect('system/permissionsGroups/'.$permissionsGroup->id.'/edit');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -73,8 +73,8 @@ class PermissionsGroupsController extends Controller {
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +83,7 @@ class PermissionsGroupsController extends Controller {
         $permissionsGroup->fill($request->all());
         $permissionsGroup->save();
 
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
@@ -91,21 +91,19 @@ class PermissionsGroupsController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(PermissionsGroup $permissionsGroup)
     {
         if ($permissionsGroup->permissions->count()) {
-
             $message = __('Group Has Permissions');
             $level = 'error';
         } else {
-
             $permissionsGroup->delete();
             $level = 'success';
-            $message = __("Operation was successfull");
+            $message = __('Operation was successfull');
         }
 
         return [

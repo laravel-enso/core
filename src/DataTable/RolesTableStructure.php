@@ -6,7 +6,6 @@ use LaravelEnso\DataTable\Abstracts\TableStructure;
 
 class RolesTableStructure extends TableStructure
 {
-
     public function __construct()
     {
         $this->data = [

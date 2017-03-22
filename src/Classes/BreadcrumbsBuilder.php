@@ -14,11 +14,11 @@ class BreadcrumbsBuilder
 
     public function __construct($menus)
     {
-        $this->menus           = $menus;
-        $this->breadcrumbs     = collect();
-        $this->breadcrumbsEnum = new PagesBreadcrumbsEnum;
-        $currentMenuDetector   = new CurrentMenuDetector($menus);
-        $this->currentMenu     = $currentMenuDetector->getData();
+        $this->menus = $menus;
+        $this->breadcrumbs = collect();
+        $this->breadcrumbsEnum = new PagesBreadcrumbsEnum();
+        $currentMenuDetector = new CurrentMenuDetector($menus);
+        $this->currentMenu = $currentMenuDetector->getData();
     }
 
     public function getBreadcrumbs()

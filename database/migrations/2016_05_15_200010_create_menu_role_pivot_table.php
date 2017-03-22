@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateMenuRolePivotTable extends Migration
 {
@@ -13,7 +13,6 @@ class CreateMenuRolePivotTable extends Migration
     public function up()
     {
         Schema::create('menu_role', function (Blueprint $table) {
-
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('menu_id')->unsigned()->index();
@@ -24,11 +23,11 @@ class CreateMenuRolePivotTable extends Migration
 
         DB::insert(
 
-            "INSERT INTO `menu_role` (`menu_id`, `role_id`)
-                select id, 1 from `menus`"
+            'INSERT INTO `menu_role` (`menu_id`, `role_id`)
+                select id, 1 from `menus`'
         );
 
-        $now = "'" . date("Y-m-d H:i:s") . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `menu_role` set created_at = $now, updated_at = $now");
     }

@@ -24,7 +24,7 @@ class ValidatePermissionsGroupRequest extends FormRequest
     public function rules()
     {
         $permissionsGroup = $this->route('permissionsGroup');
-        $name = $this->_method == 'PATCH' ? 'required|unique:permissions_groups,name,' . $permissionsGroup->id . ',id'
+        $name = $this->_method == 'PATCH' ? 'required|unique:permissions_groups,name,'.$permissionsGroup->id.',id'
             : 'required|unique:permissions_groups,name';
 
         return [
