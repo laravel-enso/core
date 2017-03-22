@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRolesTable extends Migration
 {
@@ -13,7 +13,6 @@ class CreateRolesTable extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-
             $table->increments('id');
             $table->integer('menu_id')->unsigned()->index()->nullable();
             $table->foreign('menu_id')->references('id')->on('menus')->onUpdate('restrict')->onDelete('restrict');
@@ -30,7 +29,7 @@ class CreateRolesTable extends Migration
                 (1, 'supervisor','Supervisor','Supervisor')"
         );
 
-        $now = "'" . date("Y-m-d H:i:s") . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `roles` set created_at = $now, updated_at = $now");
     }

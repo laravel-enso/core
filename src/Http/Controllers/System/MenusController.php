@@ -3,17 +3,16 @@
 namespace LaravelEnso\Core\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\Models\Role;
 use LaravelEnso\Core\Classes\MenuManager\TreeMenuBuilder;
 use LaravelEnso\Core\DataTable\MenusTableStructure;
 use LaravelEnso\Core\Enums\IsActiveEnum;
 use LaravelEnso\Core\Http\Requests\ValidateMenuRequest;
 use LaravelEnso\Core\Models\Menu;
+use LaravelEnso\Core\Models\Role;
 use LaravelEnso\DataTable\Traits\DataTable;
 
 class MenusController extends Controller
 {
-
     use DataTable;
 
     protected $tableStructureClass = MenusTableStructure::class;
@@ -43,9 +42,9 @@ class MenusController extends Controller
      */
     public function create()
     {
-        $isActiveEnum       = new IsActiveEnum;
+        $isActiveEnum = new IsActiveEnum();
         $hasChildrenOptions = $isActiveEnum->getData();
-        $menus              = Menu::whereHasChildren(1)->pluck('name', 'id');
+        $menus = Menu::whereHasChildren(1)->pluck('name', 'id');
 
         return view('core::pages.system.menus.create', compact('hasChildrenOptions', 'menus'));
     }
@@ -54,7 +53,7 @@ class MenusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ValidateMenuRequest $request
-     * @param Menu $menu
+     * @param Menu                $menu
      *
      * @return \Illuminate\Http\Response
      */
@@ -69,22 +68,22 @@ class MenusController extends Controller
             flash()->success(__('Menu Created'));
         });
 
-        return redirect('system/menus/' . $menu->id . '/edit');
+        return redirect('system/menus/'.$menu->id.'/edit');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function edit(Menu $menu)
     {
-        $isActiveEnum       = new IsActiveEnum;
+        $isActiveEnum = new IsActiveEnum();
         $hasChildrenOptions = $isActiveEnum->getData();
-        $menus              = Menu::whereHasChildren(true)->pluck('name', 'id');
-        $roles              = Role::all()->pluck('name', 'id');
+        $menus = Menu::whereHasChildren(true)->pluck('name', 'id');
+        $roles = Role::all()->pluck('name', 'id');
         $menu->roles_list;
 
         return view('core::pages.system.menus.edit', compact('menu', 'hasChildrenOptions', 'menus', 'roles'));
@@ -93,8 +92,8 @@ class MenusController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,7 +105,7 @@ class MenusController extends Controller
             $roles_list = $request->roles_list ? $request->roles_list : [];
             $menu->roles()->sync($roles_list);
 
-            flash()->success(__("The Changes have been saved!"));
+            flash()->success(__('The Changes have been saved!'));
         });
 
         return back();
@@ -115,7 +114,7 @@ class MenusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -123,11 +122,11 @@ class MenusController extends Controller
     {
         if ($menu->children->count()) {
             $message = __('Menu Has Children');
-            $level   = 'error';
+            $level = 'error';
         } else {
             $menu->delete();
-            $level   = 'success';
-            $message = __("Operation was successfull");
+            $level = 'success';
+            $message = __('Operation was successfull');
         }
 
         return [
@@ -138,9 +137,9 @@ class MenusController extends Controller
 
     public function reorder()
     {
-        $menus         = Menu::orderBy('order')->get();
+        $menus = Menu::orderBy('order')->get();
         $menuGenerator = new TreeMenuBuilder($menus);
-        $treeMenu      = $menuGenerator->getData();
+        $treeMenu = $menuGenerator->getData();
 
         return view('core::pages.system.menus.reorder', compact('treeMenu'));
     }
@@ -152,7 +151,7 @@ class MenusController extends Controller
             $this->updateMenu($menus, null);
         });
 
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
     }
 
     private function updateMenu($menus, $id)
@@ -161,7 +160,7 @@ class MenusController extends Controller
 
         foreach ($menus as $element) {
             $order++;
-            $menu            = Menu::find($element['unique_id']);
+            $menu = Menu::find($element['unique_id']);
             $menu->parent_id = $id;
 
             if (count($element['children'])) {

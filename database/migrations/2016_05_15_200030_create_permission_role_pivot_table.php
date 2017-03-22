@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePermissionRolePivotTable extends Migration
 {
@@ -13,7 +13,6 @@ class CreatePermissionRolePivotTable extends Migration
     public function up()
     {
         Schema::create('permission_role', function (Blueprint $table) {
-
             $table->integer('permission_id')->unsigned()->index();
             $table->foreign('permission_id')->references('id')->on('permissions')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('role_id')->unsigned()->index();
@@ -24,11 +23,11 @@ class CreatePermissionRolePivotTable extends Migration
 
         DB::insert(
 
-            "INSERT INTO `permission_role` (`permission_id`, `role_id`)
-                select id, 1 from `permissions`"
+            'INSERT INTO `permission_role` (`permission_id`, `role_id`)
+                select id, 1 from `permissions`'
         );
 
-        $now = "'" . date("Y-m-d H:i:s") . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `permission_role` set created_at = $now, updated_at = $now");
     }

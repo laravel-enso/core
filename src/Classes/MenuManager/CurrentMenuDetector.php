@@ -6,7 +6,6 @@ use LaravelEnso\Helpers\Classes\AbstractObject;
 
 class CurrentMenuDetector extends AbstractObject
 {
-
     private $menus;
     private $path;
     public $menu;
@@ -18,10 +17,10 @@ class CurrentMenuDetector extends AbstractObject
         $this->menu = $this->get();
     }
 
-	private function get()
+    private function get()
     {
         if (is_null($this->path)) {
-            return null;
+            return;
         }
 
         $currentMenu = $this->getCurrentMenu();

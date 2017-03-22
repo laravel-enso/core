@@ -6,7 +6,6 @@ use LaravelEnso\Core\Models\Login;
 
 class LogSuccessfulLoginListener
 {
-
     /**
      * Create the event listener.
      *
@@ -20,7 +19,8 @@ class LogSuccessfulLoginListener
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param Login $event
+     *
      * @return void
      */
     public function handle()

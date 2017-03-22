@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\Models;
 
-use LaravelEnso\NullableFields\Traits\NullableFields;
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\NullableFields\Traits\NullableFields;
 
 class Menu extends Model
 {

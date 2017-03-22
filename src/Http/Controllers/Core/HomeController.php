@@ -3,12 +3,11 @@
 namespace LaravelEnso\Core\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\Models\Menu;
 use App\User;
+use LaravelEnso\Core\Models\Menu;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         $menu = request()->user()->role->menu;

@@ -6,7 +6,6 @@ use LaravelEnso\DataTable\Abstracts\TableStructure;
 
 class PermissionsTableStructure extends TableStructure
 {
-
     public function __construct()
     {
         $this->data = [

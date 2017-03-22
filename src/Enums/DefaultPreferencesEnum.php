@@ -6,7 +6,6 @@ use LaravelEnso\Helpers\Classes\AbstractEnum;
 
 class DefaultPreferencesEnum extends AbstractEnum
 {
-
     public function __construct()
     {
         $this->data = [

@@ -6,13 +6,12 @@ use LaravelEnso\Helpers\Classes\AbstractEnum;
 
 class PermissionTypesEnum extends AbstractEnum
 {
-
     public function __construct()
-	{
-		$this->data = [
+    {
+        $this->data = [
 
-	        0 => __('read'),
-	        1 => __('write'),
-	    ];
-	}
+            0 => __('read'),
+            1 => __('write'),
+        ];
+    }
 }

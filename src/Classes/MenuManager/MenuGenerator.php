@@ -2,8 +2,6 @@
 
 namespace LaravelEnso\Core\Classes\MenuManager;
 
-use LaravelEnso\Core\Classes\MenuManager\CurrentMenuDetector;
-
 class MenuGenerator
 {
     private $menus;
@@ -13,16 +11,16 @@ class MenuGenerator
 
     public function __construct($menus)
     {
-        $this->menus          = $menus;
-        $menuDetector         = new CurrentMenuDetector($menus);
-        $this->currentMenu    = $menuDetector->getData();
+        $this->menus = $menus;
+        $menuDetector = new CurrentMenuDetector($menus);
+        $this->currentMenu = $menuDetector->getData();
         $this->activeMenusIds = $this->getActiveMenusIds();
         $this->generateMenu();
     }
 
     private function getActiveMenusIds()
     {
-        $ids         = collect();
+        $ids = collect();
         $currentMenu = $this->currentMenu;
 
         while ($currentMenu) {
@@ -35,7 +33,7 @@ class MenuGenerator
 
     private function generateMenu()
     {
-        $this->html = '<aside class="main-sidebar"><section class="sidebar"><ul class="sidebar-menu"><li class="header">' . __("Main Menu") . '</li>';
+        $this->html = '<aside class="main-sidebar"><section class="sidebar"><ul class="sidebar-menu"><li class="header">'.__('Main Menu').'</li>';
 
         $this->buildCurrentLevelMenu();
 
@@ -45,7 +43,7 @@ class MenuGenerator
     private function buildCurrentLevelMenu($parentId = null)
     {
         foreach ($this->menus as $menu) {
-            $class = $this->isActive($menu) ? "active" : "";
+            $class = $this->isActive($menu) ? 'active' : '';
 
             if ($menu->parent_id !== $parentId) {
                 continue;
@@ -66,7 +64,7 @@ class MenuGenerator
 
     private function addMenuWithChildren($menu, $class)
     {
-        $this->html .= '<li class="' . $class . '">';
+        $this->html .= '<li class="'.$class.'">';
         $icon = '<i class="fa fa-angle-left pull-right"></i>';
         $this->addMenuLabel($menu, $icon);
         $this->html .= '<ul class="treeview-menu">';
@@ -76,14 +74,14 @@ class MenuGenerator
 
     private function addMenu($menu, $class)
     {
-        $this->html .= '<li class ="' . $class . '">';
+        $this->html .= '<li class ="'.$class.'">';
         $this->addMenuLabel($menu);
         $this->html .= '</li>';
     }
 
     private function addMenuLabel($menu, $angle = '')
     {
-        $link = $menu->has_children ? '#' : ('/' . $menu->link);
-        $this->html .= "<a href = '" . $link . "'><i class = '" . $menu->icon . "'></i><span>" . __($menu->name) . "</span>$angle</a>";
+        $link = $menu->has_children ? '#' : ('/'.$menu->link);
+        $this->html .= "<a href = '".$link."'><i class = '".$menu->icon."'></i><span>".__($menu->name)."</span>$angle</a>";
     }
 }

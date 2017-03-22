@@ -1,9 +1,9 @@
 <?php
 
-use LaravelEnso\Core\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\Models\Permission;
 use LaravelEnso\Core\Models\PermissionsGroup;
+use LaravelEnso\Core\Models\Role;
 
 class InsertPermissionsForLogManager extends Migration
 {

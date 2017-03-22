@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateResourcePermissionsRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -19,5 +18,4 @@ class ValidateResourcePermissionsRequest extends FormRequest
             'permissions_group_id' => 'required|exists:permissions_groups,id',
         ];
     }
-
 }

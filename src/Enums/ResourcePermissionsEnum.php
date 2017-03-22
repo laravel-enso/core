@@ -6,7 +6,6 @@ use LaravelEnso\Helpers\Classes\AbstractEnum;
 
 class ResourcePermissionsEnum extends AbstractEnum
 {
-
     public function __construct()
     {
         $this->data = [

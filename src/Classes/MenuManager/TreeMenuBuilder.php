@@ -2,8 +2,6 @@
 
 namespace LaravelEnso\Core\Classes\MenuManager;
 
-use LaravelEnso\Core\Models\Menu;
-
 class TreeMenuBuilder
 {
     private $treeMenu = [];

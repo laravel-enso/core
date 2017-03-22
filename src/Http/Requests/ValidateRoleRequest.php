@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateRoleRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -15,7 +14,7 @@ class ValidateRoleRequest extends FormRequest
     public function rules()
     {
         $role = $this->route('role');
-        $name = $this->_method == 'PATCH' ? 'required|unique:roles,name,' . $role->id . ',id'
+        $name = $this->_method == 'PATCH' ? 'required|unique:roles,name,'.$role->id.',id'
             : 'required|unique:roles,name';
 
         return [
