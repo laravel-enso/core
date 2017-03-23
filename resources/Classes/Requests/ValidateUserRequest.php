@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateUserRequest extends FormRequest
 {
-
     public function authorize()
     {
         return true;
@@ -17,8 +16,8 @@ class ValidateUserRequest extends FormRequest
         $user = $this->route('user');
 
         if ($this->_method == 'PATCH') {
-            $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users,email,' . $user->id . ',id'];
-            $nin = 'max:13|unique:users,nin,' . $user->id . ',id|nin';
+            $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users,email,'.$user->id.',id'];
+            $nin = 'max:13|unique:users,nin,'.$user->id.',id|nin';
         } else {
             $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users'];
             $nin = 'max:13|unique:users|nin';

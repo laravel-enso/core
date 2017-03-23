@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,7 +13,6 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-
             $table->increments('id');
             $table->integer('owner_id')->unsigned()->index('owner_id');
             $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('restrict')->onDelete('restrict');
@@ -42,5 +40,4 @@ class CreateUsersTable extends Migration
     {
         Schema::drop('users');
     }
-
 }

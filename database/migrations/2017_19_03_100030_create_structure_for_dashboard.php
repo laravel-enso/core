@@ -11,7 +11,6 @@ class CreateStructureForDashboard extends Migration
      *
      * @return void
      */
-
     private $permissionsGroup = [
         'name' => 'dashboard', 'description' => 'Dashboard Permissions Group',
     ];
@@ -21,7 +20,7 @@ class CreateStructureForDashboard extends Migration
     ];
 
     private $menu = [
-        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0
+        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0,
     ];
 
     private $parentMenu;

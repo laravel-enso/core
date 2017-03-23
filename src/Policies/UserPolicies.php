@@ -7,7 +7,6 @@ use LaravelEnso\Core\Models\User;
 
 class UserPolicies
 {
-
     use HandlesAuthorization;
 
     /**

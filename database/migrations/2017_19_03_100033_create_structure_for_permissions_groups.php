@@ -23,7 +23,7 @@ class CreateStructurePermissionsGroups extends Migration
     ];
 
     private $menu = [
-        'name' => 'Permissions Groups', 'icon' => 'fa fa-fw fa-object-group', 'link' => 'system/permissionsGroups', 'has_children' => 0
+        'name' => 'Permissions Groups', 'icon' => 'fa fa-fw fa-object-group', 'link' => 'system/permissionsGroups', 'has_children' => 0,
     ];
 
     private $parentMenu;

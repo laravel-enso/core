@@ -8,7 +8,6 @@ use LaravelEnso\Core\Policies\UserPolicies;
 
 class AuthServiceProvider extends ServiceProvider
 {
-
     /**
      * The policy mappings for the application.
      *
@@ -29,7 +28,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         \Gate::define('accessRoute', function ($user, $route) {
-
             return $user->hasAccessTo($route);
         });
     }

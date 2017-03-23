@@ -15,11 +15,10 @@ use LaravelEnso\Select\Traits\SelectListBuilderTrait;
 
 class OwnersController extends Controller
 {
-
     use DataTable, SelectListBuilderTrait;
 
     protected $tableStructureClass = OwnersTableStructure::class;
-    protected $selectSourceClass   = 'LaravelEnso\Core\Models\Owner';
+    protected $selectSourceClass = 'LaravelEnso\Core\Models\Owner';
 
     public static function getTableQuery()
     {
@@ -38,10 +37,10 @@ class OwnersController extends Controller
 
     public function create()
     {
-        $isIndividualEnum = new IsIndividualEnum;
-        $types            = $isIndividualEnum->getData();
-        $isActiveEnum     = new IsActiveEnum;
-        $statuses         = $isActiveEnum->getData();
+        $isIndividualEnum = new IsIndividualEnum();
+        $types = $isIndividualEnum->getData();
+        $isActiveEnum = new IsActiveEnum();
+        $statuses = $isActiveEnum->getData();
 
         return view('core::pages.administration.owners.create', compact('types', 'statuses'));
     }
@@ -52,9 +51,9 @@ class OwnersController extends Controller
 
         $owner->save();
 
-        flash()->success(__("The Entity was created!"));
+        flash()->success(__('The Entity was created!'));
 
-        return redirect('administration/owners/' . $owner->id . '/edit');
+        return redirect('administration/owners/'.$owner->id.'/edit');
     }
 
     public function show(Owner $owner)
@@ -65,13 +64,13 @@ class OwnersController extends Controller
     public function edit(Owner $owner)
     {
         $owner->roles_list;
-        $isIndividualEnum = new IsIndividualEnum;
-        $types            = $isIndividualEnum->getData();
-        $isActiveEnum     = new IsActiveEnum;
-        $statuses         = $isActiveEnum->getData();
+        $isIndividualEnum = new IsIndividualEnum();
+        $types = $isIndividualEnum->getData();
+        $isActiveEnum = new IsActiveEnum();
+        $statuses = $isActiveEnum->getData();
 
         // excluding "admin" role for Owners <> Admin
-        $id    = request()->user()->owner->id === 1 ?: 2;
+        $id = request()->user()->owner->id === 1 ?: 2;
         $roles = Role::where('id', '>=', $id)->get()->pluck('name', 'id');
 
         return view('core::pages.administration.owners.edit', compact('owner', 'roles', 'types', 'statuses'));
@@ -80,14 +79,13 @@ class OwnersController extends Controller
     public function update(ValidateOwnerRequest $request, Owner $owner)
     {
         \DB::transaction(function () use ($request, $owner) {
-
             $owner->fill($request->all());
             $owner->save();
 
             $roles_list = $request->roles_list ?: [];
             $owner->roles()->sync($roles_list);
 
-            flash()->success(__("The Changes have been saved!"));
+            flash()->success(__('The Changes have been saved!'));
         });
 
         return back();
@@ -96,21 +94,18 @@ class OwnersController extends Controller
     public function destroy(Owner $owner)
     {
         try {
-
             $owner->delete();
         } catch (\Exception $exception) {
-
             $response = [
                 'level'   => 'error',
-                'message' => __("An error has occured. Please report this to the administrator"),
+                'message' => __('An error has occured. Please report this to the administrator'),
             ];
         }
 
         if (!isset($response)) {
-
             $response = [
                 'level'   => 'success',
-                'message' => __("Operation was successfull"),
+                'message' => __('Operation was successfull'),
             ];
         }
 

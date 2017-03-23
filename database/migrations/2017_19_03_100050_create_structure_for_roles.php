@@ -26,7 +26,7 @@ class CreateStructureForRoles extends Migration
     ];
 
     private $menu = [
-        'name' => 'Roles', 'icon' => 'fa fa-fw fa-universal-access', 'link' => 'system/roles', 'has_children' => 0
+        'name' => 'Roles', 'icon' => 'fa fa-fw fa-universal-access', 'link' => 'system/roles', 'has_children' => 0,
     ];
 
     private $parentMenu;

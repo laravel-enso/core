@@ -27,7 +27,7 @@ class CreateMenuRolePivotTable extends Migration
                 select id, 1 from `menus`'
         );
 
-        $now = "'" . date('Y-m-d H:i:s') . "'";
+        $now = "'".date('Y-m-d H:i:s')."'";
 
         DB::update("update `menu_role` set created_at = $now, updated_at = $now");
     }

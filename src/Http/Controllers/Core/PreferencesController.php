@@ -3,9 +3,9 @@
 namespace LaravelEnso\Core\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Enums\DefaultPreferencesEnum;
 use LaravelEnso\Core\Models\Preference;
+use LaravelEnso\Core\Models\User;
 
 class PreferencesController extends Controller
 {

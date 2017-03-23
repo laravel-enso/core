@@ -18,7 +18,9 @@ class StructureDestruction
                 $this->permissionsGroup->delete();
             }
 
-            if ($this->menu) $this->menu->delete();
+            if ($this->menu) {
+                $this->menu->delete();
+            }
         });
     }
 

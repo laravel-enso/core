@@ -18,11 +18,11 @@ class StructureCreation
 
     public function __construct()
     {
-        $this->defaultRoles     = config('laravel-enso.defaultRoles');
+        $this->defaultRoles = config('laravel-enso.defaultRoles');
         $this->permissionsGroup = null;
-        $this->permissions      = collect();
-        $this->menu             = null;
-        $this->parentMenu       = null;
+        $this->permissions = collect();
+        $this->menu = null;
+        $this->parentMenu = null;
     }
 
     public function up()
@@ -30,7 +30,6 @@ class StructureCreation
         $this->checkIfRolesGiven();
 
         \DB::transaction(function () {
-
             $this->createPermissions();
             $this->createMenu();
         });
@@ -41,7 +40,6 @@ class StructureCreation
         if (!$this->roles) {
             $this->setRoles([$defaultRole]);
         }
-
     }
 
     private function createPermissions()
