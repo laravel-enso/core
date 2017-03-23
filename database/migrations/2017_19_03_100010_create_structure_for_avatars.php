@@ -17,7 +17,7 @@ class CreateStructureForAvatars extends Migration
         ['name' => 'core.avatars.store', 'description' => 'Upload Avatar', 'type' => 1]
     ];
 
-    private $menu;
-    private $parentMenu;
-    private $roles;
+    // private $menu;
+    // private $parentMenu;
+    // private $roles;
 }

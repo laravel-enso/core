@@ -23,6 +23,6 @@ class CreateStructureForDashboard extends Migration
         'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0,
     ];
 
-    private $parentMenu;
-    private $roles;
+    // private $parentMenu;
+    // private $roles;
 }

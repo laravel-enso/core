@@ -31,6 +31,6 @@ class CreateStructureForUsers extends Migration
         'name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0
     ];
 
-    private $parentMenu = 'Administration';
-    private $roles;
+    // private $parentMenu = 'Administration';
+    // private $roles;
 }

@@ -19,6 +19,6 @@ class CreateStructureForSystem extends Migration
         'name' => 'System', 'icon' => 'fa fa-fw fa-sliders', 'link' => null, 'has_children' => 1,
     ];
 
-    private $parentMenu;
-    private $roles;
+    // private $parentMenu;
+    // private $roles;
 }

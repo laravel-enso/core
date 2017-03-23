@@ -16,7 +16,7 @@ class CreateStructureForPreferences extends Migration
         ['name' => 'core.preferences.resetToDefaut', 'description' => 'Reset to default preferences', 'type' => 1],
     ];
 
-    private $menu;
-    private $parentMenu;
-    private $roles;
+    // private $menu;
+    // private $parentMenu;
+    // private $roles;
 }

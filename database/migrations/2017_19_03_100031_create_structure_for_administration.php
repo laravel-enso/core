@@ -19,6 +19,6 @@ class CreateStructureForAdministration extends Migration
         'name' => 'Administration', 'icon' => 'fa fa-fw fa-cogs', 'link' => null, 'has_children' => 1,
     ];
 
-    private $parentMenu;
-    private $roles;
+    // private $parentMenu;
+    // private $roles;
 }

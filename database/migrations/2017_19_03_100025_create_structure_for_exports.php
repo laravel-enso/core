@@ -15,7 +15,7 @@ class CreateStructureForExports extends Migration
         ['name' => 'core.export.getUsers', 'description' => 'Generates an xls users export and sends it by email to the user that made the request', 'type' => 1],
     ];
 
-    private $menu;
-    private $parentMenu;
-    private $roles;
+    // private $menu;
+    // private $parentMenu;
+    // private $roles;
 }

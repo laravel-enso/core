@@ -28,6 +28,6 @@ class CreateStructureForMenus extends Migration
         'name' => 'Menus', 'icon' => 'fa fa-fw fa-list', 'link' => 'system/menus', 'has_children' => 0,
     ];
 
-    private $parentMenu;
-    private $roles;
+    // private $parentMenu;
+    // private $roles;
 }

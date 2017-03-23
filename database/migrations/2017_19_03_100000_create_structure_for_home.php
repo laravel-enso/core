@@ -15,7 +15,7 @@ class CreateStructureForHome extends Migration
         ['name' => 'home', 'description' => 'Welcome Page', 'type' => 0],
     ];
 
-    private $menu;
-    private $parentMenu;
-    private $roles;
+    // private $menu;
+    // private $parentMenu;
+    // private $roles;
 }

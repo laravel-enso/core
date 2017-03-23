@@ -28,6 +28,6 @@ class CreateStructureForPermissions extends Migration
         'name' => 'Permissions', 'icon' => 'fa fa-fw fa-exclamation-triangle', 'link' => 'system/permissions', 'has_children' => 0,
     ];
 
-    private $parentMenu;
-    private $roles;
+    // private $parentMenu;
+    // private $roles;
 }
