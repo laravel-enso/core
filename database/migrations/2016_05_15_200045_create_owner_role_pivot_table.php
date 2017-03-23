@@ -13,7 +13,6 @@ class CreateOwnerRolePivotTable extends Migration
     public function up()
     {
         Schema::create('owner_role', function (Blueprint $table) {
-
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('owner_id')->unsigned()->index();

@@ -2,20 +2,17 @@
 
 namespace App\Jobs;
 
-use App\Mail\UsersReportMail;
 use App\Notifications\UsersExportNotification;
-use LaravelEnso\Core\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use LaravelEnso\Core\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateUsersExportJob implements ShouldQueue
 {
-
     use InteractsWithQueue, Queueable, SerializesModels;
 
     /**
@@ -35,14 +32,12 @@ class GenerateUsersExportJob implements ShouldQueue
      *
      * @return void
      */
-
     public function handle()
     {
         $result = [];
-        $users  = User::with('owner')->with('role')->get();
+        $users = User::with('owner')->with('role')->get();
 
         foreach ($users as $key => $user) {
-
             switch ($user->is_active) {
 
                 case 0:
@@ -68,15 +63,12 @@ class GenerateUsersExportJob implements ShouldQueue
         }
 
         Excel::create('Raport Users', function ($excel) use ($result) {
-
             $excel->sheet('Sheet 1', function ($sheet) use ($result) {
-
                 $sheet->fromArray($result);
                 $sheet->setAutoFilter('A1:I1');
                 $sheet->freezeFirstRowAndColumn();
                 $sheet->setAllBorders('thin');
                 $sheet->cells('A1:I1', function ($cells) {
-
                     $cells->setFontWeight('bold');
                 });
             });
@@ -84,7 +76,7 @@ class GenerateUsersExportJob implements ShouldQueue
 
         $user = $this->user;
 
-        $user->notify(new UsersExportNotification);
+        $user->notify(new UsersExportNotification());
 
         Storage::delete('exports/Raport Users.xlsx');
     }

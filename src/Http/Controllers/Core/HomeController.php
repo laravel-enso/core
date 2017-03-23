@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Models\Menu;
+use LaravelEnso\Core\Models\User;
 
 class HomeController extends Controller
 {

@@ -14,10 +14,9 @@ use LaravelEnso\DataTable\Traits\DataTableEditor;
 
 class UsersController extends Controller
 {
-
     use SendsPasswordResetEmails, DataTable, DataTableEditor;
 
-    protected $tableStructureClass    = UsersTableStructure::class;
+    protected $tableStructureClass = UsersTableStructure::class;
 
     public static function getTableQuery()
     {
@@ -43,11 +42,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $user = new User;
+        $user = new User();
 
         $roles = [];
 
-        $id     = request()->user()->owner->id === 1 ?: 2;
+        $id = request()->user()->owner->id === 1 ?: 2;
         $owners = Owner::where('id', '>=', $id)->active()->get()->pluck('name', 'id');
 
         return view('core::pages.administration.users.create', compact('owners', 'user', 'roles'));
@@ -57,28 +56,31 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param ValidateUserRequest|Request $request
-     * @param User $user
+     * @param User                        $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ValidateUserRequest $request, User $user)
     {
         $user->fill($request->all());
-        $user->email    = $request->email;
+        $user->email = $request->email;
         $user->owner_id = $request->owner_id;
         $user->save();
 
-        flash()->success(__("The User was created!"));
+        flash()->success(__('The User was created!'));
 
         $this->sendResetLinkEmail($request);
 
-        return redirect('administration/users/' . $user->id . '/edit');
+        return redirect('administration/users/'.$user->id.'/edit');
     }
 
     /**
      * Display the specified resource.
      *
      * @param User $user
+     *
      * @return \Illuminate\Http\Response
+     *
      * @internal param int $id
      */
     public function show(User $user)
@@ -96,7 +98,9 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
+     *
      * @return \Illuminate\Http\Response
+     *
      * @internal param int $id
      */
     public function edit(User $user)
@@ -105,7 +109,7 @@ class UsersController extends Controller
             ->load('role');
 
         // excluding "Admin" Owner for Users that do not belong to 'Admin'
-        $id     = request()->user()->owner->id === 1 ?: 2;
+        $id = request()->user()->owner->id === 1 ?: 2;
         $owners = Owner::where('id', '>=', $id)->active()->get()->pluck('name', 'id');
 
         $roles = $user->owner->roles->pluck('name', 'id');
@@ -117,8 +121,10 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param ValidateUserRequest|Request $request
-     * @param User $user
+     * @param User                        $user
+     *
      * @return \Illuminate\Http\Response
+     *
      * @internal param int $id
      */
     public function update(ValidateUserRequest $request, User $user)
@@ -126,7 +132,7 @@ class UsersController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
@@ -134,8 +140,7 @@ class UsersController extends Controller
     public function updateProfile(ValidateUserRequest $request, User $user)
     {
         if (request()->user()->cannot('updateProfile', $user)) {
-
-            flash()->warning(__("You are not authorized for this action"));
+            flash()->warning(__('You are not authorized for this action'));
 
             return back();
         }
@@ -143,7 +148,7 @@ class UsersController extends Controller
         $user->fill($request->all());
         $user->save();
 
-        flash()->success(__("The Changes have been saved!"));
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
@@ -151,15 +156,18 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-/**
- * Remove the specified resource from storage.
- *
- * @param  int $id
- * @return \Illuminate\Http\Response
- */
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(User $user)
     {
         try {
@@ -167,15 +175,16 @@ class UsersController extends Controller
         } catch (\Exception $exception) {
             $response = [
                 'level'   => 'error',
-                'message' => __("An error has occured. Please report this to the administrator"),
+                'message' => __('An error has occured. Please report this to the administrator'),
             ];
         }
         if (!isset($response)) {
             $response = [
                 'level'   => 'success',
-                'message' => __("Operation was successfull"),
+                'message' => __('Operation was successfull'),
             ];
         }
+
         return $response;
     }
 
@@ -184,7 +193,7 @@ class UsersController extends Controller
         $user = User::find($id);
 
         \Auth::user()->setImpersonating($user->id);
-        flash()->warning(__("Impersonating") . ' ' . $user->full_name);
+        flash()->warning(__('Impersonating').' '.$user->full_name);
 
         return redirect()->back();
     }
@@ -193,7 +202,7 @@ class UsersController extends Controller
     {
         \Auth::user()->stopImpersonating();
 
-        flash()->success(__("Welcome Back"));
+        flash()->success(__('Welcome Back'));
 
         return redirect()->back();
     }

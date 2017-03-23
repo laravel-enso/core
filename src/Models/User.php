@@ -4,15 +4,14 @@ namespace LaravelEnso\Core\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Enso\Notifications\ResetPasswordNotification;
+use Laravel\Passport\HasApiTokens;
 use LaravelEnso\CnpValidator\Validations;
 use LaravelEnso\Core\Enums\IsActiveEnum;
 use LaravelEnso\Core\Http\Controllers\Core\PreferencesController;
-use Laravel\Enso\Notifications\ResetPasswordNotification;
-use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-
     use Notifiable, HasApiTokens;
 
     protected $fillable = [
@@ -50,8 +49,8 @@ class User extends Authenticatable
         return $this->hasMany('LaravelEnso\Core\Models\Preference');
     }
 
-    public function comments() {
-
+    public function comments()
+    {
         return $this->hasMany('LaravelEnso\CommentsManager\Comment');
     }
 
@@ -62,7 +61,7 @@ class User extends Authenticatable
 
     public function getAvatarLinkAttribute()
     {
-        return $this->avatar ? '/core/avatars/' . $this->avatar->saved_name : asset('/images/profile.png');
+        return $this->avatar ? '/core/avatars/'.$this->avatar->saved_name : asset('/images/profile.png');
     }
 
     public function getLanguageAttribute()
@@ -117,7 +116,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getCreatedDateAttribute()
@@ -130,24 +129,20 @@ class User extends Authenticatable
         $birthday = 'N/A';
 
         if ($this->nin && Validations::validatorNin('', $this->nin)) {
-
-            $type  = substr($this->nin, 0, 1);
-            $year  = substr($this->nin, 1, 2);
+            $type = substr($this->nin, 0, 1);
+            $year = substr($this->nin, 1, 2);
             $month = substr($this->nin, 3, 2);
-            $day   = substr($this->nin, 5, 2);
+            $day = substr($this->nin, 5, 2);
 
             if ($type == '5' || $type == '6') {
-
-                $year = '20' . $year;
+                $year = '20'.$year;
             } else {
-
-                $year = '19' . $year;
+                $year = '19'.$year;
             }
 
-            $birthday = \Date::parse($year . $month . $day)->format('d-m-Y');
+            $birthday = \Date::parse($year.$month.$day)->format('d-m-Y');
 
             if ($birthday == \Date::now()->format('d-m-Y')) {
-
                 $birthday = __('Happy Birthday');
             }
         }
@@ -157,7 +152,7 @@ class User extends Authenticatable
 
     public function getActiveLabelAttribute()
     {
-        $isActiveEnum = new IsActiveEnum;
+        $isActiveEnum = new IsActiveEnum();
 
         return $isActiveEnum->getValueByKey($this->is_active);
     }

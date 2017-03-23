@@ -7,7 +7,6 @@ use LaravelEnso\DataTable\Abstracts\TableStructure;
 
 class UsersTableStructure extends TableStructure
 {
-
     public function __construct()
     {
         $this->data = [
