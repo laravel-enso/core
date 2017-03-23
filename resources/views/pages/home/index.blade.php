@@ -10,7 +10,7 @@
     <body>
         <center>
             <div class="content">
-                <div class="title">{{ App\Utils\Inspiring::quote() }}</div>
+                <div class="title">{{ LaravelEnso\Core\Classes\Inspiring::quote() }}</div>
                 <br>
                 <a id="enter" href="/{{ $menu->link }}" class="btn btn-primary">{{ __("Enter the application") }}</a>
                 <!-- <a id="enter" href="/admin" class="btn btn-info">{{ __('Monitoring') }}</a> -->

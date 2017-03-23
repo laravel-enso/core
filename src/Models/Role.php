@@ -21,12 +21,12 @@ class Role extends Model
 
     public function owners()
     {
-        return $this->belongsToMany('App\Owner');
+        return $this->belongsToMany('LaravelEnso\Core\Models\Owner');
     }
 
     public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('LaravelEnso\Core\Models\User');
     }
 
     public function permissions()

@@ -20,16 +20,6 @@ class CreatePermissionRolePivotTable extends Migration
             $table->timestamps();
             $table->primary(['permission_id', 'role_id']);
         });
-
-        DB::insert(
-
-            'INSERT INTO `permission_role` (`permission_id`, `role_id`)
-                select id, 1 from `permissions`'
-        );
-
-        $now = "'".date('Y-m-d H:i:s')."'";
-
-        DB::update("update `permission_role` set created_at = $now, updated_at = $now");
     }
 
     /**
