@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\Models\Role;
 use LaravelEnso\Core\Models\User;
 
 class InsertDefaultUsers extends Migration
@@ -13,7 +12,7 @@ class InsertDefaultUsers extends Migration
      */
     public function up()
     {
-        $defaults = ['owner_id' => 1, 'role_id' => 1, 'nin' => NULL, 'is_active' => 1];
+        $defaults = ['owner_id' => 1, 'role_id' => 1, 'nin' => null, 'is_active' => 1];
 
         $users = [
             ['password' => '$2y$10\$MkcUlQGX9ME2VT8SMCQ4fuzPcf0H55vGDizd/hKblYvQ1OdfYGtDO', 'first_name' => 'Adi', 'last_name' => 'Ocneanu', 'email' => 'aocneanu@gmail.com', 'phone' => '0722443377'],

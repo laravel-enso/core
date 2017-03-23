@@ -11,13 +11,12 @@ class CreateStructureForSystem extends Migration
      *
      * @return void
      */
-
     private $permissionsGroup;
 
     private $permissions;
 
     private $menu = [
-        'name' => 'System', 'icon' => 'fa fa-fw fa-sliders', 'link' => null, 'has_children' => 1
+        'name' => 'System', 'icon' => 'fa fa-fw fa-sliders', 'link' => null, 'has_children' => 1,
     ];
 
     private $parentMenu;

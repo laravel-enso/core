@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateOwnersTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,7 +13,6 @@ class CreateOwnersTable extends Migration
     public function up()
     {
         Schema::create('owners', function (Blueprint $table) {
-
             $table->increments('id');
             $table->string('name')->unique('name');
             $table->string('fiscal_code')->unique('fiscal_code')->nullable();
@@ -43,5 +41,4 @@ class CreateOwnersTable extends Migration
     {
         Schema::drop('owners');
     }
-
 }

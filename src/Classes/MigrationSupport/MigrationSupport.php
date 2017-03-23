@@ -2,8 +2,6 @@
 
 namespace LaravelEnso\Core\Classes\MigrationSupport;
 
-use LaravelEnso\Core\Classes\MigrationSupport\StructureCreation;
-use LaravelEnso\Core\Classes\MigrationSupport\StructureDestruction;
 use LaravelEnso\Core\Models\PermissionsGroup;
 
 trait MigrationSupport
@@ -15,11 +13,15 @@ trait MigrationSupport
             return;
         }
 
-        $structureManager = new StructureCreation;
+        $structureManager = new StructureCreation();
 
-        if ($this->permissionsGroup) $structureManager->setPermissionsGroup(($this->permissionsGroup));
+        if ($this->permissionsGroup) {
+            $structureManager->setPermissionsGroup(($this->permissionsGroup));
+        }
 
-        if ($this->menu) $migrationSuport->setMenu($this->menu);
+        if ($this->menu) {
+            $migrationSuport->setMenu($this->menu);
+        }
 
         $structureManager->create();
     }

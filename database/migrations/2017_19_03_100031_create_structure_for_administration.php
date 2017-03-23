@@ -11,13 +11,12 @@ class CreateStructureForAdministration extends Migration
      *
      * @return void
      */
-
     private $permissionsGroup;
 
     private $permissions;
 
     private $menu = [
-        'name' => 'Administration', 'icon' => 'fa fa-fw fa-cogs', 'link' => null, 'has_children' => 1
+        'name' => 'Administration', 'icon' => 'fa fa-fw fa-cogs', 'link' => null, 'has_children' => 1,
     ];
 
     private $parentMenu;
