@@ -5,8 +5,8 @@ A solid base for all laravel-enso packages.
 ### Configuration steps:
 
 Console/Kernel.php
->>>
 
+```php
 protected function schedule(Schedule $schedule)
 {
     $schedule->call(function () {
@@ -15,12 +15,11 @@ protected function schedule(Schedule $schedule)
         $logReporting->checkLaravelLog();
     })->everyTenMinutes();
 }
-
->>>
+```
 
 Exceptions/Handler.php
->>>
 
+```php
 public function render($request, Exception $exception)
 {
     if ($exception instanceof TokenMismatchException) {
@@ -29,19 +28,17 @@ public function render($request, Exception $exception)
 
     return parent::render($request, $exception);
 }
-
->>>
+```
 
 Http/Controllers/Auth/LoginController.php
->>>
 
+```php
 protected $redirectTo = '/';
-
->>>
+```
 
 Http/Controllers/Auth/RegisterController.php => replace content with
->>>
 
+```php
 public function showRegistrationForm()
 {
     return redirect('/');
@@ -51,19 +48,17 @@ public function register(Request $request)
 {
     return redirect('/');
 }
-
->>>
+```
 
 Http/Controllers/Auth/ResetPasswordController.php
->>>
 
+```php
 protected $redirectTo = '/';
-
->>>
+```
 
 app/Http/Kernel.php => add to $middlewareGroups array
->>>
 
+```php
 'core' => [
 
     \LaravelEnso\Core\Http\Middleware\VerifyActiveState::class,
@@ -71,11 +66,10 @@ app/Http/Kernel.php => add to $middlewareGroups array
     \LaravelEnso\ActionLogger\Http\Middleware\ActionLogger::class,
     \LaravelEnso\Core\Http\Middleware\Impersonate::class,
     \LaravelEnso\Localisation\Http\Middleware\SetLanguage::class
-];
+]
+```
 
->>>
-
-Create in storage\app folder the following folders:
+create in storage\app folder the following folders:
 
 avatars
 imports
