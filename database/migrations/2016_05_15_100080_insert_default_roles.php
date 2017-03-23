@@ -13,15 +13,16 @@ class InsertDefaultRoles extends Migration
      */
     public function up()
     {
-        $roles = [
-            ['menu_id' => 1, 'name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
-            ['menu_id' => 1, 'name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role. Full featured.'],
-        ];
-
-        $menus = Menu::all();
-
         \DB::transaction(function () {
+            $roles = [
+                ['menu_id' => 1, 'name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
+                ['menu_id' => 1, 'name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role. Full featured.'],
+            ];
+
+            $menus = Menu::all();
+
             foreach ($roles as $role) {
+
                 $role = new Role($role);
                 $role->save();
                 $role->attach($menus);
