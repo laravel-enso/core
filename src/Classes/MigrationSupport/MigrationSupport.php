@@ -2,43 +2,36 @@
 
 namespace LaravelEnso\Core\Classes\MigrationSupport;
 
+use LaravelEnso\Core\Classes\MigrationSupport\StructureDestruction;
+use LaravelEnso\Core\Models\Menu;
 use LaravelEnso\Core\Models\PermissionsGroup;
 
 trait MigrationSupport
 {
-    private function up()
+    public function up()
     {
-        //fixme: to be removed after migrating all apps to Laravel Enso v3
-        if ($this->structureExists()) {
-            return;
-        }
-
         $structureManager = new StructureCreation();
 
-        if ($this->permissionsGroup) {
+        if ($this->permissionsGroup && !empty($this->permissionsGroup)) {
             $structureManager->setPermissionsGroup(($this->permissionsGroup));
+            $structureManager->setPermissions(($this->permissions));
         }
 
-        if ($this->menu) {
-            $migrationSuport->setMenu($this->menu);
+        if ($this->menu && !empty($this->menu)) {
+            $structureManager->setMenu($this->menu);
         }
 
         $structureManager->create();
     }
 
-    private function down()
+    public function down()
     {
         $structureManager = new StructureDestruction($this->permissionsGroup);
+
         if ($this->menu) {
             $structureManager->setMenu($this->menu);
         }
 
-        $structureManager->down();
-    }
-
-    private function structureExists()
-    {
-        return PermissionsGroup::whereName($this->permissionsGroup['name'])->get()->count()
-            || Menu::whereName($this->menu['name'])->get()->count();
+        $structureManager->destroy();
     }
 }

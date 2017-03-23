@@ -25,7 +25,7 @@ class StructureCreation
         $this->parentMenu = null;
     }
 
-    public function up()
+    public function create()
     {
         $this->checkIfRolesGiven();
 
@@ -38,12 +38,13 @@ class StructureCreation
     private function checkIfRolesGiven()
     {
         if (!$this->roles) {
-            $this->setRoles([$defaultRole]);
+            $this->setRoles($this->defaultRoles);
         }
     }
 
     private function createPermissions()
     {
+
         if (!$this->permissionsGroup) {
             return;
         }
@@ -51,8 +52,9 @@ class StructureCreation
         $this->permissionsGroup->save();
 
         foreach ($this->permissions as $permission) {
-            $this->permissionsGroup->permissions()->save($permission);
-            $permission->attach($this->roles);
+            $permission->permissions_group_id = $this->permissionsGroup->id;
+            $permission->save();
+            $permission->roles()->attach($this->roles);
         }
     }
 
@@ -63,7 +65,8 @@ class StructureCreation
         }
 
         $this->menu->save();
-        $this->menu->attach($this->roles);
+
+        $this->menu->roles()->attach($this->roles);
     }
 
     public function setPermissionsGroup($permissionsGroup)
@@ -100,6 +103,6 @@ class StructureCreation
 
     private function fetchRoles($roles)
     {
-        $this->roles = Role::whereIn('name', $this->roles)->get();
+        return Role::whereIn('name', array_values($roles))->get();
     }
 }

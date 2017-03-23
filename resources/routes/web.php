@@ -2,15 +2,6 @@
 
 Auth::routes();
 
-Route::group(['namespace' => 'LaravelEnso\Core\Http\Controllers', 'middleware' => ['web', 'auth']], function () {
-    Route::get('dashboard/getLineChartData', 'DashboardController@getLineChartData')->name('dashboard.getLineChartData');
-    Route::get('dashboard/getBarChartData', 'DashboardController@getBarChartData')->name('dashboard.getBarChartData');
-    Route::get('dashboard/getPieChartData', 'DashboardController@getPieChartData')->name('dashboard.getPieChartData');
-    Route::get('dashboard/getRadarChartData', 'DashboardController@getRadarChartData')->name('dashboard.getRadarChartData');
-    Route::get('dashboard/getPolarChartData', 'DashboardController@getPolarChartData')->name('dashboard.getPolarChartData');
-    Route::get('dashboard/getBubbleChartData', 'DashboardController@getBubbleChartData')->name('dashboard.getBubbleChartData');
-});
-
 Route::group(['middleware' => ['auth', 'core']], function () {
     Route::group(['namespace' => 'Administration', 'prefix' => 'administration', 'as' => 'administration.'], function () {
         Route::group(['prefix' => 'owners', 'as' => 'owners.'], function () {

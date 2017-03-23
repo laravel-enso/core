@@ -27,6 +27,6 @@ class CreateStructureForOwners extends Migration
         'name' => 'Owners', 'icon' => 'fa fa-fw fa-list-alt', 'link' => 'administration/owners', 'has_children' => 0,
     ];
 
-    private $parentMenu;
+    private $parentMenu = 'Administration';
     private $roles;
 }

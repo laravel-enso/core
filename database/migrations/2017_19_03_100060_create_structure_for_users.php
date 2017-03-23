@@ -27,10 +27,10 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.impersonate', 'description' => 'Impersonate User', 'type' => 1],
     ];
 
-    private $menus = [
-        ['name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0],
+    private $menu = [
+        'name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0
     ];
 
-    private $parentMenu;
+    private $parentMenu = 'Administration';
     private $roles;
 }

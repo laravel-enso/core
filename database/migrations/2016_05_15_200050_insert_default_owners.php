@@ -25,7 +25,7 @@ class InsertDefaultOwners extends Migration
             foreach ($owners as $owner) {
                 $owner = new Owner($owner);
                 $owner->save();
-                $owner->attach($roles);
+                $owner->roles()->attach($roles);
             }
         });
     }
@@ -37,6 +37,6 @@ class InsertDefaultOwners extends Migration
      */
     public function down()
     {
-        \DB::table('users')->delete();
+        \DB::table('owners')->delete();
     }
 }

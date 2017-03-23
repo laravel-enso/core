@@ -10,7 +10,7 @@ class StructureDestruction
     private $permissionsGroup;
     private $menu;
 
-    public function down()
+    public function destroy()
     {
         \DB::transaction(function () {
             if ($this->permissionsGroup) {

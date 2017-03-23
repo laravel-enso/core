@@ -12,7 +12,7 @@ class CreateStructureForHome extends Migration
     ];
 
     private $permissions = [
-        ['name' => 'core.home', 'description' => 'Welcome Page', 'type' => 0],
+        ['name' => 'home', 'description' => 'Welcome Page', 'type' => 0],
     ];
 
     private $menu;

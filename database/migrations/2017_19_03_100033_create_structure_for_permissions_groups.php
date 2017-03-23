@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\Classes\MigrationSupport\MigrationSupport;
 
-class CreateStructurePermissionsGroups extends Migration
+class CreateStructureForPermissionsGroups extends Migration
 {
     use MigrationSupport;
 
