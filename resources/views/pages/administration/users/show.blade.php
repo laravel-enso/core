@@ -175,5 +175,5 @@
 </section>
 @endsection
 @push('scripts')
-<script type="text/javascript" src="{{ asset('/js/users/show.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js§/users/show.js') }}"></script>
 @endpush
