@@ -44,7 +44,6 @@ class StructureCreator
 
     private function createPermissions()
     {
-
         if (!$this->permissionsGroup) {
             return;
         }
@@ -90,7 +89,9 @@ class StructureCreator
     {
         $this->menu = new Menu($menu);
 
-        if ($this->parentMenu) $this->menu->parent_id = $this->parentMenu->id;
+        if ($this->parentMenu) {
+            $this->menu->parent_id = $this->parentMenu->id;
+        }
     }
 
     public function setRoles($roles)

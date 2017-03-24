@@ -2,8 +2,6 @@
 
 namespace LaravelEnso\Core\App\Classes\StructureManager;
 
-use LaravelEnso\Core\App\Classes\StructureManager\StructureCreator;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureDestroyer;
 use LaravelEnso\Core\App\Models\Menu;
 use LaravelEnso\Core\App\Models\PermissionsGroup;
 
@@ -18,8 +16,12 @@ trait StructureSupport
             $structureManager->setPermissions(($this->permissions));
         }
 
-        if ($this->parentMenu) $structureManager->setParentMenu($this->parentMenu);
-        if ($this->menu) $structureManager->setMenu($this->menu);
+        if ($this->parentMenu) {
+            $structureManager->setParentMenu($this->parentMenu);
+        }
+        if ($this->menu) {
+            $structureManager->setMenu($this->menu);
+        }
 
         $structureManager->create();
     }

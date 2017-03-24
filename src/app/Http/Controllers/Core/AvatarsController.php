@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use LaravelEnso\Core\App\Models\Avatar;
 use LaravelEnso\FileManager\Classes\FileManager;
 

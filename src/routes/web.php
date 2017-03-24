@@ -1,7 +1,7 @@
 <?php
 
 Route::get('error/{error}', function () {
-    return view('errors.' . request()->error);
+    return view('errors.'.request()->error);
 });
 
 Route::group(['namespace' => 'LaravelEnso\Core\App\Http\Controllers', 'middleware' => ['web', 'auth']], function () {
