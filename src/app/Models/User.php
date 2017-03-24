@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use LaravelEnso\CnpValidator\Validations;
 use LaravelEnso\Core\App\Enums\IsActiveEnum;
 use LaravelEnso\Core\App\Http\Controllers\Core\PreferencesController;
@@ -12,7 +11,7 @@ use LaravelEnso\Core\App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable;
 
     protected $fillable = [
         'first_name', 'last_name', 'phone', 'nin', 'is_active', 'role_id',
