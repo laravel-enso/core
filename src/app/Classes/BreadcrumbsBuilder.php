@@ -45,7 +45,9 @@ class BreadcrumbsBuilder
     {
         $termination = $this->getRouteTermination();
 
-        if (!$termination) return;
+        if (!$termination) {
+            return;
+        }
 
         if ($this->breadcrumbsEnum->hasKey($termination)) {
             $termination = $this->breadcrumbsEnum->getValueByKey($termination);

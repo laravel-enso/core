@@ -12,11 +12,11 @@ class DefaultPreferencesEnum extends AbstractEnum
 
             'global'    => [
 
-                'lang'            => 'ro',
-                'dtStateSave'     => true,
-                'headerFixed'     => true,
+                'lang'             => 'ro',
+                'dtStateSave'      => true,
+                'headerFixed'      => true,
                 'collapsedSidebar' => false,
-                'theme'           => 'purple',
+                'theme'            => 'purple',
             ],
 
             'dashboard' => [
