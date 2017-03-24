@@ -9,7 +9,7 @@ use LaravelEnso\Core\App\Models\Menu;
 use LaravelEnso\Core\App\Models\PermissionsGroup;
 use LaravelEnso\Core\App\Models\Role;
 use LaravelEnso\DataTable\App\Traits\DataTable;
-use LaravelEnso\Select\Traits\SelectListBuilderTrait;
+use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
 
 class RolesController extends Controller
 {

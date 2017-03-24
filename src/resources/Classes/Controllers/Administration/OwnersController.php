@@ -11,7 +11,7 @@ use LaravelEnso\Core\App\Models\Owner;
 use LaravelEnso\Core\App\Models\Role;
 use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\DataTable\App\Traits\DataTable;
-use LaravelEnso\Select\Traits\SelectListBuilderTrait;
+use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
 
 class OwnersController extends Controller
 {
