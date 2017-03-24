@@ -17,7 +17,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
 
 <!-- datatables-editor -->
-<script type="text/javascript" src="/libs/datatables.net-editor/dataTables.editor.min.js"></script>
+<script type="text/javascript" src="/libs/datatables-editor/dataTables.editor.min.js"></script>
 
 <!-- jszip -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>

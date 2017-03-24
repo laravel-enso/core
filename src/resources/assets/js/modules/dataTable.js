@@ -1,7 +1,7 @@
 $.extend(true, $.fn.dataTable.defaults, {
     dom: "lfrtip",
     pageLength: 10,
-    language: {"sUrl": "/libs/datatables.lang/" + Preferences.lang + ".json"},
+    language: {"sUrl": "/libs/datatables-lang/" + Preferences.lang + ".json"},
     stateSave: Preferences.dtStateSave,
     lengthChange: true,
     lengthMenu: [10, 15, 20, 25, 30],
