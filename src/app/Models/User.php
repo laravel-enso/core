@@ -78,9 +78,9 @@ class User extends Authenticatable
         return PreferencesController::getPreferences($page);
     }
 
-    public function actionsHistories()
+    public function action_histories()
     {
-        return $this->hasMany('LaravelEnso\ActionLogger\App\Models\ActionsHistory');
+        return $this->hasMany('LaravelEnso\ActionLogger\App\Models\ActionHistory');
     }
 
     public function isAdmin()

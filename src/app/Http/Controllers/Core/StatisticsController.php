@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use LaravelEnso\ActionLogger\ActionsHistory;
+use LaravelEnso\ActionLogger\ActionHistory;
 use LaravelEnso\Core\App\Models\Login;
 
 class StatisticsController extends Controller
@@ -16,7 +16,7 @@ class StatisticsController extends Controller
         $response = [];
 
         $response['logins'] = Login::where('created_at', '>', $start_date)->where('created_at', '<', $end_date)->count();
-        $response['actions'] = ActionsHistory::where('created_at', '>', $start_date)->where('created_at', '<', $end_date)->count();
+        $response['actions'] = ActionHistory::where('created_at', '>', $start_date)->where('created_at', '<', $end_date)->count();
 
         return response()->json($response)->header('Access-Control-Allow-Origin', 'http://admin.xtelecom.ro');
     }

@@ -51,7 +51,7 @@
               <b> {{ __("Logins") }} </b> <a class="pull-right">  {{ $user->logins->count() }}  </a>
             </li>
             <li class="list-group-item">
-              <b> {{ __("Activity") }} </b> <a class="pull-right"> {{ $user->actionsHistories->count() }} </a>
+              <b> {{ __("Activity") }} </b> <a class="pull-right"> {{ $user->action_histories->count() }} </a>
             </li>
             <li class="list-group-item">
               <b> {{ __("Birthday") }} </b> <a class="pull-right"> {{ $user->birthday }} </a>
