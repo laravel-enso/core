@@ -54,7 +54,6 @@ class MenuGenerator
             }
 
             $this->addMenu($menu, $class);
-            }
         }
     }
 
