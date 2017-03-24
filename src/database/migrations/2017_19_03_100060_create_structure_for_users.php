@@ -28,7 +28,7 @@ class CreateStructureForUsers extends Migration
     ];
 
     private $menu = [
-        'name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0
+        'name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0,
     ];
 
     private $parentMenu = 'Administration';

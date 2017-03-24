@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\Permission;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
 use LaravelEnso\Core\App\Models\Role;
 
 class SetDefaultMenuForRoles extends Migration
@@ -18,7 +16,7 @@ class SetDefaultMenuForRoles extends Migration
         $roles = Role::all();
         $menu = Menu::where('parent_id', null)->first();
 
-        $roles->each(function($role) use ($menu) {
+        $roles->each(function ($role) use ($menu) {
             $role->menu_id = $menu->id;
             $role->save();
         });
