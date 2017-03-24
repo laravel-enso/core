@@ -15,8 +15,8 @@ class DefaultPreferencesEnum extends AbstractEnum
                 'lang'            => 'ro',
                 'dtStateSave'     => true,
                 'headerFixed'     => true,
-                'sidebarCollapse' => false,
-                'colorTheme'      => 'purple',
+                'collapsedSidebar' => false,
+                'theme'           => 'purple',
             ],
 
             'dashboard' => [

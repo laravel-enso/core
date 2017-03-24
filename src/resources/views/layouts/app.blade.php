@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="pusher-key" content="{{ $pusherKey }}">
-        <meta name="preferences" content="{{ $globalPreferences }}">
+        <meta name="preferences" content="{{ $preferences }}">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
         <title>{{ __(config('app.name')) }} | @yield('pageTitle')</title>
@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
     </head>
 
-    <body class="skin-{{ $colorTheme }} sidebar-mini fixed {{ $sidebarCollapse }}">
+    <body class="skin-{{ $theme }} sidebar-mini fixed {{ $collapsedSidebar }}">
         <div id="app" class="wrapper">
 
             @include('laravel-enso/core::partials.header')
@@ -42,8 +42,8 @@
 
         </div>
 
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-        <!-- <script type="text/javascript" src="http://localhost:8080/js/app.js"></script> -->
+        <!-- <script type="text/javascript" src="{{ asset('js/app.js') }}"></script> -->
+        <script type="text/javascript" src="http://localhost:8080/js/app.js"></script>
 
         @include('laravel-enso/core::includes.mainJavascript')
 

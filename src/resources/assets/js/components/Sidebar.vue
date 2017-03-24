@@ -81,12 +81,12 @@
 		      		<slot name="color-theme"></slot>
 		        	<li class="dropdown pull-right" style="list-style-type: none;">
 		          		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-		            		{{ globalPreferences.colorTheme }}
+		            		{{ globalPreferences.theme }}
 		          		</a>
 		          		<ul class="dropdown-menu color-theme-selector">
-		            		<li v-for="colorTheme in colorThemes">
-				              	<a @click="setTheme(colorTheme)">
-				                	{{ colorTheme }}
+		            		<li v-for="theme in themeList">
+				              	<a @click="setTheme(theme)">
+				                	{{ theme }}
 	              				</a>
 	            			</li>
 	          			</ul>
@@ -119,7 +119,7 @@
 	data: function()
 	{
 		return {
-		    colorThemes: JSON.parse(this.themes),
+		    themeList: JSON.parse(this.themes),
 		    languages: JSON.parse(this.langs),
 		    globalPreferences: Preferences
 		}
@@ -129,7 +129,7 @@
         bodyClass:function() {
 
             var result = 'sidebar-mini skin-';
-            result += this.globalPreferences.colorTheme;
+            result += this.globalPreferences.theme;
             result += this.globalPreferences.headerFixed ? ' fixed' : '';
             result += this.globalPreferences.sidebarCollapse ? ' sidebar-collapse' : '';
 
@@ -145,7 +145,7 @@
         },
         sidebarTheme: function() {
 
-        	return this.globalPreferences.colorTheme.indexOf('light') != -1 ? 'light' : 'dark';
+        	return this.globalPreferences.theme.indexOf('light') != -1 ? 'light' : 'dark';
         }
 	},
 	methods: {
@@ -202,10 +202,10 @@
 	    	this.globalPreferences.lang = lang;
 			this.setPreference(true);
 	    },
-	    setTheme: function(colorTheme) {
+	    setTheme: function(theme) {
 
-	    	$('body').removeClass('skin-' + this.globalPreferences.colorTheme).addClass('skin-' + colorTheme);
-			this.globalPreferences.colorTheme = colorTheme;
+	    	$('body').removeClass('skin-' + this.globalPreferences.theme).addClass('skin-' + theme);
+			this.globalPreferences.theme = theme;
 			this.setPreference(false);
 	    },
 	    setBodyClass:function() {

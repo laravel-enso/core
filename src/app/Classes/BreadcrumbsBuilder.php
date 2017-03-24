@@ -17,7 +17,7 @@ class BreadcrumbsBuilder
         $this->menus = $menus;
         $this->breadcrumbs = collect();
         $this->breadcrumbsEnum = new PagesBreadcrumbsEnum();
-        $currentMenuDetector = new CurrentMenuDetector($menus);
+        $currentMenuDetector = new CurrentMenuDetector($this->menus);
         $this->currentMenu = $currentMenuDetector->getData();
     }
 
@@ -44,6 +44,8 @@ class BreadcrumbsBuilder
     private function appendTermination()
     {
         $termination = $this->getRouteTermination();
+
+        if (!$termination) return;
 
         if ($this->breadcrumbsEnum->hasKey($termination)) {
             $termination = $this->breadcrumbsEnum->getValueByKey($termination);
@@ -72,6 +74,6 @@ class BreadcrumbsBuilder
     {
         $routeArray = explode('.', request()->route()->getName());
 
-        return end($routeArray);
+        return count($routeArray) > 1 ? end($routeArray) : null;
     }
 }

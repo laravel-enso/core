@@ -1,5 +1,5 @@
 <sidebar current-route="{{ Route::currentRouteName() }}"
-        themes="{{ $colorThemes }}"
+        themes="{{ $themes }}"
         langs="{{ $languages }}"
         v-cloak>
   <span slot="general-settings">{{ __("General Settings") }}</span>
