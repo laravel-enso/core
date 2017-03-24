@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->publishesAll();
         $this->registerMiddleware();
         $this->loadDependencies();
-        $this->composeLayouts();
+        $this->composeLayoutPage();
         $this->composeBreadcrubms();
     }
 
