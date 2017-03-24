@@ -19,9 +19,11 @@
         "laravelcollective/html": "^5.4.1",
         "pusher/pusher-php-server": "^2.5",
         "laravel-enso/helpers": "^1.0.0",
+        "laravel-enso/actionlogger": "^1.0.0",
         "laravel-enso/charts": "^1.0.0",
         "laravel-enso/select": "^1.0.0",
         "laravel-enso/filemanager": "^1.0.0",
+        "laravel-enso/cnpvalidator": "^1.0.0",
         "laravel-enso/datatable": "^1.0.0",
         "laravel-enso/nullablefields": "^1.0.0",
         "maatwebsite/excel": "^2.1.0"
