@@ -17,19 +17,21 @@ class BreadcrumbsComposer
     /**
      * Create a new profile composer.
      *
-     * @param  UserRepository  $users
+     * @param UserRepository $users
+     *
      * @return void
      */
     public function __construct()
     {
         $breadcrumbsBuilder = new BreadcrumbsBuilder(request()->user()->role->menus->sortBy('order'));
-        $this->breadcrumbs  = $breadcrumbsBuilder->getBreadcrumbs();
+        $this->breadcrumbs = $breadcrumbsBuilder->getBreadcrumbs();
     }
 
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
+     * @param View $view
+     *
      * @return void
      */
     public function compose(View $view)
