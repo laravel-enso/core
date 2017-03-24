@@ -43,8 +43,8 @@ class ResourcePermissionsController extends Controller
 
     private function getRoutesCollection($request)
     {
-        $resourcePermissionsEnum = new ResourcePermissionsEnum();
-        $permissions = $resourcePermissionsEnum->getData();
+        $resourcePermissions = new ResourcePermissionsEnum();
+        $permissions = $resourcePermissions->getData();
         $routes = $permissions['resource'];
 
         if ($request->hasDataTables) {

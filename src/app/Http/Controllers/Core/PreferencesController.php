@@ -14,11 +14,11 @@ class PreferencesController extends Controller
         $userPreferences = request()->user()->preferences
             ->where('key', $page)->first();
 
-        $defaultPreferencesEnum = new DefaultPreferencesEnum();
+        $defaultPreferences = new DefaultPreferencesEnum();
 
         $result = $userPreferences ?
             $userPreferences->value
-            : json_encode($defaultPreferencesEnum->getValueByKey($page));
+            : json_encode($defaultPreferences->getValueByKey($page));
 
         return $result;
     }
@@ -44,8 +44,8 @@ class PreferencesController extends Controller
         $preferences = request()->user()->preferences
             ->where('key', request()->key)->first();
 
-        $defaultPreferencesEnum = new DefaultPreferencesEnum();
-        $defaultPreferences = json_encode($defaultPreferencesEnum->getValueByKey(request()->key));
+        $defaultPreferences = new DefaultPreferencesEnum();
+        $defaultPreferences = json_encode($defaultPreferences->getValueByKey(request()->key));
 
         if ($preferences) {
             $preferences->value = $defaultPreferences;

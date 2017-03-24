@@ -50,8 +50,10 @@ class MenuGenerator
 
             if ($menu->has_children) {
                 $this->addMenuWithChildren($menu, $class);
-            } else {
-                $this->addMenu($menu, $class);
+                continue;
+            }
+
+            $this->addMenu($menu, $class);
             }
         }
     }

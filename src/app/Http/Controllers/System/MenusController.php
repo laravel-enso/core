@@ -121,17 +121,17 @@ class MenusController extends Controller
     public function destroy(Menu $menu)
     {
         if ($menu->children->count()) {
-            $message = __('Menu Has Children');
-            $level = 'error';
-        } else {
-            $menu->delete();
-            $level = 'success';
-            $message = __('Operation was successfull');
+            return [
+                'level'   => 'error',
+                'message' => __('Menu Has Children'),
+            ];
         }
 
+        $menu->delete();
+
         return [
-            'level'   => $level,
-            'message' => $message,
+            'level'   => 'success',
+            'message' => __('Operation was successfull'),
         ];
     }
 

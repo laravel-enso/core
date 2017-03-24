@@ -41,11 +41,11 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        $permissionTypeEnum = new PermissionTypesEnum();
-        $permissionTypeOptions = $permissionTypeEnum->getData();
+        $permissionTypes = new PermissionTypesEnum();
+        $permissionTypes = $permissionTypes->getData();
         $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
 
-        return view('laravel-enso/core::pages.system.permissions.create', compact('permissionTypeOptions', 'permissionsGroups'));
+        return view('laravel-enso/core::pages.system.permissions.create', compact('permissionTypes', 'permissionsGroups'));
     }
 
     /**
@@ -80,13 +80,13 @@ class PermissionsController extends Controller
     public function edit(Permission $permission)
     {
         $permission->load('permissions_group');
-        $permissionTypeEnum = new PermissionTypesEnum();
-        $permissionTypeOptions = $permissionTypeEnum->getData();
+        $permissionTypes = new PermissionTypesEnum();
+        $permissionTypes = $permissionTypes->getData();
         $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
         $roles = Role::all()->pluck('name', 'id');
         $permission->roles_list;
 
-        return view('laravel-enso/core::pages.system.permissions.edit', compact('permission', 'permissionTypeOptions', 'permissionsGroups', 'roles'));
+        return view('laravel-enso/core::pages.system.permissions.edit', compact('permission', 'permissionTypes', 'permissionsGroups', 'roles'));
     }
 
     /**

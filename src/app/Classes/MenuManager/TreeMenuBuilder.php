@@ -30,11 +30,7 @@ class TreeMenuBuilder
 
     private function appendMenu($menu)
     {
-        if ($menu->has_children) {
-            $menu->children = $this->buildTreeMenu($menu->id);
-        } else {
-            $menu->children = [];
-        }
+        $menu->children = $menu->has_children ? $this->buildTreeMenu($menu->id) : [];
 
         $menu['unique_id'] = $menu['id'];
         unset($menu['id']);

@@ -113,11 +113,11 @@ class RolesController extends Controller
             if (!$label || strpos($permissionsGroup->name, $label) === 0) {
                 if ($permissionsGroup->name == $label) {
                     return $permissionsGroup->permissions;
-                } else {
-                    $remainingLabels = $label ? substr($permissionsGroup->name, strlen($label) + 1) : $permissionsGroup->name;
-                    $labelsArray = explode('.', $remainingLabels);
-                    $labels[] = $labelsArray[0];
                 }
+
+                $remainingLabels = $label ? substr($permissionsGroup->name, strlen($label) + 1) : $permissionsGroup->name;
+                $labelsArray = explode('.', $remainingLabels);
+                $labels[] = $labelsArray[0];
             }
         }
 

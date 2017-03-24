@@ -98,17 +98,15 @@ class PermissionsGroupsController extends Controller
     public function destroy(PermissionsGroup $permissionsGroup)
     {
         if ($permissionsGroup->permissions->count()) {
-            $message = __('Group Has Permissions');
-            $level = 'error';
-        } else {
-            $permissionsGroup->delete();
-            $level = 'success';
-            $message = __('Operation was successfull');
+            return [
+                'level'   => 'error',
+                'message' => __('Group Has Permissions'),
+            ];
         }
 
         return [
-            'level'   => $level,
-            'message' => $message,
+            'level'   => 'success',
+            'message' => __('Operation was successfull'),
         ];
     }
 }

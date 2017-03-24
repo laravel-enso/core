@@ -17,7 +17,6 @@
         "guzzlehttp/guzzle": "~6.0",
         "doctrine/dbal": "^2.5",
         "laravelcollective/html": "dev-master",
-        "laracasts/flash": "^2.0",
         "pusher/pusher-php-server": "^2.5",
         "laravel-enso/helpers": "^1.0.0",
         "laravel-enso/charts": "^1.0.0",
