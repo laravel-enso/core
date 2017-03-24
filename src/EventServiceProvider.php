@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
 
         'Illuminate\Auth\Events\Login' => [
 
-            'LaravelEnso\Core\Listeners\LogSuccessfulLoginListener',
+            'LaravelEnso\Core\App\Listeners\LogSuccessfulLoginListener',
         ],
     ];
 

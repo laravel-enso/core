@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Core\Policies\UserPolicies;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Policies\UserPolicies;
 
 class AuthServiceProvider extends ServiceProvider
 {
