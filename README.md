@@ -72,7 +72,22 @@ Http/Controllers/Auth/ResetPasswordController.php
 protected $redirectTo = '/';
 ```
 
-app/Http/Kernel.php => add to $middlewareGroups array
+create in storage\app folder the following folders:
+
+avatars
+imports
+exports
+files
+temp
+
+delete default users table migration
+
+### Note
+
+AppServiceProvider will create the following middleware group
+
+```php
+
 
 ```php
 'core' => [
@@ -85,12 +100,11 @@ app/Http/Kernel.php => add to $middlewareGroups array
 ]
 ```
 
-create in storage\app folder the following folders:
+### Try also
 
-avatars
-imports
-exports
-files
-temp
+laravel-enso/commentsmanager
+laravel-enso/documentsmanager
+laravel-enso/tutorialmanager
+laravel-enso/localisation
 
 Have fun!!!

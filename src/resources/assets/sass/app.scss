@@ -1,10 +1,11 @@
 // Variables
 @import "variables";
-@import "bootswatchVariables";
+@import "enso-variables";
+@import "bootswatch-variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "bootswatchPaper";
+@import "bootswatch-paper";
 
 //square instead of rounded margins for all elements
 .btn,

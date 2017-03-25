@@ -8,17 +8,7 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "^1.0",
-        "jenssegers/date": "^3.2",
-        "pusher/pusher-php-server": "^2.5",
-        "laravelcollective/html": "^5.4.1",
-        "maatwebsite/excel": "^2.1.0",
-        "laravel-enso/core": "^1.0.3",
-        "laravel-enso/commentsmanager": "^1.0.0",
-        "laravel-enso/documentsmanager": "^1.0.0",
-        "laravel-enso/localisation": "^1.0.2",
-        "laravel-enso/logmanager": "^1.0.0",
-        "laravel-enso/tutorialmanager": "^1.0.0",
-        "laravel-enso/notifications": "^1.0.0"
+        "laravel-enso/core": "^1.0.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -57,9 +47,5 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
     }
 }

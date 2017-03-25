@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\App\Http\Middleware\Impersonate;
 use LaravelEnso\Core\App\Http\Middleware\VerifyActiveState;
@@ -167,6 +168,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Bind packages
+        $this->app->register(
+            'Collective\Html\HtmlServiceProvider',
+            'Laracasts\Flash\FlashServiceProvider',
+            'Maatwebsite\Excel\ExcelServiceProvider',
+            'LaravelEnso\Core\AuthServiceProvider',
+            'LaravelEnso\Core\EventServiceProvider',
+            'LaravelEnso\Charts\ChartsServiceProvider',
+            'LaravelEnso\Select\SelectServiceProvider',
+            'LaravelEnso\DataTable\DataTableServiceProvider',
+            'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
+            'LaravelEnso\Localisation\LocalisationServiceProvider',
+            'LaravelEnso\CommentsManager\CommentsManagerServiceProvider',
+            'LaravelEnso\DocumentsManager\DocumentsManagerServiceProvider',
+            'LaravelEnso\LogManager\LogManagerServiceProvider',
+            'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
+            'LaravelEnso\Notifications\NotificationsServiceProvider'
+        );
+
+        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Form', 'Collective\Html\FormFacade');
+        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Html', 'Collective\Html\HtmlFacade');
+        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Flash', 'Laracasts\Flash\Flash::class');
+        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Excel', 'Maatwebsite\Excel\Facades\Excel::class');
+        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Flash', 'Laracasts\Flash\Flash::class');
     }
 }
