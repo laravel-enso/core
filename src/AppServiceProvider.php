@@ -122,6 +122,10 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
         ], 'core-sass');
+
+        $this->publishes([
+            __DIR__.'/resources/assets/root' => base_path(),
+        ], 'core-root');
     }
 
     private function registerMiddleware()
