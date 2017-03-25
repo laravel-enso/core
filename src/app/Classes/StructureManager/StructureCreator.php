@@ -27,7 +27,7 @@ class StructureCreator
 
     public function create()
     {
-        $this->checkIfRolesGiven();
+        $this->checkIfRoleGiven();
 
         \DB::transaction(function () {
             $this->createPermissions();
@@ -35,7 +35,7 @@ class StructureCreator
         });
     }
 
-    private function checkIfRolesGiven()
+    private function checkIfRoleGiven()
     {
         if (!$this->role) {
             $this->setRole($this->defaultRole);
@@ -53,7 +53,7 @@ class StructureCreator
         foreach ($this->permissions as $permission) {
             $permission->permissions_group_id = $this->permissionsGroup->id;
             $permission->save();
-            $permission->roles()->attach($this->roles);
+            $permission->roles()->attach($this->role);
         }
     }
 
@@ -65,7 +65,7 @@ class StructureCreator
 
         $this->menu->save();
 
-        $this->menu->roles()->attach($this->roles);
+        $this->menu->roles()->attach($this->role);
     }
 
     public function setPermissionsGroup($permissionsGroup)
