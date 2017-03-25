@@ -38,8 +38,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $user   = new User();
-        $roles  = [];
+        $user = new User();
+        $roles = [];
         $owners = Owner::active()->get()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.create', compact('owners', 'user', 'roles'));
@@ -56,13 +56,13 @@ class UsersController extends Controller
     public function store(ValidateUserRequest $request, User $user)
     {
         $user->fill($request->all());
-        $user->email    = $request->email;
+        $user->email = $request->email;
         $user->owner_id = $request->owner_id;
         $user->save();
         flash()->success(__('The User was created!'));
         $this->sendResetLinkEmail($request);
 
-        return redirect('administration/users/' . $user->id . '/edit');
+        return redirect('administration/users/'.$user->id.'/edit');
     }
 
     /**
@@ -100,7 +100,7 @@ class UsersController extends Controller
             ->load('role');
 
         $owners = Owner::active()->get()->pluck('name', 'id');
-        $roles  = $user->owner->roles->pluck('name', 'id');
+        $roles = $user->owner->roles->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.edit', compact('user', 'roles', 'owners'));
     }
@@ -168,7 +168,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         \Auth::user()->setImpersonating($user->id);
-        flash()->warning(__('Impersonating') . ' ' . $user->full_name);
+        flash()->warning(__('Impersonating').' '.$user->full_name);
 
         return redirect()->back();
     }

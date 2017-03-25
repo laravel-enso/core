@@ -3,6 +3,6 @@
 return [
 
   'previous' => '&laquo; Înapoi',
-  'next' => 'Înainte &raquo;',
+  'next'     => 'Înainte &raquo;',
 
 ];

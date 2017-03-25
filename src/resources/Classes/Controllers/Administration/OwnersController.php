@@ -6,7 +6,6 @@ use App\DataTable\OwnersTableStructure;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateOwnerRequest;
 use App\Owner;
-use App\User;
 use LaravelEnso\Core\App\Enums\IsActiveEnum;
 use LaravelEnso\Core\App\Models\Role;
 use LaravelEnso\DataTable\App\Traits\DataTable;
@@ -17,7 +16,7 @@ class OwnersController extends Controller
     use DataTable, SelectListBuilderTrait;
 
     protected $tableStructureClass = OwnersTableStructure::class;
-    protected $selectSourceClass   = 'LaravelEnso\Core\App\Models\Owner';
+    protected $selectSourceClass = 'LaravelEnso\Core\App\Models\Owner';
 
     public static function getTableQuery()
     {
@@ -34,7 +33,7 @@ class OwnersController extends Controller
     public function create()
     {
         $isActiveEnum = new IsActiveEnum();
-        $statuses     = $isActiveEnum->getData();
+        $statuses = $isActiveEnum->getData();
 
         return view('laravel-enso/core::pages.administration.owners.create', compact('statuses'));
     }
@@ -47,7 +46,7 @@ class OwnersController extends Controller
 
         flash()->success(__('The Entity was created!'));
 
-        return redirect('administration/owners/' . $owner->id . '/edit');
+        return redirect('administration/owners/'.$owner->id.'/edit');
     }
 
     public function show()
@@ -59,8 +58,8 @@ class OwnersController extends Controller
     {
         $owner->roles_list;
         $isActiveEnum = new IsActiveEnum();
-        $statuses     = $isActiveEnum->getData();
-        $roles        = Role::all()->pluck('name', 'id');
+        $statuses = $isActiveEnum->getData();
+        $roles = Role::all()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.owners.edit', compact('owner', 'roles', 'statuses'));
     }

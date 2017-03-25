@@ -11,7 +11,7 @@ class User extends Users
     ];
 
     protected $hidden = [
-        'password', 'remember_token'
+        'password', 'remember_token',
     ];
 
     protected $appends = ['avatar_link', 'full_name'];
