@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function getAvatarLinkAttribute()
     {
-        return $this->avatar ? '/core/avatars/' . $this->avatar->saved_name : asset('/images/profile.png');
+        return $this->avatar ? '/core/avatars/'.$this->avatar->saved_name : asset('/images/profile.png');
     }
 
     public function getLanguageAttribute()
@@ -103,7 +103,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getCreatedDateAttribute()
@@ -113,7 +113,6 @@ class User extends Authenticatable
 
     public function getBirthdayAttribute()
     {
-        return null;
     }
 
     public function sendPasswordResetNotification($token)
