@@ -39,6 +39,6 @@ class CreateMenuRolePivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menu_role');
+        Schema::dropIfExists('menu_role');
     }
 }

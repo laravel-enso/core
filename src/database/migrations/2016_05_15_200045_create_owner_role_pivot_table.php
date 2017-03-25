@@ -29,6 +29,6 @@ class CreateOwnerRolePivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('owner_role');
+        Schema::dropIfExists('owner_role');
     }
 }

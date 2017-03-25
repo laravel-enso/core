@@ -79,6 +79,7 @@ app/Http/Kernel.php => add to $middlewareGroups array
 
     \LaravelEnso\Core\App\Http\Middleware\VerifyActiveState::class,
     \LaravelEnso\Core\App\Http\Middleware\VerifyRouteAccess::class,
+    \LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger::class,
     \LaravelEnso\Core\App\Http\Middleware\Impersonate::class,
     \LaravelEnso\Core\App\Http\Middleware\SetLanguage::class,
 ]

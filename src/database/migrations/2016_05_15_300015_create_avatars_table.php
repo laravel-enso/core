@@ -29,6 +29,6 @@ class CreateAvatarsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('avatars');
+        Schema::dropIfExists('avatars');
     }
 }

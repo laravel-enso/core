@@ -28,6 +28,6 @@ class CreateLoginsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('logins');
+        Schema::dropIfExists('logins');
     }
 }

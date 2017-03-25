@@ -3,13 +3,11 @@ const elixir = require('laravel-elixir');
 require('laravel-elixir-vue-2');
 
 elixir((mix) => {
-	mix.copy('resources/assets/libs/datatables-editor/js', 'public/libs/datatables-editor') //private lib
-		.copy('resources/assets/images', 'public/images')
+	mix.copy('resources/assets/images', 'public/images')
 		.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/fonts/bootstrap')
 		.copy('resources/assets/libs/datatables-lang', 'public/libs/datatables-lang');
 
     mix.styles([
-		"resources/assets/libs/datatables-editor/css/editor.dataTables.min.css",
 		"resources/assets/libs/checkbox-css/mk-toggle-radio-check.css",
 		"node_modules/admin-lte/dist/css/adminlte.css",
 		"node_modules/admin-lte/dist/css/skins/_all-skins.css",
