@@ -19,7 +19,7 @@ Route::group(['namespace' => 'LaravelEnso\Core\App\Http\Controllers', 'middlewar
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::group(['namespace' => 'Core', 'prefix' => 'core', 'as' => 'core.'], function () {
-        Route::resource('avatars', 'AvatarsController');
+        Route::resource('avatars', 'AvatarController');
 
         Route::group(['prefix' => 'preferences', 'as' => 'preferences.'], function () {
             Route::patch('setPreferences', 'PreferencesController@setPreferences')->name('setPreferences');

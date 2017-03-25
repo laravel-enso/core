@@ -18,7 +18,7 @@
           <img class="profile-user-img img-responsive img-square user-avatar"
               src="{{ $user->avatar_link }}"
               alt="User Image">
-          @can('viewProfilePage', $user)
+          @can('updateProfile', $user)
             <center>
             <button class="btn btn-xs btn-success"
                     v-tooltip="'{{ __("Upload Avatar") }}'"
@@ -63,7 +63,7 @@
       </div>
       <!-- /.box -->
 
-      @can('viewProfilePage', $user)
+      @can('updateProfile', $user)
         <!-- About Me Box -->
         <div class="box box-primary">
           <div class="box-header with-border">

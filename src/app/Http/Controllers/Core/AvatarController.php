@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use LaravelEnso\Core\App\Models\Avatar;
 use LaravelEnso\FileManager\Classes\FileManager;
 
-class AvatarsController extends Controller
+class AvatarController extends Controller
 {
     private $fileManager;
 
@@ -44,7 +44,7 @@ class AvatarsController extends Controller
 
         \DB::transaction(function () use ($avatar) {
             $avatar->delete();
-            $this->fileManager->delete($avatar);
+            $this->fileManager->delete($avatar->saved_name);
         });
     }
 

@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core;
 
+use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Core\App\Policies\UserPolicies;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,7 +14,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-
         User::class => UserPolicies::class,
     ];
 

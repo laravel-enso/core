@@ -97,7 +97,7 @@ class AppServiceProvider extends ServiceProvider
         ], 'core-models');
 
         $this->publishes([
-            __DIR__ . '/app/notifications' => app_path('Notifications/vendor/laravel-enso'),
+            __DIR__ . '/app/Notifications' => app_path('Notifications/vendor/laravel-enso'),
         ], 'core-notification');
     }
 
@@ -130,6 +130,10 @@ class AppServiceProvider extends ServiceProvider
 
     private function publishesResources()
     {
+        $this->publishes([
+            __DIR__ . '/resources/storage' => storage_path('app'),
+        ], 'core-storage');
+
         $this->publishes([
             __DIR__ . '/resources/assets/images' => resource_path('assets/images'),
         ], 'core-images');

@@ -47,7 +47,7 @@
                 </div>
             </div>
             <comments-manager :id="{{ $owner->id }}"
-                type="LaravelEnso\Core\App\Models\Owner"
+                type="App\Owner"
                 v-if="{{ $owner }}"
                 edited-label="{{ __("edited") }}">
                 <span slot="comments-manager-title">{{ __("Comments") }}</span>
@@ -55,7 +55,7 @@
             </comments-manager>
             <documents-manager :id="{{ $owner->id }}"
                 :file-size-limit="5000000"
-                type="LaravelEnso\Core\App\Models\Owner"
+                type="App\Owner"
                 v-if="{{ $owner }}">
                 <span slot="documents-manager-title">{{ __("Documents") }}</span>
                 @include('laravel-enso/core::partials.modal')

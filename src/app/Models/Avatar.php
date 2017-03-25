@@ -10,6 +10,6 @@ class Avatar extends Model
 
     public function user()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\User');
+        return $this->belongsTo('App\Models\User');
     }
 }
