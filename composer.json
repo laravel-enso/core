@@ -19,6 +19,7 @@
         "laravelcollective/html": "^5.4.1",
         "laravel-enso/helpers": "^1.0.0",
         "laravel-enso/actionlogger": "^1.0.0",
+        "laravel-enso/historytracker": "^1.0.0",
         "laravel-enso/charts": "^1.0.0",
         "laravel-enso/notifications": "^1.0.0",
         "laravel-enso/select": "^1.0.0",
