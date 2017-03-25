@@ -1,17 +1,15 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForPermissionsGroups extends Migration
+class CreateStructureForPermissionsGroups extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'system.permissionsGroups', 'description' => 'Permissions Grops Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'system.permissionsGroups.index', 'description' => 'Permissions Groups Index', 'type' => 0],
         ['name' => 'system.permissionsGroups.create', 'description' => 'Create Permissions Group', 'type' => 1],
         ['name' => 'system.permissionsGroups.edit', 'description' => 'Edit Existing Permissions Group', 'type' => 1],
@@ -22,10 +20,9 @@ class CreateStructureForPermissionsGroups extends Migration
         ['name' => 'system.permissionsGroups.initTable', 'description' => 'Init table data for permissiongroups', 'type' => 0],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Permissions Groups', 'icon' => 'fa fa-fw fa-object-group', 'link' => 'system/permissionsGroups', 'has_children' => 0,
     ];
 
-    private $parentMenu = 'System';
-    private $roles;
+    protected $parentMenu = 'System';
 }

@@ -1,21 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForHome extends Migration
+class CreateStructureForHome extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'core.home', 'description' => 'Home Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'home', 'description' => 'Welcome Page', 'type' => 0],
     ];
-
-    private $menu;
-    private $parentMenu;
-    private $roles;
 }

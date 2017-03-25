@@ -82,8 +82,8 @@ class OwnersController extends Controller
             $owner->fill($request->all());
             $owner->save();
 
-            $roles_list = $request->roles_list ?: [];
-            $owner->roles()->sync($roles_list);
+            $rolesList = $request->roles_list ?: [];
+            $owner->roles()->sync($rolesList);
 
             flash()->success(__('The Changes have been saved!'));
         });

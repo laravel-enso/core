@@ -1,17 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForRoles extends Migration
+class CreateStructureForRoles extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'system.roles', 'description' => 'Roles Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'system.roles.getTableData', 'description' => 'Get table data for roles', 'type' => 0],
         ['name' => 'system.roles.initTable', 'description' => 'Init table for roles menu', 'type' => 0],
         ['name' => 'system.roles.create', 'description' => 'Create Role', 'type' => 1],
@@ -25,10 +22,9 @@ class CreateStructureForRoles extends Migration
         ['name' => 'system.roles.setPermissions', 'description' => 'Set Permissions for Role', 'type' => 1],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Roles', 'icon' => 'fa fa-fw fa-universal-access', 'link' => 'system/roles', 'has_children' => 0,
     ];
 
-    private $parentMenu = 'System';
-    private $roles;
+    protected $parentMenu = 'System';
 }

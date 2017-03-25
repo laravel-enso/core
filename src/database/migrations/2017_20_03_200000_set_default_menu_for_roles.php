@@ -14,7 +14,7 @@ class SetDefaultMenuForRoles extends Migration
     public function up()
     {
         $roles = Role::all();
-        $menu = Menu::where('parent_id', null)->first();
+        $menu = Menu::whereHasChildren(false)->first();
 
         $roles->each(function ($role) use ($menu) {
             $role->menu_id = $menu->id;

@@ -1,17 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForUsers extends Migration
+class CreateStructureForUsers extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'administration.users', 'description' => 'Users Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'administration.users.initTable', 'description' => 'Init Table for Users', 'type' => 0],
         ['name' => 'administration.users.getTableData', 'description' => 'Get Table Data', 'type' => 0],
         ['name' => 'administration.users.setTableData', 'description' => 'Set data for users', 'type' => 1],
@@ -27,10 +24,9 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.impersonate', 'description' => 'Impersonate User', 'type' => 1],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Users', 'icon' => 'fa fa-fw fa-users', 'link' => 'administration/users', 'has_children' => 0,
     ];
 
-    private $parentMenu = 'Administration';
-    private $roles;
+    protected $parentMenu = 'Administration';
 }

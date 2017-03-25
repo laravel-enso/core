@@ -2,11 +2,18 @@
 
 namespace LaravelEnso\Core\App\Classes\StructureManager;
 
+use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\App\Models\Menu;
 use LaravelEnso\Core\App\Models\PermissionsGroup;
 
-trait StructureSupport
+abstract class StructureMigration extends Migration
 {
+    protected $roles;
+    protected $permissionsGroup;
+    protected $permissions;
+    protected $parentMenu;
+    protected $menu;
+
     public function up()
     {
         $structureManager = new StructureCreator();

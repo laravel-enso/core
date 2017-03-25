@@ -1,17 +1,14 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForMenus extends Migration
+class CreateStructureForMenus extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'system.menus', 'description' => 'Menus Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'system.menus.getTableData', 'description' => 'Get table data for menus', 'type' => 0],
         ['name' => 'system.menus.initTable', 'description' => 'Init table for menus menu', 'type' => 0],
         ['name' => 'system.menus.create', 'description' => 'Create Menu', 'type' => 1],
@@ -24,10 +21,9 @@ class CreateStructureForMenus extends Migration
         ['name' => 'system.menus.destroy', 'description' => 'Delete Menu', 'type' => 1],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Menus', 'icon' => 'fa fa-fw fa-list', 'link' => 'system/menus', 'has_children' => 0,
     ];
 
-    private $parentMenu = 'System';
-    private $roles;
+    protected $parentMenu = 'System';
 }

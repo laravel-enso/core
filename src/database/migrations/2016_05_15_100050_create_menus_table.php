@@ -20,7 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('icon');
             $table->integer('order')->default(999);
             $table->string('link')->nullable();
-            $table->boolean('has_children')->default(0);
+            $table->boolean('has_children')->default(false);
             $table->timestamps();
         });
     }

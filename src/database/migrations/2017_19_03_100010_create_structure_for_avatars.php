@@ -1,23 +1,16 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForAvatars extends Migration
+class CreateStructureForAvatars extends StructureMigration
 {
-    use StructureSupport;
-
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'core.avatars', 'description' => 'Avatars Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'core.avatars.destroy', 'description' => 'Delete Avatar', 'type' => 1],
         ['name' => 'core.avatars.show', 'description' => 'Return Selected Avatar', 'type' => 0],
         ['name' => 'core.avatars.store', 'description' => 'Upload Avatar', 'type' => 1],
     ];
-
-    private $menu;
-    private $parentMenu;
-    private $roles;
 }

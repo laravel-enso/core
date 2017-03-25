@@ -80,7 +80,7 @@ class RolesController extends Controller
 
     public function edit(Role $role)
     {
-        $menus = Menu::all()->pluck('name', 'id');
+        $menus = Menu::whereHasChildren(0)->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.system.roles.edit', compact('role', 'menus'));
     }

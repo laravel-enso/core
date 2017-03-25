@@ -1,28 +1,18 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForDashboard extends Migration
+class CreateStructureForDashboard extends StructureMigration
 {
-    use StructureSupport;
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    private $permissionsGroup = [
+    protected $permissionsGroup = [
         'name' => 'dashboard', 'description' => 'Dashboard Permissions Group',
     ];
 
-    private $permissions = [
+    protected $permissions = [
         ['name' => 'dashboard', 'description' => 'Dashboard Index Page', 'type' => 0],
     ];
 
-    private $menu = [
+    protected $menu = [
         'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0,
     ];
-
-    private $parentMenu;
-    private $roles;
 }

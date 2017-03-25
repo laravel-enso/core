@@ -1,24 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Classes\StructureManager\StructureSupport;
+use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
 
-class CreateStructureForAdministration extends Migration
+class CreateStructureForAdministration extends StructureMigration
 {
-    use StructureSupport;
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    private $permissionsGroup;
-
-    private $permissions;
-
-    private $menu = [
+    protected $menu = [
         'name' => 'Administration', 'icon' => 'fa fa-fw fa-cogs', 'link' => null, 'has_children' => 1,
     ];
-
-    private $parentMenu;
-    private $roles;
 }
