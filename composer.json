@@ -16,6 +16,7 @@
         "nesbot/carbon": "^1.0",
         "guzzlehttp/guzzle": "~6.0",
         "doctrine/dbal": "^2.5",
+        "pusher/pusher-php-server": "^2.5",
         "laravelcollective/html": "^5.4.1",
         "laravel-enso/helpers": "^1.0.0",
         "laravel-enso/actionlogger": "^1.0.0",
