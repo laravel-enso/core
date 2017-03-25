@@ -19,8 +19,6 @@ class UsersController extends Controller
 
     public static function getTableQuery()
     {
-        $id = request()->user()->owner_id === 1 ?: 2;
-
         $query = User::select(\DB::raw('users.id as DT_RowId, owners.name owner, users.first_name, users.last_name, users.phone, users.email, roles.name role, users.is_active'))
             ->join('owners', 'users.owner_id', '=', 'owners.id')
             ->join('roles', 'users.role_id', '=', 'roles.id');
@@ -42,7 +40,6 @@ class UsersController extends Controller
     {
         $user   = new User();
         $roles  = [];
-        $id     = request()->user()->owner->id === 1 ?: 2;
         $owners = Owner::active()->get()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.create', compact('owners', 'user', 'roles'));

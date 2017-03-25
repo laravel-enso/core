@@ -32,7 +32,7 @@ abstract class StructureMigration extends Migration
         }
 
         if ($this->role) {
-            $structureManager->setRole($role);
+            $structureManager->setRole($this->role);
         }
 
         $structureManager->create();

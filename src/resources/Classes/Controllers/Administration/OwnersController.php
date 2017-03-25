@@ -21,8 +21,6 @@ class OwnersController extends Controller
 
     public static function getTableQuery()
     {
-        $id = request()->user()->owner_id === 1 ?: 2;
-
         $query = Owner::select(\DB::raw('id as DT_RowId, name, is_active'));
 
         return $query;
