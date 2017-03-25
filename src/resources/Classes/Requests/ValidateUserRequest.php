@@ -17,10 +17,8 @@ class ValidateUserRequest extends FormRequest
 
         if ($this->_method == 'PATCH') {
             $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users,email,'.$user->id.',id'];
-            $nin = 'max:13|unique:users,nin,'.$user->id.',id|nin';
         } else {
             $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users'];
-            $nin = 'max:13|unique:users|nin';
         }
 
         return [
@@ -31,7 +29,6 @@ class ValidateUserRequest extends FormRequest
             'owner_id'   => 'required|numeric|exists:owners,id',
             'email'      => $email,
             'phone'      => ['max:20', 'regex:^[0-9+\(\)#\.\s\/ext-]+$^'],
-            'nin'        => $nin,
         ];
     }
 }

@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Administration;
 use App\DataTable\OwnersTableStructure;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateOwnerRequest;
+use App\Owner;
+use App\User;
 use LaravelEnso\Core\App\Enums\IsActiveEnum;
-use LaravelEnso\Core\App\Enums\IsIndividualEnum;
-use LaravelEnso\Core\App\Models\Owner;
 use LaravelEnso\Core\App\Models\Role;
-use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\DataTable\App\Traits\DataTable;
 use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
 
@@ -18,14 +17,13 @@ class OwnersController extends Controller
     use DataTable, SelectListBuilderTrait;
 
     protected $tableStructureClass = OwnersTableStructure::class;
-    protected $selectSourceClass = 'LaravelEnso\Core\App\Models\Owner';
+    protected $selectSourceClass   = 'LaravelEnso\Core\App\Models\Owner';
 
     public static function getTableQuery()
     {
         $id = request()->user()->owner_id === 1 ?: 2;
 
-        $query = Owner::select(\DB::raw('id as DT_RowId, name, fiscal_code, city, county,
-                address, contact, phone, email, is_active'))->where('id', '>=', $id);
+        $query = Owner::select(\DB::raw('id as DT_RowId, name, is_active'));
 
         return $query;
     }
@@ -37,12 +35,10 @@ class OwnersController extends Controller
 
     public function create()
     {
-        $isIndividualEnum = new IsIndividualEnum();
-        $types = $isIndividualEnum->getData();
         $isActiveEnum = new IsActiveEnum();
-        $statuses = $isActiveEnum->getData();
+        $statuses     = $isActiveEnum->getData();
 
-        return view('laravel-enso/core::pages.administration.owners.create', compact('types', 'statuses'));
+        return view('laravel-enso/core::pages.administration.owners.create', compact('statuses'));
     }
 
     public function store(ValidateOwnerRequest $request, Owner $owner)
@@ -53,7 +49,7 @@ class OwnersController extends Controller
 
         flash()->success(__('The Entity was created!'));
 
-        return redirect('administration/owners/'.$owner->id.'/edit');
+        return redirect('administration/owners/' . $owner->id . '/edit');
     }
 
     public function show()
@@ -64,16 +60,11 @@ class OwnersController extends Controller
     public function edit(Owner $owner)
     {
         $owner->roles_list;
-        $isIndividualEnum = new IsIndividualEnum();
-        $types = $isIndividualEnum->getData();
         $isActiveEnum = new IsActiveEnum();
-        $statuses = $isActiveEnum->getData();
+        $statuses     = $isActiveEnum->getData();
+        $roles        = Role::all()->pluck('name', 'id');
 
-        // excluding "admin" role for Owners <> Admin
-        $id = request()->user()->owner->id === 1 ?: 2;
-        $roles = Role::where('id', '>=', $id)->get()->pluck('name', 'id');
-
-        return view('laravel-enso/core::pages.administration.owners.edit', compact('owner', 'roles', 'types', 'statuses'));
+        return view('laravel-enso/core::pages.administration.owners.edit', compact('owner', 'roles', 'statuses'));
     }
 
     public function update(ValidateOwnerRequest $request, Owner $owner)
@@ -81,7 +72,6 @@ class OwnersController extends Controller
         \DB::transaction(function () use ($request, $owner) {
             $owner->fill($request->all());
             $owner->save();
-
             $rolesList = $request->roles_list ?: [];
             $owner->roles()->sync($rolesList);
 
@@ -96,19 +86,15 @@ class OwnersController extends Controller
         try {
             $owner->delete();
         } catch (\Exception $exception) {
-            $response = [
+            return [
                 'level'   => 'error',
                 'message' => __('An error has occured. Please report this to the administrator'),
             ];
         }
 
-        if (!isset($response)) {
-            $response = [
-                'level'   => 'success',
-                'message' => __('Operation was successfull'),
-            ];
-        }
-
-        return $response;
+        return [
+            'level'   => 'success',
+            'message' => __('Operation was successfull'),
+        ];
     }
 }

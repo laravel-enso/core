@@ -5,16 +5,15 @@ namespace App\Http\Controllers\Administration;
 use App\DataTable\UsersTableStructure;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateUserRequest;
+use App\Owner;
+use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use LaravelEnso\ActionLogger\App\Models\ActionHistory;
-use LaravelEnso\Core\App\Models\Owner;
-use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\DataTable\App\Traits\DataTable;
-use LaravelEnso\DataTable\App\Traits\DataTableEditor;
 
 class UsersController extends Controller
 {
-    use SendsPasswordResetEmails, DataTable, DataTableEditor;
+    use SendsPasswordResetEmails, DataTable;
 
     protected $tableStructureClass = UsersTableStructure::class;
 
@@ -22,10 +21,9 @@ class UsersController extends Controller
     {
         $id = request()->user()->owner_id === 1 ?: 2;
 
-        $query = User::select(\DB::raw('users.id as DT_RowId, owners.name owner, users.first_name, users.last_name, users.nin, users.phone, users.email, roles.name role, users.is_active'))
+        $query = User::select(\DB::raw('users.id as DT_RowId, owners.name owner, users.first_name, users.last_name, users.phone, users.email, roles.name role, users.is_active'))
             ->join('owners', 'users.owner_id', '=', 'owners.id')
-            ->join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('owner_id', '>=', $id);
+            ->join('roles', 'users.role_id', '=', 'roles.id');
 
         return $query;
     }
@@ -42,12 +40,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $user = new User();
-
-        $roles = [];
-
-        $id = request()->user()->owner->id === 1 ?: 2;
-        $owners = Owner::where('id', '>=', $id)->active()->get()->pluck('name', 'id');
+        $user   = new User();
+        $roles  = [];
+        $id     = request()->user()->owner->id === 1 ?: 2;
+        $owners = Owner::active()->get()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.create', compact('owners', 'user', 'roles'));
     }
@@ -63,15 +59,13 @@ class UsersController extends Controller
     public function store(ValidateUserRequest $request, User $user)
     {
         $user->fill($request->all());
-        $user->email = $request->email;
+        $user->email    = $request->email;
         $user->owner_id = $request->owner_id;
         $user->save();
-
         flash()->success(__('The User was created!'));
-
         $this->sendResetLinkEmail($request);
 
-        return redirect('administration/users/'.$user->id.'/edit');
+        return redirect('administration/users/' . $user->id . '/edit');
     }
 
     /**
@@ -108,11 +102,8 @@ class UsersController extends Controller
         $user->load('owner')
             ->load('role');
 
-        // excluding "Admin" Owner for Users that do not belong to 'Admin'
-        $id = request()->user()->owner->id === 1 ?: 2;
-        $owners = Owner::where('id', '>=', $id)->active()->get()->pluck('name', 'id');
-
-        $roles = $user->owner->roles->pluck('name', 'id');
+        $owners = Owner::active()->get()->pluck('name', 'id');
+        $roles  = $user->owner->roles->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.edit', compact('user', 'roles', 'owners'));
     }
@@ -147,19 +138,10 @@ class UsersController extends Controller
 
         $user->fill($request->all());
         $user->save();
-
         flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     /**
      * Remove the specified resource from storage.
@@ -173,27 +155,23 @@ class UsersController extends Controller
         try {
             $user->delete();
         } catch (\Exception $exception) {
-            $response = [
+            return [
                 'level'   => 'error',
                 'message' => __('An error has occured. Please report this to the administrator'),
             ];
         }
-        if (!isset($response)) {
-            $response = [
-                'level'   => 'success',
-                'message' => __('Operation was successfull'),
-            ];
-        }
 
-        return $response;
+        return [
+            'level'   => 'success',
+            'message' => __('Operation was successfull'),
+        ];
     }
 
     public function impersonate($id)
     {
         $user = User::find($id);
-
         \Auth::user()->setImpersonating($user->id);
-        flash()->warning(__('Impersonating').' '.$user->full_name);
+        flash()->warning(__('Impersonating') . ' ' . $user->full_name);
 
         return redirect()->back();
     }
@@ -201,7 +179,6 @@ class UsersController extends Controller
     public function stopImpersonating()
     {
         \Auth::user()->stopImpersonating();
-
         flash()->success(__('Welcome Back'));
 
         return redirect()->back();

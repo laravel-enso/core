@@ -23,7 +23,6 @@
         "laravel-enso/notifications": "^1.0.0",
         "laravel-enso/select": "^1.0.0",
         "laravel-enso/filemanager": "^1.0.0",
-        "laravel-enso/cnpvalidator": "^1.0.0",
         "laravel-enso/datatable": "^1.0.0",
         "laravel-enso/nullablefields": "^1.0.0",
         "maatwebsite/excel": "^2.1.0"

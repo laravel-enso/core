@@ -2,5 +2,5 @@
 
 return [
 
-    'defaultRoles' => ['admin'],
+    'defaultRole' => 'admin',
 ];

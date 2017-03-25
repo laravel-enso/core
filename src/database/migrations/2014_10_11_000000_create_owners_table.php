@@ -15,19 +15,7 @@ class CreateOwnersTable extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique('name');
-            $table->string('fiscal_code')->unique('fiscal_code')->nullable();
-            $table->string('reg_com_nr')->nullable();
-            $table->string('city')->nullable();
-            $table->string('county')->nullable();
-            $table->string('address')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->string('bank')->nullable();
-            $table->string('bank_account')->nullable();
-            $table->string('contact')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->boolean('is_individual')->default(0);
-            $table->boolean('is_active')->default(0);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

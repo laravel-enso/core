@@ -4,8 +4,6 @@ namespace LaravelEnso\Core\App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\CnpValidator\Validations;
-use LaravelEnso\Core\App\Enums\IsActiveEnum;
 use LaravelEnso\Core\App\Http\Controllers\Core\PreferencesController;
 use LaravelEnso\Core\App\Notifications\ResetPasswordNotification;
 
@@ -14,11 +12,11 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone', 'nin', 'is_active', 'role_id',
+        'first_name', 'last_name', 'phone', 'is_active', 'role_id',
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'api_token',
+        'password', 'remember_token',
     ];
 
     protected $appends = ['avatar_link', 'full_name'];
@@ -48,19 +46,9 @@ class User extends Authenticatable
         return $this->hasMany('LaravelEnso\Core\App\Models\Preference');
     }
 
-    public function comments()
-    {
-        return $this->hasMany('LaravelEnso\CommentsManager\App\Models\Comment');
-    }
-
-    public function comments_tags()
-    {
-        return $this->belongsToMany('LaravelEnso\CommentsManager\App\Models\Comment');
-    }
-
     public function getAvatarLinkAttribute()
     {
-        return $this->avatar ? '/core/avatars/'.$this->avatar->saved_name : asset('/images/profile.png');
+        return $this->avatar ? '/core/avatars/' . $this->avatar->saved_name : asset('/images/profile.png');
     }
 
     public function getLanguageAttribute()
@@ -115,7 +103,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function getCreatedDateAttribute()
@@ -125,30 +113,7 @@ class User extends Authenticatable
 
     public function getBirthdayAttribute()
     {
-        $birthday = 'N/A';
-
-        if ($this->nin && Validations::validatorNin('', $this->nin)) {
-            $type = substr($this->nin, 0, 1);
-            $year = substr($this->nin, 1, 2);
-            $month = substr($this->nin, 3, 2);
-            $day = substr($this->nin, 5, 2);
-            $year = ($type === '5' || $type === '6') ? '20'.$year : '19'.$year;
-
-            $birthday = \Date::parse($year.$month.$day)->format('d-m-Y');
-
-            if ($birthday == \Date::now()->format('d-m-Y')) {
-                $birthday = __('Happy Birthday');
-            }
-        }
-
-        return $birthday;
-    }
-
-    public function getActiveLabelAttribute()
-    {
-        $isActiveEnum = new IsActiveEnum();
-
-        return $isActiveEnum->getValueByKey($this->is_active);
+        return null;
     }
 
     public function sendPasswordResetNotification($token)

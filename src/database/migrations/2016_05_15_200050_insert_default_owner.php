@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\App\Models\Owner;
 use LaravelEnso\Core\App\Models\Role;
 
-class InsertDefaultOwners extends Migration
+class InsertDefaultOwner extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class InsertDefaultOwners extends Migration
     {
         \DB::transaction(function () {
             $owners = [
-                ['name' => 'Admin', 'fiscal_code' => null, 'reg_com_nr' => null, 'city' => null, 'county' => null, 'address' => null, 'postal_code' => null, 'bank' => null, 'bank_account' => null, 'contact' => null, 'phone' => null, 'email' => null, 'is_active' => 1],
+                ['name' => 'Admin', 'is_active' => true],
             ];
 
             $roles = Role::all();

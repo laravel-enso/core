@@ -8,7 +8,7 @@ use LaravelEnso\Core\App\Models\PermissionsGroup;
 
 abstract class StructureMigration extends Migration
 {
-    protected $roles;
+    protected $role;
     protected $permissionsGroup;
     protected $permissions;
     protected $parentMenu;
@@ -26,8 +26,13 @@ abstract class StructureMigration extends Migration
         if ($this->parentMenu) {
             $structureManager->setParentMenu($this->parentMenu);
         }
+
         if ($this->menu) {
             $structureManager->setMenu($this->menu);
+        }
+
+        if ($this->role) {
+            $structureManager->setRole($role);
         }
 
         $structureManager->create();

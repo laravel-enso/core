@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/database/migrations' => database_path('migrations'),
-        ], 'core-migration');
+        ], 'core-migrations');
 
         $this->publishes([
             __DIR__.'/resources/routes/web.php' => base_path('routes/web.php'),

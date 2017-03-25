@@ -25,9 +25,9 @@ class UsersTableStructure extends TableStructure
             /* computed responsive priority will be  1 for first column
              * and will increment with one for each consecutive column
              */
-            'responsivePriority' => [1, 2, 5, 7],
+            'responsivePriority' => [1, 2, 4, 6],
             /* list of columns that are not searchable */
-            'notSearchable'      => [7],
+            'notSearchable'      => [6],
             /* list of columns that are not sortable */
             // 'notSortable'        => [4],
             /* list of editable columns
@@ -70,26 +70,21 @@ class UsersTableStructure extends TableStructure
                     'name'  => 'last_name',
                 ],
                 3 => [
-                    'label' => __('Nin'),
-                    'data'  => 'nin',
-                    'name'  => 'nin',
-                ],
-                4 => [
                     'label' => __('Phone'),
                     'data'  => 'phone',
                     'name'  => 'users.phone',
                 ],
-                5 => [
+                4 => [
                     'label' => __('Email'),
                     'data'  => 'email',
                     'name'  => 'users.email',
                 ],
-                6 => [
+                5 => [
                     'label' => __('Role'),
                     'data'  => 'role',
                     'name'  => 'roles.name',
                 ],
-                7 => [
+                6 => [
                     'label' => __('Active'),
                     'data'  => 'is_active',
                     'name'  => 'users.is_active',

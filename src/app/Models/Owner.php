@@ -7,18 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Owner extends Model
 {
     protected $fillable = [
-        'name', 'fiscal_code', 'reg_com_nr', 'city', 'county', 'bank', 'bank_account', 'postal_code', 'contact', 'phone', 'email', 'address', 'is_individual', 'is_active',
+        'name', 'is_active',
     ];
-
-    public function comments()
-    {
-        return $this->morphMany('LaravelEnso\CommentsManager\App\Models\Comment', 'commentable');
-    }
-
-    public function documents()
-    {
-        return $this->morphMany('LaravelEnso\DocumentsManager\App\Models\Document', 'documentable');
-    }
 
     public function users()
     {
@@ -38,10 +28,5 @@ class Owner extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
-    }
-
-    public function scopeIndividual($query)
-    {
-        return $query->where('is_individual', 1);
     }
 }

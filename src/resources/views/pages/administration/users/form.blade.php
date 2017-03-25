@@ -39,15 +39,6 @@
     </div>
 </div>
 <div class="col-sm-6">
-    <div class="form-group{{ $errors->has('nin') ? ' has-error' : '' }}">
-        {!! Form::label('nin', __("NIN")) !!}
-        <small class="text-danger" style="float:right;">
-            {{ $errors->first('nin') }}
-        </small>
-        {!! Form::text('nin', null, ['class' => 'form-control', 'placeholder' => __("Please Fill")]) !!}
-    </div>
-</div>
-<div class="col-sm-6">
     <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
         {!! Form::label('role_id', __("Role")) !!}
         <small class="text-danger" style="float:right;">

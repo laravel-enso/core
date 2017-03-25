@@ -9,16 +9,16 @@ use LaravelEnso\Core\App\Models\Role;
 
 class StructureCreator
 {
-    private $defaultRoles;
+    private $defaultRole;
     private $permissionsGroup;
     private $permissions;
     private $parentMenu;
     private $menu;
-    private $roles;
+    private $role;
 
     public function __construct()
     {
-        $this->defaultRoles = config('laravel-enso.defaultRoles');
+        $this->defaultRole = config('laravel-enso.defaultRole');
         $this->permissionsGroup = null;
         $this->permissions = collect();
         $this->menu = null;
@@ -37,8 +37,8 @@ class StructureCreator
 
     private function checkIfRolesGiven()
     {
-        if (!$this->roles) {
-            $this->setRoles($this->defaultRoles);
+        if (!$this->role) {
+            $this->setRole($this->defaultRole);
         }
     }
 
@@ -94,13 +94,8 @@ class StructureCreator
         }
     }
 
-    public function setRoles($roles)
+    public function setRole($role)
     {
-        $this->roles = $this->fetchRoles($roles);
-    }
-
-    private function fetchRoles($roles)
-    {
-        return Role::whereIn('name', array_values($roles))->get();
+        $this->role = Role::whereName($role)->first();
     }
 }
