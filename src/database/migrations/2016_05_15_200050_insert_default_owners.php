@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Models\Menu;
 use LaravelEnso\Core\App\Models\Owner;
 use LaravelEnso\Core\App\Models\Role;
 
