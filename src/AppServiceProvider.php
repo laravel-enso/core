@@ -12,11 +12,37 @@ use LaravelEnso\Core\App\Http\ViewComposers\MainComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private $providers = [
+        'Collective\Html\HtmlServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
+        'LaravelEnso\Core\AuthServiceProvider',
+        'LaravelEnso\Core\EventServiceProvider',
+        'LaravelEnso\Charts\ChartsServiceProvider',
+        'LaravelEnso\Select\SelectServiceProvider',
+        'LaravelEnso\DataTable\DataTableServiceProvider',
+        'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
+        'LaravelEnso\Localisation\LocalisationServiceProvider',
+        'LaravelEnso\CommentsManager\CommentsManagerServiceProvider',
+        'LaravelEnso\DocumentsManager\DocumentsManagerServiceProvider',
+        'LaravelEnso\LogManager\LogManagerServiceProvider',
+        'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
+        'LaravelEnso\Notifications\NotificationsServiceProvider',
+    ];
+
+    private $aliases = [
+        'Html'  => 'Collective\Html\HtmlFacade',
+        'Flash' => 'Laracasts\Flash\Flash::class',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel::class',
+        'Form'  => 'Collective\Html\FormFacade',
+    ];
+
     /**
      * Bootstrap the application services.
      *
      * @return void
      */
+
     public function boot()
     {
         $this->publishesAll();
@@ -36,96 +62,96 @@ class AppServiceProvider extends ServiceProvider
     private function publishesDepedencies()
     {
         $this->publishes([
-            __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
+            __DIR__ . '/config/laravel-enso.php' => config_path('laravel-enso.php'),
         ], 'core-config');
 
         $this->publishes([
-            __DIR__.'/database/migrations' => database_path('migrations'),
+            __DIR__ . '/database/migrations' => database_path('migrations'),
         ], 'core-migrations');
 
         $this->publishes([
-            __DIR__.'/resources/routes/web.php' => base_path('routes/web.php'),
+            __DIR__ . '/resources/routes/web.php' => base_path('routes/web.php'),
         ], 'core-routes');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
+            __DIR__ . '/resources/lang' => resource_path('lang'),
         ], 'core-lang');
     }
 
     private function publishesClasses()
     {
         $this->publishes([
-            __DIR__.'/resources/Classes/DataTable' => app_path('DataTable'),
+            __DIR__ . '/resources/Classes/DataTable' => app_path('DataTable'),
         ], 'core-classes');
 
         $this->publishes([
-            __DIR__.'/resources/Classes/Controllers' => app_path('Http/Controllers'),
+            __DIR__ . '/resources/Classes/Controllers' => app_path('Http/Controllers'),
         ], 'core-controllers');
 
         $this->publishes([
-            __DIR__.'/resources/Classes/Requests' => app_path('Http/Requests'),
+            __DIR__ . '/resources/Classes/Requests' => app_path('Http/Requests'),
         ], 'core-requests');
 
         $this->publishes([
-            __DIR__.'/resources/Classes/Models' => app_path(),
+            __DIR__ . '/resources/Classes/Models' => app_path(),
         ], 'core-models');
 
         $this->publishes([
-            __DIR__.'/app/notifications' => app_path('Notifications/vendor/laravel-enso'),
+            __DIR__ . '/app/notifications' => app_path('Notifications/vendor/laravel-enso'),
         ], 'core-notification');
     }
 
     private function publishesViews()
     {
         $this->publishes([
-            __DIR__.'/resources/views/layouts' => resource_path('views/vendor/laravel-enso/core/layouts'),
+            __DIR__ . '/resources/views/layouts' => resource_path('views/vendor/laravel-enso/core/layouts'),
         ], 'core-views');
 
         $this->publishes([
-            __DIR__.'/resources/views/partials' => resource_path('views/vendor/laravel-enso/core/partials'),
+            __DIR__ . '/resources/views/partials' => resource_path('views/vendor/laravel-enso/core/partials'),
         ], 'core-views');
 
         $this->publishes([
-            __DIR__.'/resources/views/includes' => resource_path('views/vendor/laravel-enso/core/includes'),
+            __DIR__ . '/resources/views/includes' => resource_path('views/vendor/laravel-enso/core/includes'),
         ], 'core-views');
 
         $this->publishes([
-            __DIR__.'/resources/views/pages' => resource_path('views/vendor/laravel-enso/core/pages'),
+            __DIR__ . '/resources/views/pages' => resource_path('views/vendor/laravel-enso/core/pages'),
         ], 'core-views');
 
         $this->publishes([
-            __DIR__.'/resources/views/auth' => resource_path('views/auth'),
+            __DIR__ . '/resources/views/auth' => resource_path('views/auth'),
         ], 'core-auth');
 
         $this->publishes([
-            __DIR__.'/resources/views/errors' => resource_path('views/errors'),
+            __DIR__ . '/resources/views/errors' => resource_path('views/errors'),
         ], 'core-errors');
     }
 
     private function publishesResources()
     {
         $this->publishes([
-            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+            __DIR__ . '/resources/assets/images' => resource_path('assets/images'),
         ], 'core-images');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso'),
+            __DIR__ . '/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso'),
         ], 'core-pages-js');
 
         $this->publishes([
-            __DIR__.'/resources/assets/libs' => resource_path('assets/libs'),
+            __DIR__ . '/resources/assets/libs' => resource_path('assets/libs'),
         ], 'core-libs');
 
         $this->publishes([
-            __DIR__.'/resources/assets/main-js' => resource_path('assets/js'),
+            __DIR__ . '/resources/assets/main-js' => resource_path('assets/js'),
         ], 'core-main-js');
 
         $this->publishes([
-            __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
+            __DIR__ . '/resources/assets/sass' => resource_path('assets/sass'),
         ], 'core-sass');
 
         $this->publishes([
-            __DIR__.'/resources/assets/root' => base_path(),
+            __DIR__ . '/resources/assets/root' => base_path(),
         ], 'core-root');
     }
 
@@ -141,15 +167,15 @@ class AppServiceProvider extends ServiceProvider
             \LaravelEnso\Core\App\Http\Middleware\VerifyRouteAccess::class,
             \LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger::class,
             \LaravelEnso\Core\App\Http\Middleware\Impersonate::class,
-            \LaravelEnso\Core\App\Http\Middleware\SetLanguage::class
+            \LaravelEnso\Core\App\Http\Middleware\SetLanguage::class,
         ]);
     }
 
     private function loadDependencies()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'laravel-enso/core');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 
     private function registerComposers()
@@ -168,29 +194,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Bind packages
-        $this->app->register(
-            'Collective\Html\HtmlServiceProvider',
-            'Laracasts\Flash\FlashServiceProvider',
-            'Maatwebsite\Excel\ExcelServiceProvider',
-            'LaravelEnso\Core\AuthServiceProvider',
-            'LaravelEnso\Core\EventServiceProvider',
-            'LaravelEnso\Charts\ChartsServiceProvider',
-            'LaravelEnso\Select\SelectServiceProvider',
-            'LaravelEnso\DataTable\DataTableServiceProvider',
-            'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
-            'LaravelEnso\Localisation\LocalisationServiceProvider',
-            'LaravelEnso\CommentsManager\CommentsManagerServiceProvider',
-            'LaravelEnso\DocumentsManager\DocumentsManagerServiceProvider',
-            'LaravelEnso\LogManager\LogManagerServiceProvider',
-            'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
-            'LaravelEnso\Notifications\NotificationsServiceProvider'
-        );
+        $this->registerProviders();
+        $this->registerAliases();
+    }
 
-        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Form', 'Collective\Html\FormFacade');
-        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Html', 'Collective\Html\HtmlFacade');
-        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Flash', 'Laracasts\Flash\Flash::class');
-        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Excel', 'Maatwebsite\Excel\Facades\Excel::class');
-        \Illuminate\Foundation\AliasLoader::getInstance()->alias('Flash', 'Laracasts\Flash\Flash::class');
+    private function registerProviders()
+    {
+        foreach ($this->providers as $provider) {
+            $this->app->register($provider);
+        }
+    }
+
+    private function registerAliases()
+    {
+        $loader = AliasLoader::getInstance();
+
+        foreach ($this->aliases as $alias => $abstract) {
+            $loader->alias($alias, $abstract);
+        }
     }
 }
