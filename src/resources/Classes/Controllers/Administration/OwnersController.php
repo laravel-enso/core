@@ -56,7 +56,7 @@ class OwnersController extends Controller
         return redirect('administration/owners/'.$owner->id.'/edit');
     }
 
-    public function show(Owner $owner)
+    public function show()
     {
         //
     }

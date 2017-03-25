@@ -41,8 +41,8 @@ class PermissionsController extends Controller
      */
     public function create()
     {
-        $permissionTypes = new PermissionTypesEnum();
-        $permissionTypes = $permissionTypes->getData();
+        $permissionTypes   = new PermissionTypesEnum();
+        $permissionTypes   = $permissionTypes->getData();
         $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.system.permissions.create', compact('permissionTypes', 'permissionsGroups'));
@@ -67,7 +67,7 @@ class PermissionsController extends Controller
             flash()->success(__('Permission created'));
         });
 
-        return redirect('system/permissions/'.$permission->id.'/edit');
+        return redirect('system/permissions/' . $permission->id . '/edit');
     }
 
     /**
@@ -80,10 +80,10 @@ class PermissionsController extends Controller
     public function edit(Permission $permission)
     {
         $permission->load('permissions_group');
-        $permissionTypes = new PermissionTypesEnum();
-        $permissionTypes = $permissionTypes->getData();
+        $permissionTypes   = new PermissionTypesEnum();
+        $permissionTypes   = $permissionTypes->getData();
         $permissionsGroups = PermissionsGroup::all()->pluck('name', 'id');
-        $roles = Role::all()->pluck('name', 'id');
+        $roles             = Role::all()->pluck('name', 'id');
         $permission->roles_list;
 
         return view('laravel-enso/core::pages.system.permissions.edit', compact('permission', 'permissionTypes', 'permissionsGroups', 'roles'));
@@ -102,8 +102,8 @@ class PermissionsController extends Controller
         \DB::transaction(function () use ($request, $permission) {
             $permission->fill($request->all());
             $permission->save();
-            $roles_list = $request->roles_list ? $request->roles_list : [];
-            $permission->roles()->sync($roles_list);
+            $roles = $request->roles_list ? $request->roles_list : [];
+            $permission->roles()->sync($roles);
 
             flash()->success(__('The Changes have been saved!'));
         });

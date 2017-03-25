@@ -102,8 +102,8 @@ class MenusController extends Controller
         \DB::transaction(function () use ($request, $menu) {
             $menu->fill($request->all());
             $menu->save();
-            $roles_list = $request->roles_list ? $request->roles_list : [];
-            $menu->roles()->sync($roles_list);
+            $roles = $request->roles_list ? $request->roles_list : [];
+            $menu->roles()->sync($roles);
 
             flash()->success(__('The Changes have been saved!'));
         });
@@ -162,12 +162,11 @@ class MenusController extends Controller
             $order++;
             $menu = Menu::find($element['unique_id']);
             $menu->parent_id = $id;
+            $menu->has_children = null;
 
             if (count($element['children'])) {
                 $menu->has_children = 1;
                 $this->updateMenu($element['children'], $element['unique_id']);
-            } else {
-                $menu->has_children = null;
             }
 
             $menu->order = $order;

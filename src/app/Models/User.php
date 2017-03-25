@@ -132,12 +132,7 @@ class User extends Authenticatable
             $year = substr($this->nin, 1, 2);
             $month = substr($this->nin, 3, 2);
             $day = substr($this->nin, 5, 2);
-
-            if ($type == '5' || $type == '6') {
-                $year = '20'.$year;
-            } else {
-                $year = '19'.$year;
-            }
+            $year = ($type === '5' || $type === '6') ? '20'.$year : '19'.$year;
 
             $birthday = \Date::parse($year.$month.$day)->format('d-m-Y');
 
