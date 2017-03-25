@@ -2,7 +2,7 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
-elixir(mix => {
+elixir((mix) => {
 	mix.copy('resources/assets/libs/datatables-editor/js', 'public/libs/datatables-editor') //private lib
 		.copy('resources/assets/images', 'public/images')
 		.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/fonts/bootstrap')
