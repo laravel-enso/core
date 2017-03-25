@@ -25,25 +25,27 @@ class MainComposer
     /**
      * Create a new profile composer.
      *
-     * @param  UserRepository  $users
+     * @param UserRepository $users
+     *
      * @return void
      */
     public function __construct()
     {
-        $this->user             = request()->user();
-        $this->menu             = new MenuGenerator($this->user->role->menus->sortBy('order'));
-        $this->languages        = Language::all();
-        $this->themes           = (new ThemesEnum())->getJsonData();
-        $this->pusherKey        = env('PUSHER_KEY');
-        $this->preferences      = $this->user->global_preferences;
-        $this->theme            = json_decode($this->preferences)->theme;
+        $this->user = request()->user();
+        $this->menu = new MenuGenerator($this->user->role->menus->sortBy('order'));
+        $this->languages = Language::all();
+        $this->themes = (new ThemesEnum())->getJsonData();
+        $this->pusherKey = env('PUSHER_KEY');
+        $this->preferences = $this->user->global_preferences;
+        $this->theme = json_decode($this->preferences)->theme;
         $this->collapsedSidebar = json_decode($this->preferences)->collapsedSidebar ? 'sidebar-collapse' : '';
     }
 
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
+     * @param View $view
+     *
      * @return void
      */
     public function compose(View $view)
