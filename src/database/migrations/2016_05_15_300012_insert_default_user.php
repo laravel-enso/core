@@ -23,6 +23,7 @@ class InsertDefaultUser extends Migration
             $user->role_id = $role->id;
             $owner = Owner::whereName('Admin')->first();
             $user->owner_id = $owner->id;
+            $user->is_active = true;
             $user->save();
         });
     }

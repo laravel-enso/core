@@ -1,104 +1,47 @@
 # Laravel Enso Core v3.0
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
+[![StyleCI](https://styleci.io/repos/85807594/shield?branch=master)](https://styleci.io/repos/85807594)
+[![Total Downloads](https://poser.pugx.org/laravel-enso/core/downloads)](https://packagist.org/packages/laravel-enso/core)
+[![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
 
-A solid base for all laravel-enso packages.
+Laravel Enso can be a solid base for any Laravel Based project.
 
-### Configuration steps:
+### List of features
 
-Console/Kernel.php
+ ... will be covered soon
 
-```php
-protected function schedule(Schedule $schedule)
-{
-    $schedule->call(function () {
+### Installation
 
-        $logReporting = new LogReporting;
-        $logReporting->checkLaravelLog();
-    })->everyTenMinutes();
-}
-```
+Warning: for now, use this package only on a fresh install of Laravel
 
-Exceptions/Handler.php
+1. run `laravel new project`
 
-```php
-public function render($request, Exception $exception)
-{
-    if ($exception instanceof TokenMismatchException) {
-        return redirect('/');
-    }
+2. set .env file
 
-    return parent::render($request, $exception);
-}
-```
+3. in the project folder run `composer require laravel-enso/core`
 
-Http/Middleware/RedirectIfAuthenticated.php
+4. delete `database/migrations/create_users_table.php` (laravel default migration for users table) and resources/views/welcome.blade.php.
 
-```php
-public function handle($request, Closure $next, $guard = null)
-{
-    if (Auth::guard($guard)->check()) {
+5. add `LaravelEnso\Core\AppServiceProvider::class` to the providers list in config/app.php
 
-        return redirect('/');
-    }
+6. run `php artisan vendor:publish --force` - this will publish all you need in order to use the app.
 
-    return $next($request);
-}
+7. run `php artisan migrate` to create all the tables and the basic structure of the app.
 
-```
+8. run `npm install` to install npm
 
-Http/Controllers/Auth/LoginController.php
+9. run `gulp` to compile everything
 
-```php
-protected $redirectTo = '/';
-```
+10. LarvelEnso uses "/" as the default route so replace `/home` with `/` in the following files:
+    - app/Http/Controllers/Auth/LoginController.php
+    - app/Http/Controllers/Auth/RegisterController.php
+    - app/Http/Controllers/Auth/ResetPasswordController.php
+    - app/Http/Middleware/RedirectIfAuthenticated.php
 
-Http/Controllers/Auth/RegisterController.php => replace content with
+11. That was long... I know. At least let's hope it was worth the pain.
+Now just go to in you browser to http://project.dev and login with user: admin@login.com and password: password
 
-```php
-public function showRegistrationForm()
-{
-    return redirect('/');
-}
-
-public function register(Request $request)
-{
-    return redirect('/');
-}
-```
-
-Http/Controllers/Auth/ResetPasswordController.php
-
-```php
-protected $redirectTo = '/';
-```
-
-create in storage\app folder the following folders:
-
-avatars
-imports
-exports
-files
-temp
-
-delete default users table migration
-
-### Note
-
-AppServiceProvider will create the following middleware group
-
-```php
-
-
-```php
-'core' => [
-
-    \LaravelEnso\Core\App\Http\Middleware\VerifyActiveState::class,
-    \LaravelEnso\Core\App\Http\Middleware\VerifyRouteAccess::class,
-    \LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger::class,
-    \LaravelEnso\Core\App\Http\Middleware\Impersonate::class,
-    \LaravelEnso\Core\App\Http\Middleware\SetLanguage::class,
-]
-```
+Now play :)
 
 ### Try also
 
@@ -107,4 +50,6 @@ laravel-enso/documentsmanager
 laravel-enso/tutorialmanager
 laravel-enso/localisation
 
-Have fun!!!
+### Contributions
+
+are welcome
