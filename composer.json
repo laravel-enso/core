@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/core",
-    "description": "Laravel Enso Core v3.0. A solid base for all laravel-enso packages.",
+    "description": "Laravel Enso Core. A solid start for any Laravel Based project.",
     "type": "project",
     "license": "MIT",
     "authors": [
