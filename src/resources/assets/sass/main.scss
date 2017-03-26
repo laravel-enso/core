@@ -69,6 +69,8 @@ ul.color-theme-selector {
 	border-color: #141a1d;
 	padding: 2px;
 	margin: 2px;
+	max-height: 105;
+	overflow-y: scroll;
 }
 
 //admin-lte user preferences collapsible side panel

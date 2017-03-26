@@ -4,13 +4,9 @@ require('laravel-elixir-vue-2');
 
 elixir((mix) => {
 	mix.copy('resources/assets/images', 'public/images')
-		.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/fonts/bootstrap')
 		.copy('resources/assets/libs/datatables-lang', 'public/libs/datatables-lang');
 
-    mix.styles([
-		"resources/assets/libs/checkbox-css/mk-toggle-radio-check.css",
-		"node_modules/admin-lte/dist/css/adminlte.css",
-		"node_modules/admin-lte/dist/css/skins/_all-skins.css",
+    mix.styles(["resources/assets/sass/admin-lte-skins.css",
 	], 'public/css/all.css', './');
 
 	mix.sass('app.scss')

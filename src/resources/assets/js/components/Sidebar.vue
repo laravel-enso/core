@@ -42,13 +42,14 @@
 	      		<hr>
 		      	<label class="control-sidebar-subheading">
 		      		<slot name="state-save"></slot>
-		        	<div class="mk-trc pull-right" data-color="black" data-text="true" data-align="right">
+		      		<span class="pull-right">
 		          		<input id="dt-state-save"
 			                type="checkbox"
+			                class="toggle"
 			                v-model="globalPreferences.dtStateSave"
 			                @change="setPreference">
 		        		<label for="dt-state-save"><i></i></label>
-		    		</div>
+	        		</span>
 		      	</label>
 		      	<hr>
 	<!--
@@ -67,13 +68,14 @@
 	      		<div class="hidden-xs">
 	        		<label class="control-sidebar-subheading">
 				        <slot name="collapse"></slot>
-			          	<div class="mk-trc pull-right" data-color="black" data-text="true" data-align="right">
+				        <span class="pull-right">
 				            <input id="sidebar-collapse"
 				                  type="checkbox"
+				                  class="toggle"
 				                  v-model="globalPreferences.sidebarCollapse"
 				                  @change="setPreference">
 				            <label for="sidebar-collapse"><i></i></label>
-			          	</div>
+			            </span>
 				    </label>
 				    <hr>
 				</div>
@@ -206,7 +208,7 @@
 
 	    	$('body').removeClass('skin-' + this.globalPreferences.theme).addClass('skin-' + theme);
 			this.globalPreferences.theme = theme;
-			this.setPreference(false);
+			this.setPreference();
 	    },
 	    setBodyClass:function() {
 
@@ -228,6 +230,7 @@
 	    setPreference: function(reload = false) {
 
 	        this.setBodyClass();
+
 	        axios.patch('/core/preferences/setPreferences', {key: 'global', value: JSON.stringify(this.globalPreferences)}).then((response) => {
 
 	        	if (reload) {
