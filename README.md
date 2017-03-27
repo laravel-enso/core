@@ -38,7 +38,9 @@ Warning: for now, use this package only on a fresh install of Laravel
     - app/Http/Controllers/Auth/ResetPasswordController.php
     - app/Http/Middleware/RedirectIfAuthenticated.php
 
-11. That was long... I know. At least let's hope it was worth the pain.
+11. Uncomment `App\Providers\BroadcastServiceProvider::class` from config/app.php file.
+
+12. That was long... I know. At least let's hope it was worth the pain.
 Now just go to in you browser to http://project.dev and login with user: admin@login.com and password: password
 
 Now play :)

@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Core\app\Http\Controllers\Core\PreferencesController;
@@ -108,7 +109,7 @@ class User extends Authenticatable
 
     public function getCreatedDateAttribute()
     {
-        return \Date::parse($this->created_at)->format('d-m-Y');
+        return Carbon::parse($this->created_at)->format('d-m-Y');
     }
 
     public function getBirthdayAttribute()

@@ -22,7 +22,7 @@
         <small class="text-danger" style="float:right;">
             {{ $errors->first('type') }}
         </small>
-        {!! Form::select('type', $permissionTypeOptions, null, ['class' => 'form-control select']) !!}
+        {!! Form::select('type', $permissionTypes, null, ['class' => 'form-control select']) !!}
     </div>
 </div>
 <div class="col-sm-6">

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Enso\app\Notifications;
+namespace LaravelEnso\Core\app\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

@@ -2,13 +2,13 @@
 
 namespace LaravelEnso\Core\app\Jobs;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Enso\app\Notifications\UsersExportNotification;
-use LaravelEnso\Core\app\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateUsersExportJob implements ShouldQueue

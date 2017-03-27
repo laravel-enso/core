@@ -72,7 +72,7 @@
 				            <input id="sidebar-collapse"
 				                  type="checkbox"
 				                  class="toggle"
-				                  v-model="globalPreferences.sidebarCollapse"
+				                  v-model="globalPreferences.collapsedSidebar"
 				                  @change="setPreference()">
 				            <label for="sidebar-collapse"><i></i></label>
 			            </span>
@@ -133,7 +133,7 @@
             var result = 'sidebar-mini skin-';
             result += this.globalPreferences.theme;
             result += this.globalPreferences.headerFixed ? ' fixed' : '';
-            result += this.globalPreferences.sidebarCollapse ? ' sidebar-collapse' : '';
+            result += this.globalPreferences.collapsedSidebar ? ' sidebar-collapse' : '';
 
             return result;
         },

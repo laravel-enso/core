@@ -162,10 +162,10 @@ class MenusController extends Controller
             $order++;
             $menu = Menu::find($element['unique_id']);
             $menu->parent_id = $id;
-            $menu->has_children = null;
+            $menu->has_children = false;
 
             if (count($element['children'])) {
-                $menu->has_children = 1;
+                $menu->has_children = true;
                 $this->updateMenu($element['children'], $element['unique_id']);
             }
 
