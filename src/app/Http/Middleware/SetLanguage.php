@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Middleware;
+namespace LaravelEnso\Core\app\Http\Middleware;
 
 use App;
 use Closure;

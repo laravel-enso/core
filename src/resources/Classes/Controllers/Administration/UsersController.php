@@ -8,8 +8,8 @@ use App\Http\Requests\ValidateUserRequest;
 use App\Owner;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use LaravelEnso\ActionLogger\App\Models\ActionHistory;
-use LaravelEnso\DataTable\App\Traits\DataTable;
+use LaravelEnso\ActionLogger\app\Models\ActionHistory;
+use LaravelEnso\DataTable\app\Traits\DataTable;
 
 class UsersController extends Controller
 {

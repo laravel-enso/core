@@ -1,13 +1,13 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers;
+namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Charts\App\Classes\BarChart;
-use LaravelEnso\Charts\App\Classes\BubbleChart;
-use LaravelEnso\Charts\App\Classes\LineChart;
-use LaravelEnso\Charts\App\Classes\PieChart;
-use LaravelEnso\Charts\App\Classes\RadarChart;
+use LaravelEnso\Charts\app\Classes\BarChart;
+use LaravelEnso\Charts\app\Classes\BubbleChart;
+use LaravelEnso\Charts\app\Classes\LineChart;
+use LaravelEnso\Charts\app\Classes\PieChart;
+use LaravelEnso\Charts\app\Classes\RadarChart;
 
 class DashboardController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\ViewComposers;
+namespace LaravelEnso\Core\app\Http\ViewComposers;
 
 use Illuminate\View\View;
-use LaravelEnso\Core\App\Classes\BreadcrumbsBuilder;
+use LaravelEnso\Core\app\Classes\BreadcrumbsBuilder;
 
 class BreadcrumbsComposer
 {

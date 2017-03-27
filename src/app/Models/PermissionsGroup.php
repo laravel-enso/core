@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class PermissionsGroup extends Model
 
     public function permissions()
     {
-        return $this->hasMany('LaravelEnso\Core\App\Models\Permission');
+        return $this->hasMany('LaravelEnso\Core\app\Models\Permission');
     }
 }

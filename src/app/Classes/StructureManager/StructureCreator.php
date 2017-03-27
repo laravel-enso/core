@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Core\App\Classes\StructureManager;
+namespace LaravelEnso\Core\app\Classes\StructureManager;
 
-use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\Permission;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
-use LaravelEnso\Core\App\Models\Role;
+use LaravelEnso\Core\app\Models\Menu;
+use LaravelEnso\Core\app\Models\Permission;
+use LaravelEnso\Core\app\Models\PermissionsGroup;
+use LaravelEnso\Core\app\Models\Role;
 
 class StructureCreator
 {

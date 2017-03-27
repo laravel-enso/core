@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,28 +10,28 @@ class Role extends Model
 
     public function menus()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Menu')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Menu')->withTimestamps();
     }
 
     //returns implicit menu
     public function menu()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\Menu');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\Menu');
     }
 
     public function owners()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Owner');
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Owner');
     }
 
     public function users()
     {
-        return $this->hasMany('LaravelEnso\Core\App\Models\User');
+        return $this->hasMany('LaravelEnso\Core\app\Models\User');
     }
 
     public function permissions()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Permission')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Permission')->withTimestamps();
     }
 
     public function getPermissionsListAttribute()

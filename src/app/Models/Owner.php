@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,12 +12,12 @@ class Owner extends Model
 
     public function users()
     {
-        return $this->hasMany('LaravelEnso\Core\App\Models\User');
+        return $this->hasMany('LaravelEnso\Core\app\Models\User');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Role');
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Role');
     }
 
     public function getRolesListAttribute()

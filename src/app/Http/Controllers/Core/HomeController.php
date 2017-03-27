@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\Core;
+namespace LaravelEnso\Core\app\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\app\Models\Menu;
+use LaravelEnso\Core\app\Models\User;
 
 class HomeController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\System;
+namespace LaravelEnso\Core\app\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\App\Enums\ResourcePermissionsEnum;
-use LaravelEnso\Core\App\Http\Requests\ValidateResourcePermissionsRequest;
-use LaravelEnso\Core\App\Models\Permission;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
+use LaravelEnso\Core\app\Enums\ResourcePermissionsEnum;
+use LaravelEnso\Core\app\Http\Requests\ValidateResourcePermissionsRequest;
+use LaravelEnso\Core\app\Models\Permission;
+use LaravelEnso\Core\app\Models\PermissionsGroup;
 
 class ResourcePermissionsController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\Core;
+namespace LaravelEnso\Core\app\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use LaravelEnso\ActionLogger\ActionHistory;
-use LaravelEnso\Core\App\Models\Login;
+use LaravelEnso\Core\app\Models\Login;
 
 class StatisticsController extends Controller
 {

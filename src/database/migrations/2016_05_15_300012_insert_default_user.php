@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Models\Owner;
-use LaravelEnso\Core\App\Models\Role;
-use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\app\Models\Owner;
+use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\Core\app\Models\User;
 
 class InsertDefaultUser extends Migration
 {

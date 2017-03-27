@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Classes\MenuManager;
+namespace LaravelEnso\Core\app\Classes\MenuManager;
 
 class TreeMenuBuilder
 {

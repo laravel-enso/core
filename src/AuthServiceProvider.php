@@ -4,7 +4,7 @@ namespace LaravelEnso\Core;
 
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use LaravelEnso\Core\App\Policies\UserPolicies;
+use LaravelEnso\Core\app\Policies\UserPolicies;
 
 class AuthServiceProvider extends ServiceProvider
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Core\App\Listeners;
+namespace LaravelEnso\Core\app\Listeners;
 
-use LaravelEnso\Core\App\Models\Login;
+use LaravelEnso\Core\app\Models\Login;
 
 class LogSuccessfulLoginListener
 {

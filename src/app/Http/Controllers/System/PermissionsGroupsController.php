@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\System;
+namespace LaravelEnso\Core\app\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\App\DataTable\PermissionsGroupsTableStructure;
-use LaravelEnso\Core\App\Http\Requests\ValidatePermissionsGroupRequest;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
-use LaravelEnso\DataTable\App\Traits\DataTable;
+use LaravelEnso\Core\app\DataTable\PermissionsGroupsTableStructure;
+use LaravelEnso\Core\app\Http\Requests\ValidatePermissionsGroupRequest;
+use LaravelEnso\Core\app\Models\PermissionsGroup;
+use LaravelEnso\DataTable\app\Traits\DataTable;
 
 class PermissionsGroupsController extends Controller
 {

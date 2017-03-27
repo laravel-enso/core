@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,12 +10,12 @@ class Permission extends Model
 
     public function permissions_group()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\PermissionsGroup');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\PermissionsGroup');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Role')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Role')->withTimestamps();
     }
 
     public function getRolesListAttribute()
@@ -25,6 +25,6 @@ class Permission extends Model
 
     public function tutorials()
     {
-        return $this->hasMany('LaravelEnso\TutorialManager\App\Models\Tutorial');
+        return $this->hasMany('LaravelEnso\TutorialManager\app\Models\Tutorial');
     }
 }

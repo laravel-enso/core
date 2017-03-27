@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\System;
+namespace LaravelEnso\Core\app\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\App\Classes\MenuManager\TreeMenuBuilder;
-use LaravelEnso\Core\App\DataTable\MenusTableStructure;
-use LaravelEnso\Core\App\Enums\IsActiveEnum;
-use LaravelEnso\Core\App\Http\Requests\ValidateMenuRequest;
-use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\Role;
-use LaravelEnso\DataTable\App\Traits\DataTable;
+use LaravelEnso\Core\app\Classes\MenuManager\TreeMenuBuilder;
+use LaravelEnso\Core\app\DataTable\MenusTableStructure;
+use LaravelEnso\Core\app\Enums\IsActiveEnum;
+use LaravelEnso\Core\app\Http\Requests\ValidateMenuRequest;
+use LaravelEnso\Core\app\Models\Menu;
+use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\DataTable\app\Traits\DataTable;
 
 class MenusController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Policies;
+namespace LaravelEnso\Core\app\Policies;
 
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;

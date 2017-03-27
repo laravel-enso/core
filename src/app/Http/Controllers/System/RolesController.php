@@ -1,21 +1,21 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\System;
+namespace LaravelEnso\Core\app\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\App\DataTable\RolesTableStructure;
-use LaravelEnso\Core\App\Http\Requests\ValidateRoleRequest;
-use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
-use LaravelEnso\Core\App\Models\Role;
-use LaravelEnso\DataTable\App\Traits\DataTable;
-use LaravelEnso\Select\App\Traits\SelectListBuilderTrait;
+use LaravelEnso\Core\app\DataTable\RolesTableStructure;
+use LaravelEnso\Core\app\Http\Requests\ValidateRoleRequest;
+use LaravelEnso\Core\app\Models\Menu;
+use LaravelEnso\Core\app\Models\PermissionsGroup;
+use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\DataTable\app\Traits\DataTable;
+use LaravelEnso\Select\app\Traits\SelectListBuilderTrait;
 
 class RolesController extends Controller
 {
     use DataTable, SelectListBuilderTrait;
 
-    protected $selectSourceClass = 'LaravelEnso\Core\App\Models\Role';
+    protected $selectSourceClass = 'LaravelEnso\Core\app\Models\Role';
     protected $selectPivotParams = ['owner_id' => 'owners'];
     protected $tableStructureClass = RolesTableStructure::class;
 

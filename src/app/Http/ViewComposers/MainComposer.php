@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\ViewComposers;
+namespace LaravelEnso\Core\app\Http\ViewComposers;
 
 use Illuminate\View\View;
-use LaravelEnso\Core\App\Classes\MenuManager\MenuGenerator;
-use LaravelEnso\Core\App\Enums\ThemesEnum;
-use LaravelEnso\Core\App\Models\Language;
+use LaravelEnso\Core\app\Classes\MenuManager\MenuGenerator;
+use LaravelEnso\Core\app\Enums\ThemesEnum;
+use LaravelEnso\Core\app\Models\Language;
 
 class MainComposer
 {

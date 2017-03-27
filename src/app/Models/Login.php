@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class Login extends Model
 
     public function user()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\User');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\User');
     }
 
     public function create(Login $login)

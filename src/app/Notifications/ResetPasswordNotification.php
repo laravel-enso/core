@@ -1,12 +1,12 @@
 <?php
 
-namespace Laravel\Enso\App\Notifications;
+namespace Laravel\Enso\app\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\app\Models\User;
 
 class ResetPasswordNotification extends Notification implements ShouldQueue
 {

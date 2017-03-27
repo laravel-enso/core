@@ -4,11 +4,11 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Core\App\Http\Middleware\Impersonate;
-use LaravelEnso\Core\App\Http\Middleware\VerifyActiveState;
-use LaravelEnso\Core\App\Http\Middleware\VerifyRouteAccess;
-use LaravelEnso\Core\App\Http\ViewComposers\BreadcrumbsComposer;
-use LaravelEnso\Core\App\Http\ViewComposers\MainComposer;
+use LaravelEnso\Core\app\Http\Middleware\Impersonate;
+use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
+use LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess;
+use LaravelEnso\Core\app\Http\ViewComposers\BreadcrumbsComposer;
+use LaravelEnso\Core\app\Http\ViewComposers\MainComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -166,11 +166,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('setLanguage', SetLanguage::class);
 
         $this->app['router']->middlewareGroup('core', [
-            \LaravelEnso\Core\App\Http\Middleware\VerifyActiveState::class,
-            \LaravelEnso\Core\App\Http\Middleware\VerifyRouteAccess::class,
-            \LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger::class,
-            \LaravelEnso\Core\App\Http\Middleware\Impersonate::class,
-            \LaravelEnso\Core\App\Http\Middleware\SetLanguage::class,
+            \LaravelEnso\Core\app\Http\Middleware\VerifyActiveState::class,
+            \LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess::class,
+            \LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger::class,
+            \LaravelEnso\Core\app\Http\Middleware\Impersonate::class,
+            \LaravelEnso\Core\app\Http\Middleware\SetLanguage::class,
         ]);
     }
 

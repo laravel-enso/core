@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\NullableFields\App\Traits\NullableFields;
+use LaravelEnso\NullableFields\app\Traits\NullableFields;
 
 class Menu extends Model
 {
@@ -14,12 +14,12 @@ class Menu extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\Core\App\Models\Role')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\Core\app\Models\Role')->withTimestamps();
     }
 
     public function parent()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\Menu');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\Menu');
     }
 
     public function getRolesListAttribute()

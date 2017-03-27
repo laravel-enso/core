@@ -46,7 +46,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            <comments-manager :id="{{ $owner->id }}"
+            <!-- <comments-manager :id="{{ $owner->id }}"
                 type="App\Owner"
                 v-if="{{ $owner }}"
                 edited-label="{{ __("edited") }}">
@@ -61,7 +61,7 @@
                 @include('laravel-enso/core::partials.modal')
             </documents-manager>
             <datepicker></datepicker>
-            <timepicker></timepicker>
+            <timepicker></timepicker> -->
         </div>
     </div>
 </section>

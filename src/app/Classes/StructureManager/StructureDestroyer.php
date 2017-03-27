@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\App\Classes\StructureManager;
+namespace LaravelEnso\Core\app\Classes\StructureManager;
 
-use LaravelEnso\Core\App\Models\Menu;
-use LaravelEnso\Core\App\Models\PermissionsGroup;
+use LaravelEnso\Core\app\Models\Menu;
+use LaravelEnso\Core\app\Models\PermissionsGroup;
 
 class StructureDestroyer
 {

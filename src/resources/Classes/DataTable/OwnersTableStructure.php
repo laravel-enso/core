@@ -2,8 +2,8 @@
 
 namespace App\DataTable;
 
-use LaravelEnso\Core\App\Enums\IsActiveEnum;
-use LaravelEnso\DataTable\App\Classes\Abstracts\TableStructure;
+use LaravelEnso\Core\app\Enums\IsActiveEnum;
+use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
 
 class OwnersTableStructure extends TableStructure
 {

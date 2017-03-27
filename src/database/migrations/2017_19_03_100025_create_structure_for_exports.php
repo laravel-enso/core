@@ -1,6 +1,6 @@
 <?php
 
-use LaravelEnso\Core\App\Classes\StructureManager\StructureMigration;
+use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 
 class CreateStructureForExports extends StructureMigration
 {

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\App\Models\Role;
+use LaravelEnso\Core\app\Models\Role;
 
 class InsertDefaultRoles extends Migration
 {

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use LaravelEnso\Core\App\Models\Owner as Owners;
+use LaravelEnso\Core\app\Models\Owner as Owners;
 
 class Owner extends Owners
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Core\App\Models;
+namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\Core\App\Http\Controllers\Core\PreferencesController;
-use LaravelEnso\Core\App\Notifications\ResetPasswordNotification;
+use LaravelEnso\Core\app\Http\Controllers\Core\PreferencesController;
+use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -23,27 +23,27 @@ class User extends Authenticatable
 
     public function owner()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\Owner');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\Owner');
     }
 
     public function avatar()
     {
-        return $this->hasOne('LaravelEnso\Core\App\Models\Avatar');
+        return $this->hasOne('LaravelEnso\Core\app\Models\Avatar');
     }
 
     public function role()
     {
-        return $this->belongsTo('LaravelEnso\Core\App\Models\Role');
+        return $this->belongsTo('LaravelEnso\Core\app\Models\Role');
     }
 
     public function logins()
     {
-        return $this->hasMany('LaravelEnso\Core\App\Models\Login');
+        return $this->hasMany('LaravelEnso\Core\app\Models\Login');
     }
 
     public function preferences()
     {
-        return $this->hasMany('LaravelEnso\Core\App\Models\Preference');
+        return $this->hasMany('LaravelEnso\Core\app\Models\Preference');
     }
 
     public function getAvatarLinkAttribute()
@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function action_histories()
     {
-        return $this->hasMany('LaravelEnso\ActionLogger\App\Models\ActionHistory');
+        return $this->hasMany('LaravelEnso\ActionLogger\app\Models\ActionHistory');
     }
 
     public function isAdmin()

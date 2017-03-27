@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Core\App\DataTable;
+namespace LaravelEnso\Core\app\DataTable;
 
-use LaravelEnso\DataTable\App\Classes\Abstracts\TableStructure;
+use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
 
 class PermissionsTableStructure extends TableStructure
 {

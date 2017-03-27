@@ -4,7 +4,7 @@ Route::get('error/{error}', function () {
     return view('errors.'.request()->error);
 });
 
-Route::group(['namespace' => 'LaravelEnso\Core\App\Http\Controllers', 'middleware' => ['web', 'auth']], function () {
+Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth']], function () {
     Route::get('dashboard/getLineChartData', 'DashboardController@getLineChartData')->name('dashboard.getLineChartData');
     Route::get('dashboard/getBarChartData', 'DashboardController@getBarChartData')->name('dashboard.getBarChartData');
     Route::get('dashboard/getPieChartData', 'DashboardController@getPieChartData')->name('dashboard.getPieChartData');
@@ -13,7 +13,7 @@ Route::group(['namespace' => 'LaravelEnso\Core\App\Http\Controllers', 'middlewar
     Route::get('dashboard/getBubbleChartData', 'DashboardController@getBubbleChartData')->name('dashboard.getBubbleChartData');
 });
 
-Route::group(['namespace' => 'LaravelEnso\Core\App\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
+Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
     Route::get('/', 'Core\HomeController@index')->name('home');
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
