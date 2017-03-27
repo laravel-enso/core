@@ -10,7 +10,7 @@ use LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess;
 use LaravelEnso\Core\app\Http\ViewComposers\BreadcrumbsComposer;
 use LaravelEnso\Core\app\Http\ViewComposers\MainComposer;
 
-class AppServiceProvider extends ServiceProvider
+class CoreServiceProvider extends ServiceProvider
 {
     private $providers = [
         'Collective\Html\HtmlServiceProvider',
