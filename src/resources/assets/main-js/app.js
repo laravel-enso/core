@@ -9,8 +9,6 @@ Vue.component('typeahead', require('./vendor/laravel-enso/components/Typeahead.v
 Vue.component('inputClear', require('./vendor/laravel-enso/components/InputClear.vue'));
 Vue.component('datepicker', require('./vendor/laravel-enso/components/Datepicker.vue'));
 Vue.component('timepicker', require('./vendor/laravel-enso/components/Timepicker.vue'));
-Vue.component('documentsManager', require('./vendor/laravel-enso/components/DocumentsManager.vue'));
-Vue.component('commentsManager', require('./vendor/laravel-enso/components/CommentsManager.vue'));
 Vue.component('modal', require('./vendor/laravel-enso/components/Modal.vue'));
 Vue.component('vueFilter', require('./vendor/laravel-enso/components/VueFilter.vue'));
 Vue.component('chart', require('./vendor/laravel-enso/components/Chart.vue'));
