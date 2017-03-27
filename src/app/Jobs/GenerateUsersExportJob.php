@@ -24,7 +24,7 @@ class GenerateUsersExportJob implements ShouldQueue
 
     public function __construct($user)
     {
-        $this->user     = $user;
+        $this->user = $user;
         $this->fileName = __('Users Report');
     }
 
@@ -35,9 +35,9 @@ class GenerateUsersExportJob implements ShouldQueue
      */
     public function handle()
     {
-        $result    = [];
+        $result = [];
         $userClass = config('auth.providers.users.model');
-        $users     = $userClass::with('owner')->with('role')->get();
+        $users = $userClass::with('owner')->with('role')->get();
 
         foreach ($users as $key => $user) {
             switch ($user->is_active) {
@@ -76,7 +76,7 @@ class GenerateUsersExportJob implements ShouldQueue
         })->store('xlsx');
 
         $user = $this->user;
-        $file = config('excel.export.store.path') . '/' . $this->fileName . '.xlsx';
+        $file = config('excel.export.store.path').'/'.$this->fileName.'.xlsx';
         $user->notify(new UsersExportNotification($file));
         Storage::delete($file);
     }
