@@ -4,7 +4,7 @@ return [
 
 	'paths' => [
 		'file' => 'files',
-		'avatars' => 'avatars'
+		'avatars' => 'avatars',
 		'imports' => 'imports',
 		'temp' => 'temp',
 		'exports' => 'exports',

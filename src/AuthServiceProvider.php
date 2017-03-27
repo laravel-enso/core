@@ -21,9 +21,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->$policies = [
+        $this->policies = [
             config('auth.providers.users.model') => UserPolicies::class,
-        ]
+        ];
 
         $this->registerPolicies();
 
