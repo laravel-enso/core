@@ -10,22 +10,22 @@ use LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess;
 use LaravelEnso\Core\app\Http\ViewComposers\BreadcrumbsComposer;
 use LaravelEnso\Core\app\Http\ViewComposers\MainComposer;
 
-class AppServiceProvider extends ServiceProvider
+class CoreServiceProvider extends ServiceProvider
 {
     private $providers = [
-        'Collective\Html\HtmlServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
-        'Maatwebsite\Excel\ExcelServiceProvider',
         'LaravelEnso\Core\AuthServiceProvider',
         'LaravelEnso\Core\EventServiceProvider',
-        'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\Select\SelectServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
         'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
-        'LaravelEnso\Localisation\LocalisationServiceProvider',
-        'LaravelEnso\LogManager\LogManagerServiceProvider',
-        'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
         'LaravelEnso\Notifications\NotificationsServiceProvider',
+        'LaravelEnso\Charts\ChartsServiceProvider',
+        'LaravelEnso\LogManager\LogManagerServiceProvider',
+        'LaravelEnso\Localisation\LocalisationServiceProvider',
+        'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ];
 
     private $aliases = [

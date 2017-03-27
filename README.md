@@ -22,7 +22,7 @@ Warning: for now, use this package only on a fresh install of Laravel
 
 4. delete `database/migrations/create_users_table.php` (laravel default migration for users table) and resources/views/welcome.blade.php.
 
-5. add `LaravelEnso\Core\AppServiceProvider::class` to the providers list in config/app.php
+5. add `LaravelEnso\Core\CoreServiceProvider::class` to the providers list in config/app.php
 
 6. run `php artisan vendor:publish --force` - this will publish all you need in order to use the app.
 
