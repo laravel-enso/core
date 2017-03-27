@@ -7,7 +7,7 @@
     </div>
     <strong>
         {{ __("Copyright © 2016") }}
-        <a href="{{ env('APP_URL') }}">
+        <a href="{{ config('app.url') }}">
             {{ config('app.name') }}
         </a>
     </strong>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Enso\app\Notifications;
+namespace LaravelEnso\Core\app\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,9 +15,9 @@ class UsersExportNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($file)
     {
-        //
+        $this->file = $file;
     }
 
     /**
@@ -44,7 +44,7 @@ class UsersExportNotification extends Notification
         return (new MailMessage())
                     ->line('You will find attached the requested report.')
                     ->line('Thank you for using our application!')
-                    ->attach(storage_path('app/exports/Raport Users.xlsx'));
+                    ->attach($this->file);
     }
 
     /**

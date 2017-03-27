@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core;
 
-use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use LaravelEnso\Core\app\Policies\UserPolicies;
 
@@ -13,9 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        User::class => UserPolicies::class,
-    ];
+    protected $policies;
 
     /**
      * Register any authentication / authorization services.
@@ -24,6 +21,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->$policies = [
+            config('auth.providers.users.model') => UserPolicies::class,
+        ]
+
         $this->registerPolicies();
 
         \Gate::define('accessRoute', function ($user, $route) {

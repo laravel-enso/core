@@ -12,7 +12,7 @@ class AvatarController extends Controller
 
     public function __construct()
     {
-        $this->fileManager = new FileManager(env('AVATARS_PATH'));
+        $this->fileManager = new FileManager(config('laravel-enso.paths.avatars'));
     }
 
     public function store()

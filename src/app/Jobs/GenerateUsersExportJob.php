@@ -2,13 +2,12 @@
 
 namespace LaravelEnso\Core\app\Jobs;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Enso\app\Notifications\UsersExportNotification;
+use LaravelEnso\Core\app\Notifications\UsersExportNotification;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateUsersExportJob implements ShouldQueue
@@ -21,10 +20,12 @@ class GenerateUsersExportJob implements ShouldQueue
      * @return void
      */
     public $user;
+    private $fileName;
 
-    public function __construct(User $user)
+    public function __construct($user)
     {
-        $this->user = $user;
+        $this->user     = $user;
+        $this->fileName = __('Users Report');
     }
 
     /**
@@ -34,35 +35,35 @@ class GenerateUsersExportJob implements ShouldQueue
      */
     public function handle()
     {
-        $result = [];
-        $users = User::with('owner')->with('role')->get();
+        $result    = [];
+        $userClass = config('auth.providers.users.model');
+        $users     = $userClass::with('owner')->with('role')->get();
 
         foreach ($users as $key => $user) {
             switch ($user->is_active) {
 
                 case 0:
-                    $status = trans('export.no');
+                    $status = __('no');
                     break;
                 case 1:
-                    $status = trans('export.yes');
+                    $status = __('yes');
                     break;
             }
 
             $result[] = [
 
-                'Nr. Crt'      => $key + 1,
-                'Prenume'      => $user->first_name,
-                'Nume'         => $user->last_name,
-                'Telefon'      => $user->phone,
-                'Email'        => $user->email,
-                'CNP'          => $user->nin,
-                'Rol'          => $user->role->name,
-                'Status'       => $status,
-                'Data Crearii' => $user->created_at,
+                __('#')            => $key + 1,
+                __('First Name')   => $user->first_name,
+                __('Last Name')    => $user->last_name,
+                __('Phone')        => $user->phone,
+                __('Email')        => $user->email,
+                __('Role')         => $user->role->name,
+                __('Status')       => $status,
+                __('Member since') => $user->created_at,
             ];
         }
 
-        Excel::create('Raport Users', function ($excel) use ($result) {
+        Excel::create($this->fileName, function ($excel) use ($result) {
             $excel->sheet('Sheet 1', function ($sheet) use ($result) {
                 $sheet->fromArray($result);
                 $sheet->setAutoFilter('A1:I1');
@@ -75,9 +76,8 @@ class GenerateUsersExportJob implements ShouldQueue
         })->store('xlsx');
 
         $user = $this->user;
-
-        $user->notify(new UsersExportNotification());
-
-        Storage::delete('exports/Raport Users.xlsx');
+        $file = config('excel.export.store.path') . '/' . $this->fileName . '.xlsx';
+        $user->notify(new UsersExportNotification($file));
+        Storage::delete($file);
     }
 }

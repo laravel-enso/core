@@ -15,4 +15,9 @@ class User extends Users
     ];
 
     protected $appends = ['avatar_link', 'full_name'];
+
+    public function owner()
+    {
+        return $this->belongsTo('App\Owner');
+    }
 }

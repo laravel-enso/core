@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\Policies;
 
-use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicies
@@ -14,15 +13,15 @@ class UserPolicies
      *
      * @return void
      */
-    public function updateProfile(User $user, User $profileUser)
+    public function updateProfile($user, $profileUser)
     {
         return $user->id === $profileUser->id;
     }
 
-    public function impersonate(User $user, User $profileUser)
+    public function impersonate($user, $profileUser)
     {
         return $user->hasAccessTo('administration.users.impersonate')
-            && $user->id !== $profileUser->id
-            && !$user->isImpersonating();
+        && $user->id !== $profileUser->id
+        && !$user->isImpersonating();
     }
 }

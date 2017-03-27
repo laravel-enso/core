@@ -14,7 +14,7 @@ Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middlewar
 });
 
 Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
-    Route::get('/', 'Core\HomeController@index')->name('home');
+    Route::get('/', 'Core\HomeController')->name('home');
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
