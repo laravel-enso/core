@@ -13,28 +13,26 @@ use LaravelEnso\Core\app\Http\ViewComposers\MainComposer;
 class AppServiceProvider extends ServiceProvider
 {
     private $providers = [
-        'Collective\Html\HtmlServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
-        'Maatwebsite\Excel\ExcelServiceProvider',
-        'LaravelEnso\Core\AuthServiceProvider',
-        'LaravelEnso\Core\EventServiceProvider',
-        'LaravelEnso\Charts\ChartsServiceProvider',
-        'LaravelEnso\Select\SelectServiceProvider',
-        'LaravelEnso\DataTable\DataTableServiceProvider',
-        'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
-        'LaravelEnso\Localisation\LocalisationServiceProvider',
-        'LaravelEnso\CommentsManager\CommentsManagerServiceProvider',
-        'LaravelEnso\DocumentsManager\DocumentsManagerServiceProvider',
-        'LaravelEnso\LogManager\LogManagerServiceProvider',
-        'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
-        'LaravelEnso\Notifications\NotificationsServiceProvider',
+        Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        LaravelEnso\Core\AuthServiceProvider::class,
+        LaravelEnso\Core\EventServiceProvider::class,
+        LaravelEnso\Charts\ChartsServiceProvider::class,
+        LaravelEnso\Select\SelectServiceProvider::class,
+        LaravelEnso\DataTable\DataTableServiceProvider::class,
+        LaravelEnso\ActionLogger\ActionLoggerServiceProvider::class,
+        LaravelEnso\Localisation\LocalisationServiceProvider::class,
+        LaravelEnso\LogManager\LogManagerServiceProvider::class,
+        LaravelEnso\TutorialManager\TutorialManagerServiceProvider::class,
+        LaravelEnso\Notifications\NotificationsServiceProvider::class,
     ];
 
     private $aliases = [
-        'Html'  => 'Collective\Html\HtmlFacade',
-        'Flash' => 'Laracasts\Flash\Flash::class',
-        'Excel' => 'Maatwebsite\Excel\Facades\Excel::class',
-        'Form'  => 'Collective\Html\FormFacade',
+        'Html'  => Collective\Html\HtmlFacade::class,
+        'Flash' => Laracasts\Flash\Flash::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Form'  => Collective\Html\FormFacade::class,
     ];
 
     /**

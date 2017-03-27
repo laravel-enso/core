@@ -29,8 +29,6 @@
         "laravel-enso/filemanager": "^1.0.0",
         "laravel-enso/datatable": "^1.0.0",
         "laravel-enso/nullablefields": "^1.0.0",
-        "laravel-enso/commentsmanager": "^1.0.0",
-        "laravel-enso/documentsmanager": "^1.0.0",
         "laravel-enso/localisation": "^1.0.2",
         "laravel-enso/tutorialmanager": "^1.0.0"
     },
