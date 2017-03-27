@@ -47,7 +47,7 @@
 			                type="checkbox"
 			                class="toggle"
 			                v-model="globalPreferences.dtStateSave"
-			                @change="setPreference">
+			                @change="setPreference()">
 		        		<label for="dt-state-save"><i></i></label>
 	        		</span>
 		      	</label>
@@ -73,7 +73,7 @@
 				                  type="checkbox"
 				                  class="toggle"
 				                  v-model="globalPreferences.sidebarCollapse"
-				                  @change="setPreference">
+				                  @change="setPreference()">
 				            <label for="sidebar-collapse"><i></i></label>
 			            </span>
 				    </label>
