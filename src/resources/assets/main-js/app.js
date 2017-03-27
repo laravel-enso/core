@@ -3,8 +3,6 @@ require('./bootstrap');
 
 window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');
 
-require('admin-lte'); //fixme
-
 Vue.component('notifications', require('./vendor/laravel-enso/components/Notifications.vue'));
 Vue.component('sidebar', require('./vendor/laravel-enso/components/Sidebar.vue'));
 Vue.component('typeahead', require('./vendor/laravel-enso/components/Typeahead.vue'));
