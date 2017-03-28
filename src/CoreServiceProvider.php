@@ -158,15 +158,15 @@ class CoreServiceProvider extends ServiceProvider
 
     private function registerMiddleware()
     {
-        $this->app['router']->aliasMiddleware('impersonate', Impersonate::class);
         $this->app['router']->aliasMiddleware('verifyActiveState', VerifyActiveState::class);
         $this->app['router']->aliasMiddleware('verifyRouteAccess', VerifyRouteAccess::class);
+        $this->app['router']->aliasMiddleware('impersonate', Impersonate::class);
         $this->app['router']->aliasMiddleware('setLanguage', SetLanguage::class);
 
         $this->app['router']->middlewareGroup('core', [
             \LaravelEnso\Core\app\Http\Middleware\VerifyActiveState::class,
-            \LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess::class,
             \LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger::class,
+            \LaravelEnso\Core\app\Http\Middleware\VerifyRouteAccess::class,
             \LaravelEnso\Core\app\Http\Middleware\Impersonate::class,
             \LaravelEnso\Core\app\Http\Middleware\SetLanguage::class,
         ]);
