@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use LaravelEnso\Core\app\Models\User;
 
 class ResetPasswordNotification extends Notification implements ShouldQueue
 {
@@ -20,7 +19,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     public $token;
     public $user;
 
-    public function __construct(User $user, $token)
+    public function __construct($user, $token)
     {
         $this->token = $token;
         $this->user = $user;
