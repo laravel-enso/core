@@ -9,7 +9,7 @@
             {{ __("Create a new User") }}
         </a>
     @endcan
-    @can('accessRoute', 'core.export.getUsers')
+    @can('accessRoute', 'export.getUsers')
         <button id="exportButton"
             class="btn btn-primary margin-l-2"
             @click="getExport">

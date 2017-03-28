@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Core;
+namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Jobs\GenerateUsersExportJob;
 
-class ExcelController extends Controller
+class ExportController extends Controller
 {
     public function getUsers()
     {

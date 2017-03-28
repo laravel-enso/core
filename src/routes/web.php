@@ -18,16 +18,16 @@ Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middlewar
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+    Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
+        Route::get('getUsers', 'ExportController@getUsers')->name('getUsers');
+    });
+
     Route::group(['namespace' => 'Core', 'prefix' => 'core', 'as' => 'core.'], function () {
         Route::resource('avatars', 'AvatarController');
 
         Route::group(['prefix' => 'preferences', 'as' => 'preferences.'], function () {
             Route::patch('setPreferences', 'PreferencesController@setPreferences')->name('setPreferences');
             Route::post('resetToDefaut', 'PreferencesController@resetToDefaut')->name('resetToDefaut');
-        });
-
-        Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
-            Route::get('getUsers', 'ExcelController@getUsers')->name('getUsers');
         });
     });
 

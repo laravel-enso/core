@@ -4,7 +4,7 @@ var vue = new Vue({
 
         getExport: function() {
 
-            axios.get('/core/export/getUsers').then((response) => {
+            axios.get('/export/getUsers').then((response) => {
 
                 toastr["success"](response.data);
             });
