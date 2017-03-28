@@ -16,7 +16,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->integer('permissions_group_id')->unsigned()->index();
             $table->foreign('permissions_group_id')->references('id')->on('permissions_groups')->onUpdate('restrict')->onDelete('restrict');
-            $table->string('name')->unique();
+            $table->string('name')->unique()->index();
             $table->string('description')->nullable();
             $table->tinyInteger('type');
             $table->timestamps();
