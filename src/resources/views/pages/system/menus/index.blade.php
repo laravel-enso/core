@@ -1,6 +1,6 @@
 @extends('laravel-enso/core::layouts.app')
 
-@section('pageTitle', __("Meniuri"))
+@section('pageTitle', __("Menus"))
 
 @section('content')
 
@@ -17,7 +17,7 @@
     <div class="row" v-cloak>
         <div class="col-md-12">
             <data-table source="/system/menus">
-                <span slot="data-table-title">{{ __("Meniuri") }}</span>
+                <span slot="data-table-title">{{ __("Menus") }}</span>
                 @include('laravel-enso/core::partials.modal')
             </data-table>
         </div>

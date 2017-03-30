@@ -1,6 +1,6 @@
 @extends('laravel-enso/core::layouts.app')
 
-@section('pageTitle', __("users"))
+@section('pageTitle', __("Users"))
 
 @section('content')
 <section class="content-header">

@@ -1,6 +1,6 @@
 @extends('laravel-enso/core::layouts.app')
 
-@section('pageTitle', __("Meniuri"))
+@section('pageTitle', __("Menus"))
 
 @section('content')
 
