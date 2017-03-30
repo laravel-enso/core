@@ -76,7 +76,7 @@ class GenerateUsersExportJob implements ShouldQueue
         })->store('xlsx');
 
         $user = $this->user;
-        $file = config('laravel-enso.paths.exports') .'/'.$this->fileName.'.xlsx';
+        $file = config('laravel-enso.paths.exports').'/'.$this->fileName.'.xlsx';
         $user->notify(new UsersExportNotification(storage_path('app/'.$file)));
         Storage::delete($file);
     }
