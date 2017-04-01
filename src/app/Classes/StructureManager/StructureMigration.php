@@ -3,8 +3,6 @@
 namespace LaravelEnso\Core\app\Classes\StructureManager;
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\app\Models\Menu;
-use LaravelEnso\Core\app\Models\PermissionsGroup;
 
 abstract class StructureMigration extends Migration
 {
