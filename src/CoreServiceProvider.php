@@ -137,7 +137,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso'),
-        ], 'core-pages-js');
+        ], 'core-js');
 
         $this->publishes([
             __DIR__.'/resources/assets/libs' => resource_path('assets/libs'),
