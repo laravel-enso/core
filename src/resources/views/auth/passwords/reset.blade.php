@@ -11,7 +11,7 @@
               @push('scripts')
               <script>
               $(function(){
-                toastr["error"]("{{ $errors->first('email') }} {{ $errors->first('password') }} {{ $errors->first('password_confirmation') }}");
+                toastr.error("{{ $errors->first('email') }} {{ $errors->first('password') }} {{ $errors->first('password_confirmation') }}");
               });
               </script>
               @endpush

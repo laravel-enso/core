@@ -24,5 +24,11 @@
 @endsection
 
 @push('scripts')
-<script type="text/javascript" src="/js/vendor/laravel-enso/pages/generic.js"></script>
+
+    <script>
+        let vue = new Vue({
+            el: '#app'
+        });
+    </script>
+
 @endpush

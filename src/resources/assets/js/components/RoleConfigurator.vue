@@ -76,7 +76,7 @@
             },
             setPermissions: function() {
 
-                var params = {
+                let params = {
                     role_id: this.roleId,
                     roleMenusList: this.roleMenusList,
                     rolePermissionsList: this.rolePermissionsList,

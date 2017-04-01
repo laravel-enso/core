@@ -8,7 +8,7 @@
             @push('scripts')
                 <script>
                 $(function(){
-                    toastr["error"]("{{ $errors->first('email') }}");
+                    toastr.error("{{ $errors->first('email') }}");
                 });
                 </script>
             @endpush
@@ -17,7 +17,7 @@
             @push('scripts')
             <script>
                 $(function(){
-                    toastr["success"]("{{ session('status') }}");
+                    toastr.success("{{ session('status') }}");
                 });
             </script>
             @endpush

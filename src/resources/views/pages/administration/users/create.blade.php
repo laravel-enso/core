@@ -41,12 +41,15 @@
 
 @push('scripts')
 
-<script>
-    var vue = new Vue({
-        el: '#app',
-        data: {
-            customParams: { owner_id: null }
-        }
-    });
-</script>
+    <script>
+
+        var vue = new Vue({
+            el: '#app',
+            data: {
+                customParams: { owner_id: null }
+            }
+        });
+
+    </script>
+
 @endpush

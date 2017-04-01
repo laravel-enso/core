@@ -79,7 +79,7 @@
 		},
 		mounted: function() {
 
-			var self = this;
+			let self = this;
 		    $("#input-" + this._uid).datepicker({
 
 		        format: "dd-mm-yyyy",
@@ -88,7 +88,7 @@
 		        autoclose: true
 		    }).on('changeDate', function(x = self) {
 
-		        var event = new Event('input');
+		        let event = new Event('input');
 		        $(this)[0].dispatchEvent(event);
 		    });
 		}

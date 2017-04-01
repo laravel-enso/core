@@ -1,24 +1,26 @@
 <template>
-		<div class="input-group time-picker">
-			<i class="fa fa-times clear-button btn-box-tool"
-				@click="clearTime"
-				v-if="showClearButton">
-			</i>
-			<input :id="'input-' + _uid"
-				v-update-time-picker
-				type="text"
-				:name="name"
-				class="form-control"
-				:value="value"
-				@input="emitInputEvent"
-				@blur="hideWidget"
-				:disabled="disabled">
-			<span class="input-group-addon">
-				<i class="fa fa-clock-o"></i>
-			</span>
-		</div>
+	<div class="input-group time-picker">
+		<i class="fa fa-times clear-button btn-box-tool"
+			@click="clearTime"
+			v-if="showClearButton">
+		</i>
+		<input :id="'input-' + _uid"
+			v-update-time-picker
+			type="text"
+			:name="name"
+			class="form-control"
+			:value="value"
+			@input="emitInputEvent"
+			@blur="hideWidget"
+			:disabled="disabled">
+		<span class="input-group-addon">
+			<i class="fa fa-clock-o"></i>
+		</span>
+	</div>
 </template>
+
 <script>
+
 	export default {
 		props: {
 			value: {
@@ -48,19 +50,17 @@
 			* when the model is changed from the parent */
 			updateTimePicker: {
 				update: function (el) {
-	  				var event = new Event('change');
+	  				let event = new Event('change');
 					el.dispatchEvent(event);
   				}
 			}
 		},
 		methods: {
 			clearTime: function() {
-
 				$("#input-" + this._uid).timepicker('setTime', '');
 				this.$emit('input', '');
 			},
 			emitInputEvent: function (event) {
-
 				this.$emit('input', event.target.value);
 		    },
 		    hideWidget: function() {
@@ -77,13 +77,16 @@
 			}).on('changeTime.timepicker', function() {
 				//dispatch an input event that bubbles up so
 				//vue updates the bound model
-				var event = new Event('input');
+				let event = new Event('input');
 		        $(this)[0].dispatchEvent(event);
 			});
 		}
 	}
+
 </script>
+
 <style>
+
     .time-picker > i.clear-button {
       position: absolute;
       cursor: pointer;
@@ -99,4 +102,5 @@
     .time-picker > input {
     	text-align: right;
     }
+
 </style>

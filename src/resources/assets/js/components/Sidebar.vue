@@ -103,154 +103,134 @@
 <script>
 
 	export default {
-	props:
-	{
-		currentRoute: {
-			type: String,
-			required: true
+
+		props: {
+			currentRoute: {
+				type: String,
+				required: true
+			},
+			themes: {
+				type: String,
+				required: true
+			},
+			langs: {
+				type: String,
+				required: true
+			},
 		},
-		themes: {
-			type: String,
-			required: true
+		data: function() {
+			return {
+			    themeList: JSON.parse(this.themes),
+			    languages: JSON.parse(this.langs),
+			    globalPreferences: Preferences
+			}
 		},
-		langs: {
-			type: String,
-			required: true
+		computed: {
+	        bodyClass:function() {
+	            let result = 'sidebar-mini skin-';
+	            result += this.globalPreferences.theme;
+	            result += this.globalPreferences.headerFixed ? ' fixed' : '';
+	            result += this.globalPreferences.collapsedSidebar ? ' sidebar-collapse' : '';
+
+	            return result;
+	        },
+	        language: function() {
+	        	let lang = this.globalPreferences.lang
+	        	return this.languages.find(function(language) {
+	        		return language.name == lang;
+	        	});
+	        },
+	        sidebarTheme: function() {
+	        	return this.globalPreferences.theme.indexOf('light') != -1 ? 'light' : 'dark';
+	        }
 		},
-	},
-	data: function()
-	{
-		return {
-		    themeList: JSON.parse(this.themes),
-		    languages: JSON.parse(this.langs),
-		    globalPreferences: Preferences
-		}
-	},
-	computed:
-	{
-        bodyClass:function() {
-
-            var result = 'sidebar-mini skin-';
-            result += this.globalPreferences.theme;
-            result += this.globalPreferences.headerFixed ? ' fixed' : '';
-            result += this.globalPreferences.collapsedSidebar ? ' sidebar-collapse' : '';
-
-            return result;
-        },
-        language: function() {
-
-        	var lang = this.globalPreferences.lang
-        	return this.languages.find(function(language) {
-
-        		return language.name == lang;
-        	});
-        },
-        sidebarTheme: function() {
-
-        	return this.globalPreferences.theme.indexOf('light') != -1 ? 'light' : 'dark';
-        }
-	},
-	methods: {
-		getTutorial: function(route, state) {
-
-			axios.get('/system/tutorials/getTutorial/' + route).then((response) => {
-
-		        var tour = new Tour({
-		            backdrop: true,
-		            template: " \
-		            	<div class='popover tour'> \
-							<div class='arrow'> \
-							</div> \
-							<p class='popover-title'> \
-							</p> \
-							<div class='popover-content'> \
-							</div> \
-							<nav class='popover-navigation'> \
-								<div class='btn-group'> \
-									<button class='btn' \
-										data-role='prev'> \
-										<i class='fa fa fa-step-backward'> \
-										</i> \
-									</button> \
-									<button class='btn' \
-										data-role='next'> \
-										<i class='fa fa-step-forward'> \
-										</i> \
-									</button> \
+		methods: {
+			getTutorial: function(route, state) {
+				axios.get('/system/tutorials/getTutorial/' + route).then((response) => {
+			        let tour = new Tour({
+			            backdrop: true,
+			            template: " \
+			            	<div class='popover tour'> \
+								<div class='arrow'> \
 								</div> \
-								<button class='btn margin-left-xs' \
-									data-role='end'> \
-									<i class='fa fa-stop'> \
-									</i> \
-								</button> \
-							</nav> \
-						</div>",
+								<p class='popover-title'> \
+								</p> \
+								<div class='popover-content'> \
+								</div> \
+								<nav class='popover-navigation'> \
+									<div class='btn-group'> \
+										<button class='btn' \
+											data-role='prev'> \
+											<i class='fa fa fa-step-backward'> \
+											</i> \
+										</button> \
+										<button class='btn' \
+											data-role='next'> \
+											<i class='fa fa-step-forward'> \
+											</i> \
+										</button> \
+									</div> \
+									<button class='btn margin-left-xs' \
+										data-role='end'> \
+										<i class='fa fa-stop'> \
+										</i> \
+									</button> \
+								</nav> \
+							</div>",
+			        });
+
+			        tour.addSteps(response.data);
+
+			        if (state) {
+			            tour.init();
+			            tour.start();
+			        } else {
+			            tour.restart();
+			        }
+			    });
+			},
+		    setLanguage: function(lang) {
+		    	this.globalPreferences.lang = lang;
+				this.setPreference(true);
+		    },
+		    setTheme: function(theme) {
+		    	$('body').removeClass('skin-' + this.globalPreferences.theme).addClass('skin-' + theme);
+				this.globalPreferences.theme = theme;
+				this.setPreference();
+		    },
+		    setBodyClass:function() {
+		        $('body').removeClass();
+		        $('body').addClass(this.bodyClass);
+		    },
+		    checkTutorialState: function() {
+		    	if (document.cookie.indexOf("tour_end") == -1) {
+					this.getTutorial(this.currentRoute, true);
+			    }
+		    },
+		    startTutorial: function() {
+				$('#sidebar').removeClass('control-sidebar-open');
+				this.getTutorial(this.currentRoute, false);
+		    },
+		    setPreference: function(reload = false) {
+
+		        this.setBodyClass();
+
+		        axios.patch('/core/preferences/setPreferences', {key: 'global', value: JSON.stringify(this.globalPreferences)}).then((response) => {
+		        	if (reload) {
+		        		window.location.reload();
+		        	}
 		        });
-
-		        tour.addSteps(response.data);
-
-		        if (state) {
-
-		            tour.init();
-		            tour.start();
-		        } else {
-
-		            tour.restart();
-		        }
-		    });
-		},
-	    setLanguage: function(lang) {
-
-	    	this.globalPreferences.lang = lang;
-			this.setPreference(true);
-	    },
-	    setTheme: function(theme) {
-
-	    	$('body').removeClass('skin-' + this.globalPreferences.theme).addClass('skin-' + theme);
-			this.globalPreferences.theme = theme;
-			this.setPreference();
-	    },
-	    setBodyClass:function() {
-
-	        $('body').removeClass();
-	        $('body').addClass(this.bodyClass);
-	    },
-	    checkTutorialState: function() {
-
-	    	if (document.cookie.indexOf("tour_end") == -1) {
-
-				this.getTutorial(this.currentRoute, true);
+		    },
+		    resetToDefault: function() {
+		    	axios.post('/core/preferences/resetToDefaut', { key: 'global' }).then((response) => {
+		    		window.location.reload();
+	    		});
 		    }
-	    },
-	    startTutorial: function() {
-
-			$('#sidebar').removeClass('control-sidebar-open');
-			this.getTutorial(this.currentRoute, false);
-	    },
-	    setPreference: function(reload = false) {
-
-	        this.setBodyClass();
-
-	        axios.patch('/core/preferences/setPreferences', {key: 'global', value: JSON.stringify(this.globalPreferences)}).then((response) => {
-
-	        	if (reload) {
-	        		window.location.reload();
-	        	}
-	        });
-	    },
-	    resetToDefault: function() {
-
-	    	axios.post('/core/preferences/resetToDefaut', { key: 'global' }).then((response) => {
-
-	    		window.location.reload();
-    		});
-	    }
-	},
-	mounted: function()
-	{
-		initBootstrapSelect('select.select', '100%', true, $.fn.selectpicker.defaults.noneSelectedText);
-	    this.checkTutorialState();
-	}
- }
+		},
+		mounted: function() {
+			initBootstrapSelect('select.select', '100%', true, $.fn.selectpicker.defaults.noneSelectedText);
+		    this.checkTutorialState();
+		}
+	 }
 
 </script>

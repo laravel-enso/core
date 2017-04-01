@@ -17,14 +17,7 @@ elixir((mix) => {
 		.sass('welcome.scss')
 		.webpack('auth.js')
 		.webpack('app.js')
-		.webpack('defaults.js')
-		.webpack('vendor/laravel-enso/pages/generic.js', './public/js/vendor/laravel-enso/pages/')
-		.webpack('vendor/laravel-enso/pages/users/index.js', './public/js/users/')
-		.webpack('vendor/laravel-enso/pages/users/show.js', './public/js/users/')
-		.webpack('vendor/laravel-enso/pages/localisation/index.js', './public/js/vendor/laravel-enso/pages/localisation/')
-		.webpack('vendor/laravel-enso/pages/menus/index.js', './public/js/vendor/laravel-enso/pages/menus/')
-		.webpack('vendor/laravel-enso/pages/roles/edit.js', './public/js/vendor/laravel-enso/pages/roles/')
-		.webpack('vendor/laravel-enso/pages/index.js', './public/js/vendor/laravel-enso/pages/');
+		.webpack('defaults.js');
 
 	mix.version([
 		'css/all.css', 'css/app.css', 'css/main.css', 'css/auth.css',

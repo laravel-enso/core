@@ -76,7 +76,7 @@
         computed: {
             permissionsIds: function() {
 
-                var ids = [];
+                let ids = [];
 
                 if (this.permissionsGroupData.length) {
 
@@ -101,7 +101,7 @@
         methods: {
             getSelectedPermissionsIds: function() {
 
-                var self = this,
+                let self = this,
                     ids = [];
 
                 this.permissionsIds.forEach(function(id) {
@@ -118,7 +118,7 @@
 
                 if (this.groupsNo) {
 
-                    var checkedLength = $('[data-parent-group-id="' + this._uid + '"]:checkbox:checked').length;
+                    let checkedLength = $('[data-parent-group-id="' + this._uid + '"]:checkbox:checked').length;
 
                     if (checkedLength === this.groupsNo) {
 
@@ -128,7 +128,7 @@
                         this.setIndeterminateState('[data-group-id="' + this._uid + '"]');
                     } else {
 
-                        var indeterminateLengh = 0;
+                        let indeterminateLengh = 0;
 
                         $('[data-parent-group-id="' + this._uid + '"]').each(function() {
 
@@ -163,8 +163,8 @@
             },
             updatePermissionsGroupData: function() {
 
-                var self = this;
-                var idx = null;
+                let self = this;
+                let idx = null;
 
                 this.permissionsIds.forEach(function(id) {
 
@@ -185,7 +185,7 @@
             },
             updateChildGroups: function() {
 
-                var state = $('[data-group-id="' + this._uid + '"]').prop('checked') ? true : false;
+                let state = $('[data-group-id="' + this._uid + '"]').prop('checked') ? true : false;
 
                 if (typeof this.permissionsGroupData.length === 'undefined') {
 
