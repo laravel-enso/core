@@ -19,6 +19,11 @@ class StructureDestroyer
             }
 
             if ($this->menu) {
+                $this->menu->roles->each(function($role) {
+                    $role->menu_id = null;
+                    $role->save();
+                });
+
                 $this->menu->delete();
             }
         });
@@ -26,11 +31,11 @@ class StructureDestroyer
 
     public function setPermissionsGroup($permissionsGroup)
     {
-        $this->permissionsGroup = new PermissionsGroup($permissionsGroup);
+        $this->permissionsGroup = PermissionsGroup::whereName($permissionsGroup['name'])->first();
     }
 
     public function setMenu($menu)
     {
-        $this->menu = new Menu($menu);
+        $this->menu = Menu::whereName($menu['name'])->first();
     }
 }
