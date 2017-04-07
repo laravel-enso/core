@@ -8,6 +8,7 @@ elixir((mix) => {
 		.copy('resources/assets/libs/datatables-lang', 'public/libs/datatables-lang');
 
     mix.styles(["resources/assets/sass/admin-lte-skins.css",
+    	"resources/assets/sass/vue2-animate.css"
 	], 'public/css/all.css', './');
 
 	mix.sass('app.scss')

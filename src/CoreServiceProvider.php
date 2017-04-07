@@ -102,23 +102,27 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/resources/views/layouts' => resource_path('views/vendor/laravel-enso/core/layouts'),
-        ], 'core-views');
+        ], 'core-layouts-views');
 
         $this->publishes([
             __DIR__.'/resources/views/partials' => resource_path('views/vendor/laravel-enso/core/partials'),
-        ], 'core-views');
+        ], 'core-partials-views');
 
         $this->publishes([
             __DIR__.'/resources/views/includes' => resource_path('views/vendor/laravel-enso/core/includes'),
-        ], 'core-views');
+        ], 'core-includes-views');
 
         $this->publishes([
             __DIR__.'/resources/views/pages' => resource_path('views/vendor/laravel-enso/core/pages'),
-        ], 'core-views');
+        ], 'core-pages-views');
+
+        $this->publishes([
+            __DIR__.'/resources/views/pages/administration' => resource_path('views/vendor/laravel-enso/core/pages/administration'),
+        ], 'core-administration-views');
 
         $this->publishes([
             __DIR__.'/resources/views/auth' => resource_path('views/auth'),
-        ], 'core-auth');
+        ], 'core-auth-views');
 
         $this->publishes([
             __DIR__.'/resources/views/errors' => resource_path('views/errors'),
