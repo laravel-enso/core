@@ -35,7 +35,7 @@ class MainComposer
         $this->menu = new MenuGenerator($this->user->role->menus->sortBy('order'));
         $this->languages = Language::all();
         $this->themes = (new ThemesEnum())->getJsonData();
-        $this->pusherKey = env('PUSHER_KEY');
+        $this->pusherKey = env('PUSHER_APP_KEY');
         $this->preferences = $this->user->global_preferences;
         $this->theme = json_decode($this->preferences)->theme;
         $this->collapsedSidebar = json_decode($this->preferences)->collapsedSidebar ? 'sidebar-collapse' : '';
