@@ -2,8 +2,8 @@
 
 return [
 
-	'defaultRole' => 'admin',
-    'paths' => [
+    'defaultRole' => 'admin',
+    'paths'       => [
         'file'    => 'files',
         'avatars' => 'avatars',
         'imports' => 'imports',
