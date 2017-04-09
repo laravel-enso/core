@@ -2,6 +2,7 @@
 
 return [
 
+	'defaultRole' => 'admin',
     'paths' => [
         'file'    => 'files',
         'avatars' => 'avatars',
@@ -9,5 +10,5 @@ return [
         'temp'    => 'temp',
         'exports' => 'exports',
     ],
-    'defaultRole' => 'admin',
+    'reportingEmails' => [],
 ];

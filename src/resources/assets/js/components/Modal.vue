@@ -1,13 +1,17 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask" v-show="show">
+    <div class="modal-mask" v-if="show">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" :style="{ 'max-width': maxWidth + 'px' }">
           <div class="modal-header" v-if="header">
-            <slot name="modal-header">
-            </slot>
+            <center>
+              <h5>
+                <slot name="modal-header">
+                </slot>
+              </h5>
+            </center>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" :style="{ 'max-height': maxHeight + 'px'}">
             <slot name="modal-body">
             </slot>
           </div>
@@ -15,13 +19,13 @@
             <button type="button"
               class="btn btn-primary"
               @click="cancelAction">
-                <slot name="modal-cancel"></slot>
+              <slot name="modal-cancel"></slot>
             </button>
             <button type="button"
-              class="btn btn-primary"
-              @click="commitAction">
-                <slot name="modal-ok"></slot>
-              </button>
+              class="btn btn-primary button-default"
+              @click="commitAction" v-if="!cancelOnly">
+              <slot name="modal-ok"></slot>
+            </button>
           </div>
         </div>
       </div>
@@ -32,9 +36,7 @@
 <script>
 
   export default {
-
     props: {
-
       show: {
         type: Boolean,
         required: true,
@@ -43,20 +45,33 @@
         type: Boolean,
         default: false
       },
-      event: {
+      commitEvent: {
         type: String,
         default: 'commit-action'
+      },
+      cancelEvent: {
+        type: String,
+        default: 'cancel-action'
+      },
+      maxHeight: {
+        type: String,
+        default: '250'
+      },
+      maxWidth: {
+        type: String,
+        default: '250'
+      },
+      cancelOnly: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
-
       cancelAction: function() {
-
-        this.$emit('cancel-action');
+        this.$emit(this.cancelEvent);
       },
       commitAction: function() {
-
-        this.$emit(this.event);
+        this.$emit(this.commitEvent);
       }
     }
   }
@@ -70,9 +85,9 @@
     z-index: 9998;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .5);
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, .5);
     display: table;
     transition: opacity .3s ease;
   }
@@ -83,29 +98,41 @@
   }
 
   .modal-container {
-    width: 300px;
+    min-width: 250px;
     margin: 0px auto;
-    background-color: black;
-    opacity: .7;
+    padding: 5px 5px;
+    background-color: #fff;
+    border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all .3s ease;
   }
 
   .modal-header {
     margin-top: 0;
-    color: #fff;
+    color: #42b983;
+    padding: 5px;
+    border-bottom: 1px solid #bbbbbb;
   }
 
   .modal-body {
-    margin: 10px 0;
-    color: #fff
+    margin: 0;
+      border-bottom: 1px solid #bbbbbb;
+      overflow-y: scroll;
+  }
+
+  .modal-footer {
+    padding:5px;
   }
 
   .modal-default-button {
     float: right;
   }
 
-  .modal-enter, .modal-leave-active {
+  .modal-enter {
+    opacity: 0;
+  }
+
+  .modal-leave-active {
     opacity: 0;
   }
 

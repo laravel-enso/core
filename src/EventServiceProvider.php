@@ -2,8 +2,10 @@
 
 namespace LaravelEnso\Core;
 
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use LaravelEnso\Core\app\Listeners\LogSuccessfulLoginListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -14,9 +16,8 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
 
-        'Illuminate\Auth\Events\Login' => [
-
-            'LaravelEnso\Core\app\Listeners\LogSuccessfulLoginListener',
+        Login::class => [
+            LogSuccessfulLoginListener::class,
         ],
     ];
 

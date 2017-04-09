@@ -10,7 +10,7 @@
     <div class="explanation">
       <br>
       <small>
-        {!! isset($exception) ? ($exception->getMessage() ? $exception->getMessage().'<br>' : '') : '' !!}
+        {!! isset($exception) ? $exception->getMessage() : null !!}
         Please return to <a href="/">our homepage</a>.
       </small>
     </div>

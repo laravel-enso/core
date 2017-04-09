@@ -114,6 +114,7 @@ class User extends Authenticatable
 
     public function getBirthdayAttribute()
     {
+        //
     }
 
     public function sendPasswordResetNotification($token)
