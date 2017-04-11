@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
+use App\Enums\PagesBreadcrumbsEnum;
 use LaravelEnso\Core\app\Classes\MenuManager\CurrentMenuDetector;
-use LaravelEnso\Core\app\Enums\PagesBreadcrumbsEnum;
 
 class BreadcrumbsBuilder
 {
