@@ -4,7 +4,7 @@ return [
 
     'defaultRole' => 'admin',
     'paths'       => [
-        'file'    => 'files',
+        'files'    => 'files',
         'avatars' => 'avatars',
         'imports' => 'imports',
         'temp'    => 'temp',
