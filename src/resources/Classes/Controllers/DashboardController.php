@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use LaravelEnso\Charts\app\Classes\BarChart;
 use LaravelEnso\Charts\app\Classes\BubbleChart;
 use LaravelEnso\Charts\app\Classes\LineChart;
