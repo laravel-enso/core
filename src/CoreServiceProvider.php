@@ -76,7 +76,7 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-lang');
     }
 
-    private function publishesClasses()
+    private function publishesClassesses()
     {
         $this->publishes([
             __DIR__.'/resources/Classes/DataTable' => app_path('DataTable'),
@@ -121,6 +121,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views/pages/administration' => resource_path('views/vendor/laravel-enso/core/pages/administration'),
         ], 'core-administration-views');
+
+        $this->publishes([
+            __DIR__.'/resources/views/pages/dashboard' => resource_path('views/vendor/laravel-enso/core/pages/dashboard'),
+        ], 'core-dashboard-view');
 
         $this->publishes([
             __DIR__.'/resources/views/auth' => resource_path('views/auth'),

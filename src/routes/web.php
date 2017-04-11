@@ -4,19 +4,8 @@ Route::get('error/{error}', function () {
     return view('errors.'.request()->error);
 });
 
-Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth']], function () {
-    Route::get('dashboard/getLineChartData', 'DashboardController@getLineChartData')->name('dashboard.getLineChartData');
-    Route::get('dashboard/getBarChartData', 'DashboardController@getBarChartData')->name('dashboard.getBarChartData');
-    Route::get('dashboard/getPieChartData', 'DashboardController@getPieChartData')->name('dashboard.getPieChartData');
-    Route::get('dashboard/getRadarChartData', 'DashboardController@getRadarChartData')->name('dashboard.getRadarChartData');
-    Route::get('dashboard/getPolarChartData', 'DashboardController@getPolarChartData')->name('dashboard.getPolarChartData');
-    Route::get('dashboard/getBubbleChartData', 'DashboardController@getBubbleChartData')->name('dashboard.getBubbleChartData');
-});
-
 Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
     Route::get('/', 'Core\HomeController')->name('home');
-
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
         Route::get('getUsers', 'ExportController@getUsers')->name('getUsers');

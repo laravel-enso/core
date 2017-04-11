@@ -18,6 +18,7 @@ class MainComposer
     protected $menu;
     protected $languages;
     protected $preferences;
+    protected $theme;
     protected $themes;
     protected $userTheme;
     protected $pusherKey;
