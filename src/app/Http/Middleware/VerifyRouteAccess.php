@@ -17,7 +17,7 @@ class VerifyRouteAccess
     public function handle($request, Closure $next)
     {
         if (!$request->user()->hasAccessTo($request->route()->getName())) {
-            \Log::warning('Userul cu id [ ' . $request->user()->id . ' ] nu are acces la ruta [ ' . $request->route()->getName() . ' ] ');
+            \Log::warning('Userul cu id [ '.$request->user()->id.' ] nu are acces la ruta [ '.$request->route()->getName().' ] ');
 
             if ($request->ajax()) {
                 return response()->json([
