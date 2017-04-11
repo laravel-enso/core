@@ -76,11 +76,11 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-lang');
     }
 
-    private function publishesClassesses()
+    private function publishesClasses()
     {
         $this->publishes([
             __DIR__.'/resources/Classes/DataTable' => app_path('DataTable'),
-            __DIR__.'/resources/Classes/Enums'     => app_path('Enums'),
+            __DIR__.'/resources/Classes/Enums' => app_path('Enums'),
         ], 'core-classes');
 
         $this->publishes([
