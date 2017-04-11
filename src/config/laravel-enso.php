@@ -2,8 +2,8 @@
 
 return [
 
-	'defaultRole' => 'admin',
-    'paths' => [
+    'defaultRole' => 'admin',
+    'paths'       => [
         'file'    => 'files',
         'avatars' => 'avatars',
         'imports' => 'imports',
@@ -11,5 +11,5 @@ return [
         'exports' => 'exports',
     ],
     'reportingEmails' => ['aocneanu@gmail.com'],
-    'cacheLifetime' => env('CACHE_LIFETIME', 60)
+    'cacheLifetime'   => env('CACHE_LIFETIME', 60),
 ];
