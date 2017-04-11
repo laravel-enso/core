@@ -80,7 +80,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/resources/Classes/DataTable' => app_path('DataTable'),
-            __DIR__.'/resources/Classes/Enums' => app_path('Enums'),
+            __DIR__.'/resources/Classes/Enums'     => app_path('Enums'),
         ], 'core-classes');
 
         $this->publishes([
