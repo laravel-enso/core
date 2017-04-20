@@ -14,11 +14,10 @@ class ValidateUserRequest extends FormRequest
     public function rules()
     {
         $user = $this->route('user');
+        $email = 'required|email|unique:users';
 
         if ($this->_method == 'PATCH') {
-            $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users,email,'.$user->id.',id'];
-        } else {
-            $email = ['required', 'max:100', 'regex:^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$^', 'unique:users'];
+            $email .= ','.$user->id.',id';
         }
 
         return [
