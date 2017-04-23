@@ -39,6 +39,7 @@
     li.sortable-menu div {
         background-color: #4c5f67;
         border-radius: 0px;
+        text-align: left;
         border: 1px solid white;
         padding: 10px 25px;
         margin: 0;
