@@ -21,7 +21,7 @@ class TreeMenuBuilder
             if ($menu->parent_id !== $parentId) {
                 continue;
             }
-
+            $menu->name = __($menu->name);
             $menus[] = $this->appendMenu($menu);
         }
 

@@ -3,13 +3,15 @@
         element="ul"
         class="sortable-menu"
         :options="{ group: { name:'menus' }}">
-        <li v-for="menu in menus"
-            :key="menu.unique_id"
-            class="sortable-menu">
-                <div>{{ menu.name }}</div>
-            <reorderable-menu :menus="menu.children">
-            </reorderable-menu>
-        </li>
+        <transition-group name="list-complete">
+            <li v-for="menu in menus"
+                :key="menu.unique_id"
+                class="sortable-menu list-complete-item">
+                    <div>{{ menu.name }}</div>
+                <reorderable-menu :menus="menu.children">
+                </reorderable-menu>
+            </li>
+        </transition-group>
     </draggable>
 </template>
 
@@ -31,23 +33,24 @@
 <style>
 
     ul.sortable-menu {
-        padding-top: 15px;
-        background-color: #4c5f67;
         list-style: none;
-        min-height: 10px;
-    }
-
-    li.sortable-menu {
-        margin: 4px 0;
-        padding: 0;
     }
 
     li.sortable-menu div {
+        background-color: #4c5f67;
         border-radius: 0px;
-        border-bottom: 1px solid white;
-        padding: 6px;
+        border: 1px solid white;
+        padding: 10px 25px;
         margin: 0;
         cursor: move;
         color: #fff;
+    }
+
+    .list-complete-item {
+        transition: all 0.3s;
+    }
+
+    .list-complete-enter, .list-complete-leave-active {
+        opacity: 0;
     }
 </style>

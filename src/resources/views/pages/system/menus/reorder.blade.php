@@ -27,8 +27,9 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <reorderable-menu :menus="menus" v-cloak>
-                        </reorderable-menu>
+                        <center>
+                            <reorderable-menu :menus="menus" style="max-width: 400px; padding-left: 0" v-cloak>
+                            </reorderable-menu>
                         <center>
                             <button id="save" class="btn btn-primary" @click="sendConfiguration">
                                 {{ __("Save") }}
