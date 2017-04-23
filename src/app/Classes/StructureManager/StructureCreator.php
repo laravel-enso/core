@@ -48,7 +48,9 @@ class StructureCreator
             return;
         }
 
-        $this->permissionsGroup->save();
+        if (!$this->permissionsGroup->id) {
+            $this->permissionsGroup->save();
+        }
 
         foreach ($this->permissions as $permission) {
             $permission->permissions_group_id = $this->permissionsGroup->id;
@@ -70,7 +72,8 @@ class StructureCreator
 
     public function setPermissionsGroup($permissionsGroup)
     {
-        $this->permissionsGroup = new PermissionsGroup($permissionsGroup);
+        $group = PermissionsGroup::whereName($permissionsGroup['name'])->first();
+        $this->permissionsGroup = $group ?: new PermissionsGroup($permissionsGroup);
     }
 
     public function setPermissions($permissions)

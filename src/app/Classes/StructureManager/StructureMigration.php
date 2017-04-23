@@ -38,7 +38,12 @@ abstract class StructureMigration extends Migration
 
     public function down()
     {
-        $structureManager = new StructureDestroyer($this->permissionsGroup);
+        $structureManager = new StructureDestroyer();
+
+        if ($this->permissionsGroup && !empty($this->permissionsGroup)) {
+            $structureManager->setPermissionsGroup(($this->permissionsGroup));
+            $structureManager->setPermissions(($this->permissions));
+        }
 
         if ($this->menu) {
             $structureManager->setMenu($this->menu);
