@@ -18,6 +18,7 @@ Vue.component('checkboxManager', require('./vendor/laravel-enso/components/Check
 Vue.component('roleConfigurator', require('./vendor/laravel-enso/components/RoleConfigurator.vue'));
 Vue.component('dashboard', require('./vendor/laravel-enso/components/Dashboard.vue'));
 Vue.component('reorderableMenu', require('./vendor/laravel-enso/components/ReorderableMenu.vue'));
+Vue.component('fileUploader', require('./vendor/laravel-enso/components/FileUploader.vue'));
 
 Vue.component('draggable', require('vuedraggable'));
 
