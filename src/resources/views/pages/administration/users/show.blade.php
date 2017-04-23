@@ -17,28 +17,27 @@
 							<a class="fa fa-gears pull-right" href="/administration/users/{{ $user->id }}/impersonate" v-tooltip="'Impersonate'"></a>
 						@endcan
 						<img class="profile-user-img img-responsive img-square user-avatar"
-								src="{{ $user->avatar_link }}"
+								:src="avatarLink"
 								alt="User Image">
 						@can('updateProfile', $user)
-							<center>
-							<button class="btn btn-xs btn-success"
-											v-tooltip="'{{ __("Upload Avatar") }}'"
-											@click="openFileBrowser">
-								<i class="fa fa-camera"></i>
-							</button>
-							<button class="btn btn-xs btn-danger {{ $user->avatar ? '' : 'hidden' }}"
-											id="delete-avatar"
-											v-tooltip="'{{ __("Delete Avatar") }}'"
-											@click="deleteAvatar('{{ $user->avatar ? $user->avatar->id : '' }}')">
-								<i class="fa fa-trash-o btn-danger"></i>
-							</button>
+							<center class="margin-top-xs margin-bottom-xs">
+								<file-uploader v-if="!avatar.id"
+									@uploaded="avatar = $event"
+									url="/core/avatars">
+									<span slot="upload-button">
+										<button class="btn btn-xs btn-success"
+											v-tooltip="'{{ __('Upload Avatar') }}'">
+											<i class="fa fa-camera"></i>
+										</button>
+									</span>
+								</file-uploader>
+								<button class="btn btn-xs btn-danger"
+									v-tooltip="'{{ __('Delete Avatar') }}'"
+									@click="deleteAvatar(avatar.id)"
+									v-if="avatar.id">
+									<i class="fa fa-trash-o btn-danger"></i>
+								</button>
 							</center>
-							{!! Form::open(['method' => 'POST', 'url' => '/core/avatars', 'class' => 'form-horizontal', 'files' => 'true', 'id' => 'upload-avatar-form']) !!}
-								<input type="file"
-											name="avatar"
-											class="hidden"
-											@change="submitAvatar">
-							{!! Form::close() !!}
 						@endcan
 						<h3 class="profile-username text-center"> {{ $user->full_name }} </h3>
 
@@ -181,30 +180,18 @@
 	<script>
 		let vue = new Vue({
 		    el: '#app',
+		    data: {
+		    	avatar: {!! $user->avatar ?: "{ 'id': null }" !!}
+		    },
+		    computed: {
+		    	avatarLink() {
+		    		return this.avatar.id ? '/core/avatars/' +  this.avatar.saved_name : '/images/profile.png';
+		    	}
+		    },
 		    methods: {
-		        openFileBrowser: function() {
-		            $('input[name=avatar]').trigger('click');
-		        },
-		        submitAvatar: function() {
-		            let avatarFile = $('input[name=avatar]')[0].files[0];
-
-		            if (avatarFile) {
-		                let uploadUrl = $('#upload-avatar-form').attr('action'),
-		                    formData = new FormData();
-
-		                formData.append("avatar", avatarFile);
-
-		                axios.post(uploadUrl, formData).then((response) => {
-		                    $('.user-avatar').attr('src', '/core/avatars/' + response.data.saved_name);
-		                    $('#delete-avatar').data('avatar-id', response.data.id).removeClass('hidden');
-		                    $('input[name=avatar]').val('');
-		                });
-		            }
-		        },
 		        deleteAvatar: function(id) {
 		            axios.delete('/core/avatars/' + id).then((response) => {
-		                $('.user-avatar').attr('src', '/images/profile.png');
-		                $('#delete-avatar').addClass('hidden');
+		                this.avatar = { 'id': null };
 		            });
 		        }
 		    }

@@ -17,7 +17,7 @@ class AvatarController extends Controller
 
     public function store()
     {
-        if (!request()->file('avatar')->isValid()) {
+        if (!request()->file('file_0')->isValid()) {
             return reponse()->json([
                 [
                     'level'   => 'error',
@@ -53,7 +53,7 @@ class AvatarController extends Controller
         $avatar = null;
 
         \DB::transaction(function () use (&$avatar) {
-            $file = request()->file('avatar');
+            $file = request()->file('file_0');
             $this->fileManager->startSingleFileUpload($file);
             $avatar = new Avatar($this->fileManager->uploadedFiles->first());
 
