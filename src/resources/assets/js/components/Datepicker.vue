@@ -86,7 +86,7 @@
 		        language: Preferences.lang,
 		        todayHighlight: true,
 		        autoclose: true
-		    }).on('changeDate', function(x = self) {
+		    }).on('changeDate', function() {
 
 		        let event = new Event('input');
 		        $(this)[0].dispatchEvent(event);
