@@ -46,8 +46,6 @@ window.Echo = new Echo({
 window.Laravel = { "csrfToken": document.head.querySelector("[name=csrf-token]").content };
 window.Preferences = JSON.parse(document.head.querySelector("[name=preferences]").content);
 
-require("babel-polyfill");
-
 Vue.filter('numberFormat', function(value) {
 
     value += '';
