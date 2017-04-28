@@ -15,7 +15,7 @@ class StructureDestroyer
     public function destroy()
     {
         \DB::transaction(function () {
-            if ($this->permissions->count()) {
+            if ($this->permissions && $this->permissions->count()) {
                 $this->permissions->each->delete();
             }
 
