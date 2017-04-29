@@ -29,6 +29,6 @@ class Menu extends Model
 
     public function getChildrenAttribute()
     {
-        return Menu::whereParentId($this->id)->get();
+        return self::whereParentId($this->id)->get();
     }
 }
