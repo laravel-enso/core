@@ -1,6 +1,5 @@
 <template>
-    <i class="fa fa-times pull-right btn-box-tool"
-        class="input-clear"
+    <i class="fa fa-times pull-right btn-box-tool input-clear"
         @click="clearInput">
     </i>
 </template>

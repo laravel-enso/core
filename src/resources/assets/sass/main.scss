@@ -454,11 +454,6 @@ input[type="radio"]:before, input[type="radio"]:after {
 	min-width: 0;
 }
 
-//makes the textarea html element fixed
-textarea {
-	resize: none;
-}
-
 //used for breadcrumb color for inactive links
 a.greyed {
 	color: rgba(68, 68, 68, 0.5) !important;
