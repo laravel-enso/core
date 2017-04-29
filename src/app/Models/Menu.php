@@ -27,8 +27,8 @@ class Menu extends Model
         return $this->roles->pluck('id')->toArray();
     }
 
-    public function getChildrenAttribute()
+    public function getChildrenListAttribute()
     {
-        return Menu::whereParentId($this->id)->get();
+        return Menu::whereParentId($this->id)->pluck('id');
     }
 }

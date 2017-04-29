@@ -120,7 +120,7 @@ class MenusController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        if ($menu->children->count()) {
+        if ($menu->children_list->count()) {
             return [
                 'level'   => 'error',
                 'message' => __('Menu Has Children'),
