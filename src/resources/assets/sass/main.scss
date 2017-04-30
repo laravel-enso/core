@@ -143,7 +143,7 @@ table .editable {
 	cursor: pointer;
 }
 
-.dataTables_wrapper table.dataTable thead th {
+table.dataTable thead th {
 	background-color: #405665;
 	color: white;
 }
@@ -158,7 +158,7 @@ table.dataTable thead th {
 	background-image: none !important;
 }
 
-.dataTables_wrapper table.dataTable tfoot td {
+table.dataTable tfoot td {
 	background-color: #405665;
 	color: white;
 }
@@ -445,13 +445,18 @@ input[type="radio"]:before, input[type="radio"]:after {
 // datepicker fix, may be obsolete in the future
 .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top,
 .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-right.datepicker-orient-top {
-	z-index: 1035 !important;
+	z-index: 9999 !important;
 }
 
 //bootstrap select width
 .bootstrap-select.btn-group .dropdown-menu {
 	width: 100%;
 	min-width: 0;
+}
+
+//makes the textarea html element fixed
+textarea {
+	resize: none;
 }
 
 //used for breadcrumb color for inactive links

@@ -1,6 +1,6 @@
 <template>
-	<transition name="modal">
-		<div class="modal-mask" v-if="show">
+	<transition name="modal" v-if="show">
+		<div class="modal-mask">
 			<div class="modal-wrapper">
 				<div class="modal-container" :style="{ 'max-width': maxWidth + 'px' }">
 					<div class="modal-header" v-if="header">
