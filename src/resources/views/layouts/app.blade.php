@@ -42,8 +42,8 @@
 
         </div>
 
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-        <!-- <script type="text/javascript" src="http://localhost:8080/js/app.js"></script> -->
+        <!-- <script type="text/javascript" src="{{ asset('js/app.js') }}"></script> -->
+        <script type="text/javascript" src="http://localhost:8080/js/app.js"></script>
 
         @include('laravel-enso/core::includes.mainJavascript')
 

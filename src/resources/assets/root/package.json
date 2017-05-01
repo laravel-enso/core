@@ -16,7 +16,7 @@
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
-    "laravel-mix": "^0.8.1",
+    "laravel-mix": "^0.10",
     "lodash": "^4.14.0",
     "pusher-js": "^3.2.1",
     "sass-loader": "^4.1.1",
