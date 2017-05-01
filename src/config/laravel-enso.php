@@ -11,5 +11,5 @@
             'exports'  => 'exports',
         ],
         'reportingEmails' => ['aocneanu@gmail.com'],
-        'cacheLifetime'   => env('CACHE_LIFETIME', 60)
+        'cacheLifetime'   => env('CACHE_LIFETIME', 60),
     ];
