@@ -47,6 +47,6 @@ class StructureDestroyer
 
     public function setMenu($menu)
     {
-        $this->menu = new Menu($menu);
+        $this->menu = Menu::whereName($menu['name'])->first();
     }
 }
