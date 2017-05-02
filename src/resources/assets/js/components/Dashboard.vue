@@ -3,17 +3,18 @@
         <draggable class="col-md-6"
             v-for="(charts, column) in configuration.charts"
             :list="charts"
-            :ref="'column_' + column"
             :options="{ handle: '.draggable', group: 'dashboard' }"
             @update="updateContent(column)"
             @add="updateContent(column)"
             @remove="updateContent(column)"
-            v-if="isVisible">
+            v-if="isVisible"
+            :key="column">
             <div v-for="(chart, index) in charts"
                 :key="index">
                 <chart :type="chart.type"
                     :source="chart.source"
                     :params="params"
+                    :ref="chart.title"
                     draggable
                     :collapsed="chart.collapsed"
                     @changed-state="updateState($event, chart.source)">
@@ -50,12 +51,9 @@
         },
         methods: {
             updateContent: function(column) {
-                this.$nextTick(function() {
-                        this.$refs['column_' + column][0].$children.forEach(function(child) {
-
-                        child.getData();
-                    });
-                });
+                for (let child in this.$refs) {
+                    this.$refs[child][0].getData();
+                }
             },
             updatePreferences: function() {
                 if (!this.settingPreferences) {
