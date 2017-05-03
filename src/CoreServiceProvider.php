@@ -166,10 +166,10 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-root');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso'),
-            __DIR__.'/resources/assets/libs' => resource_path('assets/libs'),
+            __DIR__.'/resources/assets/js'      => resource_path('assets/js/vendor/laravel-enso'),
+            __DIR__.'/resources/assets/libs'    => resource_path('assets/libs'),
             __DIR__.'/resources/assets/main-js' => resource_path('assets/js'),
-            __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
+            __DIR__.'/resources/assets/sass'    => resource_path('assets/sass'),
         ], 'update');
     }
 
