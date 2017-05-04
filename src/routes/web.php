@@ -1,8 +1,8 @@
 <?php
 
-Route::get('error/{error}', function () {
-    return view('errors.'.request()->error);
-});
+// Route::get('error/{error}', function () {
+//     return view('errors.'.request()->error);
+// });
 
 Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
     Route::get('/', 'Core\HomeController')->name('home');
