@@ -60,7 +60,8 @@
 				update: function (el) {
 
 			    	$(el).datepicker('update');
-  				}
+                    this.$emit('input',null);
+                }
 			}
 		},
 		methods: {
