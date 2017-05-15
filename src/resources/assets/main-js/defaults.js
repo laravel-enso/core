@@ -20,7 +20,6 @@ NProgress.configure({
  */
 
 axios.interceptors.request.use((config) => {
-
     config.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
     config.headers['X-REQUESTED-WITH'] = 'XMLHttpRequest'; //needed for flagging req as ajax
     NProgress.start();
@@ -29,13 +28,10 @@ axios.interceptors.request.use((config) => {
 });
 
 axios.interceptors.response.use((response) => {
-
     NProgress.done();
 
     return response;
-
 }, function (error) {
-
     NProgress.done();
 
     return Promise.reject(error);

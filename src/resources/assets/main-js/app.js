@@ -1,4 +1,5 @@
 /* START core START */
+require('./polyfill');
 require('./bootstrap');
 
 window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');

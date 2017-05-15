@@ -96,9 +96,6 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $user->load('owner')
-            ->load('role');
-
         $owners = Owner::active()->get()->pluck('name', 'id');
         $roles = $user->owner->roles->pluck('name', 'id');
 

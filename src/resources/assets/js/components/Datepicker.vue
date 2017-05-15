@@ -21,9 +21,7 @@
 <script>
 
 	export default {
-
 		props: {
-
 			name: {
                 type: String,
                 default: null
@@ -46,40 +44,29 @@
 			}
 		},
 		computed: {
-
 			showClearButton: function() {
-
 				return this.clearButton && this.value && !this.disabled;
 			}
 		},
 		directives: {
-
 			updateDatePicker: {
 				/* the directive is necessary to update the timepicker library
 				* when the model is changed from the parent */
 				update: function (el) {
-
 			    	$(el).datepicker('update');
                     this.$emit('input',null);
                 }
 			}
 		},
 		methods: {
-
 			clearDate: function() {
-
 				$("#date-input-" + this._uid).datepicker('clearDates');
-			},
-			/* method is required so we can emit the event with the
-			* proper input event value as opposed to an inline call */
-			emitInputEvent: function (event) {
-
-		      this.$emit('input', event.target.value)
-		    }
+				this.$emit('input', "");
+			}
 		},
 		mounted: function() {
-
 			let self = this;
+
 		    $("#date-input-" + this._uid).datepicker({
 		        format: "dd-mm-yyyy",
 		        language: Preferences.lang,
