@@ -25,7 +25,7 @@
 					<label for="remember"><i></i>{{ __("Tine-ma minte") }}</label>
 			  	</div>
 			  	<div class="col-xs-5">
-					{!! Form::submit('Autentificare', ['class' => 'btn btn-primary btn-block']) !!}
+					{!! Form::submit('Login', ['class' => 'btn btn-primary btn-block']) !!}
 			  	</div>
 				{!! Form::close() !!}
 			</div>
