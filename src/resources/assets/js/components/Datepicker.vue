@@ -54,7 +54,6 @@
 				* when the model is changed from the parent */
 				update: function (el) {
 			    	$(el).datepicker('update');
-                    this.$emit('input',null);
                 }
 			}
 		},
