@@ -29,7 +29,7 @@ class LogSuccessfulLoginListener
 
             'user_id'    => \Auth::user()->id,
             'ip'         => request()->ip(),
-            'user_agent' => request()->header('User-Agent')
+            'user_agent' => request()->header('User-Agent'),
         ]);
 
         $login->save();
