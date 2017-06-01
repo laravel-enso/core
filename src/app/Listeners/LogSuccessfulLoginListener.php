@@ -26,8 +26,10 @@ class LogSuccessfulLoginListener
     public function handle()
     {
         $login = new Login([
-            'user_id' => \Auth::user()->id,
-            'ip'      => request()->ip(),
+
+            'user_id'    => \Auth::user()->id,
+            'ip'         => request()->ip(),
+            'user_agent' => request()->header('User-Agent'),
         ]);
 
         $login->save();
