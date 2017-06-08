@@ -26,28 +26,28 @@ Warning: for now, use this package only on a fresh install of Laravel
 
 6. you need to publish a set of resources in order to use Laravel Enso. run the following:
 
-`php artisan vendor:publish --tag=core-root --force`
-`php artisan vendor:publish --tag=core-config`
-`php artisan vendor:publish --tag=core-routes --force`
-`php artisan vendor:publish --tag=core-lang`
-`php artisan vendor:publish --tag=core-classes`
-`php artisan vendor:publish --tag=core-controllers`
-`php artisan vendor:publish --tag=core-requests`
-`php artisan vendor:publish --tag=core-models --force`
-`php artisan vendor:publish --tag=core-auth-views --force`
-`php artisan vendor:publish --tag=core-error-views`
-`php artisan vendor:publish --tag=core-storage --force`
-`php artisan vendor:publish --tag=core-images`
-`php artisan vendor:publish --tag=core-libs`
-`php artisan vendor:publish --tag=core-images --force`
-`php artisan vendor:publish --tag=core-js`
-`php artisan vendor:publish --tag=core-main-js --force`
-`php artisan vendor:publish --tag=core-sass --force`
-`php artisan vendor:publish --tag=core-administration-views --force`
-`php artisan vendor:publish --tag=select-component`
-`php artisan vendor:publish --tag=datatable-component`
-`php artisan vendor:publish --tag=notifications-component`
-`php artisan vendor:publish --tag=charts-component`
+* `php artisan vendor:publish --tag=core-root --force`
+* `php artisan vendor:publish --tag=core-config`
+* `php artisan vendor:publish --tag=core-routes --force`
+* `php artisan vendor:publish --tag=core-lang`
+* `php artisan vendor:publish --tag=core-classes`
+* `php artisan vendor:publish --tag=core-controllers`
+* `php artisan vendor:publish --tag=core-requests`
+* `php artisan vendor:publish --tag=core-models --force`
+* `php artisan vendor:publish --tag=core-auth-views --force`
+* `php artisan vendor:publish --tag=core-error-views`
+* `php artisan vendor:publish --tag=core-storage --force`
+* `php artisan vendor:publish --tag=core-images`
+* `php artisan vendor:publish --tag=core-libs`
+* `php artisan vendor:publish --tag=core-images --force`
+* `php artisan vendor:publish --tag=core-js`
+* `php artisan vendor:publish --tag=core-main-js --force`
+* `php artisan vendor:publish --tag=core-sass --force`
+* `php artisan vendor:publish --tag=core-administration-views --force`
+* `php artisan vendor:publish --tag=select-component`
+* `php artisan vendor:publish --tag=datatable-component`
+* `php artisan vendor:publish --tag=notifications-component`
+* `php artisan vendor:publish --tag=charts-component`
 
 7. run `php artisan migrate` to create all the database tables and the basic structure of the app.
 
