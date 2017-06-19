@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Core\app\Classes\StructureManager;
 
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class StructureCreator
 {
