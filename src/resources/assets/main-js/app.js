@@ -6,6 +6,8 @@ window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstra
 
 Vue.component('notifications', require('./vendor/laravel-enso/components/Notifications.vue'));
 Vue.component('sidebar', require('./vendor/laravel-enso/components/Sidebar.vue'));
+Vue.component('tutorial', require('./vendor/laravel-enso/components/Tutorial.vue'));
+Vue.component('languageSelector', require('./vendor/laravel-enso/components/LanguageSelector.vue'));
 Vue.component('typeahead', require('./vendor/laravel-enso/components/Typeahead.vue'));
 Vue.component('inputClear', require('./vendor/laravel-enso/components/InputClear.vue'));
 Vue.component('datepicker', require('./vendor/laravel-enso/components/Datepicker.vue'));

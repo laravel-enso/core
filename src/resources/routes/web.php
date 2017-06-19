@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth', 'core']], function () {
             Route::get('getTableData', 'UsersController@getTableData')->name('getTableData');
             Route::post('setTableData', 'UsersController@setTableData')->name('setTableData');
             Route::patch('updateProfile/{user}', 'UsersController@updateProfile')->name('updateProfile');
-            Route::get('{id}/impersonate', 'UsersController@impersonate')->name('impersonate');
+            Route::get('{user}/impersonate', 'UsersController@impersonate')->name('impersonate');
             Route::get('stopImpersonating', 'UsersController@stopImpersonating')->name('stopImpersonating');
         });
 

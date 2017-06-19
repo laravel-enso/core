@@ -68,7 +68,7 @@
 
 		    $("#date-input-" + this._uid).datepicker({
 		        format: "dd-mm-yyyy",
-		        language: Preferences.lang,
+		        language: Store.user.preferences.lang,
 		        todayHighlight: true,
 		        autoclose: true
 		    }).on('hide', function(date) {

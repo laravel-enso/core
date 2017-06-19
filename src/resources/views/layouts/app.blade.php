@@ -14,9 +14,9 @@
         @yield('includesCss')
 
         <link rel="icon" href="/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/all.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/all.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}"/>
     </head>
 
     <body class="skin-{{ $theme }} sidebar-mini fixed {{ $collapsedSidebar }}">
@@ -42,12 +42,12 @@
 
         </div>
 
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
         <!-- <script type="text/javascript" src="http://localhost:8080/js/app.js"></script> -->
 
         @include('laravel-enso/core::includes.mainJavascript')
 
-        <script type="text/javascript" src="{{ asset('js/defaults.js') }}"></script>
+        <script type="text/javascript" src="{{ mix('js/defaults.js') }}"></script>
 
         @stack('scripts')
 

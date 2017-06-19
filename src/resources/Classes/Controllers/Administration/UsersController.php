@@ -10,14 +10,15 @@ use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use LaravelEnso\ActionLogger\app\Models\ActionHistory;
 use LaravelEnso\DataTable\app\Traits\DataTable;
+use LaravelEnso\Impersonate\app\Traits\Controller\Impersonate;
 
 class UsersController extends Controller
 {
-    use SendsPasswordResetEmails, DataTable;
+    use SendsPasswordResetEmails, DataTable, Impersonate;
 
     protected $tableStructureClass = UsersTableStructure::class;
 
-    public static function getTableQuery()
+    public function getTableQuery()
     {
         $query = User::select(\DB::raw('users.id as DT_RowId, owners.name owner, users.first_name, users.last_name, users.phone, users.email, roles.name role, users.is_active'))
             ->join('owners', 'users.owner_id', '=', 'owners.id')
@@ -31,28 +32,15 @@ class UsersController extends Controller
         return view('laravel-enso/core::pages.administration.users.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = new User();
         $roles = [];
-        $owners = Owner::active()->get()->pluck('name', 'id');
+        $owners = Owner::active()->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.create', compact('owners', 'user', 'roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param ValidateUserRequest|Request $request
-     * @param User                        $user
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(ValidateUserRequest $request, User $user)
     {
         $user->fill($request->all());
@@ -65,15 +53,6 @@ class UsersController extends Controller
         return redirect('administration/users/'.$user->id.'/edit');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @internal param int $id
-     */
     public function show(User $user)
     {
         $user->load('owner')
@@ -85,37 +64,20 @@ class UsersController extends Controller
         return view('laravel-enso/core::pages.administration.users.show', compact('user', 'timeline'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param User $user
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @internal param int $id
-     */
     public function edit(User $user)
     {
-        $owners = Owner::active()->get()->pluck('name', 'id');
+        $owners = Owner::active()->pluck('name', 'id');
         $roles = $user->owner->roles->pluck('name', 'id');
 
         return view('laravel-enso/core::pages.administration.users.edit', compact('user', 'roles', 'owners'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param ValidateUserRequest|Request $request
-     * @param User                        $user
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @internal param int $id
-     */
     public function update(ValidateUserRequest $request, User $user)
     {
-        $user->fill($request->all());
-        $user->save();
+        // $user->fill($request->all());
+
+        $user->update($request->all());
+        // $user->save();
 
         flash()->success(__('The Changes have been saved!'));
 
@@ -137,13 +99,6 @@ class UsersController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         try {
@@ -159,22 +114,5 @@ class UsersController extends Controller
             'level'   => 'success',
             'message' => __('Operation was successfull'),
         ];
-    }
-
-    public function impersonate($id)
-    {
-        $user = User::find($id);
-        \Auth::user()->setImpersonating($user->id);
-        flash()->warning(__('Impersonating').' '.$user->full_name);
-
-        return redirect()->back();
-    }
-
-    public function stopImpersonating()
-    {
-        \Auth::user()->stopImpersonating();
-        flash()->success(__('Welcome Back'));
-
-        return redirect()->back();
     }
 }

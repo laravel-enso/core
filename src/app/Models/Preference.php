@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Preference extends Model
 {
-    protected $fillable = ['key', 'value'];
+    protected $fillable = ['value'];
+
+    protected $casts = [
+    	'value' => 'object'
+    ];
 
     public function user()
     {

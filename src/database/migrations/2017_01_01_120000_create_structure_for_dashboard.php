@@ -9,10 +9,10 @@ class CreateStructureForDashboard extends StructureMigration
     ];
 
     protected $permissions = [
-        ['name' => 'dashboard', 'description' => 'Dashboard Index Page', 'type' => 0],
+        ['name' => 'dashboard', 'description' => 'Dashboard Index Page', 'type' => 0, 'default' => true],
     ];
 
     protected $menu = [
-        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0,
+        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0
     ];
 }

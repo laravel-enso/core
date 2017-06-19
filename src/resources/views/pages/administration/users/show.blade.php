@@ -5,7 +5,7 @@
 @section('content')
 
 	<section class="content-header">
-			@include('laravel-enso/core::partials.breadcrumbs')
+			@include('laravel-enso/menumanager::breadcrumbs')
 	</section>
 	<section class="content">
 		<div class="row">
@@ -22,21 +22,20 @@
 						@can('updateProfile', $user)
 							<center class="margin-top-xs margin-bottom-xs">
 								<file-uploader v-if="!avatar.id"
-									@uploaded="avatar = $event"
+									@upload-successful="avatar = $event"
 									url="/core/avatars">
 									<span slot="upload-button">
-										<button class="btn btn-xs btn-success"
+										<i class="fa fa-camera btn btn-xs btn-success"
 											v-tooltip="'{{ __('Upload Avatar') }}'">
-											<i class="fa fa-camera"></i>
-										</button>
+										</i>
 									</span>
 								</file-uploader>
-								<button class="btn btn-xs btn-danger"
+								<i class="btn btn-xs btn-danger"
 									v-tooltip="'{{ __('Delete Avatar') }}'"
 									@click="deleteAvatar(avatar.id)"
 									v-if="avatar.id">
 									<i class="fa fa-trash-o btn-danger"></i>
-								</button>
+								</i>
 							</center>
 						@endcan
 						<h3 class="profile-username text-center"> {{ $user->full_name }} </h3>
@@ -51,7 +50,7 @@
 								<b> {{ __("Logins") }} </b> <a class="pull-right">  {{ $user->logins->count() }}  </a>
 							</li>
 							<li class="list-group-item">
-								<b> {{ __("Activity") }} </b> <a class="pull-right"> {{ $user->action_histories->count() }} </a>
+								<b> {{ __("Activity") }} </b> <a class="pull-right"> {{ $user->action_logs->count() }} </a>
 							</li>
 							<li class="list-group-item">
 								<b> {{ __("Birthday") }} </b> <a class="pull-right"> {{ $user->birthday }} </a>
@@ -185,7 +184,7 @@
 		    },
 		    computed: {
 		    	avatarLink() {
-		    		return this.avatar.id ? '/core/avatars/' +  this.avatar.saved_name : '/images/profile.png';
+		    		return '/core/avatars/' +  this.avatar.id;
 		    	}
 		    },
 		    methods: {

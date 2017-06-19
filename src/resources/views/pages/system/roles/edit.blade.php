@@ -8,7 +8,7 @@
         <a class="btn btn-primary" href="/system/roles/create">
             {{ __("Create Role") }}
         </a>
-        @include('laravel-enso/core::partials.breadcrumbs')
+        @include('laravel-enso/menumanager::breadcrumbs')
     </section>
     <section class="content">
         <div class="row" v-cloak>

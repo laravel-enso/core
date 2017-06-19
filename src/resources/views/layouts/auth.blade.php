@@ -11,8 +11,8 @@
         @include('laravel-enso/core::includes.authCss')
 
         <link rel = "icon" href = "/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset("css/app.css") }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset("css/auth.css") }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix("css/app.css") }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix("css/auth.css") }}"/>
     </head>
 
     <body class="hold-transition login-page">
@@ -20,7 +20,7 @@
 
         @yield('content')
 
-        <script type="text/javascript" src="{{ asset("/js/auth.js") }}"></script>
+        <script type="text/javascript" src="{{ mix("/js/auth.js") }}"></script>
 
         @include('laravel-enso/core::includes.authJavascript')
 

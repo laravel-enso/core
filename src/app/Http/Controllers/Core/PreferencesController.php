@@ -2,55 +2,94 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Core;
 
-use App\Enums\DefaultPreferencesEnum;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 
 class PreferencesController extends Controller
 {
-    public static function getPreferences($page)
+    private $preference;
+    private $request;
+
+    public function __construct(Request $request = null)
     {
-        $userPreferences = request()->user()->preferences
-            ->where('key', $page)->first();
-
-        $defaultPreferences = new DefaultPreferencesEnum();
-
-        $result = $userPreferences ?
-            $userPreferences->value
-            : json_encode($defaultPreferences->getValueByKey($page));
-
-        return $result;
+        $this->request = $request;
     }
 
-    public function setPreferences()
+    public function setPreferences($route = null)
     {
-        $preferences = request()->user()->preferences
-            ->where('key', request()->key)->first();
-
-        if (!$preferences) {
-            $preferences = new Preference();
-            $preferences->user_id = request()->user()->id;
-            $preferences->key = request()->key;
-        }
-
-        $preferences->value = request()->value;
-
-        $preferences->save();
+        return $route
+            ? $this->setLocalPreferences($route)
+            : $this->setGlobalPreferences();
     }
 
-    public function resetToDefaut()
+    public function resetToDefault($route = null)
     {
-        $preferences = request()->user()->preferences
-            ->where('key', request()->key)->first();
+        return $route
+            ? $this->resetLocalPreferences($route)
+            : $this->resetGlobalPreferences();
+    }
 
-        $defaultPreferences = new DefaultPreferencesEnum();
-        $defaultPreferences = json_encode($defaultPreferences->getValueByKey(request()->key));
-
-        if ($preferences) {
-            $preferences->value = $defaultPreferences;
-            $preferences->save();
+    private function setGlobalPreferences()
+    {
+        if (!$this->request->user()->preference) {
+            $this->request->user()->preference()->save($this->getDefaultPreference());
         }
 
-        return json_decode($defaultPreferences, true);
+        $this->updateGlobalPreference($this->request->get('global'));
+    }
+
+    private function setLocalPreferences($route)
+    {
+        if (!$this->request->user()->preference) {
+            $this->request->user()->preference()->save($this->getDefaultPreference());
+        }
+
+        $this->updateLocalPreference($route, $this->request->all());
+    }
+
+    private function resetGlobalPreferences()
+    {
+        if (!$this->request->user()->preference) {
+            return $this->request->user()->preference()->save($this->getDefaultPreference());
+        }
+
+        $this->updateGlobalPreference($this->getGlobalPreferences());
+    }
+
+    private function resetLocalPreferences($route)
+    {
+        // $this->setPreference();
+        // $this->preference->value->local->{$route} = (new DefaultPreferences())->getData()->local->{$route};
+        // $this->updatePreference();
+    }
+
+    private function getGlobalPreferences()
+    {
+        return json_decode($this->getDefaultPreference())->value->global;
+    }
+
+    private function getDefaultPreference()
+    {
+        return new \LaravelEnso\Core\app\Models\Preference(['value' => (new \LaravelEnso\Core\app\Classes\DefaultPreferences())->getData()]);
+    }
+
+    private function updateGlobalPreference($preferences)
+    {
+        foreach ($preferences as $key => $value) {
+            $this->request->user()->preference()->update(['value->global->'.$key => $value]);
+        }
+    }
+
+    private function updateLocalPreference($route, $preferences)
+    {
+        foreach ($preferences as $key => $value) {
+            if (is_array($value) && count($value) === 1) {
+                return $this->updateLocalPreference($route.'->'.$key, $value);
+            }
+
+            $this->request->user()->preference()->update(['value->local->'.$route.'->'.$key => json_encode($value)]);
+        }
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\Core\app\Models\Menu;
 use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\MenuManager\app\Models\Menu;
 
 class SetDefaultMenuForRoles extends Migration
 {
@@ -29,6 +29,11 @@ class SetDefaultMenuForRoles extends Migration
      */
     public function down()
     {
-        //
+        $roles = Role::all();
+
+        $roles->each(function ($role) {
+            $role->menu_id = null;
+            $role->save();
+        });
     }
 }

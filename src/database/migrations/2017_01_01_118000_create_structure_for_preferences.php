@@ -9,7 +9,7 @@ class CreateStructureForPreferences extends StructureMigration
     ];
 
     protected $permissions = [
-        ['name' => 'core.preferences.setPreferences', 'description' => 'Set User Preferences', 'type' => 1],
-        ['name' => 'core.preferences.resetToDefaut', 'description' => 'Reset to default preferences', 'type' => 1],
+        ['name' => 'core.preferences.setPreferences', 'description' => 'Set User Preferences', 'type' => 1, 'default' => true],
+        ['name' => 'core.preferences.resetToDefalut', 'description' => 'Reset to default preferences', 'type' => 1, 'default' => true],
     ];
 }

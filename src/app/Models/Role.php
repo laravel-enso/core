@@ -10,13 +10,13 @@ class Role extends Model
 
     public function menus()
     {
-        return $this->belongsToMany('LaravelEnso\Core\app\Models\Menu')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\MenuManager\app\Models\Menu')->withTimestamps();
     }
 
     //returns implicit menu
     public function menu()
     {
-        return $this->belongsTo('LaravelEnso\Core\app\Models\Menu');
+        return $this->belongsTo('LaravelEnso\MenuManager\app\Models\Menu');
     }
 
     public function owners()
@@ -31,7 +31,7 @@ class Role extends Model
 
     public function permissions()
     {
-        return $this->belongsToMany('LaravelEnso\Core\app\Models\Permission')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\PermissionManager\app\Models\Permission')->withTimestamps();
     }
 
     public function getPermissionsListAttribute()

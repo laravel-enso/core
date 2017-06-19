@@ -6,7 +6,7 @@
 
 	<section class="content-header" v-cloak>
 		<button id="reset-button" class="btn btn-xs btn-warning" @click="$refs.dashboard.resetToDefault()">{{ __("Reset Layout") }}</button>
-		@include('laravel-enso/core::partials.breadcrumbs')
+		@include('laravel-enso/menumanager::breadcrumbs')
 	</section>
 	<section class="content">
 		<dashboard preferences="{{ $localPreferences }}"

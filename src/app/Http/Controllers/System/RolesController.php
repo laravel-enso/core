@@ -5,21 +5,21 @@ namespace LaravelEnso\Core\app\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\DataTable\RolesTableStructure;
 use LaravelEnso\Core\app\Http\Requests\ValidateRoleRequest;
-use LaravelEnso\Core\app\Models\Menu;
-use LaravelEnso\Core\app\Models\PermissionsGroup;
 use LaravelEnso\Core\app\Models\Role;
 use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\Select\app\Traits\SelectListBuilderTrait;
+use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\Select\app\Traits\SelectListBuilder;
 
 class RolesController extends Controller
 {
-    use DataTable, SelectListBuilderTrait;
+    use DataTable, SelectListBuilder;
 
-    protected $selectSourceClass = 'LaravelEnso\Core\app\Models\Role';
-    protected $selectPivotParams = ['owner_id' => 'owners'];
+    protected $selectSourceClass = Role::class;
     protected $tableStructureClass = RolesTableStructure::class;
 
-    public static function getTableQuery()
+    public function getTableQuery()
     {
         $query = Role::select(\DB::raw('roles.id as DT_RowId, roles.name, roles.display_name, roles.description, roles.created_at, roles.updated_at, roles.menu_id'));
 
@@ -34,10 +34,10 @@ class RolesController extends Controller
     public function getPermissions(Role $role)
     {
         $menusList = ['menus' => Menu::all()];
-        $permissionsGroups = PermissionsGroup::with('permissions')->get();
+        $permissionsGroups = PermissionGroup::with('permissions')->get();
         $roleMenusList = $role->menus->pluck('id');
         $rolePermissionsList = $role->permissions->pluck('id');
-        $permissionsList = $this->buildPermissionsGroupsStructure($permissionsGroups);
+        $permissionsList = $this->buildPermissionGroupsStructure($permissionsGroups);
 
         return [
             'menusList'           => $menusList,
@@ -73,6 +73,8 @@ class RolesController extends Controller
         $role = new Role();
         $role->fill($request->all());
         $role->save();
+        $permissions = Permission::whereDefault(true)->pluck('id');
+        $role->permissions()->attach($permissions);
         flash()->success(__('Role Created'));
 
         return redirect('system/roles/'.$role->id.'/edit');
@@ -104,7 +106,7 @@ class RolesController extends Controller
         ];
     }
 
-    private function buildPermissionsGroupsStructure($permissionsGroups, $label = null)
+    private function buildPermissionGroupsStructure($permissionsGroups, $label = null)
     {
         $structure = [];
         $labels = [];
@@ -124,7 +126,7 @@ class RolesController extends Controller
         $labels = array_unique($labels);
 
         foreach ($labels as $currentLabel) {
-            $structure[$currentLabel] = $this->buildPermissionsGroupsStructure($permissionsGroups, $label ? $label.'.'.$currentLabel : $currentLabel);
+            $structure[$currentLabel] = $this->buildPermissionGroupsStructure($permissionsGroups, $label ? $label.'.'.$currentLabel : $currentLabel);
         }
 
         return $structure;

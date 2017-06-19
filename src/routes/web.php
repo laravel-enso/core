@@ -1,10 +1,9 @@
 <?php
 
-// Route::get('error/{error}', function () {
-//     return view('errors.'.request()->error);
-// });
-
-Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middleware' => ['web', 'auth', 'core']], function () {
+Route::group([
+    'namespace' => 'LaravelEnso\Core\app\Http\Controllers',
+    'middleware' => ['web', 'auth', 'core']
+], function () {
     Route::get('/', 'Core\HomeController')->name('home');
 
     Route::group(['prefix' => 'export', 'as' => 'export.'], function () {
@@ -12,43 +11,13 @@ Route::group(['namespace' => 'LaravelEnso\Core\app\Http\Controllers', 'middlewar
     });
 
     Route::group(['namespace' => 'Core', 'prefix' => 'core', 'as' => 'core.'], function () {
-        Route::resource('avatars', 'AvatarController');
-
         Route::group(['prefix' => 'preferences', 'as' => 'preferences.'], function () {
-            Route::patch('setPreferences', 'PreferencesController@setPreferences')->name('setPreferences');
-            Route::post('resetToDefaut', 'PreferencesController@resetToDefaut')->name('resetToDefaut');
+            Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')->name('setPreferences');
+            Route::post('resetToDefault/{route?}', 'PreferencesController@resetToDefault')->name('resetToDefault');
         });
     });
 
     Route::group(['namespace' => 'System', 'prefix' => 'system', 'as' => 'system.'], function () {
-        Route::group(['prefix' => 'menus', 'as' => 'menus.'], function () {
-            Route::get('reorder', 'MenusController@reorder')->name('reorder');
-            Route::patch('setOrder', 'MenusController@setOrder')->name('setOrder');
-            Route::patch('setAllocation', 'MenusController@setAllocation')->name('setAllocation');
-            Route::get('initTable', 'MenusController@initTable')->name('initTable');
-            Route::get('getTableData', 'MenusController@getTableData')->name('getTableData');
-        });
-
-        Route::resource('menus', 'MenusController');
-        Route::group(['prefix' => 'permissionsGroups', 'as' => 'permissionsGroups.'], function () {
-            Route::get('initTable', 'PermissionsGroupsController@initTable')->name('initTable');
-            Route::get('getTableData', 'PermissionsGroupsController@getTableData')->name('getTableData');
-        });
-
-        Route::resource('permissionsGroups', 'PermissionsGroupsController');
-
-        Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
-            Route::get('initTable', 'PermissionsController@initTable')->name('initTable');
-            Route::get('getTableData', 'PermissionsController@getTableData')->name('getTableData');
-        });
-
-        Route::resource('permissions', 'PermissionsController');
-
-        Route::group(['prefix' => 'resourcePermissions', 'as' => 'resourcePermissions.'], function () {
-            Route::get('create', 'ResourcePermissionsController@create')->name('create');
-            Route::post('store', 'ResourcePermissionsController@store')->name('store');
-        });
-
         Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
             Route::get('initTable', 'RolesController@initTable')->name('initTable');
             Route::get('getTableData', 'RolesController@getTableData')->name('getTableData');

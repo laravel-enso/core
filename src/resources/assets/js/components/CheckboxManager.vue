@@ -42,7 +42,7 @@
                                 :key="permission.id"
                                 :value="permission.id"
                                 v-model="selectedPermissionsIds"
-                                @change="updatePermissionsGroupData">
+                                @change="updatePermissionGroupData">
                             <label>{{ permission.description ? permission.description : permission.name }}</label>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
 
                 this.$emit('state-updated');
             },
-            updatePermissionsGroupData: function() {
+            updatePermissionGroupData: function() {
 
                 let self = this;
                 let idx = null;
@@ -208,7 +208,7 @@
                         this.selectedPermissionsIds = [];
                     }
 
-                    this.updatePermissionsGroupData();
+                    this.updatePermissionGroupData();
                 }
             },
             setCheckedState: function(checkbox) {

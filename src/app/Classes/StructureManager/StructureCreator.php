@@ -2,15 +2,14 @@
 
 namespace LaravelEnso\Core\app\Classes\StructureManager;
 
-use LaravelEnso\Core\app\Models\Menu;
-use LaravelEnso\Core\app\Models\Permission;
-use LaravelEnso\Core\app\Models\PermissionsGroup;
 use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class StructureCreator
 {
     private $defaultRole;
-    private $permissionsGroup;
+    private $permissionGroup;
     private $permissions;
     private $parentMenu;
     private $menu;
@@ -19,7 +18,7 @@ class StructureCreator
     public function __construct()
     {
         $this->defaultRole = config('laravel-enso.defaultRole');
-        $this->permissionsGroup = null;
+        $this->permissionGroup = null;
         $this->permissions = collect();
         $this->menu = null;
         $this->parentMenu = null;
@@ -44,16 +43,16 @@ class StructureCreator
 
     private function createPermissions()
     {
-        if (!$this->permissionsGroup) {
+        if (!$this->permissionGroup) {
             return;
         }
 
-        if (!$this->permissionsGroup->id) {
-            $this->permissionsGroup->save();
+        if (!$this->permissionGroup->id) {
+            $this->permissionGroup->save();
         }
 
         foreach ($this->permissions as $permission) {
-            $permission->permissions_group_id = $this->permissionsGroup->id;
+            $permission->permission_group_id = $this->permissionGroup->id;
             $permission->save();
             $permission->roles()->attach($this->role);
         }
@@ -70,10 +69,10 @@ class StructureCreator
         $this->menu->roles()->attach($this->role);
     }
 
-    public function setPermissionsGroup($permissionsGroup)
+    public function setPermissionGroup($permissionGroup)
     {
-        $group = PermissionsGroup::whereName($permissionsGroup['name'])->first();
-        $this->permissionsGroup = $group ?: new PermissionsGroup($permissionsGroup);
+        $group = PermissionGroup::whereName($permissionGroup['name'])->first();
+        $this->permissionGroup = $group ?: new PermissionGroup($permissionGroup);
     }
 
     public function setPermissions($permissions)

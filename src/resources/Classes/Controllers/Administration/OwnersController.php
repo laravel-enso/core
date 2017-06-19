@@ -9,16 +9,16 @@ use App\Owner;
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\Core\app\Models\Role;
 use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\Select\app\Traits\SelectListBuilderTrait;
+use LaravelEnso\Select\app\Traits\SelectListBuilder;
 
 class OwnersController extends Controller
 {
-    use DataTable, SelectListBuilderTrait;
+    use DataTable, SelectListBuilder;
 
     protected $tableStructureClass = OwnersTableStructure::class;
     protected $selectSourceClass = 'LaravelEnso\Core\app\Models\Owner';
 
-    public static function getTableQuery()
+    public function getTableQuery()
     {
         $query = Owner::select(\DB::raw('id as DT_RowId, name, is_active'));
 

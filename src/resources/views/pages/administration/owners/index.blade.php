@@ -9,7 +9,7 @@
         {{ __("Create a new Entity") }}
     </a>
     @endcan
-    @include('laravel-enso/core::partials.breadcrumbs')
+    @include('laravel-enso/menumanager::breadcrumbs')
 </section>
 <section class="content">
     <div class="row" v-cloak>

@@ -79,6 +79,20 @@ Vue.directive('focus', {
     }
 });
 
+let ensoExceptionHandlerMixin = {
+    methods: {
+        reportEnsoException(error) {
+            if (error.response && error.response.data.level) {
+                return toastr[error.response.data.level](error.response.data.message);
+            }
+
+            throw error;
+        }
+    }
+};
+
+Vue.mixin(ensoExceptionHandlerMixin);
+
 Array.prototype.unique = function() {
     return this.filter(function (value, index, self) {
         return self.indexOf(value) === index;

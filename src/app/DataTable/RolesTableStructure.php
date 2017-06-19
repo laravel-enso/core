@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\DataTable;
 
-use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
+use LaravelEnso\DataTable\app\Classes\TableStructure;
 
 class RolesTableStructure extends TableStructure
 {

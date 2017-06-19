@@ -5,22 +5,21 @@ namespace LaravelEnso\Core\app\Models;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\Core\app\Http\Controllers\Core\PreferencesController;
+use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
+use LaravelEnso\Impersonate\app\Traits\Model\Impersonate;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Impersonate;
 
     protected $fillable = [
         'first_name', 'last_name', 'phone', 'is_active', 'role_id',
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    protected $appends = ['avatar_link', 'full_name'];
+    protected $appends = ['avatar_id', 'full_name', 'preferences'];
 
     public function owner()
     {
@@ -29,7 +28,15 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return $this->hasOne('LaravelEnso\Core\app\Models\Avatar');
+        return $this->hasOne('LaravelEnso\AvatarManager\app\Models\Avatar');
+    }
+
+    public function getAvatarIdAttribute()
+    {
+        $id = $this->avatar ? $this->avatar->id : null;
+        unset($this->avatar);
+
+        return $id;
     }
 
     public function role()
@@ -42,34 +49,14 @@ class User extends Authenticatable
         return $this->hasMany('LaravelEnso\Core\app\Models\Login');
     }
 
-    public function preferences()
+    public function preference()
     {
-        return $this->hasMany('LaravelEnso\Core\app\Models\Preference');
+        return $this->hasOne('LaravelEnso\Core\app\Models\Preference');
     }
 
-    public function getAvatarLinkAttribute()
+    public function action_logs()
     {
-        return $this->avatar ? '/core/avatars/'.$this->avatar->saved_name : asset('/images/profile.png');
-    }
-
-    public function getLanguageAttribute()
-    {
-        return json_decode($this->global_preferences)->lang;
-    }
-
-    public function getGlobalPreferencesAttribute()
-    {
-        return PreferencesController::getPreferences('global');
-    }
-
-    public function getPreferences($page)
-    {
-        return PreferencesController::getPreferences($page);
-    }
-
-    public function action_histories()
-    {
-        return $this->hasMany('LaravelEnso\ActionLogger\app\Models\ActionHistory');
+        return $this->hasMany('LaravelEnso\ActionLogger\app\Models\ActionLog');
     }
 
     public function isAdmin()
@@ -87,24 +74,9 @@ class User extends Authenticatable
         return $this->role->permissions->pluck('name')->search($route) !== false;
     }
 
-    public function setImpersonating($id)
-    {
-        session()->put('impersonate', $id);
-    }
-
-    public function stopImpersonating()
-    {
-        session()->forget('impersonate');
-    }
-
-    public function isImpersonating()
-    {
-        return session()->has('impersonate');
-    }
-
     public function getFullNameAttribute()
     {
-        return $this->first_name.' '.$this->last_name;
+        return trim($this->first_name . ' ' . $this->last_name);
     }
 
     public function getCreatedDateAttribute()

@@ -3,7 +3,7 @@
 namespace App\DataTable;
 
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
-use LaravelEnso\DataTable\app\Classes\Abstracts\TableStructure;
+use LaravelEnso\DataTable\app\Classes\TableStructure;
 
 class UsersTableStructure extends TableStructure
 {

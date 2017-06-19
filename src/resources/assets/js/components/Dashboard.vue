@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <draggable class="col-md-6"
-            v-for="(charts, column) in configuration.charts"
+            v-for="(charts, column) in preferences.charts"
             :list="charts"
             :options="{ handle: '.draggable', group: 'dashboard' }"
             @update="updateContent(column)"
@@ -29,47 +29,47 @@
 
     export default {
         props: {
-            preferences: {
-                type: String,
-                required: true
-            },
             params: {
                 type: Object
             }
         },
         watch: {
-            configuration: {
-                handler: 'updatePreferences',
-                deep: true
-            }
+            // preferences: {
+            //     handler: 'updatePreferences',
+            //     deep: true
+            // }
         },
-        data: function() {
+        data() {
             return {
-                configuration: JSON.parse(this.preferences),
-                isVisible: true
+                isVisible: true,
+                preferences: Store.user.preferences.local.dashboard
             }
         },
         methods: {
-            updateContent: function(column) {
+            updateContent(column) {
                 for (let child in this.$refs) {
                     this.$refs[child][0].getData();
                 }
             },
-            updatePreferences: function() {
+            updatePreferences() {
                 if (!this.settingPreferences) {
                     this.settingPreferences = true
 
-                    axios.patch('/core/preferences/setPreferences', {key: 'dashboard', value: JSON.stringify(this.configuration)}).then(() => {
+                    axios.patch('/core/preferences/setPreferences/dashboard', this.preferences).then(() => {
                         this.settingPreferences = false;
+                    }).catch(error => {
+                        this.reportEnsoException(error);
                     });
                 }
             },
-            resetToDefault: function() {
+            resetToDefault() {
                 this.isVisible = false;
 
-                axios.post('/core/preferences/resetToDefaut', { key: 'dashboard' }).then((response) => {
-                    this.configuration = response.data;
+                axios.post('/core/preferences/resetToDefaut', { page: 'dashboard' }).then((response) => {
+                    this.preferences = response.data;
                     this.isVisible = true;
+                }).catch(error => {
+                    this.reportEnsoException(error);
                 });
             }
         }
