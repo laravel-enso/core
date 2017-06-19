@@ -17,7 +17,7 @@ class Owner extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\Core\app\Models\Role');
+        return $this->belongsToMany('LaravelEnso\RoleManager\app\Models\Role');
     }
 
     public function getRolesListAttribute()

@@ -2,15 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\app\Models\Owner;
-use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class InsertDefaultOwner extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         \DB::transaction(function () {
@@ -28,11 +23,6 @@ class InsertDefaultOwner extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         \DB::table('owners')->delete();

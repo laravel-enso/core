@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateOwnerRequest;
 use App\Owner;
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
-use LaravelEnso\Core\app\Models\Role;
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\DataTable\app\Traits\DataTable;
 use LaravelEnso\Select\app\Traits\SelectListBuilder;
 

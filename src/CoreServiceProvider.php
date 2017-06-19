@@ -17,12 +17,12 @@ class CoreServiceProvider extends ServiceProvider
     private $providers = [
         'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
+        'LaravelEnso\Core\AuthServiceProvider',
+        'LaravelEnso\Core\EventServiceProvider',
         'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
         'LaravelEnso\AvatarManager\AvatarManagerServiceProvider',
-        'LaravelEnso\Core\AuthServiceProvider',
         'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
-        'LaravelEnso\Core\EventServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
         'LaravelEnso\Localisation\LocalisationServiceProvider',
@@ -30,6 +30,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\MenuManager\MenuManagerServiceProvider',
         'LaravelEnso\Notifications\NotificationsServiceProvider',
         'LaravelEnso\PermissionManager\PermissionManagerServiceProvider',
+        'LaravelEnso\RoleManager\RoleManagerServiceProvider',
         'LaravelEnso\Select\SelectServiceProvider',
         'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
     ];

@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePreferencesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('preferences', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreatePreferencesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('preferences');
