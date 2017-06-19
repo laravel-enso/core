@@ -1,8 +1,8 @@
 <?php
 
 Route::group([
-    'namespace' => 'LaravelEnso\Core\app\Http\Controllers',
-    'middleware' => ['web', 'auth', 'core']
+    'namespace'  => 'LaravelEnso\Core\app\Http\Controllers',
+    'middleware' => ['web', 'auth', 'core'],
 ], function () {
     Route::get('/', 'Core\HomeController')->name('home');
 

@@ -17,7 +17,7 @@ class CreateStructureForOwners extends StructureMigration
         ['name' => 'administration.owners.getOptionsList', 'description' => 'Get Options List For Vue Select', 'type' => 0, 'default' => false],
         ['name' => 'administration.owners.store', 'description' => 'Save Owner', 'type' => 1, 'default' => false],
         ['name' => 'administration.owners.update', 'description' => 'Update Owner', 'type' => 1, 'default' => false],
-        ['name' => 'administration.owners.destroy', 'description' => 'Delete Owner', 'type' => 1, 'default' => false]
+        ['name' => 'administration.owners.destroy', 'description' => 'Delete Owner', 'type' => 1, 'default' => false],
     ];
 
     protected $menu = [
