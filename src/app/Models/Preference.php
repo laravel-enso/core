@@ -9,7 +9,7 @@ class Preference extends Model
     protected $fillable = ['value'];
 
     protected $casts = [
-    	'value' => 'object'
+        'value' => 'object',
     ];
 
     public function user()

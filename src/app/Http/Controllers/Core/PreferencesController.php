@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\app\Http\Controllers\Core;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
-use LaravelEnso\Core\app\Models\Preference;
 
 class PreferencesController extends Controller
 {

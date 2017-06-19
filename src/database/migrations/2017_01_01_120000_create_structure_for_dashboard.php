@@ -13,6 +13,6 @@ class CreateStructureForDashboard extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0
+        'name' => 'Dashboard', 'icon' => 'fa fa-fw fa-tachometer', 'link' => 'dashboard', 'has_children' => 0,
     ];
 }

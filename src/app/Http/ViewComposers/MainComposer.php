@@ -23,7 +23,7 @@ class MainComposer
     public function compose(View $view)
     {
         $view->with([
-            'menu' => $this->menu,
+            'menu'  => $this->menu,
             'store' => $this->store,
         ]);
     }
@@ -39,7 +39,7 @@ class MainComposer
 
     private function setStore()
     {
-        $this->store = new Object;
+        $this->store = new Object();
         $this->store->user = request()->user();
         $this->store->languages = Language::all();
         $this->store->themes = (new ThemesEnum())->getData();
@@ -51,16 +51,16 @@ class MainComposer
     private function getLabels()
     {
         return collect([
-            'generalSettings' => __("General Settings"),
-            'reset' => __("Reset"),
-            'language' => __("Language"),
-            'startTutorial' => __("Start Tutorial"),
-            'stateSave' => __("Tables State Save"),
-            'fixed' => __('Fixed layout'),
-            'collapse' => __("Collapse"),
-            'theme' => __("Theme"),
-            'profile' => __("Profile"),
-            'logout' => __("Logout"),
+            'generalSettings' => __('General Settings'),
+            'reset'           => __('Reset'),
+            'language'        => __('Language'),
+            'startTutorial'   => __('Start Tutorial'),
+            'stateSave'       => __('Tables State Save'),
+            'fixed'           => __('Fixed layout'),
+            'collapse'        => __('Collapse'),
+            'theme'           => __('Theme'),
+            'profile'         => __('Profile'),
+            'logout'          => __('Logout'),
         ]);
     }
 }
