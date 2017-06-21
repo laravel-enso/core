@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\app\Http\Controllers\Core;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\Core\app\Models\Preference;
 
 class PreferencesController extends Controller
 {
@@ -60,7 +61,7 @@ class PreferencesController extends Controller
     private function resetLocalPreferences($route)
     {
         // $this->setPreference();
-        // $this->preference->value->local->{$route} = (new DefaultPreferences())->getData()->local->{$route};
+        // $this->preference->value->local->$route = (new DefaultPreferences())->getData()->local->$route;
         // $this->updatePreference();
     }
 
@@ -71,7 +72,7 @@ class PreferencesController extends Controller
 
     private function getDefaultPreference()
     {
-        return new \LaravelEnso\Core\app\Models\Preference(['value' => (new \LaravelEnso\Core\app\Classes\DefaultPreferences())->getData()]);
+        return new Preference(['value' => (new DefaultPreferences())->getData()]);
     }
 
     private function updateGlobalPreference($preferences)

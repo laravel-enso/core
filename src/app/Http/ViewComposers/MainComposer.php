@@ -43,7 +43,7 @@ class MainComposer
         $this->store->user = request()->user();
         $this->store->languages = Language::all();
         $this->store->themes = (new ThemesEnum())->getData();
-        $this->store->pusherKey = env('PUSHER_APP_KEY');
+        $this->store->pusherKey = config('broadcasting.connections.pusher.key');
         $this->store->labels = $this->getLabels();
         $this->store->route = request()->route()->getName();
     }

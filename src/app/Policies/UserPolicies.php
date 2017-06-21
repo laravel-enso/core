@@ -8,11 +8,6 @@ class UserPolicies
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
     public function updateProfile($user, $profileUser)
     {
         return $user->id === $profileUser->id;

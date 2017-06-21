@@ -2,14 +2,15 @@
 
 namespace LaravelEnso\Core\app\Classes\StructureManager;
 
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class StructureCreator
 {
     private $defaultRole;
-    private $permissionGroup;
+    private $group;
     private $permissions;
     private $parentMenu;
     private $menu;
@@ -18,7 +19,7 @@ class StructureCreator
     public function __construct()
     {
         $this->defaultRole = config('laravel-enso.defaultRole');
-        $this->permissionGroup = null;
+        $this->group = null;
         $this->permissions = collect();
         $this->menu = null;
         $this->parentMenu = null;
@@ -43,16 +44,16 @@ class StructureCreator
 
     private function createPermissions()
     {
-        if (!$this->permissionGroup) {
+        if (!$this->group) {
             return;
         }
 
-        if (!$this->permissionGroup->id) {
-            $this->permissionGroup->save();
+        if (!$this->group->id) {
+            $this->group->save();
         }
 
         foreach ($this->permissions as $permission) {
-            $permission->permission_group_id = $this->permissionGroup->id;
+            $permission->permission_group_id = $this->group->id;
             $permission->save();
             $permission->roles()->attach($this->role);
         }
@@ -69,10 +70,10 @@ class StructureCreator
         $this->menu->roles()->attach($this->role);
     }
 
-    public function setPermissionGroup($permissionGroup)
+    public function setPermissionGroup($group)
     {
-        $group = PermissionGroup::whereName($permissionGroup['name'])->first();
-        $this->permissionGroup = $group ?: new PermissionGroup($permissionGroup);
+        $group = PermissionGroup::whereName($group['name'])->first();
+        $this->group = $group ?: new PermissionGroup($group);
     }
 
     public function setPermissions($permissions)
