@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\app\Enums;
 
 use LaravelEnso\Helpers\Classes\AbstractEnum;
 
-class ThemesEnum extends AbstractEnum
+class Themes extends AbstractEnum
 {
     public function __construct()
     {

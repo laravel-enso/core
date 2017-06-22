@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Http\ViewComposers;
 
 use Illuminate\View\View;
-use LaravelEnso\Core\app\Enums\ThemesEnum;
+use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Helpers\Classes\Object;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuGenerator;
@@ -42,7 +42,7 @@ class MainComposer
         $this->store = new Object();
         $this->store->user = request()->user();
         $this->store->languages = Language::all();
-        $this->store->themes = (new ThemesEnum())->getData();
+        $this->store->themes = (new Themes())->getData();
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');
         $this->store->labels = $this->getLabels();
         $this->store->route = request()->route()->getName();

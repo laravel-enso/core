@@ -36,16 +36,16 @@ class UsersTableStructure extends TableStructure
              * edit attributes of 'joined' models/tables
              */
             // 'editable'           => [1, 4],
-            /* if none is given, by default, 'lfrtip' is used.
+            /* if none is given, by default, 'lBfrtip' is used.
              * See datatables.net documentation */
-            'dom'                => 'lfrtip',
+            'dom'                => 'lBfrtip',
             /* table header alignment. The dt-head-* class is used,
              * i.e. dt-head-center in this case  */
             'headerAlign'        => 'center',
             /* table body alignment. The dt-body-* class is used in this example */
             'bodyAlign'          => 'center',
             /* the class of the '<table> element */
-            'tableClass'         => 'table display compact',
+            // 'tableClass'         => '',
             /* list of columns to be displayed, given by position - translation key
              * The translation will be used in the table column header.
              * Note: 'special' columns such as crtNo/actionButtons should NOT be given here */

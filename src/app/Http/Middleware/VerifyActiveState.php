@@ -6,18 +6,14 @@ use Closure;
 
 class VerifyActiveState
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->is_active) {
+        if ($request->user()->isDisabled()) {
             \Auth::logout();
+
+            if ($request->ajax()) {
+                throw new \EnsoException(__('validation.disabled'), 403);
+            }
 
             return redirect('/login')->withErrors(['is_active' => __('validation.disabled')]);
         }
