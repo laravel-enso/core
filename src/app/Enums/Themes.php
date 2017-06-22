@@ -9,7 +9,6 @@ class Themes extends AbstractEnum
     public function __construct()
     {
         $this->data = [
-
             0 => __('purple'),
             1 => __('purple-light'),
             2 => __('blue'),

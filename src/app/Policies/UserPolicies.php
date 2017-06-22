@@ -16,7 +16,7 @@ class UserPolicies
     public function impersonate($user, $profileUser)
     {
         return $user->hasAccessTo('administration.users.impersonate')
-        && $user->id !== $profileUser->id
-        && !$user->isImpersonating();
+            && $user->id !== $profileUser->id
+            && !$user->isImpersonating();
     }
 }

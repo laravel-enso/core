@@ -66,6 +66,10 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-config');
 
         $this->publishes([
+            __DIR__.'/config/inspiring.php' => config_path('inspiring.php'),
+        ], 'core-inspiring');
+
+        $this->publishes([
             __DIR__.'/database/migrations' => database_path('migrations'),
         ], 'core-migrations');
 

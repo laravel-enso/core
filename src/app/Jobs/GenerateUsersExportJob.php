@@ -14,11 +14,6 @@ class GenerateUsersExportJob implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public $user;
     private $fileName;
 
@@ -28,11 +23,6 @@ class GenerateUsersExportJob implements ShouldQueue
         $this->fileName = __('Users_Report');
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
     public function handle()
     {
         $result = [];

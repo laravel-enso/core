@@ -1,7 +1,6 @@
 <?php
 
     return [
-
         'defaultRole' => 'admin',
         'paths'       => [
             'files'    => 'files',
