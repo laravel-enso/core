@@ -2,8 +2,6 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use Illuminate\Support\Collection;
-
 class Inspiring
 {
     public static function quote()
