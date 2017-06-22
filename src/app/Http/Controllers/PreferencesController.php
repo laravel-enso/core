@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Core;
+namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

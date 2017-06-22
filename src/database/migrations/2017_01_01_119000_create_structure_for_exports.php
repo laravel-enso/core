@@ -4,7 +4,7 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 
 class CreateStructureForExports extends StructureMigration
 {
-    protected $permissionsGroup = [
+    protected $permissionGroup = [
         'name' => 'export', 'description' => 'Exports Permissions Group',
     ];
 

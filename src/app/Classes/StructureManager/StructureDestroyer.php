@@ -8,7 +8,7 @@ use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class StructureDestroyer
 {
-    private $group;
+    private $permissionGroup;
     private $permissions;
     private $menu;
 
@@ -19,9 +19,9 @@ class StructureDestroyer
                 $this->permissions->each->delete();
             }
 
-            if ($this->group) {
-                if (!$this->group->permissions->count()) {
-                    $this->group->delete();
+            if ($this->permissionGroup) {
+                if (!$this->permissionGroup->permissions->count()) {
+                    $this->permissionGroup->delete();
                 }
             }
 
@@ -31,9 +31,9 @@ class StructureDestroyer
         });
     }
 
-    public function setPermissionGroup($group)
+    public function setPermissionGroup($permissionGroup)
     {
-        $this->group = PermissionGroup::whereName($group['name'])->first();
+        $this->permissionGroup = PermissionGroup::whereName($permissionGroup['name'])->first();
     }
 
     public function setPermissions($permissions)

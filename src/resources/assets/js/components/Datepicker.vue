@@ -99,4 +99,9 @@
     	text-align: right;
     }
 
+    .datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-left.datepicker-orient-top,
+	.datepicker.datepicker-dropdown.dropdown-menu.datepicker-orient-right.datepicker-orient-top {
+		z-index: 9999 !important;
+	}
+
 </style>

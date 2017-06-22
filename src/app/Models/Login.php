@@ -12,9 +12,4 @@ class Login extends Model
     {
         return $this->belongsTo('LaravelEnso\Core\app\Models\User');
     }
-
-    public function create(Login $login)
-    {
-        $login->save;
-    }
 }

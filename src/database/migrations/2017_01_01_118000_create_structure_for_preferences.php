@@ -4,7 +4,7 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 
 class CreateStructureForPreferences extends StructureMigration
 {
-    protected $permissionsGroup = [
+    protected $permissionGroup = [
         'name' => 'core.preferences', 'description' => 'Avatars Permissions Group',
     ];
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 abstract class StructureMigration extends Migration
 {
     protected $role;
-    protected $group;
+    protected $permissionGroup;
     protected $permissions;
     protected $parentMenu;
     protected $menu;
@@ -16,8 +16,8 @@ abstract class StructureMigration extends Migration
     {
         $structureManager = new StructureCreator();
 
-        if ($this->group && !empty($this->group)) {
-            $structureManager->setPermissionsGroup(($this->group));
+        if ($this->permissionGroup && !empty($this->permissionGroup)) {
+            $structureManager->setPermissionGroup(($this->permissionGroup));
             $structureManager->setPermissions(($this->permissions));
         }
 
@@ -40,8 +40,8 @@ abstract class StructureMigration extends Migration
     {
         $structureManager = new StructureDestroyer();
 
-        if ($this->group && !empty($this->group)) {
-            $structureManager->setPermissionsGroup(($this->group));
+        if ($this->permissionGroup && !empty($this->permissionGroup)) {
+            $structureManager->setPermissionGroup(($this->permissionGroup));
             $structureManager->setPermissions(($this->permissions));
         }
 

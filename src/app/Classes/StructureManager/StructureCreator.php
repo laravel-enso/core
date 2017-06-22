@@ -10,7 +10,7 @@ use LaravelEnso\RoleManager\app\Models\Role;
 class StructureCreator
 {
     private $defaultRole;
-    private $group;
+    private $permissionGroup;
     private $permissions;
     private $parentMenu;
     private $menu;
@@ -19,7 +19,7 @@ class StructureCreator
     public function __construct()
     {
         $this->defaultRole = config('laravel-enso.defaultRole');
-        $this->group = null;
+        $this->permissionGroup = null;
         $this->permissions = collect();
         $this->menu = null;
         $this->parentMenu = null;
@@ -44,16 +44,16 @@ class StructureCreator
 
     private function createPermissions()
     {
-        if (!$this->group) {
+        if (!$this->permissionGroup) {
             return;
         }
 
-        if (!$this->group->id) {
-            $this->group->save();
+        if (!$this->permissionGroup->id) {
+            $this->permissionGroup->save();
         }
 
         foreach ($this->permissions as $permission) {
-            $permission->permission_group_id = $this->group->id;
+            $permission->permission_group_id = $this->permissionGroup->id;
             $permission->save();
             $permission->roles()->attach($this->role);
         }
@@ -70,10 +70,10 @@ class StructureCreator
         $this->menu->roles()->attach($this->role);
     }
 
-    public function setPermissionGroup($group)
+    public function setPermissionGroup($permissionGroup)
     {
-        $group = PermissionGroup::whereName($group['name'])->first();
-        $this->group = $group ?: new PermissionGroup($group);
+        $group = PermissionGroup::whereName($permissionGroup['name'])->first();
+        $this->permissionGroup = $group ?: new PermissionGroup($permissionGroup);
     }
 
     public function setPermissions($permissions)

@@ -4,7 +4,7 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 
 class CreateStructureForDashboard extends StructureMigration
 {
-    protected $permissionsGroup = [
+    protected $permissionGroup = [
         'name' => 'dashboard', 'description' => 'Dashboard Permissions Group',
     ];
 

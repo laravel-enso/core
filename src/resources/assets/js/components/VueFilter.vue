@@ -41,17 +41,14 @@
 <script>
 
   export default {
-
     data: function() {
-
         return {
             value: ''
         };
     },
+
     methods: {
-
         changed: function() {
-
             this.$emit('input', this.value);
         }
     }

@@ -9,7 +9,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @includeIf('laravel-enso/notifications::notifications')
-                <user-menu :store="store"></user-menu>
+                <user-menu></user-menu>
                 <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>

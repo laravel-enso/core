@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="pusher-key" content="{{ $pusherKey }}">
-        <meta name="preferences" content="{{ $preferences }}">
+        <meta name="pusher-key" content="{{ $store->pusherKey }}">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
         <title>{{ __(config('app.name')) }} | @yield('pageTitle')</title>
 
         @include('laravel-enso/core::includes.mainCss')
-        @yield('includesCss')
+
+        @yield('css')
 
         <link rel="icon" href="/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="{{ mix('css/all.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="/css/all.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     </head>
 
-    <body class="skin-{{ $theme }} sidebar-mini fixed {{ $collapsedSidebar }}">
+    <body class="skin-{{ $store->user->preferences->global->theme }} sidebar-mini fixed {{ $store->user->preferences->global->collapsedSidebar }}">
         <div id="app" class="wrapper">
 
             @include('laravel-enso/core::partials.header')
 
-            {!! $menu->html !!}
+            {!! $menu->render() !!}
 
             <div class="content-wrapper">
 
@@ -38,12 +38,15 @@
 
             @include('laravel-enso/core::partials.sidebar')
 
-            @include('laravel-enso/core::partials.stopImpersonating')
+            @include('laravel-enso/impersonate::stopImpersonating')
 
         </div>
 
+        <script>
+            window.Store = {!! $store !!};
+        </script>
+
         <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-        <!-- <script type="text/javascript" src="http://localhost:8080/js/app.js"></script> -->
 
         @include('laravel-enso/core::includes.mainJavascript')
 

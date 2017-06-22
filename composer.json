@@ -1,7 +1,7 @@
 {
     "name": "laravel-enso/core",
-    "description": "Laravel Enso Core. A solid start for any Laravel Based project.",
-    "type": "project",
+    "description": "Dependency for Laravel Enso.",
+    "type": "dependency",
     "license": "MIT",
     "authors": [
         {
@@ -18,22 +18,22 @@
         "doctrine/dbal": "^2.5",
         "laravelcollective/html": "^5.4.1",
         "pusher/pusher-php-server": "^2.5",
-        "laravel-enso/helpers": "1.0.*",
-        "laravel-enso/actionlogger": "1.0.*",
-        "laravel-enso/avatarmanager": "1.0.*",
-        "laravel-enso/historytracker": "1.0.*",
-        "laravel-enso/charts": "1.0.*",
+        "laravel-enso/helpers": "1.1.*",
+        "laravel-enso/actionlogger": "1.1.*",
+        "laravel-enso/avatarmanager": "1.1.*",
+        "laravel-enso/historytracker": "1.1.*",
+        "laravel-enso/charts": "1.1.*",
         "laravel-enso/impersonate": "1.1.*",
-        "laravel-enso/notifications": "1.0.*",
-        "laravel-enso/select": "1.0.*",
-        "laravel-enso/logmanager": "1.0.*",
-        "laravel-enso/filemanager": "1.0.*",
-        "laravel-enso/datatable": "1.0.*",
-        "laravel-enso/nullablefields": "1.0.*",
-        "laravel-enso/localisation": "1.0.*",
-        "laravel-enso/tutorialmanager": "1.0.*",
-        "laravel-enso/permissionmanager": "1.0.*",
-        "laravel-enso/menumanager": "1.0.*"
+        "laravel-enso/notifications": "1.1.*",
+        "laravel-enso/select": "1.1.*",
+        "laravel-enso/logmanager": "1.1.*",
+        "laravel-enso/filemanager": "1.1.*",
+        "laravel-enso/datatable": "1.1.*",
+        "laravel-enso/nullablefields": "1.1.*",
+        "laravel-enso/localisation": "1.1.*",
+        "laravel-enso/tutorialmanager": "1.1.*",
+        "laravel-enso/permissionmanager": "1.1.*",
+        "laravel-enso/menumanager": "1.1.*"
     },
     "autoload": {
         "psr-4": {

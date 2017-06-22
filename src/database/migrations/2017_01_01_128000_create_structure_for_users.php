@@ -4,7 +4,7 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 
 class CreateStructureForUsers extends StructureMigration
 {
-    protected $permissionsGroup = [
+    protected $permissionGroup = [
         'name' => 'administration.users', 'description' => 'Users Permissions Group',
     ];
 
