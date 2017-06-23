@@ -3,9 +3,12 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Helpers\Traits\IsActiveTrait;
 
 class Owner extends Model
 {
+    use IsActiveTrait;
+
     protected $fillable = ['name', 'is_active'];
 
     public function users()
@@ -21,10 +24,5 @@ class Owner extends Model
     public function getRolesListAttribute()
     {
         return $this->roles->pluck('id')->toArray();
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', 1);
     }
 }

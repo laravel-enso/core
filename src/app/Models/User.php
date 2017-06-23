@@ -6,11 +6,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
+use LaravelEnso\Helpers\Traits\FormattedTimestamps;
+use LaravelEnso\Helpers\Traits\IsActiveTrait;
 use LaravelEnso\Impersonate\app\Traits\Model\Impersonate;
 
 class User extends Authenticatable
 {
-    use Notifiable, Impersonate;
+    use Notifiable, Impersonate, IsActiveTrait, FormattedTimestamps;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -67,31 +69,6 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role_id === 1;
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->whereIsActive(true);
-    }
-
-    public function scopeDisabled($query)
-    {
-        return $query->whereIsActive(false);
-    }
-
-    public function isActive()
-    {
-        return $this->is_active;
-    }
-
-    public function isDisabled()
-    {
-        return !$this->is_active;
-    }
-
-    public function hasAccessTo($route)
-    {
-        return $this->role->permissions->pluck('name')->search($route) !== false;
     }
 
     public function getFullNameAttribute()

@@ -2,6 +2,7 @@
 
     return [
         'defaultRole' => 'admin',
+        'formattedTimestamps' => 'd-m-Y',
         'paths'       => [
             'files'    => 'files',
             'avatars'  => 'avatars',
@@ -9,5 +10,5 @@
             'temp'     => 'temp',
             'exports'  => 'exports',
         ],
-        'cacheLifetime'   => env('CACHE_LIFETIME', 60),
+        'cacheLifetime'   => env('CACHE_LIFETIME', 60)
     ];
