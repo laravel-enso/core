@@ -5,7 +5,7 @@
 @section('content')
 
     <section class="content-header">
-        @can('accessRoute', 'administration.users.create')
+        @can('access-route', 'administration.users.create')
         <a class="btn btn-primary" href="/administration/users/create">
             {{ __("Create a new User") }}
         </a>

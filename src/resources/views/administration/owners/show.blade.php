@@ -3,7 +3,7 @@
 @section('content')
 
     <section class="content-header">
-        @can('accessRoute', 'administration.owners.edit')
+        @can('access-route', 'administration.owners.edit')
         <a class="btn btn-primary" href="/administration/owners/{{ $owner->id }}/edit">
             {{ __("Edit") }}
         </a>
