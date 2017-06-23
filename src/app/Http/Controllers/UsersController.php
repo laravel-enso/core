@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use LaravelEnso\ActionLogger\app\Models\ActionHistory;
+use LaravelEnso\ActionLogger\app\Models\ActionLog;
 use LaravelEnso\Core\app\DataTable\UsersTableStructure;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 use LaravelEnso\Core\app\Models\Owner;
@@ -59,7 +59,7 @@ class UsersController extends Controller
             ->load('role')
             ->load('avatar');
 
-        $timeline = ActionHistory::whereUserId($user->id)->latest()->limit(10)->get();
+        $timeline = ActionLog::whereUserId($user->id)->latest()->limit(10)->get();
 
         return view('laravel-enso/core::administration.users.show', compact('user', 'timeline'));
     }
