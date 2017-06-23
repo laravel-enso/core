@@ -43,12 +43,15 @@ class UsersController extends Controller
 
     public function store(ValidateUserRequest $request, User $user)
     {
-        $user->fill($request->all());
-        $user->email = $request->email;
-        $user->owner_id = $request->owner_id;
-        $user->save();
+        DB::transaction(function() {
+            $user->fill($request->all());
+            $user->email = $request->email;
+            $user->owner_id = $request->owner_id;
+            $user->save();
+            $this->sendResetLinkEmail($request);
+        });
+
         flash()->success(__('The User was created!'));
-        $this->sendResetLinkEmail($request);
 
         return redirect('administration/users/'.$user->id.'/edit');
     }
