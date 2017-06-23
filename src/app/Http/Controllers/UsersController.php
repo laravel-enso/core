@@ -43,7 +43,7 @@ class UsersController extends Controller
 
     public function store(ValidateUserRequest $request, User $user)
     {
-        DB::transaction(function() {
+        \DB::transaction(function() {
             $user->fill($request->all());
             $user->email = $request->email;
             $user->owner_id = $request->owner_id;
