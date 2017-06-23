@@ -13,7 +13,6 @@ class UsersTableStructure extends TableStructure
             'crtNo'              => __('#'),
             'actionButtons'      => __('Actions'),
             'responsivePriority' => [1, 2, 4, 6],
-            'dom'                => 'lfrtip',
             'headerAlign'        => 'center',
             'bodyAlign'          => 'center',
             'tableClass'         => 'table display compact',
