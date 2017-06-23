@@ -5,7 +5,7 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 class CreateStructureForHome extends StructureMigration
 {
     protected $permissionGroup = [
-        'name' => 'core.home', 'description' => 'Home Permissions Group',
+        'name' => 'core.home', 'description' => 'Home permissions group',
     ];
 
     protected $permissions = [

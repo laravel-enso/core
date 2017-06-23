@@ -13,11 +13,9 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
         "laracasts/flash": "^2.0",
-        "nesbot/carbon": "^1.0",
         "guzzlehttp/guzzle": "~6.0",
-        "doctrine/dbal": "^2.5",
         "laravelcollective/html": "^5.4.1",
-        "pusher/pusher-php-server": "^2.5",
+        "maatwebsite/excel": "^2.1",
         "laravel-enso/helpers": "1.1.*",
         "laravel-enso/actionlogger": "1.1.*",
         "laravel-enso/avatarmanager": "1.1.*",
@@ -29,7 +27,6 @@
         "laravel-enso/localisation": "1.1.*",
         "laravel-enso/logmanager": "1.1.*",
         "laravel-enso/menumanager": "1.1.*",
-        "laravel-enso/notifications": "1.1.*",
         "laravel-enso/permissionmanager": "1.1.*",
         "laravel-enso/rememberable": "1.1.*",
         "laravel-enso/rolemanager": "1.1.*",
@@ -39,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Core\\": "src/",
-            "LaravelEnso\\PermissionManager\\": "vendor/laravel-enso/permissionmanager/src/"
+            "LaravelEnso\\Core\\": "src/"
         }
     }
 }

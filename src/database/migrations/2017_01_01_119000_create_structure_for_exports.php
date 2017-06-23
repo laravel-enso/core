@@ -5,10 +5,10 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 class CreateStructureForExports extends StructureMigration
 {
     protected $permissionGroup = [
-        'name' => 'export', 'description' => 'Exports Permissions Group',
+        'name' => 'export', 'description' => 'Exports permissions group',
     ];
 
     protected $permissions = [
-        ['name' => 'export.getUsers', 'description' => 'Generates an xls users export and sends it by email to the user that made the request', 'type' => 1, 'default' => true],
+        ['name' => 'export.getUsers', 'description' => 'Generates an xlsx users export and sends it by email to the user that made the request', 'type' => 1, 'default' => true],
     ];
 }

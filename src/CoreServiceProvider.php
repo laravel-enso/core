@@ -17,6 +17,7 @@ class CoreServiceProvider extends ServiceProvider
     private $providers = [
         'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
         'LaravelEnso\Core\AuthServiceProvider',
         'LaravelEnso\Core\EventServiceProvider',
         'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
@@ -28,7 +29,6 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\Localisation\LocalisationServiceProvider',
         'LaravelEnso\LogManager\LogManagerServiceProvider',
         'LaravelEnso\MenuManager\MenuManagerServiceProvider',
-        'LaravelEnso\Notifications\NotificationsServiceProvider',
         'LaravelEnso\PermissionManager\PermissionManagerServiceProvider',
         'LaravelEnso\RoleManager\RoleManagerServiceProvider',
         'LaravelEnso\Select\SelectServiceProvider',
@@ -61,15 +61,15 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
-            __DIR__.'/config/inspiring.php'    => config_path('inspiring.php'),
+            __DIR__.'/config/inspiring.php'    => config_path('inspiring.php')
         ], 'core-config');
 
         $this->publishes([
-            __DIR__.'/resources/preferences.json' => resource_path(),
+            __DIR__.'/resources/preferences.json' => resource_path('preferences.json')
         ], 'core-preferences');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
+            __DIR__.'/resources/lang' => resource_path('lang')
         ], 'core-lang');
     }
 
