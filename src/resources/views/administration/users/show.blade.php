@@ -44,7 +44,7 @@
 
 						<ul class="list-group list-group-unbordered">
 							<li class="list-group-item">
-								<b> {{ __("Member Since") }} </b> <a class="pull-right"> {{ $user->created_date }} </a>
+								<b> {{ __("Member Since") }} </b> <a class="pull-right"> {{ $user->created_at }} </a>
 							</li>
 							<li class="list-group-item">
 								<b> {{ __("Logins") }} </b> <a class="pull-right">  {{ $user->logins->count() }}  </a>
@@ -142,7 +142,7 @@
 							@foreach($timeline as $event)
 							<li class="time-label">
 										<span class="bg-red">
-											{{ $event->created_date }}
+											{{ $event->created_at }}
 										</span>
 							</li>
 							<!-- /.timeline-label -->
