@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\DataTable\OwnersTableStructure;
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\Core\app\Http\Requests\ValidateOwnerRequest;
-use LaravelEnso\CorePlus\app\Models\Owner;
+use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\DataTable\app\Traits\DataTable;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\Select\app\Traits\SelectListBuilder;
@@ -16,6 +16,7 @@ class OwnersController extends Controller
     use DataTable, SelectListBuilder;
 
     protected $tableStructureClass = OwnersTableStructure::class;
+
     protected $selectSourceClass = 'LaravelEnso\Core\app\Models\Owner';
 
     public function getTableQuery()
