@@ -85,6 +85,6 @@ class OwnersController extends Controller
             throw new \EnsoException(__("The owner can't be deleted because it has users attached"));
         }
 
-        return [ 'message' => __('Operation was successfull') ];
+        return ['message' => __('Operation was successfull')];
     }
 }
