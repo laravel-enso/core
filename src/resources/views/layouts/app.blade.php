@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     </head>
 
-    <body class="skin-{{ $store->user->preferences->global->theme }} sidebar-mini fixed {{ $store->user->preferences->global->collapsedSidebar }}">
+    <body class="skin-{{ $store->user->preferences->global->theme }} sidebar-mini fixed {{ $store->user->preferences->global->collapsedSidebar ? 'sidebar-collapse' : null }}">
         <div id="app" class="wrapper">
 
             @include('laravel-enso/core::partials.header')
