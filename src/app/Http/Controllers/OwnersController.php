@@ -81,18 +81,10 @@ class OwnersController extends Controller
 
     public function destroy(Owner $owner)
     {
-        try {
-            $owner->delete();
-        } catch (\Exception $exception) {
-            return [
-                'level'   => 'error',
-                'message' => __('An error has occured. Please report this to the administrator'),
-            ];
+        if ($owner->users()->count()) {
+            throw new \EnsoException(__("The owner can't be deleted because it has users attached"));
         }
 
-        return [
-            'level'   => 'success',
-            'message' => __('Operation was successfull'),
-        ];
+        return [ 'message' => __('Operation was successfull') ];
     }
 }
