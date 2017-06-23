@@ -1,6 +1,6 @@
 <?php
 
-use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
+use LaravelEnso\StructureManager\app\Classes\StructureMigration;
 
 class CreateStructureForPreferences extends StructureMigration
 {
