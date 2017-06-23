@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Core\app\Models;
 
-use Illuminate\Auth\Passwords\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Impersonate\app\Traits\Model\Impersonate;
 
 class User extends Authenticatable
