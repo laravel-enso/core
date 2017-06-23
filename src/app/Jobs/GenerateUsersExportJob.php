@@ -6,10 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\Core\app\Notifications\UsersExportNotification;
-use Maatwebsite\Excel\Facades\Excel;
 
 class GenerateUsersExportJob implements ShouldQueue
 {
@@ -37,15 +35,15 @@ class GenerateUsersExportJob implements ShouldQueue
     {
         $statuses = new IsActiveEnum();
 
-        User::with(['owner', 'role'])->get()->each(function($user, $index) use ($statuses) {
+        User::with(['owner', 'role'])->get()->each(function ($user, $index) use ($statuses) {
             $this->data->push([
-                __('#') => $index + 1,
-                __('First Name') => $user->first_name,
-                __('Last Name') => $user->last_name,
-                __('Phone') => $user->phone,
-                __('Email') => $user->email,
-                __('Role') => $user->role->name,
-                __('Status') => $statuses->getValueByKey($user->is_active),
+                __('#')            => $index + 1,
+                __('First Name')   => $user->first_name,
+                __('Last Name')    => $user->last_name,
+                __('Phone')        => $user->phone,
+                __('Email')        => $user->email,
+                __('Role')         => $user->role->name,
+                __('Status')       => $statuses->getValueByKey($user->is_active),
                 __('Member since') => $user->created_at,
             ]);
         });
@@ -68,8 +66,8 @@ class GenerateUsersExportJob implements ShouldQueue
 
     private function send()
     {
-        $file = config('laravel-enso.paths.exports') . '/' . $this->fileName . '.xlsx';
-        $this->user->notify(new UsersExportNotification(storage_path('app/' . $file)));
+        $file = config('laravel-enso.paths.exports').'/'.$this->fileName.'.xlsx';
+        $this->user->notify(new UsersExportNotification(storage_path('app/'.$file)));
         \Storage::delete($file);
     }
 }

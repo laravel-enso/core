@@ -28,7 +28,7 @@ class ValidateUserRequest extends FormRequest
             'email'      => [
                 'email',
                 'required',
-                $emailUnique
+                $emailUnique,
             ],
         ];
     }

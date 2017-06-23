@@ -21,8 +21,8 @@ class ValidateOwnerRequest extends FormRequest
             'is_active'     => 'required|in:"1","0"',
             'name'          => [
                 'required',
-                $nameUnique
-            ]
+                $nameUnique,
+            ],
         ];
     }
 }

@@ -61,15 +61,15 @@ class CoreServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
-            __DIR__.'/config/inspiring.php'    => config_path('inspiring.php')
+            __DIR__.'/config/inspiring.php'    => config_path('inspiring.php'),
         ], 'core-config');
 
         $this->publishes([
-            __DIR__.'/resources/preferences.json' => resource_path('preferences.json')
+            __DIR__.'/resources/preferences.json' => resource_path('preferences.json'),
         ], 'core-preferences');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang')
+            __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'core-lang');
     }
 

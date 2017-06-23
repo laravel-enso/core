@@ -17,7 +17,7 @@ class UsersTableStructure extends TableStructure
             'headerAlign'        => 'center',
             'bodyAlign'          => 'center',
             'tableClass'         => 'table display compact',
-            'enumMappings' => [
+            'enumMappings'       => [
                 'is_active' => IsActiveEnum::class,
             ],
             'columns'              => [

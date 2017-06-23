@@ -21,7 +21,7 @@ class CreateStructureForUsers extends StructureMigration
         ['name' => 'administration.users.destroy', 'description' => 'Delete user', 'type' => 1, 'default' => false],
         ['name' => 'administration.users.updateProfile', 'description' => 'Update user\'s profile', 'type' => 1, 'default' => true],
         ['name' => 'administration.users.impersonate', 'description' => 'Impersonate user', 'type' => 1, 'default' => false],
-        ['name' => 'administration.users.stopImpersonating', 'description' => 'Stop impersonating user', 'type' => 1, 'default' => false]
+        ['name' => 'administration.users.stopImpersonating', 'description' => 'Stop impersonating user', 'type' => 1, 'default' => false],
     ];
 
     protected $menu = [

@@ -3,10 +3,10 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\CorePlus\app\Models\Owner;
 use LaravelEnso\Core\app\DataTable\OwnersTableStructure;
 use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\Core\app\Http\Requests\ValidateOwnerRequest;
+use LaravelEnso\CorePlus\app\Models\Owner;
 use LaravelEnso\DataTable\app\Traits\DataTable;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\Select\app\Traits\SelectListBuilder;
