@@ -72,9 +72,9 @@ class OwnersController extends Controller
             $owner->save();
             $rolesList = $request->roles_list ?: [];
             $owner->roles()->sync($rolesList);
-
-            flash()->success(__('The Changes have been saved!'));
         });
+
+        flash()->success(__('The Changes have been saved!'));
 
         return back();
     }
