@@ -21,7 +21,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\Core\AuthServiceProvider',
         'LaravelEnso\Core\EventServiceProvider',
         'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
-        'LaravelEnso\AvatarManager\AvatarManagerServiceProvider',
+        'LaravelEnso\AvatarManager\AvatarServiceProvider',
         'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
