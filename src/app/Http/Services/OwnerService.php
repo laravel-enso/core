@@ -38,7 +38,7 @@ class OwnerService
         $owner = $owner->create($this->request->all());
         flash()->success(__('The Entity was created!'));
 
-        return redirect('administration/owners/' . $owner->id . '/edit');
+        return redirect('administration/owners/'.$owner->id.'/edit');
     }
 
     public function edit(Owner $owner)

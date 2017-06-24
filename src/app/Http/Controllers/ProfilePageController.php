@@ -8,9 +8,9 @@ use LaravelEnso\Core\app\Models\User;
 
 class ProfilePageController extends Controller
 {
-	public function __invoke(ValidateProfilePageRequest $request, User $user)
+    public function __invoke(ValidateProfilePageRequest $request, User $user)
     {
-    	$this->authorize('update-profile', $user);
+        $this->authorize('update-profile', $user);
         $user->update($request->all());
         flash()->success(__('The Changes have been saved!'));
 

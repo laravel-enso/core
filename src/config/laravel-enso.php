@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'version' => '1.1.7',
-        'defaultRole' => 'admin',
+        'version'             => '1.1.7',
+        'defaultRole'         => 'admin',
         'defaultRole'         => 'admin',
         'formattedTimestamps' => 'd-m-Y',
         'paths'               => [

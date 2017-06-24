@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\ActionLogger\app\Models\ActionLog;
-use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\Core\app\Models\User;
 
@@ -48,7 +47,7 @@ class UserService
 
         flash()->success(__('The User was created!'));
 
-        return redirect('administration/users/' . $user->id . '/edit');
+        return redirect('administration/users/'.$user->id.'/edit');
     }
 
     public function show(User $user)
@@ -81,11 +80,11 @@ class UserService
     public function destroy(User $user)
     {
         if ($user->logins->first()) {
-            throw new \EnsoException(__("The user has activity in the system and cannot be deleted"));
+            throw new \EnsoException(__('The user has activity in the system and cannot be deleted'));
         }
 
         $user->delete();
 
-        return [ 'message' => __('Operation was successfull') ];
+        return ['message' => __('Operation was successfull')];
     }
 }

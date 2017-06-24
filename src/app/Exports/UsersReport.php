@@ -18,8 +18,8 @@ class UsersReport
 
     public function run()
     {
-    	$this->setData();
-    	$this->createReport();
+        $this->setData();
+        $this->createReport();
     }
 
     private function setData()
@@ -28,13 +28,13 @@ class UsersReport
 
         User::with(['owner', 'role'])->get()->each(function ($user, $index) use ($statuses) {
             $this->data->push([
-                __('#') => $index + 1,
-                __('First Name') => $user->first_name,
-                __('Last Name') => $user->last_name,
-                __('Phone') => $user->phone,
-                __('Email') => $user->email,
-                __('Role') => $user->role->name,
-                __('Status') => $statuses->getValueByKey($user->is_active),
+                __('#')            => $index + 1,
+                __('First Name')   => $user->first_name,
+                __('Last Name')    => $user->last_name,
+                __('Phone')        => $user->phone,
+                __('Email')        => $user->email,
+                __('Role')         => $user->role->name,
+                __('Status')       => $statuses->getValueByKey($user->is_active),
                 __('Member since') => $user->created_at,
             ]);
         });
