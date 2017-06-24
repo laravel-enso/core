@@ -37,8 +37,8 @@
       	<hr>
 
       	<setting-switch :label="store.labels.fixed"
-  			v-model="store.user.preferences.global.headerFixed"
-  			@input="setPreference()">
+  			v-model="store.user.preferences.global.fixedHeader"
+  			@input="setPreference(true)">
   		</setting-switch>
 
   		<hr>
@@ -64,7 +64,7 @@
 		computed: {
 	        bodyClass() {
 	            return 'sidebar-mini skin-' + this.store.user.preferences.global.theme
-	            	+ (this.store.user.preferences.global.headerFixed ? ' fixed' : '')
+	            	+ (this.store.user.preferences.global.fixedHeader ? ' fixed' : '')
 	            	+ (this.store.user.preferences.global.collapsedSidebar ? ' sidebar-collapse' : '');
 	        }
 		},

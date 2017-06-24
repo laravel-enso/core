@@ -46,14 +46,14 @@
 
 @push('scripts')
 
-<script>
+    <script>
 
-    var vue = new Vue({
-        el: '#app',
-        data: {
-            customParams: { owner_id: null }
-        }
-    });
-</script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                pivotParams: { owners: {id: null } }
+            }
+        });
+    </script>
 
 @endpush

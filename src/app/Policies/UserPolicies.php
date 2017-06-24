@@ -15,7 +15,7 @@ class UserPolicies
 
     public function impersonate($user, $profileUser)
     {
-        return $user->can('access-route', 'administration.users.impersonate')
+        return $user->can('access-route', 'core.impersonate.start')
             && $user->id !== $profileUser->id
             && !$user->isImpersonating();
     }

@@ -33,8 +33,8 @@
         </small>
         <vue-select source="/administration/owners/getOptionsList"
             name="owner_id"
-            selected="{{ $user->owner_id }}"
-            v-model="customParams.owner_id">
+            selected="{{ isset($user) ? $user->owner_id : null }}"
+            v-model="pivotParams.owners.id">
         </vue-select>
     </div>
 </div>
@@ -46,8 +46,8 @@
         </small>
         <vue-select source="/system/roles/getOptionsList"
             name="role_id"
-            selected="{{ $user->role_id }}"
-            :custom-params="customParams">
+            selected="{{ isset($user) ? $user->role_id : null }}"
+            :pivot-params="pivotParams">
         </vue-select>
     </div>
 </div>

@@ -6,9 +6,9 @@
 
     <section class="content-header">
         @can('access-route', 'administration.owners.create')
-        <a class="btn btn-primary" href="/administration/owners/create">
-            {{ __("Create a new Entity") }}
-        </a>
+            <a class="btn btn-primary" href="/administration/owners/create">
+                {{ __("Create a new Entity") }}
+            </a>
         @endcan
         @include('laravel-enso/menumanager::breadcrumbs')
     </section>
@@ -57,7 +57,7 @@
 
     <script>
 
-        let vue = new Vue({
+        const vm = new Vue({
             el: '#app'
         });
 

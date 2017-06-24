@@ -27,12 +27,12 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\FileManager\FileManagerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
         'LaravelEnso\Localisation\LocalisationServiceProvider',
-        'LaravelEnso\LogManager\LogManagerServiceProvider',
-        'LaravelEnso\MenuManager\MenuManagerServiceProvider',
-        'LaravelEnso\PermissionManager\PermissionManagerServiceProvider',
-        'LaravelEnso\RoleManager\RoleManagerServiceProvider',
+        'LaravelEnso\LogManager\LogsServiceProvider',
+        'LaravelEnso\MenuManager\MenusServiceProvider',
+        'LaravelEnso\PermissionManager\PermissionsServiceProvider',
+        'LaravelEnso\RoleManager\RolesServiceProvider',
         'LaravelEnso\Select\SelectServiceProvider',
-        'LaravelEnso\TutorialManager\TutorialManagerServiceProvider',
+        'LaravelEnso\TutorialManager\TutorialsServiceProvider',
     ];
 
     private $aliases = [

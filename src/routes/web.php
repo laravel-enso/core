@@ -17,22 +17,21 @@ Route::group([
 
     Route::group(['prefix' => 'administration', 'as' => 'administration.'], function () {
         Route::group(['prefix' => 'owners', 'as' => 'owners.'], function () {
-            Route::get('initTable', 'OwnersController@initTable')->name('initTable');
-            Route::get('getTableData', 'OwnersController@getTableData')->name('getTableData');
-            Route::get('getOptionsList', 'OwnersController@getOptionsList')->name('getOptionsList');
+            Route::get('initTable', 'OwnerController@initTable')->name('initTable');
+            Route::get('getTableData', 'OwnerController@getTableData')->name('getTableData');
+            Route::get('getOptionsList', 'OwnerController@getOptionsList')->name('getOptionsList');
         });
 
-        Route::resource('owners', 'OwnersController');
+        Route::resource('owners', 'OwnerController');
 
         Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
-            Route::get('initTable', 'UsersController@initTable')->name('initTable');
-            Route::get('getTableData', 'UsersController@getTableData')->name('getTableData');
-            Route::post('setTableData', 'UsersController@setTableData')->name('setTableData');
-            Route::patch('updateProfile/{user}', 'UsersController@updateProfile')->name('updateProfile');
-            Route::get('{id}/impersonate', 'UsersController@impersonate')->name('impersonate');
-            Route::get('stopImpersonating', 'UsersController@stopImpersonating')->name('stopImpersonating');
+            Route::get('initTable', 'UserController@initTable')->name('initTable');
+            Route::get('getTableData', 'UserController@getTableData')->name('getTableData');
+            Route::post('setTableData', 'UserController@setTableData')->name('setTableData');
+
+            Route::patch('updateProfile/{user}', 'ProfilePageController')->name('updateProfile');
         });
 
-        Route::resource('users', 'UsersController');
+        Route::resource('users', 'UserController');
     });
 });

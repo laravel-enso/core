@@ -13,13 +13,13 @@
 
         @yield('css')
 
-        <link rel="icon" href="/images/favicon.ico"/>
+        <link rel="icon" href="/images/favicon.png"/>
         <link rel="stylesheet" type="text/css" href="/css/all.css"/>
         <link rel="stylesheet" type="text/css" href="/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     </head>
 
-    <body class="skin-{{ $store->user->preferences->global->theme }} sidebar-mini fixed {{ $store->user->preferences->global->collapsedSidebar ? 'sidebar-collapse' : null }}">
+    <body class="sidebar-mini  skin-{{ $store->user->preferences->global->theme }} {{ $store->user->preferences->global->collapsedSidebar ? 'sidebar-collapse' : null }} {{ $store->user->preferences->global->fixedHeader ? 'fixed' : null }}">
         <div id="app" class="wrapper">
 
             @include('laravel-enso/core::partials.header')
@@ -38,7 +38,7 @@
 
             @include('laravel-enso/core::partials.sidebar')
 
-            @include('laravel-enso/impersonate::stopImpersonating')
+            @includeIf('laravel-enso/impersonate::stop')
 
         </div>
 

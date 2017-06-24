@@ -43,10 +43,10 @@
 
     <script>
 
-        var vue = new Vue({
+        const vm = new Vue({
             el: '#app',
             data: {
-                customParams: { owner_id: null }
+                pivotParams: { owners: {id: null } }
             }
         });
 

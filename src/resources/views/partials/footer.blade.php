@@ -3,7 +3,7 @@
         <b>
             {{ __("ver") }}
         </b>
-        {{ __("1.0") }}
+        {{ config('laravel-enso.version') }}
     </div>
     <strong>
         {{ __("Copyright © 2016") }}
