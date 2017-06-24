@@ -7,7 +7,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use LaravelEnso\Core\app\Exports\UsersReport;
-use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Notifications\UsersExportNotification;
 
 class GenerateUsersExportJob implements ShouldQueue
@@ -23,7 +22,7 @@ class GenerateUsersExportJob implements ShouldQueue
     {
         $this->user = $user;
         $this->fileName = __('Users_Report');
-        $this->fullPathFile = config('laravel-enso.paths.exports') . '/' . $this->fileName . '.xlsx';
+        $this->fullPathFile = config('laravel-enso.paths.exports').'/'.$this->fileName.'.xlsx';
         $this->exporter = new UsersReport($this->fileName);
     }
 
@@ -35,7 +34,7 @@ class GenerateUsersExportJob implements ShouldQueue
 
     private function sendReport()
     {
-        $this->user->notify(new UsersExportNotification(storage_path('app/' . $this->fullPathFile)));
+        $this->user->notify(new UsersExportNotification(storage_path('app/'.$this->fullPathFile)));
     }
 
     private function cleanUp()
