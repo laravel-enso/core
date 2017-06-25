@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <comments-manager :id="{{ $owner->id }}"
+                <!-- <comments-manager :id="{{ $owner->id }}"
                     type="owner"
                     v-if="{{ $owner }}"
                     edited-label="{{ __("edited") }}">
@@ -61,7 +61,7 @@
                     v-if="{{ $owner }}">
                     <span slot="documents-manager-title">{{ __("Documents") }}</span>
                     @include('laravel-enso/core::partials.modal')
-                </documents-manager>
+                </documents-manager> -->
 
             </div>
         </div>
