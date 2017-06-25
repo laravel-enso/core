@@ -26,6 +26,11 @@ class OwnersTableStructure extends TableStructure
                     'name'  => 'name',
                 ],
                 1 => [
+                    'label' => __('Description'),
+                    'data'  => 'description',
+                    'name'  => 'description',
+                ],
+                2 => [
                     'label' => __('Active'),
                     'data'  => 'is_active',
                     'name'  => 'is_active',

@@ -20,6 +20,7 @@
         "laravel-enso/avatarmanager": "1.1.*",
         "laravel-enso/charts": "1.1.*",
         "laravel-enso/datatable": "1.1.*",
+        "laravel-enso/enso": "1.1.*",
         "laravel-enso/filemanager": "1.1.*",
         "laravel-enso/helpers": "1.1.*",
         "laravel-enso/historytracker": "1.1.*",

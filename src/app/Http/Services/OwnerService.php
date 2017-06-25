@@ -18,7 +18,7 @@ class OwnerService
 
     public function getTableQuery()
     {
-        return Owner::select(\DB::raw('id as DT_RowId, name, is_active'));
+        return Owner::select(\DB::raw('id as DT_RowId, name, description, is_active'));
     }
 
     public function index()

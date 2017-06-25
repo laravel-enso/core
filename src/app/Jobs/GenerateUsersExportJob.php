@@ -30,6 +30,7 @@ class GenerateUsersExportJob implements ShouldQueue
     {
         $this->exporter->run();
         $this->sendReport();
+        $this->cleanUp();
     }
 
     private function sendReport()

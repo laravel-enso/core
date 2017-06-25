@@ -17,7 +17,6 @@ class ValidateOwnerRequest extends FormRequest
         $owner = $this->route('owner');
         $nameUnique = Rule::unique('owners', 'name');
         $nameUnique = ($this->_method == 'PATCH') ? $nameUnique->ignore($owner->id) : $nameUnique;
-        \Log::info($nameUnique);
 
         return [
             'is_active'     => 'required|in:"1","0"',

@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id === 1;
+        return $this->role_id == 1;
     }
 
     public function getFullNameAttribute()
