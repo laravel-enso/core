@@ -8,6 +8,15 @@
     </div>
 </div>
 <div class="col-sm-6">
+    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+        {!! Form::label('description', __("Description")) !!}
+        <small class="text-danger" style="float:right;">
+            {{ $errors->first('description') }}
+        </small>
+        {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' => __("Please Fill")]) !!}
+    </div>
+</div>
+<div class="col-sm-6">
     <div class="form-group{{ $errors->has('is_active') ? ' has-error' : '' }}">
         {!! Form::label('is_active', __("Active")) !!}
         <small class="text-danger" style="float:right;">
