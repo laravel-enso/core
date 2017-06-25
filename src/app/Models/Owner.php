@@ -9,7 +9,7 @@ class Owner extends Model
 {
     use IsActiveTrait;
 
-    protected $fillable = ['name', 'is_active'];
+    protected $fillable = ['name', 'description', 'is_active'];
 
     public function users()
     {
