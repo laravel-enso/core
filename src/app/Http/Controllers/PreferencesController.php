@@ -9,7 +9,6 @@ use LaravelEnso\Core\app\Models\Preference;
 
 class PreferencesController extends Controller
 {
-    private $preference;
     private $request;
 
     public function __construct(Request $request = null)
@@ -60,9 +59,9 @@ class PreferencesController extends Controller
 
     private function resetLocalPreferences($route)
     {
-        // $this->setPreference();
-        // $this->preference->value->local->$route = (new DefaultPreferences())->getData()->local->$route;
-        // $this->updatePreference();
+        $this->setPreference();
+        $this->preference->value->local->$route = (new DefaultPreferences())->getData()->local->$route;
+        $this->updatePreference();
     }
 
     private function getGlobalPreferences()
