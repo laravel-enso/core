@@ -1,10 +1,13 @@
-@if (session()->has('flash_notification.message'))
+@if (session()->has('flash_notification'))
     @push('scripts')
     <script>
         (function() {
-            let level = "{{ session('flash_notification.level') }}" === "danger" ? "error"
-                : "{{ session('flash_notification.level') }}";
-            toastr[level]("{{ session('flash_notification.message') }}!");
+            let flashMessages = {!! session()->has('flash_notification') ? session()->get('flash_notification') : null !!};
+
+            flashMessages.forEach(flashMessage => {console.log(flashMessage);
+                let level = flashMessage.level === 'danger' ? 'error' : flashMessage.level;
+                toastr[level](flashMessage.message);
+            });
         })();
     </script>
     @endpush

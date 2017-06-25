@@ -146,16 +146,16 @@
 
 		    computed: {
 		    	avatarLink() {
-		    		return '/core/avatars/' + {{ $user->avatar ? $user->avatar->id : 'null' }};
+		    		return '/core/avatars/' + (this.store.user.avatar_id || 'null');
 		    	},
 		    },
 
 		    data: {
-		    	store: Store
+		    	store: Store,
 		    },
 
 		    methods: {
-		        deleteAvatar: function(id) {
+		        deleteAvatar(id) {
 		            axios.delete('/core/avatars/' + id).then(response => {
 		                this.store.user.avatar_id = null;
 		            }).catch(error => {
