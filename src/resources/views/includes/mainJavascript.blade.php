@@ -25,10 +25,6 @@
 <!-- toastr -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
 
-<!-- featherlight -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.1/featherlight.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.1/featherlight.gallery.min.js"></script>
-
 <!-- bootstrap-select -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
