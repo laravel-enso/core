@@ -57,7 +57,7 @@ class MainComposer
             'startTutorial'   => __('Start Tutorial'),
             'stateSave'       => __('Tables State Save'),
             'fixed'           => __('Fixed layout'),
-            'collapse'        => __('Collapse'),
+            'collapse'        => __('Menu Collapse'),
             'theme'           => __('Theme'),
             'profile'         => __('Profile'),
             'logout'          => __('Logout'),
