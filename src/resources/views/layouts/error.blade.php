@@ -4,7 +4,7 @@
 
 		<link rel = "icon" href = "/images/favicon.png"/>
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
-		<link rel = "stylesheet" type = "text/css" href = "/css/error.css"/>
+		<link rel = "stylesheet" type = "text/css" href = "{{ mix('css/error.css') }}"/>
 	</head>
 
 	<body>

@@ -22,7 +22,7 @@ class GenerateUsersExportJob implements ShouldQueue
     {
         $this->user = $user;
         $this->fileName = __('Users_Report');
-        $this->fullPathFile = config('laravel-enso.paths.exports').'/'.$this->fileName.'.xlsx';
+        $this->fullPathFile = config('laravel-enso.paths.exports').DIRECTORY_SEPARATOR.$this->fileName.'.xlsx';
         $this->exporter = new UsersReport($this->fileName);
     }
 
@@ -35,7 +35,7 @@ class GenerateUsersExportJob implements ShouldQueue
 
     private function sendReport()
     {
-        $this->user->notify(new UsersExportNotification(storage_path('app/'.$this->fullPathFile)));
+        $this->user->notify(new UsersExportNotification(storage_path('app'.DIRECTORY_SEPARATOR.$this->fullPathFile)));
     }
 
     private function cleanUp()
