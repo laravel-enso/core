@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\app\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicies
+class UserPolicy
 {
     use HandlesAuthorization;
 
