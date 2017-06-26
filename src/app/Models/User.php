@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
@@ -12,7 +13,7 @@ use LaravelEnso\Impersonate\app\Traits\Impersonate;
 
 class User extends Authenticatable
 {
-    use Notifiable, Impersonate, IsActiveTrait, FormattedTimestamps;
+    use Notifiable, Impersonate, IsActiveTrait, FormattedTimestamps, ActionLogger;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -59,11 +60,6 @@ class User extends Authenticatable
         unset($this->preference);
 
         return $preferences;
-    }
-
-    public function action_logs()
-    {
-        return $this->hasMany('LaravelEnso\ActionLogger\app\Models\ActionLog');
     }
 
     public function isAdmin()
