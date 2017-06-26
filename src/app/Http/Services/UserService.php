@@ -53,10 +53,11 @@ class UserService
     public function show(User $user)
     {
         $user->load(['owner', 'role', 'avatar']);
+
         $timeline = ActionLog::whereUserId($user->id)
+            ->with('permission')
             ->latest()
-            ->limit(10)
-            ->get(['route', 'action', 'created_at']);
+            ->paginate(7);
 
         return view('laravel-enso/core::administration.users.show', compact('user', 'timeline'));
     }

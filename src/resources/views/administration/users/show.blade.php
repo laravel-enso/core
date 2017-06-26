@@ -45,7 +45,7 @@
 								<b> {{ __("Logins") }} </b> <a class="pull-right">  {{ $user->logins->count() }}  </a>
 							</li>
 							<li class="list-group-item">
-								<b> {{ __("Activity") }} </b> <a class="pull-right"> {{ $user->action_logs->count() }} </a>
+								<b> {{ __("Actions") }} </b> <a class="pull-right"> {{ $user->action_logs->count() }} </a>
 							</li>
 						</ul>
 					</div>
@@ -106,7 +106,7 @@
 			<div class="col-md-7">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title"> {{ __("Timeline") }} </h3>
+						<h3 class="box-title"> {{ __("Route access history") }} </h3>
 					</div>
 					<div class="box-body">
 						<ul class="timeline timeline-inverse">
@@ -119,17 +119,15 @@
 							<li>
 								<i class="fa fa-user bg-aqua"></i>
 								<div class="timeline-item">
-									<span class="time"><i class="fa fa-clock-o"></i> {{ $event->created_time }} </span>
+									<span class="time"><i class="fa fa-clock-o"></i> {{ $event->created_at }} </span>
 									<h3 class="timeline-header no-border">
-										{{ $user->full_name }} {{ __('Accessed Route') }} {{ $event->route }}
+										{{ $event->permission->description }}
 									</h3>
 								</div>
 							</li>
 							@endforeach
-							<li>
-								<i class="fa fa-clock-o bg-gray"></i>
-							</li>
 						</ul>
+						{{ $timeline->links() }}
 					</div>
 				</div>
 			</div>
