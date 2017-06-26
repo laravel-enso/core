@@ -53,11 +53,11 @@ class CoreServiceProvider extends ServiceProvider
 
     private function publishesAll()
     {
-        $this->publishesDepedencies();
+        $this->publishesDependencies();
         $this->publishesResources();
     }
 
-    private function publishesDepedencies()
+    private function publishesDependencies()
     {
         $this->publishes([
             __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
