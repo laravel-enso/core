@@ -71,6 +71,11 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'core-lang');
+
+        $this->publishes([
+            __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
+            __DIR__.'/config/inspiring.php'    => config_path('inspiring.php'),
+        ], 'enso-config');
     }
 
     private function publishesResources()
@@ -85,7 +90,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js/vendor/laravel-enso'),
-        ], 'update');
+        ], 'enso-update');
     }
 
     private function registerMiddleware()
