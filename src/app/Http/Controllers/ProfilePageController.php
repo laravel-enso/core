@@ -11,7 +11,10 @@ class ProfilePageController extends Controller
     public function __invoke(ValidateProfilePageRequest $request, User $user)
     {
         $this->authorize('update-profile', $user);
-        $user->update($request->all());
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+        $user->save();
         flash()->success(__('The Changes have been saved!'));
 
         return back();
