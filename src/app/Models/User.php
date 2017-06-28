@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
@@ -12,7 +13,7 @@ use LaravelEnso\Impersonate\app\Traits\Impersonate;
 
 class User extends Authenticatable
 {
-    use Impersonate, IsActiveTrait, FormattedTimestamps, ActionLogger;
+    use Impersonate, IsActiveTrait, FormattedTimestamps, ActionLogger, Notifiable;
 
     protected $hidden = ['password', 'remember_token'];
 
