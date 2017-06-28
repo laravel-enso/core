@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ValidateProfilePageRequest extends FormRequest
 {
