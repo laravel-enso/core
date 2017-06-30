@@ -144,7 +144,7 @@
 
 		    computed: {
 		    	avatarLink() {
-		    		return '/core/avatars/' + (this.store.user.avatar_id || 'null');
+		    		return '/core/avatars/' + ('{{$user->avatar_id}}'|| 'null');
 		    	},
 		    },
 
