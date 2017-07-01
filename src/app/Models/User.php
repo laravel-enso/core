@@ -19,7 +19,7 @@ class User extends Authenticatable
 
     protected $fillable = ['first_name', 'last_name', 'phone', 'is_active', 'role_id'];
 
-    protected $appends = ['avatar_id', 'full_name', 'preferences'];
+    protected $appends = ['full_name'];
 
     public function owner()
     {
@@ -31,7 +31,7 @@ class User extends Authenticatable
         return $this->hasOne('LaravelEnso\AvatarManager\app\Models\Avatar');
     }
 
-    public function getAvatarIdAttribute()
+    public function getAvatarId()
     {
         $id = $this->avatar ? $this->avatar->id : null;
         unset($this->avatar);
@@ -54,7 +54,7 @@ class User extends Authenticatable
         return $this->hasOne('LaravelEnso\Core\app\Models\Preference');
     }
 
-    public function getPreferencesAttribute()
+    public function getPreferences()
     {
         $preferences = $this->preference ? $this->preference->value : (new DefaultPreferences())->getData();
         unset($this->preference);
@@ -72,9 +72,9 @@ class User extends Authenticatable
         return trim($this->first_name.' '.$this->last_name);
     }
 
-    public function getLanguageAttribute()
+    public function getLanguage()
     {
-        return $this->preferences->global->lang;
+        return $this->getPreferences()->global->lang;
     }
 
     public function sendPasswordResetNotification($token)
