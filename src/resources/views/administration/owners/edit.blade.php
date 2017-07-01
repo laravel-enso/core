@@ -55,6 +55,7 @@
                         edited-label="{{ __("edited") }}">
                         <span slot="comments-manager-title">{{ __("Comments") }}</span>
                         <span slot="comments-manager-load-more">{{ __("more") }}</span>
+                        @include('laravel-enso/core::partials.modal')
                     </comments-manager>
                 @endif
                 @if(!empty(config('documents.documentables')))

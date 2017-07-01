@@ -144,19 +144,12 @@
 
 		    computed: {
 		    	avatarLink() {
-
-		    	    if(this.store.user.id != this.profileUserId) {
-		    	        return '/core/avatars/' + this.profileAvatarId;
-					}
-
 		    		return '/core/avatars/' + (this.store.user.avatar_id || 'null');
 		    	},
 		    },
 
 		    data: {
-		    	store: Store,
-				profileAvatarId: '{{$user->avatar_id}}' || 'null',
-				profileUserId: '{{$user->id}}'
+		    	store: Store
 		    },
 
 		    methods: {
