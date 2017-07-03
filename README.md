@@ -11,13 +11,13 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 ### Includes
 
 - [Action Logger](https://github.com/laravel-enso/ActionLogger)
-- [Avatar Manager](https://github.com/laravel-enso/AvatarManager)
+- [Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>
 - [Charts](https://github.com/laravel-enso/Charts)
 - [Datatable](https://github.com/laravel-enso/DataTable)
 - [File Manager](https://github.com/laravel-enso/FileManager)
 - [Helpers](https://github.com/laravel-enso/Helpers)
 - [History Tracker](https://github.com/laravel-enso/HistoryTracker)
-- [Image Transformer](https://github.com/laravel-enso/ImageTransformer)
+- [Image Transformer](https://github.com/laravel-enso/ImageTransformer) <sup>1</sup>
 - [Impersonate](https://github.com/laravel-enso/Impersonate)
 - [Localisation](https://github.com/laravel-enso/Localisation)
 - [Log manager](https://github.com/laravel-enso/LogManager)
@@ -33,10 +33,20 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 ### Extra plugins
 
 - [Notifications](https://github.com/laravel-enso/Notifications)
-- [Documents Manager](https://github.com/laravel-enso/DocumentsManager)
+- [Documents Manager](https://github.com/laravel-enso/DocumentsManager) <sup>1</sup>
 - [Comments Manager](https://github.com/laravel-enso/CommentsManager)
 - [Data Import](https://github.com/laravel-enso/DataImport)
 
+
+### Notes
+
+<sup>1</sup> In order to more efficiently handle images (optimize, resize, crop), these libraries require a few extra PHP plugins and libraries:
+ * pngquant 
+ * gifsicle 
+ * jpegoptim
+ * php7.1-gd or php-imagick
+ 
+ On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd`
 
 ### Publishes
 
