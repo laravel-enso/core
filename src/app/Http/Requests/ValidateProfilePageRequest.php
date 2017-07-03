@@ -13,8 +13,6 @@ class ValidateProfilePageRequest extends FormRequest
 
     public function rules()
     {
-        $user = $this->route('user');
-
         return [
             'first_name' => 'required|max:50',
             'last_name'  => 'required|max:50',

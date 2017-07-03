@@ -25,6 +25,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
+        'LaravelEnso\ImageTransformer\ImageTransformerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
         'LaravelEnso\Localisation\LocalisationServiceProvider',
         'LaravelEnso\LogManager\LogsServiceProvider',
@@ -110,6 +111,8 @@ class CoreServiceProvider extends ServiceProvider
 
     private function loadDependencies()
     {
+        $this->mergeConfigFrom(__DIR__.'/config/laravel-enso.php', 'laravel-enso');
+        $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'inspiring');
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');

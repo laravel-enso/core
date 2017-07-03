@@ -41,6 +41,8 @@ class MainComposer
     {
         $this->store = new Object();
         $this->store->user = request()->user();
+        $this->store->user->preferences = $this->store->user->getPreferences();
+        $this->store->user->avatarId = $this->store->user->getAvatarId();
         $this->store->languages = Language::all();
         $this->store->themes = (new Themes())->getData();
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');

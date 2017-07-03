@@ -23,6 +23,7 @@
         "laravel-enso/filemanager": "1.1.*",
         "laravel-enso/helpers": "1.1.*",
         "laravel-enso/historytracker": "1.1.*",
+        "laravel-enso/imagetransformer": "^1.1",
         "laravel-enso/impersonate": "1.1.*",
         "laravel-enso/localisation": "1.1.*",
         "laravel-enso/logmanager": "1.1.*",

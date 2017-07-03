@@ -18,8 +18,8 @@
 							alt="User Image">
 						@can('update-profile', $user)
 							<center class="margin-top-xs margin-bottom-xs" v-cloak>
-								<file-uploader v-if="!store.user.avatar_id"
-									@upload-successful="store.user.avatar_id = $event.id"
+								<file-uploader v-if="!store.user.avatarId"
+									@upload-successful="store.user.avatarId = $event.id"
 									url="/core/avatars">
 									<span slot="upload-button">
 										<i class="fa fa-camera btn btn-xs btn-success">
@@ -27,8 +27,8 @@
 									</span>
 								</file-uploader>
 								<i class="btn btn-xs btn-danger"
-									@click="deleteAvatar(store.user.avatar_id)"
-									v-if="store.user.avatar_id">
+									@click="deleteAvatar(store.user.avatarId)"
+									v-if="store.user.avatarId">
 									<i class="fa fa-trash-o btn-danger"></i>
 								</i>
 							</center>
@@ -143,26 +143,25 @@
 		    el: '#app',
 
 		    computed: {
+		    	avatarId() {
+		    		return this.store.user.id === this.profileUser.id
+		    			? this.store.user.avatarId
+		    			: this.profileUser.avatarId;
+		    	},
 		    	avatarLink() {
-
-		    	    if(this.store.user.id != this.profileUserId) {
-		    	        return '/core/avatars/' + this.profileAvatarId;
-					}
-
-		    		return '/core/avatars/' + (this.store.user.avatar_id || 'null');
+		    		return '/core/avatars/' + (this.avatarId || 'null');
 		    	},
 		    },
 
 		    data: {
 		    	store: Store,
-				profileAvatarId: '{{$user->avatar_id}}' || 'null',
-				profileUserId: '{{$user->id}}'
+		    	profileUser: {!! $user !!}
 		    },
 
 		    methods: {
 		        deleteAvatar(id) {
 		            axios.delete('/core/avatars/' + id).then(response => {
-		                this.store.user.avatar_id = null;
+		                this.store.user.avatarId = null;
 		            }).catch(error => {
 		            	this.reportEnsoException(error);
 		            });
