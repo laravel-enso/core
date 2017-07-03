@@ -25,6 +25,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
+        'LaravelEnso\ImageTransformer\ImageTransformerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
         'LaravelEnso\Localisation\LocalisationServiceProvider',
         'LaravelEnso\LogManager\LogsServiceProvider',
