@@ -1,4 +1,5 @@
 # Laravel Enso Core
+[![License](https://poser.pugx.org/laravel-enso/core/license)](https://https://packagist.org/packages/laravel-enso/core)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
 [![StyleCI](https://styleci.io/repos/85807594/shield?branch=master)](https://styleci.io/repos/85807594)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/core/downloads)](https://packagist.org/packages/laravel-enso/core)
@@ -14,7 +15,8 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 - [Datatable](https://github.com/laravel-enso/DataTable)
 - [File Manager](https://github.com/laravel-enso/FileManager)
 - [Helpers](https://github.com/laravel-enso/Helpers)
-- [History Tracker`](https://github.com/laravel-enso/HistoryTracker)
+- [History Tracker](https://github.com/laravel-enso/HistoryTracker)
+- [Image Transformer](https://github.com/laravel-enso/ImageTransformer)
 - [Impersonate](https://github.com/laravel-enso/Impersonate)
 - [Localisation](https://github.com/laravel-enso/Localisation)
 - [Log manager](https://github.com/laravel-enso/LogManager)
