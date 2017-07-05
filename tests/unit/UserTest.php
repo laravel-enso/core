@@ -14,6 +14,7 @@ class UserTest extends TestCase
     private $user;
     private $owner;
     private $role;
+    private $faker;
 
     protected function setUp()
     {
@@ -47,7 +48,6 @@ class UserTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-
         $response = $this->post('/administration/users', $postParams);
 
         $user = User::whereFirstName($postParams['first_name'])->first(['id']);
@@ -65,7 +65,6 @@ class UserTest extends TestCase
         $response = $this->get('/administration/users/'.$user->id.'/edit');
 
         $response->assertStatus(200);
-        // $response->assertViewHas('user', $user);
     }
 
     /** @test */
@@ -124,6 +123,7 @@ class UserTest extends TestCase
         $user = new User($this->postParams());
         $user->email = $this->faker->email;
         $user->owner_id = $this->owner->id;
+        $user->role_id = $this->role->id;
         $user->save();
     }
 

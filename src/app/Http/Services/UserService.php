@@ -42,6 +42,7 @@ class UserService
             $user->fill($this->request->all());
             $user->email = $this->request->get('email');
             $user->owner_id = $this->request->get('owner_id');
+            $user->role_id = $this->request->get('role_id');
             $user->save();
         });
 
@@ -72,7 +73,11 @@ class UserService
 
     public function update(User $user)
     {
-        $user->update($this->request->all());
+        $user->fill($this->request->all());
+        $user->email = $this->request->get('email');
+        $user->owner_id = $this->request->get('owner_id');
+        $user->role_id = $this->request->get('role_id');
+        $user->save();
         flash()->success(__('The Changes have been saved!'));
 
         return back();
