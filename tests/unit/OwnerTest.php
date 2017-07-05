@@ -144,11 +144,11 @@ class OwnerTest extends TestCase
     private function attachUser($owner)
     {
         $user = new User([
-            'first_name'   => $this->faker->firstName,
+            'first_name'                 => $this->faker->firstName,
             'last_name'                  => $this->faker->lastName,
-            'role_id'           => $this->role->id,
-            'phone'                  => $this->faker->phoneNumber,
-            'is_active'               => 1,
+            'role_id'                    => $this->role->id,
+            'phone'                      => $this->faker->phoneNumber,
+            'is_active'                  => 1,
         ]);
         $user->email = $this->faker->email;
         $user->owner_id = $owner->id;
@@ -158,10 +158,10 @@ class OwnerTest extends TestCase
     private function postParams()
     {
         return [
-            'name'   => $this->faker->firstName,
+            'name'                         => $this->faker->firstName,
             'description'                  => $this->faker->sentence,
-            'is_active'               => 1,
-            '_method'               => 'POST',
+            'is_active'                    => 1,
+            '_method'                      => 'POST',
         ];
     }
 }

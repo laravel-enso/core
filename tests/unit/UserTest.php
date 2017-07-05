@@ -130,14 +130,14 @@ class UserTest extends TestCase
     private function postParams()
     {
         return [
-            'first_name'   => $this->faker->firstName,
+            'first_name'                 => $this->faker->firstName,
             'last_name'                  => $this->faker->lastName,
-            'role_id'           => $this->role->id,
-            'phone'                  => $this->faker->phoneNumber,
-            'is_active'               => 1,
-            'email' => $this->faker->email,
-            'owner_id' => $this->owner->id,
-            '_method'               => 'POST',
+            'role_id'                    => $this->role->id,
+            'phone'                      => $this->faker->phoneNumber,
+            'is_active'                  => 1,
+            'email'                      => $this->faker->email,
+            'owner_id'                   => $this->owner->id,
+            '_method'                    => 'POST',
         ];
     }
 }
