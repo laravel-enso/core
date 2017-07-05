@@ -50,7 +50,7 @@ class OwnerTest extends TestCase
 
         $owner = Owner::whereName($postParams['name'])->first(['id']);
 
-        $response->assertRedirect('/administration/owners/' . $owner->id . '/edit');
+        $response->assertRedirect('/administration/owners/'.$owner->id.'/edit');
         $this->hasSessionConfirmation($response);
     }
 
@@ -60,7 +60,7 @@ class OwnerTest extends TestCase
         Owner::create($this->postParams());
         $owner = Owner::orderBy('id', 'desc')->first();
 
-        $response = $this->get('/administration/owners/' . $owner->id . '/edit');
+        $response = $this->get('/administration/owners/'.$owner->id.'/edit');
 
         $response->assertStatus(200);
         // $response->assertViewHas('owner', $owner);
@@ -75,7 +75,7 @@ class OwnerTest extends TestCase
         $data = $owner->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/administration/owners/' . $owner->id, $data);
+        $response = $this->patch('/administration/owners/'.$owner->id, $data);
 
         $response->assertStatus(302);
         $this->hasSessionConfirmation($response);
@@ -89,7 +89,7 @@ class OwnerTest extends TestCase
         Owner::create($postParams);
         $owner = Owner::whereName($postParams['name'])->first();
 
-        $response = $this->delete('/administration/owners/' . $owner->id);
+        $response = $this->delete('/administration/owners/'.$owner->id);
 
         $this->hasJsonConfirmation($response);
         $this->wasDeleted($owner);
@@ -104,7 +104,7 @@ class OwnerTest extends TestCase
         $owner = Owner::whereName($postParams['name'])->first();
         $this->attachUser($owner);
 
-        $response = $this->delete('/administration/owners/' . $owner->id);
+        $response = $this->delete('/administration/owners/'.$owner->id);
 
         $response->assertStatus(302);
         $this->assertTrue($this->hasSessionErrorMessage());
@@ -147,9 +147,9 @@ class OwnerTest extends TestCase
     {
         $user = new User([
             'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'phone' => $this->faker->phoneNumber,
-            'is_active' => 1,
+            'last_name'  => $this->faker->lastName,
+            'phone'      => $this->faker->phoneNumber,
+            'is_active'  => 1,
         ]);
         $user->email = $this->faker->email;
         $user->owner_id = $owner->id;
@@ -160,10 +160,10 @@ class OwnerTest extends TestCase
     private function postParams()
     {
         return [
-            'name' => $this->faker->firstName,
+            'name'        => $this->faker->firstName,
             'description' => $this->faker->sentence,
-            'is_active' => 1,
-            '_method' => 'POST',
+            'is_active'   => 1,
+            '_method'     => 'POST',
         ];
     }
 }
