@@ -46,16 +46,11 @@ class CoreServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->publishesAll();
+        $this->publishesDependencies();
+        $this->publishesResources();
         $this->registerMiddleware();
         $this->loadDependencies();
         $this->registerComposers();
-    }
-
-    private function publishesAll()
-    {
-        $this->publishesDependencies();
-        $this->publishesResources();
     }
 
     private function publishesDependencies()
@@ -96,9 +91,7 @@ class CoreServiceProvider extends ServiceProvider
 
     private function registerMiddleware()
     {
-        $this->app['router']->aliasMiddleware('verifyActiveState', VerifyActiveState::class);
-        $this->app['router']->aliasMiddleware('action-logger', ActionLogger::class);
-        $this->app['router']->aliasMiddleware('impersonate', Impersonate::class);
+        $this->app['router']->aliasMiddleware('verify-active-state', VerifyActiveState::class);
 
         $this->app['router']->middlewareGroup('core', [
             VerifyActiveState::class,

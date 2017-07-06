@@ -51,7 +51,7 @@
 					</div>
 				</div>
 
-				@can('updateProfile', $user)
+				@can('update-profile', $user)
 					<div class="box box-primary">
 						<div class="box-header with-border">
 							<h3 class="box-title"> {{ __("Personal Info") }} </h3>
@@ -82,7 +82,7 @@
 										<small class="text-danger" style="float:right;">
 												{{ $errors->first('email') }}
 										</small>
-										{!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => __("Please Fill")]) !!}
+										{!! Form::email('email', null, ['class' => 'form-control', 'readonly' => 'readonly']) !!}
 									</div>
 								</div>
 								<div class="col-xs-12">
