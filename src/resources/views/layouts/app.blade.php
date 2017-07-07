@@ -13,7 +13,7 @@
 
         @yield('css')
 
-        <link rel="icon" href="/images/favicon.png"/>
+        <link rel="icon" href="/images/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="/css/all.css"/>
         <link rel="stylesheet" type="text/css" href="/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>
