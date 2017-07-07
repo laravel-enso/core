@@ -1,3 +1,4 @@
+<!--h--> 
 # Laravel Enso Core
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
@@ -5,6 +6,7 @@
 [![License](https://poser.pugx.org/laravel-enso/core/license)](https://https://packagist.org/packages/laravel-enso/core)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/core/downloads)](https://packagist.org/packages/laravel-enso/core)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
+<!--/h-->
 
 Main requirement & dependency aggregator for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
@@ -59,6 +61,12 @@ once a newer version is released
 - `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config, 
 once a newer version is released
 
+<!--h-->
 ### Contributions
 
-are welcome
+are welcome. Pull requests are great, but issues are good too.
+
+### License
+
+This package is released under the MIT license.
+<!--/h-->
