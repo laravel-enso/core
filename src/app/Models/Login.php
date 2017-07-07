@@ -15,7 +15,7 @@ class Login extends Model
 
     public function setUserAgentAttribute($value)
     {
-    	$this->attributes['user_agent'] = $value ?
+        $this->attributes['user_agent'] = $value ?
             substr($value, 0, 254) : null;
     }
 }
