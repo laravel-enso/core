@@ -13,7 +13,7 @@ class Login extends Model
         return $this->belongsTo('LaravelEnso\Core\app\Models\User');
     }
 
-    public function setUserAgentAttribute()
+    public function setUserAgentAttribute($value)
     {
     	$this->attributes['user_agent'] = $value ?
             substr($value, 0, 254) : null;
