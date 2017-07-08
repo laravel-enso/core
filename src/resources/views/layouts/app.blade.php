@@ -14,6 +14,10 @@
         @yield('css')
 
         <link rel="icon" href="/images/favicon.ico"/>
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
         <link rel="stylesheet" type="text/css" href="/css/all.css"/>
         <link rel="stylesheet" type="text/css" href="/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="/css/main.css"/>

@@ -1,4 +1,4 @@
-<!--h--> 
+<!--h-->
 # Laravel Enso Core
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
@@ -22,12 +22,12 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 ### Notes
 
 <sup>1</sup> In order to more efficiently handle images (optimize, resize, crop), these libraries require a few extra PHP plugins and libraries:
- * pngquant 
- * gifsicle 
- * jpegoptim
- * php7.1-gd or php-imagick
- 
- On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd`
+- pngquant
+- gifsicle
+- jpegoptim
+- php7.1-gd or php-imagick
+
+On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd`
 
 ### Publishes
 
@@ -35,9 +35,9 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 - `php artisan vendor:publish --tag=core-preferences` - the json preferences file
 - `php artisan vendor:publish --tag=core-lang` - the default lang files
 - `php artisan vendor:publish --tag=core-storage` - the storage folders
-- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components, 
+- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components,
 once a newer version is released
-- `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config, 
+- `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config,
 once a newer version is released
 
 <!--h-->
