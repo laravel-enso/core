@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'prefix' => 'home', 'as' => 'home.',
+    'prefix'     => 'home', 'as' => 'home.',
     'namespace'  => 'LaravelEnso\Core\app\Http\Controllers',
     'middleware' => ['web', 'auth'],
 ], function () {
