@@ -9,7 +9,7 @@ $.extend(true, $.fn.dataTable.defaults, {
     order: [],
     colReorder: true,
     buttons: [
-        { extend: 'pageLength', className: "blahblah" },
+        { extend: 'pageLength' },
         { extend: 'colvis', text: '<i class="fa fa-eye"></i>'},
         { extend: 'copy', text:'<i class="fa fa-clipboard"></i>'},
     ],
