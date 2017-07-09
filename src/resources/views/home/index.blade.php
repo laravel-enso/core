@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway:300,400,600"/>
         <link rel="stylesheet" type="text/css" href="{{ mix("css/app.css") }}"/>
         <link rel="stylesheet" type="text/css" href="{{ mix("css/welcome.css") }}"/>
+        <link rel="icon" href="/images/favicon.ico"/>
     </head>
     <body>
         <center>
