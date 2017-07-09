@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                @if(!empty(config('comments.commentables')))
+                @if(!is_null(config('comments.commentables.owner')))
                     <comments-manager :id="{{ $owner->id }}"
                         type="owner"
                         v-if="{{ $owner }}"
@@ -58,7 +58,7 @@
                         @include('laravel-enso/core::partials.modal')
                     </comments-manager>
                 @endif
-                @if(!empty(config('documents.documentables')))
+                @if(!is_null(config('documents.documentables.owner')))
                     <documents-manager :id="{{ $owner->id }}"
                         :file-size-limit="5000000"
                         type="owner"
