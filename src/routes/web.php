@@ -1,6 +1,14 @@
 <?php
 
 Route::group([
+    'prefix' => 'home', 'as' => 'home.',
+    'namespace'  => 'LaravelEnso\Core\app\Http\Controllers',
+    'middleware' => ['web', 'auth'],
+], function () {
+    Route::get('getTranslations', 'TranslationController')->name('getTranslations');
+});
+
+Route::group([
     'namespace'  => 'LaravelEnso\Core\app\Http\Controllers',
     'middleware' => ['web', 'auth', 'core'],
 ], function () {
