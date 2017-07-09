@@ -14,7 +14,6 @@ class OwnersTableStructure extends TableStructure
             'actionButtons' => __('Actions'),
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
-            'tableClass'    => 'table display',
             'notSearchable' => [1],
             'enumMappings'  => [
                 'is_active' => IsActiveEnum::class,

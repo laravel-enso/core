@@ -15,7 +15,6 @@ class UsersTableStructure extends TableStructure
             'responsivePriority' => [1, 2, 4, 6],
             'headerAlign'        => 'center',
             'bodyAlign'          => 'center',
-            'tableClass'         => 'table display compact',
             'enumMappings'       => [
                 'is_active' => IsActiveEnum::class,
             ],

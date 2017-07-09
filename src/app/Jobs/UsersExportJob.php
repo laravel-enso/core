@@ -7,9 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use LaravelEnso\Core\app\Exports\UsersReport;
+use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Notifications\UsersExportNotification;
 
-class GenerateUsersExportJob implements ShouldQueue
+class UsersExportJob implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
@@ -18,7 +19,7 @@ class GenerateUsersExportJob implements ShouldQueue
     private $fullPathFile;
     private $exporter;
 
-    public function __construct($user)
+    public function __construct(User $user)
     {
         $this->user = $user;
         $this->fileName = __('Users_Report');

@@ -23,8 +23,8 @@ class UsersExportNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->line('You will find attached the requested report.')
-            ->line('Thank you for using our application!')
+            ->line(__('You will find attached the requested report.'))
+            ->line(__('Thank you for using our application!'))
             ->attach($this->file);
     }
 
