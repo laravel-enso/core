@@ -43,7 +43,6 @@ class OwnerService
 
     public function edit(Owner $owner)
     {
-        $owner->roles_list;
         $statuses = (new IsActiveEnum())->getData();
         $roles = Role::pluck('name', 'id');
 
@@ -71,6 +70,6 @@ class OwnerService
 
         $owner->delete();
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 }

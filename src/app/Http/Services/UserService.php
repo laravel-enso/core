@@ -91,6 +91,6 @@ class UserService
 
         $user->delete();
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 }
