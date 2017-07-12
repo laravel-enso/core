@@ -10,13 +10,6 @@
                 {{ __("Create a new User") }}
             </a>
         @endcan
-        @can('access-route', 'export.getUsers')
-            <button id="exportButton"
-                class="btn btn-primary margin-l-2"
-                @click="getExport">
-                {{ __("Export") }}
-            </button>
-        @endcan
         @include('laravel-enso/menumanager::breadcrumbs')
     </section>
     <section class="content">
