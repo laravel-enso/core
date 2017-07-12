@@ -1,12 +1,26 @@
 {
     "name": "laravel-enso/core",
     "description": "Main requirement & dependency aggregator for Laravel Enso",
+    "keywords": [
+        "laravel-enso",
+        "enso-core",
+        "laravel-boilerplate"
+    ],
+    "homepage": "https://github.com/laravel-enso/Core",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mishu",
-            "email": "mishu@xtelecom.ro"
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Mihai Ocneanu",
+            "email": "mihai.ocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -15,7 +29,6 @@
         "laracasts/flash": "^3.0",
         "guzzlehttp/guzzle": "~6.0",
         "laravelcollective/html": "^5.4.1",
-        "maatwebsite/excel": "^2.1",
         "laravel-enso/actionlogger": "1.1.*",
         "laravel-enso/avatarmanager": "1.1.*",
         "laravel-enso/charts": "1.1.*",
@@ -39,6 +52,14 @@
     "autoload": {
         "psr-4": {
             "LaravelEnso\\Core\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\Core\\CoreServiceProvider"
+            ],
+            "aliases": {}
         }
     }
 }

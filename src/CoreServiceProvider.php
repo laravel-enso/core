@@ -17,7 +17,6 @@ class CoreServiceProvider extends ServiceProvider
     private $providers = [
         'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
-        'Maatwebsite\Excel\ExcelServiceProvider',
         'LaravelEnso\Core\AuthServiceProvider',
         'LaravelEnso\Core\EventServiceProvider',
         'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
