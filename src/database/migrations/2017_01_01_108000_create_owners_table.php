@@ -11,7 +11,7 @@ class CreateOwnersTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description')->nullable();
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }

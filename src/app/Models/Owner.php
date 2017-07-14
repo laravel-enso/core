@@ -11,6 +11,8 @@ class Owner extends Model
 
     protected $fillable = ['name', 'description', 'is_active'];
 
+    protected $attributes = ['is_active' => false];
+
     public function users()
     {
         return $this->hasMany('LaravelEnso\Core\app\Models\User');

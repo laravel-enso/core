@@ -19,6 +19,8 @@ class User extends Authenticatable
 
     protected $fillable = ['first_name', 'last_name', 'phone', 'is_active'];
 
+    protected $attributes = ['is_active' => false];
+
     protected $appends = ['full_name'];
 
     public function owner()

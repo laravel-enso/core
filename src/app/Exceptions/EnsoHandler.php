@@ -17,6 +17,7 @@ class EnsoHandler
             return response()->json([
                 'level'   => $this->exception->getLevel(),
                 'message' => $this->exception->getMessage(),
+                'errorBag' => $this->exception->getErrorBag()
             ], $this->exception->getCode());
         }
 
