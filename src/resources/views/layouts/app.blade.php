@@ -47,8 +47,6 @@
 
             @includeIf('laravel-enso/impersonate::stop')
 
-            @includeIf('laravel-enso/core::partials.env')
-
         </div>
 
         <script>window.Store = {!! $store !!};</script>

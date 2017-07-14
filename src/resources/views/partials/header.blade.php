@@ -12,6 +12,9 @@
     <nav class="navbar navbar-static-top">
         <a href="#" id="sidebar-toggle" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         </a>
+        <a href="#">
+            @includeIf('laravel-enso/core::partials.env')
+        </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 @includeIf('laravel-enso/notifications::notifications')

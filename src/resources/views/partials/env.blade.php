@@ -1,6 +1,4 @@
 @if(config('app.env') == 'local')
-	<div class="text-center local-env col-xs-4">
-	    <span class="label bg-orange">{{ __('Local') }}
-	    </span>
-	</div>
+    <span class="badge bg-orange local-env">{{ __('Local') }}
+    </span>
 @endif
