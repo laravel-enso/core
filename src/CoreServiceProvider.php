@@ -23,6 +23,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\AvatarManager\AvatarServiceProvider',
         'LaravelEnso\Charts\ChartsServiceProvider',
         'LaravelEnso\DataTable\DataTableServiceProvider',
+        'LaravelEnso\DbSyncMigrations\DbSyncServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
         'LaravelEnso\ImageTransformer\ImageTransformerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
