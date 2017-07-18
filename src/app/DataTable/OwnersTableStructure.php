@@ -10,29 +10,29 @@ class OwnersTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'crtNo' => __('#'),
+            'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
-            'headerAlign' => 'center',
-            'bodyAlign' => 'center',
+            'headerAlign'   => 'center',
+            'bodyAlign'     => 'center',
             'notSearchable' => [1],
-            'enumMappings' => [
+            'enumMappings'  => [
                 'is_active' => IsActiveEnum::class,
             ],
             'columns' => [
                 0 => [
                     'label' => __('Name'),
-                    'data' => 'name',
-                    'name' => 'name',
+                    'data'  => 'name',
+                    'name'  => 'name',
                 ],
                 1 => [
                     'label' => __('Description'),
-                    'data' => 'description',
-                    'name' => 'description',
+                    'data'  => 'description',
+                    'name'  => 'description',
                 ],
                 2 => [
                     'label' => __('Active'),
-                    'data' => 'is_active',
-                    'name' => 'is_active',
+                    'data'  => 'is_active',
+                    'name'  => 'is_active',
                 ],
             ],
         ];
