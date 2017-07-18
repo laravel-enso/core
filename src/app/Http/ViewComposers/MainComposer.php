@@ -63,6 +63,7 @@ class MainComposer
             'theme'           => __('Theme'),
             'profile'         => __('Profile'),
             'logout'          => __('Logout'),
+            'genericErrorMessage' => __('An error has occurred. The administrator has been notified. We are already working on fixing it.')
         ]);
     }
 }

@@ -121,7 +121,7 @@
 								<div class="timeline-item">
 									<span class="time"><i class="fa fa-clock-o"></i> {{ $event->created_at }} </span>
 									<h3 class="timeline-header no-border">
-										{{ $event->permission->description }}
+										{{ $event->permission ? $event->permission->description : null }}
 									</h3>
 								</div>
 							</li>

@@ -45,6 +45,7 @@ class OwnerService
     {
         $statuses = (new IsActiveEnum())->getData();
         $roles = Role::pluck('name', 'id');
+        $owner->append(['roles_list']);
 
         return view('laravel-enso/core::administration.owners.edit', compact('owner', 'roles', 'statuses'));
     }
