@@ -6,7 +6,7 @@
 <section class="content-header">
     @can('access-route', 'administration.owners.create')
     <a class="btn btn-primary" href="/administration/owners/create">
-        {{ __("Create a new Entity") }}
+        {{ __("Create Entity") }}
     </a>
     @endcan
     @include('laravel-enso/menumanager::breadcrumbs')

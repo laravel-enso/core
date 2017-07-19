@@ -13,7 +13,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border" style="text-align:center">
                         <div class="box-title">
-                            {{ __("Create a new Entity") }}
+                            {{ __("Create Entity") }}
                         </div>
                         <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" data-widget="collapse">
