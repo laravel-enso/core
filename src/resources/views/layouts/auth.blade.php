@@ -21,7 +21,7 @@
 
         @yield('content')
 
-        <script type="text/javascript" src="/js/auth.js""></script>
+        <script type="text/javascript" src="/js/auth.js"></script>
 
         @include('laravel-enso/core::includes.authJavascript')
 
