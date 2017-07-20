@@ -8,7 +8,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        			\Gate::define('update-profile', function ($user, $profileUser) {
+        \Gate::define('update-profile', function ($user, $profileUser) {
             return $user->id === $profileUser->id;
         });
     }
