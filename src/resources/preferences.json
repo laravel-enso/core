@@ -13,42 +13,37 @@
                     "type": "chart",
                     "data": {
                         "type": "bar",
-                        "title": "Bar Chart",
                         "source": "/dashboard/getBarChartData"
-                    },
-                }, {
-                    "type": "chart",
-                    "data": {
-                        "type": "radar",
-                        "title": "Radar Chart",
-                        "source": "/dashboard/getRadarChartData"
-                    },
-                }, {
-                    "type": "chart",
-                    "data": {
-                        "type": "polarArea",
-                        "title": "Polar Chart",
-                        "source": "/dashboard/getPolarChartData"
                     }
                 }, {
                     "type": "chart",
                     "data": {
+                        "type": "radar",
+                        "source": "/dashboard/getRadarChartData"
+                    }
+                }, {
+                    "type": "chart",
+                    "data": {
+                        "type": "polarArea",
+                        "source": "/dashboard/getPolarChartData"
+                    }
+                }],
+                [{
+                    "type": "chart",
+                    "data": {
                         "type": "pie",
-                        "title": "Pie Chart",
                         "source": "/dashboard/getPieChartData"
                     }
                 }, {
                     "type": "chart",
                     "data": {
                         "type": "doughnut",
-                        "title": "Doughnut Chart",
                         "source": "/dashboard/getPieChartData"
                     }
                 }, {
                     "type": "chart",
                     "data": {
                         "type": "line",
-                        "title": "Line Chart",
                         "source": "/dashboard/getLineChartData"
                     }
                 }],
@@ -56,7 +51,6 @@
                     "type": "chart",
                     "data": {
                         "type": "bubble",
-                        "title": "Bubble Chart",
                         "source": "/dashboard/getBubbleChartData"
                     }
                 }]
