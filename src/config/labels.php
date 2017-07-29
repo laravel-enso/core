@@ -1,18 +1,21 @@
 <?php
 
-      return [
-            'generalSettings'     => __('General Settings'),
-            'reset'               => __('Reset'),
-            'language'            => __('Language'),
-            'startTutorial'       => __('Start Tutorial'),
-            'stateSave'           => __('Tables State Save'),
-            'fixed'               => __('Fixed layout'),
-            'collapse'            => __('Menu Collapse'),
-            'theme'               => __('Theme'),
-            'profile'             => __('Profile'),
-            'logout'              => __('Logout'),
-            'genericErrorMessage' => __('An error has occurred. The administrator has been notified. We are already working on fixing it.'),
-            'areYouSure'          => __('Are you sure?'),
-            'cancel'              => __('Cancel'),
-            'ok'                  => __('OK'),
-        ];
+return [
+    'generalSettings' => 'General Settings',
+    'reset' => 'Reset',
+    'language' => 'Language',
+    'startTutorial' => 'Start Tutorial',
+    'stateSave' => 'Tables State Save',
+    'fixed' => 'Fixed layout',
+    'collapse' => 'Menu Collapse',
+    'theme' => 'Theme',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
+    'genericErrorMessage' => 'An error has occurred. The administrator has been notified. We are already working on fixing it.',
+    'areYouSure' => 'Are you sure?',
+    'cancel' => 'Cancel',
+    'ok' => 'OK',
+    'comments' => 'Comments',
+    'more' => 'more',
+    'documents' => 'Documents',
+];
