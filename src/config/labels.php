@@ -18,4 +18,5 @@ return [
     'comments'            => 'Comments',
     'more'                => 'more',
     'documents'           => 'Documents',
+    'totals'              => 'Totals'
 ];
