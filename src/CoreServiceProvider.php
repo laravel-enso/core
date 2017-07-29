@@ -58,7 +58,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
             __DIR__.'/config/inspiring.php'    => config_path('inspiring.php'),
-            __DIR__.'/config/labels.php'    => config_path('labels.php'),
+            __DIR__.'/config/labels.php'       => config_path('labels.php'),
         ], 'core-config');
 
         $this->publishes([
@@ -80,7 +80,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/laravel-enso.php' => config_path('laravel-enso.php'),
             __DIR__.'/config/inspiring.php'    => config_path('inspiring.php'),
-            __DIR__.'/config/labels.php'    => config_path('labels.php'),
+            __DIR__.'/config/labels.php'       => config_path('labels.php'),
         ], 'enso-config');
     }
 

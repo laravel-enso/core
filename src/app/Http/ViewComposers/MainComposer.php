@@ -24,7 +24,7 @@ class MainComposer
     public function compose(View $view)
     {
         $view->with([
-            'menu' => $this->menu,
+            'menu'  => $this->menu,
             'store' => $this->store,
         ]);
     }
@@ -52,7 +52,7 @@ class MainComposer
 
     private function getLabels()
     {
-        return collect(config('labels'))->map(function($label) {
+        return collect(config('labels'))->map(function ($label) {
             return __($label);
         });
     }
