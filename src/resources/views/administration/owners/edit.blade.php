@@ -51,8 +51,7 @@
                 @if(!is_null(config('comments.commentables.owner')))
                     <comments-manager :id="{{ $owner->id }}"
                         type="owner"
-                        v-if="{{ $owner }}"
-                        edited-label="{{ __("edited") }}">
+                        v-if="{{ $owner }}">
                     </comments-manager>
                 @endif
                 @if(!is_null(config('documents.documentables.owner')))
