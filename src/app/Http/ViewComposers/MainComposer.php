@@ -16,6 +16,7 @@ class MainComposer
 
     public function __construct()
     {
+        $this->store = new Object();
         $this->setStore();
         $this->setMenu();
     }
@@ -23,7 +24,7 @@ class MainComposer
     public function compose(View $view)
     {
         $view->with([
-            'menu'  => $this->menu,
+            'menu' => $this->menu,
             'store' => $this->store,
         ]);
     }
@@ -39,7 +40,6 @@ class MainComposer
 
     private function setStore()
     {
-        $this->store = new Object();
         $this->store->user = request()->user();
         $this->store->user->preferences = $this->store->user->getPreferences();
         $this->store->user->avatarId = $this->store->user->getAvatarId();
@@ -52,18 +52,8 @@ class MainComposer
 
     private function getLabels()
     {
-        return collect([
-            'generalSettings'     => __('General Settings'),
-            'reset'               => __('Reset'),
-            'language'            => __('Language'),
-            'startTutorial'       => __('Start Tutorial'),
-            'stateSave'           => __('Tables State Save'),
-            'fixed'               => __('Fixed layout'),
-            'collapse'            => __('Menu Collapse'),
-            'theme'               => __('Theme'),
-            'profile'             => __('Profile'),
-            'logout'              => __('Logout'),
-            'genericErrorMessage' => __('An error has occurred. The administrator has been notified. We are already working on fixing it.'),
-        ]);
+        return collect(config('labels'))->map(function($label) {
+            return __($label);
+        });
     }
 }

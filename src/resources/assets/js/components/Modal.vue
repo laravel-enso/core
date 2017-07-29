@@ -1,4 +1,5 @@
 <template>
+
 	<transition name="modal" v-if="show">
 		<div class="modal-mask">
 			<div class="modal-wrapper">
@@ -14,24 +15,30 @@
 					<div class="modal-body"
 						:style="{ 'max-height': maxHeight ? maxHeight + 'px' : null, 'height' : height ? height + 'px' : null }">
 						<slot name="modal-body">
+							{{ labels.areYouSure }}aa
 						</slot>
 					</div>
 					<div class="modal-footer">
 						<button type="button"
 							class="btn btn-primary"
 							@click="cancelAction">
-							<slot name="modal-cancel"></slot>
+							<slot name="modal-cancel">
+								{{ labels.cancel }}
+							</slot>
 						</button>
 						<button type="button"
 							class="btn btn-primary button-default"
 							@click="commitAction" v-if="!cancelOnly">
-							<slot name="modal-ok"></slot>
+							<slot name="modal-ok">
+								{{ labels.ok }}
+							</slot>
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</transition>
+
 </template>
 
 <script>
@@ -71,11 +78,18 @@
 				default: false
 			}
 		},
+
+		data() {
+			return {
+				labels: Store.labels
+			}
+		},
+
 		methods: {
-			cancelAction: function() {
+			cancelAction() {
 				this.$emit(this.cancelEvent);
 			},
-			commitAction: function() {
+			commitAction() {
 				this.$emit(this.commitEvent);
 			}
 		}
@@ -142,7 +156,7 @@
 		opacity: 0;
 	}
 
-.modal-enter .modal-container,
+	.modal-enter .modal-container,
 	.modal-leave-active .modal-container {
 		-webkit-transform: scale(1.1);
 		transform: scale(1.1);
