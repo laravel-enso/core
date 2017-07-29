@@ -7,29 +7,29 @@
 					<div class="modal-header" v-if="header">
 						<center>
 							<h5>
-								<slot name="modal-header">
+								<slot name="header">
 								</slot>
 							</h5>
 						</center>
 					</div>
 					<div class="modal-body"
 						:style="{ 'max-height': maxHeight ? maxHeight + 'px' : null, 'height' : height ? height + 'px' : null }">
-						<slot name="modal-body">
-							{{ labels.areYouSure }}aa
+						<slot name="body">
+							{{ labels.areYouSure }}
 						</slot>
 					</div>
 					<div class="modal-footer">
 						<button type="button"
 							class="btn btn-primary"
 							@click="cancelAction">
-							<slot name="modal-cancel">
+							<slot name="cancel">
 								{{ labels.cancel }}
 							</slot>
 						</button>
 						<button type="button"
 							class="btn btn-primary button-default"
 							@click="commitAction" v-if="!cancelOnly">
-							<slot name="modal-ok">
+							<slot name="ok">
 								{{ labels.ok }}
 							</slot>
 						</button>
