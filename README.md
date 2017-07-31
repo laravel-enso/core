@@ -32,9 +32,11 @@ On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpe
 ### Publishes
 
 - `php artisan vendor:publish --tag=core-config` - the configuration files
+- `php artisan vendor:publish --tag=core-labels` - the translated labels that are available globally in the front-end, in the Store object
 - `php artisan vendor:publish --tag=core-preferences` - the json preferences file
 - `php artisan vendor:publish --tag=core-lang` - the default lang files
 - `php artisan vendor:publish --tag=core-storage` - the storage folders
+- `php artisan vendor:publish --tag=core-js` - the VueJS components
 - `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components,
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config,
