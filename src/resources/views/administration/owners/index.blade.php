@@ -14,9 +14,8 @@
 <section class="content">
     <div class="row" v-cloak>
         <div class="col-md-12">
-            <data-table source="/administration/owners">
-                <span slot="data-table-title">{{ __("Registered Entities") }}</span>
-                @include('laravel-enso/core::partials.modal')
+            <data-table source="/administration/owners"
+                id="owners">
             </data-table>
         </div>
     </div>

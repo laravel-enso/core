@@ -51,11 +51,7 @@
                 @if(!is_null(config('comments.commentables.owner')))
                     <comments-manager :id="{{ $owner->id }}"
                         type="owner"
-                        v-if="{{ $owner }}"
-                        edited-label="{{ __("edited") }}">
-                        <span slot="comments-manager-title">{{ __("Comments") }}</span>
-                        <span slot="comments-manager-load-more">{{ __("more") }}</span>
-                        @include('laravel-enso/core::partials.modal')
+                        v-if="{{ $owner }}">
                     </comments-manager>
                 @endif
                 @if(!is_null(config('documents.documentables.owner')))
@@ -63,8 +59,6 @@
                         :file-size-limit="5000000"
                         type="owner"
                         v-if="{{ $owner }}">
-                        <span slot="documents-manager-title">{{ __("Documents") }}</span>
-                        @include('laravel-enso/core::partials.modal')
                     </documents-manager>
                 @endif
 
