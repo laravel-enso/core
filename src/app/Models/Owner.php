@@ -3,7 +3,9 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class Owner extends Model
 {
@@ -15,15 +17,15 @@ class Owner extends Model
 
     public function users()
     {
-        return $this->hasMany('LaravelEnso\Core\app\Models\User');
+        return $this->hasMany(User::class);
     }
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\RoleManager\app\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
-    public function getRolesListAttribute()
+    public function getRoleListAttribute()
     {
         return $this->roles->pluck('id')->toArray();
     }

@@ -16,11 +16,6 @@ class OwnerService
         $this->request = $request;
     }
 
-    public function getTableQuery()
-    {
-        return Owner::select(\DB::raw('id as DT_RowId, name, description, is_active'));
-    }
-
     public function index()
     {
         return view('laravel-enso/core::administration.owners.index');
@@ -45,7 +40,7 @@ class OwnerService
     {
         $statuses = (new IsActiveEnum())->getData();
         $roles = Role::pluck('name', 'id');
-        $owner->append(['roles_list']);
+        $owner->append(['roleList']);
 
         return view('laravel-enso/core::administration.owners.edit', compact('owner', 'roles', 'statuses'));
     }
@@ -54,11 +49,11 @@ class OwnerService
     {
         \DB::transaction(function () use ($owner) {
             $owner->update($this->request->all());
-            $rolesList = $this->request->has('roles_list') ? $this->request->get('roles_list') : [];
-            $owner->roles()->sync($rolesList);
+            $roleList = $this->request->has('roleList') ? $this->request->get('roleList') : [];
+            $owner->roles()->sync($roleList);
         });
 
-        flash()->success(__('The Changes have been saved!'));
+        flash()->success(__(config('labels.savedChanges')));
 
         return back();
     }
@@ -66,11 +61,13 @@ class OwnerService
     public function destroy(Owner $owner)
     {
         if ($owner->users()->count()) {
-            throw new \EnsoException(__("The owner can't be deleted because it has users attached"));
+            throw new \EnsoException(
+                __("The owner can't be deleted because it has users attached")
+            );
         }
 
         $owner->delete();
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 }

@@ -5,11 +5,16 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
+use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\Core\app\Models\Login;
+use LaravelEnso\Core\app\Models\Owner;
+use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class User extends Authenticatable
 {
@@ -21,44 +26,39 @@ class User extends Authenticatable
 
     protected $attributes = ['is_active' => false];
 
-    protected $appends = ['full_name'];
+    protected $appends = ['fullName'];
 
     public function owner()
     {
-        return $this->belongsTo('LaravelEnso\Core\app\Models\Owner');
+        return $this->belongsTo(Owner::class);
     }
 
     public function avatar()
     {
-        return $this->hasOne('LaravelEnso\AvatarManager\app\Models\Avatar');
-    }
-
-    public function getAvatarId()
-    {
-        $id = $this->avatar ? $this->avatar->id : null;
-        unset($this->avatar);
-
-        return $id;
+        return $this->hasOne(Avatar::class);
     }
 
     public function role()
     {
-        return $this->belongsTo('LaravelEnso\RoleManager\app\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     public function logins()
     {
-        return $this->hasMany('LaravelEnso\Core\app\Models\Login');
+        return $this->hasMany(Login::class);
     }
 
     public function preference()
     {
-        return $this->hasOne('LaravelEnso\Core\app\Models\Preference');
+        return $this->hasOne(Preference::class);
     }
 
-    public function getPreferences()
+    public function getPreferencesAttribute()
     {
-        $preferences = $this->preference ? $this->preference->value : (new DefaultPreferences())->getData();
+        $preferences = $this->preference
+            ? $this->preference->value
+            : (new DefaultPreferences())->getData();
+
         unset($this->preference);
 
         return $preferences;
@@ -71,12 +71,15 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return trim($this->first_name.' '.$this->last_name);
+        return trim($this->first_name . ' ' . $this->last_name);
     }
 
-    public function getLanguage()
+    public function getAvatarIdAttribute()
     {
-        return $this->getPreferences()->global->lang;
+        $id = $this->avatar ? $this->avatar->id : null;
+        unset($this->avatar);
+
+        return $id;
     }
 
     public function sendPasswordResetNotification($token)

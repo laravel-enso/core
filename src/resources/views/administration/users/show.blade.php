@@ -33,7 +33,7 @@
 								</i>
 							</center>
 						@endcan
-						<h3 class="profile-username text-center"> {{ $user->full_name }} </h3>
+						<h3 class="profile-username text-center"> {{ $user->fullName }} </h3>
 
 						<p class="text-muted text-center"> {{ $user->role->display_name }} </p>
 
@@ -45,7 +45,7 @@
 								<b> {{ __("Logins") }} </b> <a class="pull-right">  {{ $user->logins->count() }}  </a>
 							</li>
 							<li class="list-group-item">
-								<b> {{ __("Actions") }} </b> <a class="pull-right"> {{ $user->action_logs->count() }} </a>
+								<b> {{ __("Actions") }} </b> <a class="pull-right"> {{ $user->actionLogs->count() }} </a>
 							</li>
 						</ul>
 					</div>
@@ -119,7 +119,7 @@
 							<li>
 								<i class="fa fa-user bg-aqua"></i>
 								<div class="timeline-item">
-									<span class="time"><i class="fa fa-clock-o"></i> {{ $event->created_at }} </span>
+									<span class="time"><i class="fa fa-clock-o"></i> {{ $event->since_created }} </span>
 									<h3 class="timeline-header no-border">
 										{{ $event->permission ? $event->permission->description : null }}
 									</h3>
@@ -139,6 +139,7 @@
 @push('scripts')
 
 	<script>
+
 		const vm = new Vue({
 		    el: '#app',
 
@@ -168,6 +169,7 @@
 		        }
 		    }
 		});
+
 	</script>
 
 @endpush

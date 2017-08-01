@@ -8,16 +8,10 @@ class TranslationController extends Controller
 {
     public function __invoke()
     {
-        if (empty(request()->all())) {
-            return [];
-        }
+        return collect(request()->all())->reduce(function ($trans, $label) {
+            $trans[$label] = __($label);
 
-        $translations = [];
-
-        foreach (request()->all() as $key) {
-            $translations[$key] = __($key);
-        }
-
-        return $translations;
+            return $trans;
+        });
     }
 }

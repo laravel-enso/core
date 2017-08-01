@@ -1,32 +1,23 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers;
+namespace LaravelEnso\Core\app\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
-use LaravelEnso\Core\app\DataTable\UsersTableStructure;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 use LaravelEnso\Core\app\Http\Services\UserService;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\DataTable\app\Traits\DataTable;
 
 class UserController extends Controller
 {
-    use DataTable, SendsPasswordResetEmails;
+    use SendsPasswordResetEmails;
 
     private $users;
-
-    protected $tableStructureClass = UsersTableStructure::class;
 
     public function __construct(Request $request)
     {
         $this->users = new UserService($request);
-    }
-
-    public function getTableQuery()
-    {
-        return $this->users->getTableQuery();
     }
 
     public function index()

@@ -16,13 +16,6 @@ class UserService
         $this->request = $request;
     }
 
-    public function getTableQuery()
-    {
-        return User::select(\DB::raw('users.id as DT_RowId, owners.name owner, users.first_name, users.last_name, users.phone, users.email, roles.name role, users.is_active'))
-            ->join('owners', 'users.owner_id', '=', 'owners.id')
-            ->join('roles', 'users.role_id', '=', 'roles.id');
-    }
-
     public function index()
     {
         return view('laravel-enso/core::administration.users.index');
@@ -78,7 +71,7 @@ class UserService
         $user->owner_id = $this->request->get('owner_id');
         $user->role_id = $this->request->get('role_id');
         $user->save();
-        flash()->success(__('The Changes have been saved!'));
+        flash()->success(__(config('labels.savedChanges')));
 
         return back();
     }
@@ -91,6 +84,6 @@ class UserService
 
         $user->delete();
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 }

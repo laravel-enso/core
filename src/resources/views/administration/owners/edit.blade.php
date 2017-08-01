@@ -32,12 +32,12 @@
                         <div class="row">
                             @include('laravel-enso/core::administration.owners.form')
                             <div class="col-sm-6">
-                                <div class="form-group{{ $errors->has('roles_list') ? ' has-error' : '' }}">
-                                    {!! Form::label('roles_list', __('Roles')) !!}
+                                <div class="form-group{{ $errors->has('roleList') ? ' has-error' : '' }}">
+                                    {!! Form::label('roleList', __('Roles')) !!}
                                     <small class="text-danger" style="float:right;">
-                                        {{ $errors->first('roles_list') }}
+                                        {{ $errors->first('roleList') }}
                                     </small>
-                                    {!! Form::select('roles_list[]', $roles, null, ['class' => 'form-control select', 'multiple' => 'multiple']) !!}
+                                    {!! Form::select('roleList[]', $roles, null, ['class' => 'form-control select', 'multiple' => 'multiple']) !!}
                                 </div>
                             </div>
                         </div>
@@ -60,6 +60,12 @@
                         type="owner"
                         v-if="{{ $owner }}">
                     </documents-manager>
+                @endif
+                @if(!is_null(config('contacts.contactables.owner')))
+                    <contacts :id="{{ $owner->id }}"
+                        type="owner"
+                        v-if="{{ $owner }}">
+                    </contacts>
                 @endif
 
             </div>

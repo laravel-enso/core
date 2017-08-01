@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Core\app\Models\User;
 
 class Preference extends Model
 {
@@ -14,6 +15,6 @@ class Preference extends Model
 
     public function user()
     {
-        return $this->belongsTo('LaravelEnso\Core\app\Models\User');
+        return $this->belongsTo(User::class);
     }
 }

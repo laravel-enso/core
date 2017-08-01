@@ -8,7 +8,7 @@ class EnsoException extends Exception
 {
     private $level;
 
-    public function __construct(string $message, string $level = 'error', array $errorBag = [], int $code = 400)
+    public function __construct(string $message, string $level = 'error', array $errorBag = [], int $code = 400) //fixme
     {
         $this->level = $level;
         $this->errorBag = $errorBag;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers;
+namespace LaravelEnso\Core\app\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Http\Requests\ValidateProfilePageRequest;
@@ -11,11 +11,8 @@ class ProfilePageController extends Controller
     public function __invoke(ValidateProfilePageRequest $request, User $user)
     {
         $this->authorize('update-profile', $user);
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->phone = $request->phone;
-        $user->save();
-        flash()->success(__('The Changes have been saved!'));
+        $user->update($request->all());
+        flash()->success(__(config('labels.savedChanges')));
 
         return back();
     }

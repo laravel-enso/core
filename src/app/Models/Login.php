@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Core\app\Models\User;
 
 class Login extends Model
 {
@@ -10,12 +11,13 @@ class Login extends Model
 
     public function user()
     {
-        return $this->belongsTo('LaravelEnso\Core\app\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function setUserAgentAttribute($value)
     {
-        $this->attributes['user_agent'] = $value ?
-            substr($value, 0, 254) : null;
+        $this->attributes['user_agent'] = $value
+            ? substr($value, 0, 254)
+            : null;
     }
 }

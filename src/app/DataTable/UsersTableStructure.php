@@ -10,11 +10,12 @@ class UsersTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
+            'tableName'          => __('Registered Users'),
             'crtNo'              => __('#'),
             'actionButtons'      => __('Actions'),
             'responsivePriority' => [1, 2, 4, 6],
             'headerAlign'        => 'center',
-            'tableName'          => __('Registered Users'),
+            'totals' => [3],
             'bodyAlign'          => 'center',
             'enumMappings'       => [
                 'is_active' => IsActiveEnum::class,

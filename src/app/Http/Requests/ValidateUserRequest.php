@@ -16,7 +16,9 @@ class ValidateUserRequest extends FormRequest
     {
         $user = $this->route('user');
         $emailUnique = Rule::unique('users', 'email');
-        $emailUnique = ($this->_method == 'PATCH') ? $emailUnique->ignore($user->id) : $emailUnique;
+        $emailUnique = (request()->getMethod() == 'PATCH')
+            ? $emailUnique->ignore($user->id)
+            : $emailUnique;
 
         return [
             'first_name' => 'required|max:50',

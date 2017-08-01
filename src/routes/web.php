@@ -24,36 +24,38 @@ Route::middleware(['web', 'auth', 'core'])
 
         Route::prefix('administration')->as('administration.')
             ->group(function () {
-                Route::prefix('owners')->as('owners.')
+                Route::namespace ('Owner')
+                    ->prefix('owners')->as('owners.')
                     ->group(function () {
-                        Route::get('initTable', 'OwnerController@initTable')
+                        Route::get('initTable', 'OwnerTableController@initTable')
                             ->name('initTable');
-                        Route::get('getTableData', 'OwnerController@getTableData')
+                        Route::get('getTableData', 'OwnerTableController@getTableData')
                             ->name('getTableData');
-                        Route::get('exportExcel', 'OwnerController@exportExcel')
+                        Route::get('exportExcel', 'OwnerTableController@exportExcel')
                             ->name('exportExcel');
 
-                        Route::get('getOptionsList', 'OwnerController@getOptionsList')
+                        Route::get('getOptionsList', 'OwnerSelectController@getOptionsList')
                             ->name('getOptionsList');
                     });
 
-                Route::resource('owners', 'OwnerController', ['except' => ['show']]);
+                Route::resource('owners', 'Owner\OwnerController', ['except' => ['show']]);
 
-                Route::prefix('users')->as('users.')
+                Route::namespace ('User')
+                    ->prefix('users')->as('users.')
                     ->group(function () {
-                        Route::get('initTable', 'UserController@initTable')
+                        Route::get('initTable', 'UserTableController@initTable')
                             ->name('initTable');
-                        Route::get('getTableData', 'UserController@getTableData')
+                        Route::get('getTableData', 'UserTableController@getTableData')
                             ->name('getTableData');
-                        Route::get('exportExcel', 'UserController@exportExcel')
+                        Route::get('exportExcel', 'UserTableController@exportExcel')
                             ->name('exportExcel');
-                        // Route::post('setTableData', 'UserController@setTableData')
+                        // Route::post('setTableData', 'UserTableController@setTableData')
                         //     ->name('setTableData');
 
                         Route::patch('updateProfile/{user}', 'ProfilePageController')
                             ->name('updateProfile');
                     });
 
-                Route::resource('users', 'UserController');
+                Route::resource('users', 'User\UserController');
             });
     });

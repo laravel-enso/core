@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 
-class PreferencesController extends Controller
+class PreferencesController extends Controller //fixme. We need dedicated controllers for global / local
 {
     private $request;
 

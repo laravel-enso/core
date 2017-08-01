@@ -11,8 +11,14 @@ class BreadcrumbsComposer
 
     public function __construct()
     {
-        $breadcrumbsBuilder = new BreadcrumbsBuilder(request()->user()->role->menus->sortBy('order'));
-        $this->breadcrumbs = $breadcrumbsBuilder->get();
+        $builder = new BreadcrumbsBuilder(
+            request()->user()->role
+                ->menus()
+                ->orderBy('order')
+                ->get()
+        );
+
+        $this->breadcrumbs = $builder->get();
     }
 
     public function compose(View $view)

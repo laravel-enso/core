@@ -21,6 +21,12 @@
             "email": "mihai.ocneanu@gmail.com",
             "homepage": "https://laravel-enso.com",
             "role": "Developer"
+        },
+        {
+            "name": "Ionut Pirvulescu",
+            "email": "ionut.pirvulescu1@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -47,6 +53,7 @@
         "laravel-enso/rolemanager": "1.1.*",
         "laravel-enso/select": "1.1.*",
         "laravel-enso/structuremanager": "1.1.*",
+        "laravel-enso/testhelper": "1.0.*",
         "laravel-enso/trackwho": "1.1.*",
         "laravel-enso/tutorialmanager": "1.1.*"
     },
