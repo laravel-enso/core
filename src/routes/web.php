@@ -24,7 +24,7 @@ Route::middleware(['web', 'auth', 'core'])
 
         Route::prefix('administration')->as('administration.')
             ->group(function () {
-                Route::namespace ('Owner')
+                Route::namespace('Owner')
                     ->prefix('owners')->as('owners.')
                     ->group(function () {
                         Route::get('initTable', 'OwnerTableController@initTable')
@@ -40,7 +40,7 @@ Route::middleware(['web', 'auth', 'core'])
 
                 Route::resource('owners', 'Owner\OwnerController', ['except' => ['show']]);
 
-                Route::namespace ('User')
+                Route::namespace('User')
                     ->prefix('users')->as('users.')
                     ->group(function () {
                         Route::get('initTable', 'UserTableController@initTable')

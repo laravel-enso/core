@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
 use LaravelEnso\RoleManager\app\Models\Role;
 

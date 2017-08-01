@@ -43,10 +43,10 @@ class MainComposer
         $this->store->user = request()->user();
         $this->store->user->append(['avatarId', 'preferences']);
         $this->store->languages = Language::all();
-        $this->store->themes    = (new Themes())->getData();
+        $this->store->themes = (new Themes())->getData();
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');
-        $this->store->labels    = $this->getLabels();
-        $this->store->route     = request()->route()->getName();
+        $this->store->labels = $this->getLabels();
+        $this->store->route = request()->route()->getName();
     }
 
     private function getLabels()

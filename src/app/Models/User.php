@@ -7,9 +7,6 @@ use Illuminate\Notifications\Notifiable;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
-use LaravelEnso\Core\app\Models\Login;
-use LaravelEnso\Core\app\Models\Owner;
-use LaravelEnso\Core\app\Models\Preference;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
@@ -71,7 +68,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return trim($this->first_name . ' ' . $this->last_name);
+        return trim($this->first_name.' '.$this->last_name);
     }
 
     public function getAvatarIdAttribute()
