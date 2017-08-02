@@ -51,6 +51,8 @@ Route::middleware(['web', 'auth', 'core'])
                             ->name('exportExcel');
                         // Route::post('setTableData', 'UserTableController@setTableData')
                         //     ->name('setTableData');
+                        Route::get('getOptionsList', 'UserSelectController@getOptionsList')
+                            ->name('getOptionsList');
 
                         Route::patch('updateProfile/{user}', 'ProfilePageController')
                             ->name('updateProfile');

@@ -12,6 +12,7 @@ class CreateStructureForUsers extends StructureMigration
         ['name' => 'administration.users.initTable', 'description' => 'Init table for users', 'type' => 0, 'default' => false],
         ['name' => 'administration.users.getTableData', 'description' => 'Get table data for users', 'type' => 0, 'default' => false],
         ['name' => 'administration.users.exportExcel', 'description' => 'Export excel for users', 'type' => 0, 'default' => false],
+        ['name' => 'administration.users.getOptionsList', 'description' => 'Get options for vue-select', 'type' => 0, 'default' => false],
         // ['name' => 'administration.users.setTableData', 'description' => 'Set data for users', 'type' => 1, 'default' => false],
         ['name' => 'administration.users.create', 'description' => 'Create user', 'type' => 1, 'default' => false],
         ['name' => 'administration.users.edit', 'description' => 'Edit existing user', 'type' => 1, 'default' => false],
