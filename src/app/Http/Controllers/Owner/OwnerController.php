@@ -19,7 +19,7 @@ class OwnerController extends Controller
 
     public function index()
     {
-        return $this->owners->index();
+        return view('laravel-enso/core::administration.owners.index');
     }
 
     public function create()

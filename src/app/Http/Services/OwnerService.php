@@ -16,11 +16,6 @@ class OwnerService
         $this->request = $request;
     }
 
-    public function index()
-    {
-        return view('laravel-enso/core::administration.owners.index');
-    }
-
     public function create()
     {
         $statuses = (new IsActiveEnum())->getData();

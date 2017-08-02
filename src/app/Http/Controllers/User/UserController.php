@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->users->index();
+        return view('laravel-enso/core::administration.users.index');
     }
 
     public function create()

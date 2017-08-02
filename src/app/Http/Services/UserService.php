@@ -16,11 +16,6 @@ class UserService
         $this->request = $request;
     }
 
-    public function index()
-    {
-        return view('laravel-enso/core::administration.users.index');
-    }
-
     public function create()
     {
         $roles = [];
