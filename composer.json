@@ -43,7 +43,7 @@
         "laravel-enso/filemanager": "^1.2",
         "laravel-enso/helpers": "^1.2",
         "laravel-enso/historytracker": "^1.2",
-        "laravel-enso/imagetransformer": "^^1",
+        "laravel-enso/imagetransformer": "^1.2",
         "laravel-enso/impersonate": "^1.2",
         "laravel-enso/localisation": "^1.2",
         "laravel-enso/logmanager": "^1.2",
