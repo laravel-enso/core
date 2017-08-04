@@ -39,4 +39,5 @@ return [
     'markAllAsRead'       => 'Mark All Read',
     'clearAll'            => 'Clear All',
     'notAuthorized'       => 'You are not authorized to perform this action',
+    'observations'        => 'Observations',
 ];

@@ -49,17 +49,17 @@
                 </div>
 
                 @if(!is_null(config('comments.commentables.owner')))
-                    <comments-manager :id="{{ $owner->id }}"
+                    <comments :id="{{ $owner->id }}"
                         type="owner"
                         v-if="{{ $owner }}">
-                    </comments-manager>
+                    </comments>
                 @endif
                 @if(!is_null(config('documents.documentables.owner')))
-                    <documents-manager :id="{{ $owner->id }}"
+                    <documents :id="{{ $owner->id }}"
                         :file-size-limit="5000000"
                         type="owner"
                         v-if="{{ $owner }}">
-                    </documents-manager>
+                    </documents>
                 @endif
                 @if(!is_null(config('contacts.contactables.owner')))
                     <contacts :id="{{ $owner->id }}"
@@ -68,6 +68,60 @@
                     </contacts>
                 @endif
 
+                @if(false)
+                    <box theme="primary"
+                        icon="fa fa-lightbulb-o"
+                        title="Box Component"
+                        border open collapsible
+                        removable refresh search
+                        solid footer
+                        :overlay="loading"
+                        @refresh="refresh()"
+                        :badge="5">
+                        <span slot="btn-box-tool">
+                            <button class="btn btn-box-tool btn-sm"
+                                @click="customAction()">
+                                <i class="fa fa-handshake-o"></i>
+                            </button>
+                        </span>
+                        Box Body
+                        <span slot="footer">Footer</span>
+                    </box>
+
+                    <small-box icon="fa fa-shopping-cart"
+                        theme="bg-olive"
+                        title="Title"
+                        body="Body">
+                    </small-box>
+
+                    <info-box theme="bg-red"
+                        icon="fa fa-star-o"
+                        text="What about this"
+                        number="77,430"
+                        progress="75"
+                        description="Super progress">
+                    </info-box>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <box-widget theme="bg-orange"
+                                :image="avatarLink"
+                                name="First and Last Name"
+                                position="Developer"
+                                :items="[{'label': 'Projects', 'value': 12, 'badge': 'bg-blue'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}]">
+                            </box-widget>
+                        </div>
+                    </div>
+
+                    <user-widget
+                        theme="bg-blue"
+                        :avatar="avatarLink"
+                        background="/images/pic.jpg"
+                        name="First and Last Name"
+                        position="Developer"
+                        :items="[{'label': 'Themes', 'value': 21}, {'label': 'Tests', 'value': 56}, {'label': 'Projects', 'value': 12},{'label': 'Projects', 'value': 12}]">
+                    </user-widget>
+                @endif
             </div>
         </div>
     </section>
@@ -79,7 +133,21 @@
     <script>
 
         const vm = new Vue({
-            el: '#app'
+            el: '#app',
+
+            data: {
+                loading: false,
+                avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null')
+            },
+
+            methods: {
+                customAction() {
+                    alert('pressed');
+                },
+                refresh() {
+                    alert('refresh');
+                }
+            }
         });
 
     </script>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,12 +20,9 @@
         <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
         <link rel="stylesheet" type="text/css" href="{{ mix('css/all.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/enso.css') }}"/>
         <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}"/>
-        <link rel="stylesheet" type="text/css" href="{{ mix('css/main.css') }}"/>
 
-    <!--    <link rel="stylesheet" type="text/css" href="/css/all.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/app.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/main.css"/> -->
     </head>
 
     <body class="sidebar-mini  skin-{{ $store->user->preferences->global->theme }} {{ $store->user->preferences->global->collapsedSidebar ? 'sidebar-collapse' : null }} {{ $store->user->preferences->global->fixedHeader ? 'fixed' : null }}">

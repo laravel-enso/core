@@ -12,7 +12,7 @@
 
         <link rel = "icon" href = "/images/favicon.ico"/>
         <link rel="stylesheet" type="text/css" href="/css/app.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/enso.css"/>
         <link rel="stylesheet" type="text/css" href="/css/auth.css"/>
     </head>
 
