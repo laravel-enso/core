@@ -11,9 +11,9 @@
         @include('laravel-enso/core::includes.authCss')
 
         <link rel = "icon" href = "/images/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="/css/enso.css"/>
         <link rel="stylesheet" type="text/css" href="/css/auth.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/particles.css"/>
     </head>
 
     <body class="hold-transition login-page">
