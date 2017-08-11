@@ -14,6 +14,6 @@ class OwnerSelectController extends Controller
 
     public function __construct()
     {
-    	$this->selectQuery = Owner::active();
+        $this->selectQuery = Owner::active();
     }
 }

@@ -6,7 +6,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
-use LaravelEnso\Core\app\Http\ViewComposers\BreadcrumbsComposer;
 use LaravelEnso\Core\app\Http\ViewComposers\MainComposer;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;

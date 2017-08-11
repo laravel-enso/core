@@ -31,14 +31,14 @@ class OwnerService
     public function store(Owner $owner)
     {
         \DB::transaction(function () use (&$owner) {
-            $owner    = $owner->create($this->request->all());
+            $owner = $owner->create($this->request->all());
             $roleList = $this->request->get('roleList');
             $owner->roles()->sync($roleList);
         });
 
         return [
             'message'  => __('The entity was created!'),
-            'redirect' => '/administration/owners/' . $owner->id . '/edit',
+            'redirect' => '/administration/owners/'.$owner->id.'/edit',
         ];
     }
 
@@ -49,7 +49,7 @@ class OwnerService
         $form = (new FormBuilder(__DIR__.'/../../Forms/owner.json', $owner))
             ->setAction('PATCH')
             ->setTitle('Edit Owner')
-            ->setUrl('/administration/owners/' . $owner->id)
+            ->setUrl('/administration/owners/'.$owner->id)
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
 

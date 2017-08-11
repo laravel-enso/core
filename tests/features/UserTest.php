@@ -55,7 +55,7 @@ class UserTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
             'message' => 'The user was created!',
-            'redirect'=>'/administration/users/'.$user->id.'/edit'
+            'redirect'=> '/administration/users/'.$user->id.'/edit',
         ]);
     }
 

@@ -39,7 +39,7 @@ class UserService
 
         return [
             'message'  => __('The user was created!'),
-            'redirect' => '/administration/users/' . $user->id . '/edit',
+            'redirect' => '/administration/users/'.$user->id.'/edit',
         ];
     }
 
@@ -59,7 +59,7 @@ class UserService
     {
         $form = (new FormBuilder(__DIR__.'/../../Forms/user.json', $user))
             ->setAction('PATCH')
-            ->setUrl('/administration/users/' . $user->id)
+            ->setUrl('/administration/users/'.$user->id)
             ->getData();
 
         return view('laravel-enso/core::administration.users.edit', compact('form'));

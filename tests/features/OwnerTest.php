@@ -53,7 +53,7 @@ class OwnerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
             'message' => 'The entity was created!',
-            'redirect'=>'/administration/owners/'.$owner->id.'/edit'
+            'redirect'=> '/administration/owners/'.$owner->id.'/edit',
         ]);
     }
 
