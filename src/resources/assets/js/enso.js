@@ -1,6 +1,8 @@
-window.Laravel = { "csrfToken": document.head.querySelector("[name=csrf-token]").content };
-window.eventHub = new Vue();
+window.Laravel = {
+    "csrfToken": document.head.querySelector("[name=csrf-token]").content
+};
 
+window.eventHub = new Vue();
 
 window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');
 
@@ -27,15 +29,15 @@ Vue.filter('timeFromNow', value => {
 });
 
 Vue.directive('select-on-focus', {
-    inserted: function (el) {
-        el.addEventListener('focus',function(el){
+    inserted: function(el) {
+        el.addEventListener('focus', function(el) {
             this.select();
         });
     }
 });
 
 Vue.directive('focus', {
-    inserted: function (el) {
+    inserted: function(el) {
         el.focus();
     }
 });
@@ -46,7 +48,6 @@ Vue.mixin({
             if (error.response && error.response.data.level) {
                 return toastr[error.response.data.level](error.response.data.message);
             }
-
             throw error;
         }
     }
@@ -58,14 +59,14 @@ Array.prototype.unique = function() {
     });
 };
 
-Array.prototype.pluck = function(key) {
+Array.prototype.pluck = function(value) {
     return this.map(object => {
-        return object[key];
+        return object[value];
     });
 };
 
 Array.prototype.insert = function(index, item) {
-  this.splice(index, 0, item);
+    this.splice(index, 0, item);
 };
 
 String.prototype.capitalizeFirst = function() {
@@ -85,12 +86,13 @@ Vue.component('smallBox', require('./vendor/laravel-enso/components/vueadminlte/
 Vue.component('infoBox', require('./vendor/laravel-enso/components/vueadminlte/InfoBox.vue'));
 Vue.component('boxWidget', require('./vendor/laravel-enso/components/vueadminlte/BoxWidget.vue'));
 Vue.component('userWidget', require('./vendor/laravel-enso/components/vueadminlte/UserWidget.vue'));
+Vue.component('page', require('./vendor/laravel-enso/components/vueadminlte/Page.vue'));
+Vue.component('breadcrumbs', require('./vendor/laravel-enso/components/vueadminlte/Breadcrumbs.vue'));
 
 Vue.component('modal', require('./vendor/laravel-enso/components/enso/Modal.vue'));
 Vue.component('vueFilter', require('./vendor/laravel-enso/components/enso/VueFilter.vue'));
 Vue.component('dashboard', require('./vendor/laravel-enso/components/enso/Dashboard.vue'));
 Vue.component('typeahead', require('./vendor/laravel-enso/components/enso/Typeahead.vue'));
-Vue.component('inputClear', require('./vendor/laravel-enso/components/enso/InputClear.vue'));
 Vue.component('datepicker', require('./vendor/laravel-enso/components/enso/Datepicker.vue'));
 Vue.component('timepicker', require('./vendor/laravel-enso/components/enso/Timepicker.vue'));
 
@@ -106,5 +108,7 @@ Vue.component('checkboxManager', require('./vendor/laravel-enso/components/rolem
 Vue.component('reorderableMenu', require('./vendor/laravel-enso/components/menumanager/ReorderableMenu.vue'));
 
 Vue.component('fileUploader', require('./vendor/laravel-enso/components/filemanager/FileUploader.vue'));
+
+Vue.component('vueForm', require('./vendor/laravel-enso/components/vueforms/VueForm.vue'));
 
 Vue.component('draggable', require('vuedraggable'));
