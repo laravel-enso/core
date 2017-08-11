@@ -54,7 +54,7 @@ class OwnerTest extends TestCase
             ->assertJsonFragment([
             'message' => 'The entity was created!',
             'redirect'=> '/administration/owners/'.$owner->id.'/edit',
-        ]);
+            ]);
     }
 
     /** @test */
@@ -78,7 +78,7 @@ class OwnerTest extends TestCase
         $data = $owner->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/administration/owners/'.$owner->id, $data)
+        $this->patch('/administration/owners/'.$owner->id, $data)
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -129,11 +129,6 @@ class OwnerTest extends TestCase
     private function wasNotDeleted($owner)
     {
         return $this->assertNotNull(Owner::whereName($owner->name)->first());
-    }
-
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
     }
 
     private function hasJsonConfirmation($response)

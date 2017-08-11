@@ -56,7 +56,7 @@ class UserTest extends TestCase
             ->assertJsonFragment([
             'message' => 'The user was created!',
             'redirect'=> '/administration/users/'.$user->id.'/edit',
-        ]);
+            ]);
     }
 
     /** @test */
@@ -79,7 +79,7 @@ class UserTest extends TestCase
         $data = $user->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/administration/users/'.$user->id, $data)
+        $this->patch('/administration/users/'.$user->id, $data)
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -109,11 +109,6 @@ class UserTest extends TestCase
     private function wasDeleted($user)
     {
         return $this->assertNull(User::whereFirstName($user->first_name)->first());
-    }
-
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
     }
 
     private function hasJsonConfirmation($response)
