@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Helpers\Classes\Object;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\MenuManager\app\Classes\BreadcrumbsBuilder;
 use LaravelEnso\MenuManager\app\Classes\MenuGenerator;
 use LaravelEnso\MenuManager\app\Models\Menu;
 
@@ -47,6 +48,7 @@ class MainComposer
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');
         $this->store->labels = $this->getLabels();
         $this->store->route = request()->route()->getName();
+        $this->store->breadcrumbs = $this->getBreadcrumbs();
     }
 
     private function getLabels()
@@ -54,5 +56,17 @@ class MainComposer
         return collect(config('labels'))->map(function ($label) {
             return __($label);
         });
+    }
+
+    private function getBreadcrumbs()
+    {
+        $builder = new BreadcrumbsBuilder(
+            request()->user()->role
+                ->menus()
+                ->orderBy('order')
+                ->get()
+        );
+
+        return $builder->get();
     }
 }

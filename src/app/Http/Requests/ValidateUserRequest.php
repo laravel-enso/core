@@ -23,9 +23,9 @@ class ValidateUserRequest extends FormRequest
         return [
             'first_name' => 'required|max:50',
             'last_name'  => 'required|max:50',
-            'is_active'  => 'required|in:"1","0"',
-            'role_id'    => 'required|numeric|exists:roles,id',
-            'owner_id'   => 'required|numeric|exists:owners,id',
+            'is_active'  => 'boolean',
+            'role_id'    => 'required|exists:roles,id',
+            'owner_id'   => 'required|exists:owners,id',
             'phone'      => 'max:30',
             'email'      => [
                 'email',

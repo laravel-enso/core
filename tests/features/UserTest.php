@@ -52,8 +52,11 @@ class UserTest extends TestCase
 
         $user = User::whereFirstName($postParams['first_name'])->first(['id']);
 
-        $response->assertRedirect('/administration/users/'.$user->id.'/edit');
-        $this->hasSessionConfirmation($response);
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The user was created!',
+            'redirect'=>'/administration/users/'.$user->id.'/edit'
+        ]);
     }
 
     /** @test */
@@ -76,10 +79,10 @@ class UserTest extends TestCase
         $data = $user->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/administration/users/'.$user->id, $data);
+        $response = $this->patch('/administration/users/'.$user->id, $data)
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $response->assertStatus(302);
-        $this->hasSessionConfirmation($response);
         $this->assertTrue($this->wasUpdated());
     }
 

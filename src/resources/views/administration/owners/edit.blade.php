@@ -4,71 +4,45 @@
 
 @section('content')
 
-    <section class="content-header">
-        @can('access-route', 'administration.owners.create')
-            <a class="btn btn-primary" href="/administration/owners/create">
-                {{ __("Create Entity") }}
-            </a>
-        @endcan
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="box box-primary">
-                    <div class="box-header with-border" style="text-align:center">
-                        <div class="box-title">
-                            {{ __("Edit") }}
-                        </div>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus">
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        {!! Form::model($owner, ['method' => 'PATCH', 'url' => '/administration/owners/'.$owner->id]) !!}
-                        <div class="row">
-                            @include('laravel-enso/core::administration.owners.form')
-                            <div class="col-sm-6">
-                                <div class="form-group{{ $errors->has('roleList') ? ' has-error' : '' }}">
-                                    {!! Form::label('roleList', __('Roles')) !!}
-                                    <small class="text-danger" style="float:right;">
-                                        {{ $errors->first('roleList') }}
-                                    </small>
-                                    {!! Form::select('roleList[]', $roles, null, ['class' => 'form-control select', 'multiple' => 'multiple']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <center>
-                            {!! Form::submit(__("Save"), ['class' => 'btn btn-primary']) !!}
-                        </center>
-                        {!! Form::close() !!}
-                    </div>
+    <page v-cloak>
+        <span slot="header">
+            <div class="col-xs-12">
+                @can('access-route', 'administration.owners.create')
+                    <a class="btn btn-primary" href="/administration/owners/create">
+                        {{ __("Create Entity") }}
+                    </a>
+                @endcan
+            </div>
+        </span>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <vue-form :data="form">
+            </vue-form>
+
+            @if(true)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    @if(!is_null(config('comments.commentables.owner')))
+                        <comments :id="{{ $owner->id }}"
+                            type="owner"
+                            v-if="{{ $owner }}">
+                        </comments>
+                    @endif
+                    @if(!is_null(config('documents.documentables.owner')))
+                        <documents :id="{{ $owner->id }}"
+                            :file-size-limit="5000000"
+                            type="owner"
+                            v-if="{{ $owner }}">
+                        </documents>
+                    @endif
+                    @if(!is_null(config('contacts.contactables.owner')))
+                        <contacts :id="{{ $owner->id }}"
+                            type="owner"
+                            v-if="{{ $owner }}">
+                        </contacts>
+                    @endif
                 </div>
-
-                @if(!is_null(config('comments.commentables.owner')))
-                    <comments :id="{{ $owner->id }}"
-                        type="owner"
-                        v-if="{{ $owner }}">
-                    </comments>
-                @endif
-                @if(!is_null(config('documents.documentables.owner')))
-                    <documents :id="{{ $owner->id }}"
-                        :file-size-limit="5000000"
-                        type="owner"
-                        v-if="{{ $owner }}">
-                    </documents>
-                @endif
-                @if(!is_null(config('contacts.contactables.owner')))
-                    <contacts :id="{{ $owner->id }}"
-                        type="owner"
-                        v-if="{{ $owner }}">
-                    </contacts>
-                @endif
-
-                @if(false)
+            @endif
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     <box theme="primary"
                         icon="fa fa-lightbulb-o"
                         title="Box Component"
@@ -121,10 +95,10 @@
                         position="Developer"
                         :items="[{'label': 'Themes', 'value': 21}, {'label': 'Tests', 'value': 56}, {'label': 'Projects', 'value': 12},{'label': 'Projects', 'value': 12}]">
                     </user-widget>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
-    </section>
+    </page>
 
 @endsection
 
@@ -137,9 +111,9 @@
 
             data: {
                 loading: false,
+                form: {!! $form !!},
                 avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null')
             },
-
             methods: {
                 customAction() {
                     alert('pressed');

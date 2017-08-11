@@ -41,6 +41,7 @@
         "laravel-enso/datatable": "^1.2",
         "laravel-enso/dbsyncmigrations": "^1.2",
         "laravel-enso/filemanager": "^1.2",
+        "laravel-enso/formbuilder": "^1.0",
         "laravel-enso/helpers": "^1.2",
         "laravel-enso/historytracker": "^1.2",
         "laravel-enso/imagetransformer": "^1.2",

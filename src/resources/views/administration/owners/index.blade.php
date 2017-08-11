@@ -4,23 +4,20 @@
 
 @section('content')
 
-    <section class="content-header">
-        @can('access-route', 'administration.owners.create')
-        <a class="btn btn-primary" href="/administration/owners/create">
-            {{ __("Create Entity") }}
-        </a>
-        @endcan
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-md-12">
-                <data-table source="/administration/owners"
-                    id="owners">
-                </data-table>
-            </div>
+    <page v-cloak>
+        <span slot="header">
+            @can('access-route', 'administration.owners.create')
+                <a class="btn btn-primary" href="/administration/owners/create">
+                    {{ __("Create Entity") }}
+                </a>
+            @endcan
+        </span>
+        <div class="col-xs-12">
+            <data-table source="/administration/owners"
+                id="owners">
+            </data-table>
         </div>
-    </section>
+    </page>
 
 @endsection
 

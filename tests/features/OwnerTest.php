@@ -48,10 +48,13 @@ class OwnerTest extends TestCase
         $postParams = $this->postParams();
         $response = $this->post('/administration/owners', $postParams);
 
-        $owner = Owner::whereName($postParams['name'])->first(['id']);
+        $owner = Owner::whereName($postParams['name'])->first();
 
-        $response->assertRedirect('/administration/owners/'.$owner->id.'/edit');
-        $this->hasSessionConfirmation($response);
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The entity was created!',
+            'redirect'=>'/administration/owners/'.$owner->id.'/edit'
+        ]);
     }
 
     /** @test */
@@ -75,10 +78,10 @@ class OwnerTest extends TestCase
         $data = $owner->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/administration/owners/'.$owner->id, $data);
+        $response = $this->patch('/administration/owners/'.$owner->id, $data)
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $response->assertStatus(302);
-        $this->hasSessionConfirmation($response);
         $this->assertTrue($this->wasUpdated());
     }
 

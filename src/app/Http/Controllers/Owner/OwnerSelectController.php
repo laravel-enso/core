@@ -10,5 +10,10 @@ class OwnerSelectController extends Controller
 {
     use SelectListBuilder;
 
-    protected $selectSourceClass = Owner::class;
+    protected $selectQuery;
+
+    public function __construct()
+    {
+    	$this->selectQuery = Owner::active();
+    }
 }

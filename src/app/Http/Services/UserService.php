@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\ActionLogger\app\Models\ActionLog;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 
 class UserService
 {
@@ -18,10 +19,12 @@ class UserService
 
     public function create()
     {
-        $roles = [];
-        $owners = Owner::active()->pluck('name', 'id');
+        $form = (new FormBuilder(__DIR__.'/../../Forms/user.json'))
+            ->setAction('POST')
+            ->setUrl('/administration/users')
+            ->getData();
 
-        return view('laravel-enso/core::administration.users.create', compact('owners', 'roles'));
+        return view('laravel-enso/core::administration.users.create', compact('form'));
     }
 
     public function store(User $user)
@@ -34,9 +37,10 @@ class UserService
             $user->save();
         });
 
-        flash()->success(__('The User was created!'));
-
-        return redirect('administration/users/'.$user->id.'/edit');
+        return [
+            'message'  => __('The user was created!'),
+            'redirect' => '/administration/users/' . $user->id . '/edit',
+        ];
     }
 
     public function show(User $user)
@@ -53,10 +57,12 @@ class UserService
 
     public function edit(User $user)
     {
-        $owners = Owner::active()->pluck('name', 'id');
-        $roles = $user->owner->roles()->pluck('name', 'id');
+        $form = (new FormBuilder(__DIR__.'/../../Forms/user.json', $user))
+            ->setAction('PATCH')
+            ->setUrl('/administration/users/' . $user->id)
+            ->getData();
 
-        return view('laravel-enso/core::administration.users.edit', compact('user', 'roles', 'owners'));
+        return view('laravel-enso/core::administration.users.edit', compact('form'));
     }
 
     public function update(User $user)
@@ -66,9 +72,10 @@ class UserService
         $user->owner_id = $this->request->get('owner_id');
         $user->role_id = $this->request->get('role_id');
         $user->save();
-        flash()->success(__(config('labels.savedChanges')));
 
-        return back();
+        return [
+            'message' => __(config('labels.savedChanges')),
+        ];
     }
 
     public function destroy(User $user)

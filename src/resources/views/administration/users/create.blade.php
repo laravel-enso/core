@@ -4,38 +4,30 @@
 
 @section('content')
 
-    <section class="content-header">
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-                <div class="box box-primary">
-                    <div class="box-header with-border" style="text-align:center">
-                        <div class="box-title">
-                            {{ __("Create User") }}
-                        </div>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse">
-                                <i class="fa fa-minus">
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        {!! Form::open(['method' => 'POST', 'url' => '/administration/users']) !!}
-                        <div class="row">
-                            @include('laravel-enso/core::administration.users.form')
-                        </div>
-                        <center>
-                            {!! Form::submit(__("Create"), ['class' => 'btn btn-primary']) !!}
-                        </center>
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
+    <page v-cloak>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <vue-form :data="form">
+                <template slot="owner_id" scope="props">
+                    <vue-select name="owner_id"
+                        v-model="props.element.value"
+                        @input="pivotParams.owners.id=$event;props.errors.clear(props.element.column)"
+                        :source="props.element.config.source"
+                        clear-button>
+                    </vue-select>
+                </template>
+                <template slot="role_id" scope="props">
+                    <vue-select name="role_id"
+                        multiple
+                        :pivot-params="pivotParams"
+                        v-model="props.element.value"
+                        @input="props.errors.clear(props.element.column);"
+                        :source="props.element.config.source"
+                        clear-button>
+                    </vue-select>
+                </template>
+            </vue-form>
         </div>
-</section>
+    </page>
 
 @endsection
 
@@ -46,7 +38,8 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                pivotParams: { owners: {id: null } }
+                pivotParams: { owners: {id: "" } },
+                form: {!! $form !!}
             }
         });
 

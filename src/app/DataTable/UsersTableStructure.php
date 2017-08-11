@@ -15,7 +15,6 @@ class UsersTableStructure extends TableStructure
             'actionButtons'      => __('Actions'),
             'responsivePriority' => [1, 2, 4, 6],
             'headerAlign'        => 'center',
-            'totals'             => [3],
             'bodyAlign'          => 'center',
             'enumMappings'       => [
                 'is_active' => IsActiveEnum::class,

@@ -25,6 +25,7 @@ class CoreServiceProvider extends ServiceProvider
         'LaravelEnso\DataTable\DataTableServiceProvider',
         'LaravelEnso\DbSyncMigrations\DbSyncServiceProvider',
         'LaravelEnso\FileManager\FileManagerServiceProvider',
+        'LaravelEnso\FormBuilder\FormBuilderServiceProvider',
         'LaravelEnso\ImageTransformer\ImageTransformerServiceProvider',
         'LaravelEnso\Impersonate\ImpersonateServiceProvider',
         'LaravelEnso\Localisation\LocalisationServiceProvider',
@@ -127,9 +128,6 @@ class CoreServiceProvider extends ServiceProvider
     {
         view()->composer('laravel-enso/core::layouts.app',
             MainComposer::class);
-
-        view()->composer('laravel-enso/menumanager::breadcrumbs',
-            BreadcrumbsComposer::class);
     }
 
     public function register()

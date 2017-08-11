@@ -1,0 +1,45 @@
+{
+    "title": null,
+    "action": null,
+    "url": null,
+    "wrapperClass": "col-md-6",
+    "theme": "success",
+    "solid": false,
+    "storeSubmit": "Create",
+    "updateSubmit": "Save",
+    "deleteSubmit": "Delete",
+    "attributes": [{
+        "label": "Name",
+        "column": "name",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Description",
+        "column": "description",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Roles",
+        "column": "roleList",
+        "value": null,
+        "config": {
+            "type": "select",
+            "multiple": true,
+            "options": null
+        }
+    }, {
+        "label": "Active",
+        "column": "is_active",
+        "value": false,
+        "config": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }]
+}

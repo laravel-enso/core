@@ -1,0 +1,74 @@
+{
+    "title": null,
+    "action": null,
+    "url": null,
+    "wrapperClass": "col-md-6",
+    "theme": "success",
+    "solid": false,
+    "storeSubmit": "Create",
+    "updateSubmit": "Save",
+    "deleteSubmit": "Delete",
+    "attributes": [{
+        "label": "First Name",
+        "column": "first_name",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Last Name",
+        "column": "last_name",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Email",
+        "column": "email",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "email"
+        }
+    }, {
+        "label": "Phone Number",
+        "column": "phone",
+        "value": null,
+        "config": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Entity",
+        "column": "owner_id",
+        "value": "",
+        "config": {
+            "custom": true,
+            "type": "select",
+            "multiple": false,
+            "options": null,
+            "source": "/administration/owners/getOptionsList"
+        }
+    }, {
+        "label": "Role",
+        "column": "role_id",
+        "value": false,
+        "config": {
+            "custom": true,
+            "type": "select",
+            "multiple": false,
+            "options": null,
+            "source": "/system/roles/getOptionsList"
+        }
+    }, {
+        "label": "Active",
+        "column": "is_active",
+        "value": false,
+        "config": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }]
+}
