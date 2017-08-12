@@ -4,6 +4,7 @@ use App\Owner;
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
@@ -45,6 +46,8 @@ class UserTest extends TestHelper
     /** @test */
     public function store()
     {
+        Notification::fake();
+
         $postParams = $this->postParams();
         $response = $this->post('/administration/users', $postParams);
         $user = User::whereFirstName($postParams['first_name'])->first(['id']);
@@ -54,6 +57,8 @@ class UserTest extends TestHelper
                 'message'  => 'The user was created!',
                 'redirect' => '/administration/users/'.$user->id.'/edit',
             ]);
+
+        Notification::assertSentTo([$user], ResetPasswordNotification::class);
     }
 
     /** @test */
