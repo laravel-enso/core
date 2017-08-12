@@ -5,13 +5,12 @@ use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\RoleManager\app\Models\Role;
-use Tests\TestCase;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
-class UserTest extends TestCase
+class UserTest extends TestHelper
 {
     use DatabaseMigrations;
 
-    private $user;
     private $owner;
     private $role;
     private $faker;
@@ -20,12 +19,11 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
-        $this->user = User::first();
+        // $this->disableExceptionHandling();
+        $this->signIn(User::first());
         $this->faker = Factory::create();
         $this->owner = Owner::first(['id']);
-        $this->role = Role::first(['id']);
-        $this->actingAs($this->user);
+        $this->role  = Role::first(['id']);
     }
 
     /** @test */
@@ -39,103 +37,82 @@ class UserTest extends TestCase
     /** @test */
     public function create()
     {
-        $response = $this->get('/administration/users/create');
-
-        $response->assertStatus(200);
+        $this->get('/administration/users/create')
+            ->assertStatus(200)
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/administration/users', $postParams);
-
+        $response   = $this->post('/administration/users', $postParams);
         $user = User::whereFirstName($postParams['first_name'])->first(['id']);
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-            'message' => 'The user was created!',
-            'redirect'=> '/administration/users/'.$user->id.'/edit',
+                'message'  => 'The user was created!',
+                'redirect' => '/administration/users/' . $user->id . '/edit',
             ]);
     }
 
     /** @test */
     public function edit()
     {
-        $this->addNewUser();
-        $user = User::orderBy('id', 'desc')->first();
+        $user = $this->createUser();
 
-        $response = $this->get('/administration/users/'.$user->id.'/edit');
-
-        $response->assertStatus(200);
+        $this->get('/administration/users/' . $user->id . '/edit')
+            ->assertStatus(200)
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function update()
     {
-        $this->addNewUser();
-        $user = User::orderBy('id', 'desc')->first();
+        $user = $this->createUser();
         $user->last_name = 'edited';
-        $data = $user->toArray();
-        $data['_method'] = 'PATCH';
 
-        $this->patch('/administration/users/'.$user->id, $data)
+        $this->patch('/administration/users/' . $user->id, $user->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $this->assertTrue($this->wasUpdated());
+        $this->assertEquals('edited', $user->fresh()->last_name);
     }
 
     /** @test */
     public function destroy()
     {
-        $this->addNewUser();
-        $user = User::orderBy('id', 'desc')->first();
+        $user = $this->createUser();
 
-        $response = $this->delete('/administration/users/'.$user->id);
+        $this->delete('/administration/users/' . $user->id)
+            ->assertStatus(200)
+            ->assertJsonStructure(['message', 'redirect']);
 
-        $this->hasJsonConfirmation($response);
-        $this->wasDeleted($user);
-        $response->assertStatus(200);
+        $this->assertNull($user->fresh());
     }
 
-    private function wasUpdated()
+    private function createUser()
     {
-        $user = User::orderBy('id', 'desc')->first(['last_name']);
-
-        return $user->last_name === 'edited';
-    }
-
-    private function wasDeleted($user)
-    {
-        return $this->assertNull(User::whereFirstName($user->first_name)->first());
-    }
-
-    private function hasJsonConfirmation($response)
-    {
-        return $response->assertJsonFragment(['message']);
-    }
-
-    private function addNewUser()
-    {
-        $user = new User($this->postParams());
-        $user->email = $this->faker->email;
+        $user           = new User($this->postParams());
+        $user->email    = $this->faker->email;
         $user->owner_id = $this->owner->id;
-        $user->role_id = $this->role->id;
+        $user->role_id  = $this->role->id;
         $user->save();
+
+        return $user;
     }
 
     private function postParams()
     {
         return [
-            'first_name'                 => $this->faker->firstName,
-            'last_name'                  => $this->faker->lastName,
-            'role_id'                    => $this->role->id,
-            'phone'                      => $this->faker->phoneNumber,
-            'is_active'                  => 1,
-            'email'                      => $this->faker->email,
-            'owner_id'                   => $this->owner->id,
-            '_method'                    => 'POST',
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'role_id'    => $this->role->id,
+            'phone'      => $this->faker->phoneNumber,
+            'is_active'  => 1,
+            'email'      => $this->faker->email,
+            'owner_id'   => $this->owner->id,
+            '_method'    => 'POST',
         ];
     }
 }

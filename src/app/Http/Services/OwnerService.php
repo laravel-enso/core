@@ -79,6 +79,9 @@ class OwnerService
 
         $owner->delete();
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return [
+            'message' => __(config('labels.successfulOperation')),
+            'redirect' => '/administration/owners'
+        ];
     }
 }

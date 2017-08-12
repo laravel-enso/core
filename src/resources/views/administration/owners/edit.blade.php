@@ -18,7 +18,27 @@
             <vue-form :data="form">
             </vue-form>
 
-            @if(true)
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <vue-filter title="Test Filter"
+                                :options="[{ value: true, label: 'True' }, { value: false, label: 'False' }, { value: 5, label: 'Five' }]">
+                            </vue-filter>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="box box-body box-primary">
+                                <typeahead url="/search"
+                                    v-model="typeahead"
+                                    display-property="name">
+                                </typeahead>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if(false)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     @if(!is_null(config('comments.commentables.owner')))
                         <comments :id="{{ $owner->id }}"
@@ -41,6 +61,7 @@
                     @endif
                 </div>
             @endif
+
             @if(false)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     <box theme="primary"
@@ -112,7 +133,8 @@
             data: {
                 loading: false,
                 form: {!! $form !!},
-                avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null')
+                avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null'),
+                typeahead: ""
             },
             methods: {
                 customAction() {

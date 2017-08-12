@@ -1,13 +1,14 @@
 {
     "title": null,
     "action": null,
+    "icon": "fa fa-user",
     "url": null,
     "wrapperClass": "col-md-6",
     "theme": "success",
     "solid": false,
-    "storeSubmit": "Create",
-    "updateSubmit": "Save",
-    "deleteSubmit": "Delete",
+    "submitStore": "Create",
+    "submitUpdate": "Save",
+    "submitDelete": "Delete",
     "attributes": [{
         "label": "First Name",
         "column": "first_name",

@@ -20,6 +20,7 @@ class UserService
     public function create()
     {
         $form = (new FormBuilder(__DIR__.'/../../Forms/user.json'))
+            ->setTitle('Create User')
             ->setAction('POST')
             ->setUrl('/administration/users')
             ->getData();
@@ -58,6 +59,7 @@ class UserService
     public function edit(User $user)
     {
         $form = (new FormBuilder(__DIR__.'/../../Forms/user.json', $user))
+            ->setTitle('Edit User')
             ->setAction('PATCH')
             ->setUrl('/administration/users/'.$user->id)
             ->getData();
@@ -86,6 +88,9 @@ class UserService
 
         $user->delete();
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return [
+            'message' => __(config('labels.successfulOperation')),
+            'redirect' => '/administration/users'
+        ];
     }
 }

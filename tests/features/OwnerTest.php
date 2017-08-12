@@ -4,14 +4,14 @@ use App\Owner;
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use LaravelEnso\Core\app\Exceptions\EnsoException;
 use LaravelEnso\RoleManager\app\Models\Role;
-use Tests\TestCase;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
-class OwnerTest extends TestCase
+class OwnerTest extends TestHelper
 {
     use DatabaseMigrations;
 
-    private $user;
     private $role;
     private $faker;
 
@@ -20,10 +20,9 @@ class OwnerTest extends TestCase
         parent::setUp();
 
         // $this->disableExceptionHandling();
-        $this->user = User::first();
-        $this->role = Role::first(['id']);
+        $this->signIn(User::first());
+        $this->role  = Role::first(['id']);
         $this->faker = Factory::create();
-        $this->actingAs($this->user);
     }
 
     /** @test */
@@ -37,108 +36,75 @@ class OwnerTest extends TestCase
     /** @test */
     public function create()
     {
-        $response = $this->get('/administration/owners/create');
-
-        $response->assertStatus(200);
+        $this->get('/administration/owners/create')
+            ->assertStatus(200)
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/administration/owners', $postParams);
-
-        $owner = Owner::whereName($postParams['name'])->first();
+        $response   = $this->post('/administration/owners', $postParams);
+        $owner      = Owner::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-            'message' => 'The entity was created!',
-            'redirect'=> '/administration/owners/'.$owner->id.'/edit',
+                'message'  => 'The entity was created!',
+                'redirect' => '/administration/owners/' . $owner->id . '/edit',
             ]);
     }
 
     /** @test */
     public function edit()
     {
-        Owner::create($this->postParams());
-        $owner = Owner::orderBy('id', 'desc')->first();
+        $postParams = $this->postParams();
+        $owner      = Owner::create($postParams);
 
-        $response = $this->get('/administration/owners/'.$owner->id.'/edit');
-
-        $response->assertStatus(200);
-        // $response->assertViewHas('owner', $owner);
+        $this->get('/administration/owners/' . $owner->id . '/edit')
+            ->assertStatus(200)
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function update()
     {
-        Owner::create($this->postParams());
-        $owner = Owner::orderBy('id', 'desc')->first();
+        $postParams  = $this->postParams();
+        $owner       = Owner::create($postParams);
         $owner->name = 'edited';
-        $data = $owner->toArray();
-        $data['_method'] = 'PATCH';
 
-        $this->patch('/administration/owners/'.$owner->id, $data)
+        $this->patch('/administration/owners/' . $owner->id, $owner->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $this->assertTrue($this->wasUpdated());
+        $this->assertEquals('edited', $owner->fresh()->name);
     }
 
     /** @test */
     public function destroy()
     {
         $postParams = $this->postParams();
-        Owner::create($postParams);
-        $owner = Owner::whereName($postParams['name'])->first();
+        $owner      = Owner::create($postParams);
 
-        $response = $this->delete('/administration/owners/'.$owner->id);
+        $this->delete('/administration/owners/' . $owner->id)
+            ->assertStatus(200)
+            ->assertJsonStructure(['message', 'redirect']);
 
-        $this->hasJsonConfirmation($response);
-        $this->wasDeleted($owner);
-        $response->assertStatus(200);
+        $this->assertNull($owner->fresh());
     }
 
     /** @test */
-    public function cantDestroyIfHasUsersAttached()
+    public function cant_destroy_if_has_users_attached()
     {
         $postParams = $this->postParams();
-        Owner::create($postParams);
-        $owner = Owner::whereName($postParams['name'])->first();
+        $owner      = Owner::create($postParams);
         $this->attachUser($owner);
 
-        $response = $this->delete('/administration/owners/'.$owner->id);
+        $this->expectException(EnsoException::class);
 
-        $response->assertStatus(302);
-        $this->assertTrue($this->hasSessionErrorMessage());
-        $this->wasNotDeleted($owner);
-    }
-
-    private function wasUpdated()
-    {
-        $owner = Owner::orderBy('id', 'desc')->first();
-
-        return $owner->name === 'edited';
-    }
-
-    private function wasDeleted($owner)
-    {
-        return $this->assertNull(Owner::whereName($owner->name)->first());
-    }
-
-    private function wasNotDeleted($owner)
-    {
-        return $this->assertNotNull(Owner::whereName($owner->name)->first());
-    }
-
-    private function hasJsonConfirmation($response)
-    {
-        return $response->assertJsonFragment(['message']);
-    }
-
-    private function hasSessionErrorMessage()
-    {
-        return session('flash_notification')[0]->level === 'danger';
+        $this->delete('/administration/owners/' . $owner->id)
+            ->assertStatus(302)
+            ->assertJsonStructure(['level', 'message']);
     }
 
     private function attachUser($owner)
@@ -149,9 +115,9 @@ class OwnerTest extends TestCase
             'phone'      => $this->faker->phoneNumber,
             'is_active'  => 1,
         ]);
-        $user->email = $this->faker->email;
+        $user->email    = $this->faker->email;
         $user->owner_id = $owner->id;
-        $user->role_id = $this->role->id;
+        $user->role_id  = $this->role->id;
         $user->save();
     }
 
