@@ -30,9 +30,9 @@ class UserTest extends TestHelper
     /** @test */
     public function index()
     {
-        $response = $this->get('/administration/users');
-
-        $response->assertStatus(200);
+        $this->get('/administration/users')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.users.index');
     }
 
     /** @test */
@@ -40,6 +40,7 @@ class UserTest extends TestHelper
     {
         $this->get('/administration/users/create')
             ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.users.create')
             ->assertViewHas('form');
     }
 
@@ -68,6 +69,7 @@ class UserTest extends TestHelper
 
         $this->get('/administration/users/'.$user->id.'/edit')
             ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.users.edit')
             ->assertViewHas('form');
     }
 

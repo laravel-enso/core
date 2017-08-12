@@ -28,9 +28,9 @@ class OwnerTest extends TestHelper
     /** @test */
     public function index()
     {
-        $response = $this->get('/administration/owners');
-
-        $response->assertStatus(200);
+        $this->get('/administration/owners')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.owners.index');
     }
 
     /** @test */
@@ -38,6 +38,7 @@ class OwnerTest extends TestHelper
     {
         $this->get('/administration/owners/create')
             ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.owners.create')
             ->assertViewHas('form');
     }
 
@@ -63,6 +64,7 @@ class OwnerTest extends TestHelper
 
         $this->get('/administration/owners/'.$owner->id.'/edit')
             ->assertStatus(200)
+            ->assertViewIs('laravel-enso/core::administration.owners.edit')
             ->assertViewHas('form');
     }
 
