@@ -89,8 +89,8 @@ class UserService
         $user->delete();
 
         return [
-            'message' => __(config('labels.successfulOperation')),
-            'redirect' => '/administration/users'
+            'message'  => __(config('labels.successfulOperation')),
+            'redirect' => '/administration/users',
         ];
     }
 }

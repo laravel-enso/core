@@ -23,7 +23,7 @@ class UserTest extends TestHelper
         $this->signIn(User::first());
         $this->faker = Factory::create();
         $this->owner = Owner::first(['id']);
-        $this->role  = Role::first(['id']);
+        $this->role = Role::first(['id']);
     }
 
     /** @test */
@@ -46,13 +46,13 @@ class UserTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post('/administration/users', $postParams);
+        $response = $this->post('/administration/users', $postParams);
         $user = User::whereFirstName($postParams['first_name'])->first(['id']);
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The user was created!',
-                'redirect' => '/administration/users/' . $user->id . '/edit',
+                'redirect' => '/administration/users/'.$user->id.'/edit',
             ]);
     }
 
@@ -61,7 +61,7 @@ class UserTest extends TestHelper
     {
         $user = $this->createUser();
 
-        $this->get('/administration/users/' . $user->id . '/edit')
+        $this->get('/administration/users/'.$user->id.'/edit')
             ->assertStatus(200)
             ->assertViewHas('form');
     }
@@ -72,7 +72,7 @@ class UserTest extends TestHelper
         $user = $this->createUser();
         $user->last_name = 'edited';
 
-        $this->patch('/administration/users/' . $user->id, $user->toArray())
+        $this->patch('/administration/users/'.$user->id, $user->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -84,7 +84,7 @@ class UserTest extends TestHelper
     {
         $user = $this->createUser();
 
-        $this->delete('/administration/users/' . $user->id)
+        $this->delete('/administration/users/'.$user->id)
             ->assertStatus(200)
             ->assertJsonStructure(['message', 'redirect']);
 
@@ -93,10 +93,10 @@ class UserTest extends TestHelper
 
     private function createUser()
     {
-        $user           = new User($this->postParams());
-        $user->email    = $this->faker->email;
+        $user = new User($this->postParams());
+        $user->email = $this->faker->email;
         $user->owner_id = $this->owner->id;
-        $user->role_id  = $this->role->id;
+        $user->role_id = $this->role->id;
         $user->save();
 
         return $user;
