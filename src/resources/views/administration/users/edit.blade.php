@@ -18,8 +18,7 @@
                     <vue-select name="owner_id"
                         v-model="props.element.value"
                         @input="pivotParams.owners.id=$event;props.errors.clear(props.element.column)"
-                        :source="props.element.config.source"
-                        clear-button>
+                        :source="props.element.config.source">
                     </vue-select>
                 </template>
                 <template slot="role_id" scope="props">
@@ -27,8 +26,7 @@
                         :pivot-params="pivotParams"
                         v-model="props.element.value"
                         @input="props.errors.clear(props.element.column);"
-                        :source="props.element.config.source"
-                        clear-button>
+                        :source="props.element.config.source">
                     </vue-select>
                 </template>
             </vue-form>
