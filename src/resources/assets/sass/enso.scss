@@ -389,3 +389,9 @@ div.stop-impersonating {
 .box.box-solid.box-primary {
     border: 1px solid #009688;
 }
+
+.bootstrap-select .dropdown-toggle:focus {
+    outline: none;
+    outline: 0;
+    outline-offset: 0;
+}
