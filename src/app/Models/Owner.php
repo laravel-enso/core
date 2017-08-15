@@ -14,6 +14,8 @@ class Owner extends Model
 
     protected $attributes = ['is_active' => false];
 
+    protected $casts = ['is_active' => 'boolean'];
+
     public function users()
     {
         return $this->hasMany(User::class);
@@ -26,6 +28,6 @@ class Owner extends Model
 
     public function getRoleListAttribute()
     {
-        return $this->roles->pluck('id')->toArray();
+        return $this->roles->pluck('id');
     }
 }

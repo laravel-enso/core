@@ -4,6 +4,11 @@ input.toggle {
   opacity: 0;
 }
 
+.form-group input.toggle + label {
+    margin-top: 6px;
+    margin-bottom: 1px;
+}
+
 input.toggle + label {
     // display: block;
     cursor: pointer;

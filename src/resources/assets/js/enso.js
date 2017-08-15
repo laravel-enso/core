@@ -2,7 +2,8 @@ window.Laravel = {
     "csrfToken": document.head.querySelector("[name=csrf-token]").content
 };
 
-window.eventHub = new Vue();
+const bus = new Vue();
+Vue.prototype.$bus = bus;
 
 window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');
 
@@ -94,13 +95,13 @@ Vue.component('vueFilter', require('./vendor/laravel-enso/components/enso/VueFil
 Vue.component('dashboard', require('./vendor/laravel-enso/components/enso/Dashboard.vue'));
 Vue.component('typeahead', require('./vendor/laravel-enso/components/enso/Typeahead.vue'));
 Vue.component('datepicker', require('./vendor/laravel-enso/components/enso/Datepicker.vue'));
-Vue.component('timepicker', require('./vendor/laravel-enso/components/enso/Timepicker.vue'));
 
 Vue.component('chart', require('./vendor/laravel-enso/components/charts/Chart.vue'));
 
 Vue.component('dataTable', require('./vendor/laravel-enso/components/datatable/DataTable.vue'));
 
 Vue.component('vueSelect', require('./vendor/laravel-enso/components/select/VueSelect.vue'));
+Vue.component('vueSelectLegacy', require('./vendor/laravel-enso/components/select/VueSelectLegacy.vue'));
 
 Vue.component('roleConfigurator', require('./vendor/laravel-enso/components/rolemanager/RoleConfigurator.vue'));
 Vue.component('checkboxManager', require('./vendor/laravel-enso/components/rolemanager/CheckboxManager.vue'));

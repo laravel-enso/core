@@ -20,7 +20,7 @@
 .nav-tabs-custom,
 .content-header > .breadcrumb, //fixme
 #toast-container > div {
-  	border-radius: 0;
+    border-radius: 0;
 }
 
 //toaster customize
@@ -39,7 +39,7 @@ button:focus,
 input:focus,
 select:focus,
 .btn-box-tool, {
-  	outline: 0 !important;
+    outline: 0 !important;
 }
 
 #nprogress {
@@ -150,11 +150,6 @@ section.content-header {
   color: #009688;
 }
 
-div.bootstrap-select > button.btn.dropdown-toggle.btn-default {
-  box-shadow: none;
-  border-bottom: 1px solid #ddd;
-}
-
 .box > .box-header > .box-tools .btn {
   border: 0;
   box-shadow: none;
@@ -190,17 +185,6 @@ input[type="radio"]:before, input[type="radio"]:after {
     box-shadow: inset 0 -2px 0 #f44336;
 }
 /* END bootstrap-paper customizations */
-
-/** START spinner classes used for ajax loading **/
-.fa.fa-spinner.fa-spin.spinner-custom {
-  color: #f44336;
-}
-
-.fa.fa-spinner.fa-spin.spinner-custom-small {
-  color: #f44336;
-  font-size: 18px;
-}
-/* END spinner classes used for ajax loading */
 
 /** START helper classes **/
 
@@ -388,10 +372,4 @@ div.stop-impersonating {
 
 .box.box-solid.box-primary {
     border: 1px solid #009688;
-}
-
-.bootstrap-select .dropdown-toggle:focus {
-    outline: none;
-    outline: 0;
-    outline-offset: 0;
 }

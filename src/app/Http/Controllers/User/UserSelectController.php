@@ -12,5 +12,5 @@ class UserSelectController extends Controller
 
     protected $selectSourceClass = User::class;
     protected $selectAttributes = ['first_name', 'last_name', 'email', 'phone'];
-    protected $displayAttribute = ['fullName'];
+    protected $displayAttribute = 'fullName';
 }

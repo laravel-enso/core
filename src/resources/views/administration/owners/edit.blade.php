@@ -40,23 +40,50 @@
 
             @if(false)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <div class="box box-body box-warning">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <datepicker v-model="today">
+                                </datepicker>
+                            </div>
+                            <div class="col-md-6">
+                                <datepicker v-model="now"
+                                    time-only
+                                    format="H:i">
+                                </datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="box box-body">
+                    <vue-select v-model="value" multiple
+                        loading="loading"
+                        source="/administration/owners/getOptionList">
+                    </vue-select>
+                </div>
+                </div>
+            @endif
+
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     @if(!is_null(config('comments.commentables.owner')))
-                        <comments :id="{{ $owner->id }}"
-                            type="owner"
-                            v-if="{{ $owner }}">
+                        <comments :id="owner.id"
+                            type="owner">
                         </comments>
                     @endif
                     @if(!is_null(config('documents.documentables.owner')))
-                        <documents :id="{{ $owner->id }}"
+                        <documents :id="owner.id"
                             :file-size-limit="5000000"
-                            type="owner"
-                            v-if="{{ $owner }}">
+                            type="owner">
                         </documents>
                     @endif
                     @if(!is_null(config('contacts.contactables.owner')))
-                        <contacts :id="{{ $owner->id }}"
-                            type="owner"
-                            v-if="{{ $owner }}">
+                        <contacts :id="owner.id"
+                            type="owner">
                         </contacts>
                     @endif
                 </div>
@@ -82,6 +109,9 @@
                         Box Body
                         <span slot="footer">Footer</span>
                     </box>
+                </div>
+
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-2">
 
                     <small-box icon="fa fa-shopping-cart"
                         theme="bg-olive"
@@ -90,26 +120,29 @@
                     </small-box>
 
                     <info-box theme="bg-red"
+                        :overlay="loading"
                         icon="fa fa-star-o"
                         text="What about this"
                         number="77,430"
                         progress="75"
                         description="Super progress">
                     </info-box>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <box-widget theme="bg-orange"
-                                :image="avatarLink"
-                                name="First and Last Name"
-                                position="Developer"
-                                :items="[{'label': 'Projects', 'value': 12, 'badge': 'bg-blue'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}]">
-                            </box-widget>
-                        </div>
-                    </div>
+                <div class="col-xs-12 col-sm-10 col-md-4">
+                        <box-widget theme="bg-orange"
+                            :image="avatarLink"
+                            :overlay="loading"
+                            name="First and Last Name"
+                            position="Developer"
+                            :items="[{'label': 'Projects', 'value': 12, 'badge': 'bg-blue'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}, {'label': 'Themes', 'value': 21, 'badge': 'bg-yellow'}]">
+                        </box-widget>
+                </div>
 
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     <user-widget
                         theme="bg-blue"
+                        :overlay="loading"
                         :avatar="avatarLink"
                         background="/images/pic.jpg"
                         name="First and Last Name"
@@ -131,14 +164,19 @@
             el: '#app',
 
             data: {
-                loading: false,
+                loading: true,
                 form: {!! $form !!},
                 avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null'),
-                typeahead: ""
+                owner: {!! $owner !!},
+                typeahead: "",
+                today: moment().format('DD-MM-Y'),
+                now: moment().format('H:mm'),
+                value: [],
+                options: []
             },
             methods: {
                 customAction() {
-                    alert('pressed');
+                    alert('handshake');
                 },
                 refresh() {
                     alert('refresh');

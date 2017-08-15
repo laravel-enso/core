@@ -32,8 +32,7 @@ class OwnerService
     {
         \DB::transaction(function () use (&$owner) {
             $owner = $owner->create($this->request->all());
-            $roleList = $this->request->get('roleList');
-            $owner->roles()->sync($roleList);
+            $owner->roles()->sync($this->request->get('roleList'));
         });
 
         return [
@@ -60,8 +59,7 @@ class OwnerService
     {
         \DB::transaction(function () use ($owner) {
             $owner->update($this->request->all());
-            $roleList = $this->request->get('roleList');
-            $owner->roles()->sync($roleList);
+            $owner->roles()->sync($this->request->get('roleList'));
         });
 
         return [

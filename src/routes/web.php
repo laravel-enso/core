@@ -34,8 +34,8 @@ Route::middleware(['web', 'auth', 'core'])
                         Route::get('exportExcel', 'OwnerTableController@exportExcel')
                             ->name('exportExcel');
 
-                        Route::get('getOptionsList', 'OwnerSelectController@getOptionsList')
-                            ->name('getOptionsList');
+                        Route::get('getOptionList', 'OwnerSelectController@getOptionList')
+                            ->name('getOptionList');
                     });
 
                 Route::resource('owners', 'Owner\OwnerController', ['except' => ['show']]);
@@ -51,8 +51,8 @@ Route::middleware(['web', 'auth', 'core'])
                             ->name('exportExcel');
                         // Route::post('setTableData', 'UserTableController@setTableData')
                         //     ->name('setTableData');
-                        Route::get('getOptionsList', 'UserSelectController@getOptionsList')
-                            ->name('getOptionsList');
+                        Route::get('getOptionList', 'UserSelectController@getOptionList')
+                            ->name('getOptionList');
 
                         Route::patch('updateProfile/{user}', 'ProfilePageController')
                             ->name('updateProfile');

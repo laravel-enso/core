@@ -15,7 +15,7 @@ class CreateStructureForOwners extends StructureMigration
         ['name' => 'administration.owners.create', 'description' => 'Create owner', 'type' => 1, 'default' => false],
         ['name' => 'administration.owners.edit', 'description' => 'Edit existing owner', 'type' => 1, 'default' => false],
         ['name' => 'administration.owners.index', 'description' => 'Show owners index', 'type' => 0, 'default' => false],
-        ['name' => 'administration.owners.getOptionsList', 'description' => 'Get options for vue-select', 'type' => 0, 'default' => false],
+        ['name' => 'administration.owners.getOptionList', 'description' => 'Get options for vue-select', 'type' => 0, 'default' => false],
         ['name' => 'administration.owners.store', 'description' => 'Store a newly created owner', 'type' => 1, 'default' => false],
         ['name' => 'administration.owners.update', 'description' => 'Update edited Owner', 'type' => 1, 'default' => false],
         ['name' => 'administration.owners.destroy', 'description' => 'Delete owner', 'type' => 1, 'default' => false],

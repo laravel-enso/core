@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\DataTable;
 
-use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\DataTable\app\Classes\TableStructure;
 
 class OwnersTableStructure extends TableStructure
@@ -16,10 +15,8 @@ class OwnersTableStructure extends TableStructure
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'notSearchable' => [1],
-            'enumMappings'  => [
-                'is_active' => IsActiveEnum::class,
-            ],
-            'columns' => [
+            'boolean'       => [2],
+            'columns'       => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',

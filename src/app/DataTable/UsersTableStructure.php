@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\DataTable;
 
-use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\DataTable\app\Classes\TableStructure;
 
 class UsersTableStructure extends TableStructure
@@ -16,10 +15,8 @@ class UsersTableStructure extends TableStructure
             'responsivePriority' => [1, 2, 4, 6],
             'headerAlign'        => 'center',
             'bodyAlign'          => 'center',
-            'enumMappings'       => [
-                'is_active' => IsActiveEnum::class,
-            ],
-            'columns' => [
+            'boolean'            => [6],
+            'columns'            => [
                 0 => [
                     'label' => __('Entity'),
                     'data'  => 'owner',

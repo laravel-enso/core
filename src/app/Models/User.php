@@ -11,6 +11,7 @@ use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class User extends Authenticatable
@@ -24,6 +25,8 @@ class User extends Authenticatable
     protected $attributes = ['is_active' => false];
 
     protected $appends = ['fullName'];
+
+    protected $casts = ['is_active' => 'boolean'];
 
     public function owner()
     {
@@ -50,6 +53,11 @@ class User extends Authenticatable
         return $this->hasOne(Preference::class);
     }
 
+    public function isAdmin()
+    {
+        return $this->role_id == 1;
+    }
+
     public function getPreferencesAttribute()
     {
         $preferences = $this->preference
@@ -59,11 +67,6 @@ class User extends Authenticatable
         unset($this->preference);
 
         return $preferences;
-    }
-
-    public function isAdmin()
-    {
-        return $this->role_id == 1;
     }
 
     public function getFullNameAttribute()

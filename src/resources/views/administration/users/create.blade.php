@@ -36,7 +36,7 @@
         const vm = new Vue({
             el: '#app',
             data: {
-                pivotParams: { owners: {id: "" } },
+                pivotParams: { owners: { id: null} },
                 form: {!! $form !!}
             }
         });

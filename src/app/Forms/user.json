@@ -49,8 +49,8 @@
             "custom": true,
             "type": "select",
             "multiple": false,
-            "options": null,
-            "source": "/administration/owners/getOptionsList"
+            "options": [],
+            "source": "/administration/owners/getOptionList"
         }
     }, {
         "label": "Role",
@@ -60,8 +60,8 @@
             "custom": true,
             "type": "select",
             "multiple": false,
-            "options": null,
-            "source": "/system/roles/getOptionsList"
+            "options": [],
+            "source": "/system/roles/getOptionList"
         }
     }, {
         "label": "Active",
