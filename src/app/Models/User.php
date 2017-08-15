@@ -11,7 +11,6 @@ use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\Helpers\Traits\IsActiveTrait;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
-use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class User extends Authenticatable
