@@ -16,7 +16,6 @@
                 </template>
                 <template slot="role_id" scope="props">
                     <vue-select name="role_id"
-                        multiple
                         :pivot-params="pivotParams"
                         v-model="props.element.value"
                         @input="props.errors.clear(props.element.column);"
