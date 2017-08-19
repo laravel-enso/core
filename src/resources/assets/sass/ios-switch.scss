@@ -61,3 +61,7 @@ input.toggle:checked + label:after {
     left: 15px;
     box-shadow: inset 0 0 0 1px rgba(19, 191, 17, 1), 0 2px 4px rgba(0, 0, 0, .2);
 }
+
+input.toggle:disabled + label:before {
+    background: #eee;
+}
