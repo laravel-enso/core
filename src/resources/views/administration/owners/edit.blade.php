@@ -20,6 +20,34 @@
 
             @if(false)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <tabs title="Tabs"
+                        reverse
+                        icon="fa fa-gears"
+                        :tabs="['Tab 1', 'Tab 2']">
+                        <span slot="Tab 1">
+                            blah
+                        </span>
+                        <span slot="Tab 2">
+                            blah2
+                        </span>
+                    </tabs>
+
+                    <tabs title="Tabs with badges"
+                        reverse
+                        icon="fa fa-gears"
+                        :tabs="[{ label: 'Tab 1', badge: 5 }, { label:'Tab 2', badge: 10} ]">
+                        <span slot="Tab 1">
+                            blah
+                        </span>
+                        <span slot="Tab 2">
+                            blah2
+                        </span>
+                    </tabs>
+                </div>
+            @endif
+
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     <div class="row">
                         <div class="col-md-5">
                             <vue-filter title="Test Filter"
@@ -164,7 +192,7 @@
             el: '#app',
 
             data: {
-                loading: true,
+                loading: false,
                 form: {!! $form !!},
                 avatarLink: '/core/avatars/' + (Store.user.avatarId || 'null'),
                 owner: {!! $owner !!},
