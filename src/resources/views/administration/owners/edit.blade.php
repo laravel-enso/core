@@ -6,17 +6,27 @@
 
     <page v-cloak>
         <span slot="header">
-            <div class="col-xs-12">
-                @can('access-route', 'administration.owners.create')
-                    <a class="btn btn-primary" href="/administration/owners/create">
-                        {{ __("Create Entity") }}
-                    </a>
-                @endcan
-            </div>
+            @can('access-route', 'administration.owners.create')
+                <a class="btn btn-primary" href="/administration/owners/create">
+                    {{ __("Create Entity") }}
+                </a>
+            @endcan
         </span>
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
             <vue-form :data="form">
             </vue-form>
+
+            @if(false)
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <paginate :list="['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'v', 'x', 'z']">
+                        <template scope="props">
+                            <ul>
+                                <li v-for="el in props.list">@{{ el }}</li>
+                            </ul>
+                        </template>
+                    </paginate>
+                </div>
+            @endif
 
             @if(false)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">

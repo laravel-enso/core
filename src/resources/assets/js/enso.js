@@ -96,6 +96,7 @@ Vue.component('vueFilter', require('./vendor/laravel-enso/components/enso/VueFil
 Vue.component('dashboard', require('./vendor/laravel-enso/components/enso/Dashboard.vue'));
 Vue.component('typeahead', require('./vendor/laravel-enso/components/enso/Typeahead.vue'));
 Vue.component('datepicker', require('./vendor/laravel-enso/components/enso/Datepicker.vue'));
+Vue.component('paginate', require('./vendor/laravel-enso/components/enso/Paginate.vue'));
 
 Vue.component('chart', require('./vendor/laravel-enso/components/charts/Chart.vue'));
 
