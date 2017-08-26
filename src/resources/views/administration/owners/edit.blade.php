@@ -107,7 +107,7 @@
                 </div>
             @endif
 
-            @if(false)
+            @if(true)
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                     @if(!is_null(config('comments.commentables.owner')))
                         <comments :id="owner.id"
