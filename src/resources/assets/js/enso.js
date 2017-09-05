@@ -6,6 +6,7 @@ const bus = new Vue();
 Vue.prototype.$bus = bus;
 
 window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');
+require('animate.css');
 
 import VTooltip from 'v-tooltip';
 Vue.use(VTooltip);
