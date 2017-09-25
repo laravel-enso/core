@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
