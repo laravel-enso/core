@@ -70,9 +70,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\Core\\CoreServiceProvider"
+                "LaravelEnso\\Core\\CoreServiceProvider",
+                "LaravelEnso\\Core\\AuthServiceProvider",
+                "LaravelEnso\\Core\\EventServiceProvider"
             ],
-            "aliases": {}
+            "aliases": {
+                "EnsoException": "LaravelEnso\\Core\\app\\Exceptions\\EnsoException"
+            }
         }
     }
 }

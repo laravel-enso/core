@@ -13,37 +13,6 @@ use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
 
 class CoreServiceProvider extends ServiceProvider
 {
-    private $providers = [
-        'Collective\Html\HtmlServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
-        'LaravelEnso\Core\AuthServiceProvider',
-        'LaravelEnso\Core\EventServiceProvider',
-        'LaravelEnso\ActionLogger\ActionLoggerServiceProvider',
-        'LaravelEnso\AvatarManager\AvatarServiceProvider',
-        'LaravelEnso\Charts\ChartsServiceProvider',
-        'LaravelEnso\DataTable\DataTableServiceProvider',
-        'LaravelEnso\DbSyncMigrations\DbSyncServiceProvider',
-        'LaravelEnso\FormBuilder\FormBuilderServiceProvider',
-        'LaravelEnso\ImageTransformer\ImageTransformerServiceProvider',
-        'LaravelEnso\Impersonate\ImpersonateServiceProvider',
-        'LaravelEnso\Localisation\LocalisationServiceProvider',
-        'LaravelEnso\LogManager\LogsServiceProvider',
-        'LaravelEnso\MenuManager\MenusServiceProvider',
-        'LaravelEnso\PermissionManager\PermissionsServiceProvider',
-        'LaravelEnso\RoleManager\RolesServiceProvider',
-        'LaravelEnso\TutorialManager\TutorialsServiceProvider',
-        'LaravelEnso\VueAdminLTE\VueAdminLTEServiceProvider',
-        'LaravelEnso\VueComponents\VueComponentsServiceProvider',
-    ];
-
-    private $aliases = [
-        'Form'          => 'Collective\Html\FormFacade',
-        'Html'          => 'Collective\Html\HtmlFacade',
-        'Excel'         => 'Maatwebsite\Excel\Facades\Excel',
-        'Flash'         => 'Laracasts\Flash\Flash',
-        'EnsoException' => 'LaravelEnso\Core\app\Exceptions\EnsoException',
-    ];
-
     public function boot()
     {
         $this->publishesDependencies();
@@ -129,23 +98,6 @@ class CoreServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->registerProviders();
-        $this->registerAliases();
-    }
-
-    private function registerProviders()
-    {
-        foreach ($this->providers as $provider) {
-            $this->app->register($provider);
-        }
-    }
-
-    private function registerAliases()
-    {
-        $loader = AliasLoader::getInstance();
-
-        foreach ($this->aliases as $alias => $abstract) {
-            $loader->alias($alias, $abstract);
-        }
+        //
     }
 }
