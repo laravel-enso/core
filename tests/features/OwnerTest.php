@@ -7,13 +7,16 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\Core\app\Exceptions\EnsoException;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 
 class OwnerTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $role;
     private $faker;
+    private $prefix = 'administration.owners';
 
     protected function setUp()
     {
@@ -26,31 +29,14 @@ class OwnerTest extends TestHelper
     }
 
     /** @test */
-    public function index()
-    {
-        $this->get('/administration/owners')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.owners.index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/administration/owners/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.owners.create')
-            ->assertViewHas('form');
-    }
-
-    /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/administration/owners', $postParams);
+        $response = $this->post(route('administration.owners.store', [], false), $postParams);
         $owner = Owner::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
-            ->assertJsonFragment([
+            ->assertJson([
                 'message'  => 'The entity was created!',
                 'redirect' => '/administration/owners/'.$owner->id.'/edit',
             ]);
@@ -62,10 +48,9 @@ class OwnerTest extends TestHelper
         $postParams = $this->postParams();
         $owner = Owner::create($postParams);
 
-        $this->get('/administration/owners/'.$owner->id.'/edit')
+        $this->get(route('administration.owners.edit', $owner->id, false))
             ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.owners.edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form' => [], 'owner' => []]);
     }
 
     /** @test */
@@ -75,9 +60,9 @@ class OwnerTest extends TestHelper
         $owner = Owner::create($postParams);
         $owner->name = 'edited';
 
-        $this->patch('/administration/owners/'.$owner->id, $owner->toArray())
+        $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals('edited', $owner->fresh()->name);
     }
@@ -88,7 +73,7 @@ class OwnerTest extends TestHelper
         $postParams = $this->postParams();
         $owner = Owner::create($postParams);
 
-        $this->delete('/administration/owners/'.$owner->id)
+        $this->delete(route('administration.owners.destroy', $owner->id, false))
             ->assertStatus(200)
             ->assertJsonStructure(['message', 'redirect']);
 
@@ -104,9 +89,11 @@ class OwnerTest extends TestHelper
 
         $this->expectException(EnsoException::class);
 
-        $this->delete('/administration/owners/'.$owner->id)
+        $this->delete(route('administration.owners.destroy', $owner->id, false))
             ->assertStatus(302)
-            ->assertJsonStructure(['level', 'message']);
+            ->assertJson(['message']);
+
+        $this->assertNotNull($owner->fresh());
     }
 
     private function attachUser($owner)

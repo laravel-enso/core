@@ -10,5 +10,6 @@ class CreateStructureForHome extends StructureMigration
 
     protected $permissions = [
         ['name' => 'home', 'description' => 'Welcome Page', 'type' => 0, 'default' => true],
+        ['name' => 'init', 'description' => 'App State Builder', 'type' => 0, 'default' => true],
     ];
 }

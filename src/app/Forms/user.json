@@ -1,19 +1,14 @@
 {
     "title": null,
-    "action": null,
     "icon": "fa fa-user",
-    "url": null,
-    "wrapperClass": "col-md-6",
-    "theme": "success",
-    "solid": false,
-    "submitStore": "Create",
-    "submitUpdate": "Save",
-    "submitDelete": "Delete",
-    "attributes": [{
+    "columns": "2",
+    "method": null,
+    "prefix": "administration.users",
+    "fields": [{
         "label": "First Name",
         "column": "first_name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -21,7 +16,7 @@
         "label": "Last Name",
         "column": "last_name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -29,7 +24,7 @@
         "label": "Email",
         "column": "email",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "email"
         }
@@ -37,7 +32,7 @@
         "label": "Phone Number",
         "column": "phone",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -45,7 +40,7 @@
         "label": "Entity",
         "column": "owner_id",
         "value": "",
-        "config": {
+        "meta": {
             "custom": true,
             "type": "select",
             "multiple": false,
@@ -56,7 +51,7 @@
         "label": "Role",
         "column": "role_id",
         "value": false,
-        "config": {
+        "meta": {
             "custom": true,
             "type": "select",
             "multiple": false,
@@ -67,7 +62,7 @@
         "label": "Active",
         "column": "is_active",
         "value": false,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "checkbox"
         }

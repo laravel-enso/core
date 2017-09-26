@@ -10,12 +10,7 @@ class VerifyActiveState
     {
         if ($request->user()->isDisabled()) {
             auth()->logout();
-
-            if ($request->ajax()) {
-                throw new \EnsoException(__('validation.disabled'), 'warning', [], 401);
-            }
-
-            return redirect('/login')->withErrors(['is_active' => __('validation.disabled')]);
+            throw new \EnsoException(__(config('enso.labels.disabledAccount')), 401);
         }
 
         return $next($request);

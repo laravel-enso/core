@@ -9,9 +9,12 @@ class OwnersTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'     => __('Registered Entities'),
+            'name'          => __('Registered Entities'),
+            'icon'          => 'fa fa-list-alt',
             'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
+            'actions'       => __('Actions'),
+            'actionButtons' => ['edit', 'destroy'],
+            'headerButtons' => ['create', 'exportExcel'],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'notSearchable' => [1],

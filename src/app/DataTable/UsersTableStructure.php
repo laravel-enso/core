@@ -9,9 +9,12 @@ class UsersTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'          => __('Registered Users'),
+            'name'               => __('Registered Users'),
+            'icon'               => 'fa fa-users',
             'crtNo'              => __('#'),
-            'actionButtons'      => __('Actions'),
+            'actions'            => __('Actions'),
+            'actionButtons'      => ['show', 'edit', 'destroy'],
+            'headerButtons'      => ['create', 'exportExcel'],
             'responsivePriority' => [1, 2, 4, 6],
             'headerAlign'        => 'center',
             'bodyAlign'          => 'center',

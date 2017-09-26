@@ -3,80 +3,67 @@
 namespace LaravelEnso\Core\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\ActionLogger\app\Models\ActionLog;
-use LaravelEnso\Core\app\Models\Owner;
+use LaravelEnso\Core\app\Classes\UserProfile;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 
 class UserService
 {
-    private $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    private const FormPath = __DIR__ . '/../../Forms/user.json';
 
     public function create()
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/user.json'))
+        $form = (new FormBuilder(self::FormPath))
             ->setTitle('Create User')
-            ->setAction('POST')
-            ->setUrl('/administration/users')
+            ->setMethod('POST')
             ->getData();
 
-        return view('laravel-enso/core::administration.users.create', compact('form'));
+        return compact('form');
     }
 
-    public function store(User $user)
+    public function store(Request $request, User $user)
     {
-        \DB::transaction(function () use (&$user) {
-            $user->fill($this->request->all());
-            $user->email = $this->request->get('email');
-            $user->owner_id = $this->request->get('owner_id');
-            $user->role_id = $this->request->get('role_id');
+        \DB::transaction(function () use ($request, &$user) {
+            $user->fill($request->all());
+            $user->email    = $request->get('email');
+            $user->owner_id = $request->get('owner_id');
+            $user->role_id  = $request->get('role_id');
             $user->save();
         });
 
         return [
             'message'  => __('The user was created!'),
-            'redirect' => '/administration/users/'.$user->id.'/edit',
+            'redirect' => route('administration.users.edit', $user->id, false),
         ];
     }
 
     public function show(User $user)
     {
-        $user->load(['owner', 'role', 'avatar']);
+        $profile = new UserProfile($user);
 
-        $timeline = ActionLog::whereUserId($user->id)
-            ->with('permission')
-            ->latest()
-            ->paginate(7);
-
-        return view('laravel-enso/core::administration.users.show', compact('user', 'timeline'));
+        return ['user' => $profile->get()];
     }
 
     public function edit(User $user)
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/user.json', $user))
+        $form = (new FormBuilder(self::FormPath, $user))
             ->setTitle('Edit User')
-            ->setAction('PATCH')
-            ->setUrl('/administration/users/'.$user->id)
+            ->setMethod('PATCH')
             ->getData();
 
-        return view('laravel-enso/core::administration.users.edit', compact('form'));
+        return compact('form');
     }
 
-    public function update(User $user)
+    public function update(Request $request, User $user)
     {
-        $user->fill($this->request->all());
-        $user->email = $this->request->get('email');
-        $user->owner_id = $this->request->get('owner_id');
-        $user->role_id = $this->request->get('role_id');
+        $user->fill($request->all());
+        $user->email    = $request->get('email');
+        $user->owner_id = $request->get('owner_id');
+        $user->role_id  = $request->get('role_id');
         $user->save();
 
         return [
-            'message' => __(config('labels.savedChanges')),
+            'message' => __(config('enso.labels.savedChanges')),
         ];
     }
 
@@ -89,8 +76,8 @@ class UserService
         $user->delete();
 
         return [
-            'message'  => __(config('labels.successfulOperation')),
-            'redirect' => '/administration/users',
+            'message'  => __(config('enso.labels.successfulOperation')),
+            'redirect' => route('administration.users.index', [], false),
         ];
     }
 }

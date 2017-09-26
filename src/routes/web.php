@@ -49,8 +49,6 @@ Route::middleware(['web', 'auth', 'core'])
                             ->name('getTableData');
                         Route::get('exportExcel', 'UserTableController@exportExcel')
                             ->name('exportExcel');
-                        // Route::post('setTableData', 'UserTableController@setTableData')
-                        //     ->name('setTableData');
                         Route::get('getOptionList', 'UserSelectController@getOptionList')
                             ->name('getOptionList');
 

@@ -7,41 +7,27 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 
 class UserTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $owner;
     private $role;
     private $faker;
+    private $prefix = 'administration.users';
 
     protected function setUp()
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        $this->disableExceptionHandling();
         $this->signIn(User::first());
         $this->faker = Factory::create();
         $this->owner = Owner::first(['id']);
-        $this->role = Role::first(['id']);
-    }
-
-    /** @test */
-    public function index()
-    {
-        $this->get('/administration/users')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.users.index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/administration/users/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.users.create')
-            ->assertViewHas('form');
+        $this->role  = Role::first(['id']);
     }
 
     /** @test */
@@ -50,13 +36,13 @@ class UserTest extends TestHelper
         Notification::fake();
 
         $postParams = $this->postParams();
-        $response = $this->post('/administration/users', $postParams);
-        $user = User::whereFirstName($postParams['first_name'])->first(['id']);
+        $response   = $this->post(route('administration.users.store', [], false), $postParams);
+        $user       = User::whereFirstName($postParams['first_name'])->first(['id']);
 
         $response->assertStatus(200)
-            ->assertJsonFragment([
+            ->assertJson([
                 'message'  => 'The user was created!',
-                'redirect' => '/administration/users/'.$user->id.'/edit',
+                'redirect' => '/administration/users/' . $user->id . '/edit',
             ]);
 
         Notification::assertSentTo([$user], ResetPasswordNotification::class);
@@ -67,21 +53,20 @@ class UserTest extends TestHelper
     {
         $user = $this->createUser();
 
-        $this->get('/administration/users/'.$user->id.'/edit')
+        $this->get(route('administration.users.edit', $user->id, false))
             ->assertStatus(200)
-            ->assertViewIs('laravel-enso/core::administration.users.edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form']);
     }
 
     /** @test */
     public function update()
     {
-        $user = $this->createUser();
+        $user            = $this->createUser();
         $user->last_name = 'edited';
 
-        $this->patch('/administration/users/'.$user->id, $user->toArray())
+        $this->patch(route('administration.users.update', $user->id, false), $user->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals('edited', $user->fresh()->last_name);
     }
@@ -91,7 +76,7 @@ class UserTest extends TestHelper
     {
         $user = $this->createUser();
 
-        $this->delete('/administration/users/'.$user->id)
+        $this->delete(route('administration.users.destroy', $user->id, false))
             ->assertStatus(200)
             ->assertJsonStructure(['message', 'redirect']);
 
@@ -100,10 +85,10 @@ class UserTest extends TestHelper
 
     private function createUser()
     {
-        $user = new User($this->postParams());
-        $user->email = $this->faker->email;
+        $user           = new User($this->postParams());
+        $user->email    = $this->faker->email;
         $user->owner_id = $this->owner->id;
-        $user->role_id = $this->role->id;
+        $user->role_id  = $this->role->id;
         $user->save();
 
         return $user;
@@ -119,7 +104,6 @@ class UserTest extends TestHelper
             'is_active'  => 1,
             'email'      => $this->faker->email,
             'owner_id'   => $this->owner->id,
-            '_method'    => 'POST',
         ];
     }
 }

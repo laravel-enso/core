@@ -13,16 +13,8 @@ class EnsoHandler
 
     public function render()
     {
-        if (request()->ajax()) {
-            return response()->json([
-                'level'    => $this->exception->getLevel(),
-                'message'  => $this->exception->getMessage(),
-                'errorBag' => $this->exception->getErrorBag(),
-            ], $this->exception->getCode());
-        }
-
-        flash()->{$this->exception->getLevel()}($this->exception->getMessage());
-
-        return back();
+        return response()->json([
+            'message'  => $this->exception->getMessage(),
+        ], $this->exception->getCode());
     }
 }

@@ -1,19 +1,14 @@
 {
     "title": null,
-    "action": null,
-    "url": null,
     "icon": "fa fa-list-alt",
-    "wrapperClass": "col-md-6",
-    "theme": "success",
-    "solid": false,
-    "submitStore": "Create",
-    "submitUpdate": "Save",
-    "submitDelete": "Delete",
-    "attributes": [{
+    "columns": "1",
+    "method": null,
+    "prefix": "administration.owners",
+    "fields": [{
         "label": "Name",
         "column": "name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -21,7 +16,7 @@
         "label": "Description",
         "column": "description",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -29,7 +24,7 @@
         "label": "Roles",
         "column": "roleList",
         "value": null,
-        "config": {
+        "meta": {
             "type": "select",
             "multiple": true,
             "options": null
@@ -38,7 +33,7 @@
         "label": "Active",
         "column": "is_active",
         "value": false,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "checkbox"
         }

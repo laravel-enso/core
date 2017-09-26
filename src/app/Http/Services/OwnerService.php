@@ -9,35 +9,29 @@ use LaravelEnso\RoleManager\app\Models\Role;
 
 class OwnerService
 {
-    private $request;
+    private const FormPath = __DIR__ . '/../../Forms/owner.json';
 
-    public function __construct(Request $request)
+    public function create(Owner $owner)
     {
-        $this->request = $request;
-    }
-
-    public function create()
-    {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/owner.json'))
-            ->setAction('POST')
+        $form = (new FormBuilder(self::FormPath, $owner))
+            ->setMethod('POST')
             ->setTitle('Create Owner')
-            ->setUrl('/administration/owners')
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/core::administration.owners.create', compact('form'));
+        return compact('form', 'owner');
     }
 
-    public function store(Owner $owner)
+    public function store(Request $request, Owner $owner)
     {
-        \DB::transaction(function () use (&$owner) {
-            $owner = $owner->create($this->request->all());
-            $owner->roles()->sync($this->request->get('roleList'));
+        \DB::transaction(function () use ($request, &$owner) {
+            $owner = $owner->create($request->all());
+            $owner->roles()->sync($request->get('roleList'));
         });
 
         return [
             'message'  => __('The entity was created!'),
-            'redirect' => '/administration/owners/'.$owner->id.'/edit',
+            'redirect' => route('administration.owners.edit', $owner->id, false),
         ];
     }
 
@@ -45,25 +39,24 @@ class OwnerService
     {
         $owner->append(['roleList']);
 
-        $form = (new FormBuilder(__DIR__.'/../../Forms/owner.json', $owner))
-            ->setAction('PATCH')
+        $form = (new FormBuilder(self::FormPath, $owner))
+            ->setMethod('PATCH')
             ->setTitle('Edit Owner')
-            ->setUrl('/administration/owners/'.$owner->id)
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/core::administration.owners.edit', compact('form', 'owner'));
+        return compact('form', 'owner');
     }
 
-    public function update(Owner $owner)
+    public function update(Request $request, Owner $owner)
     {
-        \DB::transaction(function () use ($owner) {
-            $owner->update($this->request->all());
-            $owner->roles()->sync($this->request->get('roleList'));
+        \DB::transaction(function () use ($request, $owner) {
+            $owner->update($request->all());
+            $owner->roles()->sync($request->get('roleList'));
         });
 
         return [
-            'message' => __(config('labels.savedChanges')),
+            'message' => __(config('enso.labels.savedChanges')),
         ];
     }
 
@@ -78,8 +71,8 @@ class OwnerService
         $owner->delete();
 
         return [
-            'message'  => __(config('labels.successfulOperation')),
-            'redirect' => '/administration/owners',
+            'message'  => __(config('enso.labels.successfulOperation')),
+            'redirect' => route('administration.owners.index', [], false),
         ];
     }
 }

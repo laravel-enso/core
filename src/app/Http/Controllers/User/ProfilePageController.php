@@ -12,8 +12,7 @@ class ProfilePageController extends Controller
     {
         $this->authorize('update-profile', $user);
         $user->update($request->all());
-        flash()->success(__(config('labels.savedChanges')));
 
-        return back();
+        return [ 'message' => __(config('enso.labels.successfulOperation')) ];
     }
 }
