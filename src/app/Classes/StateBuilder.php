@@ -12,7 +12,6 @@ class StateBuilder
 {
     private $user;
     private $state;
-    private $permissions;
 
     public function __invoke(User $user)
     {
