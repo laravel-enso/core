@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers;
 
-use App\Classes\StateBuilder;
 use App\Http\Controllers\Controller;
+use LaravelEnso\Core\app\Classes\StateBuilder;
 
 class AppInitController extends Controller
 {
