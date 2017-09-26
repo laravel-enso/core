@@ -37,7 +37,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel-enso/actionlogger": "2.0.*",
         "laravel-enso/avatarmanager": "2.0.*",
-        "laravel-enso/charts": "^2.0.*",
+        "laravel-enso/charts": "2.0.*",
         "laravel-enso/datatable": "2.0.*",
         "laravel-enso/dbsyncmigrations": "2.0.*",
         "laravel-enso/filemanager": "2.0.*",
