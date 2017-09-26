@@ -43,7 +43,7 @@
         "laravel-enso/filemanager": "2.0.*",
         "laravel-enso/formbuilder": "2.0.*",
         "laravel-enso/helpers": "1.3.*",
-        "laravel-enso/historytracker": "2.0.*",
+        "laravel-enso/historytracker": "1.3.*",
         "laravel-enso/imagetransformer": "1.3.*",
         "laravel-enso/impersonate": "2.0.*",
         "laravel-enso/localisation": "2.0.*",
