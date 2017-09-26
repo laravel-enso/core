@@ -6,7 +6,6 @@ use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
-use LaravelEnso\MenuManager\app\Models\Menu;
 
 class StateBuilder
 {
@@ -27,7 +26,7 @@ class StateBuilder
     private function setState()
     {
         $languages = Language::get(['name', 'flag']);
-        $menus     = $this->getMenus();
+        $menus = $this->getMenus();
 
         $this->state = [
             'menus'         => $menus,
@@ -35,7 +34,7 @@ class StateBuilder
             'languages'     => $languages->pluck('flag', 'name'),
             'locale'        => $this->user->preferences->global->lang,
             'themes'        => collect((new Themes())->all()),
-            'theme'         => "clean",
+            'theme'         => 'clean',
             'csrfToken'     => csrf_token(),
             'pusherToken'   => config('broadcasting.connections.pusher.key'),
             'implicitMenu'  => $this->user->role->menu,
@@ -62,7 +61,7 @@ class StateBuilder
             }
 
             $json = json_decode(\File::get(
-                resource_path('lang' . DIRECTORY_SEPARATOR . $lang->name . '.json')
+                resource_path('lang'.DIRECTORY_SEPARATOR.$lang->name.'.json')
             ));
 
             $i18n[$lang->name] = $json;
