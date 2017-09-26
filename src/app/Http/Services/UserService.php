@@ -9,7 +9,7 @@ use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 
 class UserService
 {
-    private const FormPath = __DIR__ . '/../../Forms/user.json';
+    private const FormPath = __DIR__.'/../../Forms/user.json';
 
     public function create()
     {
@@ -25,9 +25,9 @@ class UserService
     {
         \DB::transaction(function () use ($request, &$user) {
             $user->fill($request->all());
-            $user->email    = $request->get('email');
+            $user->email = $request->get('email');
             $user->owner_id = $request->get('owner_id');
-            $user->role_id  = $request->get('role_id');
+            $user->role_id = $request->get('role_id');
             $user->save();
         });
 
@@ -57,9 +57,9 @@ class UserService
     public function update(Request $request, User $user)
     {
         $user->fill($request->all());
-        $user->email    = $request->get('email');
+        $user->email = $request->get('email');
         $user->owner_id = $request->get('owner_id');
-        $user->role_id  = $request->get('role_id');
+        $user->role_id = $request->get('role_id');
         $user->save();
 
         return [

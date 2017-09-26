@@ -9,7 +9,7 @@ use LaravelEnso\RoleManager\app\Models\Role;
 
 class OwnerService
 {
-    private const FormPath = __DIR__ . '/../../Forms/owner.json';
+    private const FormPath = __DIR__.'/../../Forms/owner.json';
 
     public function create(Owner $owner)
     {

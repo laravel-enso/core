@@ -10,6 +10,7 @@ class VerifyActiveState
     {
         if ($request->user()->isDisabled()) {
             auth()->logout();
+
             throw new \EnsoException(__(config('enso.labels.disabledAccount')), 401);
         }
 

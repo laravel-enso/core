@@ -8,22 +8,22 @@ use LaravelEnso\Core\app\Models\User;
 
 class UserProfile
 {
-	private $user;
+    private $user;
 
-	public function __construct(User $user)
-	{
-		$this->user = $user;
-		$this->build();
-	}
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+        $this->build();
+    }
 
-	public function get()
-	{
-		return $this->user;
-	}
+    public function get()
+    {
+        return $this->user;
+    }
 
-	private function build()
-	{
-		$this->user->load(['owner', 'role', 'avatar']);
+    private function build()
+    {
+        $this->user->load(['owner', 'role', 'avatar']);
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
         $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;
@@ -33,12 +33,12 @@ class UserProfile
         );
 
         $this->user->timeline = ActionLog::whereUserId($this->user->id)
-            ->whereHas('permission', function($query) {
-            	$query->where('name', 'like', '%index')
-            		->orWhere('name', 'like', '%create')
-            		->orWhere('name', 'like', '%edit')
-            		->orWhere('name', 'like', '%destroy');
+            ->whereHas('permission', function ($query) {
+                $query->where('name', 'like', '%index')
+                    ->orWhere('name', 'like', '%create')
+                    ->orWhere('name', 'like', '%edit')
+                    ->orWhere('name', 'like', '%destroy');
             })->with('permission')->latest()
             ->paginate(10);
-	}
+    }
 }

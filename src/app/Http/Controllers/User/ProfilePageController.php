@@ -13,6 +13,6 @@ class ProfilePageController extends Controller
         $this->authorize('update-profile', $user);
         $user->update($request->all());
 
-        return [ 'message' => __(config('enso.labels.successfulOperation')) ];
+        return ['message' => __(config('enso.labels.successfulOperation'))];
     }
 }
