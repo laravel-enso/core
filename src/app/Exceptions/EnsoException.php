@@ -6,22 +6,15 @@ use Exception;
 
 class EnsoException extends Exception
 {
-    private $level;
-
-    public function __construct(string $message, string $level = 'error', array $errorBag = [], int $code = 400) //fixme
+    public function __construct(string $message)
     {
-        $this->level = $level;
-        $this->errorBag = $errorBag;
-        parent::__construct(__($message), $code);
+        parent::__construct(__($message), 455);
     }
 
-    public function getLevel()
+    public function render()
     {
-        return $this->level;
-    }
-
-    public function getErrorBag()
-    {
-        return $this->errorBag;
+        return response()->json([
+            'message'  => $this->getMessage(),
+        ], $this->getCode());
     }
 }
