@@ -6,13 +6,14 @@ use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use Tests\TestCase;
 
-class UserTest extends TestHelper
+class UserTest extends TestCase
 {
-    use DatabaseMigrations, TestDataTable, TestCreateForm;
+    use DatabaseMigrations, SignIn, TestDataTable, TestCreateForm;
 
     private $owner;
     private $role;
@@ -23,11 +24,11 @@ class UserTest extends TestHelper
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->signIn(User::first());
         $this->faker = Factory::create();
         $this->owner = Owner::first(['id']);
-        $this->role = Role::first(['id']);
+        $this->role  = Role::first(['id']);
     }
 
     /** @test */
@@ -36,13 +37,13 @@ class UserTest extends TestHelper
         Notification::fake();
 
         $postParams = $this->postParams();
-        $response = $this->post(route('administration.users.store', [], false), $postParams);
-        $user = User::whereFirstName($postParams['first_name'])->first(['id']);
+        $response   = $this->post(route('administration.users.store', [], false), $postParams);
+        $user       = User::whereFirstName($postParams['first_name'])->first(['id']);
 
         $response->assertStatus(200)
             ->assertJson([
                 'message'  => 'The user was created!',
-                'redirect' => '/administration/users/'.$user->id.'/edit',
+                'redirect' => '/administration/users/' . $user->id . '/edit',
             ]);
 
         Notification::assertSentTo([$user], ResetPasswordNotification::class);
@@ -61,7 +62,7 @@ class UserTest extends TestHelper
     /** @test */
     public function update()
     {
-        $user = $this->createUser();
+        $user            = $this->createUser();
         $user->last_name = 'edited';
 
         $this->patch(route('administration.users.update', $user->id, false), $user->toArray())
@@ -85,10 +86,10 @@ class UserTest extends TestHelper
 
     private function createUser()
     {
-        $user = new User($this->postParams());
-        $user->email = $this->faker->email;
+        $user           = new User($this->postParams());
+        $user->email    = $this->faker->email;
         $user->owner_id = $this->owner->id;
-        $user->role_id = $this->role->id;
+        $user->role_id  = $this->role->id;
         $user->save();
 
         return $user;

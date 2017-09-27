@@ -10,4 +10,11 @@ class EnsoException extends Exception
     {
         parent::__construct(__($message), $code);
     }
+
+    public function render()
+    {
+        return response()->json([
+            'message'  => $this->getMessage(),
+        ], $this->getCode());
+    }
 }

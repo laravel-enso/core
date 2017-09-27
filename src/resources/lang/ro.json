@@ -130,6 +130,7 @@
     "notifications": "notificari",
     "Passwords must be at least six characters and match the confirmation.": "Parola trebuie s\u0103 fie de cel pu\u021bin \u0219ase caractere \u0219i s\u0103 se potriveasc\u0103 cu cea de confirmare.",
     "Your password has been reset!": "Parola a fost resetat\u0103!",
+    "Your account has been disabled. Please contact the administrator" : "Ne pare rau, contul tau a fost dezactivat. Te rugam contacteaza administratorul",
     "We have e-mailed your password reset link!": "Am trimis un e-mail cu link-ul de resetare a parolei!",
     "This password reset token is invalid.": "Codul de resetare a parolei este gre\u0219it.",
     "We can't find a user with that e-mail address.": "Nu exist\u0103 niciun utilizator cu aceast\u0103 adres\u0103 de e-mail.",
