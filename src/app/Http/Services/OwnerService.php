@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\RoleManager\app\Models\Role;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class OwnerService
 {
@@ -63,7 +64,7 @@ class OwnerService
     public function destroy(Owner $owner)
     {
         if ($owner->users()->count()) {
-            throw new \EnsoException(
+            throw new ConflictHttpException(
                 __("The owner can't be deleted because it has users attached")
             );
         }

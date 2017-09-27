@@ -6,9 +6,9 @@ use Exception;
 
 class EnsoException extends Exception
 {
-    public function __construct(string $message, int $code = 400)
+    public function __construct(string $message)
     {
-        parent::__construct(__($message), $code);
+        parent::__construct(__($message), 455);
     }
 
     public function render()
