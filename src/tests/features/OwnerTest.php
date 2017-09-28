@@ -8,7 +8,6 @@ use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Tests\TestCase;
 
 class OwnerTest extends TestCase
@@ -25,7 +24,7 @@ class OwnerTest extends TestCase
 
         // $this->withoutExceptionHandling();
         $this->signIn(User::first());
-        $this->role  = Role::first(['id']);
+        $this->role = Role::first(['id']);
         $this->faker = Factory::create();
     }
 
@@ -33,13 +32,13 @@ class OwnerTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post(route('administration.owners.store', [], false), $postParams);
-        $owner      = Owner::whereName($postParams['name'])->first();
+        $response = $this->post(route('administration.owners.store', [], false), $postParams);
+        $owner = Owner::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJson([
                 'message'  => 'The entity was created!',
-                'redirect' => '/administration/owners/' . $owner->id . '/edit',
+                'redirect' => '/administration/owners/'.$owner->id.'/edit',
             ]);
     }
 
@@ -47,7 +46,7 @@ class OwnerTest extends TestCase
     public function edit()
     {
         $postParams = $this->postParams();
-        $owner      = Owner::create($postParams);
+        $owner = Owner::create($postParams);
 
         $this->get(route('administration.owners.edit', $owner->id, false))
             ->assertStatus(200)
@@ -57,8 +56,8 @@ class OwnerTest extends TestCase
     /** @test */
     public function update()
     {
-        $postParams  = $this->postParams();
-        $owner       = Owner::create($postParams);
+        $postParams = $this->postParams();
+        $owner = Owner::create($postParams);
         $owner->name = 'edited';
 
         $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
@@ -72,7 +71,7 @@ class OwnerTest extends TestCase
     public function destroy()
     {
         $postParams = $this->postParams();
-        $owner      = Owner::create($postParams);
+        $owner = Owner::create($postParams);
 
         $this->delete(route('administration.owners.destroy', $owner->id, false))
             ->assertStatus(200)
@@ -85,7 +84,7 @@ class OwnerTest extends TestCase
     public function cant_destroy_if_has_users_attached()
     {
         $postParams = $this->postParams();
-        $owner      = Owner::create($postParams);
+        $owner = Owner::create($postParams);
         $this->attachUser($owner);
 
         $this->delete(route('administration.owners.destroy', $owner->id, false))
@@ -102,9 +101,9 @@ class OwnerTest extends TestCase
             'phone'      => $this->faker->phoneNumber,
             'is_active'  => 1,
         ]);
-        $user->email    = $this->faker->email;
+        $user->email = $this->faker->email;
         $user->owner_id = $owner->id;
-        $user->role_id  = $this->role->id;
+        $user->role_id = $this->role->id;
         $user->save();
     }
 
