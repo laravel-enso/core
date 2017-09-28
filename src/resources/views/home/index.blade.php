@@ -11,9 +11,6 @@
         <link id="theme" rel="stylesheet" type="text/css" href="{{ $theme }}">
         <link href="{{ mix('css/enso.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css"/>
-
-        <style>
-        </style>
     </head>
     <body>
 

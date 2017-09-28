@@ -22,7 +22,7 @@ class CreateStructureForOwners extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Owners', 'icon' => 'fa fa-fw fa-list-alt', 'link' => 'administration/owners', 'has_children' => false,
+        'name' => 'Owners', 'icon' => 'fa fa-fw fa-list-alt', 'link' => 'administration.owners.index', 'has_children' => false,
     ];
 
     protected $parentMenu = 'Administration';
