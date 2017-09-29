@@ -1,0 +1,29 @@
+@import '~font-awesome/scss/_variables.scss';
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
+@import '~animate.css/animate.css';
+@import "./helpers";
+@import './libs/ios-switch';
+@import "~vue-directive-tooltip/src/css/index";
+
+.animated {
+    animation-duration: .250s;
+}
+
+.toast-top-right {
+  top: 70px !important;
+  right: 5px;
+}
+
+.toast-top-center {
+  top: 70px !important;
+}
+
+.icon.angle[aria-hidden="true"] {
+    transform: rotate(180deg);
+}
+
+.icon.angle {
+    transition: transform .300s ease;
+}
