@@ -9,7 +9,6 @@
 
         <link rel="icon" href="/favicon.ico"/>
         <link id="theme" rel="stylesheet" type="text/css" href="/themes/clean/bulma.min.css">
-        <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
         <link href="{{ mix('css/enso.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ mix('css/auth.css') }}" rel="stylesheet" type="text/css"/>
     </head>
