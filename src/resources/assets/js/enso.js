@@ -1,9 +1,16 @@
-require('./bootstrap');
-require('./app');
+import './bootstrap';
+import './app';
 
-import App from './components/enso/App.vue';
+import router from './router';
+import store from './store';
+import App from './pages/enso/App.vue';
+import { sync } from 'vuex-router-sync';
+
+sync(store, router);
 
 new Vue({
-    el: '#app',
-    components: { App }
+	el: '#app',
+	router,
+	store,
+    ...App
 });

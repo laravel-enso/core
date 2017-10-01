@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class OwnerService
 {
-    private const FormPath = __DIR__.'/../../Forms/owner.json';
+    const FormPath = __DIR__ . '/../../Forms/owner.json';
 
     public function create(Owner $owner)
     {
@@ -32,7 +32,8 @@ class OwnerService
 
         return [
             'message'  => __('The entity was created!'),
-            'redirect' => route('administration.owners.edit', $owner->id, false),
+            'redirect' => 'administration.owners.edit',
+            'id'       => $owner->id,
         ];
     }
 
@@ -73,7 +74,7 @@ class OwnerService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => route('administration.owners.index', [], false),
+            'redirect' => 'administration.owners.index',
         ];
     }
 }

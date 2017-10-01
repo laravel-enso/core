@@ -9,7 +9,7 @@ use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 
 class UserService
 {
-    private const FormPath = __DIR__.'/../../Forms/user.json';
+    const FormPath = __DIR__ . '/../../Forms/user.json';
 
     public function create()
     {
@@ -25,15 +25,16 @@ class UserService
     {
         \DB::transaction(function () use ($request, &$user) {
             $user->fill($request->all());
-            $user->email = $request->get('email');
+            $user->email    = $request->get('email');
             $user->owner_id = $request->get('owner_id');
-            $user->role_id = $request->get('role_id');
+            $user->role_id  = $request->get('role_id');
             $user->save();
         });
 
         return [
             'message'  => __('The user was created!'),
-            'redirect' => route('administration.users.edit', $user->id, false),
+            'redirect' => 'administration.users.edit',
+            'id'       => $user->id,
         ];
     }
 
@@ -57,9 +58,9 @@ class UserService
     public function update(Request $request, User $user)
     {
         $user->fill($request->all());
-        $user->email = $request->get('email');
+        $user->email    = $request->get('email');
         $user->owner_id = $request->get('owner_id');
-        $user->role_id = $request->get('role_id');
+        $user->role_id  = $request->get('role_id');
         $user->save();
 
         return [
@@ -77,7 +78,7 @@ class UserService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => route('administration.users.index', [], false),
+            'redirect' => 'administration.users.index',
         ];
     }
 }

@@ -3,46 +3,38 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
 
-class PreferencesController extends Controller //fixme. We need dedicated controllers for global / local
+class PreferencesController extends Controller//fixme. We need dedicated controllers for global / local
 {
-    private $request;
-
-    public function __construct(Request $request = null)
-    {
-        $this->request = $request;
-    }
-
     public function setPreferences($route = null)
     {
         return $route
-            ? $this->setLocalPreferences($route)
-            : $this->setGlobalPreferences();
+        ? $this->setLocalPreferences($route)
+        : $this->setGlobalPreferences();
     }
 
     public function resetToDefault($route = null)
     {
         return $route
-            ? $this->resetLocalPreferences($route)
-            : $this->resetGlobalPreferences();
+        ? $this->resetLocalPreferences($route)
+        : $this->resetGlobalPreferences();
     }
 
     private function setGlobalPreferences()
     {
-        if (!$this->request->user()->preference) {
-            $this->request->user()->preference()->save($this->getDefaultPreference());
+        if (!request()->user()->preference) {
+            request()->user()->preference()->save($this->getDefaultPreference());
         }
 
-        $this->updateGlobalPreference($this->request->get('global'));
+        $this->updateGlobalPreference(request()->get('global'));
     }
 
     private function setLocalPreferences($route)
     {
-        if (!$this->request->user()->preference) {
-            $this->request->user()->preference()->save($this->getDefaultPreference());
+        if (!request()->user()->preference) {
+            request()->user()->preference()->save($this->getDefaultPreference());
         }
 
         $this->updateLocalPreference($route, $this->request->all());
@@ -50,8 +42,8 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
 
     private function resetGlobalPreferences()
     {
-        if (!$this->request->user()->preference) {
-            return $this->request->user()->preference()->save($this->getDefaultPreference());
+        if (!request()->user()->preference) {
+            return request()->user()->preference()->save($this->getDefaultPreference());
         }
 
         $this->updateGlobalPreference($this->getGlobalPreferences());
@@ -77,7 +69,7 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
     private function updateGlobalPreference($preferences)
     {
         foreach ($preferences as $key => $value) {
-            $this->request->user()->preference()->update(['value->global->'.$key => $value]);
+            request()->user()->preference()->update(['value->global->' . $key => $value]);
         }
     }
 
@@ -85,10 +77,10 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
     {
         foreach ($preferences as $key => $value) {
             if (is_array($value) && count($value) === 1) {
-                return $this->updateLocalPreference($route.'->'.$key, $value);
+                return $this->updateLocalPreference($route . '->' . $key, $value);
             }
 
-            $this->request->user()->preference()->update(['value->local->'.$route.'->'.$key => json_encode($value)]);
+            request()->user()->preference()->update(['value->local->' . $route . '->' . $key => json_encode($value)]);
         }
     }
 }

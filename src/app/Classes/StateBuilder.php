@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
+use LaravelEnso\Core\app\Classes\Inspiring;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Localisation\app\Models\Language;
@@ -28,18 +29,13 @@ class StateBuilder
         $menus = $this->getMenus();
 
         $this->state = [
+            'user'          => $this->user,
             'menus'         => $menus,
             'i18n'          => $this->getI18N($languages),
             'languages'     => $languages->pluck('flag', 'name'),
-            'locale'        => $this->user->preferences->global->lang,
             'themes'        => collect((new Themes())->all()),
-            'theme'         => 'clean',
-            'csrfToken'     => csrf_token(),
-            'pusherToken'   => config('broadcasting.connections.pusher.key'),
             'implicitMenu'  => $this->user->role->menu,
-            'user'          => $this->user,
-            'impersonating' => session()->has('impersonating'),
-            'dateFormat'    => config('enso.config.jsDateFormat'),
+            // 'impersonating' => session()->has('impersonating'),
             'meta'          => $this->getMeta(),
         ];
     }
@@ -74,6 +70,9 @@ class StateBuilder
         return [
             'appName' => config('app.name'),
             'version' => config('enso.config.version'),
+            'quote' => Inspiring::quote(),
+            'env' => config('app.env'),
+            'dateFormat'    => config('enso.config.jsDateFormat')
         ];
     }
 }

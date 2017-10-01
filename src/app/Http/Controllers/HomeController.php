@@ -10,9 +10,8 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $inspiringQuote = Inspiring::quote();
         $theme = (new Themes())->get(request()->user()->preferences->global->theme);
 
-        return view('laravel-enso/core::home.index', compact('inspiringQuote', 'theme'));
+        return view('laravel-enso/core::index', compact('theme'));
     }
 }
