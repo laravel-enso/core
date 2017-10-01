@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class OwnerService
 {
-    const FormPath = __DIR__ . '/../../Forms/owner.json';
+    const FormPath = __DIR__.'/../../Forms/owner.json';
 
     public function create(Owner $owner)
     {

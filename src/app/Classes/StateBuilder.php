@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use LaravelEnso\Core\app\Classes\Inspiring;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Localisation\app\Models\Language;
@@ -68,11 +67,11 @@ class StateBuilder
     private function getMeta()
     {
         return [
-            'appName' => config('app.name'),
-            'version' => config('enso.config.version'),
-            'quote' => Inspiring::quote(),
-            'env' => config('app.env'),
-            'dateFormat'    => config('enso.config.jsDateFormat')
+            'appName'       => config('app.name'),
+            'version'       => config('enso.config.version'),
+            'quote'         => Inspiring::quote(),
+            'env'           => config('app.env'),
+            'dateFormat'    => config('enso.config.jsDateFormat'),
         ];
     }
 }

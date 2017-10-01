@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\app\Classes\Inspiring;
 use LaravelEnso\Core\app\Enums\Themes;
 
 class HomeController extends Controller
