@@ -10,8 +10,8 @@ class VerifyXMLHttpRequest
     public function handle($request, Closure $next)
     {
         if (!$request->isXmlHttpRequest()) {
-        	\Log::warning('Potential CSRF attempt');
-        	\Log::warning($request->headers);
+            \Log::warning('Potential CSRF attempt');
+            \Log::warning($request->headers);
 
             throw new AuthorizationException();
         }
