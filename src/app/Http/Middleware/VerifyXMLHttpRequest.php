@@ -5,14 +5,15 @@ namespace LaravelEnso\Core\app\Http\Middleware;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 
-class VerifyActiveState
+class VerifyXMLHttpRequest
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->isDisabled()) {
-            auth()->logout();
+        if (!$request->isXmlHttpRequest()) {
+        	\Log::warning('Potential CSRF attempt');
+        	\Log::warning($request->headers);
 
-            throw new AuthorizationException(__(config('enso.labels.disabledAccount')), 401);
+            throw new AuthorizationException();
         }
 
         return $next($request);

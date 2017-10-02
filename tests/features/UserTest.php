@@ -24,7 +24,7 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->signIn(User::first());
         $this->faker = Factory::create();
         $this->owner = Owner::first(['id']);
