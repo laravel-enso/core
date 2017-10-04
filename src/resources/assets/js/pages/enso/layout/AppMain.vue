@@ -11,7 +11,7 @@
 	    </sidebar>
 	    <section class="main-content">
 	        <div class="container is-fluid page-content is-marginless">
-	        	<page-header :title="__(title)"></page-header>
+	        	<page-header :title="__($route.meta.title)"></page-header>
 		        <router></router>
 	        </div>
 	    </section>
@@ -47,9 +47,6 @@
 			...mapState(['stateLoaded', 'user', 'menus', 'meta']),
 			...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'navbar', 'settingsBar']),
             ...mapGetters('locale', ['__']),
-            title() {
-            	return this.$route.meta.title;
-            }
         },
 
         watch: {
@@ -104,16 +101,12 @@
 	        	axios.get(route('core.impersonate.start', id, false)).then(response => {
 	        		toastr.warning(response.data.message);
 	        		this.getState();
-	        	}).catch(error => {
-	        		this.handleError(error);
 	        	});
 	        },
 	        stopImpersonating() {
 	        	axios.get(route('core.impersonate.stop', [], false)).then(response => {
 	        		toastr.info(response.data.message);
 	        		this.getState();
-	        	}).catch(error => {
-	        		this.handleError(error);
 	        	});
 	        }
 		},

@@ -48,10 +48,7 @@
             setPreferences() {
                 axios.patch(route('core.preferences.setPreferences', [], false),
                     { 'global': this.user.preferences.global }
-                ).then(() => {
-                }).catch(error => {
-                    this.handleError(error);
-                });
+                );
             },
         }
 	};

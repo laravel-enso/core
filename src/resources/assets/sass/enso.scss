@@ -1,14 +1,16 @@
 @import '~font-awesome/scss/_variables.scss';
-$fa-font-path: "~font-awesome/fonts";
+$fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome.scss';
 
 @import '~animate.css/animate.css';
-@import "./helpers";
+@import './helpers';
 @import './libs/ios-switch';
-@import "~vue-directive-tooltip/src/css/index";
+@import '~vue-directive-tooltip/src/css/index';
+
+@import './app';
 
 .animated {
-    animation-duration: .250s;
+    animation-duration: .4s;
 }
 
 .toast-top-right {

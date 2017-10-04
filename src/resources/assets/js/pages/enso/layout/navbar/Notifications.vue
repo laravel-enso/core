@@ -51,7 +51,7 @@
 
 		computed: {
 			...mapGetters('locale', ['__']),
-			...mapState(['user'], 'tokens'),
+			...mapState(['user', 'auth']),
 		},
 
 		data() {
@@ -78,8 +78,6 @@
 			getCount() {
 				axios.get(route('core.notifications.getCount', [], false)).then(response => {
 					this.unreadCount = response.data;
-				}).catch(error => {
-					this.handleError(error);
 				});
 			},
 			getList() {
@@ -96,7 +94,6 @@
 					this.loading = false;
 				}).catch(error => {
 					this.loading = false;
-					this.handleError(error);
 				});
 			},
 			process(notification) {
@@ -104,15 +101,11 @@
 					this.unreadCount = this.unreadCount > 0 ? --this.unreadCount : this.unreadCount; //fixme
 					notification.read_at = response.data.read_at;
 					this.$bus.$emit('redirect', notification.data.path);
-				}).catch(error => {
-					this.handleError(error);
 				});
 			},
 			markAllAsRead() {
 				axios.patch(route('core.notifications.markAllAsRead', [], false)).then(response => {
 					this.setAllAsRead();
-				}).catch(error => {
-					this.handleError(error);
 				});
 			},
 			setAllAsRead() {
@@ -126,17 +119,15 @@
 				axios.patch(route('core.notifications.clearAll', [], false)).then(response => {
 					this.notifications = [];
 					this.unreadCount = 0;
-				}).catch(error => {
-					this.handleError(error);
 				});
 			},
 			init() {
 				this.Echo = new Echo({
 				    broadcaster: 'pusher',
-				    key: this.tokens.pusher,
+				    key: this.auth.pusher,
 				    cluster: 'eu',
 				    namespace: 'App.Events',
-				    auth: { headers: { 'Authorization': 'Bearer ' + this.tokens.auth } }
+				    auth: { headers: { 'Authorization': 'Bearer ' + this.auth.jwt } }
 				});
 			},
 			listen() {

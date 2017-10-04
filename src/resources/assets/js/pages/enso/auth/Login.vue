@@ -15,7 +15,8 @@
 	                	:class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
 	                	type="email"
 	                	placeholder="Email"
-	                	v-model="email">
+	                	v-model="email"
+	                	@keypress.down="hasErrors=false">
 	                <span class="icon is-small is-left">
 	                    <i class="fa fa-envelope"></i>
 	                </span>
@@ -35,7 +36,8 @@
 	                	:class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
 	                	type="password"
 	                	placeholder="Password"
-	                	v-model="password">
+	                	v-model="password"
+	                	@keypress.down="hasErrors=false">
 	                <span class="icon is-small is-left">
 	                    <i class="fa fa-lock"></i>
 	                </span>
@@ -80,6 +82,8 @@
 
 <script>
 
+	import { mapActions } from 'vuex';
+
 	export default {
 		name: 'Login',
 
@@ -113,6 +117,7 @@
 	    },
 
 	    methods: {
+	    	...mapActions('auth', ['login']),
 	    	submit() {
 	    		this.loading = true;
 
@@ -120,9 +125,7 @@
 	    			.then(({ data }) => {
 	    			this.loading = false;
 	    			this.isSuccessful = true;
-	    			setTimeout(() => this.$store.dispatch('tokens/set',
-	    				{ tokens: data, remember: this.remember }
-	    			), 1000);
+	    			setTimeout(() => this.login({ tokens: data, remember: this.remember }), 1000);
 	    		}).catch(error => {
 	    			this.loading = false;
 	    			this.hasErrors = true;
@@ -130,8 +133,6 @@
 	    			if (error.response.status === 422) {
 	    				return toastr.error(error.response.data.email);
 	    			}
-
-	    			this.handleError(error);
 	    		});
 	    	}
 	    }

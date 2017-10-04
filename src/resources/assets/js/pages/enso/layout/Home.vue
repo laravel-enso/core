@@ -9,13 +9,13 @@
             		size="large">
         		</overlay>
 	            <div class="title is-1 inspiring animated fadeInDown"
-	            	 v-if="!loading">
+	            	 v-if="meta.quote">
 	            	{{ meta.quote }}
 	            </div>
 
 	            <button class="animated fadeInRightBig button is-outlined"
 	            	@click="$emit('enter-app')"
-	            	v-if="!loading">
+	            	v-if="meta.quote">
 	            	Enter the application
             	</button>
        	 	</div>
@@ -41,7 +41,7 @@
 
 		data() {
 			return {
-				loading: false
+				loading: true
 			}
 		},
 
@@ -52,7 +52,6 @@
 		methods: {
 			...mapActions(['setState']),
 			init() {
-				this.loading = true;
 				this.setState();
 				setTimeout(() => this.loading = false, 500);
 			}

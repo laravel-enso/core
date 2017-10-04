@@ -45,7 +45,7 @@
             "type": "select",
             "multiple": false,
             "options": [],
-            "source": "/administration/owners/getOptionList"
+            "source": "administration.owners.getOptionList"
         }
     }, {
         "label": "Role",
@@ -56,7 +56,7 @@
             "type": "select",
             "multiple": false,
             "options": [],
-            "source": "/system/roles/getOptionList"
+            "source": "system.roles.getOptionList"
         }
     }, {
         "label": "Active",

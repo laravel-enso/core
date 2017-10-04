@@ -6,9 +6,8 @@ import { Administration } from './routes/enso/administration';
 import { System } from './routes/enso/system';
 import { DataImport } from './routes/enso/dataImport';
 import { notFound } from './routes/enso/notFound';
-import { home } from './routes/enso/home';
 
-const routes = Auth.concat([ Dashboard, Administration, System, DataImport, notFound, home ]);
+const routes = Auth.concat([ Dashboard, Administration, System, DataImport, notFound ]);
 
 const router = new Router({
 	mode: 'history',

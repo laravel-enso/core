@@ -49,8 +49,6 @@
 				this.form = response.data.form;
 				this.initialised = true;
 				this.pivotParams.owners.id = this.getOwnerId();
-			}).catch(error => {
-				this.handleError(error);
 			});
 		},
 

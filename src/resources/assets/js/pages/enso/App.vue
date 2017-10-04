@@ -2,24 +2,13 @@
 
 	<div id="app">
 		<transition
+			enter-active-class="fadeIn"
 			leave-active-class="fadeOut">
-			<auth v-if="!auth"
+			<component :is="component"
 				class="animated"
-				:class="{ 'fadeIn': !auth }">
-			</auth>
-		</transition>
-
-		<transition
-			leave-active-class="fadeOut">
-			<home class="animated"
-				:class="{ 'fadeIn': showHome }"
-				v-if="showHome"
 				@enter-app="showHome=false">
-			</home>
+			</component>
 		</transition>
-
-		<app-main v-if="auth && !showHome">
-		</app-main>
 	</div>
 
 </template>
@@ -29,7 +18,7 @@
 	import Auth from './layout/Auth.vue';
 	import Home from'./layout/Home.vue';
 	import AppMain from'./layout/AppMain.vue';
-	import { mapState } from 'vuex';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		name: 'App',
@@ -37,7 +26,14 @@
 		components: { Auth, Home, AppMain },
 
 		computed: {
-			...mapState('tokens', ['auth']),
+			...mapGetters('auth', ['isAuth']),
+			component() {
+				return !this.isAuth
+					? 'auth'
+					: (this.showHome
+						? 'home'
+						: 'app-main');
+			}
 		},
 
 		data() {
@@ -47,9 +43,9 @@
 		},
 
 		watch: {
-			auth: {
+			isAuth: {
 				handler() {
-					if (this.auth) {
+					if (this.isAuth) {
 						this.showHome = true;
 					}
 				}

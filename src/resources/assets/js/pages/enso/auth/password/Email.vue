@@ -88,15 +88,9 @@
                             ? toastr.error(error.response.data.message)
                             :  toastr.error(error.response.data.email);
                     }
-
-                    this.handleError(error);
                 });
             }
         }
 	};
 
 </script>
-
-<style>
-	
-</style>

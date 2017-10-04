@@ -4,7 +4,7 @@
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-mobile is-centered">
-                	<router></router>
+                	<router-view></router-view>
                 </div>
             </div>
         </div>
@@ -21,8 +21,10 @@
 
 		components: { Router },
 
-		beforeCreate() {
-			this.$router.push({ name: 'login' });
+		mounted() {
+			if (this.$route.path === '/') {
+				this.$router.replace({ path: '/login' });
+			}
 		}
 	};
 

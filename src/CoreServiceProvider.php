@@ -72,7 +72,6 @@ class CoreServiceProvider extends ServiceProvider
             VerifyActiveState::class,
             ActionLogger::class,
             VerifyRouteAccess::class,
-            VerifyXMLHttpRequest::class,
             // Impersonate::class,
             SetLanguage::class,
         ]);

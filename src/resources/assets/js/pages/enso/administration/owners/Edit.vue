@@ -45,8 +45,6 @@
 				this.form = response.data.form;
 				this.owner = response.data.owner;
 				this.initialised = true;
-			}).catch(error => {
-				this.handleError(error);
 			});
 		}
 	};

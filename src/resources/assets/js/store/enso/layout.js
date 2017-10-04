@@ -46,7 +46,7 @@ export const layout = {
             document.getElementById('theme').setAttribute('href', state.themes[getters.theme]);
         },
         switchTheme({ commit, dispatch }, theme) {
-            commit('updateTheme', theme, { root:true });
+            commit('setTheme', theme, { root:true });
             commit('toggleLights');
             setTimeout(() => dispatch('setTheme'), 300);
             setTimeout(() => commit('toggleLights'), 500);

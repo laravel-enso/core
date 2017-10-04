@@ -229,7 +229,6 @@
 	import FileUploader from '../../../../components/enso/fileuploader/FileUploader.vue';
 	import { mapGetters } from 'vuex';
 	import { mapState } from 'vuex';
-	import { mapMutations } from 'vuex';
 	import Cookie from 'js-cookie';
 
 	export default {
@@ -248,7 +247,7 @@
 	    		return this.isSelfVisiting ? this.user.avatarId : this.profileUser.avatarId;
 	    	},
 	    	avatarLink() {
-	    		return '/core/avatars/' + (this.avatarId || 'null');
+	    		return route('core.avatars.show', (this.avatarId || 'null'), false);
 	    	},
 	    	timeline() {
 	    		let self = this;
@@ -294,19 +293,14 @@
 		},
 
 		methods: {
-			...mapMutations('tokens', ['setAuth']),
 			deleteAvatar() {
 	            axios.delete(route('core.avatars.destroy', this.user.avatarId, false)).then(() => {
 	                this.$store.commit('setUserAvatar', null);
-	            }).catch(error => {
-	            	this.handleError(error);
 	            });
 	        },
 	        logout() {
-	        	axios.post('/api/logout').then(() => {
-	        		Cookie.remove('auth');
-		            Cookie.remove('pusherToken');
-		            this.setAuth(false);
+	        	axios.post(route('logout', [], false)).then(() => {
+		            this.$store.dispatch('auth/logout');
 	        	});
 	        },
 	        getDay(timestamp) {
@@ -327,8 +321,6 @@
 	        getPage(page) {
 	        	axios.get(this.paginationUrl + page).then(response => {
 					this.profileUser = response.data.user;
-				}).catch(error => {
-					this.handleError(error);
 				});
 	        }
 		},
@@ -337,8 +329,6 @@
 			axios.get(route(this.$route.name, this.$route.params.id, false)).then(response => {
 				this.profileUser = response.data.user;
 				this.initialised = true;
-			}).catch(error => {
-				this.handleError(error);
 			});
 		}
 	};
