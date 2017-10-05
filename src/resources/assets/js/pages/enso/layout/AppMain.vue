@@ -1,5 +1,4 @@
 <template>
-<template>
 
 	<div class="app-main"
 		:class="{ 'lights-off': lightsOff }">
