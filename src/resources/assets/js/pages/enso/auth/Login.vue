@@ -87,6 +87,13 @@
 	export default {
 		name: 'Login',
 
+		props: {
+			appName: {
+				type: String,
+				required: true
+			}
+		},
+
 		data() {
 			return {
 		    	loading: false,
@@ -94,8 +101,7 @@
 		    	password: '',
 		    	remember: false,
 		    	hasErrors: null,
-		    	isSuccessful: false,
-		    	appName: null
+		    	isSuccessful: false
 		    };
 		},
 
@@ -112,26 +118,22 @@
 	    	}
 	    },
 
-	    created() {
-	    	this.appName  = document.title;
-	    },
-
 	    methods: {
 	    	...mapActions('auth', ['login']),
 	    	submit() {
 	    		this.loading = true;
 
-	    		axios.post('/api/login', { email: this.email, password: this.password })
+	    		axios.post(route('login', [], false).toString(), { email: this.email, password: this.password })
 	    			.then(({ data }) => {
 	    			this.loading = false;
 	    			this.isSuccessful = true;
-	    			setTimeout(() => this.login({ tokens: data, remember: this.remember }), 1000);
-	    		}).catch(error => {
+	    			setTimeout(() => this.login(this.remember), 1000);
+	    		}).catch(({ response }) => {
 	    			this.loading = false;
 	    			this.hasErrors = true;
 
-	    			if (error.response.status === 422) {
-	    				return toastr.error(error.response.data.email);
+	    			if (response.response.status === 422) {
+	    				return toastr.error(response.response.data.email);
 	    			}
 	    		});
 	    	}

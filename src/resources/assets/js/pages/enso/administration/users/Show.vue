@@ -13,7 +13,7 @@
        					</div>
        					<div class="column">
        						<div class="level">
-       							<div class="level-item has-padding-top-medium">
+       							<div class="level-item has-padding-top-small">
        								<div>
 			       						<p class="title is-3">{{ profileUser.fullName }}</p>
 					          			<p>{{ __('role') }}: {{ profileUser.role.name }}</p>
@@ -34,7 +34,7 @@
 								          			</button>
 								          			<file-uploader v-if="!avatarId"
 														@upload-successful="$store.commit('setUserAvatar', $event.id)"
-														url="/core/avatars">
+														:url="uploadAvatarLink">
 														<template slot="upload-button"
 															scope="props">
 															<button  class="button is-small is-info"
@@ -240,6 +240,9 @@
 				locale: 'current'
 			}),
 			...mapState(['user', 'meta']),
+			uploadAvatarLink() {
+				return route('core.avatars.store', [], false)
+			},
 			isSelfVisiting() {
 				return this.user.id === this.profileUser.id;
 			},
@@ -299,7 +302,7 @@
 	            });
 	        },
 	        logout() {
-	        	axios.post(route('logout', [], false)).then(() => {
+	        	axios.post(route('logout', [], false).toString()).then(() => {
 		            this.$store.dispatch('auth/logout');
 	        	});
 	        },
@@ -344,12 +347,13 @@
 
 	.stat-value {
 		font-size: 3em;
-		padding-top: 20px;
+		padding-top: 12px;
 	}
 
 	.stat-key {
 		font-size: 1.4em;
 		font-weight: 200;
+		padding-bottom: 8px;
 	}
 
 	.level.user-controls {

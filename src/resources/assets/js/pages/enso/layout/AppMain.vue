@@ -64,7 +64,6 @@
 				this.setState();
 			}
 
-			this.setRedirectListener();
 			this.$bus.$on('start-impersonating', $event => this.startImpersonating($event));
 			this.$bus.$on('stop-impersonating', () => this.stopImpersonating());
 			this.$router.replace({ name: this.menus.implicit.link });
@@ -94,19 +93,16 @@
 				window.addEventListener('DOMContentLoaded', handler);
 				window.addEventListener('resize', handler);
 			},
-			setRedirectListener() {
-				this.$bus.$on('redirect', $event => this.$router.push({ path: $event }));//fixme
-			},
 			startImpersonating(id) {
 	        	axios.get(route('core.impersonate.start', id, false)).then(response => {
 	        		toastr.warning(response.data.message);
-	        		this.getState();
+	        		this.setState();
 	        	});
 	        },
 	        stopImpersonating() {
 	        	axios.get(route('core.impersonate.stop', [], false)).then(response => {
 	        		toastr.info(response.data.message);
-	        		this.getState();
+	        		this.setState();
 	        	});
 	        }
 		},

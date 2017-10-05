@@ -25,17 +25,18 @@ class StateBuilder
     private function setState()
     {
         $languages = Language::get(['name', 'flag']);
-        $menus = $this->getMenus();
+        $menus     = $this->getMenus();
 
         $this->state = [
-            'user'          => $this->user,
-            'menus'         => $menus,
-            'i18n'          => $this->getI18N($languages),
-            'languages'     => $languages->pluck('flag', 'name'),
-            'themes'        => collect((new Themes())->all()),
-            'implicitMenu'  => $this->user->role->menu,
-            // 'impersonating' => session()->has('impersonating'),
-            'meta'          => $this->getMeta(),
+            'user'         => $this->user,
+            'menus'        => $menus,
+            'i18n'         => $this->getI18N($languages),
+            'languages'    => $languages->pluck('flag', 'name'),
+            'themes'       => collect((new Themes())->all()),
+            'implicitMenu' => $this->user->role->menu,
+            'impersonating' => session()->has('impersonating'),
+            'meta'         => $this->getMeta(),
+            'csrfToken'    => csrf_token(),
         ];
     }
 
@@ -55,7 +56,7 @@ class StateBuilder
             }
 
             $json = json_decode(\File::get(
-                resource_path('lang'.DIRECTORY_SEPARATOR.$lang->name.'.json')
+                resource_path('lang' . DIRECTORY_SEPARATOR . $lang->name . '.json')
             ));
 
             $i18n[$lang->name] = $json;
@@ -67,11 +68,12 @@ class StateBuilder
     private function getMeta()
     {
         return [
-            'appName'       => config('app.name'),
-            'version'       => config('enso.config.version'),
-            'quote'         => Inspiring::quote(),
-            'env'           => config('app.env'),
-            'dateFormat'    => config('enso.config.jsDateFormat'),
+            'appName'    => config('app.name'),
+            'version'    => config('enso.config.version'),
+            'quote'      => Inspiring::quote(),
+            'env'        => config('app.env'),
+            'dateFormat' => config('enso.config.jsDateFormat'),
+            'pusher'     => config('broadcasting.connections.pusher.key'),
         ];
     }
 }

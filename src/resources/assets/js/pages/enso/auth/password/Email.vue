@@ -49,13 +49,19 @@
 	export default {
 		name: 'Email',
 
+        props: {
+            appName: {
+                type: String,
+                required: true
+            }
+        },
+
 		data() {
 			return {
 	            loading: false,
 	            email: null,
 	            hasErrors: null,
-	            isSuccessful: false,
-	            appName: null
+	            isSuccessful: false
 	        };
         },
 
@@ -67,15 +73,11 @@
             }
         },
 
-        created() {
-	    	this.appName  = document.title;
-	    },
-
         methods: {
             submit() {
                 this.loading = true;
 
-                axios.post('/password/email', { email: this.email }).then(response => {
+                axios.post(route('password.email', [], false).toString(), { email: this.email }).then(response => {
                     this.loading = false;
                     this.isSuccessful = true;
                     toastr.success(response.data.status);

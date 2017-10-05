@@ -5,31 +5,26 @@ export const auth = {
 	namespaced: true,
 
     state: {
-        jwt: Cookie.get('jwtToken'),
-        pusher: Cookie.get('pusherToken')
+        auth: localStorage.hasOwnProperty('auth') && localStorage.getItem('auth')
     },
 
     mutations: {
-        setPusher: (state, token) => state.pusher = token,
-        setJwt: (state, token) => state.jwt = token,
+        setAuth: (state, value) => state.auth = value,
     },
 
     getters: {
-        isAuth: (state, getters) => typeof state.jwt === 'string'
+        isAuth: (state, getters) => state.auth
     },
 
     actions: {
-        login({ commit }, { tokens, remember } ) {
-            commit('setJwt', tokens.jwt);
-            Cookie.set('jwtToken', tokens.jwt, { expires: remember ? 30 : null });
-            commit('setPusher', tokens.pusher);
-            Cookie.set('pusherToken', tokens.pusher, { expires: remember ? 30 : null });
+        login({ commit }, remember) {
+            commit('setAuth', true);
+            localStorage.setItem('auth', true);
         },
         logout({ commit }) {
-            commit('setJwt', null);
-            Cookie.remove('jwtToken');
-            commit('setPusher', null);
-            Cookie.remove('pusherToken');
+            delete axios.defaults.headers.common['X-CSRF-TOKEN'];
+            commit('setAuth', false);
+            localStorage.removeItem('auth');
             commit('setMeta', {}, {root:true});
             router.replace({ name: 'login' });
         }

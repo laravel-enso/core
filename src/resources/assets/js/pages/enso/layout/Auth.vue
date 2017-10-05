@@ -4,7 +4,9 @@
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-mobile is-centered">
-                	<router-view></router-view>
+                	<router-view
+                		:app-name="appName">
+	        		</router-view>
                 </div>
             </div>
         </div>
@@ -20,6 +22,18 @@
 		name: 'Auth',
 
 		components: { Router },
+
+		data() {
+			return {
+				appName: ''
+			}
+		},
+
+		created() {
+			axios.get(route('appName').toString()).then(({ data }) => {
+				this.appName = data;
+			});
+		},
 
 		mounted() {
 			if (this.$route.path === '/') {

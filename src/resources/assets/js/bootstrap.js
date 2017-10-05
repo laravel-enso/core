@@ -7,10 +7,6 @@ require('datatables.net-buttons');
 require('datatables.net-buttons/js/buttons.colVis.js');
 require('datatables.net-buttons/js/buttons.html5.js');
 
-window.Laravel = {
-    "csrfToken": document.head.querySelector("[name=csrf-token]").content
-};
-
 import Vue from 'vue';
 window.Vue = Vue;
 
@@ -30,8 +26,8 @@ window.toastr = require('toastr');
 require('toastr/build/toastr.min.css');
 
 window.axios = require('axios');
-
 require('./modules/enso/plugins/axios');
+
 require('./modules/enso/filters');
 require('./modules/enso/directives');
 require('./modules/enso/prototypes');

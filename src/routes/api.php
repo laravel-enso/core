@@ -1,13 +1,13 @@
 <?php
 
-Route::middleware(['auth:api', 'api', 'core'])
+Route::middleware(['web', 'auth', 'core'])
     ->prefix('api')
     ->namespace('LaravelEnso\Core\app\Http\Controllers')
     ->group(function () {
-        Route::get('/init', 'AppInitController')->name('init');
-
         Route::prefix('core')->as('core.')
             ->group(function () {
+                Route::get('init', 'AppInitController')->name('home.init');
+
                 Route::prefix('preferences')->as('preferences.')
                     ->group(function () {
                         Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')

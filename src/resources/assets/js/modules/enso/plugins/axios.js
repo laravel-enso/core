@@ -2,13 +2,6 @@ import store from '../../../store';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-axios.interceptors.request.use(request => {
-    if (store.getters['auth/isAuth']) {
-        request.headers.common['Authorization'] = 'Bearer ' + store.state.auth.jwt;
-    }
-    return request;
-});
-
 axios.interceptors.response.use(response => response, error => {
     const { status, data } = error.response;
 

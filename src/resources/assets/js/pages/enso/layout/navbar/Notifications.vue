@@ -51,7 +51,7 @@
 
 		computed: {
 			...mapGetters('locale', ['__']),
-			...mapState(['user', 'auth']),
+			...mapState(['user', 'meta']),
 		},
 
 		data() {
@@ -100,7 +100,7 @@
 				axios.patch(route('core.notifications.markAsRead', notification.id, false).toString()).then(response => {
 					this.unreadCount = this.unreadCount > 0 ? --this.unreadCount : this.unreadCount; //fixme
 					notification.read_at = response.data.read_at;
-					this.$bus.$emit('redirect', notification.data.path);
+					this.$router.push({ path: notification.data.path });
 				});
 			},
 			markAllAsRead() {
@@ -124,10 +124,9 @@
 			init() {
 				this.Echo = new Echo({
 				    broadcaster: 'pusher',
-				    key: this.auth.pusher,
+				    key: this.meta.pusher,
 				    cluster: 'eu',
-				    namespace: 'App.Events',
-				    auth: { headers: { 'Authorization': 'Bearer ' + this.auth.jwt } }
+				    namespace: 'App.Events'
 				});
 			},
 			listen() {
