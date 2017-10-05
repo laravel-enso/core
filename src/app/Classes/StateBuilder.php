@@ -6,6 +6,7 @@ use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
+use Tightenco\Ziggy\BladeRouteGenerator;
 
 class StateBuilder
 {
@@ -25,7 +26,7 @@ class StateBuilder
     private function setState()
     {
         $languages = Language::get(['name', 'flag']);
-        $menus = $this->getMenus();
+        $menus     = $this->getMenus();
 
         $this->state = [
             'user'          => $this->user,
@@ -37,6 +38,7 @@ class StateBuilder
             'impersonating' => session()->has('impersonating'),
             'meta'          => $this->getMeta(),
             'csrfToken'     => csrf_token(),
+            'routes'        => app(BladeRouteGenerator::class)->getRoutePayload(),
         ];
     }
 
@@ -56,7 +58,7 @@ class StateBuilder
             }
 
             $json = json_decode(\File::get(
-                resource_path('lang'.DIRECTORY_SEPARATOR.$lang->name.'.json')
+                resource_path('lang' . DIRECTORY_SEPARATOR . $lang->name . '.json')
             ));
 
             $i18n[$lang->name] = $json;
@@ -69,6 +71,7 @@ class StateBuilder
     {
         return [
             'appName'    => config('app.name'),
+            'appUrl'     => url('/') . '/',
             'version'    => config('enso.config.version'),
             'quote'      => Inspiring::quote(),
             'env'        => config('app.env'),

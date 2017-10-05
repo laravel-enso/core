@@ -30,7 +30,7 @@
 		},
 
 		created() {
-			axios.get(route('appName').toString()).then(({ data }) => {
+			axios.get('/api/getAppName').then(({ data }) => {
 				this.appName = data;
 			});
 		},

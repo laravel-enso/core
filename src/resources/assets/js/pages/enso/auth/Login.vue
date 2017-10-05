@@ -123,8 +123,7 @@
 	    	submit() {
 	    		this.loading = true;
 
-	    		axios.post(route('login', [], false).toString(), { email: this.email, password: this.password })
-	    			.then(({ data }) => {
+	    		axios.post('/api/login',{ email: this.email, password: this.password }).then(({ data }) => {
 	    			this.loading = false;
 	    			this.isSuccessful = true;
 	    			setTimeout(() => this.login(this.remember), 1000);

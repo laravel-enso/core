@@ -28,6 +28,7 @@ require('toastr/build/toastr.min.css');
 window.axios = require('axios');
 require('./modules/enso/plugins/axios');
 
+require('./modules/enso/plugins/route');
 require('./modules/enso/filters');
 require('./modules/enso/directives');
 require('./modules/enso/prototypes');

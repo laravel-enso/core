@@ -1,6 +1,6 @@
 <template>
 
-	<div class="column box login">
+    <div class="column box login">
         <h3 class="title is-3 has-text-black has-text-centered has-margin-bottom-medium">
             <figure class="image is-24x24 logo">
                 <img src="/images/logo.svg"/>
@@ -46,8 +46,8 @@
 
 <script>
 
-	export default {
-		name: 'Email',
+    export default {
+        name: 'Email',
 
         props: {
             appName: {
@@ -56,13 +56,13 @@
             }
         },
 
-		data() {
-			return {
-	            loading: false,
-	            email: null,
-	            hasErrors: null,
-	            isSuccessful: false
-	        };
+        data() {
+            return {
+                loading: false,
+                email: null,
+                hasErrors: null,
+                isSuccessful: false
+            };
         },
 
         watch: {
@@ -76,8 +76,10 @@
         methods: {
             submit() {
                 this.loading = true;
+                this.isSuccessful = false;
+                this.hasErrors = false;
 
-                axios.post(route('password.email', [], false).toString(), { email: this.email }).then(response => {
+                axios.post('/api/password/email', { email: this.email }).then(response => {
                     this.loading = false;
                     this.isSuccessful = true;
                     toastr.success(response.data.status);
@@ -93,6 +95,6 @@
                 });
             }
         }
-	};
+    };
 
 </script>

@@ -9,8 +9,6 @@
     </head>
     <body>
 
-        @routes()
-
         <div id="app"></div>
 
         @include('laravel-enso/core::polyfills')

@@ -18,11 +18,14 @@ const store = new Vuex.Store({
         user: {},
         impersonating: null,
         meta: {},
-        stateLoaded: false
+        appIsLoaded: false,
+        routes: {}
     },
 
     getters: {
-        avatarLink: (state, getters) => route('core.avatars.show', (state.user.avatarId || 'null'), false).toString()
+        avatarLink: (state, getters) => state.appIsLoaded
+            ? route('core.avatars.show', (state.user.avatarId || 'null'), false).toString()
+            : '#'
     },
 
     mutations: {
@@ -32,28 +35,30 @@ const store = new Vuex.Store({
         setTheme: (state, theme) => state.user.preferences.global.theme = theme,
         setLocale: (state, locale) => state.user.preferences.global.lang = locale,
         setMeta: (state, meta) => state.meta = meta,
-        setStateLoaded: (state) => state.stateLoaded = true
+        setStateLoaded: (state) => state.appIsLoaded = true,
+        setRoutes: (state, routes) => state.routes = routes
     },
 
     actions: {
         setState({ commit, dispatch }) {
-            axios.get(route('core.home.init', [], false)).then(({data}) => {
+            axios.get('/api/core/init').then(({data}) => {
                 commit('setUser', data.user);
                 commit('setImpersonating', data.impersonating);
                 commit('menus/set', data.menus);
                 commit('menus/setImplicit', data.implicitMenu);
-                router.addRoutes([{ name: 'home', path:'/', redirect: { name: data.implicitMenu.link } }])
+                router.addRoutes([{ name: 'home', path:'/', redirect: { name: data.implicitMenu.link } }]);
                 commit('locale/setLanguages', data.languages);
                 commit('locale/setI18n', data.i18n);
                 dispatch('locale/setLocale', data.user.preferences.global.lang);
                 commit('layout/setThemes', data.themes);
                 commit('setMeta', data.meta);
-                commit('setStateLoaded');
                 dispatch('layout/setTheme');
                 window.Laravel = {
                     "csrfToken": data.csrfToken
                 };
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrfToken;
+                commit('setRoutes', data.routes);
+                commit('setStateLoaded');
             });
         }
     }

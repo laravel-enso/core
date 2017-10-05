@@ -1,4 +1,5 @@
 <template>
+<template>
 
 	<div class="app-main"
 		:class="{ 'lights-off': lightsOff }">
@@ -44,7 +45,7 @@
 		components: { Nprogress, Navbar, Sidebar, Settings, AppFooter, Router, PageHeader },
 
 		computed: {
-			...mapState(['stateLoaded', 'user', 'menus', 'meta']),
+			...mapState(['appIsLoaded', 'user', 'menus', 'meta']),
 			...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'navbar', 'settingsBar']),
             ...mapGetters('locale', ['__']),
         },
@@ -60,7 +61,7 @@
         },
 
 		created() {
-			if (!this.stateLoaded) {
+			if (!this.appIsLoaded) {
 				this.setState();
 			}
 
