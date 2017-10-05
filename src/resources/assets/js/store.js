@@ -10,7 +10,7 @@ import { layout } from './store/enso/layout';
 import { auth } from './store/enso/auth';
 
 const store = new Vuex.Store({
-	strict: true,
+    strict: true,
 
     modules: { locale, menus, layout, auth },
 
@@ -37,7 +37,7 @@ const store = new Vuex.Store({
 
     actions: {
         setState({ commit, dispatch }) {
-            axios.get(route('init', [], false)).then(({data}) => {
+            axios.get(route('core.home.init', [], false)).then(({data}) => {
                 commit('setUser', data.user);
                 commit('setImpersonating', data.impersonating);
                 commit('menus/set', data.menus);
@@ -50,6 +50,10 @@ const store = new Vuex.Store({
                 commit('setMeta', data.meta);
                 commit('setStateLoaded');
                 dispatch('layout/setTheme');
+                window.Laravel = {
+                    "csrfToken": data.csrfToken
+                };
+                axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrfToken;
             });
         }
     }
