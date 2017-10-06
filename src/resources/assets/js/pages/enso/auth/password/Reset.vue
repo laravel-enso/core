@@ -1,6 +1,6 @@
 <template>
 
-	<div class="column box login">
+    <div class="column box login">
         <h3 class="title is-3 has-text-black has-text-centered has-margin-bottom-medium">
             <figure class="image is-24x24 logo">
                 <img src="/images/logo.svg"/>
@@ -9,7 +9,6 @@
         </h3>
         <form class="has-margin-bottom-medium"
             @submit.prevent="submit()">
-            <input type="hidden" name="token" value="token">
             <div class="field">
                 <div class="control has-icons-left has-icons-right">
                     <input class="input"
@@ -87,8 +86,8 @@
 
 <script>
 
-	export default {
-		name: 'Email',
+    export default {
+        name: 'Email',
 
         props: {
             appName: {
@@ -97,16 +96,16 @@
             }
         },
 
-		data() {
-			return {
+        data() {
+            return {
                 loading: false,
                 email: null,
                 password: null,
                 passwordConfirmation: null,
-                token: 'token',
+                token: this.$route.params.token,
                 hasErrors: null,
                 isSuccessful: false,
-	        };
+            };
         },
 
         watch: {
@@ -167,6 +166,6 @@
                 });
             }
         }
-	};
+    };
 
 </script>
