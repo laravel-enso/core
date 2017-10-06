@@ -48,7 +48,7 @@ Vue.mixin({
     methods: {
         reportEnsoException(error) {
             if (error.response && error.response.data.message) {
-                return toastr.error(error.response.data.message);
+                toastr.error(error.response.data.message);
             }
             throw error;
         }
