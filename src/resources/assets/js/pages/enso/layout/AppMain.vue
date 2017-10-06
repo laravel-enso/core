@@ -60,10 +60,6 @@
         },
 
 		created() {
-			if (!this.appIsLoaded) {
-				this.setState();
-			}
-
 			this.$bus.$on('start-impersonating', $event => this.startImpersonating($event));
 			this.$bus.$on('stop-impersonating', () => this.stopImpersonating());
 			this.$router.replace({ name: this.menus.implicit.link });
@@ -108,7 +104,7 @@
 		},
 
 		mounted() {
-			this.setThemeParams();
+			setTimeout(() => this.setThemeParams(), 501);
 		}
 	};
 
@@ -126,8 +122,10 @@
 	}
 
 	.main-content {
+		padding-top: 50px;
         margin-left: 180px;
         transition: margin .5s ease;
+        transition: padding-top .25s ease;
     }
 
     @media screen and (max-width: 1007px) {

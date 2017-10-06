@@ -4,9 +4,10 @@
         <div class="hero-body">
             <div class="container">
                 <div class="columns is-mobile is-centered">
-                	<router-view
-                		:app-name="appName">
-	        		</router-view>
+                	<router
+                		:app-name="appName"
+                		@login="$emit('login')">
+	        		</router>
                 </div>
             </div>
         </div>

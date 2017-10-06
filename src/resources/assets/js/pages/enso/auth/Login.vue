@@ -126,7 +126,10 @@
 	    		axios.post('/api/login',{ email: this.email, password: this.password }).then(({ data }) => {
 	    			this.loading = false;
 	    			this.isSuccessful = true;
-	    			setTimeout(() => this.login(this.remember), 1000);
+	    			setTimeout(() => {
+	    				this.login(this.remember);
+	    				this.$emit('login');
+	    			}, 1000);
 	    		}).catch(({ response }) => {
 	    			this.loading = false;
 	    			this.hasErrors = true;

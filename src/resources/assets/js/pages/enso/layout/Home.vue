@@ -9,14 +9,14 @@
             		size="large">
         		</overlay>
 	            <div class="title is-1 inspiring animated fadeInDown"
-	            	 v-if="meta.quote">
+	            	 v-if="!loading">
 	            	{{ meta.quote }}
 	            </div>
 
 	            <button class="animated fadeInRightBig button is-outlined"
 	            	@click="$emit('enter-app')"
-	            	v-if="meta.quote">
-	            	Enter the application
+	            	v-if="!loading">
+	            	{{ __('Enter the application') }}
             	</button>
        	 	</div>
 		</div>
@@ -28,7 +28,7 @@
 
 	import Overlay from '../../../components/enso/bulma/Overlay.vue';
 	import { mapState } from 'vuex';
-	import { mapActions } from 'vuex';
+	import { mapGetters } from 'vuex';
 
 	export default {
 		name: 'Home',
@@ -36,7 +36,8 @@
 		components: { Overlay },
 
 		computed: {
-			...mapState(['meta']),
+			...mapState(['meta', 'appIsLoaded']),
+			...mapGetters('locale', ['__'])
 		},
 
 		data() {
@@ -45,16 +46,22 @@
 			}
 		},
 
-		beforeMount() {
-			this.init()
+		watch: {
+			appIsLoaded: {
+				handler: 'endLoadingState'
+			}
 		},
 
 		methods: {
-			...mapActions(['setState']),
-			init() {
-				this.setState();
-				setTimeout(() => this.loading = false, 500);
+			endLoadingState() {
+				if (this.appIsLoaded) {
+					setTimeout(() => this.loading = false, 500);
+				}
 			}
+		},
+
+		mounted() {
+			this.endLoadingState();
 		}
 	};
 

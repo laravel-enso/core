@@ -35,7 +35,7 @@ const store = new Vuex.Store({
         setTheme: (state, theme) => state.user.preferences.global.theme = theme,
         setLocale: (state, locale) => state.user.preferences.global.lang = locale,
         setMeta: (state, meta) => state.meta = meta,
-        setStateLoaded: (state) => state.appIsLoaded = true,
+        setLoadedState: (state) => state.appIsLoaded = true,
         setRoutes: (state, routes) => state.routes = routes
     },
 
@@ -58,7 +58,7 @@ const store = new Vuex.Store({
                 };
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrfToken;
                 commit('setRoutes', data.routes);
-                commit('setStateLoaded');
+                commit('setLoadedState');
             });
         }
     }
