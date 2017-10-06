@@ -11,7 +11,7 @@
             </router-link>
 
             <a v-if="menu.children.length"
-                @click="$store.commit('menus/toggle', menu)"
+                @click="toggle(menu)"
                 :aria-expanded="menu.expanded">
                 <span class="icon is-small">
                     <i :class="menu.icon"></i>
@@ -38,6 +38,7 @@
 <script>
 
     import { mapGetters } from 'vuex';
+    import { mapMutations } from 'vuex';
 
     export default {
         name: 'Menus',
@@ -54,10 +55,7 @@
         },
 
         computed: {
-            ...mapGetters('locale', ['__']),
-            matchedRoutes() {
-                return this.$route.matched;
-            }
+            ...mapGetters('locale', ['__'])
         },
 
         watch: {
@@ -75,10 +73,11 @@
         },
 
         methods: {
+            ...mapMutations('menus', ['toggle']),
             isActive(menu) {
-                return this.matchedRoutes.pluck('name').includes(menu.link) ||
-                    (this.matchedRoutes.length > 1
-                        && this.matchedRoutes.pluck('path')[this.matchedRoutes.length - 2] ===
+                return this.$route.matched.pluck('name').includes(menu.link) ||
+                    (this.$route.matched.length > 1
+                        && this.$route.matched.pluck('path')[this.$route.matched.length - 2] ===
                         '/' + menu.link.split('.').slice(0,-1).join('/')
                     );
             },

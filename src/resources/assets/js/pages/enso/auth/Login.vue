@@ -129,6 +129,7 @@
 	    			setTimeout(() => {
 	    				this.login(this.remember);
 	    				this.$emit('login');
+	    				this.$router.replace('/');
 	    			}, 1000);
 	    		}).catch(({ response }) => {
 	    			this.loading = false;

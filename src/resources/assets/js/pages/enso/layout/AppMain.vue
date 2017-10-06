@@ -62,7 +62,6 @@
 		created() {
 			this.$bus.$on('start-impersonating', $event => this.startImpersonating($event));
 			this.$bus.$on('stop-impersonating', () => this.stopImpersonating());
-			this.$router.replace({ name: this.menus.implicit.link });
 		},
 
 		beforeMount () {

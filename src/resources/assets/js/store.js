@@ -46,7 +46,6 @@ const store = new Vuex.Store({
                 commit('setImpersonating', data.impersonating);
                 commit('menus/set', data.menus);
                 commit('menus/setImplicit', data.implicitMenu);
-                router.addRoutes([{ name: 'home', path:'/', redirect: { name: data.implicitMenu.link } }]);
                 commit('locale/setLanguages', data.languages);
                 commit('locale/setI18n', data.i18n);
                 dispatch('locale/setLocale', data.user.preferences.global.lang);
@@ -58,6 +57,7 @@ const store = new Vuex.Store({
                 };
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrfToken;
                 commit('setRoutes', data.routes);
+                router.addRoutes([{ path:'/', redirect: { name: data.implicitMenu.link } }]);
                 commit('setLoadedState');
             });
         }

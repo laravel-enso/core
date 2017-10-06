@@ -1,6 +1,6 @@
 <template>
 
-	<footer class="footer">
+    <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
                 <p>
@@ -13,7 +13,7 @@
                     </span> + <a href="https://www.bulma.io" target="_blank">Bulma</a> + <a href="https://www.vuejs.org" target="_blank">VueJs</a> + <a href="https://www.laravel.com" target="_blank">Laravel</a>
                 </p>
                 <p>
-                    <a class="icon" href="https://github.com/laravel-enso/enso">
+                    <a class="icon" href="https://github.com/laravel-enso/enso" target="_blank">
                         <i class="fa fa-github">
                         </i>
                     </a>
@@ -28,26 +28,26 @@
 
     import { mapState } from 'vuex';
 
-	export default {
-		name: 'AppFooter',
+    export default {
+        name: 'AppFooter',
 
-		computed: {
+        computed: {
             ...mapState(['meta'])
         },
 
-		data() {
-			return {}
-		},
-		methods: {},
+        data() {
+            return {}
+        },
+        methods: {},
 
-		mounted() {}
-	};
+        mounted() {}
+    };
 
 </script>
 
 <style>
 
-	.footer {
+    .footer {
         margin-left: 180px;
         z-index: 1;
     }
