@@ -12,7 +12,7 @@ class VerifyActiveState
             auth()->logout();
 
             if ($request->ajax()) {
-                throw new \EnsoException(__('validation.disabled'), 'warning', [], 401);
+                throw new \EnsoException(__('validation.disabled'));
             }
 
             return redirect('/login')->withErrors(['is_active' => __('validation.disabled')]);

@@ -47,8 +47,8 @@ Vue.directive('focus', {
 Vue.mixin({
     methods: {
         reportEnsoException(error) {
-            if (error.response && error.response.data.level) {
-                return toastr[error.response.data.level](error.response.data.message);
+            if (error.response && error.response.data.message) {
+                return toastr.error(error.response.data.message);
             }
             throw error;
         }
