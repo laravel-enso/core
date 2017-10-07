@@ -87,6 +87,7 @@
 				document.addEventListener('visibilitychange', handler);
 				window.addEventListener('DOMContentLoaded', handler);
 				window.addEventListener('resize', handler);
+				handler();
 			},
 			startImpersonating(id) {
 	        	axios.get(route('core.impersonate.start', id, false)).then(response => {
