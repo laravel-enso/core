@@ -10,6 +10,7 @@ axios.interceptors.response.use(response => response, error => {
     }
 
     if (status === 401 && store.getters['auth/isAuth']) {
+    	toastr.error(data.message);
         store.dispatch('auth/logout');
     }
 

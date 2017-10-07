@@ -83,14 +83,14 @@
                     this.loading = false;
                     this.isSuccessful = true;
                     toastr.success(response.data.status);
-                }).catch(error => {
+                }).catch(({ response }) => {
                     this.loading = false;
                     this.hasErrors = true;
 
-                    if (error.response.status === 422) {
-                        return error.response.data.message
-                            ? toastr.error(error.response.data.message)
-                            :  toastr.error(error.response.data.email);
+                    if (response.status === 422) {
+                        return response.data.message
+                            ? toastr.error(response.data.message)
+                            :  toastr.error(response.data.email);
                     }
                 });
             }

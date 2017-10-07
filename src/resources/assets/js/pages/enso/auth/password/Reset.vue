@@ -129,6 +129,8 @@
         methods: {
             submit() {
                 this.loading = true;
+                this.isSuccessful = false;
+                this.hasErrors = false;
 
                 let params = {
                     email: this.email,
@@ -142,21 +144,21 @@
                     this.isSuccessful = true;
                     toastr.success(response.data.status);
                     setTimeout(() => this.$router.push({ name: '/login' }));
-                }).catch(error => {
+                }).catch(({ response }) => {
                     this.loading = false;
                     this.hasErrors = true;
 
-                    if (error.response.status === 422) {
-                        if (error.response.data.message) {
-                            toastr.error(error.response.data.message);
+                    if (response.status === 422) {
+                        if (response.data.message) {
+                            toastr.error(response.data.message);
                         }
 
-                        if (error.response.data.errors.email) {
-                            toastr.error(error.response.data.errors.email);
+                        if (response.data.errors.email) {
+                            toastr.error(response.data.errors.email);
                         }
 
-                        if (error.response.data.errors.password) {
-                            toastr.error(error.response.data.errors.password);
+                        if (response.data.errors.password) {
+                            toastr.error(response.data.errors.password);
                         }
 
                         return;

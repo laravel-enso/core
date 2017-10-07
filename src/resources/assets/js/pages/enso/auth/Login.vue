@@ -122,6 +122,8 @@
 	    	...mapActions('auth', ['login']),
 	    	submit() {
 	    		this.loading = true;
+	    		this.isSuccessful = false;
+                this.hasErrors = false;
 
 	    		axios.post('/api/login',{ email: this.email, password: this.password }).then(({ data }) => {
 	    			this.loading = false;
@@ -135,8 +137,12 @@
 	    			this.loading = false;
 	    			this.hasErrors = true;
 
-	    			if (response.response.status === 422) {
-	    				return toastr.error(response.response.data.email);
+	    			if (response.status === 401) {
+	    				return toastr.error(response.data.message);
+	    			}
+
+	    			if (response.status === 422) {
+	    				return toastr.error(response.data.email);
 	    			}
 	    		});
 	    	}

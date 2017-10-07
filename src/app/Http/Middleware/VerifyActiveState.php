@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Middleware;
 
 use Closure;
-use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 
 class VerifyActiveState
 {
@@ -12,7 +12,7 @@ class VerifyActiveState
         if ($request->user()->isDisabled()) {
             auth()->logout();
 
-            throw new AuthorizationException(__(config('enso.labels.disabledAccount')), 401);
+            throw new AuthenticationException(__(config('enso.labels.disabledAccount')));
         }
 
         return $next($request);
