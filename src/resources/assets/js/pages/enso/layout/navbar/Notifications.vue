@@ -1,9 +1,10 @@
 <template>
 
 	<div class="navbar-item has-dropdown"
-		:class="{ 'is-active': isOpen }">
+		v-click-outside="hide"
+		:class="{ 'is-active': show }">
         <a class="navbar-link"
-        	@click="toggle">
+        	@click="show=!show">
             <span class="icon is-small">
                 <i class="fa fa-bell">
                 </i>
@@ -13,7 +14,7 @@
         </a>
         <div class="navbar-dropdown is-right notification-list"
         	@scroll="computeScrollPosition($event)"
-        	v-if="isOpen">
+        	v-if="show">
     		<span v-for="notification in notifications">
         		<a class="navbar-item"
 		        	@click="process(notification)">
@@ -64,7 +65,7 @@
 				offset: 0,
 				loading: false,
 				Echo: null,
-				isOpen: false
+				show: false
 			}
 		},
 
@@ -74,7 +75,20 @@
 			this.listen();
 		},
 
+		watch: {
+			show: {
+				handler() {
+					if (this.show) {
+						this.getList();
+					}
+				}
+			}
+		},
+
 		methods: {
+			hide() {
+                this.show = false;
+            },
 			getCount() {
 				axios.get(route('core.notifications.getCount', [], false)).then(response => {
 					this.unreadCount = response.data;
@@ -137,13 +151,6 @@
 					self.offset = 0;
 					toastr.info(this.__('You just got a notification...'))
 				});
-			},
-			toggle() {
-				this.isOpen = !this.isOpen;
-
-				if (this.isOpen) {
-					this.getList();
-				}
 			},
 			computeScrollPosition(event) {
 				let a = event.target.scrollTop,

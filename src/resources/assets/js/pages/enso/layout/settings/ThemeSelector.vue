@@ -8,7 +8,8 @@
         </div>
         <div class="level-right">
             <div class="level-item">
-            	<div class="dropdown is-right"
+                <div class="dropdown is-right"
+                    v-click-outside="hide"
                     :class="{ 'is-active': show }"
                     @click="show=!show">
                     <div class="dropdown-trigger">
@@ -24,12 +25,12 @@
                     </div>
                     <div class="dropdown-menu" role="menu">
                         <div class="dropdown-content theme-list has-text-centered">
-                        	<a v-for="(href, key) in themes"
-                        		class="dropdown-item"
+                            <a v-for="(href, key) in themes"
+                                class="dropdown-item"
                                 :class="{ 'is-active': key === theme }"
                                 @click="update(key)">
-                        		{{ key }}
-                        	</a>
+                                {{ key }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -46,8 +47,8 @@
     import { mapGetters } from 'vuex';
     import { mapActions } from 'vuex';
 
-	export default {
-		name: 'ThemeSelector',
+    export default {
+        name: 'ThemeSelector',
 
         props: {
             title: {
@@ -61,14 +62,17 @@
             ...mapGetters('layout', ['theme'])
         },
 
-		data() {
-			return {
-				show: false,
-			}
-		},
+        data() {
+            return {
+                show: false,
+            }
+        },
 
         methods: {
             ...mapActions('layout', ['switchTheme']),
+            hide() {
+                this.show = false;
+            },
             update(theme) {
                 if (theme === this.theme) {
                     return false;
@@ -78,7 +82,7 @@
                 this.$emit('update');
             }
         }
-	};
+    };
 
 </script>
 

@@ -15,6 +15,9 @@ Vue.prototype.$bus = bus;
 
 import VTooltip from 'vue-directive-tooltip';
 Vue.use(VTooltip);
+import vClickOutside from 'v-click-outside';
+Vue.use(vClickOutside);
+
 
 require('at.js');
 require('jquery.caret');
