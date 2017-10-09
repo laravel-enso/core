@@ -30,6 +30,12 @@
 			}
 		},
 
+		beforeCreate() {
+			if (this.$route.path === '/') {
+				this.$router.replace({ name: 'login' });
+			}
+		},
+
 		created() {
 			axios.get('/api/getAppName').then(({ data }) => {
 				this.appName = data;
@@ -37,12 +43,6 @@
 				this.handleError(error);
 			});
 		},
-
-		mounted() {
-			if (this.$route.path === '/') {
-				this.$router.replace({ name: 'login' });
-			}
-		}
 	};
 
 </script>

@@ -61,7 +61,7 @@ const store = new Vuex.Store({
                 commit('setLoadedState');
             }).catch(error => {
                 if (error.response.status === 401) {
-                    return this.$router.push({ name: 'login' });
+                    dispatch('auth/logout', false);
                 }
             });
         }
