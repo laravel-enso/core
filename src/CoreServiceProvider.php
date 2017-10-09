@@ -54,6 +54,11 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-assets');
 
         $this->publishes([
+            __DIR__.'/resources/assets/lang' => resource_path('assets/lang'),
+            __DIR__.'/resources/assets/dt-lang' => resource_path('assets/dt-lang'),
+        ], 'enso-lang');
+
+        $this->publishes([
             __DIR__.'/resources/assets/js'   => resource_path('assets/js'),
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
         ], 'enso-assets');
@@ -71,7 +76,7 @@ class CoreServiceProvider extends ServiceProvider
             VerifyActiveState::class,
             ActionLogger::class,
             VerifyRouteAccess::class,
-            // Impersonate::class,
+            Impersonate::class,
             SetLanguage::class,
         ]);
     }

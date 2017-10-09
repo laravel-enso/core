@@ -29,9 +29,10 @@ window.toastr = require('toastr');
 require('toastr/build/toastr.min.css');
 
 window.axios = require('axios');
-require('./modules/enso/plugins/axios');
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 require('./modules/enso/plugins/route');
+require('./modules/enso/mixins');
 require('./modules/enso/filters');
 require('./modules/enso/directives');
 require('./modules/enso/prototypes');

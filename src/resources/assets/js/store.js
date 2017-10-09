@@ -41,7 +41,7 @@ const store = new Vuex.Store({
 
     actions: {
         setState({ commit, dispatch }) {
-            axios.get('/api/core/init').then(({data}) => {
+            axios.get('/api/core/init').then(({ data }) => {
                 commit('setUser', data.user);
                 commit('setImpersonating', data.impersonating);
                 commit('menus/set', data.menus);
@@ -59,6 +59,10 @@ const store = new Vuex.Store({
                 commit('setRoutes', data.routes);
                 router.addRoutes([{ path:'/', redirect: { name: data.implicitMenu.link } }]);
                 commit('setLoadedState');
+            }).catch(error => {
+                if (error.response.status === 401) {
+                    return this.$router.push({ name: 'login' });
+                }
             });
         }
     }

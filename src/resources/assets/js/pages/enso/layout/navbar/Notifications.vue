@@ -92,6 +92,8 @@
 			getCount() {
 				axios.get(route('core.notifications.getCount', [], false)).then(response => {
 					this.unreadCount = response.data;
+				}).catch(error => {
+					this.handleError(error);
 				});
 			},
 			getList() {
@@ -108,6 +110,7 @@
 					this.loading = false;
 				}).catch(error => {
 					this.loading = false;
+					this.handleError(error);
 				});
 			},
 			process(notification) {
@@ -115,16 +118,22 @@
 					this.unreadCount = this.unreadCount > 0 ? --this.unreadCount : this.unreadCount; //fixme
 					notification.read_at = response.data.read_at;
 					this.$router.push({ path: notification.data.path });
+				}).catch(error => {
+					this.handleError(error);
 				});
 			},
 			markAllAsRead() {
 				axios.patch(route('core.notifications.markAllAsRead', [], false)).then(response => {
 					this.setAllAsRead();
+				}).catch(error => {
+					this.handleError(error);
 				});
 			},
 			setAllAsRead() {
 				this.notifications.forEach(notification => {
 					notification.read_at = notification.read_at || moment().format('Y-MM-DD H:mm:s');
+				}).catch(error => {
+					this.handleError(error);
 				});
 
 				this.unreadCount = 0;
@@ -133,6 +142,8 @@
 				axios.patch(route('core.notifications.clearAll', [], false)).then(response => {
 					this.notifications = [];
 					this.unreadCount = 0;
+				}).catch(error => {
+					this.handleError(error);
 				});
 			},
 			init() {

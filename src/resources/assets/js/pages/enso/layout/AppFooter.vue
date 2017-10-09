@@ -10,7 +10,7 @@
                     built with
                     <span class="icon has-text-danger">
                         <i class="fa fa-heart"></i>
-                    </span> + <a href="https://www.bulma.io" target="_blank">Bulma</a> + <a href="https://www.vuejs.org" target="_blank">VueJs</a> + <a href="https://www.laravel.com" target="_blank">Laravel</a>
+                    </span> + <a href="https://bulma.io" target="_blank">Bulma</a> + <a href="https://www.vuejs.org" target="_blank">VueJs</a> + <a href="https://www.laravel.com" target="_blank">Laravel</a>
                 </p>
                 <p>
                     <a class="icon" href="https://github.com/laravel-enso/enso" target="_blank">

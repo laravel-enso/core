@@ -48,6 +48,8 @@
 			axios.get(route(this.$route.name, null, false)).then(response => {
 				this.form = response.data.form;
 				this.initialised = true;
+			}).catch(error => {
+				this.handleError(error);
 			});
 		}
 	};

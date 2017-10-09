@@ -93,13 +93,17 @@
 	        	axios.get(route('core.impersonate.start', id, false)).then(response => {
 	        		toastr.warning(response.data.message);
 	        		this.setState();
-	        	});
+	        	}).catch(error => {
+					this.handleError(error);
+				});
 	        },
 	        stopImpersonating() {
 	        	axios.get(route('core.impersonate.stop', [], false)).then(response => {
 	        		toastr.info(response.data.message);
 	        		this.setState();
-	        	});
+	        	}).catch(error => {
+					this.handleError(error);
+				});
 	        }
 		},
 

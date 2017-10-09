@@ -299,12 +299,16 @@
 			deleteAvatar() {
 	            axios.delete(route('core.avatars.destroy', this.user.avatarId, false)).then(() => {
 	                this.$store.commit('setUserAvatar', null);
-	            });
+	            }).catch(error => {
+					this.handleError(error);
+				});
 	        },
 	        logout() {
 	        	axios.post(route('logout', [], false).toString()).then(() => {
 		            this.$store.dispatch('auth/logout');
-	        	});
+	        	}).catch(error => {
+					this.handleError(error);
+				});
 	        },
 	        getDay(timestamp) {
 	        	return moment(timestamp).calendar().split(' ')[0];
@@ -324,6 +328,8 @@
 	        getPage(page) {
 	        	axios.get(this.paginationUrl + page).then(response => {
 					this.profileUser = response.data.user;
+				}).catch(error => {
+					this.handleError(error);
 				});
 	        }
 		},
@@ -332,6 +338,8 @@
 			axios.get(route(this.$route.name, this.$route.params.id, false)).then(response => {
 				this.profileUser = response.data.user;
 				this.initialised = true;
+			}).catch(error => {
+				this.handleError(error);
 			});
 		}
 	};

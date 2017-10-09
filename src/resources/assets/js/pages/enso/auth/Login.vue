@@ -133,16 +133,18 @@
 	    				this.$emit('login');
 	    				this.$router.replace('/');
 	    			}, 1000);
-	    		}).catch(({ response }) => {
+	    		}).catch((error) => {
 	    			this.loading = false;
 	    			this.hasErrors = true;
 
-	    			if (response.status === 401) {
-	    				return toastr.error(response.data.message);
+	    			let { status, data } = error.response;
+
+	    			if (status === 401) {
+	    				return toastr.error(data.message);
 	    			}
 
-	    			if (response.status === 422) {
-	    				return toastr.error(response.data.email);
+	    			if (status === 422) {
+	    				return toastr.error(data.email);
 	    			}
 	    		});
 	    	}

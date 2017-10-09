@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Classes\UserProfile;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserService
 {
@@ -71,7 +72,7 @@ class UserService
     public function destroy(User $user)
     {
         if ($user->logins->first()) {
-            throw new \EnsoException(__('The user has activity in the system and cannot be deleted'));
+            throw new ConflictHttpException(__('The user has activity in the system and cannot be deleted'));
         }
 
         $user->delete();

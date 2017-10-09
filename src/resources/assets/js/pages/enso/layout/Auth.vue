@@ -33,12 +33,14 @@
 		created() {
 			axios.get('/api/getAppName').then(({ data }) => {
 				this.appName = data;
+			}).catch(error => {
+				this.handleError(error);
 			});
 		},
 
 		mounted() {
 			if (this.$route.path === '/') {
-				this.$router.replace({ path: '/login' });
+				this.$router.replace({ name: 'login' });
 			}
 		}
 	};

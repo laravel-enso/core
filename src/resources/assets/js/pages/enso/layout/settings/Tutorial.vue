@@ -42,6 +42,8 @@
             get() {
                 axios.get(route('system.tutorials.show', this.$route.name, false)).then(response => {
                     this.init(response.data);
+                }).catch(error => {
+                    this.handleError(error);
                 });
             },
             init(steps) {

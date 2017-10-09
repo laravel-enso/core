@@ -143,22 +143,24 @@
                     this.loading = false;
                     this.isSuccessful = true;
                     toastr.success(response.data.status);
-                    setTimeout(() => this.$router.push({ name: '/login' }));
-                }).catch(({ response }) => {
+                    setTimeout(() => this.$router.push({ name: 'login' }));
+                }).catch(error => {
                     this.loading = false;
                     this.hasErrors = true;
 
-                    if (response.status === 422) {
-                        if (response.data.message) {
-                            toastr.error(response.data.message);
+                    let { status, data } = error.response;
+
+                    if (status === 422) {
+                        if (data.message) {
+                            toastr.error(data.message);
                         }
 
-                        if (response.data.errors.email) {
-                            toastr.error(response.data.errors.email);
+                        if (data.errors.email) {
+                            toastr.error(data.errors.email);
                         }
 
-                        if (response.data.errors.password) {
-                            toastr.error(response.data.errors.password);
+                        if (data.errors.password) {
+                            toastr.error(data.errors.password);
                         }
 
                         return;
