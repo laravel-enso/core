@@ -102,11 +102,8 @@ class OwnerTest extends TestHelper
         $owner = Owner::create($postParams);
         $this->attachUser($owner);
 
-        $this->expectException(EnsoException::class);
-
         $this->delete('/administration/owners/'.$owner->id)
-            ->assertStatus(455)
-            ->assertJsonStructure(['level', 'message']);
+            ->assertStatus(455);
     }
 
     private function attachUser($owner)
