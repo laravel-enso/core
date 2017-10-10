@@ -4,7 +4,6 @@ use App\Owner;
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use LaravelEnso\Core\app\Exceptions\EnsoException;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
