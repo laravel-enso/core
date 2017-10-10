@@ -8,6 +8,9 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
 <!--/h-->
 
+Note: Documentation is pending update for version 2.x. Moving forward, we decided to continue developing Enso as a SPA, using Bulma as the CSS framework, for too many reasons to list here :smiley: 
+------
+
 Main requirement & dependency aggregator for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
 ### Included packages
