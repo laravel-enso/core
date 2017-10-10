@@ -105,7 +105,7 @@ class OwnerTest extends TestHelper
         $this->expectException(EnsoException::class);
 
         $this->delete('/administration/owners/'.$owner->id)
-            ->assertStatus(302)
+            ->assertStatus(455)
             ->assertJsonStructure(['level', 'message']);
     }
 
