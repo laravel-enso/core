@@ -8,14 +8,11 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
 <!--/h-->
 
-Note: Documentation is pending update for version 2.x. Moving forward, we decided to continue developing Enso as a SPA, using Bulma as the CSS framework, for too many reasons to list here :smiley: 
-------
-
 Main requirement & dependency aggregator for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
 ### Included packages
 
-[Action Logger](https://github.com/laravel-enso/ActionLogger), [Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>, [Charts](https://github.com/laravel-enso/Charts), [Datatable](https://github.com/laravel-enso/DataTable), [File Manager](https://github.com/laravel-enso/FileManager), [Helpers](https://github.com/laravel-enso/Helpers), [History Tracker](https://github.com/laravel-enso/HistoryTracker), [Image Transformer](https://github.com/laravel-enso/ImageTransformer) <sup>1</sup>, [Impersonate](https://github.com/laravel-enso/Impersonate), [Localisation](https://github.com/laravel-enso/Localisation), [Log manager](https://github.com/laravel-enso/LogManager), [Menu manager](https://github.com/laravel-enso/MenuManager), [Permission manager](https://github.com/laravel-enso/PermissionManager), [Rememberable](https://github.com/laravel-enso/Rememberable), [Role manager](https://github.com/laravel-enso/RoleManager), [Select](https://github.com/laravel-enso/Select), [Structure manager](https://github.com/laravel-enso/StructureManager), [Trackwho](https://github.com/laravel-enso/TrackWho), [Tutorial Manager](https://github.com/laravel-enso/TutorialManager)
+[Action Logger](https://github.com/laravel-enso/ActionLogger), [Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>, [Charts](https://github.com/laravel-enso/Charts), [Datatable](https://github.com/laravel-enso/DataTable), [DbSyncMigrations](https://github.com/laravel-enso/DbSyncMigrations), [File Manager](https://github.com/laravel-enso/FileManager), [Form Builder](https://github.com/laravel-enso/FormBuilder), [Helpers](https://github.com/laravel-enso/Helpers), [History Tracker](https://github.com/laravel-enso/HistoryTracker), [Image Transformer](https://github.com/laravel-enso/ImageTransformer) <sup>1</sup>, [Impersonate](https://github.com/laravel-enso/Impersonate), [Localisation](https://github.com/laravel-enso/Localisation), [Log manager](https://github.com/laravel-enso/LogManager), [Menu manager](https://github.com/laravel-enso/MenuManager), [Permission manager](https://github.com/laravel-enso/PermissionManager), [Rememberable](https://github.com/laravel-enso/Rememberable), [Role manager](https://github.com/laravel-enso/RoleManager), [Select](https://github.com/laravel-enso/Select), [Structure manager](https://github.com/laravel-enso/StructureManager), [Trackwho](https://github.com/laravel-enso/TrackWho), [Tutorial Manager](https://github.com/laravel-enso/TutorialManager), [Vue Components](https://github.com/laravel-enso/VueComponents)
 
 ### Optional packages
 
@@ -30,20 +27,29 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 - jpegoptim
 - php7.1-gd or php-imagick
 
-On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd`
+On Linux, you may install them with: 
+```
+sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd
+```
 
 ### Publishes
 
 - `php artisan vendor:publish --tag=core-config` - the configuration files
-- `php artisan vendor:publish --tag=core-labels` - the translated labels that are available globally in the front-end, in the Store object
 - `php artisan vendor:publish --tag=core-preferences` - the json preferences file
 - `php artisan vendor:publish --tag=core-lang` - the default lang files
+- `php artisan vendor:publish --tag=enso-lang` - the assets lang files
 - `php artisan vendor:publish --tag=core-storage` - the storage folders
-- `php artisan vendor:publish --tag=core-js` - the VueJS components
+- `php artisan vendor:publish --tag=core-assets` - the assets folders, scss & js
 - `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components,
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config,
 once a newer version is released
+- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the scss & js assets,
+once a newer version is released
+
+### Notes
+
+The [Laravel Enso](https://github.com/laravel-enso/Enso) package comes with this package included.
 
 <!--h-->
 ### Contributions
