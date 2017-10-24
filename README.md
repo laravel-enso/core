@@ -51,6 +51,12 @@ once a newer version is released
 
 The [Laravel Enso](https://github.com/laravel-enso/Enso) package comes with this package included.
 
+Since v2, while not mandatory, Laravel Enso also includes 
+[Notifications](https://github.com/laravel-enso/Notifications), 
+[Documents Manager](https://github.com/laravel-enso/DocumentsManager), 
+[Comments Manager](https://github.com/laravel-enso/CommentsManager) 
+and [Data Import](https://github.com/laravel-enso/DataImport).
+
 <!--h-->
 ### Contributions
 
