@@ -96,6 +96,7 @@ Vue.component('userWidget', require('./vendor/laravel-enso/components/vueadminlt
 Vue.component('page', require('./vendor/laravel-enso/components/vueadminlte/Page.vue'));
 Vue.component('breadcrumbs', require('./vendor/laravel-enso/components/vueadminlte/Breadcrumbs.vue'));
 Vue.component('tabs', require('./vendor/laravel-enso/components/vueadminlte/Tabs.vue'));
+Vue.component('overlay', require('./vendor/laravel-enso/components/vueadminlte/Overlay.vue'));
 
 Vue.component('modal', require('./vendor/laravel-enso/components/enso/Modal.vue'));
 Vue.component('vueFilter', require('./vendor/laravel-enso/components/enso/VueFilter.vue'));
