@@ -5,7 +5,6 @@ window.Laravel = {
 const bus = new Vue();
 Vue.prototype.$bus = bus;
 
-window.initBootstrapSelect = require('./vendor/laravel-enso/modules/initBootstrapSelect');
 require('animate.css');
 
 import VTooltip from 'v-tooltip';
@@ -110,7 +109,6 @@ Vue.component('chart', require('./vendor/laravel-enso/components/charts/Chart.vu
 Vue.component('dataTable', require('./vendor/laravel-enso/components/datatable/DataTable.vue'));
 
 Vue.component('vueSelect', require('./vendor/laravel-enso/components/select/VueSelect.vue'));
-Vue.component('vueSelectLegacy', require('./vendor/laravel-enso/components/select/VueSelectLegacy.vue'));
 
 Vue.component('roleConfigurator', require('./vendor/laravel-enso/components/rolemanager/RoleConfigurator.vue'));
 Vue.component('checkboxManager', require('./vendor/laravel-enso/components/rolemanager/CheckboxManager.vue'));

@@ -9,10 +9,6 @@ toastr.options = require('./vendor/laravel-enso/modules/toastr');
 
 require('./vendor/laravel-enso/modules/dataTable');
 
-window.bootstrapSelect = require('./vendor/laravel-enso/modules/bootstrapSelect');
-
-$.fn.selectpicker.defaults = bootstrapSelect()[Store.user.preferences.global.lang] || bootstrapSelect()['en'];
-
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div>'
 });
