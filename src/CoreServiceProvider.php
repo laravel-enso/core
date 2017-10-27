@@ -53,6 +53,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets/js/modules' => resource_path('assets/js/vendor/laravel-enso/modules'),
             __DIR__.'/resources/assets/js/enso.js' => resource_path('assets/js/enso.js'),
+            __DIR__.'/resources/assets/js/defaults.js' => resource_path('assets/js/defaults.js'),
         ], 'core-js');
 
         $this->publishes([
@@ -63,6 +64,7 @@ class CoreServiceProvider extends ServiceProvider
             __DIR__.'/resources/assets/js/modules' => resource_path('assets/js/vendor/laravel-enso/modules'),
             __DIR__.'/resources/assets/sass'       => resource_path('assets/sass'),
             __DIR__.'/resources/assets/js/enso.js' => resource_path('assets/js/enso.js'),
+            __DIR__.'/resources/assets/js/defaults.js' => resource_path('assets/js/defaults.js'),
         ], 'enso-update');
     }
 
