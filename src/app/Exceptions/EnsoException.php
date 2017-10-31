@@ -14,7 +14,7 @@ class EnsoException extends Exception
     public function render()
     {
         return response()->json([
-            'message'  => $this->getMessage(),
+            'message' => $this->getMessage(),
         ], $this->getCode());
     }
 }
