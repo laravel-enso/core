@@ -119,4 +119,6 @@ Vue.component('fileUploader', require('./vendor/laravel-enso/components/filemana
 
 Vue.component('vueForm', require('./vendor/laravel-enso/components/vueforms/VueForm.vue'));
 
+Vue.component('howToVideo', require('./vendor/laravel-enso/components/howToVideos/HowToVideo.vue'));
+
 Vue.component('draggable', require('vuedraggable'));

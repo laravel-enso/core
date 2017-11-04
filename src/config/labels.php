@@ -47,4 +47,5 @@ return [
     'select'              => 'Press enter to select',
     'selected'            => 'Selected',
     'noResult'            => 'No elements found',
+    'selectTags'          => 'Select Tags',
 ];
