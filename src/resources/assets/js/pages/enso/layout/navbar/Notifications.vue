@@ -150,7 +150,7 @@
 				this.Echo = new Echo({
 				    broadcaster: 'pusher',
 				    key: this.meta.pusher,
-				    cluster: 'eu',
+				    cluster: this.meta.pusherCluster,
 				    namespace: 'App.Events'
 				});
 			},

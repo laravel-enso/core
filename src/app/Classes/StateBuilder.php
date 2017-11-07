@@ -77,6 +77,7 @@ class StateBuilder
             'env'        => config('app.env'),
             'dateFormat' => config('enso.config.jsDateFormat'),
             'pusher'     => config('broadcasting.connections.pusher.key'),
+            'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
         ];
     }
 }
