@@ -1,7 +1,9 @@
+import Vue from 'vue';
+
 Vue.mixin({
     methods: {
         handleError(error) {
-            let { status, data } = error.response;
+            const { status, data } = error.response;
 
             if (status === 401) {
                 if (this.$store.getters['auth/isAuth']) {
@@ -16,6 +18,6 @@ Vue.mixin({
             }
 
             throw error;
-        }
-    }
+        },
+    },
 });
