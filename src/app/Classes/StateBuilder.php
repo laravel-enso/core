@@ -70,13 +70,13 @@ class StateBuilder
     private function getMeta()
     {
         return [
-            'appName'    => config('app.name'),
-            'appUrl'     => url('/').'/',
-            'version'    => config('enso.config.version'),
-            'quote'      => Inspiring::quote(),
-            'env'        => config('app.env'),
-            'dateFormat' => config('enso.config.jsDateFormat'),
-            'pusher'     => config('broadcasting.connections.pusher.key'),
+            'appName'       => config('app.name'),
+            'appUrl'        => url('/').'/',
+            'version'       => config('enso.config.version'),
+            'quote'         => Inspiring::quote(),
+            'env'           => config('app.env'),
+            'dateFormat'    => config('enso.config.jsDateFormat'),
+            'pusher'        => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
         ];
     }
