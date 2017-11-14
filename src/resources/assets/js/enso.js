@@ -50,6 +50,10 @@ Vue.mixin({
                 return toastr.error(error.response.data.message);
             }
 
+            if (error.response.status === 429) {
+                return toastr.error(error.response.data.message);
+            }
+
             if (error.response.status === 403) {
                 return toastr.error(Store.labels.notAuthorized);
             }
