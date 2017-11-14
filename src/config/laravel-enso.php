@@ -14,5 +14,5 @@
             'howToVideos' => 'howToVideos',
         ],
         'sentryRavenKey' => env('SENTRY_RAVEN_DSN', 'no-sentry-raven-key-found-in-env'),
-        'cacheLifetime' => env('CACHE_LIFETIME', 60),
+        'cacheLifetime'  => env('CACHE_LIFETIME', 60),
     ];
