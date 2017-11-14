@@ -46,6 +46,7 @@ class MainComposer
         $this->store->languages = Language::all();
         $this->store->themes = (new Themes())->getData();
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');
+        $this->store->sentryRavenKey = env('SENTRY_RAVEN_DSN', 'no-sentry-raven-key-found-in-env');
         $this->store->labels = $this->getLabels();
         $this->store->route = request()->route()->getName();
         $this->store->breadcrumbs = $this->getBreadcrumbs();
