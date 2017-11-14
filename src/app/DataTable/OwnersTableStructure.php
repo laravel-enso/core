@@ -17,7 +17,6 @@ class OwnersTableStructure extends TableStructure
             'headerButtons' => ['create', 'exportExcel'],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
-            'notSearchable' => [1],
             'boolean'       => [2],
             'columns'       => [
                 0 => [

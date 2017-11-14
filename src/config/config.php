@@ -13,5 +13,6 @@ return [
         'temp'    => 'temp',
         'exports' => 'exports',
     ],
+    'ravenKey' => env('RAVEN_DSN', 'no-raven-key-found'),
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
 ];
