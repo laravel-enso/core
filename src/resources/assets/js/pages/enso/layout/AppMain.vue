@@ -122,6 +122,8 @@ export default {
     }
 
     .main-content {
+        position: relative;
+        z-index: 2000;
         padding-top: 50px;
         margin-left: 180px;
         transition: margin .5s ease;
