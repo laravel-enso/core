@@ -2,13 +2,13 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Owner;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use LaravelEnso\Core\app\DataTable\OwnersTableStructure;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\VueDatatable\app\Classes\Template;
-use LaravelEnso\Core\app\DataTable\OwnersTableStructure;
 use LaravelEnso\VueDatatable\app\Classes\Table;
+use LaravelEnso\VueDatatable\app\Classes\Template;
 
 class OwnerTableController extends Controller
 {
