@@ -3,7 +3,7 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Registered Users",
-    "icon": "fa fa-list-alt",
+    "icon": "fa fa-users",
     "crtNo": true,
     "buttons": [
         "create",
