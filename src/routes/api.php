@@ -22,11 +22,11 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::namespace('Owner')
                     ->prefix('owners')->as('owners.')
                     ->group(function () {
-                        Route::get('initTable', 'OwnerTableController@initTable')
+                        Route::get('initTable', 'OwnerTableController@init')
                             ->name('initTable');
-                        Route::get('getTableData', 'OwnerTableController@getTableData')
+                        Route::get('getTableData', 'OwnerTableController@data')
                             ->name('getTableData');
-                        Route::get('exportExcel', 'OwnerTableController@exportExcel')
+                        Route::get('exportExcel', 'OwnerTableController@excel')
                             ->name('exportExcel');
 
                         Route::get('getOptionList', 'OwnerSelectController@getOptionList')
@@ -38,11 +38,11 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::namespace('User')
                     ->prefix('users')->as('users.')
                     ->group(function () {
-                        Route::get('initTable', 'UserTableController@initTable')
+                        Route::get('initTable', 'UserTableController@init')
                             ->name('initTable');
-                        Route::get('getTableData', 'UserTableController@getTableData')
+                        Route::get('getTableData', 'UserTableController@data')
                             ->name('getTableData');
-                        Route::get('exportExcel', 'UserTableController@exportExcel')
+                        Route::get('exportExcel', 'UserTableController@excel')
                             ->name('exportExcel');
                         Route::get('getOptionList', 'UserSelectController@getOptionList')
                             ->name('getOptionList');

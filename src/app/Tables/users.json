@@ -1,0 +1,52 @@
+{
+    "routePrefix": "administration.users",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Registered Users",
+    "icon": "fa fa-list-alt",
+    "crtNo": true,
+    "buttons": [
+        "create",
+        "show",
+        "edit",
+        "destroy",
+        "excel"
+    ],
+    "columns": [
+        {
+            "label": "Entity",
+            "name": "owner",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "First Name",
+            "name": "first_name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Last Name",
+            "name": "last_name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Phone",
+            "name": "phone",
+            "meta": ["searchable","sortable"]
+        },
+        {
+            "label": "Email",
+            "name": "email",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Role",
+            "name": "role",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Active",
+            "name": "is_active",
+            "meta": ["boolean"]
+        }
+    ]
+}

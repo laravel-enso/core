@@ -1,0 +1,26 @@
+{
+    "routePrefix": "administration.owners",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Registered Entities",
+    "icon": "fa fa-list-alt",
+    "crtNo": true,
+    "buttons": [ "create", "edit", "destroy", "excel"],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "meta": [ "searchable", "sortable" ]
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "meta": [ "searchable", "sortable" ]
+        },
+        {
+            "label": "Active",
+            "name": "is_active",
+            "meta": [ "boolean" ]
+        }
+    ]
+}

@@ -9,13 +9,13 @@ use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
-use LaravelEnso\Helpers\Traits\IsActiveTrait;
+use LaravelEnso\Helpers\Traits\IsActive;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class User extends Authenticatable
 {
-    use Impersonate, IsActiveTrait, FormattedTimestamps, ActionLogger, Notifiable;
+    use Impersonate, IsActive, FormattedTimestamps, ActionLogger, Notifiable;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function getFullNameAttribute()
     {
-        return trim($this->first_name.' '.$this->last_name);
+        return trim($this->first_name . ' ' . $this->last_name);
     }
 
     public function getAvatarIdAttribute()

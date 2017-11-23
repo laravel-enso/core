@@ -3,12 +3,12 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Helpers\Traits\IsActiveTrait;
+use LaravelEnso\Helpers\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class Owner extends Model
 {
-    use IsActiveTrait;
+    use IsActive;
 
     protected $fillable = ['name', 'description', 'is_active'];
 

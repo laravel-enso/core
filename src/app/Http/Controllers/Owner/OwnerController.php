@@ -11,6 +11,8 @@ class OwnerController extends Controller
 {
     public function __construct(OwnerService $service)
     {
+        parent::__construct();
+
         $this->service = $service;
     }
 

@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        $theme = (new Themes())->get(request()->user()->preferences->global->theme);
+        $theme = Themes::get(request()->user()->preferences->global->theme);
 
         return view('laravel-enso/core::index', compact('theme'));
     }
