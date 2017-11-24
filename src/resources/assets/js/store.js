@@ -2,14 +2,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import router from './router';
-import { locale } from './store/enso/locale';
-import { menus } from './store/enso/menus';
-import { layout } from './store/enso/layout';
-import { auth } from './store/enso/auth';
+import locale from './store/enso/locale';
+import menus from './store/enso/menus';
+import layout from './store/enso/layout';
+import auth from './store/enso/auth';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
     strict: true,
 
     modules: {
@@ -25,8 +25,9 @@ const store = new Vuex.Store({
     },
 
     getters: {
-        avatarLink: (state) => state.appIsLoaded ?
-            route('core.avatars.show', (state.user.avatarId || 'null'), false).toString() : '#',
+        avatarLink: state => (state.appIsLoaded ?
+            route('core.avatars.show', (state.user.avatarId || 'null'), false).toString()
+            : '#'),
     },
 
     mutations: {
@@ -70,5 +71,3 @@ const store = new Vuex.Store({
         },
     },
 });
-
-export default store;

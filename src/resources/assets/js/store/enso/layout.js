@@ -1,7 +1,7 @@
-import { navbar } from './layout/navbar';
-import { settingsBar } from './layout/settingsBar';
+import navbar from './layout/navbar';
+import settingsBar from './layout/settingsBar';
 
-export const layout = {
+export default {
     namespaced: true,
 
     modules: { navbar, settingsBar },
@@ -14,8 +14,9 @@ export const layout = {
     },
 
     getters: {
-        theme: (state, getters, rootState) => rootState.user.preferences ?
-            rootState.user.preferences.global.theme : null,
+        theme: (state, getters, rootState) => (rootState.user.preferences ?
+            rootState.user.preferences.global.theme
+            : null),
     },
 
     mutations: {
