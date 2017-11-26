@@ -38,7 +38,7 @@
         "laravel-enso/actionlogger": "2.0.*",
         "laravel-enso/avatarmanager": "2.1.*",
         "laravel-enso/charts": "2.1.*",
-        "laravel-enso/vue-datatable": "1.0.*",
+        "laravel-enso/vuedatatable": "1.0.*",
         "laravel-enso/dbsyncmigrations": "2.1.*",
         "laravel-enso/filemanager": "2.1.*",
         "laravel-enso/formbuilder": "2.1.*",
