@@ -15,6 +15,6 @@ class OwnerTableController extends Controller
 
     public function query()
     {
-        return Owner::select(\DB::raw('id as dtRowId, name, description, is_active, created_at'));
+        return Owner::select(\DB::raw('id as "dtRowId", name, description, is_active, created_at'));
     }
 }

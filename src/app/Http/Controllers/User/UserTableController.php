@@ -16,8 +16,8 @@ class UserTableController extends Controller
     public function query()
     {
         return User::select(\DB::raw(
-            'users.id as dtRowId, owners.name owner, users.first_name, users.last_name, users.phone,
-            users.email, roles.name role, users.is_active'
+            'users.id as "dtRowId", owners.name as owner, users.first_name, users.last_name, users.phone,
+            users.email, roles.name as role, users.is_active'
             ))->join('owners', 'users.owner_id', '=', 'owners.id')
             ->join('roles', 'users.role_id', '=', 'roles.id');
     }
