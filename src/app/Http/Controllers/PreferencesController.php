@@ -69,7 +69,7 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
     private function updateGlobalPreference($preferences)
     {
         foreach ($preferences as $key => $value) {
-            request()->user()->preference()->update(['value->global->'.$key => $value]);
+            request()->user()->preference()->update(['value->global->' . $key => $value]);
         }
     }
 
@@ -77,10 +77,10 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
     {
         foreach ($preferences as $key => $value) {
             if (is_array($value) && count($value) === 1) {
-                return $this->updateLocalPreference($route.'->'.$key, $value);
+                return $this->updateLocalPreference($route . '->' . $key, $value);
             }
 
-            request()->user()->preference()->update(['value->local->'.$route.'->'.$key => json_encode($value)]);
+            request()->user()->preference()->update(['value->local->' . $route . '->' . $key => json_encode($value)]);
         }
     }
 }
