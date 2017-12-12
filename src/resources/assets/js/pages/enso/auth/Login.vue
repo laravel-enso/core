@@ -141,7 +141,7 @@ export default {
                         return;
                     }
 
-                    this.$router.push({ name: this.lastRoute });
+                    this.$router.replace({ name: this.lastRoute });
                     this.$store.commit('auth/setLastRoute', null);
                 }, 1000);
             }).catch((error) => {
