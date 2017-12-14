@@ -61,4 +61,7 @@ return [
     'postalArea'            => 'Postal Area',
     'administrativeArea'    => 'Administrative Area',
     'country'               => 'Country',
+    'neighborhood'          => 'Neighborhood',
+    'locality'              => 'Locality',
+    'county'                => 'County',
 ];
