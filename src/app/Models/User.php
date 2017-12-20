@@ -8,14 +8,15 @@ use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\Helpers\Traits\IsActive;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class User extends Authenticatable
 {
-    use Impersonate, IsActive, FormattedTimestamps, ActionLogger, Notifiable;
+    use Impersonate, IsActive, ActionLogger, Notifiable;
+
+    private const AdminRoleId = 1;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -54,7 +55,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id == 1;
+        return $this->role_id == self::AdminRoleId;
     }
 
     public function getPreferencesAttribute()

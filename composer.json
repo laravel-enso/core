@@ -57,7 +57,9 @@
         "laravel-enso/tutorialmanager": "2.1.*",
         "laravel-enso/vuecomponents": "2.1.*",
         "laravel-enso/vuedatatable": "1.0.*",
-        "tightenco/ziggy": "0.4.*",
+        "tightenco/ziggy": "0.4.*"
+    },
+    "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
     },
     "autoload": {
