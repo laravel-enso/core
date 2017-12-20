@@ -2,15 +2,15 @@
 
 namespace LaravelEnso\Core\app\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
-use LaravelEnso\AvatarManager\app\Models\Avatar;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
-use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use LaravelEnso\Helpers\Traits\IsActive;
-use LaravelEnso\Impersonate\app\Traits\Impersonate;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\AvatarManager\app\Models\Avatar;
+use LaravelEnso\Impersonate\app\Traits\Impersonate;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id == self::AdminRoleId;
+        return $this->role_id === self::AdminRoleId;
     }
 
     public function getPreferencesAttribute()

@@ -3,10 +3,10 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
+use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
 
 class CoreServiceProvider extends ServiceProvider
@@ -49,12 +49,12 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core-storage');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js'   => resource_path('assets/js'),
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
         ], 'core-assets');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js'   => resource_path('assets/js'),
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
         ], 'enso-assets');
 

@@ -16,8 +16,8 @@ class LogSuccessfulLoginListener
     public function handle()
     {
         $this->login->create([
-            'user_id'    => auth()->user()->id,
-            'ip'         => request()->ip(),
+            'user_id' => auth()->user()->id,
+            'ip' => request()->ip(),
             'user_agent' => request()->header('User-Agent'),
         ]);
     }

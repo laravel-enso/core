@@ -2,11 +2,11 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\app\Enums\Themes;
+use Tightenco\Ziggy\BladeRouteGenerator;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
-use Tightenco\Ziggy\BladeRouteGenerator;
 
 class StateBuilder
 {
@@ -29,17 +29,17 @@ class StateBuilder
         $menus = $this->getMenus();
 
         $this->state = [
-            'user'          => $this->user,
-            'menus'         => $menus,
-            'i18n'          => $this->getI18N($languages),
-            'languages'     => $languages->pluck('flag', 'name'),
-            'themes'        => Themes::all(),
-            'implicitMenu'  => $this->user->role->menu,
+            'user' => $this->user,
+            'menus' => $menus,
+            'i18n' => $this->getI18N($languages),
+            'languages' => $languages->pluck('flag', 'name'),
+            'themes' => Themes::all(),
+            'implicitMenu' => $this->user->role->menu,
             'impersonating' => session()->has('impersonating'),
-            'meta'          => $this->getMeta(),
-            'csrfToken'     => csrf_token(),
-            'ravenKey'      => config('laravel-enso.config.ravenKey'),
-            'routes'        => app(BladeRouteGenerator::class)->getRoutePayload(),
+            'meta' => $this->getMeta(),
+            'csrfToken' => csrf_token(),
+            'ravenKey' => config('laravel-enso.config.ravenKey'),
+            'routes' => app(BladeRouteGenerator::class)->getRoutePayload(),
         ];
     }
 
@@ -71,13 +71,13 @@ class StateBuilder
     private function getMeta()
     {
         return [
-            'appName'       => config('app.name'),
-            'appUrl'        => url('/').'/',
-            'version'       => config('enso.config.version'),
-            'quote'         => Inspiring::quote(),
-            'env'           => config('app.env'),
-            'dateFormat'    => config('enso.config.jsDateFormat'),
-            'pusher'        => config('broadcasting.connections.pusher.key'),
+            'appName' => config('app.name'),
+            'appUrl' => url('/').'/',
+            'version' => config('enso.config.version'),
+            'quote' => Inspiring::quote(),
+            'env' => config('app.env'),
+            'dateFormat' => config('enso.config.jsDateFormat'),
+            'pusher' => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
         ];
     }

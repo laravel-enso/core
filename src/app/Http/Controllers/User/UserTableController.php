@@ -4,8 +4,8 @@ namespace LaravelEnso\Core\app\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\VueDatatable\app\Traits\Excel;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
 
 class UserTableController extends Controller
 {

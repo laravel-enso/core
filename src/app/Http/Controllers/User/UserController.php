@@ -3,10 +3,10 @@
 namespace LaravelEnso\Core\app\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\app\Http\Services\UserService;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
-use LaravelEnso\Core\app\Http\Services\UserService;
-use LaravelEnso\Core\app\Models\User;
 
 class UserController extends Controller
 {

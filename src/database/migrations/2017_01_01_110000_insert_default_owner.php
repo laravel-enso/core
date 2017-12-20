@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\RoleManager\app\Models\Role;
+use Illuminate\Database\Migrations\Migration;
 
 class InsertDefaultOwner extends Migration
 {

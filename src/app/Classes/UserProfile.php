@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Classes;
 
 use Carbon\Carbon;
-use LaravelEnso\ActionLogger\app\Models\ActionLog;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\ActionLogger\app\Models\ActionLog;
 
 class UserProfile
 {

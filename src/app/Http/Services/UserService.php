@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\Core\app\Classes\UserProfile;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\app\Classes\UserProfile;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -33,9 +33,9 @@ class UserService
         });
 
         return [
-            'message'  => __('The user was created!'),
+            'message' => __('The user was created!'),
             'redirect' => 'administration.users.edit',
-            'id'       => $user->id,
+            'id' => $user->id,
         ];
     }
 
@@ -78,7 +78,7 @@ class UserService
         $user->delete();
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'administration.users.index',
         ];
     }

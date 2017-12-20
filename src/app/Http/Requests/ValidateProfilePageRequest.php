@@ -15,8 +15,8 @@ class ValidateProfilePageRequest extends FormRequest
     {
         return [
             'first_name' => 'required|max:50',
-            'last_name'  => 'required|max:50',
-            'phone'      => 'max:30',
+            'last_name' => 'required|max:50',
+            'phone' => 'max:30',
         ];
     }
 }

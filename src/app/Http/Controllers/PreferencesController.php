@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Models\Preference;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
 
 class PreferencesController extends Controller //fixme. We need dedicated controllers for global / local
 {

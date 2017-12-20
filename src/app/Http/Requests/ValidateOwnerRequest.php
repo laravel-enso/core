@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateOwnerRequest extends FormRequest
 {
@@ -17,13 +17,13 @@ class ValidateOwnerRequest extends FormRequest
         $owner = $this->route('owner');
         $nameUnique = Rule::unique('owners', 'name');
 
-        $nameUnique = (request()->getMethod() == 'PATCH')
+        $nameUnique = (request()->getMethod() === 'PATCH')
             ? $nameUnique->ignore($owner->id)
             : $nameUnique;
 
         return [
             'is_active' => 'boolean',
-            'name'      => [
+            'name' => [
                 'required',
                 $nameUnique,
             ],

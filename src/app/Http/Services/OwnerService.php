@@ -4,8 +4,8 @@ namespace LaravelEnso\Core\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Models\Owner;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class OwnerService
@@ -31,9 +31,9 @@ class OwnerService
         });
 
         return [
-            'message'  => __('The entity was created!'),
+            'message' => __('The entity was created!'),
             'redirect' => 'administration.owners.edit',
-            'id'       => $owner->id,
+            'id' => $owner->id,
         ];
     }
 
@@ -73,7 +73,7 @@ class OwnerService
         $owner->delete();
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'administration.owners.index',
         ];
     }
