@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\app\Http\Services;
 use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Classes\UserProfile;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserService
@@ -14,10 +14,9 @@ class UserService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setTitle('Create User')
-            ->setMethod('POST')
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->get();
 
         return compact('form');
     }
@@ -48,10 +47,9 @@ class UserService
 
     public function edit(User $user)
     {
-        $form = (new FormBuilder(self::FormPath, $user))
-            ->setTitle('Edit User')
-            ->setMethod('PATCH')
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($user)
+            ->get();
 
         return compact('form');
     }

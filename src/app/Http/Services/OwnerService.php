@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\app\Http\Services;
 use Illuminate\Http\Request;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class OwnerService
@@ -14,11 +14,10 @@ class OwnerService
 
     public function create(Owner $owner)
     {
-        $form = (new FormBuilder(self::FormPath, $owner))
-            ->setMethod('POST')
-            ->setTitle('Create Owner')
-            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath, $owner))
+            ->create()
+            ->options('roleList', Role::pluck('name', 'id'))
+            ->get();
 
         return compact('form', 'owner');
     }
@@ -41,11 +40,10 @@ class OwnerService
     {
         $owner->append(['roleList']);
 
-        $form = (new FormBuilder(self::FormPath, $owner))
-            ->setMethod('PATCH')
-            ->setTitle('Edit Owner')
-            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($owner)
+            ->options('roleList', Role::pluck('name', 'id'))
+            ->get();
 
         return compact('form', 'owner');
     }
