@@ -40,7 +40,7 @@
         "laravel-enso/charts": "2.1.*",
         "laravel-enso/dbsyncmigrations": "2.1.*",
         "laravel-enso/filemanager": "2.1.*",
-        "laravel-enso/formbuilder": "2.1.*",
+        "laravel-enso/formbuilder": "2.2.*",
         "laravel-enso/helpers": "1.6.*",
         "laravel-enso/historytracker": "1.4.*",
         "laravel-enso/imagetransformer": "1.3.*",
