@@ -1,12 +1,9 @@
 {
-    "title": null,
-    "icon": "fa fa-user",
     "columns": "2",
-    "method": null,
-    "prefix": "administration.users",
+    "routePrefix": "administration.users",
     "fields": [{
         "label": "First Name",
-        "column": "first_name",
+        "name": "first_name",
         "value": null,
         "meta": {
             "type": "input",
@@ -14,7 +11,7 @@
         }
     }, {
         "label": "Last Name",
-        "column": "last_name",
+        "name": "last_name",
         "value": null,
         "meta": {
             "type": "input",
@@ -22,7 +19,7 @@
         }
     }, {
         "label": "Email",
-        "column": "email",
+        "name": "email",
         "value": null,
         "meta": {
             "type": "input",
@@ -30,7 +27,7 @@
         }
     }, {
         "label": "Phone Number",
-        "column": "phone",
+        "name": "phone",
         "value": null,
         "meta": {
             "type": "input",
@@ -38,7 +35,7 @@
         }
     }, {
         "label": "Entity",
-        "column": "owner_id",
+        "name": "owner_id",
         "value": "",
         "meta": {
             "custom": true,
@@ -49,7 +46,7 @@
         }
     }, {
         "label": "Role",
-        "column": "role_id",
+        "name": "role_id",
         "value": false,
         "meta": {
             "custom": true,
@@ -60,7 +57,7 @@
         }
     }, {
         "label": "Active",
-        "column": "is_active",
+        "name": "is_active",
         "value": false,
         "meta": {
             "type": "input",

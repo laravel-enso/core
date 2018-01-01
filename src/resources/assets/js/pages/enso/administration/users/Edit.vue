@@ -8,7 +8,9 @@
                 <template slot="owner_id" slot-scope="props">
                     <vue-select name="owner_id"
                         v-model="props.field.value"
-                        @input="pivotParams.owners.id=$event;props.errors.clear(props.field.column)"
+                        :key-map="props.field.meta.keyMap"
+                        :has-error="props.errors.has(props.field.name)"
+                        @input="pivotParams.owners.id=$event;props.errors.clear(props.field.name)"
                         :source="props.field.meta.source">
                     </vue-select>
                 </template>
@@ -16,7 +18,9 @@
                     <vue-select name="role_id"
                         :pivot-params="pivotParams"
                         v-model="props.field.value"
-                        @input="props.errors.clear(props.field.column);"
+                        :key-map="props.field.meta.keyMap"
+                        :has-error="props.errors.has(props.field.name)"
+                        @input="props.errors.clear(props.field.name);"
                         :source="props.field.meta.source">
                     </vue-select>
                 </template>
@@ -45,14 +49,14 @@ export default {
     created() {
         axios.get(route(this.$route.name, this.$route.params.id, false)).then(({ data }) => {
             this.form = data.form;
-            this.initialised = true;
             this.pivotParams.owners.id = this.getOwnerId();
+            this.initialised = true;
         }).catch(error => this.handleError(error));
     },
 
     methods: {
         getOwnerId() {
-            const attribute = this.form.fields.find(attr => attr.column === 'owner_id');
+            const attribute = this.form.fields.find(({ name }) => name === 'owner_id');
 
             return attribute.value;
         },

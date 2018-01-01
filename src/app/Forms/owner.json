@@ -1,12 +1,9 @@
 {
-    "title": null,
-    "icon": "fa fa-list-alt",
     "columns": "1",
-    "method": null,
-    "prefix": "administration.owners",
+    "routePrefix": "administration.owners",
     "fields": [{
         "label": "Name",
-        "column": "name",
+        "name": "name",
         "value": null,
         "meta": {
             "type": "input",
@@ -14,7 +11,7 @@
         }
     }, {
         "label": "Description",
-        "column": "description",
+        "name": "description",
         "value": null,
         "meta": {
             "type": "input",
@@ -22,7 +19,7 @@
         }
     }, {
         "label": "Roles",
-        "column": "roleList",
+        "name": "roleList",
         "value": [],
         "meta": {
             "type": "select",
@@ -31,7 +28,7 @@
         }
     }, {
         "label": "Active",
-        "column": "is_active",
+        "name": "is_active",
         "value": false,
         "meta": {
             "type": "input",

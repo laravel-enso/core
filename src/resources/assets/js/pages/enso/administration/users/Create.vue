@@ -8,7 +8,8 @@
                 <template slot="owner_id" slot-scope="props">
                     <vue-select name="owner_id"
                         v-model="props.field.value"
-                        @input="pivotParams.owners.id=$event;props.errors.clear(props.field.column)"
+                        :has-error="props.errors.has(props.field.name)"
+                        @input="pivotParams.owners.id=$event;props.errors.clear(props.field.name)"
                         :source="props.field.meta.source">
                     </vue-select>
                 </template>
@@ -16,7 +17,8 @@
                     <vue-select name="role_id"
                         :pivot-params="pivotParams"
                         v-model="props.field.value"
-                        @input="props.errors.clear(props.field.column);"
+                        :has-error="props.errors.has(props.field.name)"
+                        @input="props.errors.clear(props.field.name);"
                         :source="props.field.meta.source">
                     </vue-select>
                 </template>
