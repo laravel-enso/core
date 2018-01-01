@@ -5,7 +5,7 @@
     "name": "Registered Entities",
     "icon": "fa fa-list-alt",
     "crtNo": true,
-    "buttons": [ "create", "edit", "destroy", "excel"],
+    "buttons": ["excel", "create", "edit", "destroy"],
     "columns": [
         {
             "label": "Name",
