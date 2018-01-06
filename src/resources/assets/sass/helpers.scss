@@ -1,5 +1,10 @@
 .has-vertically-centered-content {
-    display:flex; align-items: center;
+    display:flex;
+    align-items: center;
+}
+
+.has-margin-small {
+    margin: 6px;
 }
 
 .has-margin-left-small {
@@ -42,20 +47,20 @@
     margin: 24px;
 }
 
-.has-margin-top-large {
-    margin-top: 24px;
-}
-
-.has-margin-bottom-large {
-    margin-bottom: 24px;
-}
-
 .has-margin-left-large {
     margin-left: 24px;
 }
 
 .has-margin-right-large {
     margin-right: 24px;
+}
+
+.has-margin-top-large {
+    margin-top: 24px;
+}
+
+.has-margin-bottom-large {
+    margin-bottom: 24px;
 }
 
 .has-padding-small {
@@ -124,4 +129,66 @@
 
 .is-clickable {
     cursor: pointer;
+}
+
+.has-colored-background {
+    &.is-white {
+        background-color: $white;
+    }
+
+    &.is-black {
+        background-color: $black;
+    }
+
+    &.is-grey {
+        background-color: $grey;
+    }
+    
+    &.is-grey-light {
+        background-color: $grey-light;
+    }
+    
+    &.is-grey-lighter {
+        background-color: $grey-lighter;
+    }
+    
+    &.is-light {
+        background-color: $light;
+    }
+
+    &.is-dark {
+        background-color: $dark;
+    }
+
+    &.is-primary {
+        background-color: $primary;
+    }
+
+    &.is-link {
+        background-color: $link;
+    }
+
+    &.is-info {
+        background-color: $info;
+    }
+
+    &.is-success {
+        background-color: $success;
+    }
+
+    &.is-warning {
+        background-color: $warning;
+    }
+
+    &.is-danger {
+        background-color: $danger;
+    }
+
+    &.is-yellow {
+        background-color: $yellow;
+    }
+
+    &.is-purple {
+        background-color: $purple;
+    }
 }
