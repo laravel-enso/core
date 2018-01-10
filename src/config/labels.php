@@ -48,6 +48,7 @@ return [
     'selected'              => 'Selected',
     'noResult'              => 'No elements found',
     'selectTags'            => 'Select Tags',
+    'tagPlaceholder'        => 'Press enter to create',
     //addresses
     'addresses'             => 'Addresses',
     'street'                => 'Street',
