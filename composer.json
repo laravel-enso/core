@@ -70,7 +70,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\Core\\CoreServiceProvider",
+                "LaravelEnso\\Core\\AppServiceProvider",
                 "LaravelEnso\\Core\\AuthServiceProvider",
                 "LaravelEnso\\Core\\EventServiceProvider"
             ],
