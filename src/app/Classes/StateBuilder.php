@@ -38,7 +38,7 @@ class StateBuilder
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->getMeta(),
             'csrfToken' => csrf_token(),
-            'ravenKey' => config('laravel-enso.config.ravenKey'),
+            'ravenKey' => config('enso.config.ravenKey'),
             'routes' => app(BladeRouteGenerator::class)->getRoutePayload(),
         ];
     }
