@@ -15,6 +15,9 @@
             <documents :id="owner.id"
                 type="owner">
             </documents>
+            <addresses :id="owner.id"
+                type="owner">
+            </addresses>
         </div>
     </div>
 
@@ -25,11 +28,12 @@
 import Documents from '../../../components/enso/documents/Documents.vue';
 import Comments from '../../../components/enso/comments/Comments.vue';
 import Contacts from '../../../components/enso/contacts/Contacts.vue';
+import Addresses from '../../../components/enso/addresses/Addresses.vue';
 import VueForm from '../../../components/enso/vueforms/VueForm.vue';
 
 export default {
     components: {
-        Comments, Contacts, Documents, VueForm,
+        Comments, Contacts, Documents, Addresses, VueForm,
     },
 
     data() {
