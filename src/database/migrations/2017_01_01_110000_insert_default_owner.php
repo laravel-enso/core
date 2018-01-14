@@ -13,7 +13,7 @@ class InsertDefaultOwner extends Migration
 
             $owner = Owner::create([
                 'name' => 'Admin',
-                'is_active' => true
+                'is_active' => true,
             ]);
 
             $owner->roles()->attach($roles);
