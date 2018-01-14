@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishesDependencies(); //fixme we should publish the notification for password reset!?
+        $this->publishesDependencies();
         $this->publishesResources();
         $this->registerMiddleware();
         $this->loadDependencies();

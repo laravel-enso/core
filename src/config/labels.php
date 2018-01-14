@@ -7,7 +7,6 @@ return [
     'savedChanges' => 'The changes have been saved',
     'notAuthorized' => 'You are not authorized to perform this action',
     'disabledAccount' => 'Your account has been disabled. Please contact the administrator',
-    //addresses
     'addresses' => 'Addresses',
     'street' => 'Street',
     'number' => 'Number',

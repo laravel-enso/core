@@ -9,17 +9,14 @@ class InsertDefaultOwner extends Migration
     public function up()
     {
         \DB::transaction(function () {
-            $owners = [
-                ['name' => 'Admin', 'is_active' => true],
-            ];
-
             $roles = Role::all();
 
-            foreach ($owners as $owner) {
-                $owner = new Owner($owner);
-                $owner->save();
-                $owner->roles()->attach($roles);
-            }
+            $owner = Owner::create([
+                'name' => 'Admin',
+                'is_active' => true
+            ]);
+
+            $owner->roles()->attach($roles);
         });
     }
 

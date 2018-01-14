@@ -29,7 +29,7 @@
     }, {
         "label": "Active",
         "name": "is_active",
-        "value": false,
+        "value": true,
         "meta": {
             "type": "input",
             "content": "checkbox"

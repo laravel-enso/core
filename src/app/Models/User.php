@@ -76,7 +76,8 @@ class User extends Authenticatable
 
     public function getAvatarIdAttribute()
     {
-        $id = $this->avatar ? $this->avatar->id : null;
+        $id = optional($this->avatar)->id;
+
         unset($this->avatar);
 
         return $id;

@@ -10,9 +10,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('owner_id')->unsigned()->index('owner_id');
-            $table->foreign('owner_id')->references('id')->on('owners')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('owner_id')->references('id')->on('owners')
+                ->onUpdate('restrict')->onDelete('restrict');
             $table->integer('role_id')->unsigned()->index('roles_id');
-            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('role_id')->references('id')->on('roles')
+                ->onUpdate('restrict')->onDelete('restrict');
             $table->string('email');
             $table->string('password')->nullable();
             $table->string('first_name')->nullable();
