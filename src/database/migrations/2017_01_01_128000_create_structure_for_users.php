@@ -21,7 +21,6 @@ class CreateStructureForUsers extends StructureMigration
         ['name' => 'administration.users.store', 'description' => 'Store newly created user', 'type' => 1, 'default' => false],
         ['name' => 'administration.users.update', 'description' => 'Update edited user', 'type' => 1, 'default' => false],
         ['name' => 'administration.users.destroy', 'description' => 'Delete user', 'type' => 1, 'default' => false],
-        ['name' => 'administration.users.updateProfile', 'description' => 'Update user\'s profile', 'type' => 1, 'default' => true],
     ];
 
     protected $menu = [

@@ -46,9 +46,6 @@ Route::middleware(['web', 'auth', 'core'])
                             ->name('exportExcel');
                         Route::get('getOptionList', 'UserSelectController@getOptionList')
                             ->name('getOptionList');
-
-                        Route::patch('updateProfile/{user}', 'ProfilePageController')
-                            ->name('updateProfile');
                     });
 
                 Route::resource('users', 'User\UserController');

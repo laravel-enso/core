@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Helpers\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Helpers\app\Traits\IsActive;
 
 class Owner extends Model
 {
