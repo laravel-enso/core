@@ -130,7 +130,7 @@ export default {
         transition: margin .5s;
     }
 
-    @media screen and (max-width: 1007px) {
+    @media screen and (max-width: 1023px) {
         .main-content {
             margin-left: 0;
         }
