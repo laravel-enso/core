@@ -4,8 +4,8 @@ namespace LaravelEnso\Core\app\Models;
 
 use LaravelEnso\Core\app\Enums\Themes;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\Helpers\app\Traits\IsActive;
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
