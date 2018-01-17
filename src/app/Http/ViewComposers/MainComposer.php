@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\app\Http\ViewComposers;
 
 use Illuminate\View\View;
 use LaravelEnso\Core\app\Enums\Themes;
-use LaravelEnso\Helpers\Classes\Object;
+use LaravelEnso\Helpers\Classes\Obj;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\BreadcrumbsBuilder;
 use LaravelEnso\MenuManager\app\Classes\MenuGenerator;
@@ -17,7 +17,7 @@ class MainComposer
 
     public function __construct()
     {
-        $this->store = new Object();
+        $this->store = new Obj();
         $this->setStore();
         $this->setMenu();
     }
