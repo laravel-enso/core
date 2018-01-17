@@ -8,16 +8,16 @@ class DefaultPreferences
 
     public function __construct()
     {
-        $this->setData();
+        $this->data = $this->readDefault();
     }
 
-    public function getData()
+    public function data()
     {
         return json_decode($this->data);
     }
 
-    private function setData()
+    private function readDefault()
     {
-        $this->data = \File::get(resource_path('preferences.json'));
+        return \File::get(resource_path('preferences.json'));
     }
 }

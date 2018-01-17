@@ -4,16 +4,14 @@ namespace LaravelEnso\Core\app\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Models\Owner;
-use LaravelEnso\Select\app\Traits\SelectListBuilder;
+use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
 class OwnerSelectController extends Controller
 {
-    use SelectListBuilder;
+    use OptionsBuilder;
 
-    protected $selectQuery;
-
-    public function __construct()
+    public function query()
     {
-        $this->selectQuery = Owner::active();
+        return Owner::active();
     }
 }

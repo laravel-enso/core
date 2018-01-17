@@ -9,6 +9,6 @@ class AppInitController extends Controller
 {
     public function __invoke(StateBuilder $state)
     {
-        return $state(auth()->user());
+        return ['state' => $state->get()];
     }
 }

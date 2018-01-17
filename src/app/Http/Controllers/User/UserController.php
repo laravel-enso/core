@@ -4,7 +4,9 @@ namespace LaravelEnso\Core\app\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Core\app\Http\Services\UserService;
+use LaravelEnso\FormBuilder\app\Classes\Form;
+use LaravelEnso\Core\app\Classes\ProfileBuilder;
+use LaravelEnso\Core\app\Forms\Builders\UserForm;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 
@@ -12,41 +14,50 @@ class UserController extends Controller
 {
     use SendsPasswordResetEmails;
 
-    public function __construct(UserService $service)
+    public function create(UserForm $form)
     {
-        $this->service = $service;
+        return ['form' => $form->create()];
     }
 
-    public function create()
+    public function store(ValidateUserRequest $request)
     {
-        return $this->service->create();
-    }
+        $user = User::create($request->all());
 
-    public function store(ValidateUserRequest $request, User $user)
-    {
-        $response = $this->service->store($request, $user);
         $this->sendResetLinkEmail($request);
 
-        return $response;
+        return [
+            'message' => __('The user was created!'),
+            'redirect' => 'administration.users.edit',
+            'id' => $user->id,
+        ];
     }
 
     public function show(User $user)
     {
-        return $this->service->show($user);
+        (new ProfileBuilder($user))->set();
+
+        return ['user' => $user];
     }
 
-    public function edit(User $user)
+    public function edit(User $user, UserForm $form)
     {
-        return $this->service->edit($user);
+        return ['form' => $form->edit($user)];
     }
 
     public function update(ValidateUserRequest $request, User $user)
     {
-        return $this->service->update($request, $user);
+        $user->update($request->all());
+
+        return ['message' => __(config('enso.labels.savedChanges'))];
     }
 
     public function destroy(User $user)
     {
-        return $this->service->destroy($user);
+        $user->delete();
+
+        return [
+            'message' => __(config('enso.labels.successfulOperation')),
+            'redirect' => 'administration.users.index',
+        ];
     }
 }

@@ -2,15 +2,17 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use LaravelEnso\Core\app\Enums\Themes;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\Impersonate\app\Traits\Impersonate;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
@@ -20,7 +22,7 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
-    protected $fillable = ['first_name', 'last_name', 'phone', 'is_active'];
+    protected $fillable = ['first_name', 'last_name', 'phone', 'is_active', 'email', 'owner_id', 'role_id'];
 
     protected $attributes = ['is_active' => false];
 
@@ -58,11 +60,16 @@ class User extends Authenticatable
         return $this->role_id === self::AdminRoleId;
     }
 
+    public function theme()
+    {
+        return Themes::get($this->preferences->global->theme);
+    }
+
     public function getPreferencesAttribute()
     {
         $preferences = $this->preference
             ? $this->preference->value
-            : (new DefaultPreferences())->getData();
+            : (new DefaultPreferences())->data();
 
         unset($this->preference);
 
@@ -86,5 +93,14 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($this, $token));
+    }
+
+    public function delete()
+    {
+        if ($this->logins()->count()) {
+            throw new ConflictHttpException(__('The user has activity in the system and cannot be deleted'));
+        }
+
+        parent::delete();
     }
 }

@@ -42,9 +42,9 @@ class UserTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message'  => 'The user was created!',
+                'message' => 'The user was created!',
                 'redirect' => 'administration.users.edit',
-                'id'       => $user->id,
+                'id' => $user->id,
             ]);
 
         Notification::assertSentTo([$user], ResetPasswordNotification::class);
@@ -87,25 +87,19 @@ class UserTest extends TestCase
 
     private function createUser()
     {
-        $user = new User($this->postParams());
-        $user->email = $this->faker->email;
-        $user->owner_id = $this->owner->id;
-        $user->role_id = $this->role->id;
-        $user->save();
-
-        return $user;
+        return User::create($this->postParams());
     }
 
     private function postParams()
     {
         return [
             'first_name' => $this->faker->firstName,
-            'last_name'  => $this->faker->lastName,
-            'role_id'    => $this->role->id,
-            'phone'      => $this->faker->phoneNumber,
-            'is_active'  => 1,
-            'email'      => $this->faker->email,
-            'owner_id'   => $this->owner->id,
+            'last_name' => $this->faker->lastName,
+            'role_id' => $this->role->id,
+            'phone' => $this->faker->phoneNumber,
+            'is_active' => 1,
+            'email' => $this->faker->email,
+            'owner_id' => $this->owner->id,
         ];
     }
 }

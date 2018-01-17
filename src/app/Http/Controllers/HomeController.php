@@ -3,13 +3,12 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\app\Enums\Themes;
 
 class HomeController extends Controller
 {
     public function __invoke()
     {
-        $theme = Themes::get(request()->user()->preferences->global->theme);
+        $theme = auth()->user()->theme();
 
         return view('laravel-enso/core::index', compact('theme'));
     }

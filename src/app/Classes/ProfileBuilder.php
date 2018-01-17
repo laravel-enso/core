@@ -6,33 +6,49 @@ use Carbon\Carbon;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\ActionLogger\app\Models\ActionLog;
 
-class UserProfile
+class ProfileBuilder
 {
+    private const LoginsRating = 80;
+    private const ActionsRating = 20;
+
     private $user;
 
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    public function set()
+    {
+        $this->user->load(['owner', 'role', 'avatar']);
+
         $this->build();
     }
 
-    public function get()
-    {
-        return $this->user;
-    }
-
-    private function build()
+    public function build()
     {
         $this->user->load(['owner', 'role', 'avatar']);
+
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
         $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;
-        $this->user->rating = intval(
-            0.8 * $this->user->loginCount / $this->user->daysSinceMember +
-            0.2 * $this->user->actionLogCount / $this->user->daysSinceMember
-        );
 
-        $this->user->timeline = ActionLog::whereUserId($this->user->id)
+        $this->user->rating = $this->rating();
+
+        $this->user->timeline = $this->timeline();
+    }
+
+    private function rating()
+    {
+        return intval(
+            (self::LoginsRating * $this->user->loginCount / $this->user->daysSinceMember +
+            self::ActionsRating * $this->user->actionLogCount / $this->user->daysSinceMember) / 100
+        );
+    }
+
+    private function timeline()
+    {
+        return ActionLog::whereUserId($this->user->id)
             ->whereHas('permission', function ($query) {
                 $query->where('name', 'like', '%index')
                     ->orWhere('name', 'like', '%create')

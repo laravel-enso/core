@@ -37,9 +37,9 @@ class OwnerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message'  => 'The entity was created!',
+                'message' => 'The entity was created!',
                 'redirect' => 'administration.owners.edit',
-                'id'       => $owner->id,
+                'id' => $owner->id,
             ]);
     }
 
@@ -60,6 +60,7 @@ class OwnerTest extends TestCase
         $postParams = $this->postParams();
         $owner = Owner::create($postParams);
         $owner->name = 'edited';
+        $owner->roleList = [];
 
         $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
             ->assertStatus(200)
@@ -98,9 +99,9 @@ class OwnerTest extends TestCase
     {
         $user = new User([
             'first_name' => $this->faker->firstName,
-            'last_name'  => $this->faker->lastName,
-            'phone'      => $this->faker->phoneNumber,
-            'is_active'  => 1,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'is_active' => 1,
         ]);
         $user->email = $this->faker->email;
         $user->owner_id = $owner->id;
@@ -111,10 +112,11 @@ class OwnerTest extends TestCase
     private function postParams()
     {
         return [
-            'name'        => $this->faker->firstName,
+            'name' => $this->faker->firstName,
             'description' => $this->faker->sentence,
-            'is_active'   => 1,
-            '_method'     => 'POST',
+            'is_active' => 1,
+            '_method' => 'POST',
+            'roleList' => []
         ];
     }
 }

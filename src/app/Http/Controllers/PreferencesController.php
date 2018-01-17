@@ -52,7 +52,7 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
     private function resetLocalPreferences($route)
     {
         $this->setPreference();
-        $this->preference->value->local->$route = (new DefaultPreferences())->getData()->local->$route;
+        $this->preference->value->local->$route = (new DefaultPreferences())->data()->local->$route;
         $this->updatePreference();
     }
 
@@ -63,7 +63,7 @@ class PreferencesController extends Controller //fixme. We need dedicated contro
 
     private function getDefaultPreference()
     {
-        return new Preference(['value' => (new DefaultPreferences())->getData()]);
+        return new Preference(['value' => (new DefaultPreferences())->data()]);
     }
 
     private function updateGlobalPreference($preferences)

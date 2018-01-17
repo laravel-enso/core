@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Owner extends Model
 {
@@ -29,5 +30,34 @@ class Owner extends Model
     public function getRoleListAttribute()
     {
         return $this->roles->pluck('id');
+    }
+
+    public function updateWithRoles(array $attributes, array $roles)
+    {
+        tap($this)->update($attributes)
+            ->roles()
+            ->sync($roles);
+    }
+
+    public function storeWithRoles(array $attributes, array $roles)
+    {
+        $this->fill($attributes);
+
+        tap($this)->save()
+            ->roles()
+            ->sync($roles);
+
+        return $this;
+    }
+
+    public function delete()
+    {
+        if ($this->users()->count()) {
+            throw new ConflictHttpException(
+                __("The owner can't be deleted because it has users attached")
+            );
+        }
+
+        parent::delete();
     }
 }

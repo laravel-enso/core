@@ -29,8 +29,8 @@ Route::middleware(['web', 'auth', 'core'])
                         Route::get('exportExcel', 'OwnerTableController@excel')
                             ->name('exportExcel');
 
-                        Route::get('getOptionList', 'OwnerSelectController@getOptionList')
-                            ->name('getOptionList');
+                        Route::get('selectOptions', 'OwnerSelectController@options')
+                            ->name('selectOptions');
                     });
 
                 Route::resource('owners', 'Owner\OwnerController', ['except' => ['show']]);
@@ -44,8 +44,8 @@ Route::middleware(['web', 'auth', 'core'])
                             ->name('getTableData');
                         Route::get('exportExcel', 'UserTableController@excel')
                             ->name('exportExcel');
-                        Route::get('getOptionList', 'UserSelectController@getOptionList')
-                            ->name('getOptionList');
+                        Route::get('selectOptions', 'UserSelectController@options')
+                            ->name('selectOptions');
                     });
 
                 Route::resource('users', 'User\UserController');

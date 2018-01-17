@@ -95,7 +95,7 @@
         <div class="columns is-centered">
             <div class="column is-two-thirds-tablet">
                 <div class="box">
-                    <nav class="pagination is-small has-margin-bottom-large" role="navigation" aria-label="pagination">
+                    <nav class="pagination is-small has-margin-bottom-large">
                         <a class="pagination-previous"
                             @click="getPage(profileUser.timeline.current_page - 1)"
                             :disabled="profileUser.timeline.prev_page_url===null">
@@ -107,7 +107,8 @@
                             {{ __('Next') }}
                         </a>
                         <ul class="pagination-list" v-if="isShort">
-                            <li v-for="i in profileUser.timeline.last_page">
+                            <li v-for="i in profileUser.timeline.last_page"
+                                :key="i">
                                 <a class="pagination-link"
                                     :class="{ 'is-current': profileUser.timeline.current_page === i}"
                                     @click="getPage(i)">
@@ -183,7 +184,7 @@
                             </li>
                         </ul>
                     </nav>
-                    <ul class="timeline">
+                    <ul class="timeline has-padding-large">
                         <div v-for="(actions, day) in timeline"
                             class="timeline-content"
                             :key="day">

@@ -11,39 +11,38 @@ use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
 class StateBuilder
 {
     private $user;
-    private $state;
 
-    public function __invoke(User $user)
+    public function __construct()
     {
-        $this->user = $user->append(['avatarId', 'preferences'])
-            ->load(['role.permissions']);
-
-        $this->setState();
-
-        return $this->state;
+        $this->user = auth()->user();
     }
 
-    private function setState()
+    public function get()
+    {
+        return $this->state();
+    }
+
+    private function state()
     {
         $languages = Language::get(['name', 'flag']);
-        $menus = $this->getMenus();
 
-        $this->state = [
-            'user' => $this->user,
-            'menus' => $menus,
-            'i18n' => $this->getI18N($languages),
+        return [
+            'user' => $this->user->append(['avatarId', 'preferences'])
+                ->load(['role.permissions']),
+            'menus' => $this->menus(),
+            'i18n' => $this->i18n($languages),
             'languages' => $languages->pluck('flag', 'name'),
             'themes' => Themes::all(),
             'implicitMenu' => $this->user->role->menu,
             'impersonating' => session()->has('impersonating'),
-            'meta' => $this->getMeta(),
+            'meta' => $this->meta(),
             'csrfToken' => csrf_token(),
             'ravenKey' => config('enso.config.ravenKey'),
             'routes' => app(BladeRouteGenerator::class)->getRoutePayload(),
         ];
     }
 
-    private function getMenus()
+    private function menus()
     {
         $menus = $this->user->role->menus()->orderBy('order')
             ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
@@ -51,7 +50,7 @@ class StateBuilder
         return (new MenuBuilder($menus))->get();
     }
 
-    private function getI18N($languages)
+    private function i18n($languages)
     {
         return $languages->reduce(function ($i18n, $lang) {
             if ($lang->name === 'en') {
@@ -68,7 +67,7 @@ class StateBuilder
         }, []);
     }
 
-    private function getMeta()
+    private function meta()
     {
         return [
             'appName' => config('app.name'),

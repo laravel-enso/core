@@ -15,6 +15,7 @@ class ValidateOwnerRequest extends FormRequest
     public function rules()
     {
         $owner = $this->route('owner');
+
         $nameUnique = Rule::unique('owners', 'name');
 
         $nameUnique = (request()->getMethod() === 'PATCH')
