@@ -58,9 +58,8 @@ class OwnerTest extends TestCase
     public function update()
     {
         $postParams = $this->postParams();
-        $owner = Owner::create($postParams);
+        $owner = Owner::create($postParams)->append(['roleList']);
         $owner->name = 'edited';
-        $owner->roleList = [];
 
         $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
             ->assertStatus(200)

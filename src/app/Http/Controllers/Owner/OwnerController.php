@@ -16,7 +16,10 @@ class OwnerController extends Controller
 
     public function store(ValidateOwnerRequest $request, Owner $owner)
     {
-        $owner->storeWithRoles($request->all(), $request->get('roleList'));
+        $owner = $owner->storeWithRoles(
+            $request->all(),
+            $request->get('roleList')
+        );
 
         return [
             'message' => __('The entity was created!'),
@@ -35,7 +38,10 @@ class OwnerController extends Controller
 
     public function update(ValidateOwnerRequest $request, Owner $owner)
     {
-        $owner->updateWithRoles($request->all(), $request->get('roleList'));
+        $owner->updateWithRoles(
+            $request->all(),
+            $request->get('roleList')
+        );
 
         return ['message' => __(config('enso.labels.savedChanges'))];
     }
