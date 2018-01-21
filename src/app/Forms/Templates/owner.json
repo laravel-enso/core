@@ -1,5 +1,5 @@
 {
-    "columns": "1",
+    "columns": "2",
     "routePrefix": "administration.owners",
     "fields": [{
         "label": "Name",
