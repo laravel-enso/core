@@ -3,7 +3,7 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Registered Users",
-    "icon": "fa fa-users",
+    "icon": "fas fa-users",
     "crtNo": true,
     "buttons": ["excel", "create", "show", "edit", "destroy"],
     "columns": [

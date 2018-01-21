@@ -3,7 +3,7 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Registered Entities",
-    "icon": "fa fa-list-alt",
+    "icon": "fas fa-list-alt",
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
     "columns": [
