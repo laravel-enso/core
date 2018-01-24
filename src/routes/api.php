@@ -6,7 +6,7 @@ Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::prefix('core')->as('core.')
             ->group(function () {
-                Route::get('init', 'AppInitController')->name('init');
+                Route::get('', 'SpaController')->name('index');
 
                 Route::prefix('preferences')->as('preferences.')
                     ->group(function () {
