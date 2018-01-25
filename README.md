@@ -40,12 +40,11 @@ sudo apt-get install pngquant gifsicle jpegoptim php7.1-gd
 - `php artisan vendor:publish --tag=enso-lang` - the assets lang files
 - `php artisan vendor:publish --tag=core-storage` - the storage folders
 - `php artisan vendor:publish --tag=core-assets` - the assets folders, scss & js
-- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components,
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config,
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the scss & js assets,
-once a newer version is released
+once a newer version is released (ran automatically with --force after every composer install)
 
 ### Notes
 
