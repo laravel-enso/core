@@ -3,26 +3,30 @@ import axios from 'axios';
 import lodash from 'lodash';
 import moment from 'moment';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import toastr from 'toastr';
-import 'toastr/build/toastr.min.css';
 
 import './modules/enso/';
 
 import router from './router';
 import store from './store';
 import App from './pages/App.vue';
+import Toastr from './components/enso/bulma/toastr';
 
 import './app';
 
 Vue.component('fa', FontAwesomeIcon);
 
-const bus = new Vue({ name: 'Bus' });
+Vue.use(Toastr, {
+    i18n: store.getters['locale/__'],
+    position: 'right',
+    duration: 3000,
+    closeButton: true,
+});
 
+const bus = new Vue({ name: 'Bus' });
 Vue.prototype.$bus = bus;
 
 window._ = lodash;
 window.moment = moment;
-window.toastr = toastr;
 window.axios = axios;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
