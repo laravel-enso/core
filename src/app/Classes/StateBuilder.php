@@ -76,6 +76,7 @@ class StateBuilder
             'quote' => Inspiring::quote(),
             'env' => config('app.env'),
             'dateFormat' => config('enso.config.jsDateFormat'),
+            'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'pusher' => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
         ];
