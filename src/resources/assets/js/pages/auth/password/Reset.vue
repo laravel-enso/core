@@ -158,25 +158,27 @@ export default {
                 const { status, data } = error.response;
 
                 if (status === 422) {
-                    if (data.errors) {
-                        if (data.errors.email) {
-                            this.$toastr.error(data.errors.email);
-                        }
-
-                        if (data.errors.password) {
-                            this.$toastr.error(data.errors.password);
-                        }
-
-                        return;
-                    }
-
-                    this.$toastr.error(data.message);
-
+                    this.reportLoginError(data);
                     return;
                 }
 
                 throw error;
             });
+        },
+        reportLoginError(data) {
+            if (data.errors) {
+                if (data.errors.email) {
+                    this.$toastr.error(data.errors.email[0]);
+                }
+
+                if (data.errors.password) {
+                    this.$toastr.error(data.errors.password[0]);
+                }
+
+                return;
+            }
+
+            this.$toastr.error(data.message);
         },
     },
 };
