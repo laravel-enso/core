@@ -9,7 +9,7 @@ class VerifyActiveState
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->isDisabled()) {
+        if ($request->user()->isDisabled() || $request->user()->owner()->isDisabled()) {
             auth()->logout();
 
             throw new AuthenticationException(__(config('enso.labels.disabledAccount')));
