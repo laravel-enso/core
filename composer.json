@@ -39,8 +39,7 @@
         "laravel-enso/avatarmanager": "2.1.*",
         "laravel-enso/charts": "2.1.*",
         "laravel-enso/formbuilder": "2.3.*",
-        "laravel-enso/helpers": "1.7.*",
-        "laravel-enso/historytracker": "1.4.*",
+        "laravel-enso/helpers": "1.7.*", "laravel-enso/historytracker": "1.4.*",
         "laravel-enso/impersonate": "2.1.*",
         "laravel-enso/localisation": "2.1.*",
         "laravel-enso/logmanager": "2.1.*",
@@ -58,6 +57,11 @@
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan enso:update-user-agent"
+        ]
     },
     "autoload": {
         "psr-4": {

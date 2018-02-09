@@ -12,11 +12,4 @@ class Login extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function setUserAgentAttribute($value)
-    {
-        $this->attributes['user_agent'] = $value
-            ? substr($value, 0, 254)
-            : null;
-    }
 }

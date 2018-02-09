@@ -6,17 +6,10 @@ use LaravelEnso\Core\app\Models\Login;
 
 class LoginLoggerListener
 {
-    private $login;
-
-    public function __construct()
+    public function handle($event)
     {
-        $this->login = new Login();
-    }
-
-    public function handle()
-    {
-        $this->login->create([
-            'user_id' => auth()->user()->id,
+        Login::create([
+            'user_id' => $event->user->id,
             'ip' => request()->ip(),
             'user_agent' => request()->header('User-Agent'),
         ]);
