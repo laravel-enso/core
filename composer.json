@@ -59,11 +59,6 @@
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "php artisan enso:update-user-agent"
-        ]
-    },
     "autoload": {
         "psr-4": {
             "LaravelEnso\\Core\\": "src/"
