@@ -18,7 +18,7 @@
                                         <p>{{ __('role') }}: {{ profileUser.role.name }}</p>
                                         <p>{{ __('since') }}: {{ profileUser.created_at | timeFromNow }}</p>
                                         <p class="has-margin-top-small">
-                                            <div class="level user-controls"
+                                            </p><div class="level user-controls"
                                                 v-if="isSelfVisiting">
                                                 <div class="level-left">
                                                     <button class="button is-small is-warning"
@@ -35,9 +35,9 @@
                                                         @upload-successful="$store.commit('setUserAvatar', $event.id)"
                                                         :url="uploadAvatarLink">
                                                         <template slot="upload-button"
-                                                            slot-scope="props">
-                                                            <button  class="button is-small is-info"
-                                                                @click="props.openFileBrowser">
+                                                            slot-scope="{ openFileBrowser }">
+                                                            <button class="button is-small is-info"
+                                                                @click="openFileBrowser">
                                                                 <span class="icon">
                                                                     <fa icon="upload"></fa>
                                                                 </span>
