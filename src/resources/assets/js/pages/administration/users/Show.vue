@@ -33,7 +33,8 @@
                                                     </button>
                                                     <file-uploader v-if="!avatarId"
                                                         @upload-successful="$store.commit('setUserAvatar', $event.id)"
-                                                        :url="uploadAvatarLink">
+                                                        :url="uploadAvatarLink"
+                                                        file-key="avatar">
                                                         <template slot="upload-button"
                                                             slot-scope="{ openFileBrowser }">
                                                             <button class="button is-small is-info"
