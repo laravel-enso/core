@@ -78,6 +78,6 @@ class MainComposer
 
         return $locale === 'en'
             ? []
-            : json_decode(\File::get(resource_path('lang/' . $locale . '.json')));
+            : json_decode(\File::get(resource_path('lang/'.$locale.'.json')));
     }
 }
