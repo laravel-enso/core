@@ -48,7 +48,7 @@ class MainComposer
         $this->store->pusherKey = config('broadcasting.connections.pusher.key');
         $this->store->sentryRavenKey = config('laravel-enso.sentryRavenKey');
         $this->store->labels = $this->getLabels();
-        $this->store->i18n = json_decode(\File::get(resource_path('lang/'.app()->getLocale().'.json')));
+        $this->store->i18n = $this->loadTranslations();
         $this->store->route = request()->route()->getName();
         $this->store->breadcrumbs = $this->getBreadcrumbs();
     }
@@ -70,5 +70,14 @@ class MainComposer
         );
 
         return $builder->get();
+    }
+
+    private function loadTranslations()
+    {
+        $locale = app()->getLocale();
+
+        return $locale === 'en'
+            ? []
+            : json_decode(\File::get(resource_path('lang/' . $locale . '.json')));
     }
 }
