@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Core\app\Commands\UpdateUserAgentField;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
@@ -18,10 +17,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishesResources();
         $this->registerMiddleware();
         $this->loadDependencies();
-
-        $this->commands([
-            UpdateUserAgentField::class,
-        ]);
     }
 
     private function publishesDependencies()
