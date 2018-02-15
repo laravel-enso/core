@@ -30,6 +30,7 @@ class OwnerForm
 
         return $this->form
             ->options('roleList', Role::pluck('name', 'id'))
+            ->append('owner_id', $owner->id)
             ->edit($owner);
     }
 }

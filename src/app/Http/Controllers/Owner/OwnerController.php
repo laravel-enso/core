@@ -30,10 +30,7 @@ class OwnerController extends Controller
 
     public function edit(Owner $owner, OwnerForm $form)
     {
-        return [
-            'owner' => $owner,
-            'form' => $form->edit($owner),
-        ];
+        return ['form' => $form->edit($owner)];
     }
 
     public function update(ValidateOwnerRequest $request, Owner $owner)

@@ -2,9 +2,9 @@
 
     <div class="columns is-centered">
         <div class="column is-three-quarters animated fadeIn"
-            v-if="initialised">
-            <vue-form :data="form"
-                class="box">
+            v-if="form && owner">
+            <vue-form class="box"
+                :data="form">
             </vue-form>
             <contacts :id="owner.id"
                 type="owner">
@@ -38,9 +38,8 @@ export default {
 
     data() {
         return {
-            initialised: false,
-            form: {},
-            owner: {},
+            form: null,
+            owner: null,
         };
     },
 
@@ -48,7 +47,6 @@ export default {
         axios.get(route(this.$route.name, this.$route.params.id, false)).then(({ data }) => {
             this.form = data.form;
             this.owner = data.owner;
-            this.initialised = true;
         }).catch(error => this.handleError(error));
     },
 };
