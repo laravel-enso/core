@@ -47,7 +47,7 @@
     }, {
         "label": "Role",
         "name": "role_id",
-        "value": false,
+        "value": null,
         "meta": {
             "custom": true,
             "type": "select",
