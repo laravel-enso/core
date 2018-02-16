@@ -51,7 +51,7 @@ class OwnerTest extends TestCase
 
         $this->get(route('administration.owners.edit', $owner->id, false))
             ->assertStatus(200)
-            ->assertJsonStructure(['form' => [], 'owner' => []]);
+            ->assertJsonStructure(['form' => []]);
     }
 
     /** @test */
