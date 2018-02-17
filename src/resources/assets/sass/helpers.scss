@@ -131,15 +131,6 @@
     cursor: pointer;
 }
 
-.navbar.has-shadow, .has-shadow {
-    -webkit-box-shadow: 0 2px 3px hsla(0,0%,50%,.3);
-    box-shadow: 0 2px 3px hsla(0,0%,50%,.3);
-
-    &.hover {
-        &:hover {
-        -webkit-box-shadow: 0 2px 3px hsla(0,0%,4%,.3);
-        box-shadow: 0 2px 3px hsla(0,0%,4%,.3);
-        }
-    }
+.is-radiusless {
+    border-radius: 0;
 }
-
