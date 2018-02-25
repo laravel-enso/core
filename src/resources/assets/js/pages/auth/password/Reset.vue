@@ -104,9 +104,7 @@
 
 import zxcvbn from 'zxcvbn';
 import fontawesome from '@fortawesome/fontawesome';
-import {
-    faEnvelope, faCheck, faExclamationTriangle, faLock,
-} from '@fortawesome/fontawesome-free-solid/shakable.es';
+import { faEnvelope, faCheck, faExclamationTriangle, faLock } from '@fortawesome/fontawesome-free-solid/shakable.es';
 
 fontawesome.library.add(faEnvelope, faCheck, faExclamationTriangle, faLock);
 

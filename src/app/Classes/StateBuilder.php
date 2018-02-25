@@ -36,8 +36,6 @@ class StateBuilder
             'implicitMenu' => $this->user->role->menu,
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
-            'csrfToken' => csrf_token(),
-            'ravenKey' => config('enso.config.ravenKey'),
             'routes' => app(BladeRouteGenerator::class)->getRoutePayload(),
         ];
     }
@@ -77,8 +75,10 @@ class StateBuilder
             'env' => config('app.env'),
             'dateFormat' => config('enso.config.jsDateFormat'),
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
+            'csrfToken' => csrf_token(),
             'pusher' => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
+            'ravenKey' => config('enso.config.ravenKey'),
         ];
     }
 }
