@@ -24,14 +24,15 @@ class StateBuilder
 
     private function state()
     {
-        $languages = Language::get(['name', 'flag']);
+        $languages = Language::active()
+            ->pluck('flag', 'name');
 
         return [
             'user' => $this->user->append(['avatarId', 'preferences'])
                 ->load(['role.permissions']),
             'menus' => $this->menus(),
             'i18n' => $this->i18n($languages),
-            'languages' => $languages->pluck('flag', 'name'),
+            'languages' => $languages,
             'themes' => Themes::all(),
             'implicitMenu' => $this->user->role->menu,
             'impersonating' => session()->has('impersonating'),
@@ -50,19 +51,20 @@ class StateBuilder
 
     private function i18n($languages)
     {
-        return $languages->reduce(function ($i18n, $lang) {
-            if ($lang->name === 'en') {
+        return $languages->keys()
+            ->reduce(function ($i18n, $lang) {
+                if ($lang === 'en') {
+                    return $i18n;
+                }
+
+                $json = json_decode(\File::get(
+                    resource_path('lang'.DIRECTORY_SEPARATOR.$lang.'.json')
+                ));
+
+                $i18n[$lang] = $json;
+
                 return $i18n;
-            }
-
-            $json = json_decode(\File::get(
-                resource_path('lang'.DIRECTORY_SEPARATOR.$lang->name.'.json')
-            ));
-
-            $i18n[$lang->name] = $json;
-
-            return $i18n;
-        }, []);
+            }, []);
     }
 
     private function meta()
