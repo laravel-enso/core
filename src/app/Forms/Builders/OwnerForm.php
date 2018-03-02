@@ -20,7 +20,7 @@ class OwnerForm
     public function create()
     {
         return $this->form
-            ->options('roleList', Role::pluck('name', 'id'))
+            ->options('roleList', Role::get(['name', 'id']))
             ->create();
     }
 
@@ -29,7 +29,7 @@ class OwnerForm
         $owner->append(['roleList']);
 
         return $this->form
-            ->options('roleList', Role::pluck('name', 'id'))
+            ->options('roleList', Role::get(['name', 'id']))
             ->append('owner_id', $owner->id)
             ->edit($owner);
     }
