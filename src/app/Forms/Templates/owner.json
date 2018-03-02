@@ -24,7 +24,7 @@
         "meta": {
             "type": "select",
             "multiple": true,
-            "options": null
+            "options": []
         }
     }, {
         "label": "Active",
