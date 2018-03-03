@@ -13,7 +13,7 @@ class UserForm
 
     public function __construct()
     {
-        $this->form = new Form(self::FormPath);
+        $this->form = new Form($this->formPath());
     }
 
     public function create()
@@ -24,5 +24,14 @@ class UserForm
     public function edit(User $user)
     {
         return $this->form->edit($user);
+    }
+
+    private function formPath()
+    {
+        $publishedForm = app_path('Forms/vendor/user.json');
+
+        return \File::exists($publishedForm)
+            ? $publishedForm
+            : self::FormPath;
     }
 }

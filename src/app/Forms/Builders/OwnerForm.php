@@ -14,7 +14,7 @@ class OwnerForm
 
     public function __construct()
     {
-        $this->form = new Form(self::FormPath);
+        $this->form = new Form($this->formPath());
     }
 
     public function create()
@@ -32,5 +32,14 @@ class OwnerForm
             ->options('roleList', Role::get(['name', 'id']))
             ->append('owner_id', $owner->id)
             ->edit($owner);
+    }
+
+    private function formPath()
+    {
+        $publishedForm = app_path('Forms/vendor/owner.json');
+
+        return \File::exists($publishedForm)
+            ? $publishedForm
+            : self::FormPath;
     }
 }

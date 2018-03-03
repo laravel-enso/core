@@ -61,6 +61,14 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/app/Forms/Templates/user.form' => app_path().'/Forms/vendor/',
+        ], 'core-user-form');
+
+        $this->publishes([
+            __DIR__.'/app/Forms/Templates/owner.form' => app_path().'/Forms/vendor/',
+        ], 'core-owner-form');
     }
 
     private function registerMiddleware()
