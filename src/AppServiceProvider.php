@@ -63,11 +63,11 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/app/Forms/Templates/user.form' => app_path().'/Forms/vendor/',
-        ], 'core-user-form');
+            __DIR__.'/app/Forms/Templates' => app_path().'/Forms/vendor/',
+        ], 'core-forms');
 
         $this->publishes([
-            __DIR__.'/app/Forms/Templates/owner.form' => app_path().'/Forms/vendor/',
+            __DIR__.'/app/Forms/Templates' => app_path().'/Forms/vendor/',
         ], 'core-owner-form');
     }
 
