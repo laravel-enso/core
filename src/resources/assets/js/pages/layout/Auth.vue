@@ -28,6 +28,10 @@ export default {
     },
 
     created() {
+        if (!this.$route.meta.guestGuard) {
+            this.$router.push({ name: 'login' });
+        }
+
         axios.get('/api/getMeta').then(({ data }) => {
             this.setMeta(data);
         }).catch(error => this.handleError(error));

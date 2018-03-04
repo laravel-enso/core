@@ -65,10 +65,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/app/Forms/Templates' => app_path().'/Forms/vendor/',
         ], 'core-forms');
-
-        $this->publishes([
-            __DIR__.'/app/Forms/Templates' => app_path().'/Forms/vendor/',
-        ], 'core-owner-form');
     }
 
     private function registerMiddleware()
