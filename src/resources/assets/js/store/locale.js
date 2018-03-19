@@ -15,7 +15,19 @@ export const getters = {
         }
 
         const { lang } = rootState.user.preferences.global;
-        return state.i18n[lang] ? (state.i18n[lang][key] || key) : key;
+        const { env } = rootState.meta;
+        if (state.i18n[lang] && state.i18n[lang][key] !== undefined) {
+            return (state.i18n[lang][key] || key);
+        } else {
+            if (env === 'local') { 
+                axios.patch("/api/system/localisation/addLangKey", { langKey: key }).then((response) => {
+                    // not needed
+                }).catch((error) => {
+                    // not needed
+                });
+            }
+            return key;
+        }
     },
     current: (state, getters, rootState) => (rootState.user.preferences ?
         rootState.user.preferences.global.lang
