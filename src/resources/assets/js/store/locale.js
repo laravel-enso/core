@@ -20,7 +20,7 @@ export const getters = {
             return (state.i18n[lang][key] || key);
         } else {
             if (env === 'local') { 
-                axios.post("/api/system/localisation/addLangKey", { langKey: key }).then((response) => {
+                axios.patch("/api/system/localisation/addLangKey", { langKey: key }).then((response) => {
                     // not needed
                 }).catch((error) => {
                     // not needed
