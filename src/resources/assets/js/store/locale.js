@@ -16,7 +16,7 @@ export const getters = {
 
         const { lang } = rootState.user.preferences.global;
         const { env } = rootState.meta;
-        if (state.i18n[lang] && state.i18n[lang][key] != undefined) {
+        if (state.i18n[lang] && state.i18n[lang][key] !== undefined) {
             return (state.i18n[lang][key] || key);
         } else {
             if (env === 'local') { 
