@@ -13,7 +13,7 @@ const addMissingKey = (key) => {
 };
 
 Vue.prototype.__ = (key) => {
-    if (!store.state.user.preferences) {
+    if (!store.state.isInitialised) {
         return key;
     }
 
