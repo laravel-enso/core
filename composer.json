@@ -37,7 +37,6 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel-enso/actionlogger": "2.0.*",
         "laravel-enso/avatarmanager": "2.1.*",
-        "laravel-enso/charts": "2.1.*",
         "laravel-enso/formbuilder": "2.5.*",
         "laravel-enso/helpers": "1.7.*",
         "laravel-enso/historytracker": "1.4.*",
