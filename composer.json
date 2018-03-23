@@ -42,7 +42,7 @@
         "laravel-enso/helpers": "1.7.*",
         "laravel-enso/historytracker": "1.4.*",
         "laravel-enso/impersonate": "2.1.*",
-        "laravel-enso/localisation": "2.2.*",
+        "laravel-enso/localisation": "2.3.*",
         "laravel-enso/logmanager": "2.1.*",
         "laravel-enso/menumanager": "2.1.*",
         "laravel-enso/permissionmanager": "2.1.*",

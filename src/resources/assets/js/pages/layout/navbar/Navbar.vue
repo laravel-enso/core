@@ -18,7 +18,7 @@
                 </span>
             </a>
             <div class="navbar-item"
-                v-if="envIsLocal">
+                v-if="meta.env === 'local'">
                 <span class="tag is-warning">
                     <span class="icon is-small">
                         <fa icon="code"></fa>
@@ -74,13 +74,6 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: { Notifications, SettingsControl, ProfileControl },
-
-    props: {
-        envIsLocal: {
-            type: Boolean,
-            default: false,
-        },
-    },
 
     computed: {
         ...mapState(['meta']),

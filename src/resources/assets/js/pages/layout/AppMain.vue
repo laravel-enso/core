@@ -3,8 +3,7 @@
     <div class="app-main"
         :class="{ 'lights-off': lightsOff }">
         <nprogress></nprogress>
-        <navbar class="animated slideInDown"
-            :env-is-local="meta.env === 'local'">
+        <navbar class="animated slideInDown">
         </navbar>
         <transition enter-active-class="slideInLeft"
             leave-active-class="slideOutLeft">

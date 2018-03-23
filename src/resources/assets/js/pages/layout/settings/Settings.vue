@@ -6,23 +6,23 @@
         </p>
         <ul class="menu-list">
             <li class="settings-item">
-                <language-selector :title="__('Language')"
-                    @update="setPreferences">
+                <language-selector @update="setPreferences">
                 </language-selector>
             </li>
             <li class="settings-item">
-                <theme-selector :title="__('Theme')"
-                    @update="setPreferences">
+                <theme-selector @update="setPreferences">
                 </theme-selector>
             </li>
             <li class="settings-item has-margin-bottom-small">
-                <menu-state :title="__('Expanded Menu')"
-                    @update="setPreferences">
+                <menu-state @update="setPreferences">
                 </menu-state>
             </li>
             <li class="settings-item">
-                <tutorial :title="__('Tutorial')">
-                </tutorial>
+                <tutorial></tutorial>
+            </li>
+            <hr v-if="meta.env === 'local'">
+            <li class="settings-item">
+                <key-collector v-if="meta.env === 'local'"></key-collector>
             </li>
         </ul>
     </vue-aside>
@@ -37,16 +37,18 @@ import LanguageSelector from './LanguageSelector.vue';
 import ThemeSelector from './ThemeSelector.vue';
 import MenuState from './MenuState.vue';
 import Tutorial from './Tutorial.vue';
+import KeyCollector from './KeyCollector.vue';
 
 export default {
     name: 'Settings',
 
     components: {
-        VueAside, LanguageSelector, ThemeSelector, MenuState, Tutorial,
+        VueAside, LanguageSelector, ThemeSelector, MenuState, Tutorial, KeyCollector,
     },
 
     computed: {
         ...mapState(['user']),
+        ...mapState(['meta']),
     },
 
     methods: {
