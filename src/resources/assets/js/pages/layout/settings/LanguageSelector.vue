@@ -30,7 +30,7 @@
 
 <script>
 
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import Dropdown from '../../../components/enso/bulma/Dropdown.vue';
 
 require('../../../../sass/flags.scss');
@@ -53,8 +53,9 @@ export default {
     },
 
     methods: {
+        ...mapActions('locale', ['setLocale']),
         update(locale) {
-            this.$store.dispatch('locale/setLocale', locale);
+            this.setLocale(locale);
             this.$emit('update');
         },
     },

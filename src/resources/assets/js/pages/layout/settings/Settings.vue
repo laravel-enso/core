@@ -6,18 +6,22 @@
         </p>
         <ul class="menu-list">
             <li class="settings-item">
-                <language-selector @update="setPreferences"
-                    :title="__('Language')">
+                <language-selector :title="__('Language')"
+                    @update="setPreferences">
                 </language-selector>
             </li>
             <li class="settings-item">
-                <theme-selector @update="setPreferences"
-                    :title="__('Theme')">
+                <theme-selector :title="__('Theme')"
+                    @update="setPreferences">
                 </theme-selector>
             </li>
+            <li class="settings-item has-margin-bottom-small">
+                <menu-state :title="__('Expanded Menu')"
+                    @update="setPreferences">
+                </menu-state>
+            </li>
             <li class="settings-item">
-                <tutorial
-                    :title="__('Tutorial')">
+                <tutorial :title="__('Tutorial')">
                 </tutorial>
             </li>
         </ul>
@@ -31,13 +35,14 @@ import { mapState } from 'vuex';
 import VueAside from '../VueAside.vue';
 import LanguageSelector from './LanguageSelector.vue';
 import ThemeSelector from './ThemeSelector.vue';
+import MenuState from './MenuState.vue';
 import Tutorial from './Tutorial.vue';
 
 export default {
     name: 'Settings',
 
     components: {
-        VueAside, LanguageSelector, ThemeSelector, Tutorial,
+        VueAside, LanguageSelector, ThemeSelector, MenuState, Tutorial,
     },
 
     computed: {
