@@ -8,8 +8,8 @@
                 <span class="icon is-small">
                     <fa :icon="menu.icon"></fa>
                 </span>
-                <transition enter-active-class="fadeInLeftBig"
-                    leave-active-class="fadeOutLeftBig">
+                <transition enter-active-class="zoomIn"
+                    leave-active-class="zoomOut">
                     <span class="animated has-margin-left-small"
                         v-if="navbar.isExpanded">
                         {{ __(menu.name) }}
@@ -28,8 +28,8 @@
                 <span class="icon is-small">
                     <fa :icon="menu.icon"></fa>
                 </span>
-                <transition enter-active-class="fadeInLeftBig"
-                    leave-active-class="fadeOutLeftBig">
+                <transition enter-active-class="zoomIn"
+                    leave-active-class="zoomOut">
                     <span class="animated has-margin-left-small"
                         v-if="navbar.isExpanded">
                         {{ __(menu.name) }}
@@ -138,6 +138,7 @@ export default {
         transition: height .400s ease;
         display: block;
         overflow-y: auto;
+        overflow-x: hidden;
 
         a {
             display: flex;
