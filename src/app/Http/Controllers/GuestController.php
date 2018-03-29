@@ -17,7 +17,7 @@ class GuestController extends Controller
     private function meta()
     {
         return [
-            'appName' => config('app.name')
+            'appName' => config('app.name'),
         ];
     }
 
@@ -32,7 +32,7 @@ class GuestController extends Controller
                 'Login' => __('Login'),
                 'Send a reset passworkd link' => __('Send a reset passworkd link'),
                 'Repeat Password' => __('Repeat Password'),
-            ]
+            ],
         ];
     }
 }
