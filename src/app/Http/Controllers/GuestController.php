@@ -32,6 +32,8 @@ class GuestController extends Controller
                 'Login' => __('Login'),
                 'Send a reset passworkd link' => __('Send a reset passworkd link'),
                 'Repeat Password' => __('Repeat Password'),
+                'Success' => __('Success'),
+                'Error' => __('Error'),
             ],
         ];
     }
