@@ -17,7 +17,8 @@
                             type="email"
                             :placeholder="__('Email')"
                             v-model="email"
-                            @keypress.down="hasErrors=false">
+                            @keypress.down="hasErrors=false"
+                            autofocus>
                         <span class="icon is-small is-left">
                             <fa icon="envelope"></fa>
                         </span>
