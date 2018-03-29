@@ -13,7 +13,7 @@ const addMissingKey = (key) => {
 Vue.mixin({
     methods: {
         __(key) {
-            if (!store.state.isInitialised) {
+            if (!Object.keys(store.state.locale.i18n).length) {
                 return key;
             }
 

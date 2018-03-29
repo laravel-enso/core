@@ -9,14 +9,22 @@ class GuestController extends Controller
     public function __invoke()
     {
         return [
-            'appName' => config('app.name'),
+            'meta' => $this->meta(),
             'i18n' => $this->i18n(),
+        ];
+    }
+
+    private function meta()
+    {
+        return [
+            'appName' => config('app.name')
         ];
     }
 
     private function i18n()
     {
         return [
+            app()->getLocale() => [
                 'Email' => __('Email'),
                 'Password' => __('Password'),
                 'Remember me' => __('Remember me'),
@@ -24,6 +32,7 @@ class GuestController extends Controller
                 'Login' => __('Login'),
                 'Send a reset passworkd link' => __('Send a reset passworkd link'),
                 'Repeat Password' => __('Repeat Password'),
+            ]
         ];
     }
 }
