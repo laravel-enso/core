@@ -19,7 +19,8 @@
                 <menu-state @update="setPreferences">
                 </menu-state>
             </li>
-            <li class="settings-item">
+            <li class="settings-item"
+                v-if="canAccess('system.tutorials.show')">
                 <tutorial></tutorial>
             </li>
             <li class="settings-item">

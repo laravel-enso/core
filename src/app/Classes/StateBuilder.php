@@ -7,6 +7,7 @@ use LaravelEnso\Core\app\Enums\Themes;
 use Tightenco\Ziggy\BladeRouteGenerator;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class StateBuilder
 {
@@ -37,7 +38,7 @@ class StateBuilder
             'implicitMenu' => $this->user->role->menu,
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
-            'routes' => app(BladeRouteGenerator::class)->getRoutePayload(),
+            'routes' => $this->routes(),
         ];
     }
 
@@ -82,5 +83,18 @@ class StateBuilder
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
             'ravenKey' => config('enso.config.ravenKey'),
         ];
+    }
+
+    private function routes()
+    {
+        $forbidden = Permission::whereNotIn('id', $this->user->role->permissionList)
+            ->pluck('name');
+        \Log::info(app(BladeRouteGenerator::class)->getRoutePayload()->keys());
+
+        return app(BladeRouteGenerator::class)
+            ->getRoutePayload()
+            ->filter(function ($value, $key) use ($forbidden) {
+                return !$forbidden->contains($key);
+            });
     }
 }
