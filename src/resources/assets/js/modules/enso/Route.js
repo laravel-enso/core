@@ -18,11 +18,7 @@ class Route {
         const url = this.buildDomain()
             + store.state.routes[this.name].uri.replace(/^\//, '');
 
-        return url.replace(
-            // finds every "{param}" and replaces it with the appropriate key from this.params
-            /{([^}]+)}/gi,
-            tag => this.extractTag(tag),
-        );
+        return this.fillParams(url);
     }
 
     buildDomain() {
@@ -33,16 +29,23 @@ class Route {
             : '/';
     }
 
-    extractTag(tag) {
-        // removes "{", "}" and optional "?" from the end
-        const key = tag.replace(/\{|\}/gi, '').replace(/\?$/, '');
+    fillParams(url) {
+        return url.replace(
+            /{([^}]+)}/gi,
+            segment => this.fillParam(segment),
+        );
+    }
+
+    fillParam(segment) {
+        const key = segment.replace(/\{|\}/gi, '')
+            .replace(/\?$/, '');
 
         if (Array.isArray(this.params)) {
             return this.shiftParams(key);
         }
 
         if (typeof this.params[key] === 'undefined') {
-            return this.optionalParam(tag, key);
+            return this.optionalParam(segment, key);
         }
 
         return this.params[key].id || this.params[key];
