@@ -134,9 +134,10 @@ export default {
             this.show = false;
         },
         getCount() {
-            axios.get(route('core.notifications.getCount', [], false)).then(({ data }) => {
-                this.unreadCount = data;
-            }).catch(error => this.handleError(error));
+            axios.get(route('core.notifications.getCount'))
+                .then(({ data }) => {
+                    this.unreadCount = data;
+                }).catch(error => this.handleError(error));
         },
         getData() {
             if (!this.needsUpdate || this.loading) {
@@ -145,37 +146,39 @@ export default {
 
             this.loading = true;
 
-            axios.get(route('core.notifications.getList', [this.offset, this.limit], false)).then(({ data }) => {
+            axios.get(route(
+                'core.notifications.getList',
+                [this.offset, this.limit],
+            )).then(({ data }) => {
                 this.notifications = this.offset ? this.notifications.concat(data) : data;
                 this.offset = this.notifications.length;
                 this.needsUpdate = false;
                 this.loading = false;
-            }).catch((error) => {
-                this.loading = false;
-                this.handleError(error);
-            });
+            }).catch(error => this.handleError(error));
         },
         markAsRead(notification) {
-            axios.patch(route('core.notifications.markAsRead', notification.id, false).toString()).then(({ data }) => {
-                this.unreadCount = this.unreadCount > 0
-                    ? --this.unreadCount
-                    : this.unreadCount; // fixme
+            axios.patch(route('core.notifications.markAsRead', notification.id))
+                .then(({ data }) => {
+                    this.unreadCount = this.unreadCount > 0
+                        ? --this.unreadCount
+                        : this.unreadCount; // fixme
 
-                notification.read_at = data.read_at;
-                this.$router.push({ path: notification.data.path });
-            }).catch(error => this.handleError(error));
+                    notification.read_at = data.read_at;
+                    this.$router.push({ path: notification.data.path });
+                }).catch(error => this.handleError(error));
         },
         markAllAsRead() {
-            axios.patch(route('core.notifications.markAllAsRead', [], false)).then(() => {
-                this.notifications.forEach((notification) => {
-                    notification.read_at = notification.read_at || format(new Date(), 'Y-MM-DD H:mm:s');
-                });
+            axios.patch(route('core.notifications.markAllAsRead'))
+                .then(() => {
+                    this.notifications.forEach((notification) => {
+                        notification.read_at = notification.read_at || format(new Date(), 'Y-MM-DD H:mm:s');
+                    });
 
-                this.unreadCount = 0;
-            }).catch(error => this.handleError(error));
+                    this.unreadCount = 0;
+                }).catch(error => this.handleError(error));
         },
         clearAll() {
-            axios.patch(route('core.notifications.clearAll', [], false)).then(() => {
+            axios.patch(route('core.notifications.clearAll')).then(() => {
                 this.notifications = [];
                 this.unreadCount = 0;
             }).catch(error => this.handleError(error));
