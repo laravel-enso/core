@@ -5,20 +5,26 @@
             {{ __("Settings") }}
         </p>
         <ul class="menu-list">
-            <li class="settings-item">
-                <language-selector @update="setPreferences"
-                    :title="__('Language')">
+            <li class="settings-item"
+                v-if="multipleLanguages">
+                <language-selector @update="setPreferences">
                 </language-selector>
             </li>
-            <li class="settings-item">
-                <theme-selector @update="setPreferences"
-                    :title="__('Theme')">
+            <li class="settings-item"
+                v-if="multipleThemes">
+                <theme-selector @update="setPreferences">
                 </theme-selector>
             </li>
+            <li class="settings-item has-margin-bottom-small">
+                <menu-state @update="setPreferences">
+                </menu-state>
+            </li>
+            <li class="settings-item"
+                v-if="canAccess('system.tutorials.show')">
+                <tutorial></tutorial>
+            </li>
             <li class="settings-item">
-                <tutorial
-                    :title="__('Tutorial')">
-                </tutorial>
+                <key-collector v-if="meta.env === 'local'"></key-collector>
             </li>
         </ul>
     </vue-aside>
@@ -27,22 +33,32 @@
 
 <script>
 
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import VueAside from '../VueAside.vue';
 import LanguageSelector from './LanguageSelector.vue';
 import ThemeSelector from './ThemeSelector.vue';
+import MenuState from './MenuState.vue';
 import Tutorial from './Tutorial.vue';
+import KeyCollector from './KeyCollector.vue';
 
 export default {
     name: 'Settings',
 
     components: {
-        VueAside, LanguageSelector, ThemeSelector, Tutorial,
+        VueAside, LanguageSelector, ThemeSelector, MenuState, Tutorial, KeyCollector,
     },
 
     computed: {
         ...mapState(['user']),
-        ...mapGetters('locale', ['__']),
+        ...mapState(['meta']),
+        ...mapState('layout', ['themes']),
+        ...mapState('locale', ['languages']),
+        multipleThemes() {
+            return Object.keys(this.themes).length > 1;
+        },
+        multipleLanguages() {
+            return Object.keys(this.languages).length > 1;
+        },
     },
 
     methods: {

@@ -2,7 +2,7 @@
     <div class="level is-mobile settings">
         <div class="level-left">
             <div class="level-item">
-                {{ title }}
+                {{ __('Language') }}
             </div>
         </div>
         <div class="level-right">
@@ -10,7 +10,7 @@
                 <dropdown :height="220">
                     <span slot="label"
                         class="icon is-small is-pulled-right">
-                        <i :class="['flag-icon', languages[locale]]"></i>
+                        <i :class="languages[locale]"></i>
                     </span>
                     <a v-for="(flag, lang) in languages"
                         class="dropdown-item"
@@ -18,7 +18,7 @@
                         :class="{ 'is-active': flag === languages[locale] }"
                         @click="update(lang)">
                         <span class="icon is-small">
-                            <i :class="['flag-icon', flag]"></i>
+                            <i :class="flag"></i>
                         </span>
                     </a>
                 </dropdown>
@@ -30,7 +30,7 @@
 
 <script>
 
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import Dropdown from '../../../components/enso/bulma/Dropdown.vue';
 
 require('../../../../sass/flags.scss');
@@ -40,21 +40,15 @@ export default {
 
     components: { Dropdown },
 
-    props: {
-        title: {
-            type: String,
-            required: true,
-        },
-    },
-
     computed: {
         ...mapState('locale', ['languages']),
         ...mapGetters('locale', { locale: 'current' }),
     },
 
     methods: {
+        ...mapActions('locale', ['setLocale']),
         update(locale) {
-            this.$store.dispatch('locale/setLocale', locale);
+            this.setLocale(locale);
             this.$emit('update');
         },
     },

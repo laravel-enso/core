@@ -81,7 +81,6 @@ class AppServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'enso.inspiring');
         $this->mergeConfigFrom(__DIR__.'/config/labels.php', 'enso.labels');
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
-        $this->mergeConfigFrom(__DIR__.'/config/themes.php', 'enso.themes');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');

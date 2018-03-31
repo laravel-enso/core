@@ -1,26 +1,34 @@
 <template>
 
-    <div class="app-main"
-        :class="{ 'lights-off': lightsOff }">
-        <nprogress></nprogress>
-        <navbar class="animated slideInDown"
-            :env-is-local="meta.env === 'local'">
-        </navbar>
-        <sidebar class="animated"
-            :class="navbar.isVisible ? 'slideInLeft' : 'slideOutLeft'">
-        </sidebar>
-        <section class="main-content">
-            <div class="container is-fluid page-content is-marginless">
-                <page-header :title="$route.meta.title"></page-header>
-                <router></router>
-            </div>
-        </section>
-        <settings class="animated"
-            :class="settingsBar.isVisible ? 'slideInRight': 'slideOutRight'">
-        </settings>
-        <app-footer class="animated slideInUp">
-        </app-footer>
-    </div>
+    <transition enter-active-class="fadeIn"
+        leave-active-class="fadeOut"
+        v-if="lightsOn">
+        <div class="app-main">
+            <nprogress></nprogress>
+            <navbar class="animated slideInDown">
+            </navbar>
+            <transition enter-active-class="slideInLeft"
+                leave-active-class="slideOutLeft">
+                <sidebar :class="[
+                    'animated',
+                    navbar.isVisible ? 'slideInLeft' : 'slideOutLeft',
+                    { 'is-collapsed' : !navbar.isExpanded }
+                ]" v-if="navbar.isVisible">
+                </sidebar>
+            </transition>
+            <section :class="['main-content', navbar.isExpanded ? 'is-expanded' : 'is-collapsed' ]">
+                <div class="container is-fluid page-content is-marginless">
+                    <page-header :title="$route.meta.title"></page-header>
+                    <router></router>
+                </div>
+            </section>
+            <settings class="animated"
+                :class="settingsBar.isVisible ? 'slideInRight': 'slideOutRight'">
+            </settings>
+            <app-footer class="animated slideInUp">
+            </app-footer>
+        </div>
+    </transition>
 
 </template>
 
@@ -45,14 +53,17 @@ export default {
     computed: {
         ...mapState(['meta']),
         ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'navbar', 'settingsBar']),
+        lightsOn() {
+            return !this.lightsOff;
+        },
     },
 
     watch: {
         isTablet: {
             handler() {
                 return this.isTablet
-                    ? this.$store.commit('layout/navbar/collapse')
-                    : this.$store.commit('layout/navbar/expand');
+                    ? this.$store.commit('layout/navbar/hide')
+                    : this.$store.commit('layout/navbar/show');
             },
         },
     },
@@ -118,10 +129,6 @@ export default {
         flex-direction: column;
         opacity: 1;
         transition: opacity .3s ease;
-
-        &.lights-off {
-            opacity: 0;
-        }
     }
 
     .main-content {
@@ -129,13 +136,22 @@ export default {
         flex: 1;
         z-index: 1;
         margin-top: 50px;
-        margin-left: 180px;
         transition: margin .5s;
+
+        &.is-expanded {
+            margin-left: 180px;
+        }
+
+        &.is-collapsed {
+            margin-left: 56px;
+        }
     }
 
     @media screen and (max-width: 1023px) {
         .main-content {
-            margin-left: 0;
+            &.is-expanded, &.is-collapsed {
+                margin-left: 0;
+            }
         }
     }
 

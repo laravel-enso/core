@@ -1,19 +1,24 @@
 <?php
 
-Route::middleware(['web', 'auth', 'core'])
+Route::namespace('LaravelEnso\Core\app\Http\Controllers')
     ->prefix('api')
-    ->namespace('LaravelEnso\Core\app\Http\Controllers')
     ->group(function () {
-        Route::prefix('core')->as('core.')
-            ->group(function () {
-                Route::get('', 'SpaController')->name('index');
+        Route::get('/getMeta', 'GuestController')
+            ->name('getMeta');
 
-                Route::prefix('preferences')->as('preferences.')
+        Route::middleware(['web', 'auth', 'core'])
+            ->group(function () {
+                Route::prefix('core')->as('core.')
                     ->group(function () {
-                        Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')
-                            ->name('setPreferences');
-                        Route::post('resetToDefault/{route?}', 'PreferencesController@resetToDefault')
-                            ->name('resetToDefault');
+                        Route::get('', 'SpaController')->name('index');
+
+                        Route::prefix('preferences')->as('preferences.')
+                            ->group(function () {
+                                Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')
+                                    ->name('setPreferences');
+                                Route::post('resetToDefault/{route?}', 'PreferencesController@resetToDefault')
+                                    ->name('resetToDefault');
+                            });
                     });
             });
     });

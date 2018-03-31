@@ -15,9 +15,10 @@
                         <input class="input"
                             :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
                             type="email"
-                            placeholder="Email"
+                            :placeholder="__('Email')"
                             v-model="email"
-                            @keypress.down="hasErrors=false">
+                            @keypress.down="hasErrors=false"
+                            v-focus>
                         <span class="icon is-small is-left">
                             <fa icon="envelope"></fa>
                         </span>
@@ -36,7 +37,7 @@
                         <input class="input"
                             :class="{ 'is-danger': hasErrors, 'is-success': isSuccessful }"
                             type="password"
-                            placeholder="Password"
+                            :placeholder="__('Password')"
                             v-model="password"
                             @keypress.down="hasErrors=false">
                         <span class="icon is-small is-left">
@@ -57,7 +58,7 @@
                         <label class="checkbox">
                         <input type="checkbox"
                             v-model="remember">
-                        Remember me
+                            {{ __('Remember me') }}
                         </label>
                     </div>
                 </div>
@@ -69,13 +70,13 @@
                         <span class="icon is-small">
                             <fa icon="user"></fa>
                         </span>
-                        <span>Login</span>
+                        <span>{{ __('Login') }}</span>
                     </button>
                 </div>
             </form>
             <router-link :to="{ name: 'password.email' }"
                 class="is-pulled-right">
-                Forgot password
+                {{ __('Forgot password') }}
             </router-link>
             <div class="is-clearfix"></div>
         </div>

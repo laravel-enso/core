@@ -13,7 +13,7 @@
 
 <script>
 
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import Auth from './layout/Auth.vue';
 import Home from './layout/Home.vue';
 import AppMain from './layout/AppMain.vue';
@@ -32,7 +32,6 @@ export default {
     computed: {
         ...mapState(['meta']),
         ...mapState('auth', ['isAuth', 'lastRoute']),
-        ...mapGetters('locale', ['__']),
         component() {
             if (!this.isAuth) {
                 return 'auth';
@@ -77,10 +76,10 @@ export default {
         },
         documentTitle(value) {
             const title = this.meta.extendedDocumentTitle
-                ? `${value} | ${this.meta.appName}`
-                : value;
+                ? `${this.__(value)} | ${this.meta.appName}`
+                : this.__(value);
 
-            return this.__(title);
+            return title;
         },
         addEnterAppListener() {
             this.$bus.$on('enter-app', () => {
