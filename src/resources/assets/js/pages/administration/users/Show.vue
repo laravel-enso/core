@@ -233,13 +233,13 @@
 <script>
 
 import { mapGetters, mapState } from 'vuex';
-import { format } from 'date-fns/esm';
 import fontawesome from '@fortawesome/fontawesome';
 import {
     faTrashAlt, faUpload, faSignOutAlt, faEllipsisH,
     faEye, faPlus, faPencilAlt,
 } from '@fortawesome/fontawesome-free-solid/shakable.es';
 import FileUploader from '../../../components/enso/fileuploader/FileUploader.vue';
+import format from '../../../modules/enso/plugins/date-fns/format';
 
 fontawesome.library.add([
     faTrashAlt, faUpload, faSignOutAlt, faEllipsisH,

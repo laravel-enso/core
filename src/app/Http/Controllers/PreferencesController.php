@@ -20,27 +20,9 @@ class PreferencesController extends Controller
         $this->updateGlobalPreference($request->get('global'));
     }
 
-    private function setGlobalPreferences()
-    {
-        if (!$this->request->user()->preference) {
-            $this->request->user()
-                ->preference()
-                ->save($this->getDefaultPreference());
-        }
-
-        $this->updateGlobalPreference($this->request->get('global'));
-    }
-
     public function resetToDefault()
     {
         //
-    }
-
-    private function getGlobalPreferences()
-    {
-        return $this->getDefaultPreference()
-            ->value
-            ->global;
     }
 
     private function getDefaultPreference()
