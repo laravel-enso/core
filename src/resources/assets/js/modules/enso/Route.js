@@ -26,13 +26,7 @@ class Route {
     }
 
     buildDomain() {
-        if (this.name === undefined) {
-            throw new Error('Route: You must provide a route name');
-        }
-
-        if (store.state.routes[this.name] === undefined) {
-            throw new Error(`Route: route "${this.name}" is not found in the route list`);
-        }
+        this.validate();
 
         return this.absolute
             ? `${(store.state.routes[this.name].domain || store.state.meta.appUrl).replace(/\/+$/, '')}/`
@@ -44,18 +38,36 @@ class Route {
         const key = tag.replace(/\{|\}/gi, '').replace(/\?$/, '');
 
         if (Array.isArray(this.params)) {
-            return this.params.length === 0
-                ? this.throwMissingKeyError(key)
-                : this.params.shift();
+            return this.shiftParams(key);
         }
 
         if (typeof this.params[key] === 'undefined') {
-            return tag.indexOf('?') === -1
-                ? this.throwMissingKeyError(key)
-                : '';
+            return this.optionalParam(tag, key);
         }
 
         return this.params[key].id || this.params[key];
+    }
+
+    shiftParams(key) {
+        return this.params.length === 0
+            ? this.throwMissingKeyError(key)
+            : this.params.shift();
+    }
+
+    optionalParam(tag, key) {
+        return tag.indexOf('?') === -1
+            ? this.throwMissingKeyError(key)
+            : '';
+    }
+
+    validate() {
+        if (typeof this.name === 'undefined') {
+            throw new Error('Route: You must provide a route name');
+        }
+
+        if (typeof store.state.routes[this.name] === 'undefined') {
+            throw new Error(`Route: route "${this.name}" is not found in the route list`);
+        }
     }
 
     throwMissingKeyError(key) {
