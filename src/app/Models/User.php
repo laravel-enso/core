@@ -19,6 +19,7 @@ class User extends Authenticatable
     use Impersonate, IsActive, ActionLogger, Notifiable;
 
     private const AdminRoleId = 1;
+    private const SupervisorRoleId = 1;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -58,6 +59,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role_id === self::AdminRoleId;
+    }
+
+    public function isSupervisor()
+    {
+        return $this->role_id === self::SupervisorRoleId;
     }
 
     public function theme()
