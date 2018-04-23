@@ -11,7 +11,7 @@
                 <button class="button is-small is-info"
                     @click="get()">
                     <span class="icon is-small">
-                        <fa icon="question"></fa>
+                        <fa icon="question"/>
                     </span>
                 </button>
             </div>
