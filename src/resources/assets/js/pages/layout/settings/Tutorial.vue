@@ -22,9 +22,10 @@
 
 <script>
 
-import { introJs } from 'intro.js';
 import fontawesome from '@fortawesome/fontawesome';
 import { faQuestion } from '@fortawesome/fontawesome-free-solid/shakable.es';
+
+const introJs = require('intro.js');
 
 fontawesome.library.add(faQuestion);
 
