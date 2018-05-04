@@ -29,9 +29,12 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage())
             ->subject(__('Reset Password Notification'))
-            ->line(__('Please set or reset your password by clicking the button below.'))
-            ->action(__('Direct Link'), config('app.url').'/password/reset/'.$this->token)
-            ->line(__('Thank you for using our application!'));
+            ->view('laravel-enso/core::emails.passwordReset',
+                [
+                    'line1'          => __('Please set or reset your password by clicking the button below.'),
+                    'line2'          => __('Thank you for using our application!'),
+                    'resetURL'          => config('app.url').'/password/reset/'.$this->token,
+                ]);
     }
 
     public function toArray($notifiable)

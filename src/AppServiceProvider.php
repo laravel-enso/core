@@ -61,6 +61,14 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/resources/views/emails' => resource_path('views/emails'),
+        ], 'email-notifications');
+
+        $this->publishes([
+            __DIR__.'/resources/views/emails' => resource_path('views/emails'),
+        ], 'core-email-notification');
     }
 
     private function registerMiddleware()
@@ -83,7 +91,6 @@ class AppServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');
     }
 
     public function register()
