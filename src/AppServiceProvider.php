@@ -64,11 +64,15 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/views/emails' => resource_path('views/emails'),
-        ], 'email-notifications');
+            __DIR__.'/resources/assets/css' => public_path('css'),
+            __DIR__.'/resources/assets/images' => public_path('images/emails'),
+        ], 'email-templates');
 
         $this->publishes([
             __DIR__.'/resources/views/emails' => resource_path('views/emails'),
-        ], 'core-email-notification');
+            __DIR__.'/resources/assets/css' => public_path('css'),
+            __DIR__.'/resources/assets/images' => public_path('images'),
+        ], 'core-email-templates');
     }
 
     private function registerMiddleware()
