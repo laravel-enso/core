@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\App;
 
 class ResetPasswordNotification extends Notification implements ShouldQueue
 {
@@ -27,13 +28,16 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable)
     {
+        app()->setLocale($notifiable->preferences->global->lang);
+
         return (new MailMessage())
             ->subject(__('Reset Password Notification'))
             ->view('emails.passwordReset',
                 [
-                    'line1' => __('Please set or reset your password by clicking the button below.'),
-                    'line2' => __('Thank you for using our application!'),
+                    'body' => __('Please set or reset your password by clicking the button below.'),
+                    'ending' => __('Thank you for using our application!'),
                     'resetURL' => config('app.url').'/password/reset/'.$this->token,
+                    'buttonLabel' => __('Reset Your Password'),
                 ]);
     }
 

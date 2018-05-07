@@ -36,7 +36,13 @@
                                     <td style="background-color:#ffffff;">
                                         <br>
                                         <center>
-                                            @yield('content')
+                                            <table style="margin: 0 auto;" cellspacing="0" cellpadding="0" class="force-width-80">
+                                                <tr>
+                                                    <td style="text-align:left; color: #6f6f6f;" class="spaced-out-lines">
+                                                        @yield('content')
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </center>
 
                                         <table style="margin:0 auto;" cellspacing="0" cellpadding="10" width="100%">
