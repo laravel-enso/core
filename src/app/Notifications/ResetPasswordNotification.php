@@ -35,7 +35,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
             ->view('emails.passwordReset',
                 [
                     'body' => __('Please set or reset your password by clicking the button below.'),
-                    'ending' => __('Thank you for using our application!'),
+                    'ending' => __('Thank you for using our application'),
                     'resetURL' => config('app.url').'/password/reset/'.$this->token,
                     'buttonLabel' => __('Reset Your Password'),
                 ]);
