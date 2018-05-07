@@ -4,13 +4,13 @@
             <br>
             <br>
             <a href="http://www.laravel-enso.com/">
-                <img width="62" height="56" img src="https://www.laravel-enso.com/images/emails/googleplus.gif">
+                <img width="62" height="56" img src="{{Config::get('app.url')}}/images/emails/googleplus.gif">
             </a>
             <a href="https://www.laravel-enso.com">
-                <img width="68" height="56" src="https://www.laravel-enso.com/images/emails/facebook.gif">
+                <img width="68" height="56" src="{{Config::get('app.url')}}/images/emails/facebook.gif">
             </a>
             <a href="http://www.laravel-enso.com/">
-                <img width="61" height="56" src="https://www.laravel-enso.com/images/emails/twitter.gif">
+                <img width="61" height="56" src="{{Config::get('app.url')}}/images/emails/twitter.gif">
             </a>
             <br>
             <br>

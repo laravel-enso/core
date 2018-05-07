@@ -28,7 +28,7 @@
             <table cellspacing="0" cellpadding="0" width="100%">
                 <tr>
                     <td>
-                        <img src="https://www.laravel-enso.com/images/emails/background.gif" style="max-width:100%; display:block;">
+                        <img src="{{Config::get('app.url')}}/images/emails/background.gif" style="max-width:100%; display:block;">
                     </td>
                 </tr>
             </table>
