@@ -61,6 +61,16 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/resources/views/emails' => resource_path('views/emails'),
+            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+        ], 'email-templates');
+
+        $this->publishes([
+            __DIR__.'/resources/views/emails' => resource_path('views/emails'),
+            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+        ], 'core-email-templates');
     }
 
     private function registerMiddleware()
