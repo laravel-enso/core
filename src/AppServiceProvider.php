@@ -64,13 +64,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/views/emails' => resource_path('views/emails'),
-            __DIR__.'/resources/assets/css' => resource_path('assets/css'),
             __DIR__.'/resources/assets/images' => resource_path('assets/images'),
         ], 'email-templates');
 
         $this->publishes([
             __DIR__.'/resources/views/emails' => resource_path('views/emails'),
-            __DIR__.'/resources/assets/css' => resource_path('assets/css'),
             __DIR__.'/resources/assets/images' => resource_path('assets/images'),
         ], 'core-email-templates');
     }

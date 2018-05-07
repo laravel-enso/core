@@ -1,13 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>{{$htmlTitle or ''}}</title>
 
-    <style type="text/css">
-        <?php include public_path('css/emails.css') ?>
-    </style>
+
+    @include('emails.partials.css')
+
 
     <!-- Originally designed by https://github.com/kaytcat -->
     <!-- Header image designed by Freepik.com -->
@@ -15,8 +16,9 @@
     @yield('css')
 
 </head>
-<body  offset="0" class="body" style="padding:0; margin:0; display:block; background:#eeebeb; -webkit-text-size-adjust:none" bgcolor="#eeebeb">
-<table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%">
+<body offset="0" class="body"
+      style="padding:0; margin:0; display:block; background:#eeebeb; -webkit-text-size-adjust:none" bgcolor="#eeebeb">
+    <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%">
     <tr>
         <td align="center" valign="top" style="background-color:#eeebeb" width="100%">
 
@@ -28,7 +30,8 @@
 
                             @include('emails.partials.header')
 
-                            <table cellspacing="0" cellpadding="0" width="100%" class="force-full-width" bgcolor="#ffffff" >
+                            <table cellspacing="0" cellpadding="0" width="100%" class="force-full-width"
+                                   bgcolor="#ffffff">
                                 <tr>
                                     <td style="background-color:#ffffff;">
                                         <br>
@@ -42,7 +45,11 @@
                                                     <br>
                                                     <div>
                                                         <!--[if mso]>
-                                                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://" style="height:45px;v-text-anchor:middle;width:220px;" stroke="f" fillcolor="#f5774e">
+                                                        <v:rect xmlns:v="urn:schemas-microsoft-com:vml"
+                                                                xmlns:w="urn:schemas-microsoft-com:office:word"
+                                                                href="http://"
+                                                                style="height:45px;v-text-anchor:middle;width:220px;"
+                                                                stroke="f" fillcolor="#f5774e">
                                                             <w:anchorlock/>
                                                             <center>
                                                         <![endif]-->
