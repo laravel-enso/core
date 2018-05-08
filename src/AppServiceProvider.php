@@ -51,21 +51,24 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/core'),
             __DIR__.'/resources/assets/images' => resource_path('assets/images'),
         ], 'core-assets');
 
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
             __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/core'),
             __DIR__.'/resources/assets/images' => resource_path('assets/images'),
         ], 'enso-assets');
 
         $this->publishes([
-            __DIR__.'/resources/views/emails' => resource_path('views/emails'),
+            __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/core'),
             __DIR__.'/resources/assets/images' => resource_path('assets/images'),
         ], 'core-email-templates');
+
+        $this->publishes([
+            __DIR__.'/resources/views' => resource_path('views/vendor/laravel-enso/core'),
+            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+        ], 'email-templates');
     }
 
     private function registerMiddleware()
