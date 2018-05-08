@@ -1,7 +1,7 @@
 <table style="margin:0 auto;" cellspacing="0" cellpadding="0" width="100%">
     <tr>
         <td style="text-align: center;">
-            @include('emails.partials.logo')
+            @include('laravel-enso/core::emails.partials.logo')
         </td>
     </tr>
 </table>

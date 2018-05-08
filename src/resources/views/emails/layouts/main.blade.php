@@ -7,7 +7,7 @@
     <title>{{$htmlTitle or ''}}</title>
 
 
-    @include('emails.partials.css')
+    @include('laravel-enso/core::emails.partials.css')
 
 
     <!-- Originally designed by https://github.com/kaytcat -->
@@ -28,7 +28,7 @@
                     <tr>
                         <td align="center" valign="top">
 
-                            @include('emails.partials.header')
+                            @include('laravel-enso/core::emails.partials.header')
 
                             <table cellspacing="0" cellpadding="0" width="100%" class="force-full-width"
                                    bgcolor="#ffffff">
@@ -70,7 +70,7 @@
                                             </tr>
                                         </table>
 
-                                        @include('emails.partials.footer')
+                                        @include('laravel-enso/core::emails.partials.footer')
                                     </td>
                                 </tr>
                             </table>
