@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notification;
 
 class ResetPasswordNotification extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     public $token;
@@ -36,7 +35,7 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
                 [
                     'body'        => __('Please set or reset your password by clicking the button below.'),
                     'ending'      => __('Thank you for using our application'),
-                    'resetURL'    => config('app.url') . '/password/reset/' . $this->token,
+                    'resetURL'    => config('app.url').'/password/reset/'.$this->token,
                     'buttonLabel' => __('Reset Your Password'),
                 ]);
     }
