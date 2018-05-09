@@ -41,6 +41,8 @@ On Linux, you may install them with: `sudo apt-get install pngquant gifsicle jpe
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-config` - a common alias for when wanting to update the config,
 once a newer version is released
+- `php artisan vendor:publish --tag=core-email-templates` - the email templates
+- `php artisan vendor:publish --tag=email-templates` - a common alias for when wanting to update the email templates
 
 <!--h-->
 ### Contributions
