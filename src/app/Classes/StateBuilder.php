@@ -28,8 +28,9 @@ class StateBuilder
             ->pluck('flag', 'name');
 
         return [
-            'user' => $this->user->append(['avatarId', 'preferences'])
+            'user' => $this->user->append(['avatarId'])
                 ->load(['role.permissions']),
+            'preferences' => $this->user->preferences(),
             'menus' => $this->menus(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,

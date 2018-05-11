@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\Core\app\Console\Commands\ClearPreferences;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
@@ -17,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
         $this->publishesResources();
         $this->registerMiddleware();
         $this->loadDependencies();
+
+        $this->commands([
+            ClearPreferences::class,
+        ]);
     }
 
     private function publishesDependencies()

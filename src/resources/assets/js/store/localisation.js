@@ -16,19 +16,10 @@ export const mutations = {
 };
 
 export const getters = {
-    __: (state, getters, rootState) => (key) => {
-        const { lang } = rootState.user.preferences.global;
+    __: (state, getters, rootState, rootGetters) => (key) => {
+        const lang = rootGetters['preferences/lang'];
         return state.i18n[lang]
             ? state.i18n[lang][key]
             : key;
-    },
-    current: (state, getters, rootState) => (rootState.user.preferences ?
-        rootState.user.preferences.global.lang
-        : null),
-};
-
-export const actions = {
-    setLocale({ commit }, selectedLocale) {
-        commit('setLocale', selectedLocale, { root: true });
     },
 };

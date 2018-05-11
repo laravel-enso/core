@@ -17,7 +17,7 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                 Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')
                                     ->name('setPreferences');
                                 Route::post('resetToDefault/{route?}', 'PreferencesController@resetToDefault')
-                                    ->name('resetToDefault');
+                                    ->name('setDefault');
                             });
                     });
             });

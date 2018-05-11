@@ -8,7 +8,7 @@ class DefaultPreferences
 
     public function __construct()
     {
-        $this->data = $this->readDefault();
+        $this->data = $this->read();
     }
 
     public function data()
@@ -16,7 +16,7 @@ class DefaultPreferences
         return json_decode($this->data);
     }
 
-    private function readDefault()
+    private function read()
     {
         return \File::get(resource_path('preferences.json'));
     }

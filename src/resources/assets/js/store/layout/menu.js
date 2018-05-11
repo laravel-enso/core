@@ -25,6 +25,7 @@ export const mutations = {
             state.isVisible = !state.isVisible;
             return;
         }
+
         state.isVisible = true;
         state.isExpanded = !state.isExpanded;
     },

@@ -4,39 +4,28 @@ namespace LaravelEnso\Core\app\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
 
 class PreferencesController extends Controller
 {
     public function setPreferences(Request $request)
     {
-        if (!$request->user()->preference) {
-            $request->user()
-                ->preference()
-                ->save($this->getDefaultPreference());
+        if ($request->has('global')) {
+            auth()->user()
+                ->setGlobalPreferences($request->get('global'));
+
+            return;
         }
 
-        $this->updateGlobalPreference($request->get('global'));
+        auth()->user()
+            ->setLocalPreferences(
+                $request->get('route'),
+                $request->get('value')
+            );
     }
 
-    public function resetToDefault()
+    public function setDefault(Request $request)
     {
-        //
-    }
-
-    private function getDefaultPreference()
-    {
-        return new Preference(['value' => (new DefaultPreferences())->data()]);
-    }
-
-    private function updateGlobalPreference($preferences)
-    {
-        collect($preferences)
-            ->each(function ($value, $key) {
-                auth()->user()
-                    ->preference()
-                    ->update(['value->global->'.$key => $value]);
-            });
+        $request->user()
+            ->persistDefaultPreferences();
     }
 }

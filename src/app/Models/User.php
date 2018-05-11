@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\Models;
 
-use LaravelEnso\Core\app\Enums\Themes;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
@@ -66,20 +65,35 @@ class User extends Authenticatable
         return $this->role_id === self::SupervisorRoleId;
     }
 
-    public function theme()
+    public function persistDefaultPreferences()
     {
-        return Themes::get($this->preferences->global->theme);
+        $this->preference()
+            ->save($this->defaultPreferences());
     }
 
-    public function getPreferencesAttribute()
+    public function preferences()
     {
         $preferences = $this->preference
             ? $this->preference->value
-            : (new DefaultPreferences())->data();
+            : $this->defaultPreferences()->value;
 
         unset($this->preference);
 
         return $preferences;
+    }
+
+    public function lang()
+    {
+        return $this->preferences()
+            ->global
+            ->lang;
+    }
+
+    private function defaultPreferences()
+    {
+        return new Preference([
+            'value' => (new DefaultPreferences())->data()
+        ]);
     }
 
     public function getFullNameAttribute()
@@ -101,6 +115,22 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($this, $token));
     }
 
+    public function setGlobalPreferences($global)
+    {
+        $preferences = $this->preferences();
+        $preferences->global = $global;
+
+        $this->setPreferences($preferences);
+    }
+
+    public function setLocalPreferences($route, $value)
+    {
+        $preferences = $this->preferences();
+        $preferences->local->$route = $value;
+
+        $this->setPreferences($preferences);
+    }
+
     public function delete()
     {
         if ($this->logins()->count()) {
@@ -108,5 +138,14 @@ class User extends Authenticatable
         }
 
         parent::delete();
+    }
+
+    private function setPreferences($preferences)
+    {
+        $this->preference()
+            ->updateOrCreate(
+                ['user_id' => $this->id],
+                ['value' => $preferences]
+            );
     }
 }
