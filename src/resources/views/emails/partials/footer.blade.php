@@ -27,8 +27,9 @@
         </td>
     </tr>
     <tr>
-        <td style="font-size:12px;">
-            &nbsp;
+    <tr>
+        <td style="color:#f0f0f0; font-size: 14px; text-align:center; padding-bottom:4px;">
+            <a href="%unsubscribe_url%">unsubscribe</a>
         </td>
     </tr>
 </table>
