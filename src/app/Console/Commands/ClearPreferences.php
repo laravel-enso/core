@@ -8,6 +8,7 @@ use LaravelEnso\Core\app\Models\Preference;
 class ClearPreferences extends Command
 {
     protected $signature = 'enso:clear-preferences';
+
     protected $description = 'This command will clear enso preferences';
 
     public function handle()

@@ -37,7 +37,7 @@ class OwnerTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'The entity was created!',
+                'message' => 'The owner was successfully created',
                 'redirect' => 'administration.owners.edit',
                 'id' => $owner->id,
             ]);
@@ -63,7 +63,7 @@ class OwnerTest extends TestCase
 
         $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJsonFragment(['message']);
 
         $this->assertEquals('edited', $owner->fresh()->name);
     }

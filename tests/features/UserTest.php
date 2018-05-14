@@ -42,7 +42,7 @@ class UserTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'The user was created!',
+                'message' => 'The user was successfully created',
                 'redirect' => 'administration.users.edit',
                 'id' => $user->id,
             ]);
@@ -68,7 +68,7 @@ class UserTest extends TestCase
 
         $this->patch(route('administration.users.update', $user->id, false), $user->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJsonFragment(['message']);
 
         $this->assertEquals('edited', $user->fresh()->last_name);
     }

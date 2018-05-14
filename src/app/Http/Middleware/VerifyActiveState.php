@@ -12,7 +12,9 @@ class VerifyActiveState
         if ($request->user()->isDisabled() || $request->user()->owner->isDisabled()) {
             auth()->logout();
 
-            throw new AuthenticationException(__(config('enso.labels.disabledAccount')));
+            throw new AuthenticationException(__(
+                'Your account has been disabled. Please contact the administrator.'
+            ));
         }
 
         return $next($request);

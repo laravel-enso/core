@@ -7,8 +7,8 @@ use LaravelEnso\Core\app\Classes\StateBuilder;
 
 class SpaController extends Controller
 {
-    public function __invoke(StateBuilder $state)
+    public function __invoke()
     {
-        return ['state' => $state->get()];
+        return new StateBuilder;
     }
 }

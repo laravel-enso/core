@@ -92,7 +92,6 @@ class AppServiceProvider extends ServiceProvider
     private function loadDependencies()
     {
         $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'enso.inspiring');
-        $this->mergeConfigFrom(__DIR__.'/config/labels.php', 'enso.labels');
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');

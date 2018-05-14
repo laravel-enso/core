@@ -26,7 +26,7 @@ class Owner extends Model
     {
         if ($this->users()->count()) {
             throw new ConflictHttpException(
-                __("The owner can't be deleted because it has users attached")
+                __("The owner has users attached and can't be deleted")
             );
         }
 

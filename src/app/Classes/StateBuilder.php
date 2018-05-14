@@ -4,11 +4,12 @@ namespace LaravelEnso\Core\app\Classes;
 
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Enums\Themes;
+use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 
-class StateBuilder
+class StateBuilder implements Responsable
 {
     private $user;
 
@@ -17,7 +18,7 @@ class StateBuilder
         $this->user = auth()->user();
     }
 
-    public function get()
+    public function toResponse($request)
     {
         return $this->state();
     }

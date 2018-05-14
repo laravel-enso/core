@@ -133,11 +133,15 @@ class User extends Authenticatable
 
     public function delete()
     {
-        if ($this->logins()->count()) {
-            throw new ConflictHttpException(__('The user has activity in the system and cannot be deleted'));
+        try {
+            parent::delete();
+        } catch (\Exception $e) {
+            throw new ConflictHttpException(__(
+                'The user has activity in the system and cannot be deleted'
+            ));
         }
 
-        parent::delete();
+        return ['message' => 'The user was successfully deleted'];
     }
 
     private function setPreferences($preferences)

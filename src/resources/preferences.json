@@ -8,54 +8,44 @@
     "local": {
         "dashboard.index": {
             "grid": [
-                [
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getPieChartData"
-                        }
-                    },
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getPolarChartData"
-                        }
+                [{
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/pie"
                     }
-                ],
-                [
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getBarChartData"
-                        }
-                    },
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getBubbleChartData"
-                        }
-                    },
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getLineChartData"
-                        }
+                }, {
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/polar"
                     }
-                ],
-                [
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getRadarChartData"
-                        }
-                    },
-                    {
-                        "type": "chart",
-                        "meta": {
-                            "source": "/api/dashboard/getDoughnutChartData"
-                        }
+                }],
+                [{
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/bar"
                     }
-                ]
+                }, {
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/bubble"
+                    }
+                }, {
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/line"
+                    }
+                }],
+                [{
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/radar"
+                    }
+                }, {
+                    "type": "chart",
+                    "meta": {
+                        "source": "/api/dashboard/doughnut"
+                    }
+                }]
             ]
         }
     }
