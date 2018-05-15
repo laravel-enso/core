@@ -15,7 +15,7 @@ class GuestI18n implements Responsable
                 'Remember me' => __('Remember me'),
                 'Forgot password' => __('Forgot password'),
                 'Login' => __('Login'),
-                'Send a reset passworkd link' => __('Send a reset passworkd link'),
+                'Send a reset password link' => __('Send a reset password link'),
                 'Repeat Password' => __('Repeat Password'),
                 'Success' => __('Success'),
                 'Error' => __('Error'),
