@@ -22,7 +22,9 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
-    protected $fillable = ['first_name', 'last_name', 'phone', 'is_active', 'email', 'owner_id', 'role_id'];
+    protected $fillable = [
+        'first_name', 'last_name', 'phone', 'is_active', 'email', 'owner_id', 'role_id'
+    ];
 
     protected $attributes = ['is_active' => false];
 

@@ -1,23 +1,17 @@
 <?php
 
-namespace LaravelEnso\Core\app\Classes;
+namespace LaravelEnso\Core\app\Http\Responses;
 
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Enums\Themes;
+use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 
-class StateBuilder implements Responsable
+class AppState implements Responsable
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user = auth()->user();
-    }
-
     public function toResponse($request)
     {
         return $this->state();
@@ -29,14 +23,14 @@ class StateBuilder implements Responsable
             ->pluck('flag', 'name');
 
         return [
-            'user' => $this->user->append(['avatarId'])
+            'user' => auth()->user()->append(['avatarId'])
                 ->load(['role.permissions']),
-            'preferences' => $this->user->preferences(),
+            'preferences' => auth()->user()->preferences(),
             'menus' => $this->menus(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,
             'themes' => Themes::all(),
-            'implicitMenu' => $this->user->role->menu,
+            'implicitMenu' => auth()->user()->role->menu,
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
             'routes' => $this->routes(),
@@ -45,7 +39,7 @@ class StateBuilder implements Responsable
 
     private function menus()
     {
-        $menus = $this->user->role->menus()->orderBy('order')
+        $menus = auth()->user()->role->menus()->orderBy('order')
             ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
 
         return (new MenuBuilder($menus))->get();
@@ -88,7 +82,7 @@ class StateBuilder implements Responsable
 
     private function routes()
     {
-        $forbidden = Permission::whereNotIn('id', $this->user->role->permissionList)
+        $forbidden = Permission::whereNotIn('id', auth()->user()->role->permissionList)
             ->pluck('name');
 
         return collect(\Route::getRoutes()->getRoutesByName())
