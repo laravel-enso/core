@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function owner()
     {
-        return $this->belongsTo(Owner::class);
+        return $this->belongsTo(config('enso.config.ownerModel'));
     }
 
     public function avatar()
