@@ -49,6 +49,10 @@ once a newer version is released (ran automatically with --force after every com
 - `php artisan vendor:publish --tag=email-templates` - a common alias for when wanting to update the templates 
 used for notifications
 
+### Commands
+- `php artisan enso:clear-preferences` - clears the preferences stored in the DB, 
+useful when the preferences structure changes  
+
 ### Notes
 
 The [Laravel Enso](https://github.com/laravel-enso/Enso) package comes with this package included.
