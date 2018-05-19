@@ -1,6 +1,5 @@
 <?php
 
-use App\Owner;
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,7 +32,7 @@ class OwnerTest extends TestCase
     {
         $postParams = $this->postParams();
         $response = $this->post(route('administration.owners.store', [], false), $postParams);
-        $owner = Owner::whereName($postParams['name'])->first();
+        $owner = config('enso.config.ownerModel')::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJson([
@@ -47,7 +46,7 @@ class OwnerTest extends TestCase
     public function edit()
     {
         $postParams = $this->postParams();
-        $owner = Owner::create($postParams);
+        $owner = config('enso.config.ownerModel')::create($postParams);
 
         $this->get(route('administration.owners.edit', $owner->id, false))
             ->assertStatus(200)
@@ -58,7 +57,7 @@ class OwnerTest extends TestCase
     public function update()
     {
         $postParams = $this->postParams();
-        $owner = Owner::create($postParams)->append(['roleList']);
+        $owner = config('enso.config.ownerModel')::create($postParams)->append(['roleList']);
         $owner->name = 'edited';
 
         $this->patch(route('administration.owners.update', $owner->id, false), $owner->toArray())
@@ -72,7 +71,7 @@ class OwnerTest extends TestCase
     public function destroy()
     {
         $postParams = $this->postParams();
-        $owner = Owner::create($postParams);
+        $owner = config('enso.config.ownerModel')::create($postParams);
 
         $this->delete(route('administration.owners.destroy', $owner->id, false))
             ->assertStatus(200)
@@ -85,7 +84,7 @@ class OwnerTest extends TestCase
     public function cant_destroy_if_has_users_attached()
     {
         $postParams = $this->postParams();
-        $owner = Owner::create($postParams);
+        $owner = config('enso.config.ownerModel')::create($postParams);
         $this->attachUser($owner);
 
         $this->delete(route('administration.owners.destroy', $owner->id, false))
