@@ -23,7 +23,7 @@ class CreateStructureForUsers extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Users', 'icon' => 'users', 'link' => 'administration.users.index', 'has_children' => false,
+        'name' => 'Users', 'icon' => 'users', 'link' => 'administration.users.index', 'order' => 999, 'has_children' => false,
     ];
 
     protected $parentMenu = 'Administration';
