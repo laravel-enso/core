@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\Core\app\Http\Responses\GuestI18n;
 
 class GuestController extends Controller
 {
@@ -24,6 +23,18 @@ class GuestController extends Controller
 
     private function i18n()
     {
-        return new GuestI18n();
+        return [
+            app()->getLocale() => [
+                'Email' => __('Email'),
+                'Password' => __('Password'),
+                'Remember me' => __('Remember me'),
+                'Forgot password' => __('Forgot password'),
+                'Login' => __('Login'),
+                'Send a reset password link' => __('Send a reset password link'),
+                'Repeat Password' => __('Repeat Password'),
+                'Success' => __('Success'),
+                'Error' => __('Error'),
+            ],
+        ];
     }
 }
