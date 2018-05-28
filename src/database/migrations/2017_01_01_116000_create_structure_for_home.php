@@ -9,6 +9,6 @@ class CreateStructureForHome extends StructureMigration
     ];
 
     protected $permissions = [
-        ['name' => 'core.index', 'description' => 'App State Builder', 'type' => 0, 'default' => true],
+        ['name' => 'core.index', 'description' => 'App State Builder', 'type' => 0, 'is_default' => true],
     ];
 }

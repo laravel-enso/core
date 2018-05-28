@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Console\Commands;
+namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\app\Models\Preference;

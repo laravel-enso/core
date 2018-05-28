@@ -2,6 +2,7 @@
 
 return [
     'version' => '2.x.x',
+    'stateBuilder' => '',
     'ownerModel' => 'App\Owner',
     'defaultRole' => 'admin',
     'defaultRole' => 'admin',

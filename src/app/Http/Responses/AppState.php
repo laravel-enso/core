@@ -6,6 +6,7 @@ use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
+use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
 use LaravelEnso\PermissionManager\app\Models\Permission;
@@ -22,6 +23,8 @@ class AppState implements Responsable
         $languages = Language::active()
             ->pluck('flag', 'name');
 
+        $localState = config('enso.config.stateBuilder');
+
         return [
             'user' => auth()->user()->append(['avatarId'])
                 ->load(['role.permissions']),
@@ -34,12 +37,15 @@ class AppState implements Responsable
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
             'routes' => $this->routes(),
+            'local' => class_exists($localState)
+                ? $this->localState(new $localState())
+                : null,
         ];
     }
 
     private function menus()
     {
-        $menus = auth()->user()->role->menus()->orderBy('order')
+        $menus = auth()->user()->role->menus()->orderBy('order_index')
             ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
 
         return (new MenuBuilder($menus))->get();
@@ -92,5 +98,10 @@ class AppState implements Responsable
                 return collect($route)->only(['uri', 'methods'])
                     ->put('domain', $route->domain());
             });
+    }
+
+    private function localState(StateBuilder $state)
+    {
+        return $state->build();
     }
 }
