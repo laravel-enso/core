@@ -2,6 +2,9 @@
 
 return [
     'version' => '2.x.x',
+    'facebook' => '',
+    'googleplus' => '',
+    'twitter' => 'https://twitter.com',
     'stateBuilder' => '',
     'ownerModel' => 'App\Owner',
     'defaultRole' => 'admin',

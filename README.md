@@ -45,8 +45,8 @@ once a newer version is released
 once a newer version is released
 - `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the scss & js assets,
 once a newer version is released (ran automatically with --force after every composer install)
-- `php artisan vendor:publish --tag=core-email-templates` - the templates used for notifications
-- `php artisan vendor:publish --tag=email-templates` - a common alias for when wanting to update the templates 
+- `php artisan vendor:publish --tag=core-mail` - the templates used for notifications
+- `php artisan vendor:publish --tag=enso-mail` - a common alias for when wanting to update the templates 
 used for notifications
 
 ### Commands

@@ -31,16 +31,11 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
         app()->setLocale($notifiable->lang());
 
         return (new MailMessage())
-            ->subject(__('Reset Password Notification'))
-            ->view(
-                'laravel-enso/core::emails.passwordReset',
-                [
-                    'body' => __('Please set or reset your password by clicking the button below.'),
-                    'ending' => __('Thank you for using our application'),
-                    'resetURL' => config('app.url').'/password/reset/'.$this->token,
-                    'buttonLabel' => __('Reset Your Password'),
-                ]
-            );
+            ->subject(__(config('app.name')).': '.__('Reset Password Notification'))
+            ->markdown('laravel-enso/core::emails.reset', [
+                'name' => $notifiable->first_name,
+                'url' => url('password/reset/'.$this->token),
+            ]);
     }
 
     public function toArray($notifiable)
