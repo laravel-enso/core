@@ -76,7 +76,7 @@ class AppState implements Responsable
             'appUrl' => url('/').'/',
             'version' => config('enso.config.version'),
             'quote' => Inspiring::quote(),
-            'env' => config('app.env'),
+            'env' => app()->environment(),
             'dateFormat' => config('enso.config.jsDateFormat'),
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
