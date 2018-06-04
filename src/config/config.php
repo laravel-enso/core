@@ -17,6 +17,7 @@ return [
         'imports' => 'imports',
         'temp' => 'temp',
         'exports' => 'exports',
+        'howToVideos' => 'howToVideos',
     ],
     'ravenKey' => env('RAVEN_DSN', null),
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
