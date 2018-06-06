@@ -26,7 +26,8 @@ class AppState implements Responsable
         $localState = config('enso.config.stateBuilder');
 
         return [
-            'user' => auth()->user()->append(['avatarId'])
+            'user' => auth()->user()
+                ->append(['avatarId'])
                 ->load(['role.permissions']),
             'preferences' => auth()->user()->preferences(),
             'menus' => $this->menus(),
@@ -45,7 +46,10 @@ class AppState implements Responsable
 
     private function menus()
     {
-        $menus = auth()->user()->role->menus()->orderBy('order_index')
+        $menus = auth()->user()
+            ->role
+            ->menus()
+            ->orderBy('order_index')
             ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
 
         return (new MenuBuilder($menus))->get();
@@ -88,8 +92,10 @@ class AppState implements Responsable
 
     private function routes()
     {
-        $forbidden = Permission::whereNotIn('id', auth()->user()->role->permissionList)
-            ->pluck('name');
+        $forbidden = Permission::whereNotIn(
+            'id',
+            auth()->user()->role->permissionList
+        )->pluck('name');
 
         return collect(\Route::getRoutes()->getRoutesByName())
             ->reject(function ($value, $key) use ($forbidden) {

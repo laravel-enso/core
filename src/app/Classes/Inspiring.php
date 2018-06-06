@@ -6,6 +6,7 @@ class Inspiring
 {
     public static function quote()
     {
-        return collect(config('enso.inspiring.quotes'))->random();
+        return collect(config('enso.inspiring.quotes'))
+            ->random();
     }
 }

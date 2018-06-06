@@ -6,16 +6,16 @@ use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
-use LaravelEnso\Impersonate\app\Traits\Impersonate;
+use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
-use LaravelEnso\ActionLogger\app\Traits\ActionLogger;
+use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use Impersonate, IsActive, ActionLogger, Notifiable;
+    use Notifiable, Impersonates, HasActionLogs, IsActive;
 
     private const AdminRoleId = 1;
     private const SupervisorRoleId = 1;
