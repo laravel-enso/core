@@ -35,7 +35,7 @@ export default {
             const lang = Object.keys(i18n).shift();
             this.lang(lang);
 
-            if (!this.$route.path.includes('/password/reset/')) {
+            if (!window.location.pathname.includes('/password/reset/')) {
                 this.$router.push({ name: 'login' });
             }
         }).catch(error => this.handleError(error));
