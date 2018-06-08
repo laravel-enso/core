@@ -48,7 +48,7 @@ export default {
         isAuth(authenticated) {
             if (!authenticated) {
                 this.showHome = true;
-                this.$router.push({ path: '/' });
+                this.$router.push({ name: 'login' });
                 return;
             }
 

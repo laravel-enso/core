@@ -28,7 +28,7 @@ export default {
     },
 
     created() {
-        axios.get('/api/getMeta').then(({ data }) => {
+        axios.get('/api/meta').then(({ data }) => {
             const { meta, i18n } = data;
             this.setMeta(meta);
             this.setI18n(i18n);
