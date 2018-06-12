@@ -51,7 +51,7 @@
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/trackwho": "1.5.*",
         "laravel-enso/tutorialmanager": "2.1.*",
-        "laravel-enso/vuecomponents": "2.1.*"
+        "laravel-enso/vuecomponents": "2.2.*"
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
