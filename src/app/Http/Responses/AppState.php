@@ -9,7 +9,6 @@ use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
-use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class AppState implements Responsable
 {
@@ -20,6 +19,14 @@ class AppState implements Responsable
 
     private function state()
     {
+        $response = $this->response();
+        unset(auth()->user()->role);
+
+        return $response;
+    }
+
+    private function response()
+    {
         $languages = Language::active()
             ->pluck('flag', 'name');
 
@@ -27,17 +34,16 @@ class AppState implements Responsable
 
         return [
             'user' => auth()->user()
-                ->append(['avatarId'])
-                ->load(['role.permissions']),
+                ->append(['avatarId']),
             'preferences' => auth()->user()->preferences(),
-            'menus' => $this->menus(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,
             'themes' => Themes::all(),
+            'routes' => $this->routes(),
             'implicitMenu' => auth()->user()->role->menu,
+            'menus' => $this->menus(),
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
-            'routes' => $this->routes(),
             'local' => class_exists($localState)
                 ? $this->localState(new $localState())
                 : null,
@@ -46,8 +52,7 @@ class AppState implements Responsable
 
     private function menus()
     {
-        $menus = auth()->user()
-            ->role
+        $menus = auth()->user()->role
             ->menus()
             ->orderBy('order_index')
             ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
@@ -92,18 +97,19 @@ class AppState implements Responsable
 
     private function routes()
     {
-        $forbidden = Permission::whereNotIn(
-            'id',
-            auth()->user()->role->permissionList
-        )->pluck('name');
+        return auth()->user()->role
+            ->permissions()
+            ->pluck('name')
+            ->reduce(function ($collection, $permission) {
+                $route = \Route::getRoutes()->getByName($permission);
 
-        return collect(\Route::getRoutes()->getRoutesByName())
-            ->reject(function ($value, $key) use ($forbidden) {
-                return $forbidden->contains($key);
-            })->map(function ($route) {
-                return collect($route)->only(['uri', 'methods'])
-                    ->put('domain', $route->domain());
-            });
+                $collection[$permission] = $route
+                    ? collect($route)->only(['uri', 'methods'])
+                        ->put('domain', $route->domain())
+                    : null;
+
+                return $collection;
+            }, []);
     }
 
     private function localState(StateBuilder $state)

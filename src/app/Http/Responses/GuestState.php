@@ -11,6 +11,7 @@ class GuestState implements Responsable
         return [
             'meta' => $this->meta(),
             'i18n' => $this->i18n(),
+            'routes' => $this->routes(),
         ];
     }
 
@@ -18,6 +19,8 @@ class GuestState implements Responsable
     {
         return [
             'appName' => config('app.name'),
+            'appUrl' => url('/').'/',
+            'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
         ];
     }
 
@@ -36,5 +39,18 @@ class GuestState implements Responsable
                 'Error' => __('Error'),
             ],
         ];
+    }
+
+    private function routes()
+    {
+        $authRoutes = collect(['login', 'password.email', 'password.reset']);
+
+        return collect(\Route::getRoutes()->getRoutesByName())
+            ->filter(function ($route, $name) use ($authRoutes) {
+                return $authRoutes->contains($name);
+            })->map(function ($route) {
+                return collect($route)->only(['uri', 'methods'])
+                    ->put('domain', $route->domain());
+            });
     }
 }

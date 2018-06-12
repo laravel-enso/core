@@ -17,6 +17,8 @@ class VerifyActiveState
             ));
         }
 
+        unset($request->user()->owner);
+
         return $next($request);
     }
 }
