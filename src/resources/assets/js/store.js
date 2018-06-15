@@ -18,6 +18,7 @@ export default new Vuex.Store({
     state: {
         isInitialised: false,
         showQuote: false,
+        showQuoteOnLogin: false,
         user: {},
         impersonating: null,
         meta: {},
@@ -38,6 +39,7 @@ export default new Vuex.Store({
         setMeta: (state, meta) => { state.meta = meta; },
         initialise: (state, value) => { state.isInitialised = value; },
         setShowQuote: (state, value) => { state.showQuote = value; },
+        setShowQuoteOnLogin: (state, value) => { state.showQuoteOnLogin = value; },
         setRoutes: (state, routes) => { state.routes = routes; },
         setDefaultRoute: (state, route) => {
             router.addRoutes([{
@@ -70,6 +72,7 @@ export default new Vuex.Store({
                 commit('layout/menu/update', data.preferences.global.expandedMenu);
                 commit('setMeta', data.meta);
                 commit('setCsrfToken', data.meta.csrfToken);
+                commit('setShowQuoteOnLogin', data.meta.showQuoteOnLogin);
                 commit('setRoutes', data.routes);
                 commit('setDefaultRoute', data.implicitMenu.link);
 

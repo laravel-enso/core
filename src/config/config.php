@@ -22,4 +22,5 @@ return [
     'ravenKey' => env('RAVEN_DSN', null),
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
     'extendedDocumentTitle' => false,
+    'showQuoteOnLogin' => env('SHOW_QUOTE_ON_LOGIN', true),
 ];

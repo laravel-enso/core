@@ -9,7 +9,7 @@
 
 <script>
 
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import AuthForm from './AuthForm.vue';
 
 export default {
@@ -17,12 +17,16 @@ export default {
 
     components: { AuthForm },
 
+    computed: {
+        ...mapState(['showQuoteOnLogin']),
+    },
+
     methods: {
         ...mapMutations('auth', ['login']),
         ...mapMutations('layout', ['showHome']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
         init(data) {
-            this.setShowQuote(true);
+            this.setShowQuote(this.showQuoteOnLogin);
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
                 this.login();
