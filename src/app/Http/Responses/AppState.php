@@ -92,7 +92,6 @@ class AppState implements Responsable
             'pusher' => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
             'ravenKey' => config('enso.config.ravenKey'),
-            'showQuoteOnLogin' => config('enso.config.showQuoteOnLogin'),
         ];
     }
 

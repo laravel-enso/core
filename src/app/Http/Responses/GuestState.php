@@ -21,6 +21,7 @@ class GuestState implements Responsable
             'appName' => config('app.name'),
             'appUrl' => url('/').'/',
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
+            'showQuote' => config('enso.config.showQuote'),
         ];
     }
 

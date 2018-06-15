@@ -18,7 +18,7 @@ export default {
     components: { AuthForm },
 
     computed: {
-        ...mapState(['showQuoteOnLogin']),
+        ...mapState(['meta']),
     },
 
     methods: {
@@ -26,7 +26,7 @@ export default {
         ...mapMutations('layout', ['showHome']),
         ...mapMutations(['setShowQuote', 'setCsrfToken']),
         init(data) {
-            this.setShowQuote(this.showQuoteOnLogin);
+            this.setShowQuote(this.meta.showQuote);
             this.setCsrfToken(data.csrfToken);
             setTimeout(() => {
                 this.login();
