@@ -118,7 +118,7 @@ img {
 /* Body */
 
 .body {
-    background-color: #ffffff;
+    background-color: #403f3f;
     border-bottom: 1px solid #cfcfcf;
     border-top: 1px solid #cfcfcf;
     margin: 0;
@@ -183,11 +183,12 @@ img {
     color: #74787e;
     border-bottom: 1px solid #edeff2;
     padding-bottom: 8px;
+    font-size: 18px;
 }
 
 .table td {
     color: #74787e;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 18px;
     padding: 10px 0;
 }
