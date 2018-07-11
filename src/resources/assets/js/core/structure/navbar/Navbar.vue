@@ -6,13 +6,10 @@
                 <figure class="image is-24x24">
                     <img src="/images/logo.svg">
                 </figure>
-                <transition enter-active-class="zoomIn"
-                    leave-active-class="zoomOut">
-                    <h4 class="title is-4 animated has-margin-left-small"
-                        v-if="menu.isExpanded">
-                        {{ meta.appName }}
-                    </h4>
-                </transition>
+                <h4 class="title is-4 animated has-margin-left-small"
+                    v-if="menu.isExpanded">
+                    {{ meta.appName }}
+                </h4>
             </a>
             <a class="navbar-item"
                 @click="toggleMenu(isTouch)">
