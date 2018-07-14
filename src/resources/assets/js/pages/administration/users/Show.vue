@@ -30,8 +30,7 @@
                                         {{ __('Avatar') }}
                                     </span>
                                 </button>
-                                <file-uploader v-if="!avatarId"
-                                    @upload-successful="setUserAvatar($event.id)"
+                                <file-uploader @upload-successful="setUserAvatar($event.id)"
                                     :url="uploadAvatarLink"
                                     file-key="avatar">
                                     <template slot="upload-button"
