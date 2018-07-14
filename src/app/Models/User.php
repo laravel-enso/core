@@ -10,6 +10,7 @@ use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use LaravelEnso\AvatarManager\app\Classes\DefaultAvatar;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -105,11 +106,12 @@ class User extends Authenticatable
 
     public function getAvatarIdAttribute()
     {
-        $id = optional($this->avatar)->id;
+        $avatar = $this->avatar
+            ?? (new DefaultAvatar($this))->create();
 
         unset($this->avatar);
 
-        return $id;
+        return $avatar->id;
     }
 
     public function sendPasswordResetNotification($token)
