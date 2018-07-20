@@ -20,5 +20,14 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                     ->name('setDefault');
                             });
                     });
+
+                Route::namespace('Administration\Team')
+                    ->prefix('administration')->as('administration.')
+                    ->group(function () {
+                        Route::get('teams/selectOptions', 'TeamSelectController@options')
+                            ->name('teams.selectOptions');
+
+                        Route::resource('teams', 'TeamController', ['only' => ['index', 'store', 'destroy']]);
+                    });
             });
     });
