@@ -19,7 +19,7 @@ class TeamController extends Controller
         $team = Team::store($request->validated());
 
         return [
-            'message' => __('The cost center was successfully saved'),
+            'message' => __('The team was successfully saved'),
             'team' => $team,
         ];
     }
