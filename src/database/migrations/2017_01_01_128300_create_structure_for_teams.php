@@ -10,9 +10,7 @@ class CreateStructureForTeams extends StructureMigration
 
     protected $permissions = [
         ['name' => 'administration.teams.index', 'description' => 'Show teams', 'type' => 0, 'is_default' => false],
-        ['name' => 'administration.teams.edit', 'description' => 'Edit existing team', 'type' => 1, 'is_default' => false],
         ['name' => 'administration.teams.store', 'description' => 'Store newly created team', 'type' => 1, 'is_default' => false],
-        ['name' => 'administration.teams.update', 'description' => 'Update edited team', 'type' => 1, 'is_default' => false],
         ['name' => 'administration.teams.destroy', 'description' => 'Delete team', 'type' => 1, 'is_default' => false],
         ['name' => 'administration.teams.selectOptions', 'description' => 'Get options for vue-select', 'type' => 0, 'is_default' => false],
     ];
