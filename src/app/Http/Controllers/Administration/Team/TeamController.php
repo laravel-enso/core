@@ -29,7 +29,7 @@ class TeamController extends Controller
         $team->delete();
 
         return [
-            'message' => __('The team was successfully deleted')
+            'message' => __('The team was successfully deleted'),
         ];
     }
 }
