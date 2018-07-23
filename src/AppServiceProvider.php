@@ -86,8 +86,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app['router']->middlewareGroup('core', [
             VerifyActiveState::class,
             ActionLogger::class,
-            VerifyRouteAccess::class,
             Impersonate::class,
+            VerifyRouteAccess::class,
             SetLanguage::class,
         ]);
     }
