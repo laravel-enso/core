@@ -37,8 +37,8 @@
         "guzzlehttp/guzzle": "~6.0",
         "laravel-enso/actionlogger": "2.1.*",
         "laravel-enso/avatarmanager": "2.1.*",
-        "laravel-enso/vuedatatable": "1.2.*",
-        "laravel-enso/formbuilder": "2.6.*",
+        "laravel-enso/vuedatatable": "1.3.*",
+        "laravel-enso/formbuilder": "2.7.*",
         "laravel-enso/helpers": "1.7.*",
         "laravel-enso/historytracker": "1.4.*",
         "laravel-enso/impersonate": "2.2.*",
@@ -52,7 +52,7 @@
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/trackwho": "1.5.*",
         "laravel-enso/tutorialmanager": "2.1.*",
-        "laravel-enso/vuecomponents": "2.2.*"
+        "laravel-enso/vuecomponents": "2.3.*"
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
