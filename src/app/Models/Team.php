@@ -3,10 +3,18 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\ActivityLog\app\Traits\LogActivity;
+use LaravelEnso\Core\app\Classes\TeamMemberChanges;
 
 class Team extends Model
 {
+    use LogActivity;
+
     protected $fillable = ['name'];
+
+    protected $loggableLabel = 'name';
+
+    protected $loggable = ['name'];
 
     public function users()
     {
@@ -23,11 +31,20 @@ class Team extends Model
 
     public static function store($attributes)
     {
-        $team = self::firstOrCreate(
-            ['name' => $attributes['name']]
-        );
+        $team = null;
 
-        $team->users()->sync($attributes['userList']);
+        \DB::transaction(function() use (&$team, $attributes) {
+            $team = self::firstOrCreate(
+                ['name' => $attributes['name']]
+            );
+
+            $synced = $team->users()->sync($attributes['userList']);
+
+            if (count($synced['attached']) && count($synced['detached'])) {
+                (new TeamMemberChanges($team, $synced))
+                    ->log();
+            }
+        });
 
         return $team->append('userList');
     }
