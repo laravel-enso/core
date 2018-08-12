@@ -33,7 +33,7 @@ class Team extends Model
     {
         $team = null;
 
-        \DB::transaction(function() use (&$team, $attributes) {
+        \DB::transaction(function () use (&$team, $attributes) {
             $team = self::firstOrCreate(
                 ['name' => $attributes['name']]
             );

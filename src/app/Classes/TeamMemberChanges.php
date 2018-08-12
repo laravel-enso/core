@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use LaravelEnso\Core\app\Models\Team;
 use App\User;
+use LaravelEnso\Core\app\Models\Team;
 
 class TeamMemberChanges
 {
@@ -38,6 +38,7 @@ class TeamMemberChanges
 
         $this->message = 'added the user(s): '.$attached;
     }
+
     private function computeDetached()
     {
         $detached = $this->users($this->synced['detached']);
