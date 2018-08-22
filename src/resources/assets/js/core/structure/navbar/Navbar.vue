@@ -41,7 +41,8 @@
             </div>
             <div class="is-pulled-right is-flex"
                 v-if="isTouch">
-                <notifications/>
+                <notifications
+                    @click="$router.push({'name': 'core.notifications.index'})"/>
                 <profile-control/>
                 <settings-control/>
             </div>

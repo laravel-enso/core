@@ -2,7 +2,8 @@
 
     <div :class="['navbar-item notifications', { 'has-dropdown': !isTouch }, { 'is-active': show }]"
         v-click-outside="hide">
-        <span v-if="isTouch" class="is-clickable">
+        <span v-if="isTouch" class="is-clickable"
+             @click="$emit('adsfasfd'); $router.push({'name': 'core.notifications.index'})">
             <span class="icon">
                 <fa icon="bell"/>
             </span>
