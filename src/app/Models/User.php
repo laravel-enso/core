@@ -5,18 +5,17 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\AvatarManager\app\Models\Avatar;
+use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use LaravelEnso\AvatarManager\app\Classes\DefaultAvatar;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use Notifiable, Impersonates, HasActionLogs, IsActive;
+    use Notifiable, HasAvatar, Impersonates, HasActionLogs, IsActive;
 
     private const AdminRoleId = 1;
     private const SupervisorRoleId = 1;
@@ -29,7 +28,7 @@ class User extends Authenticatable
 
     protected $attributes = ['is_active' => false];
 
-    protected $appends = ['fullName'];
+    protected $appends = ['fullName', 'avatarId'];
 
     protected $casts = ['is_active' => 'boolean'];
 
@@ -41,11 +40,6 @@ class User extends Authenticatable
     public function teams()
     {
         return $this->belongsToMany(Team::class);
-    }
-
-    public function avatar()
-    {
-        return $this->hasOne(Avatar::class);
     }
 
     public function role()
@@ -107,16 +101,6 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return trim($this->first_name.' '.$this->last_name);
-    }
-
-    public function getAvatarIdAttribute()
-    {
-        $avatar = $this->avatar
-            ?? (new DefaultAvatar($this))->create();
-
-        unset($this->avatar);
-
-        return $avatar->id;
     }
 
     public function sendPasswordResetNotification($token)
