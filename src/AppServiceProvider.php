@@ -4,6 +4,7 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
+use LaravelEnso\Core\app\Commands\UpgradeFileManager;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->commands([
             ClearPreferences::class,
+            UpgradeFileManager::class,
         ]);
     }
 
@@ -45,6 +47,15 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => resource_path('lang'),
         ], 'core-lang');
+
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'core-seeder');
+
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'enso-seeders');
+
     }
 
     private function publishesResources()
