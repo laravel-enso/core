@@ -129,7 +129,8 @@ class UpgradeFileManager extends Command
         });
 
         Schema::table('documents', function (Blueprint $table) {
-            $table->dropColumn(['saved_name', 'original_name', 'size']);
+            $table->dropColumn(['saved_name', 'size']);
+            $table->renameColumn('original_name', 'name');
         });
     }
 
