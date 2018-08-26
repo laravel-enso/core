@@ -6,8 +6,6 @@ use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\FileManager\app\Models\File;
 use LaravelEnso\HowToVideos\app\Models\Video;
 use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\DataImport\app\Models\DataImport;
@@ -41,7 +39,7 @@ class UpgradeFileManager extends Command
             $this->info('Upgrading avatars');
             $this->upgradeAvatars();
             $this->info('Avatars were successfully upgraded');
-            
+
             $this->info('Upgrading data imports');
             $this->upgradeDataImports();
             $this->info('Data imports were successfully upgraded');
@@ -49,7 +47,7 @@ class UpgradeFileManager extends Command
             $this->info('Upgrading documents');
             $this->upgradeDocuments();
             $this->info('Documents were successfully upgraded');
-            
+
             $this->info('Upgrading how-to videos');
             $this->upgradeHowToVideos();
             $this->info('HowToVideos were successfully upgraded');
@@ -75,7 +73,7 @@ class UpgradeFileManager extends Command
             $table->dropColumn(['saved_name', 'original_name']);
         });
     }
-    
+
     private function upgradeDataImports()
     {
         DataImport::get()->each(function ($import) {
@@ -98,7 +96,7 @@ class UpgradeFileManager extends Command
                 $table->dropColumn('comment');
             }
         });
-        
+
         ImportTemplate::get()->each(function ($template) {
             $template->file()->create([
                 'original_name' => $template->original_name,
@@ -116,7 +114,7 @@ class UpgradeFileManager extends Command
             $table->dropColumn(['saved_name', 'original_name']);
         });
     }
-    
+
     private function upgradeDocuments()
     {
         Document::get()->each(function ($document) {
@@ -134,7 +132,7 @@ class UpgradeFileManager extends Command
             $table->dropColumn(['saved_name', 'original_name', 'size']);
         });
     }
-    
+
     private function upgradeHowToVideos()
     {
         Video::get()->each(function ($video) {
@@ -180,7 +178,7 @@ class UpgradeFileManager extends Command
     private function mimeType($file)
     {
         return \Storage::has($file)
-            ?  \Storage::mimeType($file)
+            ? \Storage::mimeType($file)
             : '';
     }
 }
