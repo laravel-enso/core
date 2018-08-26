@@ -90,7 +90,8 @@ class UpgradeFileManager extends Command
         });
 
         Schema::table('data_imports', function (Blueprint $table) {
-            $table->dropColumn(['saved_name', 'original_name']);
+            $table->dropColumn('saved_name');
+            $table->renameColumn('original_name', 'name');
 
             if (Schema::hasColumn('data_imports', 'comment')) {
                 $table->dropColumn('comment');
