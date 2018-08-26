@@ -12,6 +12,7 @@ class TeamIndex implements Responsable
         return Team::with(['users'])
             ->latest()
             ->get()
-            ->each->append('userList');
+            ->each
+            ->append('userList');
     }
 }
