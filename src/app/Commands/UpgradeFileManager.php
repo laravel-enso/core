@@ -11,6 +11,7 @@ use LaravelEnso\AvatarManager\app\Models\Avatar;
 use LaravelEnso\DataImport\app\Models\DataImport;
 use LaravelEnso\DataImport\app\Models\ImportTemplate;
 use LaravelEnso\DocumentsManager\app\Models\Document;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class UpgradeFileManager extends Command
 {
@@ -72,6 +73,12 @@ class UpgradeFileManager extends Command
         Schema::table('avatars', function (Blueprint $table) {
             $table->dropColumn(['saved_name', 'original_name']);
         });
+
+        Permission::whereName('core.avatars.destroy')
+            ->update([
+                'name' => 'core.avatars.update',
+                'description' => 'Generate avatar',
+            ]);
     }
 
     private function upgradeDataImports()
