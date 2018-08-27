@@ -21,12 +21,6 @@ class UpgradeFileManager extends Command
 
     public function handle()
     {
-        if (!Schema::hasColumn('avatars', 'saved_name')) {
-            $this->info('The upgrade was already performed');
-
-            return;
-        }
-
         auth()->loginUsingId(User::first()->id);
 
         $this->info('The upgrade process has started');
@@ -37,26 +31,26 @@ class UpgradeFileManager extends Command
     private function upgrade()
     {
         \DB::transaction(function () {
-            $this->info('Upgrading avatars');
             $this->upgradeAvatars();
-            $this->info('Avatars were successfully upgraded');
 
-            $this->info('Upgrading data imports');
             $this->upgradeDataImports();
-            $this->info('Data imports were successfully upgraded');
 
-            $this->info('Upgrading documents');
             $this->upgradeDocuments();
-            $this->info('Documents were successfully upgraded');
 
-            $this->info('Upgrading how-to videos');
             $this->upgradeHowToVideos();
-            $this->info('HowToVideos were successfully upgraded');
         });
     }
 
     private function upgradeAvatars()
     {
+        if (!Schema::hasColumn('avatars', 'saved_name')) {
+            $this->info('The upgrade for avatars was already performed');
+
+            return;
+        }
+
+        $this->info('Upgrading avatars');
+
         Avatar::get()->each(function ($avatar) {
             $avatar->file()->create([
                 'original_name' => $avatar->original_name,
@@ -79,10 +73,24 @@ class UpgradeFileManager extends Command
                 'name' => 'core.avatars.update',
                 'description' => 'Generate avatar',
             ]);
+
+        $this->info('Avatars were successfully upgraded');
     }
 
     private function upgradeDataImports()
     {
+        if (!Schema::hasTable('data_imports')) {
+            return;
+        }
+
+        if (!Schema::hasColumn('data_imports', 'saved_name')) {
+            $this->info('The upgrade for data imports was already performed');
+
+            return;
+        }
+
+        $this->info('Upgrading data imports');
+
         DataImport::get()->each(function ($import) {
             $import->file()->create([
                 'original_name' => $import->original_name,
@@ -121,10 +129,24 @@ class UpgradeFileManager extends Command
         Schema::table('import_templates', function (Blueprint $table) {
             $table->dropColumn(['saved_name', 'original_name']);
         });
+
+        $this->info('Data imports were successfully upgraded');
     }
 
     private function upgradeDocuments()
     {
+        if (!Schema::hasTable('documents')) {
+            return;
+        }
+
+        if (!Schema::hasColumn('documents', 'saved_name')) {
+            $this->info('The upgrade for documents was already performed');
+
+            return;
+        }
+
+        $this->info('Upgrading documents');
+
         Document::get()->each(function ($document) {
             $document->file()->create([
                 'original_name' => $document->original_name,
@@ -140,10 +162,24 @@ class UpgradeFileManager extends Command
             $table->dropColumn(['saved_name', 'size']);
             $table->renameColumn('original_name', 'name');
         });
+
+        $this->info('Documents were successfully upgraded');
     }
 
     private function upgradeHowToVideos()
     {
+        if (!Schema::hasTable('how_to_videos')) {
+            return;
+        }
+
+        if (!Schema::hasColumn('how_to_videos', 'saved_name')) {
+            $this->info('The upgrade for how-to videos was already performed');
+
+            return;
+        }
+
+        $this->info('Upgrading how-to videos');
+
         Video::get()->each(function ($video) {
             $video->file()->create([
                 'original_name' => $video->video_original_name,
@@ -175,6 +211,8 @@ class UpgradeFileManager extends Command
         Schema::table('how_to_videos', function (Blueprint $table) {
             $table->dropColumn(['video_saved_name', 'video_original_name', 'poster_saved_name', 'poster_original_name']);
         });
+
+        $this->info('How-to videos were successfully upgraded');
     }
 
     private function size($file)
