@@ -23,7 +23,7 @@ class ValidateTeamRequest extends FormRequest
         return [
             'name' => ['required', $nameUnique],
             'description' => 'string|nullable',
-            'userList' => 'array',
+            'userIds' => 'array',
         ];
     }
 }

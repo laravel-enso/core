@@ -28,7 +28,6 @@ class ProfileBuilder
     public function build()
     {
         $this->user->load(['owner', 'role']);
-        $this->user->append(['avatarId']);
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
         $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;

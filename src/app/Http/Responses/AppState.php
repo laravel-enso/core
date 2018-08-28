@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
-use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
@@ -20,6 +19,7 @@ class AppState implements Responsable
     private function state()
     {
         $response = $this->response();
+
         unset(auth()->user()->role);
 
         return $response;
@@ -33,8 +33,7 @@ class AppState implements Responsable
         $localState = config('enso.config.stateBuilder');
 
         return [
-            'user' => auth()->user()
-                ->append(['avatarId']),
+            'user' => auth()->user()->load('avatar'),
             'preferences' => auth()->user()->preferences(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,

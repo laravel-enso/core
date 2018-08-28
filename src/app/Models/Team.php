@@ -21,14 +21,6 @@ class Team extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function getUserListAttribute()
-    {
-        $userList = $this->users->pluck('id');
-        $this->users->each->append('avatarId');
-
-        return $userList;
-    }
-
     public static function store($attributes)
     {
         $team = null;
@@ -38,7 +30,7 @@ class Team extends Model
                 ['name' => $attributes['name']]
             );
 
-            $synced = $team->users()->sync($attributes['userList']);
+            $synced = $team->users()->sync($attributes['userIds']);
 
             if (count($synced['attached']) && count($synced['detached'])) {
                 (new TeamMemberChanges($team, $synced))
@@ -46,7 +38,7 @@ class Team extends Model
             }
         });
 
-        return $team->append('userList');
+        return $team;
     }
 
     public function delete()
@@ -60,5 +52,20 @@ class Team extends Model
         }
 
         return ['message' => 'The team was successfully deleted'];
+    }
+
+    public function userIds()
+    {
+        return $this->users->pluck('id');
+    }
+
+    public function userList()
+    {
+        return $this->users->map(function ($user) {
+            return [
+                'name' => $user->fullName,
+                'avatar' => $user->avatar,
+            ];
+        });
     }
 }

@@ -4,14 +4,18 @@ namespace LaravelEnso\Core\app\Http\Controllers\Administration\Team;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Models\Team;
-use LaravelEnso\Core\app\Http\Responses\TeamIndex;
+use LaravelEnso\Core\app\Http\Resources\Team as Resource;
 use LaravelEnso\Core\app\Http\Requests\ValidateTeamRequest;
 
 class TeamController extends Controller
 {
     public function index()
     {
-        return new TeamIndex();
+        return Resource::collection(
+            Team::with('users')
+                ->latest()
+                ->get()
+        );
     }
 
     public function store(ValidateTeamRequest $request)
@@ -20,7 +24,7 @@ class TeamController extends Controller
 
         return [
             'message' => __('The team was successfully saved'),
-            'team' => $team,
+            'team' => new Resource($team),
         ];
     }
 
