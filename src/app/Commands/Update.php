@@ -57,6 +57,10 @@ class Update extends Command
 
     private function updateAddresses()
     {
+        if (!Schema::hasTable('addresses')) {
+            return;
+        }
+
         $this->info('Updating addresses');
 
         Schema::table('addresses', function (Blueprint $table) {
@@ -68,6 +72,10 @@ class Update extends Command
 
     private function updateHowToVideos()
     {
+        if (!Schema::hasTable('how_to_videos')) {
+            return;
+        }
+
         $this->info('Updating how-to videos');
 
         Schema::table('how_to_videos', function (Blueprint $table) {
