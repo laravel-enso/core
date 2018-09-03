@@ -1,9 +1,13 @@
 <template>
 
-    <div :class="['navbar-item notifications', { 'has-dropdown': !isTouch }, { 'is-active': show }]"
+    <div :class="[
+            'navbar-item notifications',
+            { 'has-dropdown': !isTouch },
+            { 'is-active': show }
+        ]"
         v-click-outside="hide">
         <span v-if="isTouch" class="is-clickable"
-             @click="$emit('adsfasfd'); $router.push({'name': 'core.notifications.index'})">
+             @click="$router.push({'name': 'core.notifications.index'})">
             <span class="icon">
                 <fa icon="bell"/>
             </span>
@@ -47,7 +51,10 @@
                 <div class="level-left">
                     <div class="level-item">
                         <a class="button is-small is-info has-margin-left-small"
-                            @click="$router.push({'name': 'core.notifications.index'})">
+                            @click="
+                                show = false;
+                                $router.push({'name': 'core.notifications.index'})
+                            ">
                             <span>{{ __("See all") }}</span>
                             <span class="icon is-small">
                                 <fa icon="eye"/>
