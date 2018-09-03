@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ForgotPasswordController extends Controller
 {
-    protected function sendResetLinkResponse($response)
+    protected function sendResetLinkResponse(Request $request, $response)
     {
         return ['status' => trans($response)];
     }
