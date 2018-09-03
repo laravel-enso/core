@@ -5,8 +5,8 @@ export const state = {
 };
 
 export const mutations = {
-    setI18n: (state, i18n) => { state.i18n = i18n; },
-    setLanguages: (state, languages) => { state.languages = languages; },
+    setI18n: (state, i18n) => (state.i18n = i18n),
+    setLanguages: (state, languages) => (state.languages = languages),
     addKey: (state, key) => {
         Object.keys(state.i18n).forEach((lang) => {
             state.i18n[lang][key] = '';

@@ -6,6 +6,19 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
         Route::get('/meta', 'GuestController')
             ->name('meta');
 
+        Route::namespace('Auth')
+            ->middleware('web')
+            ->group(function () {
+                Route::post('login', 'LoginController@login')
+                    ->name('login');
+                Route::post('logout', 'LoginController@logout')
+                    ->name('logout');
+                Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
+                    ->name('password.email');
+                Route::post('password/reset', 'ResetPasswordController@reset')
+                    ->name('password.reset');
+            });
+
         Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::prefix('core')->as('core.')

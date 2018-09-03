@@ -29,21 +29,11 @@ export const mutations = {
         state.global = preferences.global;
         state.local = preferences.local;
     },
-    global: (state, payload) => {
-        state.global = payload;
-    },
-    lang: (state, lang) => {
-        state.global.lang = lang;
-    },
-    theme: (state, theme) => {
-        state.global.theme = theme;
-    },
-    expandedMenu: (state, expandedMenu) => {
-        state.global.expandedMenu = expandedMenu;
-    },
-    local: (state, payload) => {
-        state.local[payload.route] = payload.value;
-    },
+    global: (state, payload) => (state.global = payload),
+    lang: (state, lang) => (state.global.lang = lang),
+    theme: (state, theme) => (state.global.theme = theme),
+    expandedMenu: (state, expandedMenu) => (state.global.expandedMenu = expandedMenu),
+    local: (state, payload) => (state.local[payload.route] = payload.value),
 };
 
 export const actions = {
