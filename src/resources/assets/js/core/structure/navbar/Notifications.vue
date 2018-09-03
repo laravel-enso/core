@@ -117,6 +117,7 @@ export default {
             loading: false,
             Echo: null,
             show: false,
+            desktopNotifications: false,
         };
     },
 
@@ -138,7 +139,8 @@ export default {
 
     created() {
         this.getData = debounce(this.getData, 500);
-        this.init();
+        this.initLaravelEcho();
+        this.initDesktopNotification();
         this.getCount();
         this.listen();
         this.addBusListeners();
@@ -201,7 +203,7 @@ export default {
                 this.unreadCount = 0;
             }).catch(error => this.handleError(error));
         },
-        init() {
+        initLaravelEcho() {
             this.Echo = new Echo({
                 broadcaster: 'pusher',
                 key: this.meta.pusher,
@@ -209,13 +211,45 @@ export default {
                 namespace: 'App.Events',
             });
         },
+        initDesktopNotification() {
+            if (!('Notification' in window) || Notification.permission === 'denied') {
+                return;
+            }
+
+            if (Notification.permission !== 'granted') {
+                Notification.requestPermission((permission) => {
+                    if (!('permission' in Notification)) {
+                        Notification.permission = permission;
+                    }
+
+                    this.desktopNotifications = permission === 'granted';
+                });
+                return;
+            }
+
+            this.desktopNotifications = Notification.permission === 'granted';
+        },
         listen() {
             const self = this;
-            this.Echo.private(`App.User.${this.user.id}`).notification((notification) => {
+            this.Echo.private(`App.User.${this.user.id}`).notification(({ level, body }) => {
                 self.unreadCount++;
                 self.needsUpdate = true;
                 self.offset = 0;
-                this.$toastr[notification.level](notification.body);
+
+                if (!document.hidden) {
+                    this.$toastr[level](body);
+                    return;
+                }
+
+                if (this.desktopNotifications) {
+                    const notification = new Notification(this.meta.appName, { body });
+
+                    notification.onclick = () => {
+                        window.focus();
+                    };
+
+                    window.navigator.vibrate(500);
+                }
             });
         },
         computeScrollPosition(event) {
