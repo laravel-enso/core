@@ -10,7 +10,7 @@ class ResetPasswordController extends Controller
 {
     protected $redirectTo = '/';
 
-    protected function sendResetResponse($response)
+    protected function sendResetResponse(Request $request, $response)
     {
         return ['status' => trans($response)];
     }
