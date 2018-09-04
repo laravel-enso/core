@@ -12,7 +12,7 @@ export const mutations = {
             state.i18n[lang][key] = '';
         });
     },
-    setKeyCollector: (state, status) => { state.keyCollector = status; },
+    setKeyCollector: (state, status) => (state.keyCollector = status),
 };
 
 export const getters = {

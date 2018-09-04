@@ -238,26 +238,31 @@ export default {
         },
         listen() {
             const self = this;
-            this.Echo.private(`App.User.${this.user.id}`).notification(({ level, body }) => {
-                self.unreadCount++;
-                self.needsUpdate = true;
-                self.offset = 0;
+            this.Echo.private(`App.User.${this.user.id}`)
+                .notification(({
+                    level, body, title,
+                }) => {
+                    self.unreadCount++;
+                    self.needsUpdate = true;
+                    self.offset = 0;
 
-                if (!document.hidden) {
-                    this.$toastr[level](body);
-                    return;
-                }
+                    if (!document.hidden) {
+                        this.$toastr[level](body, title);
+                        return;
+                    }
 
-                if (this.desktopNotifications) {
-                    const notification = new Notification(this.meta.appName, { body });
+                    if (this.desktopNotifications) {
+                        const notification = new Notification(title, {
+                            body,
+                        });
 
-                    notification.onclick = () => {
-                        window.focus();
-                    };
+                        notification.onclick = () => {
+                            window.focus();
+                        };
 
-                    window.navigator.vibrate(500);
-                }
-            });
+                        window.navigator.vibrate(500);
+                    }
+                });
         },
         computeScrollPosition(event) {
             const a = event.target.scrollTop;
