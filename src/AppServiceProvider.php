@@ -91,20 +91,20 @@ class AppServiceProvider extends ServiceProvider
         ], 'core-storage');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
-            __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+            __DIR__.'/resources/js' => resource_path('js'),
+            __DIR__.'/resources/sass' => resource_path('sass'),
+            __DIR__.'/resources/images' => resource_path('images'),
         ], 'core-assets');
 
         $this->publishes([
-            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
-            __DIR__.'/resources/assets/sass' => resource_path('assets/sass'),
-            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+            __DIR__.'/resources/js' => resource_path('js'),
+            __DIR__.'/resources/sass' => resource_path('sass'),
+            __DIR__.'/resources/images' => resource_path('images'),
         ], 'enso-assets');
 
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
-            __DIR__.'/resources/assets/images' => resource_path('assets/images'),
+            __DIR__.'/resources/images' => resource_path('images'),
         ], 'enso-mail-assets');
 
         $this->publishes([

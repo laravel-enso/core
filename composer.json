@@ -40,7 +40,7 @@
         "laravel-enso/activityLog": "1.0.*",
         "laravel-enso/avatarmanager": "2.2.*",
         "laravel-enso/filemanager": "2.5.*",
-        "laravel-enso/formbuilder": "2.7.*",
+        "laravel-enso/formbuilder": "2.8.*",
         "laravel-enso/helpers": "1.8.*",
         "laravel-enso/historytracker": "1.4.*",
         "laravel-enso/impersonate": "2.2.*",
@@ -53,8 +53,8 @@
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/trackwho": "1.5.*",
         "laravel-enso/tutorialmanager": "2.1.*",
-        "laravel-enso/vuecomponents": "2.3.*",
-        "laravel-enso/vuedatatable": "1.4.*"
+        "laravel-enso/vuecomponents": "2.4.*",
+        "laravel-enso/vuedatatable": "1.5.*"
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"
