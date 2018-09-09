@@ -94,7 +94,7 @@ class User extends Authenticatable
     private function defaultPreferences()
     {
         return new Preference([
-            'value' => (new DefaultPreferences())->data(),
+            'value' => DefaultPreferences::data(),
         ]);
     }
 

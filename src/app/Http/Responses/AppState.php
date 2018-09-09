@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\app\Http\Responses;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
+use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
@@ -67,11 +68,9 @@ class AppState implements Responsable
                     return $i18n;
                 }
 
-                $json = json_decode(\File::get(
+                $i18n[$lang] = (new JsonParser(
                     resource_path('lang'.DIRECTORY_SEPARATOR.$lang.'.json')
-                ));
-
-                $i18n[$lang] = $json;
+                ))->object();
 
                 return $i18n;
             }, []);
