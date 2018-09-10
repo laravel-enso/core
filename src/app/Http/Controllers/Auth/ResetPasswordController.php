@@ -3,11 +3,14 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Auth\ResetPasswordController as Controller;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ResetPasswordController extends Controller
 {
+    use ResetsPasswords;
+
     protected $redirectTo = '/';
 
     protected function sendResetResponse(Request $request, $response)

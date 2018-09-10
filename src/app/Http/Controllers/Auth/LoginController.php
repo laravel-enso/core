@@ -6,10 +6,18 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Auth\LoginController as Controller;
 
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     protected $redirectTo = '/';
 
     protected function attemptLogin(Request $request)
