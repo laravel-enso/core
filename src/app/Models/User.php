@@ -133,8 +133,6 @@ class User extends Authenticatable
                 'The user has activity in the system and cannot be deleted'
             ));
         }
-
-        return ['message' => 'The user was successfully deleted'];
     }
 
     private function setPreferences($preferences)
