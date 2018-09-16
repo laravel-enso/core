@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Models\Team;
+use LaravelEnso\Core\app\Models\User;
 
 class TeamMemberChanges
 {

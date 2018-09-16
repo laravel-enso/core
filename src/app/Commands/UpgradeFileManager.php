@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Commands;
 
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Console\Command;
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\HowToVideos\app\Models\Video;
