@@ -17,9 +17,6 @@ class User extends Authenticatable
 {
     use Notifiable, HasAvatar, Impersonates, HasActionLogs, IsActive;
 
-    private const AdminRoleId = 1;
-    private const SupervisorRoleId = 1;
-
     protected $hidden = ['password', 'remember_token'];
 
     protected $fillable = [
@@ -59,12 +56,12 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id === self::AdminRoleId;
+        return $this->role_id === Role::AdminId;
     }
 
     public function isSupervisor()
     {
-        return $this->role_id === self::SupervisorRoleId;
+        return $this->role_id === Role::SupervisorId;
     }
 
     public function persistDefaultPreferences()
