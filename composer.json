@@ -68,7 +68,7 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Core\\AppServiceProvider",
-                "LaravelEnso\\Core\\AuthtServiceProvider",
+                "LaravelEnso\\Core\\AuthServiceProvider",
                 "LaravelEnso\\Core\\EventServiceProvider"
             ]
         }
