@@ -5,17 +5,21 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\ActivityLog\app\Traits\LogActivity;
 use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
+use LaravelEnso\CommentsManager\app\Traits\Comments;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
+use LaravelEnso\DocumentsManager\app\Traits\Documents;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasAvatar, Impersonates, HasActionLogs, IsActive;
+    use Notifiable, HasAvatar, Impersonates, HasActionLogs,
+        IsActive, Comments, Documents, LogActivity;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -23,11 +27,16 @@ class User extends Authenticatable
         'first_name', 'last_name', 'phone', 'is_active', 'email', 'owner_id', 'role_id',
     ];
 
-    protected $attributes = ['is_active' => false];
-
     protected $appends = ['fullName'];
 
     protected $casts = ['is_active' => 'boolean'];
+
+    protected $loggableLabel = 'fullName';
+
+    protected $loggable = [
+        'first_name', 'last_name', 'phone', 'email', 'owner_id' => [Owner::class, 'name'],
+        'role_id' => [Role::class, 'name'], 'is_active' => 'active state',
+    ];
 
     public function owner()
     {

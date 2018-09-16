@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
-use App\User;
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\AuthenticationException;

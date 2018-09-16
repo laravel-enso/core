@@ -92,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/js' => resource_path('js'),
+            __DIR__.'/resources/customizableJs' => resource_path('js'),
             __DIR__.'/resources/sass' => resource_path('sass'),
             __DIR__.'/resources/images' => resource_path('images'),
         ], 'core-assets');

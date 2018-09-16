@@ -1,6 +1,6 @@
 <?php
 
-use App\Owner;
+use LaravelEnso\Core\app\Models\Owner;
 use Illuminate\Database\Seeder;
 use LaravelEnso\RoleManager\app\Models\Role;
 

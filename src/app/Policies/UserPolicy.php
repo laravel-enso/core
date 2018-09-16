@@ -9,6 +9,21 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function before($user)
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+    }
+
+    public function impersonate(User $user, User $targetUser)
+    {
+        return $user->can('access-route', 'core.impersonate.start')
+            && !$targetUser->isAdmin()
+            && $user->id !== $targetUser->id
+            && !$user->isImpersonating();
+    }
+
     public function handle(User $user, User $targetUser)
     {
         return $user->isAdmin() || !$targetUser->isAdmin();

@@ -34,13 +34,49 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                             });
                     });
 
-                Route::namespace('Administration\Team')
+                Route::namespace('Administration')
                     ->prefix('administration')->as('administration.')
                     ->group(function () {
-                        Route::get('teams/selectOptions', 'TeamSelectController@options')
-                            ->name('teams.selectOptions');
+                        Route::namespace('Owner')
+                            ->prefix('owners')->as('owners.')
+                            ->group(function () {
+                                Route::get('initTable', 'OwnerTableController@init')
+                                    ->name('initTable');
+                                Route::get('getTableData', 'OwnerTableController@data')
+                                    ->name('getTableData');
+                                Route::get('exportExcel', 'OwnerTableController@excel')
+                                    ->name('exportExcel');
 
-                        Route::resource('teams', 'TeamController', ['only' => ['index', 'store', 'destroy']]);
+                                Route::get('selectOptions', 'OwnerSelectController@options')
+                                    ->name('selectOptions');
+                            });
+
+                        Route::resource('owners', 'Owner\OwnerController', ['except' => ['show', 'index']]);
+
+                        Route::namespace('User')
+                            ->prefix('users')->as('users.')
+                            ->group(function () {
+                                Route::get('initTable', 'UserTableController@init')
+                                    ->name('initTable');
+                                Route::get('getTableData', 'UserTableController@data')
+                                    ->name('getTableData');
+                                Route::get('exportExcel', 'UserTableController@excel')
+                                    ->name('exportExcel');
+
+                                Route::get('selectOptions', 'UserSelectController@options')
+                                    ->name('selectOptions');
+                            });
+
+                        Route::resource('users', 'User\UserController', ['except' => ['index']]);
+
+                        Route::namespace('Team')
+                            ->prefix('team')->as('team.')
+                            ->group(function () {
+                                Route::get('selectOptions', 'TeamSelectController@options')
+                                    ->name('selectOptions');
+                            });
+
+                        Route::resource('teams', 'Team\TeamController', ['only' => ['index', 'store', 'destroy']]);
                     });
             });
     });

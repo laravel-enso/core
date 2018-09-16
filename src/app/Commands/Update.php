@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\Commands;
 
-use App\User;
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

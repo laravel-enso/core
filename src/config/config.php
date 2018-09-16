@@ -1,12 +1,15 @@
 <?php
 
+use App\Classes\LocalState;
+use LaravelEnso\Core\app\Models\Owner;
+
 return [
-    'version' => '2.9.0',
+    'version' => '2.11.0',
     'facebook' => 'https://facebook.com',
     'googleplus' => 'https://plus.google.com',
     'twitter' => 'https://twitter.com',
-    'stateBuilder' => 'App\Classes\LocalState',
-    'ownerModel' => 'App\Owner',
+    'stateBuilder' => LocalState::class,
+    'ownerModel' => Owner::class,
     'defaultRole' => 'admin',
     'phpDateFormat' => 'd-m-Y',
     'jsDateFormat' => 'DD-MM-YYYY',
@@ -21,5 +24,4 @@ return [
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
     'ensoApiToken' => env('ENSO_API_TOKEN', null),
     'extendedDocumentTitle' => false,
-    'showQuote' => env('SHOW_QUOTE', true),
 ];
