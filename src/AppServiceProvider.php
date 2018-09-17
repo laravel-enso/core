@@ -115,14 +115,6 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
             __DIR__.'/resources/images' => resource_path('images'),
         ], 'enso-mail-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/views/emails' => resource_path('views/vendor/laravel-enso/core/emails'),
-        ], 'core-mail');
-
-        $this->publishes([
-            __DIR__.'/resources/views/emails' => resource_path('views/vendor/laravel-enso/core/emails'),
-        ], 'enso-mail');
     }
 
     public function register()
