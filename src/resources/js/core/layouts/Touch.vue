@@ -5,12 +5,7 @@
         <div class="app-main"
             v-show="lightsOn">
             <navbar class="animated slideInDown"/>
-            <sidebar :class="[
-                'animated',
-                menu.isVisible ? 'slideInLeft' : 'slideOutLeft',
-                { 'is-collapsed' : !menu.isExpanded }
-            ]" v-if="menu.isVisible"/>
-            <section :class="['main-content', menu.isExpanded ? 'is-expanded' : 'is-collapsed' ]">
+            <section class="main-content">
                 <div class="container is-fluid page-content is-marginless">
                     <page-header :title="$route.meta.title"/>
                     <router v-if="isInitialised"/>
@@ -28,22 +23,22 @@
 
 import { mapState, mapMutations, mapActions } from 'vuex';
 import Navbar from '../structure/navbar/Navbar.vue';
-import Sidebar from '../structure/menu/Sidebar.vue';
+import TouchMenus from '../structure/menu/TouchMenus.vue';
 import Settings from '../structure/settings/Settings.vue';
 import AppFooter from '../structure/AppFooter.vue';
 import Router from '../Router.vue';
 import PageHeader from '../structure/PageHeader.vue';
 
 export default {
-    name: 'Default',
+    name: 'Touch',
 
     components: {
-        Navbar, Sidebar, Settings, AppFooter, Router, PageHeader,
+        Navbar, TouchMenus, Settings, AppFooter, Router, PageHeader,
     },
 
     computed: {
         ...mapState(['meta', 'isInitialised']),
-        ...mapState('layout', ['lightsOff', 'isTablet', 'isMobile', 'menu', 'settingsBar']),
+        ...mapState('layout', ['lightsOff', 'isTablet', 'settingsBar']),
         lightsOn() {
             return !this.lightsOff;
         },
@@ -131,22 +126,6 @@ export default {
         z-index: 1;
         margin-top: 50px;
         transition: margin .5s;
-
-        &.is-expanded {
-            margin-left: 180px;
-        }
-
-        &.is-collapsed {
-            margin-left: 56px;
-        }
-    }
-
-    @media screen and (max-width: 1023px) {
-        .main-content {
-            &.is-expanded, &.is-collapsed {
-                margin-left: 0;
-            }
-        }
     }
 
     div.container.page-content {

@@ -88,8 +88,6 @@ export default {
         left: 56px;
     }
 
-    a
-
     .icon.angle {
         margin-left: auto;
     }

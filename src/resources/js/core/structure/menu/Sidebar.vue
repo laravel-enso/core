@@ -25,7 +25,6 @@ export default {
 
     computed: {
         ...mapState('menus', { menus: 'list' }),
-        ...mapState('layout', ['navbar']),
     },
 
     beforeMount() {
@@ -43,9 +42,8 @@ export default {
             }
         },
         hasActiveChild(menu) {
-            return menu.children
-                .find(child => this.isActive(child) || this.hasActiveChild(child))
-                    !== undefined;
+            return menu.children.some(child =>
+                this.isActive(child) || this.hasActiveChild(child));
         },
         isActive(menu) {
             return menu.link !== null && (
