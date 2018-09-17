@@ -72,10 +72,6 @@ class AppServiceProvider extends ServiceProvider
         ], 'enso-preferences');
 
         $this->publishes([
-            __DIR__.'/resources/lang' => resource_path('lang'),
-        ], 'core-lang');
-
-        $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
         ], 'core-factories');
 
@@ -113,7 +109,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
-            __DIR__.'/resources/images' => resource_path('images'),
         ], 'enso-mail-assets');
     }
 
