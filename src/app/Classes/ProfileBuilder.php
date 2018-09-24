@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Classes;
 
 use Carbon\Carbon;
-use LaravelEnso\Core\app\Models\User;
+use App\User;
 
 class ProfileBuilder
 {
