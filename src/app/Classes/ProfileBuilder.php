@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Classes;
 
-use Carbon\Carbon;
 use App\User;
+use Carbon\Carbon;
 
 class ProfileBuilder
 {
