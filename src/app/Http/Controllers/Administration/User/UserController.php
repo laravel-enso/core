@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Http\Controllers\Controller;
 use LaravelEnso\Core\app\Classes\ProfileBuilder;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
