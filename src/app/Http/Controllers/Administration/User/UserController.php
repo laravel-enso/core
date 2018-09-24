@@ -2,16 +2,18 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Classes\ProfileBuilder;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 
 class UserController extends Controller
 {
-    use SendsPasswordResetEmails;
+    use AuthorizesRequests, SendsPasswordResetEmails, ValidatesRequests;
 
     public function create(UserForm $form)
     {

@@ -2,13 +2,16 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\Owner;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\Owner;
 use LaravelEnso\Core\app\Forms\Builders\OwnerForm;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelEnso\Core\app\Http\Requests\ValidateOwnerRequest;
 
 class OwnerController extends Controller
 {
+    use ValidatesRequests;
+
     public function create(OwnerForm $form)
     {
         return ['form' => $form->create()];

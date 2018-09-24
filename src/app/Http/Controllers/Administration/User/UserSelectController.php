@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 

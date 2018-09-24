@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\Team;
 
 use Team;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
 class TeamSelectController extends Controller

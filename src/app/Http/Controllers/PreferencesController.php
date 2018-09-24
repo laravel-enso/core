@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 class PreferencesController extends Controller
 {

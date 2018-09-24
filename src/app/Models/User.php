@@ -7,11 +7,9 @@ use LaravelEnso\Helpers\app\Traits\IsActive;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\ActivityLog\app\Traits\LogActivity;
 use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
-use LaravelEnso\CommentsManager\app\Traits\Comments;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
-use LaravelEnso\DocumentsManager\app\Traits\Documents;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -19,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 class User extends Authenticatable
 {
     use Notifiable, HasAvatar, Impersonates, HasActionLogs,
-        IsActive, Comments, Documents, LogActivity;
+        IsActive, LogActivity;
 
     protected $hidden = ['password', 'remember_token'];
 

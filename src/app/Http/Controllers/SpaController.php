@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Http\Responses\AppState;
 
 class SpaController extends Controller

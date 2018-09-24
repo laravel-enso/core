@@ -2,13 +2,16 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\Team;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\Team;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelEnso\Core\app\Http\Resources\Team as Resource;
 use LaravelEnso\Core\app\Http\Requests\ValidateTeamRequest;
 
 class TeamController extends Controller
 {
+    use ValidatesRequests;
+
     public function index()
     {
         return Resource::collection(
