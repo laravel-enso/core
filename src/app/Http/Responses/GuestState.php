@@ -15,7 +15,7 @@ class GuestState implements Responsable
         ];
     }
 
-    private function meta()
+    protected function meta()
     {
         return [
             'appName' => config('app.name'),
@@ -25,7 +25,7 @@ class GuestState implements Responsable
         ];
     }
 
-    private function i18n()
+    protected function i18n()
     {
         return [
             app()->getLocale() => [
@@ -42,7 +42,7 @@ class GuestState implements Responsable
         ];
     }
 
-    private function routes()
+    protected function routes()
     {
         $authRoutes = collect(['login', 'password.email', 'password.reset']);
 
