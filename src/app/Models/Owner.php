@@ -4,13 +4,19 @@ namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Helpers\app\Traits\IsActive;
+use LaravelEnso\Contacts\app\Traits\Contactable;
 use LaravelEnso\RoleManager\app\Traits\HasRoles;
 use LaravelEnso\ActivityLog\app\Traits\LogActivity;
+use LaravelEnso\Discussions\app\Traits\Discussable;
+use LaravelEnso\CommentsManager\app\Traits\Commentable;
+use LaravelEnso\AddressesManager\app\Traits\Addressable;
+use LaravelEnso\DocumentsManager\app\Traits\Documentable;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Owner extends Model
 {
-    use IsActive, HasRoles, LogActivity;
+    use IsActive, HasRoles, LogActivity, Contactable, Commentable,
+        Discussable, Documentable, Addressable;
 
     protected $fillable = ['name', 'description', 'is_active'];
 

@@ -8,19 +8,22 @@
             "label": "Name",
             "name": "name",
             "data": "owners.name",
-            "meta": [ "searchable", "sortable" ]
-        },
-        {
+            "meta": ["searchable", "sortable"]
+        }, {
             "label": "Description",
             "name": "description",
             "data": "owners.description",
-            "meta": [ "searchable", "sortable" ]
-        },
-        {
+            "meta": ["searchable", "sortable"]
+        }, {
             "label": "Active",
             "name": "is_active",
             "data": "owners.is_active",
-            "meta": [ "boolean" ]
+            "meta": ["boolean"]
+        }, {
+            "label": "Created At",
+            "name": "created_at",
+            "data": "owners.created_at",
+            "meta": ["date"]
         }
     ]
 }
