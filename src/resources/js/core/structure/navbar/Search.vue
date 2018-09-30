@@ -84,6 +84,9 @@ export default {
             .route-control {
                 z-index: 4;
                 opacity: 0.8;
+                cursor: pointer;
+                margin-right: 0.2em;
+
                 &:hover {
                     opacity: 1;
                 }
