@@ -53,6 +53,7 @@
         "laravel-enso/permissionmanager": "2.1.*",
         "laravel-enso/rememberable": "1.4.*",
         "laravel-enso/rolemanager": "2.3.*",
+        "laravel-enso/searchable": "1.0.*",
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/trackwho": "1.5.*",
         "laravel-enso/tutorialmanager": "2.1.*",
