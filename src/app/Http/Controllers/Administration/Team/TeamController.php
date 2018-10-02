@@ -23,7 +23,10 @@ class TeamController extends Controller
 
     public function store(ValidateTeamRequest $request)
     {
-        $team = Team::store($request->validated());
+        $team = Team::updateOrCreate(
+            $request->only(['id']),
+            $request->validated()
+        );
 
         return [
             'message' => __('The team was successfully saved'),

@@ -13,6 +13,7 @@ class Team extends JsonResource
             'name' => $this->name,
             'userIds' => $this->whenLoaded('users', $this->userIds()),
             'users' => $this->whenLoaded('users', $this->userList()),
+            'edit' => false,
         ];
     }
 }
