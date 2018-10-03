@@ -9,7 +9,7 @@ class TrackWhoUpdate extends Command
 {
     const Tables = [
         'activity_logs', 'comments', 'data_exports', 'data_imports', 'documents',
-        'discussions', 'discussion_replies', 'reactions', 'files', 'tasks'
+        'discussions', 'discussion_replies', 'reactions', 'files', 'tasks',
     ];
 
     const Column = 'created_by';
