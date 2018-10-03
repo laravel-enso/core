@@ -5,6 +5,7 @@ namespace LaravelEnso\Core;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\app\Commands\Update;
 use Illuminate\Http\Resources\Json\Resource;
+use LaravelEnso\Core\app\Commands\TrackWhoUpdate;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
 use LaravelEnso\Core\app\Commands\UpgradeFileManager;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             UpdateGlobalPreferences::class,
             UpgradeFileManager::class,
             Update::class,
+            TrackWhoUpdate::class,
         ]);
 
         $this->addMiddleware();

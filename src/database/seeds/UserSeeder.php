@@ -9,8 +9,6 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        User::flushEventListeners();
-
         $user = User::create([
             'email' => 'admin@laravel-enso.com',
             'first_name' => 'Admin',

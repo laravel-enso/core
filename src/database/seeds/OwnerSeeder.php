@@ -8,8 +8,6 @@ class OwnerSeeder extends Seeder
 {
     public function run()
     {
-        Owner::flushEventListeners();
-
         Owner::create([
             'name' => 'Admin',
             'is_active' => true,
