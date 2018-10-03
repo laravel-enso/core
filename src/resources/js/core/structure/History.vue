@@ -1,11 +1,11 @@
 <template>
 
     <div class="wrapper">
-        <span class="tag is-warning icon has-margin-right-small"
+        <a class="tag is-warning icon has-margin-right-small"
             v-if="routes.length > 1"
             @click="clear()">
             <fa icon="trash-alt"/>
-        </span>
+        </a>
         <draggable class="field is-grouped is-grouped-multiline"
             v-model="routes">
             <span class="control"
