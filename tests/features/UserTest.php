@@ -3,21 +3,20 @@
 use Faker\Factory;
 use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
+use LaravelEnso\People\app\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\TestHelper\app\Traits\TestDataTable;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
+use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
+    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
 
-    private $owner;
-    private $role;
-    private $faker;
-    private $prefix = 'administration.users';
+    private $permissionGroup = 'administration.users';
+    private $testModel;
 
     protected function setUp()
     {
@@ -26,27 +25,35 @@ class UserTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs(User::first());
 
-        $this->faker = Factory::create();
-        $this->owner = config('enso.config.ownerModel')::first(['id']);
-        $this->role = Role::first(['id']);
+        $this->testModel = factory(User::class)
+            ->make();
     }
 
     /** @test */
-    public function store()
+    public function can_view_create_form()
     {
-        Notification::fake();
+        $person = factory(Person::class)
+            ->create();
 
-        $postParams = $this->postParams();
+        $this->get(route($this->permissionGroup.'.create', [$person->id], false))
+            ->assertStatus(200)
+            ->assertJsonStructure(['form']);
+    }
+
+    /** @test */
+    public function can_store_user()
+    {
+        \Notification::fake();
 
         $response = $this->post(
             route('administration.users.store', [], false),
-            $postParams
+            $this->testModel->toArray()
         );
 
-        $user = \App\User::whereFirstName($postParams['first_name'])
-                    ->first(['id']);
+        $user = User::whereEmail($this->testModel->email)
+            ->first();
 
         $response->assertStatus(200)
             ->assertJsonStructure(['message'])
@@ -55,60 +62,51 @@ class UserTest extends TestCase
                 'id' => $user->id,
             ]);
 
-        Notification::assertSentTo([$user], ResetPasswordNotification::class);
+        \Notification::assertSentTo($user, ResetPasswordNotification::class);
     }
 
     /** @test */
-    public function edit()
+    public function can_update_user()
     {
-        $user = $this->createUser();
+        $this->testModel->save();
 
-        $this->get(route('administration.users.edit', $user->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['form']);
-    }
+        $initialState = $this->testModel->is_active;
+        $this->testModel->is_active = !$this->testModel->is_active;
 
-    /** @test */
-    public function update()
-    {
-        $user = $this->createUser();
+        $this->patch(
+            route('administration.users.update', $this->testModel->id, false),
+            $this->testModel->toArray()
+        )->assertStatus(200)
+        ->assertJsonStructure(['message']);
 
-        $user->last_name = 'edited';
-
-        $this->patch(route('administration.users.update', $user->id, false), $user->toArray())
-            ->assertStatus(200)
-            ->assertJsonStructure(['message']);
-
-        $this->assertEquals('edited', $user->fresh()->last_name);
+        $this->assertEquals(!$initialState, $this->testModel->fresh()->is_active);
     }
 
     /** @test */
     public function destroy()
     {
-        $user = $this->createUser();
+        $this->testModel->save();
 
-        $this->delete(route('administration.users.destroy', $user->id, false))
+        $this->delete(route('administration.users.destroy', $this->testModel->id, false))
             ->assertStatus(200)
             ->assertJsonStructure(['message', 'redirect']);
 
-        $this->assertNull($user->fresh());
+        $this->assertNull($this->testModel->fresh());
     }
 
-    private function createUser()
+    /** @test */
+    public function get_option_list()
     {
-        return User::create($this->postParams());
-    }
+        $this->testModel->is_active = true;
+        $this->testModel->save();
 
-    private function postParams()
-    {
-        return [
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'role_id' => $this->role->id,
-            'phone' => $this->faker->phoneNumber,
-            'is_active' => 1,
-            'email' => $this->faker->email,
-            'owner_id' => $this->owner->id,
-        ];
+        $this->get(route('administration.users.options', [
+            'query' => $this->testModel->person->name,
+            'limit' => 10,
+        ], false))
+        ->assertStatus(200)
+        ->assertJsonFragment([
+            'name' => $this->testModel->person->name,
+        ]);
     }
 }

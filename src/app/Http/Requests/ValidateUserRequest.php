@@ -21,14 +21,12 @@ class ValidateUserRequest extends FormRequest
             : $emailUnique;
 
         return [
-            'first_name' => 'required|max:50',
-            'last_name' => 'required|max:50',
-            'is_active' => 'boolean',
+            'person_id' => 'exists:people,id',
+            'group_id' => 'required|exists:user_groups,id',
             'role_id' => 'required|exists:roles,id',
-            'owner_id' => 'required|exists:owners,id',
-            'phone' => 'max:30',
             'email' => ['email', 'required', $emailUnique],
             'password' => 'nullable|min:6|confirmed',
+            'is_active' => 'boolean',
         ];
     }
 }

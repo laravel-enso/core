@@ -3,47 +3,49 @@
 namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\Helpers\app\Traits\IsActive;
+use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\People\app\Traits\IsPerson;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\ActivityLog\app\Traits\LogActivity;
+use LaravelEnso\Helpers\app\Traits\ActiveState;
+use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
 use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
+use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
-use LaravelEnso\ActionLogger\app\Traits\HasActionLogs;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasAvatar, Impersonates, HasActionLogs,
-        IsActive, LogActivity;
+    use ActionLogs, ActiveState, HasAvatar, Impersonates,
+        IsPerson, LogsActivity, Notifiable;
 
     protected $hidden = ['password', 'remember_token'];
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone', 'is_active', 'email', 'owner_id', 'role_id',
+        'person_id', 'group_id', 'role_id', 'email', 'is_active',
     ];
 
-    protected $appends = ['fullName'];
+    protected $casts = [
+        'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int'
+    ];
 
-    protected $casts = ['is_active' => 'boolean'];
-
-    protected $loggableLabel = 'fullName';
+    protected $loggableLabel = 'email';
 
     protected $loggable = [
-        'first_name', 'last_name', 'phone', 'email', 'owner_id' => [Owner::class, 'name'],
-        'role_id' => [Role::class, 'name'], 'is_active' => 'active state',
+        'email', 'group_id' => [UserGroup::class, 'name'],
+        'role_id' => [Role::class, 'name']
     ];
 
-    public function owner()
+    public function person()
     {
-        return $this->belongsTo(config('enso.config.ownerModel'));
+        return $this->belongsTo(Person::class);
     }
 
-    public function teams()
+    public function group()
     {
-        return $this->belongsToMany(Team::class);
+        return $this->belongsTo(UserGroup::class);
     }
 
     public function role()
@@ -69,6 +71,11 @@ class User extends Authenticatable
     public function isSupervisor()
     {
         return $this->role_id === Role::SupervisorId;
+    }
+
+    public function isPerson(Person $person)
+    {
+        return $this->person_id === $person->id;
     }
 
     public function persistDefaultPreferences()
@@ -102,14 +109,17 @@ class User extends Authenticatable
         ]);
     }
 
-    public function getFullNameAttribute()
+    public function sendResetPasswordEmail()
     {
-        return trim($this->first_name.' '.$this->last_name);
+        $this->sendPasswordResetNotification(
+            app('auth.password.broker')
+                ->createToken($this)
+        );
     }
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($this, $token));
+        $this->notify(new ResetPasswordNotification($token));
     }
 
     public function setGlobalPreferences($global)
@@ -146,5 +156,10 @@ class User extends Authenticatable
                 ['user_id' => $this->id],
                 ['value' => $preferences]
             );
+    }
+
+    public function scopeAllowed($query)
+    {
+        return $query;
     }
 }

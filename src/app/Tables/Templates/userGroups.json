@@ -1,0 +1,24 @@
+{
+    "routePrefix": "administration.userGroups",
+    "readSuffix": "getTableData",
+    "crtNo": true,
+    "buttons": ["excel", "create", "edit", "destroy"],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "data": "userGroups.name",
+            "meta": ["searchable", "sortable"]
+        }, {
+            "label": "Description",
+            "name": "description",
+            "data": "userGroups.description",
+            "meta": ["searchable", "sortable"]
+        }, {
+            "label": "Created At",
+            "name": "created_at",
+            "data": "userGroups.created_at",
+            "meta": ["date"]
+        }
+    ]
+}

@@ -9,15 +9,13 @@ class VerifyActiveState
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->isDisabled() || $request->user()->owner->isDisabled()) {
+        if ($request->user()->isDisabled()) {
             auth()->logout();
 
             throw new AuthenticationException(__(
                 'Your account has been disabled. Please contact the administrator.'
             ));
         }
-
-        unset($request->user()->owner);
 
         return $next($request);
     }

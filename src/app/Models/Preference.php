@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Preference extends Model
 {
-    protected $fillable = ['value'];
+    protected $fillable = ['user_id', 'value'];
 
     protected $casts = ['value' => 'object'];
 

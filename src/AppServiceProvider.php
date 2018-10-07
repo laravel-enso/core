@@ -4,6 +4,7 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\app\Commands\Update;
+use LaravelEnso\Core\app\Commands\Upgrade;
 use Illuminate\Http\Resources\Json\Resource;
 use LaravelEnso\Core\app\Commands\TrackWhoUpdate;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
@@ -26,13 +27,14 @@ class AppServiceProvider extends ServiceProvider
             UpdateGlobalPreferences::class,
             UpgradeFileManager::class,
             Update::class,
+            Upgrade::class,
             TrackWhoUpdate::class,
         ]);
 
-        $this->addMiddleware();
-        $this->load();
-        $this->publishDeps();
-        $this->publishResources();
+        $this->addMiddleware()
+            ->load()
+            ->publishDeps()
+            ->publishResources();
     }
 
     private function addMiddleware()
@@ -46,15 +48,20 @@ class AppServiceProvider extends ServiceProvider
             VerifyRouteAccess::class,
             SetLanguage::class,
         ]);
+
+        return $this;
     }
 
     private function load()
     {
         $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'enso.inspiring');
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
+        $this->mergeConfigFrom(__DIR__.'/config/themes.php', 'enso.themes');
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');
+
+        return $this;
     }
 
     private function publishDeps()
@@ -90,6 +97,8 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
         ], 'enso-seeders');
+
+        return $this;
     }
 
     private function publishResources()

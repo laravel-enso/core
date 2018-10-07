@@ -6,18 +6,17 @@ use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Classes\ProfileBuilder;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
+use LaravelEnso\People\app\Models\Person;
 
 class UserController extends Controller
 {
-    use AuthorizesRequests, SendsPasswordResetEmails, ValidatesRequests;
+    use AuthorizesRequests;
 
-    public function create(UserForm $form)
+    public function create(Person $person, UserForm $form)
     {
-        return ['form' => $form->create()];
+        return ['form' => $form->create($person)];
     }
 
     public function store(ValidateUserRequest $request)
@@ -28,7 +27,7 @@ class UserController extends Controller
 
         $user->save();
 
-        $this->sendResetLinkEmail($request);
+        $user->sendResetPasswordEmail();
 
         return [
             'message' => __('The user was successfully created'),

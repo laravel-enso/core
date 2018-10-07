@@ -13,6 +13,6 @@ class CreateStructureForDashboard extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Dashboard', 'icon' => 'tachometer-alt', 'link' => 'dashboard.index', 'order_index' => 999, 'has_children' => false,
+        'name' => 'Dashboard', 'icon' => 'tachometer-alt', 'link' => 'dashboard.index', 'order_index' => 100, 'has_children' => false,
     ];
 }

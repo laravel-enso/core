@@ -1,0 +1,32 @@
+{
+    "routePrefix": "administration.userGroups",
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Description",
+            "name": "description",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Roles",
+            "name": "roleList",
+            "value": [],
+            "meta": {
+                "type": "select",
+                "multiple": true,
+                "source": "system.roles.options"
+            }
+        }]
+    }]
+}

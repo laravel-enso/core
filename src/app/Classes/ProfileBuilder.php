@@ -19,14 +19,18 @@ class ProfileBuilder
 
     public function set()
     {
-        $this->user->load(['owner', 'role', 'avatar']);
+        $this->user->load([
+            'person:id,name,appellative,birthday,gender,phone',
+            'group:id,name',
+            'role:id,name',
+            'avatar:id,user_id'
+        ]);
 
         $this->build();
     }
 
     public function build()
     {
-        $this->user->load(['owner', 'role']);
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
         $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;

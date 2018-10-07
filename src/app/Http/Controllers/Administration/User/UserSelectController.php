@@ -10,10 +10,15 @@ class UserSelectController extends Controller
 {
     use OptionsBuilder;
 
-    protected $queryAttributes = ['first_name', 'last_name', 'email', 'phone'];
+    protected $queryAttributes = ['email', 'person.name', 'person.appellative'];
 
     public function query()
     {
-        return User::active();
+        return User::allowed()
+            ->active()
+            ->with([
+                'person:id,appellative,name',
+                'avatar:id,user_id',
+            ]);
     }
 }

@@ -12,10 +12,11 @@ class UserTable extends Table
     public function query()
     {
         return User::select(\DB::raw(
-                'users.id, users.id as "dtRowId", avatars.id as avatarId, owners.name as owner,
-                users.first_name, users.last_name, users.phone, users.email, roles.name as role,
+                'users.id, users.id as "dtRowId", avatars.id as avatarId, user_groups.name as userGroup,
+                people.name, people.appellative, people.phone, users.email, roles.name as role,
                 users.is_active, users.created_at'
-            ))->join('owners', 'users.owner_id', '=', 'owners.id')
+            ))->join('people', 'users.person_id', '=', 'people.id')
+            ->join('user_groups', 'users.group_id', '=', 'user_groups.id')
             ->join('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('avatars', 'users.id', '=', 'avatars.user_id');
     }

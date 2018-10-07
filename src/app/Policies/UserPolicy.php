@@ -16,17 +16,9 @@ class UserPolicy
         }
     }
 
-    public function impersonate(User $user, User $targetUser)
-    {
-        return $user->can('access-route', 'core.impersonate.start')
-            && !$targetUser->isAdmin()
-            && $user->id !== $targetUser->id
-            && !$user->isImpersonating();
-    }
-
     public function handle(User $user, User $targetUser)
     {
-        return $user->isAdmin() || !$targetUser->isAdmin();
+        return !$targetUser->isAdmin();
     }
 
     public function changePassword(User $user, User $targetUser)
@@ -38,5 +30,13 @@ class UserPolicy
     {
         return $user->id !== $targetUser->id
             && !($targetUser->isAdmin() && !$user->isAdmin());
+    }
+
+    public function impersonate(User $user, User $targetUser)
+    {
+        return $user->can('access-route', 'core.impersonate.start')
+            && !$targetUser->isAdmin()
+            && $user->id !== $targetUser->id
+            && !$user->isImpersonating();
     }
 }

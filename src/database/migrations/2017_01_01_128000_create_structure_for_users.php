@@ -12,7 +12,7 @@ class CreateStructureForUsers extends StructureMigration
         ['name' => 'administration.users.initTable', 'description' => 'Init table for users', 'type' => 0, 'is_default' => false],
         ['name' => 'administration.users.getTableData', 'description' => 'Get table data for users', 'type' => 0, 'is_default' => false],
         ['name' => 'administration.users.exportExcel', 'description' => 'Export excel for users', 'type' => 0, 'is_default' => false],
-        ['name' => 'administration.users.selectOptions', 'description' => 'Get options for vue-select', 'type' => 0, 'is_default' => false],
+        ['name' => 'administration.users.options', 'description' => 'Get options for select', 'type' => 0, 'is_default' => false],
         ['name' => 'administration.users.create', 'description' => 'Create user', 'type' => 1, 'is_default' => false],
         ['name' => 'administration.users.edit', 'description' => 'Edit existing user', 'type' => 1, 'is_default' => false],
         ['name' => 'administration.users.index', 'description' => 'Show users', 'type' => 0, 'is_default' => false],
@@ -23,7 +23,7 @@ class CreateStructureForUsers extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Users', 'icon' => 'users', 'link' => 'administration.users.index', 'order_index' => 999, 'has_children' => false,
+        'name' => 'Users', 'icon' => 'user', 'link' => 'administration.users.index', 'order_index' => 100, 'has_children' => false,
     ];
 
     protected $parentMenu = 'Administration';

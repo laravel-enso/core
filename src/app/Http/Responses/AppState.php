@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Responses;
 
 use LaravelEnso\Core\app\Enums\Themes;
+use LaravelEnso\People\app\Enums\Genders;
 use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
@@ -34,7 +35,7 @@ class AppState implements Responsable
         $localState = config('enso.config.stateBuilder');
 
         return [
-            'user' => auth()->user()->load('avatar'),
+            'user' => auth()->user()->load(['person', 'avatar']),
             'preferences' => auth()->user()->preferences(),
             'i18n' => $this->i18n($languages),
             'languages' => $languages,
@@ -44,6 +45,7 @@ class AppState implements Responsable
             'menus' => $this->menus(),
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
+            'enums' => $this->enums(),
             'local' => class_exists($localState)
                 ? $this->localState(new $localState())
                 : null,
@@ -90,6 +92,13 @@ class AppState implements Responsable
             'pusher' => config('broadcasting.connections.pusher.key'),
             'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
             'ravenKey' => config('enso.config.ravenKey'),
+        ];
+    }
+
+    private function enums()
+    {
+        return [
+            'genders' => Genders::all(),
         ];
     }
 
