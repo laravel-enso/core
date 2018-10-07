@@ -4,11 +4,11 @@ namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Core\app\Classes\ProfileBuilder;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
-use LaravelEnso\People\app\Models\Person;
 
 class UserController extends Controller
 {

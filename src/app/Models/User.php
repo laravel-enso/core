@@ -28,14 +28,14 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int'
+        'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
     ];
 
     protected $loggableLabel = 'email';
 
     protected $loggable = [
         'email', 'group_id' => [UserGroup::class, 'name'],
-        'role_id' => [Role::class, 'name']
+        'role_id' => [Role::class, 'name'],
     ];
 
     public function person()

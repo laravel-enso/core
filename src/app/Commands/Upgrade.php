@@ -20,11 +20,11 @@ class Upgrade extends Command
     private const SelectPermissions = [
         'administration.owners.selectOptions', 'administration.people.selectOptions',
         'administration.teams.selectOptions', 'administration.users.selectOptions',
-        'system.roles.selectOptions'
+        'system.roles.selectOptions',
     ];
 
     private const OwnerPermissions = [
-        'administration.owners.initTable', 'administration.owners.getTableData', 'administration.owners.exportExcel', 'administration.owners.create', 'administration.owners.edit', 'administration.owners.index', 'administration.owners.options', 'administration.owners.store', 'administration.owners.update', 'administration.owners.destroy'
+        'administration.owners.initTable', 'administration.owners.getTableData', 'administration.owners.exportExcel', 'administration.owners.create', 'administration.owners.edit', 'administration.owners.index', 'administration.owners.options', 'administration.owners.store', 'administration.owners.update', 'administration.owners.destroy',
     ];
 
     protected $signature = 'enso:upgrade';
@@ -58,17 +58,17 @@ class Upgrade extends Command
     {
         \DB::table('migrations')->whereMigration('2017_01_01_108000_create_owners_table')
             ->update([
-                'migration' => '2017_01_01_108000_create_user_groups_table'
+                'migration' => '2017_01_01_108000_create_user_groups_table',
             ]);
 
         \DB::table('migrations')->whereMigration('2017_01_01_127000_create_structure_for_owners')
             ->update([
-                'migration' => '2017_01_01_127000_create_structure_for_user_groups'
+                'migration' => '2017_01_01_127000_create_structure_for_user_groups',
             ]);
 
         \DB::table('migrations')->whereMigration('2017_01_01_109000_create_owner_role_pivot_table')
             ->update([
-                'migration' => '2017_01_01_109000_create_role_user_group_pivot_table'
+                'migration' => '2017_01_01_109000_create_role_user_group_pivot_table',
             ]);
 
         return $this;
@@ -138,7 +138,7 @@ class Upgrade extends Command
     {
         if (!Schema::hasTable('people')) {
             return $this;
-        };
+        }
 
         if (Person::first()) {
             $this->info('The people table alreay has entries. The upgrade was probably performed');
@@ -156,7 +156,7 @@ class Upgrade extends Command
                     'name' => trim($user->first_name.' '.$user->last_name),
                     'appellative' => $user->first_name,
                     'phone' => $user->phone,
-                    'created_at' => $user->created_at
+                    'created_at' => $user->created_at,
                 ]);
 
                 $person->email = $user->email;
@@ -182,7 +182,7 @@ class Upgrade extends Command
     {
         if (!Schema::hasTable('people')) {
             return $this;
-        };
+        }
 
         if (!Schema::hasColumn('users', 'first_name')) {
             $this->info('The users table was already updated');

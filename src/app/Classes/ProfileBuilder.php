@@ -23,7 +23,7 @@ class ProfileBuilder
             'person:id,name,appellative,birthday,gender,phone',
             'group:id,name',
             'role:id,name',
-            'avatar:id,user_id'
+            'avatar:id,user_id',
         ]);
 
         $this->build();
