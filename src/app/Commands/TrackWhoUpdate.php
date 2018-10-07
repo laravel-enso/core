@@ -18,8 +18,6 @@ class TrackWhoUpdate extends Command
 
     protected $description = 'This command will make all `created_by` table columns nullable';
 
-    private $schemaManager;
-
     public function handle()
     {
         $this->info('The update process has started');
