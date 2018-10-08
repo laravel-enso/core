@@ -273,7 +273,7 @@ class Upgrade extends Command
             ->each(function ($permission) {
                 $permission->update([
                     'name' => Str::replaceFirst('owners', 'userGroups', $permission->name),
-                    'description' => Str::replaceFirst('owner', 'user group', $permission->description)
+                    'description' => Str::replaceFirst('owner', 'user group', $permission->description),
                 ]);
             });
 
