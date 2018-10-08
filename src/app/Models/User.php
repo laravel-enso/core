@@ -157,9 +157,4 @@ class User extends Authenticatable
                 ['value' => $preferences]
             );
     }
-
-    public function scopeAllowed($query)
-    {
-        return $query;
-    }
 }

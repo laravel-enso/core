@@ -14,8 +14,7 @@ class UserSelectController extends Controller
 
     public function query()
     {
-        return User::allowed()
-            ->active()
+        return User::active()
             ->with([
                 'person:id,appellative,name',
                 'avatar:id,user_id',

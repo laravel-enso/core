@@ -40,7 +40,6 @@
         "laravel-enso/activityLog": "1.1.*",
         "laravel-enso/avatarmanager": "2.3.*",
         "laravel-enso/charts": "2.5.*",
-        "laravel-enso/companies": "1.0.*",
         "laravel-enso/dataexport": "^1.0",
         "laravel-enso/filemanager": "2.5.*",
         "laravel-enso/formbuilder": "2.9.*",

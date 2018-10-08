@@ -5,7 +5,7 @@ use LaravelEnso\StructureManager\app\Classes\StructureMigration;
 class CreateStructureForUserGroups extends StructureMigration
 {
     protected $permissionGroup = [
-        'name' => 'administration.userGroups', 'description' => 'UserGroups permissions group',
+        'name' => 'administration.userGroups', 'description' => 'User Group permissions',
     ];
 
     protected $permissions = [
@@ -22,7 +22,7 @@ class CreateStructureForUserGroups extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'UserGroups', 'icon' => 'users', 'link' => 'administration.userGroups.index', 'order_index' => 500, 'has_children' => false,
+        'name' => 'User Groups', 'icon' => 'users', 'link' => 'administration.userGroups.index', 'order_index' => 500, 'has_children' => false,
     ];
 
     protected $parentMenu = 'Administration';

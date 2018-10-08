@@ -22,6 +22,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Resource::withoutWrapping();
 
+        $this->addCommands()
+            ->addMiddleware()
+            ->loadDependencies()
+            ->publishDependencies()
+            ->publishResources();
+    }
+
+    private function addCommands()
+    {
         $this->commands([
             ClearPreferences::class,
             UpdateGlobalPreferences::class,
@@ -31,10 +40,7 @@ class AppServiceProvider extends ServiceProvider
             TrackWhoUpdate::class,
         ]);
 
-        $this->addMiddleware()
-            ->load()
-            ->publishDeps()
-            ->publishResources();
+        return $this;
     }
 
     private function addMiddleware()
@@ -52,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function load()
+    private function loadDependencies()
     {
         $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'enso.inspiring');
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
@@ -64,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function publishDeps()
+    private function publishDependencies()
     {
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),

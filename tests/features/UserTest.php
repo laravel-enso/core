@@ -6,14 +6,13 @@ use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\People\app\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
-use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
 use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
 use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 class UserTest extends TestCase
 {
-    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
+    use Datatable, DestroyForm, EditForm, RefreshDatabase;
 
     private $permissionGroup = 'administration.users';
     private $testModel;
@@ -80,18 +79,6 @@ class UserTest extends TestCase
         ->assertJsonStructure(['message']);
 
         $this->assertEquals(!$initialState, $this->testModel->fresh()->is_active);
-    }
-
-    /** @test */
-    public function destroy()
-    {
-        $this->testModel->save();
-
-        $this->delete(route('administration.users.destroy', $this->testModel->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['message', 'redirect']);
-
-        $this->assertNull($this->testModel->fresh());
     }
 
     /** @test */

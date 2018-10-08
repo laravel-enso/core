@@ -10,6 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class Upgrade extends Command
 {
@@ -26,6 +27,9 @@ class Upgrade extends Command
     private const OwnerPermissions = [
         'administration.owners.initTable', 'administration.owners.getTableData', 'administration.owners.exportExcel', 'administration.owners.create', 'administration.owners.edit', 'administration.owners.index', 'administration.owners.options', 'administration.owners.store', 'administration.owners.update', 'administration.owners.destroy',
     ];
+
+    private const OwnerPermissionGroup = 'administration.owners';
+    private const UserGroupPermissinGroup = 'administration.userGroups';
 
     protected $signature = 'enso:upgrade';
 
@@ -269,8 +273,12 @@ class Upgrade extends Command
             ->each(function ($permission) {
                 $permission->update([
                     'name' => Str::replaceFirst('owners', 'userGroups', $permission->name),
+                    'description' => Str::replaceFirst('owner', 'user group', $permission->description)
                 ]);
             });
+
+        PermissionGroup::whereName(self::OwnerPermissionGroup)
+            ->update(['name' => self::UserGroupPermissinGroup]);
 
         $this->info('Owner permissions were successfully renamed');
 
