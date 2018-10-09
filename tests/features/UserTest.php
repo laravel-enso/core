@@ -3,7 +3,6 @@
 use Faker\Factory;
 use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\People\app\Models\Person;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
 use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
@@ -33,10 +32,7 @@ class UserTest extends TestCase
     /** @test */
     public function can_view_create_form()
     {
-        $person = factory(Person::class)
-            ->create();
-
-        $this->get(route($this->permissionGroup.'.create', [$person->id], false))
+        $this->get(route($this->permissionGroup.'.create', [$this->testModel->person->id], false))
             ->assertStatus(200)
             ->assertJsonStructure(['form']);
     }
@@ -70,7 +66,7 @@ class UserTest extends TestCase
         $this->testModel->save();
 
         $initialState = $this->testModel->is_active;
-        $this->testModel->is_active = !$this->testModel->is_active;
+        $this->testModel->is_active = !$initialState;
 
         $this->patch(
             route('administration.users.update', $this->testModel->id, false),
