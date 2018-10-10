@@ -1,5 +1,5 @@
 const initBookmarks = () => {
-    const bookmarks = localStorage.getItem('bookmar;s');
+    const bookmarks = localStorage.getItem('bookmarks');
 
     return bookmarks && JSON.parse(bookmarks) || [];
 };
@@ -40,6 +40,12 @@ export const mutations = {
         const index = state.routes
             .findIndex(({ name }) => name === route.name);
         state.routes[index].sticky = true;
+        updateLocalStorage(state.routes);
+    },
+    unStick(state, route) {
+        const index = state.routes
+            .findIndex(({ name }) => name === route.name);
+        state.routes[index].sticky = false;
         updateLocalStorage(state.routes);
     },
     drop(state, route) {
