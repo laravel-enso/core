@@ -13,12 +13,13 @@
         }, {
             "label": "Name",
             "name": "name",
-            "data": "people.name"
+            "data": "people.name",
+            "meta": ["sortable", "searchable"]
         }, {
             "label": "Appellative",
             "name": "appellative",
             "data": "people.appellative",
-            "meta": ["searchable"]
+            "meta": ["sortable", "searchable"]
         }, {
             "label": "Phone",
             "name": "phone",
