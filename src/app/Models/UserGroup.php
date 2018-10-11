@@ -33,29 +33,3 @@ class UserGroup extends Model
         parent::delete();
     }
 }
-
-public function handle(LdapUser $ldapUser, EloquentUser $eloquentUser)
-    {
-        if ($eloquentUser->id) {
-            Log::info('user exists');
-            $eloquentUser->person->name = $ldapUser->getCommonName();
-
-            return;
-        }
-            
-        Log::warning('new user: ' . $ldapUser->getCommonName());
-        $person = Person::firstOrCreate(['email' => $ldapUser->getUserPrincipalName()]
-            , [
-                'title' => Titles::Mr,
-                'name' => $ldapUser->getCommonName(),
-                'appellative' => optional($ldapUser)->givenname[0],
-                'gender' => Genders::Male,
-                'birthday' => substr(optional($ldapUser)->whencreated[0],0,8), //you likely want something else here
-                'phone' => optional($ldapUser)->telephonenumber[0],
-            ]);
-        $eloquentUser->person()->associate($person);
-        $eloquentUser->group()->associate(2); // 2 = Default
-        $eloquentUser->role()->associate(2); // 2 = Default
-        $eloquentUser->is_active = true;
-        }
-    }
