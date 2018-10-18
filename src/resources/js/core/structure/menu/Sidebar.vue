@@ -61,7 +61,7 @@ export default {
                 .includes(link);
         },
         routePathMatches({ link }) {
-            if (this.hasExactMatch(this.menus)) return false;
+            if (this.hasExactMatch(this.menus) || !link.endsWith('index')) return false;
             return this.$route.matched.length > 1
                     && this.$route.matched
                         .map(route => route.path)[this.$route.matched.length - 2]
