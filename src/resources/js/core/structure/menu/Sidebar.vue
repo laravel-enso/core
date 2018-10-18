@@ -45,6 +45,10 @@ export default {
             return menu.children.some(child =>
                 this.isActive(child) || this.hasActiveChild(child));
         },
+        hasExactMatch(menu) {
+            return menu.some(child => this.routeNameMatches(child)
+                || this.routeNameMatches(child.children));
+        },
         isActive(menu) {
             return menu.link !== null && (
                 this.routeNameMatches(menu)
@@ -57,6 +61,7 @@ export default {
                 .includes(link);
         },
         routePathMatches({ link }) {
+            if (this.hasExactMatch(this.menus)) return false;
             return this.$route.matched.length > 1
                     && this.$route.matched
                         .map(route => route.path)[this.$route.matched.length - 2]
