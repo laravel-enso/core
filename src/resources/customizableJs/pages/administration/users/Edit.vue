@@ -6,7 +6,7 @@
                 :route-params="[$route.name, $route.params.id, false]"
                 ref="form"
                 @loaded="
-                    personId = $refs.form.data.params.personId
+                    initialised = true;
                     pivotParams.userGroups.id = $refs.form.field('group_id').value;
                 ">
                 <template slot="group_id" slot-scope="{ field, errors }">
@@ -64,8 +64,9 @@
                     class="button is-warning"
                     @click="$router.push({
                         name: 'administration.people.edit',
-                        params: { id: personId }
-                    })">
+                        params: { id: $refs.form.data.params.personId }
+                    })"
+                    v-if="initialised">
                     <span class="is-hidden-mobile">
                         {{ __('Edit Person') }}
                     </span>
@@ -96,7 +97,7 @@ export default {
 
     data() {
         return {
-            personId: null,
+            initialised: false,
             pivotParams: { userGroups: { id: null } },
             password: null,
             passwordConfirmation: null,

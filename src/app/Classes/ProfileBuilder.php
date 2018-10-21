@@ -7,8 +7,8 @@ use LaravelEnso\Core\app\Models\User;
 
 class ProfileBuilder
 {
-    private const LoginsRating = 80;
-    private const ActionsRating = 20;
+    private const LoginRating = 80;
+    private const ActionRating = 20;
 
     private $user;
 
@@ -40,8 +40,8 @@ class ProfileBuilder
     private function rating()
     {
         return intval(
-            (self::LoginsRating * $this->user->loginCount / $this->user->daysSinceMember +
-            self::ActionsRating * $this->user->actionLogCount / $this->user->daysSinceMember) / 100
+            (self::LoginRating * $this->user->loginCount / $this->user->daysSinceMember +
+            self::ActionRating * $this->user->actionLogCount / $this->user->daysSinceMember) / 100
         );
     }
 }

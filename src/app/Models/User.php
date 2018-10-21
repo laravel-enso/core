@@ -31,7 +31,7 @@ class User extends Authenticatable
         'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
     ];
 
-    protected $loggableLabel = 'email';
+    protected $loggableLabel = 'person.name';
 
     protected $loggable = [
         'email', 'group_id' => [UserGroup::class, 'name'],

@@ -12,6 +12,7 @@ class CreateLoginsTable extends Migration
 
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users');
+
             $table->string('ip');
             $table->text('user_agent');
 

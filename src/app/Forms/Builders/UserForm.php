@@ -40,7 +40,7 @@ class UserForm
         return $this->form
             ->value('password', null)
             ->append('personId', $user->person_id)
-            ->actions(['destroy', 'show', 'update'])
+            ->actions(['back', 'destroy', 'show', 'update'])
             ->edit($user);
     }
 

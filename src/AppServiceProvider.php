@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         Resource::withoutWrapping();
 
         $this->addCommands()
-            ->addMiddleware()
+            ->loadMiddleware()
             ->loadDependencies()
             ->publishDependencies()
             ->publishResources();
@@ -43,9 +43,11 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function addMiddleware()
+    private function loadMiddleware()
     {
-        $this->app['router']->aliasMiddleware('verify-active-state', VerifyActiveState::class);
+        $this->app['router']->middleware(
+            'verify-active-state', VerifyActiveState::class
+        );
 
         $this->app['router']->middlewareGroup('core', [
             VerifyActiveState::class,

@@ -22,9 +22,9 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        $user = User::where('email', '=', request()->input('email'))->first();
+        $user = User::where('email', '=', $request->input('email'))->first();
 
-        if (is_null($user) || !Hash::check(request()->input('password'), $user->password)) {
+        if (is_null($user) || ! Hash::check($request->input('password'), $user->password)) {
             return false;
         }
 
@@ -34,7 +34,7 @@ class LoginController extends Controller
             ));
         }
 
-        auth()->login($user, request()->input('remember'));
+        auth()->login($user, $request->input('remember'));
 
         return true;
     }

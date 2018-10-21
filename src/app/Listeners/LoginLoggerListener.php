@@ -11,8 +11,7 @@ class LoginLoggerListener
         Login::create([
             'user_id' => $event->user->id,
             'ip' => request()->ip(),
-            'user_agent' => request()
-                ->header('User-Agent'),
+            'user_agent' => request()->header('User-Agent'),
         ]);
     }
 }

@@ -10,7 +10,9 @@ class UserSelectController extends Controller
 {
     use OptionsBuilder;
 
-    protected $queryAttributes = ['email', 'person.name', 'person.appellative'];
+    protected $queryAttributes = [
+        'email', 'person.name', 'person.appellative'
+    ];
 
     public function query()
     {
