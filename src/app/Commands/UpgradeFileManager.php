@@ -43,7 +43,7 @@ class UpgradeFileManager extends Command
 
     private function upgradeAvatars()
     {
-        if (!Schema::hasColumn('avatars', 'saved_name')) {
+        if (! Schema::hasColumn('avatars', 'saved_name')) {
             $this->info('The upgrade for avatars was already performed');
 
             return;
@@ -79,11 +79,11 @@ class UpgradeFileManager extends Command
 
     private function upgradeDataImports()
     {
-        if (!Schema::hasTable('data_imports')) {
+        if (! Schema::hasTable('data_imports')) {
             return;
         }
 
-        if (!Schema::hasColumn('data_imports', 'saved_name')) {
+        if (! Schema::hasColumn('data_imports', 'saved_name')) {
             $this->info('The upgrade for data imports was already performed');
 
             return;
@@ -135,11 +135,11 @@ class UpgradeFileManager extends Command
 
     private function upgradeDocuments()
     {
-        if (!Schema::hasTable('documents')) {
+        if (! Schema::hasTable('documents')) {
             return;
         }
 
-        if (!Schema::hasColumn('documents', 'saved_name')) {
+        if (! Schema::hasColumn('documents', 'saved_name')) {
             $this->info('The upgrade for documents was already performed');
 
             return;
@@ -168,11 +168,11 @@ class UpgradeFileManager extends Command
 
     private function upgradeHowToVideos()
     {
-        if (!Schema::hasTable('how_to_videos')) {
+        if (! Schema::hasTable('how_to_videos')) {
             return;
         }
 
-        if (!Schema::hasColumn('how_to_videos', 'saved_name')) {
+        if (! Schema::hasColumn('how_to_videos', 'saved_name')) {
             $this->info('The upgrade for how-to videos was already performed');
 
             return;

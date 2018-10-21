@@ -36,11 +36,11 @@ class Update extends Command
 
     private function updateDocuments()
     {
-        if (!Schema::hasTable('documents')) {
+        if (! Schema::hasTable('documents')) {
             return;
         }
 
-        if (!Schema::hasColumn('documents', 'name')) {
+        if (! Schema::hasColumn('documents', 'name')) {
             $this->info('The update for documents was already performed');
 
             return;
@@ -57,7 +57,7 @@ class Update extends Command
 
     private function updateAddresses()
     {
-        if (!Schema::hasTable('addresses')) {
+        if (! Schema::hasTable('addresses')) {
             return;
         }
 
@@ -72,7 +72,7 @@ class Update extends Command
 
     private function updateHowToVideos()
     {
-        if (!Schema::hasTable('how_to_videos')) {
+        if (! Schema::hasTable('how_to_videos')) {
             return;
         }
 

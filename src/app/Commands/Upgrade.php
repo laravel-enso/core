@@ -80,7 +80,7 @@ class Upgrade extends Command
 
     private function renameOwners()
     {
-        if (!Schema::hasTable('owners')) {
+        if (! Schema::hasTable('owners')) {
             $this->info('The owners structure was already upgraded');
 
             return $this;
@@ -140,7 +140,7 @@ class Upgrade extends Command
 
     private function insertPeople()
     {
-        if (!Schema::hasTable('people')) {
+        if (! Schema::hasTable('people')) {
             return $this;
         }
 
@@ -184,11 +184,11 @@ class Upgrade extends Command
 
     private function dropColummnsFromUserTable()
     {
-        if (!Schema::hasTable('people')) {
+        if (! Schema::hasTable('people')) {
             return $this;
         }
 
-        if (!Schema::hasColumn('users', 'first_name')) {
+        if (! Schema::hasColumn('users', 'first_name')) {
             $this->info('The users table was already updated');
 
             return $this;
