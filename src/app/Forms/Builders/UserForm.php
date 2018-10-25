@@ -39,6 +39,7 @@ class UserForm
 
         return $this->form
             ->value('password', null)
+            ->routeParams(['gigi' => 2, 'mimi' => 3])
             ->append('personId', $user->person_id)
             ->actions(['back', 'destroy', 'show', 'update'])
             ->edit($user);

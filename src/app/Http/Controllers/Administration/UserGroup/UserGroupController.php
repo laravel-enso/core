@@ -21,7 +21,7 @@ class UserGroupController extends Controller
         return [
             'message' => __('The user group was successfully created'),
             'redirect' => 'administration.userGroups.edit',
-            'id' => $userGroup->id,
+            'param' => ['userGroup' => $userGroup->id],
         ];
     }
 

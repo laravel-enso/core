@@ -9,7 +9,7 @@ use LaravelEnso\Core\app\Classes\DefaultPreferences;
 
 class UpdateGlobalPreferences extends Command
 {
-    protected $signature = 'enso:update-global-preferences';
+    protected $signature = 'enso:preferences:update-global';
 
     protected $description = 'This command will add new global preferences keys for users';
 

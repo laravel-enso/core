@@ -20,7 +20,7 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $this->seed()
             ->actingAs(User::first());
@@ -54,7 +54,7 @@ class UserTest extends TestCase
             ->assertJsonStructure(['message'])
             ->assertJsonFragment([
                 'redirect' => 'administration.users.edit',
-                'id' => $user->id,
+                'param' => ['user' => $user->id],
             ]);
 
         \Notification::assertSentTo($user, ResetPasswordNotification::class);
@@ -66,7 +66,7 @@ class UserTest extends TestCase
         $this->testModel->save();
 
         $initialState = $this->testModel->is_active;
-        $this->testModel->is_active = !$initialState;
+        $this->testModel->is_active = ! $initialState;
 
         $this->patch(
             route('administration.users.update', $this->testModel->id, false),
@@ -74,7 +74,7 @@ class UserTest extends TestCase
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 
-        $this->assertEquals(!$initialState, $this->testModel->fresh()->is_active);
+        $this->assertEquals(! $initialState, $this->testModel->fresh()->is_active);
     }
 
     /** @test */

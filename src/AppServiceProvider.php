@@ -3,12 +3,9 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Core\app\Commands\Update;
 use LaravelEnso\Core\app\Commands\Upgrade;
 use Illuminate\Http\Resources\Json\Resource;
-use LaravelEnso\Core\app\Commands\TrackWhoUpdate;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
-use LaravelEnso\Core\app\Commands\UpgradeFileManager;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
@@ -34,10 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->commands([
             ClearPreferences::class,
             UpdateGlobalPreferences::class,
-            UpgradeFileManager::class,
-            Update::class,
             Upgrade::class,
-            TrackWhoUpdate::class,
         ]);
 
         return $this;

@@ -23,7 +23,7 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
             ->group(function () {
                 Route::prefix('core')->as('core.')
                     ->group(function () {
-                        Route::get('', 'SpaController')->name('index');
+                        Route::get('home', 'SpaController')->name('home.index');
 
                         Route::prefix('preferences')->as('preferences.')
                             ->group(function () {
@@ -42,8 +42,8 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                             ->group(function () {
                                 Route::get('initTable', 'UserGroupTableController@init')
                                     ->name('initTable');
-                                Route::get('getTableData', 'UserGroupTableController@data')
-                                    ->name('getTableData');
+                                Route::get('tableData', 'UserGroupTableController@data')
+                                    ->name('tableData');
                                 Route::get('exportExcel', 'UserGroupTableController@excel')
                                     ->name('exportExcel');
 
@@ -61,8 +61,8 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
 
                                 Route::get('initTable', 'UserTableController@init')
                                     ->name('initTable');
-                                Route::get('getTableData', 'UserTableController@data')
-                                    ->name('getTableData');
+                                Route::get('tableData', 'UserTableController@data')
+                                    ->name('tableData');
                                 Route::get('exportExcel', 'UserTableController@excel')
                                     ->name('exportExcel');
 

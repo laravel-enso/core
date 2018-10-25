@@ -32,7 +32,7 @@ class UserController extends Controller
         return [
             'message' => __('The user was successfully created'),
             'redirect' => 'administration.users.edit',
-            'id' => $user->id,
+            'param' => ['user' => $user->id],
         ];
     }
 

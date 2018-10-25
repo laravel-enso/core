@@ -9,7 +9,7 @@ use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\MenuManager\app\Classes\MenuBuilder;
+use LaravelEnso\MenuManager\app\Classes\MenuTree;
 
 class AppState implements Responsable
 {
@@ -41,8 +41,8 @@ class AppState implements Responsable
             'languages' => $languages,
             'themes' => Themes::all(),
             'routes' => $this->routes(),
-            'implicitMenu' => auth()->user()->role->menu,
-            'menus' => $this->menus(),
+            'implicitRoute' => auth()->user()->role->menu->permission->name,
+            'menus' => (new MenuTree())->get(),
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
             'enums' => $this->enums(),
@@ -50,16 +50,6 @@ class AppState implements Responsable
                 ? $this->localState(new $localState())
                 : null,
         ];
-    }
-
-    private function menus()
-    {
-        $menus = auth()->user()->role
-            ->menus()
-            ->orderBy('order_index')
-            ->get(['id', 'icon', 'link', 'name', 'parent_id', 'has_children']);
-
-        return (new MenuBuilder($menus))->get();
     }
 
     private function i18n($languages)

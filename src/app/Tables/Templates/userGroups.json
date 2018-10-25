@@ -1,6 +1,5 @@
 {
     "routePrefix": "administration.userGroups",
-    "readSuffix": "getTableData",
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
     "columns": [

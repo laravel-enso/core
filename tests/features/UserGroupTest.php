@@ -45,7 +45,7 @@ class UserGroupTest extends TestCase
             ->assertJsonStructure(['message'])
             ->assertJsonFragment([
                 'redirect' => 'administration.userGroups.edit',
-                'id' => $group->id,
+                'param' => ['userGroup' => $group->id],
             ]);
     }
 
