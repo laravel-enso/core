@@ -69,7 +69,7 @@ class Upgrade extends Command
         });
 
         Menu::all()->each(function ($menu) {
-            if (! is_null($menu->link)) {
+            if (! empty($menu->link)) {
                 $menu->update([
                     'permission_id' => Permission::whereName($menu->link)->first()->id,
                 ]);
