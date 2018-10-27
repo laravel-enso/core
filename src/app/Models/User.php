@@ -34,8 +34,9 @@ class User extends Authenticatable
     protected $loggableLabel = 'person.name';
 
     protected $loggable = [
-        'email', 'group_id' => [UserGroup::class, 'name'],
-        'role_id' => [Role::class, 'name'],
+        'email',
+        'group_id' => [UserGroup::class => 'name'],
+        'role_id' => [Role::class => 'name'],
     ];
 
     public function person()
