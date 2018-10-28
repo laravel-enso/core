@@ -5,7 +5,9 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\People\app\Traits\IsPerson;
+use LaravelEnso\FileManager\app\Models\File;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\FileManager\app\Traits\Uploads;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
 use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
@@ -19,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 class User extends Authenticatable
 {
     use ActionLogs, ActiveState, HasAvatar, Impersonates,
-        IsPerson, LogsActivity, Notifiable;
+        IsPerson, LogsActivity, Notifiable, Uploads;
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -52,6 +54,11 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class, 'created_by');
     }
 
     public function logins()

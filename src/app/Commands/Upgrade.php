@@ -29,6 +29,7 @@ class Upgrade extends Command
             $this->updateMenuStructure();
             $this->updatePermissionStructure();
             $this->updateCoreHome();
+            $this->dropCreatedBy();
         });
     }
 
@@ -118,5 +119,35 @@ class Upgrade extends Command
     private function updateCoreHome()
     {
         Permission::whereName('core.index')->update(['name' => 'core.home.index']);
+
+        return $this;
+    }
+
+    private function dropCreatedBy()
+    {
+        $this->info('Dropping deprecated columns');
+
+        if (Schema::hasColumn('data_imports', 'created_by')) {
+            Schema::table('data_imports', function (Blueprint $table) {
+                $table->dropForeign(['created_by']);
+                $table->dropColumn(['created_by', 'name']);
+            });
+        }
+
+        if (Schema::hasColumn('data_exports', 'created_by')) {
+            Schema::table('data_exports', function (Blueprint $table) {
+                $table->dropForeign(['created_by']);
+                $table->dropColumn(['created_by']);
+            });
+        }
+
+        if (Schema::hasColumn('documents', 'created_by')) {
+            Schema::table('documents', function (Blueprint $table) {
+                $table->dropForeign(['created_by']);
+                $table->dropColumn(['created_by']);
+            });
+        }
+
+        $this->info('Deprecated columns were successfully dropped');
     }
 }
