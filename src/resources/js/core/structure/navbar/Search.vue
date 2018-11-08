@@ -10,7 +10,8 @@
             v-model="query"
             @update="redirect">
             <template slot="controls"
-                slot-scope="{ items }">
+                slot-scope="{ items }"
+                v-if="items.length">
                 <div class="dropdown-content has-text-centered has-padding-small has-margin-top-small"
                     v-if="tags(items).length < 6">
                     <span class="tag control-list is-uppercase"
