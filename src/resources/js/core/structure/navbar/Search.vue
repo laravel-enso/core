@@ -11,7 +11,7 @@
             @update="redirect">
             <template slot="controls"
                 slot-scope="{ items }">
-                <a class="dropdown-item has-text-centered"
+                <div class="dropdown-content has-text-centered has-padding-small has-margin-top-small"
                     v-if="tags(items).length < 6">
                     <span class="tag control-list is-uppercase"
                         :class="{ 'is-info': selected(tag) }"
@@ -20,13 +20,13 @@
                         @click="toggle(tag)">
                         {{ __(tag ) }}
                     </span>
-                </a>
-                <a class="dropdown-item has-text-centered"
+                </div>
+                <div class="has-text-centered"
                     v-else>
                     <p class="title is-6">
                         {{ __('Categories found') }}: {{ tags(items).length }}
                     </p>
-                </a>
+                </div>
             </template>
             <template slot="option"
                 slot-scope="{ highlight, item }">
