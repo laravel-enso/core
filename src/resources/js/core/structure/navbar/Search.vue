@@ -70,16 +70,6 @@ export default {
         selectedTags: [],
     }),
 
-    watch: {
-        query: {
-            handler(value) {
-                if (!value) {
-                    this.selectedTags = [];
-                }
-            },
-        },
-    },
-
     methods: {
         route(search, { routes }) {
             return routes.find(route =>
@@ -107,6 +97,20 @@ export default {
             }, []);
         },
         filter(items) {
+            if (this.value === '') {
+                this.selectedTags = [];
+            }
+
+            let filtered = this.filtered(items);
+
+            if (!filtered.length && this.selectedTags.length) {
+                this.selectedTags = [];
+                filtered = this.filtered(items);
+            }
+
+            return filtered;
+        },
+        filtered(items) {
             return this.selectedTags.length
                 ? items.filter(item =>
                     this.selectedTags.includes(item.group))
