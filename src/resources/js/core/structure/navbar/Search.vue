@@ -14,13 +14,13 @@
                 v-if="items.length">
                 <div class="dropdown-content has-text-centered has-padding-small has-margin-top-small"
                     v-if="tags(items).length < 6">
-                    <span class="tag control-list is-uppercase"
+                    <a class="tag control-list is-uppercase"
                         :class="{ 'is-info': selected(tag) }"
                         v-for="(tag, index) in tags(items)"
                         :key="index"
                         @click="toggle(tag)">
                         {{ __(tag ) }}
-                    </span>
+                    </a>
                 </div>
                 <div class="has-text-centered"
                     v-else>
@@ -137,6 +137,10 @@ export default {
             opacity: .7;
             -webkit-box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
             box-shadow: 0 1px 1px rgba(10, 10, 10, 0.2);
+
+            &.control-list:hover {
+                text-decoration: none;
+            }
 
             &.control-list:not(:first-child) {
                 margin-left: .5em;
