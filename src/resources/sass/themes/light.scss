@@ -13,5 +13,5 @@ $red: #e74c3c;
 @import "../extensions";
 
 .aside {
-	background: #fff;
+	background: $body-background-color;
 }

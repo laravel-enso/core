@@ -20,7 +20,7 @@
             "value": null,
             "column": 2,
             "meta": {
-                "disabled": true,
+                "readonly": true,
                 "type": "select",
                 "options": "LaravelEnso\\People\\app\\Enums\\Titles"
             }
