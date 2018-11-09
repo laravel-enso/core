@@ -5,7 +5,7 @@
 
         <link rel="icon" href="/favicon.ico"/>
         <link rel="icon" type="image/png" href="/images/favicon.png">
-        <link id="theme" rel="stylesheet" type="text/css" href="/themes/clean/bulma.min.css">
+        <link id="theme" rel="stylesheet" type="text/css" href="/themes/light/bulma.min.css">
         <link href="{{ mix('css/enso.css') }}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
