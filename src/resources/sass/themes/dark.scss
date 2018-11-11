@@ -97,10 +97,7 @@ $dropdown-content-background-color: $background;
 $dropdown-item-color: $text;
 $dropdown-item-hover-color: $text-light;
 
-$tabs-toggle-link-active-background-color: $background;
-$tabs-toggle-link-active-border-color: $border;
-$tabs-toggle-link-active-color: #FFF;
-$tabs-boxed-link-active-background-color: $body-background-color;
+$tabs-toggle-link-active-color:$white;
 
 $pagination-color: $link;
 $pagination-border-color: $border;
@@ -112,10 +109,6 @@ $pagination-border-color: $border;
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 // overrides
-
-// .section {
-//   background-color: $body-background-color;
-// }
 
 .delete, .modal-close {
     background-color: rgba(10, 10, 10, 0.4);
