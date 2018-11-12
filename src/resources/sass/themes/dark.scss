@@ -53,9 +53,8 @@ $button-background-color: $grey;
 $button-border-color: $grey;
 $button-hover-border: transparent;
 $button-active-border-color: transparent;
+
 $input-hover-color: $link-hover;
-
-
 $input-color: $grey-lighter;
 $input-background-color: $grey-dark;
 $input-border-color: $grey;
@@ -152,6 +151,23 @@ $pagination-border-color: $border;
 
 .has-background-light {
 	background: #2b3e4f !important;
+}
+
+.editor.wysiwyg {
+	.content.wysiwyg-content {
+		&:hover {
+			color: $input-hover-color;
+			border-color: $grey-light;
+		}
+
+		color: $input-color;
+		background-color: $input-background-color;
+		border-color: $input-border-color;
+
+		&.is-danger {
+			border-color: $danger;
+		}
+	}
 }
 
 @import "~flatpickr/dist/themes/dark";
