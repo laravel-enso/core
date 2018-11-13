@@ -24,7 +24,6 @@ class UserGroupForm
     public function edit(UserGroup $userGroup)
     {
         return $this->form
-            ->value('roleList', $userGroup->roleList())
             ->edit($userGroup);
     }
 }

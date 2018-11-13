@@ -23,7 +23,7 @@ class ValidateUserGroupRequest extends FormRequest
         return [
             'name' => ['required', $nameUnique],
             'description' => 'nullable',
-            'roleList' => 'array',
+            'roles' => 'array',
         ];
     }
 }

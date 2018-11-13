@@ -21,7 +21,7 @@ class UserGroupTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $this->seed()
             ->actingAs(User::first());
@@ -35,7 +35,7 @@ class UserGroupTest extends TestCase
     {
         $response = $this->post(
             route('administration.userGroups.store', [], false),
-            $this->testModel->toArray() + ['roleList' => []]
+            $this->testModel->toArray() + ['roles' => []]
         );
 
         $group = UserGroup::whereName($this->testModel->name)
@@ -58,7 +58,11 @@ class UserGroupTest extends TestCase
 
         $this->patch(
             route('administration.userGroups.update', $this->testModel->id, false),
-            $this->testModel->toArray() + ['roleList' => $this->testModel->roleList()]
+            $this->testModel->toArray() + [
+                'roles' => $this->testModel->roles()
+                    ->pluck('id')
+                    ->toArray()
+            ]
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 
