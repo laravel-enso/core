@@ -27,11 +27,10 @@
 <script>
 
 import VueFormSs from '../../../components/enso/vueforms/VueFormSs.vue';
-import InputField from '../../../components/enso/vueforms/fields/InputField.vue';
 import SelectField from '../../../components/enso/vueforms/fields/SelectField.vue';
 
 export default {
-    components: { VueFormSs, InputField, SelectField },
+    components: { VueFormSs, SelectField },
 
     data() {
         return {
