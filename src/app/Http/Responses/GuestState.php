@@ -8,6 +8,10 @@ class GuestState implements Responsable
 {
     public function toResponse($request)
     {
+        if ($request->has('locale')) {
+            app()->setLocale($request->get('locale'));
+        }
+
         return [
             'meta' => $this->meta(),
             'i18n' => $this->i18n(),
