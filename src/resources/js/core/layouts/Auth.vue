@@ -3,9 +3,7 @@
     <section class="hero is-fullheight is-primary is-bold">
         <div class="hero-body">
             <div class="container">
-                <div class="columns is-centered">
-                    <router v-if="initialised"/>
-                </div>
+                <router v-if="initialised"/>
             </div>
         </div>
     </section>
