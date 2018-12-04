@@ -5,19 +5,12 @@ const __ = store.getters['localisation/__'];
 
 Vue.mixin({
     methods: {
-        __(key) {
+        __(key, params) {
             if (!store.getters['localisation/isInitialised']) {
                 return key;
             }
 
-            const translation = __(key);
-
-            if (typeof translation === 'undefined'
-                && store.state.localisation.keyCollector) {
-                store.dispatch('localisation/addMissingKey', key);
-            }
-
-            return translation || key;
+            return __(key, params);
         },
     },
 });
