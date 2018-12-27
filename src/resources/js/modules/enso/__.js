@@ -18,10 +18,11 @@ export default function (key, params) {
     if(params) {
         translation = translation.replace(/:(\w*)/g, function(e, key) {
             let param = params[key.toLowerCase()] || key;
-            if(key === key.toUpperCase()) // param is uppercased
+            if(key === key.toUpperCase()) { // param is uppercased
                 param = param.toUpperCase();
-            else if(key[0] === key[0].toUpperCase()) // first letter is uppercased
+            } else if(key[0] === key[0].toUpperCase()) { // first letter is uppercased
                 param = param.charAt(0).toUpperCase() + param.slice(1);
+            }
             return param;
         });
     }
