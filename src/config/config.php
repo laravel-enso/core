@@ -11,7 +11,7 @@ return [
     'stateBuilder' => LocalState::class,
     'defaultRole' => 'admin',
     'phpDateFormat' => 'd-m-Y',
-    'jsDateFormat' => 'DD-MM-YYYY',
+    'jsDateFormat' => 'dd-MM-yyyy',
     'paths' => [
         'files' => 'files',
         'avatars' => 'avatars',
