@@ -1,30 +1,35 @@
 import store from '../../store';
 
-const __ = store.getters[ 'localisation/__' ];
-
-export default function (key, params) {
-    if (!store.getters[ 'localisation/isInitialised' ]) {
+export default (key, params = null) => {
+    if (!store.getters['localisation/isInitialised']) {
         return key;
     }
 
-    let translation = __(key);
+    let translation = store.getters['localisation/__'](key);
 
-    if (typeof translation === 'undefined'
-        && store.state.localisation.keyCollector) {
-        store.dispatch('localisation/addMissingKey', key);
+    if (typeof translation === 'undefined' || translation == null) {
+        translation = key;
+
+        if (store.state.localisation.keyCollector) {
+            store.dispatch('localisation/addMissingKey', key);
+        }
     }
 
-    translation = translation || key;
-    if(params) {
-        translation = translation.replace(/:(\w*)/g, function(e, key) {
-            let param = params[key.toLowerCase()] || key;
-            if(key === key.toUpperCase()) { // param is uppercased
-                param = param.toUpperCase();
-            } else if(key[0] === key[0].toUpperCase()) { // first letter is uppercased
-                param = param.charAt(0).toUpperCase() + param.slice(1);
+    return !!params && typeof params === 'object'
+        ? translation.replace(/:(\w*)/g, (e, key) => {
+            if (typeof params[key.toLowerCase()] === 'undefined') {
+                return key;
             }
-            return param;
-        });
-    }
-    return translation;
+
+            const param = params[key.toLowerCase()];
+
+            if(key === key.toUpperCase()) {
+                return param.toUpperCase();
+            }
+            
+            return key[0] === key[0].toUpperCase()
+                ? param.charAt(0).toUpperCase() + param.slice(1)
+                : param;
+        })
+        : translation;
 }
