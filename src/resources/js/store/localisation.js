@@ -12,8 +12,8 @@ export const getters = {
             ? rootState.preferences.global.lang : null);
 
         return state.i18n[lang]
-          ? state.i18n[lang][key]
-          : key;
+            ? state.i18n[lang][key]
+            : key;
     },
     documentTitle: (state, getters, rootState) =>
         title => (rootState.meta.extendedDocumentTitle
