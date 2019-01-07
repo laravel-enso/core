@@ -6,7 +6,7 @@ export const state = {
 
 export const getters = {
     isInitialised: state => Object.keys(state.i18n).length > 0,
-    __: (state, getters, rootState, rootGetters) => (key, params) => {
+    __: (state, getters, rootState, rootGetters) => (key) => {
         const lang = rootGetters['preferences/lang']
           || ((rootState.preferences && rootState.preferences.global)
             ? rootState.preferences.global.lang : null);
