@@ -23,4 +23,5 @@ return [
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
     'ensoApiToken' => env('ENSO_API_TOKEN', null),
     'extendedDocumentTitle' => false,
+    'password_expires_days' => 2,
 ];

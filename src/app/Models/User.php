@@ -26,7 +26,7 @@ class User extends Authenticatable
     protected $hidden = ['password', 'remember_token'];
 
     protected $fillable = [
-        'person_id', 'group_id', 'role_id', 'email', 'is_active',
+        'person_id', 'group_id', 'role_id', 'email', 'is_active', 'password_changed_at',
     ];
 
     protected $casts = [

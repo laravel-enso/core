@@ -17,6 +17,10 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                     ->name('password.email');
                 Route::post('password/reset', 'ResetPasswordController@reset')
                     ->name('password.reset');
+                Route::get('password/expired', 'Auth\ExpiredPasswordController@expired')
+                    ->name('password.expired');
+                Route::post('password/post_expired', 'Auth\ExpiredPasswordController@postExpired')
+                    ->name('password.post_expired');                    
             });
 
         Route::middleware(['web', 'auth', 'core'])
