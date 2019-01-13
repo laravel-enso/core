@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\Core\app\Commands\Upgrade;
 use Illuminate\Http\Resources\Json\Resource;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     private function addCommands()
     {
         $this->commands([
+            Upgrade::class,
             ClearPreferences::class,
             UpdateGlobalPreferences::class,
         ]);
