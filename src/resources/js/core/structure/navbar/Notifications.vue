@@ -3,9 +3,9 @@
     <div :class="[
             'navbar-item notifications',
             { 'has-dropdown': !isTouch },
-            { 'is-active': show }
+            { 'is-active': visible }
         ]"
-        v-click-outside="hide">
+        v-click-outside="() => visible = false">
         <span v-if="isTouch" class="is-clickable"
              @click="$router.push({'name': 'core.notifications.index'})">
             <span class="icon">
@@ -14,8 +14,8 @@
             <sup class="has-text-danger notification-count">{{ unreadCount || null }}</sup>
             <overlay v-if="loading"/>
         </span>
-        <a :class="['navbar-link', { 'rotate': show }]"
-            @click="show = !show"
+        <a :class="['navbar-link', { 'rotate': visible }]"
+            @click="toggle()"
             v-else>
             <span class="icon">
                 <fa icon="bell"/>
@@ -24,13 +24,13 @@
             <overlay v-if="loading"/>
         </a>
         <div class="navbar-dropdown is-right"
-            v-if="show">
+            v-if="visible">
             <div class="notification-list"
                 @scroll="computeScrollPosition($event)">
                 <a class="navbar-item"
                     @click="update(notification)"
-                    v-for="(notification, index) in notifications"
-                    :key="index">
+                    v-for="notification in notifications"
+                    :key="notification.id">
                     <div class="navbar-content">
                         <p class="is-notification" :class="{ 'is-bold': !notification.read_at }">
                             <fa :icon="notification.data.icon"
@@ -47,12 +47,13 @@
             </div>
             <hr class="navbar-divider"
                 v-if="notifications.length">
-            <nav class="level navbar-item" v-if="notifications.length">
+            <nav class="level navbar-item"
+                v-if="notifications.length">
                 <div class="level-left">
                     <div class="level-item">
                         <a class="button is-small is-info has-margin-left-small"
                             @click="
-                                show = false;
+                                visible = false;
                                 $router.push({'name': 'core.notifications.index'})
                             ">
                             <span>{{ __("See all") }}</span>
@@ -122,8 +123,8 @@ export default {
             needsUpdate: true,
             offset: 0,
             loading: false,
-            Echo: null,
-            show: false,
+            echo: null,
+            visible: false,
             desktopNotifications: false,
         };
     },
@@ -137,16 +138,11 @@ export default {
         unreadCount(val) {
             this.favico.badge(val);
         },
-        show() {
-            if (this.show) {
-                this.fetch();
-            }
-        },
     },
 
     created() {
         this.fetch = debounce(this.fetch, 500);
-        this.initLaravelEcho();
+        this.initEcho();
         this.initDesktopNotification();
         this.count();
         this.listen();
@@ -154,8 +150,12 @@ export default {
     },
 
     methods: {
-        hide() {
-            this.show = false;
+        toggle() {
+            this.visible = !this.visible;
+
+            if (this.visible) {
+                this.fetch();
+            }
         },
         count() {
             axios.get(route('core.notifications.count'))
@@ -202,8 +202,8 @@ export default {
 
             this.unreadCount = 0;
         },
-        initLaravelEcho() {
-            this.Echo = new Echo({
+        initEcho() {
+            this.echo = new Echo({
                 broadcaster: 'pusher',
                 key: this.meta.pusher,
                 cluster: this.meta.pusherCluster,
@@ -230,31 +230,29 @@ export default {
         },
         listen() {
             const self = this;
-            this.Echo.private(`App.User.${this.user.id}`)
-                .notification(({
-                    level, body, title,
-                }) => {
-                    self.unreadCount++;
-                    self.needsUpdate = true;
-                    self.offset = 0;
+            this.echo.private(`App.User.${this.user.id}`)
+                .notification(({ level, body, title }) => {
+                self.unreadCount++;
+                self.needsUpdate = true;
+                self.offset = 0;
 
-                    if (!document.hidden) {
-                        this.$toastr[level](body, title);
-                        return;
-                    }
+                if (!document.hidden) {
+                    this.$toastr[level](body, title);
+                    return;
+                }
 
-                    if (this.desktopNotifications) {
-                        const notification = new Notification(title, {
-                            body,
-                        });
+                if (this.desktopNotifications) {
+                    const notification = new Notification(title, {
+                        body,
+                    });
 
-                        notification.onclick = () => {
-                            window.focus();
-                        };
+                    notification.onclick = () => {
+                        window.focus();
+                    };
 
-                        window.navigator.vibrate(500);
-                    }
-                });
+                    window.navigator.vibrate(500);
+                }
+            });
         },
         computeScrollPosition(event) {
             const a = event.target.scrollTop;
