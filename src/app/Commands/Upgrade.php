@@ -62,9 +62,10 @@ class Upgrade extends Command
         });
 
         Schema::table('data_imports', function (Blueprint $table) {
-            $table->tinyInteger('status')->change();
             $table->dropColumn('summary');
         });
+
+        \DB::statement('ALTER TABLE data_imports MODIFY status TINYINT NOT NULL');
 
         $this->info('Table successfuly updated');
 
@@ -82,7 +83,7 @@ class Upgrade extends Command
         }
 
         Schema::table('data_exports', function (Blueprint $table) {
-            $table->string('type')->after('name');
+            $table->string('name')->after('id');
             $table->integer('entries')->nullable()->after('name');
             $table->tinyInteger('status')->after('entries')->nullable();
 
