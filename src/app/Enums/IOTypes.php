@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\app\Enums;
 
 use LaravelEnso\Helpers\app\Classes\Enum;
 
-class IOtypes extends Enum
+class IOTypes extends Enum
 {
     const Import = 1;
     const Export = 2;

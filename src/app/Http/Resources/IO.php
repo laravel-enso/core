@@ -16,7 +16,7 @@ class IO extends JsonResource
             'type' => $this->type(),
             'since' => $this->created_at,
             'status' => $this->status,
-            'owner' => $this->whenLoaded('createdBy', new TrackWho($this->createdBy))
+            'owner' => $this->whenLoaded('createdBy', new TrackWho($this->createdBy)),
         ];
     }
 }

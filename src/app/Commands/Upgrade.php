@@ -109,7 +109,7 @@ class Upgrade extends Command
         Permission::whereName('import.run')
             ->update([
                 'name' => 'import.store',
-                'description' => 'Upload file for import'
+                'description' => 'Upload file for import',
             ]);
 
         Permission::whereName('import.getSummary')
