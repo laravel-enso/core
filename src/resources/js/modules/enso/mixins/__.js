@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import __ from '../__';
+import __ from '../plugins/__';
 
 Vue.mixin({
     methods: {
