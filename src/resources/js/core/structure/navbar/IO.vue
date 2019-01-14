@@ -166,25 +166,26 @@ export default {
         listen() {
             this.echo.private(`operations.${this.user.id}`)
                 .listen('.io-started', ({ operation }) => {
-                    this[this.type(operation.type)].push(operation);
+                    this.push(operation);
                 }).listen('.io-updated', ({ operation }) => {
                     this.update(operation);
                 }).listen('.io-stopped', ({ operation }) => {
                     this.remove(operation);
                 });
         },
-        push(type, operation) {
-            this[type].push(operation);
+        push(operation) {
+            this[this.type(operation.type)].push(operation);
         },
         update(operation) {
             const existing = this[this.type(operation.type)]
                 .find(({ id }) => id === operation.id);
             if (existing) {
                 existing.entries = operation.entries;
+                existing.status = operation.status;
                 return;
             }
 
-            this[this.type(operation.type)].push(operation);
+            this.push(operation);
         },
         remove(operation) {
             const index = this[this.type(operation.type)]

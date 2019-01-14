@@ -15,12 +15,12 @@ class IOEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $operation;
-    private $event;
+    private $name;
 
-    public function __construct(IOOperation $operation, $event)
+    public function __construct(IOOperation $operation, $name)
     {
         $this->operation = $operation;
-        $this->event = $event;
+        $this->name = $name;
     }
 
     public function broadcastOn()
@@ -35,6 +35,6 @@ class IOEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return $this->event;
+        return $this->name;
     }
 }

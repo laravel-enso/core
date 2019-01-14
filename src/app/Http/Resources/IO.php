@@ -10,13 +10,13 @@ class IO extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->getKey(),
             'entries' => $this->entries(),
             'name' => $this->name(),
             'type' => $this->type(),
             'since' => $this->created_at,
-            'status' => $this->status,
-            'owner' => $this->whenLoaded('createdBy', new TrackWho($this->createdBy)),
+            'status' => $this->status(),
+            'owner' => new TrackWho($this->createdBy),
         ];
     }
 }

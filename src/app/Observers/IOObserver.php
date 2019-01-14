@@ -20,8 +20,10 @@ class IOObserver
 
     private function event($operation)
     {
-        event(new IOEvent(
-            $operation, IOEvents::get($operation->status)
-        ));
+        if (IOEvents::has($operation->status())) {
+            event(new IOEvent(
+                $operation, IOEvents::get($operation->status())
+            ));
+        }
     }
 }

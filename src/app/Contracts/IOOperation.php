@@ -10,5 +10,7 @@ interface IOOperation
 
     public function type();
 
+    public function status();
+
     public function entries();
 }
