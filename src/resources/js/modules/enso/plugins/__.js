@@ -32,4 +32,4 @@ export default (key, params = null) => {
                 : param;
         })
         : translation;
-}
+};
