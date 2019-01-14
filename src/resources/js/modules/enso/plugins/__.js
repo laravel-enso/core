@@ -1,4 +1,4 @@
-import store from '../../store';
+import store from '../../../store';
 
 export default (key, params = null) => {
     if (!store.getters['localisation/isInitialised']) {
