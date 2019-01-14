@@ -189,7 +189,7 @@ export default {
         },
         remove(operation) {
             const index = this[this.type(operation.type)]
-                .findIndex(({ id }) => id === operation);
+                .findIndex(({ id }) => id === operation.id);
 
             if (index >= 0) {
                 this[this.type(operation.type)].splice(index, 1);
