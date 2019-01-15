@@ -13,9 +13,10 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 - project wide, middleware based, automatic logging of all user actions
 - configurable, selective, model event based logging of CRUD (& custom) actions
 - integrated avatar functionality with custom & automatic avatar generation
-- chart generation support
-- extensible, reusable file management core functionality
-- powerful, template based, customizable form builder with out of the box support for most use cases
+- beautiful charts generation support
+- extensible, reusable file management core functionality with sharing capabilities
+- powerful, template based form builder with out of the box support for most use cases
+and the option for the customization of any input
 - model event based history tracking
 - middleware based user impersonation support for testing & troubleshooting
 - localisation & i18n support
@@ -29,17 +30,19 @@ Main requirement & dependency aggregator for [Laravel Enso](https://github.com/l
 - customizable, project wide search support
 - template based CLI interface for the painless creation of the most needed file structures
 - trait based, event driven user tracking for any model state change
-- easy to use tutorial functionality for quick human user training
+- easy to use tutorial functionality for quick human operator training
 - model event driven, out of the box versioning support
 - aspect consistent ecosystem of front-end VueJS reusable components
 - highly powerful, full search, customizable, template based, huge data-set capable, 
-front-end back-end integrated data table functionality with a great many other features
+front-end back-end integrated data table functionality with support for the export of the entire resultset 
+and a great many other features
+- customizable, extensible, companies structure
+- template based, validation capable, asynchronous capable xlsx data import functionality featuring support for big files 
+(the number of rows is limited only by the xlsx format)
  
 ## Optional Features
 - customizable, extensible, generic addresses manager plugin
 - polymorphic, notification integrated comments functionality
-- customizable, extensible, companies structure
-- template based, validation capable, xlsx data import functionality
 - intuitive discussions module
 - polymorphic, document upload and management functionality
 - easy to use, searchable, taggable videos support
@@ -51,12 +54,13 @@ front-end back-end integrated data table functionality with a great many other f
 [Activity Log](https://github.com/laravel-enso/ActivityLog), 
 [Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>, 
 [Charts](https://github.com/laravel-enso/Charts), 
-[Data Export](https://github.com/laravel-enso/DataExport), 
+[Companies](https://github.com/laravel-enso/Companies),
+[Data Export](https://github.com/laravel-enso/DataExport),
+[Data Import](https://github.com/laravel-enso/DataImport), 
 [File Manager](https://github.com/laravel-enso/FileManager), 
 [Form Builder](https://github.com/laravel-enso/FormBuilder), 
 [Helpers](https://github.com/laravel-enso/Helpers), 
 [History Tracker](https://github.com/laravel-enso/HistoryTracker),
-[Image Transformer](https://github.com/laravel-enso/ImageTransformer), 
 [Impersonate](https://github.com/laravel-enso/Impersonate), 
 [Localisation](https://github.com/laravel-enso/Localisation), 
 [Log Manager](https://github.com/laravel-enso/LogManager), 
@@ -78,9 +82,7 @@ front-end back-end integrated data table functionality with a great many other f
 ## Optional packages
 
 [Addresses Manager](https://github.com/laravel-enso/AddressesManager), 
-[Comments Manager](https://github.com/laravel-enso/CommentsManager), 
-[Companies](https://github.com/laravel-enso/Companies), 
-[Data Import](https://github.com/laravel-enso/DataImport), 
+[Comments Manager](https://github.com/laravel-enso/CommentsManager),
 [Discussions](https://github.com/laravel-enso/Discussions), 
 [Documents Manager](https://github.com/laravel-enso/DocumentsManager) <sup>1</sup>, 
 [HowTo Videos](https://github.com/laravel-enso/HowToVideos)
