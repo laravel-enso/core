@@ -7,8 +7,8 @@ export const state = {
 export const getters = {
     isInitialised: state => Object.keys(state.i18n).length > 0,
     __: (state, getters, rootState) => (key) => {
-        const lang = rootState.preferences.global;
-
+        const { lang } = rootState.preferences.global;
+        console.log(lang);
         return state.i18n[lang]
             ? state.i18n[lang][key]
             : key;
