@@ -52,7 +52,7 @@ class Upgrade extends Command
         });
 
         DataImport::whereNull('status')
-            ->update(['status' => Statuses::Processed]);
+            ->update(['status' => Statuses::Finalized]);
 
         DataImport::get()->each(function ($dataImport) {
             $dataImport->update([
