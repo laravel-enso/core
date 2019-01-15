@@ -7,8 +7,16 @@
         ]"
         v-click-outside="() => visible = false"
         v-if="count">
+        <span v-if="isTouch" class="is-clickable">
+            <span class="icon">
+                <fa icon="sync-alt"
+                    spin/>
+            </span>
+            <sup class="has-text-danger operation-count">{{ count || null }}</sup>
+        </span>
         <a :class="['navbar-link', { 'rotate': visible }]"
-            @click="visible = isTouch ? visible : !visible">
+            @click="visible = !visible"
+            v-else>
             <span class="icon">
                 <fa icon="sync-alt"
                     spin/>

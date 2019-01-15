@@ -11,8 +11,7 @@
             <span class="icon">
                 <fa icon="bell"/>
             </span>
-            <sup class="has-text-danger notification-count">{{ unreadCount || null }}</sup>
-            <overlay v-if="loading"/>
+            <sup class="has-text-danger notification-count">{{ unreadCount || null }}</sup>/>
         </span>
         <a :class="['navbar-link', { 'rotate': visible }]"
             @click="toggle()"
