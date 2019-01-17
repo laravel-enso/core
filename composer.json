@@ -57,7 +57,7 @@
         "laravel-enso/rememberable": "1.4.*",
         "laravel-enso/rolemanager": "2.5.*",
         "laravel-enso/searchable": "1.0.*",
-        "laravel-enso/structuremanager": "2.4.*",
+        "laravel-enso/structuremanager": "2.5.*",
         "laravel-enso/trackwho": "1.7.*",
         "laravel-enso/tutorialmanager": "2.2.*",
         "laravel-enso/versioning": "1.1.*",
