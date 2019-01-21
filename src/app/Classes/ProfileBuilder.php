@@ -20,7 +20,7 @@ class ProfileBuilder
     public function set()
     {
         $this->user->load([
-            'person:id,name,appellative,birthday,phone',
+            'person:id,name,title,appellative,birthday,phone',
             'group:id,name',
             'role:id,name',
             'avatar:id,user_id',
