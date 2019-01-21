@@ -20,7 +20,7 @@ class ProfileBuilder
     public function set()
     {
         $this->user->load([
-            'person:id,name,appellative,birthday,gender,phone',
+            'person:id,name,appellative,birthday,phone',
             'group:id,name',
             'role:id,name',
             'avatar:id,user_id',
@@ -32,6 +32,7 @@ class ProfileBuilder
     public function build()
     {
         $this->user->loginCount = $this->user->logins()->count();
+        $this->user->person->gender = $this->user->person->gender();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
         $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;
         $this->user->rating = $this->rating();
