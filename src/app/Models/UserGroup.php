@@ -11,6 +11,8 @@ class UserGroup extends Model
 {
     use HasRoles, LogsActivity;
 
+    const AdminGroupId = 1;
+
     protected $fillable = ['name', 'description'];
 
     protected $loggableLabel = 'name';

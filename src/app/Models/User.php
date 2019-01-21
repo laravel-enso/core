@@ -81,6 +81,11 @@ class User extends Authenticatable
         return $this->role_id === Role::SupervisorId;
     }
 
+    public function belongsToAdminGroup()
+    {
+        return $this->group_id === UserGroup::AdminGroupId;
+    }
+
     public function isPerson(Person $person)
     {
         return $this->person_id === $person->id;
@@ -148,11 +153,17 @@ class User extends Authenticatable
 
     public function delete()
     {
+        if ($this->logins()->first() !== null) {
+            throw new ConflictHttpException(__(
+                'The user has activity in the system and cannot be deleted'
+            ));
+        }
+
         try {
             parent::delete();
         } catch (\Exception $e) {
             throw new ConflictHttpException(__(
-                'The user has activity in the system and cannot be deleted'
+                'The user has assigned resources in the system and cannot be deleted'
             ));
         }
     }

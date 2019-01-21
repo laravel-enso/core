@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\app\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\DataImport\app\Enums\Statuses;
 use LaravelEnso\DataImport\app\Models\DataImport;
 use LaravelEnso\PermissionManager\app\Models\Permission;
@@ -13,7 +14,7 @@ class Upgrade extends Command
 {
     protected $signature = 'enso:upgrade';
 
-    protected $description = 'This command will upgrade Core to 3.4.x';
+    protected $description = 'This command will upgrade Core from 3.3.* to ^3.4';
 
     public function handle()
     {
@@ -27,7 +28,10 @@ class Upgrade extends Command
         \DB::transaction(function () {
             $this->updateImportTable()
                 ->updateExportTable()
-                ->updatePermissions();
+                ->updatePermissions()
+                ->updatePeople()
+                ->updateContacts()
+                ->updateCompanies();
         });
     }
 
@@ -126,6 +130,93 @@ class Upgrade extends Command
             ]);
 
         $this->info('Permissions successfuly updated');
+
+        return $this;
+    }
+
+    private function updatePeople()
+    {
+        $this->info('Updating people table');
+
+        if (Schema::hasColumn('people', 'company_id')) {
+            $this->info('Table already updated');
+
+            return $this;
+        }
+
+        Schema::table('people', function (Blueprint $table) {
+            $table->integer('company_id')->after('id')->unsigned()->index()->nullable();
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->string('position')->after('birthday')->nullable();
+            $table->dropColumn('gender');
+        });
+
+        $this->info('Table successfuly updated');
+
+        return $this;
+    }
+
+    private function updateContacts()
+    {
+        $this->info('Updating contacts structure');
+
+        if (! Schema::hasTable('contacts')) {
+            $this->info('Structure already updated');
+        }
+
+        \DB::table('contacts')->get()
+            ->each(function ($contact) {
+                Person::whereId($contact->person_id)
+                    ->update(collect($contact)->only([
+                        'company_id', 'position'
+                    ])->toArray());
+            });
+
+        Schema::drop('contacts');
+
+        \DB::table('migrations')
+            ->whereIn('migration', [
+                '2018_10_23_095019_create_contacts_table',
+                '2017_01_01_148000_create_structure_for_contacts',
+            ])
+            ->delete();
+
+        Permission::where(
+            'name',
+            'LIKE%',
+            'administration.companies.contacts.'
+        )->delete();
+
+        $this->info('Structure successfuly updated');
+
+        return $this;
+    }
+
+    private function updateCompanies()
+    {
+        $this->info('Updating companies table');
+
+        if (! Schema::hasColumn('companies', 'mandatary_position')) {
+            $this->info('Table already updated');
+
+            return $this;
+        }
+
+        Company::has('mandatary')
+            ->with('mandatary')
+            ->get()
+            ->each(function ($company) {
+                $company->mandatary->update([
+                    'company_id' => $company->id,
+                    'position' => $company->mandatary_position,
+                ]);
+            });
+
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropColumn('mandatary_position');
+        });
+
+        $this->info('Table successfuly updated');
 
         return $this;
     }

@@ -57,7 +57,9 @@ class UserController extends Controller
             $user->password = bcrypt($request->get('password'));
         }
 
-        if ($request->get('role_id') !== $user->role_id) {
+        $user->fill($request->validated());
+
+        if ($user->isDirty('role_id')) {
             $this->authorize('change-role', $user);
         }
 
