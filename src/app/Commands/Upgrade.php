@@ -171,7 +171,7 @@ class Upgrade extends Command
             ->each(function ($contact) {
                 Person::whereId($contact->person_id)
                     ->update(collect($contact)->only([
-                        'company_id', 'position'
+                        'company_id', 'position',
                     ])->toArray());
             });
 
