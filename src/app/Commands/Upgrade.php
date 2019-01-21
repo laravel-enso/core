@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\Companies\app\Models\Company;
 use LaravelEnso\DataImport\app\Enums\Statuses;
 use LaravelEnso\DataImport\app\Models\DataImport;
 use LaravelEnso\PermissionManager\app\Models\Permission;
@@ -162,6 +163,8 @@ class Upgrade extends Command
 
         if (! Schema::hasTable('contacts')) {
             $this->info('Structure already updated');
+
+            return $this;
         }
 
         \DB::table('contacts')->get()
@@ -172,7 +175,7 @@ class Upgrade extends Command
                     ])->toArray());
             });
 
-        Schema::drop('contacts');
+        Schema::dropIfExists('contacts');
 
         \DB::table('migrations')
             ->whereIn('migration', [
