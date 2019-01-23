@@ -241,7 +241,9 @@ export default {
             });
         },
         dateFormat(date) {
-            return format(date, this.meta.dateFormat);
+            return date
+                ? format(date, this.meta.dateFormat)
+                : null;
         },
     },
 };
