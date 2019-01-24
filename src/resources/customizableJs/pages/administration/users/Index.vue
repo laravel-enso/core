@@ -21,11 +21,9 @@ import VueTable from '../../../components/enso/vuedatatable/VueTable.vue';
 export default {
     components: { VueTable },
 
-    data() {
-        return {
+    data: => () ({
             path: route('administration.users.initTable'),
-        };
-    },
+    }),
 
     methods: {
         avatarLink(id) {
