@@ -31,12 +31,12 @@ library.add(faQuestion);
 export default {
     name: 'Tutorial',
 
-    data: () => ({
+    data: v => ({
         driver: new Driver({
-            doneBtnText: this.__('Done'),
-            closeBtnText: this.__('Close'),
-            nextBtnText: this.__('Next'),
-            prevBtnText: this.__('Previous'),
+            doneBtnText: v.__('Done'),
+            closeBtnText: v.__('Close'),
+            nextBtnText: v.__('Next'),
+            prevBtnText: v.__('Previous'),
         }),
     }),
 
