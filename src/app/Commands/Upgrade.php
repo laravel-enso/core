@@ -186,8 +186,8 @@ class Upgrade extends Command
 
         Permission::where(
             'name',
-            'LIKE%',
-            'administration.companies.contacts.'
+            'LIKE',
+            'administration.companies.contacts.%'
         )->delete();
 
         $this->info('Structure successfuly updated');
