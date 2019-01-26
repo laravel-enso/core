@@ -40,7 +40,7 @@ class PasswordExpiresSoonNotification extends Notification implements ShouldQueu
 
         if ($daysLeft > 1) {
             return __("You've got :days days left to change it", [
-                'days' => $daysLeft
+                'days' => $daysLeft,
             ]);
         }
 

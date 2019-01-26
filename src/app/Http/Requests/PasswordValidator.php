@@ -28,19 +28,19 @@ class PasswordValidator
 
             if (! $this->hasMinUppercase()) {
                 $this->validator->errors()->add('password', __('Minimum upper case letters count is :number', [
-                    'number' => config('enso.config.password.minUpperCase')
+                    'number' => config('enso.config.password.minUpperCase'),
                 ]));
             }
 
             if (! $this->hasMinNumeric()) {
                 $this->validator->errors()->add('password', __('Minimum numeric characters count is :number', [
-                    'number' => config('enso.config.password.minNumeric')
+                    'number' => config('enso.config.password.minNumeric'),
                 ]));
             }
 
             if (! $this->hasMinSpecial()) {
                 $this->validator->errors()->add('password', __('Minimum special characters count is :number', [
-                    'number' => config('enso.config.password.minSpecial')
+                    'number' => config('enso.config.password.minSpecial'),
                 ]));
             }
         }
