@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -22,10 +21,17 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        $user = User::where('email', '=', $request->input('email'))->first();
+        $user = User::whereEmail($request->input('email'))
+            ->first();
 
-        if (is_null($user) || ! Hash::check($request->input('password'), $user->password)) {
+        if (is_null($user) || ! $user->isCurrentPassword($request->input('password'))) {
             return false;
+        }
+
+        if ($user->passwordExpired()) {
+            throw new AuthenticationException(__(
+                'Your password has expired. Please use the reset password form to set a new one'
+            ));
         }
 
         if ($user->isDisabled()) {

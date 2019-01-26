@@ -32,7 +32,8 @@ class Upgrade extends Command
                 ->updatePermissions()
                 ->updatePeople()
                 ->updateContacts()
-                ->updateCompanies();
+                ->updateCompanies()
+                ->updateUsers();
         });
     }
 
@@ -217,6 +218,25 @@ class Upgrade extends Command
 
         Schema::table('companies', function (Blueprint $table) {
             $table->dropColumn('mandatary_position');
+        });
+
+        $this->info('Table successfuly updated');
+
+        return $this;
+    }
+
+    private function updateUsers()
+    {
+        $this->info('Updating users table');
+
+        if (Schema::hasColumn('users', 'password_updated_at')) {
+            $this->info('Table already updated');
+
+            return $this;
+        }
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->datetime('password_updated_at')->after('remember_token')->nullable();
         });
 
         $this->info('Table successfuly updated');

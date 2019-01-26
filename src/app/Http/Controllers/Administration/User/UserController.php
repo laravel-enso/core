@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Core\app\Classes\ProfileBuilder;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
@@ -64,6 +65,10 @@ class UserController extends Controller
         }
 
         $user->update($request->validated());
+
+        if (collect($user->getChanges())->keys()->contains('password')) {
+            event(new PasswordReset($user));
+        }
 
         return ['message' => __('The user was successfully updated')];
     }

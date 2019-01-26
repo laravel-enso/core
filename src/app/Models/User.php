@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\app\Models;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\People\app\Traits\IsPerson;
+use LaravelEnso\Core\app\Traits\HasPassword;
 use LaravelEnso\FileManager\app\Models\File;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\FileManager\app\Traits\Uploads;
@@ -15,23 +16,22 @@ use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use ActionLogs, ActiveState, HasAvatar, Impersonates,
+    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
         IsPerson, LogsActivity, Notifiable, Uploads;
 
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
-    protected $fillable = [
-        'person_id', 'group_id', 'role_id', 'email', 'is_active',
-    ];
+    protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
 
     protected $casts = [
         'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
     ];
+
+    protected $dates = ['password_updated_at'];
 
     protected $loggableLabel = 'person.name';
 
@@ -120,19 +120,6 @@ class User extends Authenticatable
         return new Preference([
             'value' => DefaultPreferences::data(),
         ]);
-    }
-
-    public function sendResetPasswordEmail()
-    {
-        $this->sendPasswordResetNotification(
-            app('auth.password.broker')
-                ->createToken($this)
-        );
-    }
-
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
     }
 
     public function setGlobalPreferences($global)

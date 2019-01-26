@@ -25,8 +25,20 @@ class ValidateUserRequest extends FormRequest
             'group_id' => 'required|exists:user_groups,id',
             'role_id' => 'required|exists:roles,id',
             'email' => ['email', 'required', $emailUnique],
-            'password' => 'nullable|min:6|confirmed',
+            'password' => 'nullable|confirmed|min:'.config('enso.config.password.minLength'),
             'is_active' => 'boolean',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($this->filled('password')) {
+                $validator->after(function ($validator) {
+                    (new PasswordValidator($this, $validator))
+                        ->handle();
+                });
+            }
+        });
     }
 }

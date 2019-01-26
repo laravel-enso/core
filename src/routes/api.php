@@ -15,7 +15,7 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                     ->name('logout');
                 Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
                     ->name('password.email');
-                Route::post('password/reset', 'ResetPasswordController@reset')
+                Route::post('password/reset', 'ResetPasswordController@attemptReset')
                     ->name('password.reset');
             });
 
