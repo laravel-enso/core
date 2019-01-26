@@ -6,7 +6,9 @@ class PasswordResetListener
 {
     public function handle($event)
     {
-        $event->user->password_updated_at = now();
-        $event->user->save();
+        if ((int) config('enso.config.password.lifetime') > 0) {
+            $event->user->password_updated_at = now();
+            $event->user->save();
+        }
     }
 }
