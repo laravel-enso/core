@@ -210,8 +210,13 @@ export default {
 
                     const { status, data } = error.response;
 
-                    if ([401, 429].includes(status)) {
+                    if (status === 401) {
                         this.$toastr.error(data.message);
+                        return;
+                    }
+
+                    if (status === 429) {
+                        this.$toastr.error(data.errors.email[0]);
                         return;
                     }
 
