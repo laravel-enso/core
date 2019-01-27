@@ -32,13 +32,11 @@ class ValidateUserRequest extends FormRequest
 
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
-            if ($this->filled('password')) {
-                $validator->after(function ($validator) {
-                    (new PasswordValidator($this, $validator))
+        if ($this->filled('password')) {
+            $validator->after(function ($validator) {
+                (new PasswordValidator($this, $validator))
                         ->handle();
-                });
-            }
-        });
+            });
+        }
     }
 }

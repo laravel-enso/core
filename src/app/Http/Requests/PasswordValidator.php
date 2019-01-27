@@ -51,11 +51,9 @@ class PasswordValidator
         if (! config('enso.config.password.minUpperCase')) {
             return true;
         }
+        preg_match_all('/[A-Z]+/', $this->request->get('password'), $matches);
 
-        preg_match('/[A-Z]+/', $this->request->get('password'), $matches);
-
-        return Str::length(collect($matches)->implode(''))
-            >= config('enso.config.password.minUpperCase');
+        return $this->length($matches) >= config('enso.config.password.minUpperCase');
     }
 
     private function hasMinNumeric()
@@ -64,10 +62,9 @@ class PasswordValidator
             return true;
         }
 
-        preg_match('/[0-9]+/', $this->request->get('password'), $matches);
+        preg_match_all('/[0-9]+/', $this->request->get('password'), $matches);
 
-        return Str::length(collect($matches)->implode(''))
-            >= config('enso.config.password.minNumeric');
+        return $this->length($matches) >= config('enso.config.password.minNumeric');
     }
 
     private function hasMinSpecial()
@@ -76,9 +73,13 @@ class PasswordValidator
             return true;
         }
 
-        preg_match('/[^\da-zA-Z]/', $this->request->get('password'), $matches);
+        preg_match_all('/[^\da-zA-Z0-9]+/', $this->request->get('password'), $matches);
 
-        return Str::length(collect($matches)->implode(''))
-            >= config('enso.config.password.minSpecial');
+        return $this->length($matches) >= config('enso.config.password.minSpecial');
+    }
+
+    private function length($matches)
+    {
+        return Str::length(collect($matches)->flatten()->implode(''));
     }
 }
