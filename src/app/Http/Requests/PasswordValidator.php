@@ -28,19 +28,19 @@ class PasswordValidator
 
             if (! $this->hasMinUppercase()) {
                 $this->validator->errors()->add('password', __('Minimum upper case letters count is :number', [
-                    'number' => config('enso.config.password.minUpperCase'),
+                    'number' => config('enso.auth.password.minUpperCase'),
                 ]));
             }
 
             if (! $this->hasMinNumeric()) {
                 $this->validator->errors()->add('password', __('Minimum numeric characters count is :number', [
-                    'number' => config('enso.config.password.minNumeric'),
+                    'number' => config('enso.auth.password.minNumeric'),
                 ]));
             }
 
             if (! $this->hasMinSpecial()) {
                 $this->validator->errors()->add('password', __('Minimum special characters count is :number', [
-                    'number' => config('enso.config.password.minSpecial'),
+                    'number' => config('enso.auth.password.minSpecial'),
                 ]));
             }
         }
@@ -48,34 +48,34 @@ class PasswordValidator
 
     private function hasMinUppercase()
     {
-        if (! config('enso.config.password.minUpperCase')) {
+        if (! config('enso.auth.password.minUpperCase')) {
             return true;
         }
         preg_match_all('/[A-Z]+/', $this->request->get('password'), $matches);
 
-        return $this->length($matches) >= config('enso.config.password.minUpperCase');
+        return $this->length($matches) >= config('enso.auth.password.minUpperCase');
     }
 
     private function hasMinNumeric()
     {
-        if (! config('enso.config.password.minNumeric')) {
+        if (! config('enso.auth.password.minNumeric')) {
             return true;
         }
 
         preg_match_all('/[0-9]+/', $this->request->get('password'), $matches);
 
-        return $this->length($matches) >= config('enso.config.password.minNumeric');
+        return $this->length($matches) >= config('enso.auth.password.minNumeric');
     }
 
     private function hasMinSpecial()
     {
-        if (! config('enso.config.password.minSpecial')) {
+        if (! config('enso.auth.password.minSpecial')) {
             return true;
         }
 
         preg_match_all('/[^\da-zA-Z0-9]+/', $this->request->get('password'), $matches);
 
-        return $this->length($matches) >= config('enso.config.password.minSpecial');
+        return $this->length($matches) >= config('enso.auth.password.minSpecial');
     }
 
     private function length($matches)

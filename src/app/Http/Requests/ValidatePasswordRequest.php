@@ -15,7 +15,7 @@ class ValidatePasswordRequest extends FormRequest
     {
         return [
             'email' => 'exists:users,email',
-            'password' => 'nullable|confirmed|min:'.config('enso.config.password.minLength'),
+            'password' => 'nullable|confirmed|min:'.config('enso.auth.password.minLength'),
         ];
     }
 

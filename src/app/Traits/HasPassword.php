@@ -14,7 +14,7 @@ trait HasPassword
 
     public function passwordExpired()
     {
-        $lifetime = (int) config('enso.config.password.lifetime');
+        $lifetime = (int) config('enso.auth.password.lifetime');
 
         return $lifetime > 0 && (is_null($this->password_updated_at)
                 || now()->diffInDays($this->password_updated_at) > $lifetime);
@@ -22,7 +22,7 @@ trait HasPassword
 
     public function needsPasswordChange()
     {
-        return (int) config('enso.config.password.lifetime') > 0
+        return (int) config('enso.auth.password.lifetime') > 0
             && ! is_null($this->password_updated_at)
             && $this->passwordExpiresIn() <= 3;
     }
