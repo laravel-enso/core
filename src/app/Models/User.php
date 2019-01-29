@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function company()
+    {
+        return  $this->person->company;
+    }
+
     public function files()
     {
         return $this->hasMany(File::class, 'created_by');
