@@ -34,4 +34,11 @@ class UserGroup extends Model
 
         parent::delete();
     }
+
+    public function scopeVisible($query)
+    {
+        return auth()->user()->belongsToAdminGroup()
+            ? $query
+            : $query->whereId(auth()->user()->group_id);
+    }
 }

@@ -10,5 +10,8 @@ class UserGroupSelectController extends Controller
 {
     use OptionsBuilder;
 
-    protected $model = UserGroup::class;
+    public function query()
+    {
+        return UserGroup::visible();
+    }
 }

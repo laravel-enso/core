@@ -60,9 +60,7 @@ class UserController extends Controller
 
         $user->fill($request->validated());
 
-        if ($user->isDirty('role_id')) {
-            $this->authorize('change-role', $user);
-        }
+        $this->authorize('handle-after', $user);
 
         $user->update($request->validated());
 

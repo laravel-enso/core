@@ -18,18 +18,20 @@ class UserPolicy
 
     public function handle(User $user, User $targetUser)
     {
-        return ! $targetUser->isAdmin();
+        return ! $targetUser->isAdmin()
+            && $targetUser->group_id === $user->id;
+    }
+
+    public function handleAfter(User $user, User $targetUser)
+    {
+        return $targetUser->isDirty('role_id')
+            ? $this->canChangeRole($user, $targetUser) && ! $targetUser->isDirty('group_id')
+            : ! $targetUser->isDirty('group_id');
     }
 
     public function changePassword(User $user, User $targetUser)
     {
         return $user->id === $targetUser->id;
-    }
-
-    public function changeRole(User $user, User $targetUser)
-    {
-        return $user->id !== $targetUser->id
-            && ! ($targetUser->isAdmin() && ! $user->isAdmin());
     }
 
     public function impersonate(User $user, User $targetUser)
@@ -38,5 +40,11 @@ class UserPolicy
             && ! $targetUser->isAdmin()
             && $user->id !== $targetUser->id
             && ! $user->isImpersonating();
+    }
+
+    private function canChangeRole(User $user, User $targetUser)
+    {
+        return  $user->id !== $targetUser->id
+            && ! ($targetUser->isAdmin() && ! $user->isAdmin());
     }
 }
