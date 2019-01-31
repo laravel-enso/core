@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Policies;
 
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\RoleManager\app\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -19,10 +20,10 @@ class UserPolicy
     public function handle(User $user, User $targetUser)
     {
         return ! $targetUser->isAdmin()
-            && $targetUser->group_id === $user->id;
+            && $targetUser->group_id === $user->group_id;
     }
 
-    public function handleAfter(User $user, User $targetUser)
+    public function update(User $user, User $targetUser)
     {
         return $targetUser->isDirty('role_id')
             ? $this->canChangeRole($user, $targetUser) && ! $targetUser->isDirty('group_id')
@@ -45,6 +46,7 @@ class UserPolicy
     private function canChangeRole(User $user, User $targetUser)
     {
         return  $user->id !== $targetUser->id
-            && ! ($targetUser->isAdmin() && ! $user->isAdmin());
+            && ! $targetUser->isAdmin()
+            && Role::visible()->whereId($targetUser->role_id)->first() !== null;
     }
 }
