@@ -60,11 +60,9 @@ class UserController extends Controller
 
         $user->fill($request->validated());
 
-        if ($user->isDirty('role_id')) {
-            $this->authorize('change-role', $user);
-        }
+        $this->authorize('update', $user);
 
-        $user->update($request->validated());
+        $user->save($request->validated());
 
         if (collect($user->getChanges())->keys()->contains('password')) {
             event(new PasswordReset($user));
