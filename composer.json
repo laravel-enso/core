@@ -51,6 +51,7 @@
         "laravel-enso/localisation": "2.4.*",
         "laravel-enso/logmanager": "2.2.*",
         "laravel-enso/menumanager": "2.3.*",
+        "laravel-enso/multitenancy": "1.0.*",
         "laravel-enso/notifications": "2.2.*",
         "laravel-enso/people": "1.1.*",
         "laravel-enso/permissionmanager": "2.3.*",

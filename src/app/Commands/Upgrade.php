@@ -33,6 +33,7 @@ class Upgrade extends Command
                 ->updatePeople()
                 ->updateContacts()
                 ->updateCompanies()
+                ->addsTenant()
                 ->updateUsers();
         });
     }
@@ -221,6 +222,25 @@ class Upgrade extends Command
         });
 
         $this->info('Table successfuly updated');
+
+        return $this;
+    }
+
+    private function addsTenant()
+    {
+        $this->info('Adding tenant to companies table');
+
+        if (Schema::hasColumn('companies', 'is_tenant')) {
+            $this->info('Tenant already added');
+
+            return $this;
+        }
+
+        Schema::table('companies', function (Blueprint $table) {
+            $table->boolean('is_tenant')->after('pays_vat')->default(false);
+        });
+
+        $this->info('Tenant successfuly added');
 
         return $this;
     }

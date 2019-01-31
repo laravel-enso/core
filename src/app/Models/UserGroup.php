@@ -4,12 +4,14 @@ namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\RoleManager\app\Traits\HasRoles;
+use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
+use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserGroup extends Model
 {
-    use HasRoles, LogsActivity;
+    use HasRoles, LogsActivity, TableCache, SystemConnection;
 
     const AdminGroupId = 1;
 
@@ -18,6 +20,8 @@ class UserGroup extends Model
     protected $loggableLabel = 'name';
 
     protected $loggable = ['name', 'description'];
+
+    protected $cachedTable = 'userGroups';
 
     public function users()
     {

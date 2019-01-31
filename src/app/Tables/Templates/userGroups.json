@@ -2,6 +2,7 @@
     "routePrefix": "administration.userGroups",
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
+    "cache": true,
     "columns": [
         {
             "label": "Name",

@@ -2,6 +2,7 @@
     "routePrefix": "administration.users",
     "crtNo": true,
     "buttons": ["excel", "show", "edit", "destroy"],
+    "cache": true,
     "columns": [
         {
             "label": "",

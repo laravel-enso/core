@@ -16,12 +16,13 @@ use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
     use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
-        IsPerson, LogsActivity, Notifiable, Uploads;
+        IsPerson, LogsActivity, Notifiable, Uploads, SystemConnection;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
@@ -41,6 +42,8 @@ class User extends Authenticatable
         'role_id' => [Role::class => 'name'],
     ];
 
+    protected $cachedTable = 'users';
+
     public function person()
     {
         return $this->belongsTo(Person::class);
@@ -58,7 +61,7 @@ class User extends Authenticatable
 
     public function company()
     {
-        return  $this->person->company;
+        return $this->person->company;
     }
 
     public function files()
