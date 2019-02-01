@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
 
     private function loadMiddleware()
     {
-        $this->app['router']->middleware(
+        $this->app['router']->aliasMiddleware(
             'verify-active-state', VerifyActiveState::class
         );
 
