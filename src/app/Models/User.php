@@ -12,6 +12,7 @@ use LaravelEnso\FileManager\app\Traits\Uploads;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
 use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
+use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
@@ -21,8 +22,8 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
-    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
-        IsPerson, LogsActivity, Notifiable, Uploads, SystemConnection;
+    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates, IsPerson,
+        LogsActivity, Notifiable, Uploads, SystemConnection, TableCache;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 

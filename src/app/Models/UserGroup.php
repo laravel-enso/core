@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserGroup extends Model
 {
-    use HasRoles, LogsActivity, TableCache, SystemConnection;
+    use HasRoles, LogsActivity, TableCache, SystemConnection, TableCache;
 
     const AdminGroupId = 1;
 
