@@ -1,5 +1,6 @@
 <template>
-    <div class="navbar-item key-collector">
+    <div class="navbar-item key-collector"
+        v-if="keyCollector">
         <span class="has-text-info is-bold">
             {{ count }}
         </span>
@@ -31,7 +32,7 @@ export default {
     }),
 
     computed: {
-        ...mapState('localisation', ['missingKeys']),
+        ...mapState('localisation', ['keyCollector', 'missingKeys']),
         count() {
             return this.missingKeys.length;
         },
