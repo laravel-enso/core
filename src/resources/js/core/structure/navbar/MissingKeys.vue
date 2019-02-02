@@ -1,6 +1,5 @@
 <template>
-    <div v-if="count > 0"
-        class="navbar-item key-collector">
+    <div class="navbar-item key-collector">
         <span class="has-text-info is-bold">
             {{ count }}
         </span>
