@@ -36,6 +36,7 @@
         "laravel/framework": "5.7.*",
         "guzzlehttp/guzzle": "~6.0",
         "jenssegers/date": "^3.4",
+        "laravel/horizon": "^2.0",
         "laravel-enso/actionlogger": "2.2.*",
         "laravel-enso/activityLog": "1.1.*",
         "laravel-enso/avatarmanager": "2.3.*",
