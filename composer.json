@@ -63,8 +63,7 @@
         "laravel-enso/tutorialmanager": "2.2.*",
         "laravel-enso/versioning": "1.1.*",
         "laravel-enso/vuecomponents": "2.7.*",
-        "laravel-enso/vuedatatable": "1.9.*",
-        "laravel/horizon": "^2.0"
+        "laravel-enso/vuedatatable": "1.9.*"
     },
     "autoload": {
         "psr-4": {
