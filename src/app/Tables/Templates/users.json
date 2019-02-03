@@ -8,7 +8,7 @@
             "label": null,
             "name": "avatarId",
             "data": "avatars.avatarId",
-            "meta": ["slot"],
+            "meta": ["slot", "notExportable"],
             "class": "is-paddingless"
         }, {
             "label": "Name",
