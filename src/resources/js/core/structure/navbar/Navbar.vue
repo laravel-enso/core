@@ -41,6 +41,7 @@
             <div v-if="isTouch"
                 class="is-pulled-right is-flex">
                 <search v-if="!isMobile"/>
+                <tenant/>
                 <i-o/>
                 <notifications/>
                 <profile-control/>
@@ -52,6 +53,7 @@
                 class="navbar-end">
                 <search/>
                 <missing-keys/>
+                <tenant/>
                 <i-o/>
                 <notifications/>
                 <profile-control/>
@@ -71,6 +73,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import MissingKeys from './MissingKeys.vue';
 import IO from './IO.vue';
+import Tenant from './Tenant.vue';
 import Notifications from './Notifications.vue';
 import SettingsControl from './SettingsControl.vue';
 import ProfileControl from './ProfileControl.vue';
@@ -84,7 +87,7 @@ export default {
     directives: { tooltip: VTooltip },
 
     components: {
-        MissingKeys, IO, Notifications, SettingsControl, ProfileControl, Search,
+        MissingKeys, Tenant, IO, Notifications, SettingsControl, ProfileControl, Search,
     },
 
     computed: {

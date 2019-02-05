@@ -15,6 +15,7 @@ return [
         'imports' => 'imports',
         'exports' => 'exports',
         'howToVideos' => 'howToVideos',
+        'tenants' => 'tenants',
     ],
     'facebook' => 'https://facebook.com',
     'googleplus' => 'https://plus.google.com',

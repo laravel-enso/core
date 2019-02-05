@@ -21,6 +21,7 @@ export default new Vuex.Store({
         showQuote: false,
         user: {},
         impersonating: null,
+        tenant: null,
         meta: {},
         enums: {},
         routes: {},
@@ -48,6 +49,7 @@ export default new Vuex.Store({
         initialise: (state, value) => (state.isInitialised = value),
         setShowQuote: (state, value) => (state.showQuote = value),
         setRoutes: (state, routes) => (state.routes = routes),
+        setTenant: (state, tenant) => (state.tenant = tenant),
         setDefaultRoute: (state, route) => {
             router.addRoutes([{
                 path: '/',
