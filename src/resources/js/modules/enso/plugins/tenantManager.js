@@ -5,6 +5,11 @@ const setTenant = (config) => {
         return;
     }
 
+    if (config.data instanceof FormData) {
+        config.data.append('_tenantId', store.state.tenant.id);
+        return;
+    }
+
     const tenant = {
         _tenantId: store.state.tenant.id,
     };
