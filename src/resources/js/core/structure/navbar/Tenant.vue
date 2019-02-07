@@ -71,16 +71,14 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-    .navbar-item.tenant .tag {
-        .name {
-            max-width: 100px;
-            overflow-x: hidden;
-            text-overflow: ellipsis;
-        }
+<style lang="scss">
+    .navbar-item.tenant .tag .name {
+        max-width: 100px;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
     }
 
-    .tenant-container .modal-content {
+    .tenant-container > .modal > .modal-content {
         overflow: unset;
     }
 
