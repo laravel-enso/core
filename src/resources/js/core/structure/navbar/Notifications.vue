@@ -211,11 +211,14 @@ export default {
             this.echo = new Echo({
                 broadcaster: 'pusher',
                 key: this.meta.pusher.key,
-                cluster: this.meta.pusher.cluster,
-                wsHost: this.meta.pusher.host,
-                httpHost: this.meta.pusher.host,
-                wsPort: this.meta.pusher.port,
-                wssPort: this.meta.pusher.port,
+                ...this.meta.pusher.host && {
+                    wsHost: this.meta.pusher.host,
+                    httpHost: this.meta.pusher.host
+                },
+                ...this.meta.pusher.port && {
+                    wsPort: this.meta.pusher.port,
+                    wssPort: this.meta.pusher.port
+                },
                 disableStats: true,
                 encrypted: this.meta.pusher.secure,
                 enabledTransports: ['ws', 'wss'],
