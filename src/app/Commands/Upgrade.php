@@ -10,7 +10,6 @@ use LaravelEnso\Companies\app\Models\Company;
 use LaravelEnso\DataImport\app\Enums\Statuses;
 use LaravelEnso\DataImport\app\Models\DataImport;
 use LaravelEnso\PermissionManager\app\Models\Permission;
-use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 
 class Upgrade extends Command
 {
@@ -231,15 +230,8 @@ class Upgrade extends Command
     {
         $this->info('Adding tenant to companies table');
 
-        if (Permission::whereName('administration.companies.tenants')
-            ->first() === null) {
-            Permission::create([
-                'name' => 'administration.companies.tenants',
-                'description' => 'Get options for tenant selector',
-                'type' => PermissionTypes::Read,
-                'default' => false,
-            ]);
-        }
+        Permission::whereName('administration.companies.tenants')
+            ->delete();
 
         if (Schema::hasColumn('companies', 'is_tenant')) {
             $this->info('Tenant already added');

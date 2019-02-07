@@ -17,13 +17,12 @@ use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable
 {
     use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates, IsPerson,
-        LogsActivity, Notifiable, Uploads, SystemConnection, TableCache;
+        LogsActivity, Notifiable, Uploads, TableCache;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
