@@ -104,7 +104,7 @@ export default {
                     wssPort: this.meta.pusher.port
                 },
                 disableStats: true,
-                encrypted: this.meta.pusher.secure,
+                encrypted: this.meta.pusher.encrypted,
                 enabledTransports: ['ws', 'wss'],
                 namespace: 'App.Events',
             });
