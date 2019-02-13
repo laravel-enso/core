@@ -84,7 +84,7 @@ class AppState implements Responsable
               'cluster' => config('broadcasting.connections.pusher.options.cluster'),
               'host' => config('broadcasting.connections.pusher.options.host'),
               'port' => config('broadcasting.connections.pusher.options.port'),
-              'secure' => (config('broadcasting.connections.pusher.options.scheme') === 'https'),
+              'encrypted' => config('broadcasting.connections.pusher.options.encrypted'),
             ],
             'ravenKey' => config('enso.config.ravenKey'),
         ];
