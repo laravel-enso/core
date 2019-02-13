@@ -79,8 +79,13 @@ class AppState implements Responsable
             'dateFormat' => config('enso.config.jsDateFormat'),
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
-            'pusher' => config('broadcasting.connections.pusher.key'),
-            'pusherCluster' => config('broadcasting.connections.pusher.options.cluster'),
+            'pusher' => [
+              'key' => config('broadcasting.connections.pusher.key'),
+              'cluster' => config('broadcasting.connections.pusher.options.cluster'),
+              'host' => config('broadcasting.connections.pusher.options.host'),
+              'port' => config('broadcasting.connections.pusher.options.port'),
+              'encrypted' => config('broadcasting.connections.pusher.options.encrypted'),
+            ],
             'ravenKey' => config('enso.config.ravenKey'),
         ];
     }

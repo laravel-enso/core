@@ -210,8 +210,18 @@ export default {
         initEcho() {
             this.echo = new Echo({
                 broadcaster: 'pusher',
-                key: this.meta.pusher,
-                cluster: this.meta.pusherCluster,
+                key: this.meta.pusher.key,
+                ...this.meta.pusher.host && {
+                    wsHost: this.meta.pusher.host,
+                    httpHost: this.meta.pusher.host
+                },
+                ...this.meta.pusher.port && {
+                    wsPort: this.meta.pusher.port,
+                    wssPort: this.meta.pusher.port
+                },
+                disableStats: true,
+                encrypted: this.meta.pusher.encrypted,
+                enabledTransports: ['ws', 'wss'],
                 namespace: 'App.Events',
             });
         },
