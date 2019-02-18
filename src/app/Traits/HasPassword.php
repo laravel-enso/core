@@ -29,7 +29,9 @@ trait HasPassword
 
     public function passwordExpiresIn()
     {
-        return now()->diffInDays($this->password_updated_at);
+        return $this->password_updated_at
+            ->addDays((int) config('enso.auth.password.lifetime'))
+            ->diffInDays(now());
     }
 
     public function sendResetPasswordEmail()
