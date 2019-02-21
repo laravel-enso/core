@@ -61,10 +61,10 @@ export default {
             return !this.lightsOff;
         },
         slideIn() {
-            return this.isRTL ? 'slideInLeft' : 'slideInRight'
+            return this.isRTL ? 'slideInLeft' : 'slideInRight';
         },
         slideOut() {
-            return this.isRTL ? 'slideOutLeft' : 'slideOutRight'
+            return this.isRTL ? 'slideOutLeft' : 'slideOutRight';
         },
     },
 
