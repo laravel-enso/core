@@ -39,7 +39,7 @@
                 </button>
             </div>
             <div v-if="isTouch"
-                class="is-pulled-right is-flex">
+                class="is-flex" :class="isRTL ? 'is-pulled-left' : 'is-pulled-right'">
                 <search v-if="!isMobile"/>
                 <i-o/>
                 <notifications/>
@@ -63,7 +63,7 @@
 
 <script>
 
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -90,6 +90,7 @@ export default {
     computed: {
         ...mapState(['meta', 'impersonating']),
         ...mapState('layout', ['isMobile', 'isTouch', 'menu']),
+        ...mapGetters('preferences', ['isRTL']),
     },
 
     methods: {
@@ -117,6 +118,9 @@ export default {
 
         .is-pulled-right {
             margin-left: auto;
+        }
+        .is-pulled-left {
+            margin-right: auto;
         }
     }
 

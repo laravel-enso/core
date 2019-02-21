@@ -13,7 +13,8 @@
                 slot="controls"
                 slot-scope="{ items }">
                 <div v-if="tags(items).length < 6"
-                    class="dropdown-content has-text-centered has-padding-small has-margin-top-small">
+                     class="dropdown-content has-text-centered
+                     has-padding-small has-margin-top-small">
                     <a v-for="(tag, index) in tags(items)"
                         :key="index"
                         class="tag control-list is-uppercase"
@@ -37,7 +38,7 @@
                     </span>
                     <span v-html="highlight(item['label'])"/>
                     <span v-if="item.routes.length"
-                        class="route-controls">
+                        class="route-controls" :class="rtlClass">
                         <span v-for="(route, index) in item.routes"
                             :key="index"
                             class="icon is-small route-control"
@@ -53,6 +54,7 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEye, faPencilAlt, faListUl } from '@fortawesome/free-solid-svg-icons';
 import Typeahead from '../../../components/enso/bulma/Typeahead.vue';
@@ -68,6 +70,10 @@ export default {
         query: '',
         selectedTags: [],
     }),
+
+    computed: {
+        ...mapGetters('preferences', ['rtlClass']),
+    },
 
     methods: {
         route(search, { routes }) {
@@ -153,8 +159,13 @@ export default {
         }
         .route-controls {
             position: absolute;
-            right: 1em;
             margin-top: .15em;
+            &.left {
+                right: 1rem;
+            }
+            &.right {
+                left: 1rem;
+            }
 
             .route-control {
                 z-index: 4;

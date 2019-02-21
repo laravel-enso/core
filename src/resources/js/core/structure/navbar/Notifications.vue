@@ -26,7 +26,7 @@
             <overlay v-if="loading"/>
         </a>
         <div v-if="visible"
-            class="navbar-dropdown is-right">
+            class="navbar-dropdown " :class="isRTL ? 'is-left' : 'is-right'">
             <div class="notification-list"
                 @scroll="computeScrollPosition($event)">
                 <a v-for="notification in notifications"
@@ -92,7 +92,7 @@
 <script>
 
 import debounce from 'lodash/debounce';
-import { mapState } from 'vuex';
+import { mapState,mapGetters } from 'vuex';
 import vClickOutside from 'v-click-outside';
 import Pusher from 'pusher-js';
 import Echo from 'laravel-echo';
@@ -137,6 +137,7 @@ export default {
     computed: {
         ...mapState(['user', 'meta']),
         ...mapState('layout', ['isTouch']),
+        ...mapGetters('preferences', ['isRTL']),
     },
 
     watch: {
@@ -210,18 +211,8 @@ export default {
         initEcho() {
             this.echo = new Echo({
                 broadcaster: 'pusher',
-                key: this.meta.pusher.key,
-                ...this.meta.pusher.host && {
-                    wsHost: this.meta.pusher.host,
-                    httpHost: this.meta.pusher.host
-                },
-                ...this.meta.pusher.port && {
-                    wsPort: this.meta.pusher.port,
-                    wssPort: this.meta.pusher.port
-                },
-                disableStats: true,
-                encrypted: this.meta.pusher.encrypted,
-                enabledTransports: ['ws', 'wss'],
+                key: this.meta.pusher,
+                cluster: this.meta.pusherCluster,
                 namespace: 'App.Events',
             });
         },

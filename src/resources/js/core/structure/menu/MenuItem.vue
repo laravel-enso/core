@@ -13,11 +13,11 @@
             </span>
         </transition>
         <span v-if="menu.has_children"
-            class="icon is-small angle is-pulled-right"
+            class="icon is-small angle is-pulled-right" :class="rtlClass"
             :aria-expanded="menu.expanded">
             <fa icon="angle-up"/>
         </span>
-        <div class="dropdown-content">
+        <div class="dropdown-content" :class="rtlClass">
             <div v-if="!isExpanded"
                 class="dropdown-item">
                 {{ __(menu.name) }}
@@ -28,7 +28,7 @@
 
 <script>
 
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations,mapGetters } from 'vuex';
 
 export default {
     name: 'MenuItem',
@@ -43,6 +43,7 @@ export default {
     computed: {
         ...mapState('layout/menu', ['isExpanded']),
         ...mapState('layout', ['isTouch']),
+        ...mapGetters('preferences', ['rtlClass']),
     },
 
     methods: {
@@ -86,11 +87,23 @@ export default {
         padding-top: 0;
         margin-top: -9px;
         position: fixed;
-        left: 56px;
+
+        &.left {
+            left: 56px;
+        }
+        &.right {
+            right: 56px;
+        }
     }
 
     .icon.angle {
-        margin-left: auto;
+
+        &.left {
+            margin-left: auto
+        }
+        &.right {
+            margin-right: auto
+        }
     }
 
 </style>

@@ -31,10 +31,10 @@ export default {
 
     computed: {
         ...mapState('layout', ['themes']),
-        ...mapGetters('preferences', ['theme']),
+        ...mapGetters('preferences', ['theme', 'rtlCss']),
         alternate() {
             return Object.keys(this.themes)
-                .find(theme => theme !== this.theme);
+                .find(theme => theme.replace('-rtl', '') !== this.theme.replace('-rtl', '')) + this.rtlCss;
         },
     },
 
