@@ -4,16 +4,16 @@ export const state = {
 };
 
 const setPreferences = (payload) => {
-    axios.patch(route('core.preferences.setPreferences'), payload)
+    return axios.patch(route('core.preferences.setPreferences'), payload)
         .catch(error => this.handleError(error));
 };
 
 const updateGlobal = () => {
-    setPreferences({ global: state.global });
+    return setPreferences({ global: state.global });
 };
 
 const updateLocal = (payload) => {
-    setPreferences({ route: payload.route, value: payload.value });
+    return setPreferences({ route: payload.route, value: payload.value });
 };
 
 export const getters = {
