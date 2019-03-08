@@ -5,7 +5,7 @@
     "cache": true,
     "columns": [
         {
-            "label": null,
+            "label": "Avatar",
             "name": "avatarId",
             "data": "avatars.avatarId",
             "meta": ["slot", "notExportable"],

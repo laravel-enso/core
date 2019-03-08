@@ -81,10 +81,7 @@ class AppState implements Responsable
             'csrfToken' => csrf_token(),
             'pusher' => [
               'key' => config('broadcasting.connections.pusher.key'),
-              'cluster' => config('broadcasting.connections.pusher.options.cluster'),
-              'host' => config('broadcasting.connections.pusher.options.host'),
-              'port' => config('broadcasting.connections.pusher.options.port'),
-              'encrypted' => config('broadcasting.connections.pusher.options.encrypted'),
+              'options' => config('broadcasting.connections.pusher.options'),
             ],
             'ravenKey' => config('enso.config.ravenKey'),
         ];

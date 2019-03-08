@@ -78,7 +78,6 @@
             "meta": {
                 "custom": true,
                 "type": "select",
-                "multiple": false,
                 "options": [],
                 "source": "system.roles.options"
             }
