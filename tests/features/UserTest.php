@@ -16,7 +16,7 @@ class UserTest extends TestCase
     private $permissionGroup = 'administration.users';
     private $testModel;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
