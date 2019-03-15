@@ -60,12 +60,12 @@
         "laravel-enso/rememberable": "1.5.*",
         "laravel-enso/rolemanager": "3.0.*",
         "laravel-enso/searchable": "1.1.*",
+        "laravel-enso/select": "3.0.*",
         "laravel-enso/structuremanager": "3.0.*",
         "laravel-enso/teams": "2.0.*",
         "laravel-enso/trackwho": "1.7.*",
         "laravel-enso/tutorialmanager": "3.0.*",
         "laravel-enso/versioning": "1.1.*",
-        "laravel-enso/vuecomponents": "2.7.*",
         "laravel-enso/vuedatatable": "2.0.*"
     },
     "autoload": {
