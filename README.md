@@ -90,7 +90,7 @@ and a great many other features
 
 ### Configuration & Details
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/packages/core.html)
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/core.html)
 
 ### Contributions
 
