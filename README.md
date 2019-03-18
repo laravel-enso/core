@@ -1,4 +1,4 @@
-# Laravel Enso Core
+# Core
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
 [![StyleCI](https://styleci.io/repos/85807594/shield?branch=master)](https://styleci.io/repos/85807594)
@@ -7,6 +7,16 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
 
 Main requirement & dependency aggregator for [Laravel Enso](https://github.com/laravel-enso/Enso).
+
+This package works exclusively within the [Enso](https://github.com/laravel-enso/Enso) ecosystem.
+
+The front end assets that utilize this api are present in the [ui](https://github.com/enso-ui/ui) package.
+
+For live examples and demos, you may visit [laravel-enso.com](https://www.laravel-enso.com)
+
+## Installation
+
+Comes pre-installed in Enso.
 
 ## Features
 - core users, roles, permissions structure
@@ -23,6 +33,7 @@ and the option for the customization of any input
 - Laravel log management functionality & interface
 - application menus management
 - user email & push notifications
+- IO operations progress monitoring for data import and export
 - extensible, core people functionality
 - integrated permissions management
 - easy to use caching support
@@ -34,18 +45,20 @@ and the option for the customization of any input
 - model event driven, out of the box versioning support
 - aspect consistent ecosystem of front-end VueJS reusable components
 - highly powerful, full search, customizable, template based, huge data-set capable, 
-front-end back-end integrated data table functionality with support for the export of the entire resultset 
+front-end back-end integrated data table functionality with support for the export of the entire result-set 
 and a great many other features
 - customizable, extensible, companies structure
-- template based, validation capable, asynchronous capable xlsx data import functionality featuring support for big files 
-(the number of rows is limited only by the xlsx format)
+- template based, validation capable, asynchronous capable xlsx data import functionality
+ featuring support for big files (the number of rows is limited only by the xlsx format)
+- easy to use, searchable, taggable videos support
  
 ## Optional Features
 - customizable, extensible, generic addresses manager plugin
 - polymorphic, notification integrated comments functionality
+- template based, validation capable, xlsx data import functionality
 - intuitive discussions module
 - polymorphic, document upload and management functionality
-- easy to use, searchable, taggable videos support
+
 - core teams structure  
 
 ## Included packages
@@ -61,10 +74,13 @@ and a great many other features
 [Form Builder](https://github.com/laravel-enso/FormBuilder), 
 [Helpers](https://github.com/laravel-enso/Helpers), 
 [History Tracker](https://github.com/laravel-enso/HistoryTracker),
+[How To Videos](https://github.com/laravel-enso/HowToVideos),
 [Impersonate](https://github.com/laravel-enso/Impersonate), 
+[IO](https://github.com/laravel-enso/IO), 
 [Localisation](https://github.com/laravel-enso/Localisation), 
 [Log Manager](https://github.com/laravel-enso/LogManager), 
 [Menu Manager](https://github.com/laravel-enso/MenuManager),
+[Multi tenancy](https://github.com/laravel-enso/Multitenancy),
 [Notifications](https://github.com/laravel-enso/Notifications), 
 [People](https://github.com/laravel-enso/People), 
 [Permission Manager](https://github.com/laravel-enso/PermissionManager), 
@@ -73,10 +89,10 @@ and a great many other features
 [Searchable](https://github.com/laravel-enso/Searchable), 
 [Select](https://github.com/laravel-enso/Select), 
 [Structure Manager](https://github.com/laravel-enso/StructureManager), 
+[Teams](https://github.com/laravel-enso/Teams), 
 [TrackWho](https://github.com/laravel-enso/TrackWho), 
 [Tutorial Manager](https://github.com/laravel-enso/TutorialManager), 
-[Versioning](https://github.com/laravel-enso/Versioning), 
-[Vue Components](https://github.com/laravel-enso/VueComponents), 
+[Versioning](https://github.com/laravel-enso/Versioning),
 [VueDataTable](https://github.com/laravel-enso/VueDataTable), 
 
 ## Optional packages
@@ -85,8 +101,6 @@ and a great many other features
 [Comments Manager](https://github.com/laravel-enso/CommentsManager),
 [Discussions](https://github.com/laravel-enso/Discussions), 
 [Documents Manager](https://github.com/laravel-enso/DocumentsManager) <sup>1</sup>, 
-[HowTo Videos](https://github.com/laravel-enso/HowToVideos)
-[Teams](https://github.com/laravel-enso/Teams)
 
 ### Configuration & Details
 
@@ -99,4 +113,3 @@ are welcome. Pull requests are great, but issues are good too.
 ### License
 
 This package is released under the MIT license.
-<!--/h-->
