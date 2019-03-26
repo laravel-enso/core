@@ -3,9 +3,11 @@
 namespace LaravelEnso\Core\app\Http\Responses;
 
 use LaravelEnso\Core\app\Enums\Themes;
+use LaravelEnso\Helpers\app\Classes\Enum;
 use LaravelEnso\People\app\Enums\Genders;
 use LaravelEnso\Core\app\Classes\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
+use LaravelEnso\Calendar\app\Enums\Calendars;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
@@ -29,6 +31,8 @@ class AppState implements Responsable
 
     private function response()
     {
+        Enum::localisation(false);
+
         $languages = Language::active()
             ->pluck('flag', 'name');
 
@@ -76,7 +80,7 @@ class AppState implements Responsable
             'version' => config('enso.config.version'),
             'quote' => Inspiring::quote(),
             'env' => app()->environment(),
-            'dateFormat' => config('enso.config.jsDateFormat'),
+            'dateFormat' => config('enso.config.dateFormat'),
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
             'pusher' => [
@@ -91,6 +95,7 @@ class AppState implements Responsable
     {
         return [
             'genders' => Genders::all(),
+            'calendars' => Calendars::all(),
         ];
     }
 

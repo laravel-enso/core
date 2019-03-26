@@ -39,6 +39,7 @@
         "laravel-enso/actionlogger": "2.2.*",
         "laravel-enso/activityLog": "2.0.*",
         "laravel-enso/avatarmanager": "2.3.*",
+        "laravel-enso/calendar": "1.0.*",
         "laravel-enso/charts": "3.0.*",
         "laravel-enso/companies": "2.0.*",
         "laravel-enso/dataexport": "^1.2",
