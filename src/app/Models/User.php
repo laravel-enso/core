@@ -4,11 +4,11 @@ namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\Calendar\app\Models\Event;
 use LaravelEnso\People\app\Traits\IsPerson;
 use LaravelEnso\Core\app\Traits\HasPassword;
 use LaravelEnso\FileManager\app\Models\File;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\Calendar\app\Models\Event;
 use LaravelEnso\FileManager\app\Traits\Uploads;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
