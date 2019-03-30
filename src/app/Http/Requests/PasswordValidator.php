@@ -10,39 +10,37 @@ class PasswordValidator
 {
     private $request;
     private $validator;
+    private $user;
 
-    public function __construct(Request $request, Validator $validator)
+    public function __construct(Request $request, Validator $validator, $user)
     {
         $this->request = $request;
         $this->validator = $validator;
+        $this->user = $user;
     }
 
     public function handle()
     {
-        if ($this->request->filled('password')) {
-            if (config('auth.providers.users.model')::query()
-                ->whereEmail($this->request->get('email'))
-                ->first()->isCurrentPassword($this->request->get('password'))) {
-                $this->validator->errors()->add('password', __('You cannot use the existing password'));
-            }
+        if ($this->user->currentPasswordIs($this->request->get('password'))) {
+            $this->validator->errors()->add('password', __('You cannot use the existing password'));
+        }
 
-            if (! $this->hasMinUppercase()) {
-                $this->validator->errors()->add('password', __('Minimum upper case letters count is :number', [
-                    'number' => config('enso.auth.password.minUpperCase'),
-                ]));
-            }
+        if (! $this->hasMinUppercase()) {
+            $this->validator->errors()->add('password', __('Minimum upper case letters count is :number', [
+                'number' => config('enso.auth.password.minUpperCase'),
+            ]));
+        }
 
-            if (! $this->hasMinNumeric()) {
-                $this->validator->errors()->add('password', __('Minimum numeric characters count is :number', [
-                    'number' => config('enso.auth.password.minNumeric'),
-                ]));
-            }
+        if (! $this->hasMinNumeric()) {
+            $this->validator->errors()->add('password', __('Minimum numeric characters count is :number', [
+                'number' => config('enso.auth.password.minNumeric'),
+            ]));
+        }
 
-            if (! $this->hasMinSpecial()) {
-                $this->validator->errors()->add('password', __('Minimum special characters count is :number', [
-                    'number' => config('enso.auth.password.minSpecial'),
-                ]));
-            }
+        if (! $this->hasMinSpecial()) {
+            $this->validator->errors()->add('password', __('Minimum special characters count is :number', [
+                'number' => config('enso.auth.password.minSpecial'),
+            ]));
         }
     }
 

@@ -7,7 +7,7 @@ use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 trait HasPassword
 {
-    public function isCurrentPassword(string $password)
+    public function currentPasswordIs(string $password)
     {
         return Hash::check($password, $this->password);
     }

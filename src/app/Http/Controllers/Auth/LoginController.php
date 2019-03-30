@@ -25,7 +25,7 @@ class LoginController extends Controller
         $user = User::whereEmail($request->input('email'))
             ->first();
 
-        if (is_null($user) || ! $user->isCurrentPassword($request->input('password'))) {
+        if (is_null($user) || ! $user->currentPasswordIs($request->input('password'))) {
             return false;
         }
 
