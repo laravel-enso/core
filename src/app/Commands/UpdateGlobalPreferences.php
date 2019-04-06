@@ -46,8 +46,7 @@ class UpdateGlobalPreferences extends Command
         return collect($this->defaultPreferences->global)
             ->keys()
             ->diff(
-                collect($meta->global)
-                    ->keys()
+                collect($meta->global)->keys()
             );
     }
 

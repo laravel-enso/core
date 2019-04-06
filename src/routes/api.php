@@ -51,7 +51,8 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                     ->name('options');
                             });
 
-                        Route::resource('userGroups', 'UserGroup\UserGroupController', ['except' => ['show', 'index']]);
+                        Route::resource('userGroups', 'UserGroup\UserGroupController')
+                            ->except('show', 'index');
 
                         Route::namespace('User')
                             ->prefix('users')->as('users.')
@@ -70,7 +71,8 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                     ->name('options');
                             });
 
-                        Route::resource('users', 'User\UserController', ['except' => ['index', 'create']]);
+                        Route::resource('users', 'User\UserController')
+                            ->except('index', 'create');
                     });
             });
     });

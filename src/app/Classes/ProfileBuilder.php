@@ -40,9 +40,9 @@ class ProfileBuilder
 
     private function rating()
     {
-        return intval(
-            (self::LoginRating * $this->user->loginCount / $this->user->daysSinceMember +
-            self::ActionRating * $this->user->actionLogCount / $this->user->daysSinceMember) / 100
-        );
+        return intval((
+            self::LoginRating * $this->user->loginCount / $this->user->daysSinceMember +
+            self::ActionRating * $this->user->actionLogCount / $this->user->daysSinceMember
+        ) / 100);
     }
 }

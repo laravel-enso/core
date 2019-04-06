@@ -65,8 +65,7 @@ class UserTest extends TestCase
     {
         $this->testModel->save();
 
-        $initialState = $this->testModel->is_active;
-        $this->testModel->is_active = ! $initialState;
+        $this->testModel->is_active = ! $this->testModel->is_active;
 
         $this->patch(
             route('administration.users.update', $this->testModel->id, false),
@@ -74,7 +73,7 @@ class UserTest extends TestCase
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 
-        $this->assertEquals(! $initialState, $this->testModel->fresh()->is_active);
+        $this->assertEquals($this->testModel->is_active, $this->testModel->fresh()->is_active);
     }
 
     /** @test */
@@ -88,8 +87,6 @@ class UserTest extends TestCase
             'limit' => 10,
         ], false))
         ->assertStatus(200)
-        ->assertJsonFragment([
-            'name' => $this->testModel->person->name,
-        ]);
+        ->assertJsonFragment(['name' => $this->testModel->person->name]);
     }
 }

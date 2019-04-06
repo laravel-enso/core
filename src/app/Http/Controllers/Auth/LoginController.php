@@ -12,20 +12,20 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+    protected $redirectTo = '/';
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
         $this->maxAttempts = config('enso.auth.maxLoginAttempts');
     }
 
-    protected $redirectTo = '/';
-
     protected function attemptLogin(Request $request)
     {
-        $user = User::whereEmail($request->input('email'))
-            ->first();
+        $user = User::whereEmail($request->input('email'))->first();
 
-        if (is_null($user) || ! $user->currentPasswordIs($request->input('password'))) {
+        if (! optional($user)->currentPasswordIs($request->input('password'))) {
             return false;
         }
 

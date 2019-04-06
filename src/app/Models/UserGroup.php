@@ -12,15 +12,13 @@ class UserGroup extends Model
 {
     use HasRoles, LogsActivity, TableCache, TableCache;
 
-    const AdminGroupId = 1;
+    const Admin = 1;
 
     protected $fillable = ['name', 'description'];
 
     protected $loggableLabel = 'name';
 
     protected $loggable = ['name', 'description'];
-
-    protected $cachedTable = 'userGroups';
 
     public function users()
     {

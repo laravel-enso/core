@@ -31,7 +31,7 @@ class PasswordExpiresSoonNotification extends Notification implements ShouldQueu
             'level' => 'warning',
             'title' => __('Your password will expire soon'),
             'body' => $this->body($notifiable),
-        ]))->onQueue('notifications');
+        ]))->onQueue($this->queue);
     }
 
     private function body($notifiable)

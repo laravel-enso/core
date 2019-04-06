@@ -43,8 +43,6 @@ class User extends Authenticatable
         'role_id' => [Role::class => 'name'],
     ];
 
-    protected $cachedTable = 'users';
-
     public function person()
     {
         return $this->belongsTo(Person::class);
@@ -97,7 +95,7 @@ class User extends Authenticatable
 
     public function belongsToAdminGroup()
     {
-        return $this->group_id === UserGroup::AdminGroupId;
+        return $this->group_id === UserGroup::Admin;
     }
 
     public function isPerson(Person $person)
@@ -171,10 +169,9 @@ class User extends Authenticatable
 
     private function setPreferences($preferences)
     {
-        $this->preference()
-            ->updateOrCreate(
-                ['user_id' => $this->id],
-                ['value' => $preferences]
-            );
+        $this->preference()->updateOrCreate(
+            ['user_id' => $this->id],
+            ['value' => $preferences]
+        );
     }
 }

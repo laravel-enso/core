@@ -17,7 +17,7 @@ class LoginListener
 
         if ($event->user->needsPasswordChange()) {
             config('auth.providers.users.model')::find($event->user->id)->notify(
-                (new PasswordExpiresSoonNotification)
+                (new PasswordExpiresSoonNotification())
                     ->onQueue('notifications')
             );
         }

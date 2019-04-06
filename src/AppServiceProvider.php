@@ -28,11 +28,11 @@ class AppServiceProvider extends ServiceProvider
 
     private function addCommands()
     {
-        $this->commands([
+        $this->commands(
             Upgrade::class,
             ClearPreferences::class,
-            UpdateGlobalPreferences::class,
-        ]);
+            UpdateGlobalPreferences::class
+        );
 
         return $this;
     }
@@ -57,10 +57,15 @@ class AppServiceProvider extends ServiceProvider
     private function loadDependencies()
     {
         $this->mergeConfigFrom(__DIR__.'/config/inspiring.php', 'enso.inspiring');
+
         $this->mergeConfigFrom(__DIR__.'/config/config.php', 'enso.config');
+
         $this->mergeConfigFrom(__DIR__.'/config/auth.php', 'enso.auth');
+
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/core');
 
         return $this;
@@ -116,10 +121,5 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
         ], 'enso-email');
-    }
-
-    public function register()
-    {
-        //
     }
 }

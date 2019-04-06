@@ -26,9 +26,8 @@ class UserController extends Controller
 
         $this->authorize('handle', $user);
 
-        $user->save();
-
-        $user->sendResetPasswordEmail();
+        tap($user)->save()
+            ->sendResetPasswordEmail();
 
         return [
             'message' => __('The user was successfully created'),

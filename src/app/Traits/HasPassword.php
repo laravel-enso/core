@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
@@ -17,7 +18,7 @@ trait HasPassword
         $lifetime = (int) config('enso.auth.password.lifetime');
 
         return $lifetime > 0 && (is_null($this->password_updated_at)
-                || now()->diffInDays($this->password_updated_at) > $lifetime);
+            || now()->diffInDays($this->password_updated_at) > $lifetime);
     }
 
     public function needsPasswordChange()
@@ -31,7 +32,7 @@ trait HasPassword
     {
         return $this->password_updated_at
             ->addDays((int) config('enso.auth.password.lifetime'))
-            ->diffInDays(now());
+            ->diffInDays(Carbon::now());
     }
 
     public function sendResetPasswordEmail()
@@ -44,6 +45,9 @@ trait HasPassword
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $this->notify(
+            (new ResetPasswordNotification($token))
+                ->onQueue('notifications')
+        );
     }
 }

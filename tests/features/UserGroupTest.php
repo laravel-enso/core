@@ -62,9 +62,8 @@ class UserGroupTest extends TestCase
                 'roles' => $this->testModel->roles()
                     ->pluck('id')
                     ->toArray()
-            ]
-        )->assertStatus(200)
-        ->assertJsonStructure(['message']);
+            ])->assertStatus(200)
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals('edited', $this->testModel->fresh()->name);
     }

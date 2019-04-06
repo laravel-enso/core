@@ -11,12 +11,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        Login::class => [
-            LoginListener::class,
-        ],
-        PasswordReset::class => [
-            PasswordResetListener::class,
-        ],
+        Login::class => [LoginListener::class],
+        PasswordReset::class => [PasswordResetListener::class],
     ];
 
     public function boot()
