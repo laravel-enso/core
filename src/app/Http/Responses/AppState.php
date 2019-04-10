@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Responses;
 
 use LaravelEnso\Core\app\Enums\Themes;
+use LaravelEnso\IO\app\Enums\IOStatuses;
 use LaravelEnso\Helpers\app\Classes\Enum;
 use LaravelEnso\People\app\Enums\Genders;
 use LaravelEnso\Core\app\Classes\Inspiring;
@@ -96,6 +97,7 @@ class AppState implements Responsable
         return [
             'genders' => Genders::all(),
             'calendars' => Calendars::all(),
+            'ioStatuses' => IOStatuses::all(),
         ];
     }
 
