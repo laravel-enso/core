@@ -77,7 +77,7 @@ class AppState implements Responsable
 
     private function rtl($languages)
     {
-        return $languages->filter(function($lang) {
+        return $languages->filter(function ($lang) {
             return $lang->is_rtl;
         })->pluck('name');
     }
