@@ -35,15 +35,17 @@ class AppState implements Responsable
         Enum::localisation(false);
 
         $languages = Language::active()
-            ->pluck('flag', 'name');
+            ->get(['name', 'flag', 'is_rtl']);
 
+        $langs = $languages->pluck('flag', 'name');
         $localState = config('enso.config.stateBuilder');
 
         return [
             'user' => auth()->user()->load(['person', 'avatar']),
             'preferences' => auth()->user()->preferences(),
-            'i18n' => $this->i18n($languages),
-            'languages' => $languages,
+            'i18n' => $this->i18n($langs),
+            'languages' => $langs,
+            'rtl' => $this->rtl($languages),
             'themes' => Themes::all(),
             'routes' => $this->routes(),
             'implicitRoute' => auth()->user()->role->menu->permission->name,
@@ -71,6 +73,13 @@ class AppState implements Responsable
 
                 return $i18n;
             }, []);
+    }
+
+    private function rtl($languages)
+    {
+        return $languages->filter(function($lang) {
+            return $lang->is_rtl;
+        })->pluck('name');
     }
 
     private function meta()

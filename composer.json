@@ -51,7 +51,7 @@
         "laravel-enso/howtovideos": "3.0.*",
         "laravel-enso/impersonate": "2.3.*",
         "laravel-enso/io": "1.1.*",
-        "laravel-enso/localisation": "3.0.*",
+        "laravel-enso/localisation": "3.1.*",
         "laravel-enso/logmanager": "3.0.*",
         "laravel-enso/menumanager": "3.0.*",
         "laravel-enso/multitenancy": "1.1.*",
