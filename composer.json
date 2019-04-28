@@ -58,7 +58,7 @@
         "laravel-enso/notifications": "3.0.*",
         "laravel-enso/people": "2.0.*",
         "laravel-enso/permissionmanager": "3.0.*",
-        "laravel-enso/rememberable": "1.5.*",
+        "laravel-enso/rememberable": "2.0.*",
         "laravel-enso/rolemanager": "3.0.*",
         "laravel-enso/searchable": "1.1.*",
         "laravel-enso/select": "3.0.*",
