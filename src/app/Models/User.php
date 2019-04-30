@@ -120,7 +120,7 @@ class User extends Authenticatable implements HasLocalePreference
 
         return $preferences;
     }
-    
+
     public function preferredLocale()
     {
         return $this->lang();
