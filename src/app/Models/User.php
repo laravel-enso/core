@@ -18,9 +18,10 @@ use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
 use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasLocalePreference
 {
     use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates, IsPerson,
         LogsActivity, Notifiable, Uploads, TableCache;
@@ -118,6 +119,11 @@ class User extends Authenticatable
         unset($this->preference);
 
         return $preferences;
+    }
+
+    public function preferredLocale()
+    {
+        return $this->lang();
     }
 
     public function lang()
