@@ -2,23 +2,23 @@
 
 namespace LaravelEnso\Core\app\Models;
 
-use Illuminate\Contracts\Translation\HasLocalePreference;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
-use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
-use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
+use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Calendar\app\Models\Event;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\People\app\Traits\IsPerson;
 use LaravelEnso\Core\app\Traits\HasPassword;
 use LaravelEnso\FileManager\app\Models\File;
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\FileManager\app\Traits\Uploads;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
-use LaravelEnso\Impersonate\app\Traits\Impersonates;
-use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\People\app\Traits\IsPerson;
-use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
+use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
 use LaravelEnso\VueDatatable\app\Traits\TableCache;
+use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\Impersonate\app\Traits\Impersonates;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable implements HasLocalePreference
