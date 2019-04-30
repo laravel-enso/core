@@ -2,25 +2,26 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
+use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
+use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
 use LaravelEnso\Calendar\app\Models\Event;
-use LaravelEnso\People\app\Traits\IsPerson;
+use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Core\app\Traits\HasPassword;
 use LaravelEnso\FileManager\app\Models\File;
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\FileManager\app\Traits\Uploads;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
-use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
-use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
-use LaravelEnso\VueDatatable\app\Traits\TableCache;
-use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\People\app\Traits\IsPerson;
+use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasLocalePreference
 {
     use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates, IsPerson,
         LogsActivity, Notifiable, Uploads, TableCache;
@@ -125,6 +126,16 @@ class User extends Authenticatable
         return $this->preferences()
             ->global
             ->lang;
+    }
+
+    /**
+     * Get the user's preferred locale.
+     *
+     * @return string
+     */
+    public function preferredLocale()
+    {
+        return $this->locale;
     }
 
     private function defaultPreferences()
