@@ -106,8 +106,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function persistDefaultPreferences()
     {
-        $this->preference()
-            ->save($this->defaultPreferences());
+        $this->setPreferences($this->defaultPreferences());
     }
 
     public function preferences()
