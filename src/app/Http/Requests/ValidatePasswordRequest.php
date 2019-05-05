@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Requests;
 
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ValidatePasswordRequest extends FormRequest
@@ -21,10 +22,13 @@ class ValidatePasswordRequest extends FormRequest
 
     public function withValidator($validator)
     {
+        $user = $this->route('user')
+            ?? User::whereEmail($this->get('email'))->first();
+
         if ($this->filled('password')) {
-            $validator->after(function ($validator) {
+            $validator->after(function ($validator) use ($user) {
                 (new PasswordValidator(
-                    $this, $validator, $this->route('user'))
+                    $this, $validator, $user)
                 )->handle();
             });
         }
