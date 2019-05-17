@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateUserRequest extends FormRequest
+class ValidateUserStore extends FormRequest
 {
     public function authorize()
     {
@@ -14,17 +14,11 @@ class ValidateUserRequest extends FormRequest
 
     public function rules()
     {
-        $emailUnique = Rule::unique('users', 'email');
-
-        $emailUnique = ($this->method() === 'PATCH')
-            ? $emailUnique->ignore($this->route('user')->id)
-            : $emailUnique;
-
         return [
             'person_id' => 'exists:people,id',
             'group_id' => 'required|exists:user_groups,id',
             'role_id' => 'required|exists:roles,id',
-            'email' => ['email', 'required', $emailUnique],
+            'email' => ['email', 'required', $this->emailUnique()],
             'password' => 'nullable|confirmed|min:'.config('enso.auth.password.minLength'),
             'is_active' => 'boolean',
         ];
@@ -39,5 +33,10 @@ class ValidateUserRequest extends FormRequest
                 )->handle();
             });
         }
+    }
+
+    protected function emailUnique()
+    {
+        return Rule::unique('users', 'email');
     }
 }

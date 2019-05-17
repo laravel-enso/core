@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForPreferences extends StructureMigration
+class CreateStructureForPreferences extends Migration
 {
     protected $permissions = [
         ['name' => 'core.preferences.setPreferences', 'description' => 'Set user\'s preferences', 'type' => 1, 'is_default' => true],

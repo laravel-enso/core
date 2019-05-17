@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForDashboard extends StructureMigration
+class CreateStructureForDashboard extends Migration
 {
     protected $permissions = [
         ['name' => 'dashboard.index', 'description' => 'Dashboard page', 'type' => 0, 'is_default' => true],

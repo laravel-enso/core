@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForHome extends StructureMigration
+class CreateStructureForHome extends Migration
 {
     protected $permissions = [
         ['name' => 'core.home.index', 'description' => 'App State Builder', 'type' => 0, 'is_default' => true],

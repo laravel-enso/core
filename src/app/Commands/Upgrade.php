@@ -3,9 +3,12 @@
 namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Roles\app\Enums\Roles;
 use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class Upgrade extends Command
 {
@@ -22,7 +25,9 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        $this->upgradeLanguagesTable();
+        $this->upgradeLanguagesTable()
+            ->upgradeMigrationName()
+            ->addOrganizeMenus();
     }
 
     private function upgradeLanguagesTable()
@@ -46,6 +51,48 @@ class Upgrade extends Command
         });
 
         $this->info('Languages table was successfuly upgraded');
+
+        return $this;
+    }
+
+    private function upgradeMigrationName()
+    {
+        $this->info('Renaming migrations');
+
+        DB::table('migrations')->whereMigration('2017_01_01_144000_create_structure_for_comments_manager')
+            ->update(['migration' => '2017_01_01_144000_create_structure_for_comments']);
+
+        DB::table('migrations')->whereMigration('2017_01_01_149750_create_structure_for_how_to_videos')
+            ->update(['migration' => '2017_01_01_149750_create_structure_for_how_to']);
+
+        DB::table('migrations')->whereMigration('2017_01_01_134000_create_structure_for_logmanager')
+            ->update(['migration' => '2017_01_01_134000_create_structure_for_logs']);
+
+        $this->info('Migrations renamed');
+
+        return $this;
+    }
+
+    private function addOrganizeMenus()
+    {
+        if (Permission::whereName('system.menus.organize')->first() !== null) {
+            $this->info('Organize menu was already added');
+
+            return $this;
+        }
+
+        $this->info('Adding organize menus');
+
+        $permission = Permission::create([
+            'name' => 'system.menus.organize',
+            'description' => 'Organize menus',
+            'type' => 1,
+            'is_default' => false
+        ]);
+
+        $permission->roles()->sync(Roles::keys());
+
+        $this->info('Organize menus was added');
 
         return $this;
     }

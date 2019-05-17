@@ -4,11 +4,11 @@ use Faker\Factory;
 use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Core\app\Models\UserGroup;
+use LaravelEnso\Forms\app\TestTraits\EditForm;
+use LaravelEnso\Forms\app\TestTraits\CreateForm;
+use LaravelEnso\Forms\app\TestTraits\DestroyForm;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
-use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
-use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
-use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
+use LaravelEnso\Tables\app\Traits\Tests\Datatable;
 
 class UserGroupTest extends TestCase
 {

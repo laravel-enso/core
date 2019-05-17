@@ -3,76 +3,72 @@
 Route::namespace('LaravelEnso\Core\app\Http\Controllers')
     ->prefix('api')
     ->group(function () {
-        Route::get('/meta', 'GuestController')
-            ->name('meta');
+        Route::get('/meta', 'Guest')->name('meta');
 
         Route::namespace('Auth')
             ->middleware('web')
             ->group(function () {
-                Route::post('login', 'LoginController@login')
-                    ->name('login');
-                Route::post('logout', 'LoginController@logout')
-                    ->name('logout');
-                Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')
-                    ->name('password.email');
-                Route::post('password/reset', 'ResetPasswordController@attemptReset')
-                    ->name('password.reset');
+                Route::post('login', 'LoginController@login')->name('login');
+                Route::post('logout', 'LoginController@logout')->name('logout');
+                Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+                Route::post('password/reset', 'ResetPasswordController@attemptReset')->name('password.reset');
             });
 
         Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
-                Route::prefix('core')->as('core.')
+                Route::prefix('core')
+                    ->as('core.')
                     ->group(function () {
-                        Route::get('home', 'SpaController')->name('home.index');
+                        Route::get('home', 'Spa')->name('home.index');
 
-                        Route::prefix('preferences')->as('preferences.')
+                        Route::namespace('Preferences')
+                            ->prefix('preferences')
+                            ->as('preferences.')
                             ->group(function () {
-                                Route::patch('setPreferences/{route?}', 'PreferencesController@setPreferences')
-                                    ->name('setPreferences');
-                                Route::post('resetToDefault/{route?}', 'PreferencesController@resetToDefault')
-                                    ->name('setDefault');
+                                Route::patch('setPreferences/{route?}', 'Set')->name('setPreferences');
+                                Route::post('resetToDefault/{route?}', 'SetDefault')->name('setDefault');
                             });
                     });
 
                 Route::namespace('Administration')
-                    ->prefix('administration')->as('administration.')
+                    ->prefix('administration')
+                    ->as('administration.')
                     ->group(function () {
                         Route::namespace('UserGroup')
-                            ->prefix('userGroups')->as('userGroups.')
+                            ->prefix('userGroups')
+                            ->as('userGroups.')
                             ->group(function () {
-                                Route::get('initTable', 'UserGroupTableController@init')
-                                    ->name('initTable');
-                                Route::get('tableData', 'UserGroupTableController@data')
-                                    ->name('tableData');
-                                Route::get('exportExcel', 'UserGroupTableController@excel')
-                                    ->name('exportExcel');
+                                Route::get('create', 'Create')->name('create');
+                                Route::post('', 'Store')->name('store');
+                                Route::get('{userGroup}/edit', 'Edit')->name('edit');
+                                Route::patch('{userGroup}', 'Update')->name('update');
+                                Route::delete('{userGroup}', 'Destroy')->name('destroy');
 
-                                Route::get('options', 'UserGroupSelectController@options')
-                                    ->name('options');
+                                Route::get('initTable', 'Table@init')->name('initTable');
+                                Route::get('tableData', 'Table@data')->name('tableData');
+                                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
+
+                                Route::get('options', 'Options')->name('options');
                             });
-
-                        Route::resource('userGroups', 'UserGroup\UserGroupController')
-                            ->except('show', 'index');
 
                         Route::namespace('User')
-                            ->prefix('users')->as('users.')
+                            ->prefix('users')
+                            ->as('users.')
                             ->group(function () {
-                                Route::get('create/{person}', 'UserController@create')
-                                    ->name('create');
+                                Route::get('create/{person}', 'Create')->name('create');
+                                Route::post('', 'Store')->name('store');
+                                Route::get('{user}/edit', 'Edit')->name('edit');
+                                Route::patch('{user}', 'Update')->name('update');
+                                Route::delete('{user}', 'Destroy')->name('destroy');
 
-                                Route::get('initTable', 'UserTableController@init')
-                                    ->name('initTable');
-                                Route::get('tableData', 'UserTableController@data')
-                                    ->name('tableData');
-                                Route::get('exportExcel', 'UserTableController@excel')
-                                    ->name('exportExcel');
+                                Route::get('initTable', 'Table@init')->name('initTable');
+                                Route::get('tableData', 'Table@data')->name('tableData');
+                                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
 
-                                Route::get('options', 'UserSelectController@options')
-                                    ->name('options');
+                                Route::get('options', 'Options')->name('options');
+
+                                Route::get('{user}', 'Show')->name('show');
                             });
-
-                        Route::resource('users', 'User\UserController')
-                            ->except('index', 'create');
                     });
             });
     });

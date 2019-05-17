@@ -17,14 +17,14 @@ trait HasPassword
     {
         $lifetime = (int) config('enso.auth.password.lifetime');
 
-        return $lifetime > 0 && (is_null($this->password_updated_at)
+        return $lifetime > 0 && ($this->password_updated_at === null
             || now()->diffInDays($this->password_updated_at) > $lifetime);
     }
 
     public function needsPasswordChange()
     {
         return (int) config('enso.auth.password.lifetime') > 0
-            && ! is_null($this->password_updated_at)
+            && $this->password_updated_at !== null
             && $this->passwordExpiresIn() <= 3;
     }
 

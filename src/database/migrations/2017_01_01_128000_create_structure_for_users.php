@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForUsers extends StructureMigration
+class CreateStructureForUsers extends Migration
 {
     protected $permissions = [
         ['name' => 'administration.users.initTable', 'description' => 'Init table for users', 'type' => 0, 'is_default' => false],

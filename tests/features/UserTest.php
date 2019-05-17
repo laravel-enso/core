@@ -3,10 +3,10 @@
 use Faker\Factory;
 use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Forms\app\TestTraits\EditForm;
+use LaravelEnso\Forms\app\TestTraits\DestroyForm;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
-use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
-use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
+use LaravelEnso\Tables\app\Traits\Tests\Datatable;
 use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
 
 class UserTest extends TestCase

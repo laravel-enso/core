@@ -1,7 +1,7 @@
 # Core
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/Core&amp;utm_campaign=Badge_Grade)
-[![StyleCI](https://styleci.io/repos/85807594/shield?branch=master)](https://styleci.io/repos/85807594)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/core&amp;utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/85807594/shield?branch=master)](https://github.styleci.io/repos/85807594)
 [![License](https://poser.pugx.org/laravel-enso/core/license)](https://packagist.org/packages/laravel-enso/core)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/core/downloads)](https://packagist.org/packages/laravel-enso/core)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/core/version)](https://packagist.org/packages/laravel-enso/core)
@@ -65,42 +65,42 @@ and a great many other features
 
 [Action Logger](https://github.com/laravel-enso/ActionLogger), 
 [Activity Log](https://github.com/laravel-enso/ActivityLog), 
-[Avatar Manager](https://github.com/laravel-enso/AvatarManager) <sup>1</sup>, 
+[Avatar Manager](https://github.com/laravel-enso/Avatars) <sup>1</sup>, 
 [Charts](https://github.com/laravel-enso/Charts), 
 [Companies](https://github.com/laravel-enso/Companies),
 [Data Export](https://github.com/laravel-enso/DataExport),
 [Data Import](https://github.com/laravel-enso/DataImport), 
-[File Manager](https://github.com/laravel-enso/FileManager), 
-[Form Builder](https://github.com/laravel-enso/FormBuilder), 
+[File Manager](https://github.com/laravel-enso/Files), 
+[Form Builder](https://github.com/laravel-enso/Forms), 
 [Helpers](https://github.com/laravel-enso/Helpers), 
 [History Tracker](https://github.com/laravel-enso/HistoryTracker),
-[How To Videos](https://github.com/laravel-enso/HowToVideos),
+[How To Videos](https://github.com/laravel-enso/HowTo),
 [Impersonate](https://github.com/laravel-enso/Impersonate), 
 [IO](https://github.com/laravel-enso/IO), 
 [Localisation](https://github.com/laravel-enso/Localisation), 
-[Log Manager](https://github.com/laravel-enso/LogManager), 
-[Menu Manager](https://github.com/laravel-enso/MenuManager),
+[Log Manager](https://github.com/laravel-enso/Logs), 
+[Menu Manager](https://github.com/laravel-enso/Menus),
 [Multi tenancy](https://github.com/laravel-enso/Multitenancy),
 [Notifications](https://github.com/laravel-enso/Notifications), 
 [People](https://github.com/laravel-enso/People), 
-[Permission Manager](https://github.com/laravel-enso/PermissionManager), 
+[Permission Manager](https://github.com/laravel-enso/Permissions), 
 [Rememberable](https://github.com/laravel-enso/Rememberable), 
-[Role Manager](https://github.com/laravel-enso/RoleManager), 
+[Role Manager](https://github.com/laravel-enso/Roles), 
 [Searchable](https://github.com/laravel-enso/Searchable), 
 [Select](https://github.com/laravel-enso/Select), 
-[Structure Manager](https://github.com/laravel-enso/StructureManager), 
+[Structure Manager](https://github.com/laravel-enso/Cli), 
 [Teams](https://github.com/laravel-enso/Teams), 
 [TrackWho](https://github.com/laravel-enso/TrackWho), 
-[Tutorial Manager](https://github.com/laravel-enso/TutorialManager), 
+[Tutorial Manager](https://github.com/laravel-enso/Tutorials), 
 [Versioning](https://github.com/laravel-enso/Versioning),
 [VueDataTable](https://github.com/laravel-enso/VueDataTable), 
 
 ## Optional packages
 
-[Addresses Manager](https://github.com/laravel-enso/AddressesManager), 
-[Comments Manager](https://github.com/laravel-enso/CommentsManager),
+[Addresses Manager](https://github.com/laravel-enso/Addresses), 
+[Comments Manager](https://github.com/laravel-enso/Comments),
 [Discussions](https://github.com/laravel-enso/Discussions), 
-[Documents Manager](https://github.com/laravel-enso/DocumentsManager) <sup>1</sup>, 
+[Documents Manager](https://github.com/laravel-enso/Documents) <sup>1</sup>, 
 
 ### Configuration & Details
 

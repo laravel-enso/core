@@ -3,9 +3,10 @@
 namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
+use LaravelEnso\Core\app\Services\DefaultPreferences;
 
 class UpdateGlobalPreferences extends Command
 {
@@ -24,7 +25,7 @@ class UpdateGlobalPreferences extends Command
 
         $this->defaultPreferences = $this->defaultPreferences();
 
-        \DB::transaction(function () {
+        DB::transaction(function () {
             Preference::chunk(1000, function ($preferences) {
                 $preferences->each(function ($preference) {
                     $meta = $preference->value;

@@ -6,13 +6,13 @@ use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\IO\app\Enums\IOStatuses;
 use LaravelEnso\Helpers\app\Classes\Enum;
 use LaravelEnso\People\app\Enums\Genders;
-use LaravelEnso\Core\app\Classes\Inspiring;
+use LaravelEnso\Core\app\Services\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Calendar\app\Enums\Calendars;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
+use LaravelEnso\Menus\app\Services\TreeBuilder;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\MenuManager\app\Classes\MenuTree;
 
 class AppState implements Responsable
 {
@@ -49,7 +49,7 @@ class AppState implements Responsable
             'themes' => Themes::all(),
             'routes' => $this->routes(),
             'implicitRoute' => auth()->user()->role->menu->permission->name,
-            'menus' => (new MenuTree())->get(),
+            'menus' => (new TreeBuilder())->handle(),
             'impersonating' => session()->has('impersonating'),
             'meta' => $this->meta(),
             'enums' => $this->enums(),

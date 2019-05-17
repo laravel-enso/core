@@ -3,11 +3,12 @@
 namespace LaravelEnso\Core\app\Forms\Builders;
 
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\FormBuilder\app\Classes\Form;
+use LaravelEnso\Forms\app\Services\Form;
 
 class UserForm
 {
     private const TemplatePath = __DIR__.'/../Templates/user.json';
+
     private const Tooltip = 'Personal information can only be edited via the person form';
 
     private $form;

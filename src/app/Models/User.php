@@ -2,29 +2,29 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use Illuminate\Support\Facades\App;
+use LaravelEnso\Files\app\Models\File;
+use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Notifications\Notifiable;
+use LaravelEnso\Files\app\Traits\Uploads;
 use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Calendar\app\Models\Event;
 use LaravelEnso\People\app\Traits\IsPerson;
 use LaravelEnso\Core\app\Traits\HasPassword;
-use LaravelEnso\FileManager\app\Models\File;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\FileManager\app\Traits\Uploads;
+use LaravelEnso\Avatars\app\Traits\HasAvatar;
+use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
-use LaravelEnso\AvatarManager\app\Traits\HasAvatar;
-use LaravelEnso\VueDatatable\app\Traits\TableCache;
-use LaravelEnso\ActivityLog\app\Traits\LogsActivity;
-use LaravelEnso\Core\app\Classes\DefaultPreferences;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
+use LaravelEnso\Core\app\Services\DefaultPreferences;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable implements HasLocalePreference
 {
-    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates, IsPerson,
-        LogsActivity, Notifiable, Uploads, TableCache;
+    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
+        IsPerson, Notifiable, Uploads, TableCache;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
@@ -35,14 +35,6 @@ class User extends Authenticatable implements HasLocalePreference
     ];
 
     protected $dates = ['password_updated_at'];
-
-    protected $loggableLabel = 'person.name';
-
-    protected $loggable = [
-        'email',
-        'group_id' => [UserGroup::class => 'name'],
-        'role_id' => [Role::class => 'name'],
-    ];
 
     public function person()
     {
@@ -86,12 +78,12 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function isAdmin()
     {
-        return $this->role_id === Role::AdminId;
+        return $this->role_id === App::make('roles')::Admin;
     }
 
     public function isSupervisor()
     {
-        return $this->role_id === Role::SupervisorId;
+        return $this->role_id === App::make('roles')::Supervisor;
     }
 
     public function belongsToAdminGroup()

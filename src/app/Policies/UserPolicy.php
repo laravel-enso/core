@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Policies;
 
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy

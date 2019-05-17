@@ -3,7 +3,7 @@
 namespace LaravelEnso\Core\app\Tables\Builders;
 
 use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\VueDatatable\app\Classes\Table;
+use LaravelEnso\Tables\app\Services\Table;
 
 class UserGroupTable extends Table
 {
@@ -11,8 +11,8 @@ class UserGroupTable extends Table
 
     public function query()
     {
-        return UserGroup::select(\DB::raw('
+        return UserGroup::selectRaw('
             id as "dtRowId", name, description, created_at
-        '));
+        ');
     }
 }

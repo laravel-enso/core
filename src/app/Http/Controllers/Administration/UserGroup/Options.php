@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
-class UserGroupSelectController extends Controller
+class Options extends Controller
 {
     use OptionsBuilder;
 

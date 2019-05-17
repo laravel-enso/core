@@ -11,7 +11,7 @@ use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
 use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
-use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
+use LaravelEnso\Permissions\app\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers;
+namespace LaravelEnso\Core\app\Http\Controllers\Preferences;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class PreferencesController extends Controller
+class Set extends Controller
 {
-    public function setPreferences(Request $request)
+    public function __invoke(Request $request)
     {
         if ($request->has('global')) {
             auth()->user()->setGlobalPreferences($request->get('global'));
@@ -18,11 +18,5 @@ class PreferencesController extends Controller
         auth()->user()->setLocalPreferences(
             $request->get('route'), $request->get('value')
         );
-    }
-
-    public function setDefault(Request $request)
-    {
-        $request->user()
-            ->persistDefaultPreferences();
     }
 }

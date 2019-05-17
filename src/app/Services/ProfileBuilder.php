@@ -1,13 +1,14 @@
 <?php
 
-namespace LaravelEnso\Core\app\Classes;
+namespace LaravelEnso\Core\app\Services;
 
 use Carbon\Carbon;
 use LaravelEnso\Core\app\Models\User;
 
 class ProfileBuilder
 {
-    private const LoginRating = 80;
+    private const LoginRating = 80; //TODO refactor in config
+
     private const ActionRating = 20;
 
     private $user;

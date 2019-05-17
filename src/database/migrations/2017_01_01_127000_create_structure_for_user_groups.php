@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForUserGroups extends StructureMigration
+class CreateStructureForUserGroups extends Migration
 {
     protected $permissions = [
         ['name' => 'administration.userGroups.initTable', 'description' => 'Init table for userGroups', 'type' => 0, 'is_default' => false],

@@ -3,11 +3,11 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\UserGroup;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\VueDatatable\app\Traits\Excel;
-use LaravelEnso\VueDatatable\app\Traits\Datatable;
+use LaravelEnso\Tables\app\Traits\Excel;
+use LaravelEnso\Tables\app\Traits\Datatable;
 use LaravelEnso\Core\app\Tables\Builders\UserGroupTable;
 
-class UserGroupTableController extends Controller
+class Table extends Controller
 {
     use Datatable, Excel;
 

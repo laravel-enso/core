@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Classes;
+namespace LaravelEnso\Core\app\Services;
 
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 
