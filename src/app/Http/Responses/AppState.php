@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
+use Illuminate\Support\Facades\App;
 use LaravelEnso\Core\app\Enums\Themes;
 use LaravelEnso\IO\app\Enums\IOStatuses;
 use LaravelEnso\Helpers\app\Classes\Enum;
@@ -51,6 +52,14 @@ class AppState implements Responsable
             'implicitRoute' => auth()->user()->role->menu->permission->name,
             'menus' => (new TreeBuilder())->handle(),
             'impersonating' => session()->has('impersonating'),
+            'websockets' => [
+                'pusher' => [
+                    'key' => config('broadcasting.connections.pusher.key'),
+                    'options' => config('broadcasting.connections.pusher.options'),
+                ],
+                'privateChannel' => 'App.User.'.auth()->user()->id,
+                'ioChannel' => $this->ioChannel(),
+            ],
             'meta' => $this->meta(),
             'enums' => $this->enums(),
             'local' => class_exists($localState)
@@ -93,10 +102,6 @@ class AppState implements Responsable
             'dateFormat' => config('enso.config.dateFormat'),
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
-            'pusher' => [
-              'key' => config('broadcasting.connections.pusher.key'),
-              'options' => config('broadcasting.connections.pusher.options'),
-            ],
             'ravenKey' => config('enso.config.ravenKey'),
         ];
     }
@@ -107,6 +112,7 @@ class AppState implements Responsable
             'genders' => Genders::all(),
             'calendars' => Calendars::all(),
             'ioStatuses' => IOStatuses::all(),
+            'roles' => App::make('roles'),
         ];
     }
 
@@ -125,6 +131,16 @@ class AppState implements Responsable
 
                 return $collection;
             }, []);
+    }
+
+    private function ioChannel()
+    {
+        $roles = App::make('roles');
+
+        return collect([$roles::Admin, $roles::Supervisor])
+            ->contains(auth()->user()->role_id)
+            ? 'operations'
+            : 'operations'.auth()->user()->id;
     }
 
     private function localState(StateBuilder $state)
