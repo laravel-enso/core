@@ -44,9 +44,9 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                 Route::patch('{userGroup}', 'Update')->name('update');
                                 Route::delete('{userGroup}', 'Destroy')->name('destroy');
 
-                                Route::get('initTable', 'Table@init')->name('initTable');
-                                Route::get('tableData', 'Table@data')->name('tableData');
-                                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
+                                Route::get('initTable', 'InitTable')->name('initTable');
+                                Route::get('tableData', 'TableData')->name('tableData');
+                                Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
 
                                 Route::get('options', 'Options')->name('options');
                             });
@@ -61,9 +61,9 @@ Route::namespace('LaravelEnso\Core\app\Http\Controllers')
                                 Route::patch('{user}', 'Update')->name('update');
                                 Route::delete('{user}', 'Destroy')->name('destroy');
 
-                                Route::get('initTable', 'Table@init')->name('initTable');
-                                Route::get('tableData', 'Table@data')->name('tableData');
-                                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
+                                Route::get('initTable', 'InitTable')->name('initTable');
+                                Route::get('tableData', 'TableData')->name('tableData');
+                                Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
 
                                 Route::get('options', 'Options')->name('options');
 

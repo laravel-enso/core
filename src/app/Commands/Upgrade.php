@@ -87,7 +87,7 @@ class Upgrade extends Command
             'name' => 'system.menus.organize',
             'description' => 'Organize menus',
             'type' => 1,
-            'is_default' => false
+            'is_default' => false,
         ]);
 
         $permission->roles()->sync(Roles::keys());
