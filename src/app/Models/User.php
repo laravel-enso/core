@@ -53,7 +53,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function company()
     {
-        return $this->person->company;
+        return $this->person->company();
     }
 
     public function events()
