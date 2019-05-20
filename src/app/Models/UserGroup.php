@@ -11,8 +11,6 @@ class UserGroup extends Model
 {
     use HasRoles, TableCache, TableCache;
 
-    const Admin = 1;
-
     protected $fillable = ['name', 'description'];
 
     public function users()
