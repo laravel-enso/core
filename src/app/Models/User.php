@@ -88,7 +88,7 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function belongsToAdminGroup()
     {
-        return $this->group_id === UserGroup::Admin;
+        return $this->group_id === App::make('user-groups')::Admin;
     }
 
     public function isPerson(Person $person)

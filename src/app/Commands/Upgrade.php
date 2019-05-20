@@ -24,33 +24,8 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        $this->upgradeMigrationName()
-            ->addOrganizeMenus()
-            ->addCompanyPerson();
-    }
-
-    private function upgradeMigrationName()
-    {
-        $this->info('Renaming migrations');
-
-        DB::table('migrations')->whereMigration('2017_01_01_144000_create_structure_for_comments_manager')
-            ->update(['migration' => '2017_01_01_144000_create_structure_for_comments']);
-
-        DB::table('migrations')->whereMigration('2017_01_01_149750_create_structure_for_how_to_videos')
-            ->update(['migration' => '2017_01_01_149750_create_structure_for_how_to']);
-
-        DB::table('migrations')->whereMigration('2017_01_01_134000_create_structure_for_logmanager')
-            ->update(['migration' => '2017_01_01_134000_create_structure_for_logs']);
-
-        DB::table('migrations')->whereMigration('2017_01_01_141000_create_structure_for_documents_manager')
-            ->update(['migration' => '2017_01_01_141000_create_structure_for_documents']);
-
-        DB::table('migrations')->whereMigration('2017_01_01_136000_create_structure_for_tutorial')
-            ->update(['migration' => '2017_01_01_136000_create_structure_for_tutorials']);
-
-        $this->info('Migrations renamed successfully');
-
-        return $this;
+        $this->addOrganizeMenus()
+            ->upgradeCompanyPerson();
     }
 
     private function addOrganizeMenus()
@@ -79,12 +54,12 @@ class Upgrade extends Command
         return $this;
     }
 
-    private function addCompanyPerson()
+    private function upgradeCompanyPerson()
     {
-        $this->info('Adding company_person table');
+        $this->info('Upgrading company person relationship');
 
         if (! Schema::hasColumn('people', 'company_id')) {
-            $this->info('The company_person table was already added');
+            $this->info('The company person relationship was already upgraded');
 
             return $this;
         }
@@ -112,7 +87,7 @@ class Upgrade extends Command
             $table->dropColumn('position');
         });
 
-        $this->info('The company_person table was added and data was migrated');
+        $this->info('The Company Person relation was upgraded successfully and the data was migrated');
 
         return $this;
     }
