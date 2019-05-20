@@ -4,7 +4,7 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\app\Commands\Upgrade;
-use LaravelEnso\Core\app\Models\UserGroup;
+use LaravelEnso\Core\app\Enums\UserGroups;
 use Illuminate\Http\Resources\Json\Resource;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
 use LaravelEnso\Core\app\Commands\RenameMigrations;
@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         Resource::withoutWrapping();
 
         $this->app->bind('user-groups', function () {
-            return new UserGroup;
+            return new UserGroups;
         });
 
         $this->addCommands()
