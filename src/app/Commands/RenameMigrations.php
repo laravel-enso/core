@@ -58,7 +58,7 @@ class RenameMigrations extends Command
             ->update(['migration' => '2018_07_13_103000_create_structure_for_discussions']);
 
         DB::table('migrations')->whereMigration('2018_10_23_155453_create_structure_for_company_people')
-            ->update(['migration' => '2018_10_07_102000_create_structure_for_companies']);
+            ->update(['migration' => '2018_10_07_102000_create_structure_for_company_people']);
 
         DB::table('migrations')->whereMigration('2019_05_19_100000_create_company_person_pivot_table')
             ->update(['migration' => '2018_10_07_103000_create_company_person_pivot_table']);
@@ -74,7 +74,6 @@ class RenameMigrations extends Command
 
         DB::table('migrations')->whereMigration('2017_12_12_133613_create_structure_for_localities')
             ->update(['migration' => '2017_12_11_103000_create_structure_for_localities']);
-
 
         $this->info('Migrations renamed successfully');
     }

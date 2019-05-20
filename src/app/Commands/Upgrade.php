@@ -26,6 +26,7 @@ class Upgrade extends Command
     {
         $this->addOrganizeMenus()
             ->upgradeCompanyPerson()
+            ->upgradePolimorphics()
             ->dropRegion();
     }
 
@@ -106,6 +107,23 @@ class Upgrade extends Command
                     'position' => $person->position,
                 ]]);
         });
+    }
+
+    private function upgradePolimorphics()
+    {
+        DB::table('files')->whereAttachableType('LaravelEnso\AvatarManager\app\Models\Avatar')
+            ->update(['attachable_type' => 'LaravelEnso\Avatars\app\Models\Avatar']);
+
+        DB::table('files')->whereAttachableType('LaravelEnso\FileManager\app\Models\Upload')
+            ->update(['attachable_type' => 'LaravelEnso\Files\app\Models\Upload']);
+
+        DB::table('files')->whereAttachableType('LaravelEnso\DocumentsManager\app\Models\Document')
+            ->update(['attachable_type' => 'LaravelEnso\Documents\app\Models\Document']);
+
+        DB::table('files')->whereAttachableType('LaravelEnso\HowToVideos\app\Models\Poster')
+            ->update(['attachable_type' => 'LaravelEnso\HowTo\app\Models\Poster']);
+
+        return $this;
     }
 
     private function dropRegion()
