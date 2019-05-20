@@ -6,9 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Roles\app\Enums\Roles;
-use Illuminate\Database\Schema\Blueprint;
 use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Permissions\app\Models\Permission;
 
 class Upgrade extends Command
@@ -43,6 +41,12 @@ class Upgrade extends Command
 
         DB::table('migrations')->whereMigration('2017_01_01_134000_create_structure_for_logmanager')
             ->update(['migration' => '2017_01_01_134000_create_structure_for_logs']);
+
+        DB::table('migrations')->whereMigration('2017_01_01_141000_create_structure_for_documents_manager')
+            ->update(['migration' => '2017_01_01_141000_create_structure_for_documents']);
+
+        DB::table('migrations')->whereMigration('2017_01_01_136000_create_structure_for_tutorial')
+            ->update(['migration' => '2017_01_01_136000_create_structure_for_tutorials']);
 
         $this->info('Migrations renamed successfully');
 
