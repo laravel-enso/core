@@ -25,7 +25,8 @@ class Upgrade extends Command
     private function upgrade()
     {
         $this->addOrganizeMenus()
-            ->upgradeCompanyPerson();
+            ->upgradeCompanyPerson()
+            ->dropRegion();
     }
 
     private function addOrganizeMenus()
@@ -105,5 +106,14 @@ class Upgrade extends Command
                     'position' => $person->position,
                 ]]);
         });
+    }
+
+    private function dropRegion()
+    {
+        if (Schema::hasColumn('localities', 'region')) {
+            Schema::table('localities', function ($table) {
+                $table->dropColumn('region');
+            });
+        }
     }
 }
