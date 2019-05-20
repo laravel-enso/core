@@ -123,6 +123,9 @@ class Upgrade extends Command
         DB::table('files')->whereAttachableType('LaravelEnso\HowToVideos\app\Models\Poster')
             ->update(['attachable_type' => 'LaravelEnso\HowTo\app\Models\Poster']);
 
+        DB::table('files')->whereAttachableType('LaravelEnso\HowToVideos\app\Models\Video')
+            ->update(['attachable_type' => 'LaravelEnso\HowTo\app\Models\Video']);
+
         return $this;
     }
 
