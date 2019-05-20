@@ -15,7 +15,7 @@ class Upgrade extends Command
 {
     protected $signature = 'enso:upgrade';
 
-    protected $description = 'This command will upgrade Core';
+    protected $description = 'This command will upgrade Core from v3.2.* to v.3.3.*';
 
     public function handle()
     {
@@ -26,37 +26,9 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        $this->upgradeLanguagesTable()
-            ->upgradeMigrationName()
+        $this->upgradeMigrationName()
             ->addOrganizeMenus()
             ->addCompanyPerson();
-    }
-
-    private function upgradeLanguagesTable()
-    {
-        $this->info('Upgrading languages table');
-
-        if (Schema::hasColumn('languages', 'is_rtl')) {
-            $this->info('Languages table is already upgraded');
-
-            return $this;
-        }
-
-        Schema::table('languages', function (Blueprint $table) {
-            $table->boolean('is_rtl')->after('flag')->nullable();
-        });
-
-        Language::where('name', '<>', 'ar')->update(['is_rtl' => false]);
-
-        Language::whereName('ar')->update(['is_rtl' => true]);
-
-        Schema::table('languages', function (Blueprint $table) {
-            $table->boolean('is_rtl')->nullable(false)->change();
-        });
-
-        $this->info('Languages table was successfuly upgraded');
-
-        return $this;
     }
 
     private function upgradeMigrationName()
