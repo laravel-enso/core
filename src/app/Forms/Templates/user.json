@@ -9,7 +9,7 @@
                 {
                     "label": "",
                     "name": "person_id",
-                    "value": null,
+                    "value": "",
                     "column": 2,
                     "meta": {
                         "hidden": true,
@@ -31,7 +31,7 @@
                 {
                     "label": "Name",
                     "name": "name",
-                    "value": null,
+                    "value": "",
                     "column": 6,
                     "meta": {
                         "readonly": true,
@@ -42,7 +42,7 @@
                 {
                     "label": "Appellative",
                     "name": "appellative",
-                    "value": null,
+                    "value": "",
                     "column": 4,
                     "meta": {
                         "readonly": true,

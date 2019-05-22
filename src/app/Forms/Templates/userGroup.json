@@ -5,7 +5,7 @@
         "fields": [{
             "label": "Name",
             "name": "name",
-            "value": null,
+            "value": "",
             "meta": {
                 "type": "input",
                 "content": "text"
@@ -13,7 +13,7 @@
         }, {
             "label": "Description",
             "name": "description",
-            "value": null,
+            "value": "",
             "meta": {
                 "type": "input",
                 "content": "text"
