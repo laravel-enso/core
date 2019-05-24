@@ -83,7 +83,7 @@ class Upgrade extends Command
             try {
                 $table->dropIndex(['mandatary_id']);
             } catch (\Exception $e) {
-                echo 'Error droppiung mandatary_id index, safe to ignore' . PHP_EOL;
+                echo 'Error droppiung mandatary_id index, safe to ignore'.PHP_EOL;
             }
             $table->dropColumn('mandatary_id');
         });
@@ -93,7 +93,7 @@ class Upgrade extends Command
             try {
                 $table->dropIndex(['company_id']);
             } catch (\Exception $e) {
-                echo 'Error droppiung company_id index, safe to ignore' . PHP_EOL;
+                echo 'Error droppiung company_id index, safe to ignore'.PHP_EOL;
             }
             $table->dropColumn('company_id');
             $table->dropColumn('position');
