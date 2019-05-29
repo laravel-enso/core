@@ -80,21 +80,13 @@ class Upgrade extends Command
 
         Schema::table('companies', function ($table) {
             $table->dropForeign(['mandatary_id']);
-            try {
-                $table->dropIndex(['mandatary_id']);
-            } catch (\Exception $e) {
-                echo 'Error droppiung mandatary_id index, safe to ignore'.PHP_EOL;
-            }
+            $table->dropIndex(['mandatary_id']);
             $table->dropColumn('mandatary_id');
         });
 
         Schema::table('people', function ($table) {
             $table->dropForeign(['company_id']);
-            try {
-                $table->dropIndex(['company_id']);
-            } catch (\Exception $e) {
-                echo 'Error droppiung company_id index, safe to ignore'.PHP_EOL;
-            }
+            $table->dropIndex(['company_id']);
             $table->dropColumn('company_id');
             $table->dropColumn('position');
         });
