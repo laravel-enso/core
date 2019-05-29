@@ -80,11 +80,13 @@ class Upgrade extends Command
 
         Schema::table('companies', function ($table) {
             $table->dropForeign(['mandatary_id']);
+            $table->dropIndex(['mandatary_id']);
             $table->dropColumn('mandatary_id');
         });
 
         Schema::table('people', function ($table) {
             $table->dropForeign(['company_id']);
+            $table->dropIndex(['company_id']);
             $table->dropColumn('company_id');
             $table->dropColumn('position');
         });
