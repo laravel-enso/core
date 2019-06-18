@@ -31,7 +31,7 @@ class User extends Authenticatable implements HasLocalePreference
     protected $fillable = ['person_id', 'group_id', 'role_id', 'email', 'is_active'];
 
     protected $casts = [
-        'is_active' => 'boolean', 'person_id' => 'int', 'owner_id' => 'int', 'role_id' => 'int',
+        'is_active' => 'boolean', 'person_id' => 'int', 'group_id' => 'int', 'role_id' => 'int',
     ];
 
     protected $dates = ['password_updated_at'];
