@@ -7,6 +7,11 @@
         <link href="{{ mix('css/enso.css') }}" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <noscript>
+            <strong>
+                We're sorry but the frontend doesn't work properly without JavaScript enabled. Please enable it to continue.
+            </strong>
+        </noscript>
 
         <div id="app"></div>
 
@@ -15,6 +20,5 @@
         <script src="{{ mix('js/manifest.js') }}"></script>
         <script src="{{ mix('js/vendor.js') }}"></script>
         <script src="{{ mix('js/enso.js') }}"></script>
-
     </body>
 </html>

@@ -13,7 +13,7 @@ class Upgrade extends Command
 {
     protected $signature = 'enso:upgrade';
 
-    protected $description = 'This command will upgrade Core from v3.2.* to v.3.3.*';
+    protected $description = 'This command will upgrade Core from v3.3.* to the latest version';
 
     public function handle()
     {
@@ -24,119 +24,26 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        $this->addOrganizeMenus()
-            ->upgradeCompanyPerson()
-            ->upgradePolimorphics()
-            ->dropRegion();
+        $this->addRemindedAt();
     }
 
-    private function addOrganizeMenus()
+    private function addRemindedAt()
     {
-        $this->info('Adding organize menu action');
+        $this->info('Upgrading calendar reminders table');
 
-        if (Permission::whereName('system.menus.organize')->first() !== null) {
-            $this->info('Organize menu action was already added');
+        if (Schema::hasColumn('reminders', 'reminded_at')) {
+            $this->info('The calendar reminders table was already upgraded');
 
             return $this;
         }
 
-        $this->info('Adding organize menus');
-
-        $permission = Permission::create([
-            'name' => 'system.menus.organize',
-            'description' => 'Organize menus',
-            'type' => 1,
-            'is_default' => false,
-        ]);
-
-        $permission->roles()->sync(Roles::keys());
-
-        $this->info('Organize menus action was successfully added');
-
-        return $this;
-    }
-
-    private function upgradeCompanyPerson()
-    {
-        $this->info('Upgrading company person relationship');
-
-        if (! Schema::hasColumn('people', 'company_id')) {
-            $this->info('The company person relationship was already upgraded');
-
-            return $this;
-        }
-
-        DB::table('companies')
-            ->get()
-            ->each(function ($company) {
-                $people = DB::table('people')
-                    ->whereCompanyId($company->id)
-                    ->get();
-
-                if ($people->isNotEmpty()) {
-                    $this->syncCompanyPerson($company, $people);
-                }
-            });
-
-        Schema::table('companies', function ($table) {
-            $table->dropForeign(['mandatary_id']);
-            $table->dropIndex(['mandatary_id']);
-            $table->dropColumn('mandatary_id');
+        Schema::table('reminders', function ($table) {
+            $table->datetime('reminded_at')->nullable()->after('remind_at')->index();
+            $table->index('remind_at');
         });
 
-        Schema::table('people', function ($table) {
-            $table->dropForeign(['company_id']);
-            $table->dropIndex(['company_id']);
-            $table->dropColumn('company_id');
-            $table->dropColumn('position');
-        });
-
-        $this->info('The Company Person relation was upgraded successfully and the data was migrated');
+        $this->info('he calendar reminders table was upgraded successfully');
 
         return $this;
-    }
-
-    private function syncCompanyPerson($company, $people)
-    {
-        $mandataryId = $company->mandatary_id ?? $people->first()->id;
-
-        $people->each(function ($person) use ($company, $mandataryId) {
-            Person::find($person->id)
-                ->companies()
-                ->sync([$company->id => [
-                    'is_main' => true,
-                    'is_mandatary' => $mandataryId === $person->id,
-                    'position' => $person->position,
-                ]]);
-        });
-    }
-
-    private function upgradePolimorphics()
-    {
-        DB::table('files')->whereAttachableType('LaravelEnso\AvatarManager\app\Models\Avatar')
-            ->update(['attachable_type' => 'LaravelEnso\Avatars\app\Models\Avatar']);
-
-        DB::table('files')->whereAttachableType('LaravelEnso\FileManager\app\Models\Upload')
-            ->update(['attachable_type' => 'LaravelEnso\Files\app\Models\Upload']);
-
-        DB::table('files')->whereAttachableType('LaravelEnso\DocumentsManager\app\Models\Document')
-            ->update(['attachable_type' => 'LaravelEnso\Documents\app\Models\Document']);
-
-        DB::table('files')->whereAttachableType('LaravelEnso\HowToVideos\app\Models\Poster')
-            ->update(['attachable_type' => 'LaravelEnso\HowTo\app\Models\Poster']);
-
-        DB::table('files')->whereAttachableType('LaravelEnso\HowToVideos\app\Models\Video')
-            ->update(['attachable_type' => 'LaravelEnso\HowTo\app\Models\Video']);
-
-        return $this;
-    }
-
-    private function dropRegion()
-    {
-        if (Schema::hasColumn('localities', 'region')) {
-            Schema::table('localities', function ($table) {
-                $table->dropColumn('region');
-            });
-        }
     }
 }
