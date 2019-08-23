@@ -24,22 +24,18 @@ abstract class DatabaseUpgrade extends Command
 
     protected function migrateTable()
     {
-
     }
 
     protected function migrateData()
     {
-
     }
 
     protected function postMigrateTable()
     {
-
     }
 
     protected function rollbackMigrateTable()
     {
-
     }
 
     public function getUpgradeName()
