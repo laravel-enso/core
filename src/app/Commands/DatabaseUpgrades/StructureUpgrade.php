@@ -15,15 +15,15 @@ class StructureUpgrade extends DatabaseUpgrade
             || Permission::whereName($this->permissions[0]['name'])->first() !== null;
     }
 
-    protected function getRoles(Permission $p)
+    protected function getRoles(Permission $permission)
     {
-        if ($p->is_default) {
+        if ($permission->is_default) {
             return Role::pluck('id');
-        } else {
-            return Role::whereName(config('enso.config.defaultRole'))
-                ->first()
-                ->id;
         }
+
+        return Role::whereName(config('enso.config.defaultRole'))
+            ->first()
+            ->id;
     }
 
     protected function migrateData()

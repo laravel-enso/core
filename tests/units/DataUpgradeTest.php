@@ -13,10 +13,10 @@ class DatabaseUpgradeTest extends TestCase
     /** @test */
     public function cannot_migrate_when_data_migration_was_not_done()
     {
-        $db = new ExceptionalDataMigrationTest();
+        $migration = new ExceptionalDataMigrationTest();
 
         try {
-            $db->migrate();
+            $migration->migrate();
             $this->assertFalse(true, 'should throw Exception');
         } catch (Exception $e) {
         }
@@ -27,10 +27,10 @@ class DatabaseUpgradeTest extends TestCase
     /** @test */
     public function cannot_migrate_when_post_migration_was_not_done()
     {
-        $db = new ExceptionalPostMigrationTest();
+        $migration = new ExceptionalPostMigrationTest();
 
         try {
-            $db->migrate();
+            $migration->migrate();
             $this->assertFalse(true, 'should throw Exception');
         } catch (Exception $e) {
         }
@@ -41,9 +41,9 @@ class DatabaseUpgradeTest extends TestCase
     /** @test */
     public function cannot_migrate_when_already_migrated()
     {
-        $db = new MigratedMigrationTest();
+        $migration = new MigratedMigrationTest();
 
-        $db->migrate();
+        $migration->migrate();
 
         $this->assertFalse(Schema::hasTable('test'));
     }
@@ -51,9 +51,9 @@ class DatabaseUpgradeTest extends TestCase
     /** @test */
     public function can_upgrade()
     {
-        $db = new TestDatabaseMigration();
+        $migration = new TestDatabaseMigration();
 
-        $db->migrate();
+        $migration->migrate();
 
         $this->assertNotEmpty(DB::table('test')->get());
     }
@@ -62,10 +62,10 @@ class DatabaseUpgradeTest extends TestCase
     /** @test */
     public function cannot_migrate_twice()
     {
-        $db = new TestDatabaseMigration();
+        $migration = new TestDatabaseMigration();
 
-        $db->migrate();
-        $db->migrate();
+        $migration->migrate();
+        $migration->migrate();
 
         $this->assertCount(1, DB::table('test')->get());
     }
@@ -139,6 +139,6 @@ class MigratedMigrationTest extends TestDatabaseMigration
 {
     protected function isMigrated()
     {
-      return true;
+        return true;
     }
 }
