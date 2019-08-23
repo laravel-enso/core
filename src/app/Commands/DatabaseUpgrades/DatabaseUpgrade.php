@@ -94,7 +94,7 @@ abstract class DatabaseUpgrade extends Command
 
     private function completeMigration()
     {
-        $time = (int)((microtime(true) - $this->time) * 1000);
-        $this->info($this->getUpgradeName().' was done (' . $time . ' ms)');
+        $time = (int) ((microtime(true) - $this->time) * 1000);
+        $this->info($this->getUpgradeName().' was done ('.$time.' ms)');
     }
 }
