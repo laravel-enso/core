@@ -15,7 +15,8 @@ class StructureUpgrade extends DatabaseUpgrade
             || Permission::whereName($this->permissions[0]['name'])->first() !== null;
     }
 
-    protected function getRoles(Permission $p){
+    protected function getRoles(Permission $p)
+    {
         if ($p->is_default) {
             return Role::pluck('id');
         } else {
@@ -27,7 +28,7 @@ class StructureUpgrade extends DatabaseUpgrade
 
     protected function migrateData()
     {
-        collect($this->permissions)->each(function($permission){
+        collect($this->permissions)->each(function ($permission) {
             $p = Permission::create($permission);
             $p->roles()->sync($this->getRoles($p));
         });

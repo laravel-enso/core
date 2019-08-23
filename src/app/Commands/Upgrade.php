@@ -26,5 +26,4 @@ class Upgrade extends Command
         (new CompaniesUpgrade())->migrate();
         (new AddingInvoiceLinePermissions())->migrate();
     }
-
 }

@@ -22,19 +22,23 @@ abstract class DatabaseUpgrade extends Command
 
     abstract protected function isMigrated();
 
-    protected function migrateTable(){
+    protected function migrateTable()
+    {
 
     }
 
-    protected function migrateData(){
+    protected function migrateData()
+    {
 
     }
 
-    protected function postMigrateTable(){
+    protected function postMigrateTable()
+    {
 
     }
 
-    protected function rollbackMigrateTable(){
+    protected function rollbackMigrateTable()
+    {
 
     }
 
@@ -52,7 +56,7 @@ abstract class DatabaseUpgrade extends Command
     public function migrate()
     {
         if ($this->isMigrated()) {
-            $this->info($this->getUpgradeName() . " already has been done");
+            $this->info($this->getUpgradeName().' already has been done');
 
             return;
         }
@@ -69,7 +73,7 @@ abstract class DatabaseUpgrade extends Command
             $this->postMigrateTable();
         } catch (Exception $e) {
             $this->rollbackMigrateTable();
-            $this->error($this->getUpgradeName() . " was unsuccessfully and rollback");
+            $this->error($this->getUpgradeName().' was unsuccessfully and rollback');
 
             throw  $e;
         }
@@ -85,12 +89,12 @@ abstract class DatabaseUpgrade extends Command
     private function startMigration()
     {
         $this->time = microtime(true);
-        $this->info($this->getUpgradeName() . " is starting");
+        $this->info($this->getUpgradeName().' is starting');
     }
 
     private function completeMigration()
     {
         $time = (int)((microtime(true) - $this->time) * 1000);
-        $this->info($this->getUpgradeName() . " was done (" . $time . " ms)");
+        $this->info($this->getUpgradeName().' was done (' . $time . ' ms)');
     }
 }
