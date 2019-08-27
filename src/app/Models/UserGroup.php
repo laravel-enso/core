@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserGroup extends Model
 {
-    use HasRoles, TableCache, TableCache;
+    use HasRoles, TableCache;
 
     protected $fillable = ['name', 'description'];
 
