@@ -4,12 +4,10 @@ namespace LaravelEnso\Core\app\Http\Responses;
 
 use Illuminate\Support\Facades\App;
 use LaravelEnso\Core\app\Enums\Themes;
-use LaravelEnso\IO\app\Enums\IOStatuses;
+use LaravelEnso\Enums\app\Facades\Enums;
 use LaravelEnso\Helpers\app\Classes\Enum;
-use LaravelEnso\People\app\Enums\Genders;
 use LaravelEnso\Core\app\Services\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
-use LaravelEnso\Calendar\app\Enums\Calendars;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
 use LaravelEnso\Menus\app\Services\TreeBuilder;
 use LaravelEnso\Core\app\Contracts\StateBuilder;
@@ -61,7 +59,7 @@ class AppState implements Responsable
                 'ioChannel' => $this->ioChannel(),
             ],
             'meta' => $this->meta(),
-            'enums' => $this->enums(),
+            'enums' => Enums::all(),
             'local' => class_exists($localState)
                 ? $this->localState(new $localState())
                 : null,
@@ -103,16 +101,6 @@ class AppState implements Responsable
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
             'ravenKey' => config('enso.config.ravenKey'),
-        ];
-    }
-
-    private function enums()
-    {
-        return [
-            'genders' => Genders::all(),
-            'calendars' => Calendars::all(),
-            'ioStatuses' => IOStatuses::all(),
-            'roles' => App::make('roles'),
         ];
     }
 
