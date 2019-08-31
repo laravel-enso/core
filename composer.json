@@ -68,6 +68,7 @@
         "laravel-enso/track-who": "1.8.*",
         "laravel-enso/tutorials": "3.1.*",
         "laravel-enso/versioning": "1.2.*",
+        "laravel-enso/enums": "1.0.*",
         "laravel-enso/tables": "2.1.*"
     },
     "autoload": {
