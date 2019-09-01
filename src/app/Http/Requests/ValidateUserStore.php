@@ -37,6 +37,7 @@ class ValidateUserStore extends FormRequest
 
     protected function emailUnique()
     {
-        return Rule::unique('people', 'email');
+        return Rule::unique('people', 'email')
+            ->ignore($this->get('person_id'));
     }
 }
