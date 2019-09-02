@@ -3,7 +3,10 @@
 namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
 class Upgrade extends Command
 {
@@ -13,33 +16,14 @@ class Upgrade extends Command
 
     public function handle()
     {
-        $this->info('The upgrade process has started');
         $this->upgrade();
-        $this->info('The upgrade process was successful.');
     }
 
     private function upgrade()
     {
-        $this->addRemindedAt();
-    }
-
-    private function addRemindedAt()
-    {
-        $this->info('Upgrading calendar reminders table');
-
-        if (Schema::hasColumn('reminders', 'reminded_at')) {
-            $this->info('The calendar reminders table was already upgraded');
-
-            return $this;
-        }
-
-        Schema::table('reminders', function ($table) {
-            $table->datetime('reminded_at')->nullable()->after('remind_at')->index();
-            $table->index('remind_at');
-        });
-
-        $this->info('he calendar reminders table was upgraded successfully');
-
-        return $this;
+        (new InvoiceLineUpgrade())->migrate();
+        (new PeopleUpgrade())->migrate();
+        (new CompaniesUpgrade())->migrate();
+        (new AddingInvoiceLinePermissions())->migrate();
     }
 }
