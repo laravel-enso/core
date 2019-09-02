@@ -52,7 +52,7 @@ abstract class DatabaseUpgrade extends Command
     public function migrate()
     {
         if ($this->isMigrated()) {
-            $this->info($this->getUpgradeName().' already has been done');
+            $this->info($this->getUpgradeName().' has been already done');
 
             return;
         }
@@ -69,7 +69,7 @@ abstract class DatabaseUpgrade extends Command
             $this->postMigrateTable();
         } catch (Exception $e) {
             $this->rollbackMigrateTable();
-            $this->error($this->getUpgradeName().' was unsuccessfully and rollback');
+            $this->error($this->getUpgradeName().' was unsuccessfully, doing rollback');
 
             throw  $e;
         }
