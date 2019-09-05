@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
@@ -21,9 +22,12 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        (new InvoiceLineUpgrade())->migrate();
         (new PeopleUpgrade())->migrate();
         (new CompaniesUpgrade())->migrate();
-        (new AddingInvoiceLinePermissions())->migrate();
+
+        if (Schema::hasTable('client_invoices')) {
+            (new InvoiceLineUpgrade())->migrate();
+            (new AddingInvoiceLinePermissions())->migrate();
+        }
     }
 }
