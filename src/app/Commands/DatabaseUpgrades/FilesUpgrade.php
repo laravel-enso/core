@@ -18,7 +18,7 @@ class FilesUpgrade extends DatabaseUpgrade
     protected function migrateTable()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->index('files_original_name_index');
+            $table->index('original_name');
         });
     }
 

@@ -9,7 +9,7 @@ class PeopleUpgrade extends DatabaseUpgrade
 {
     protected function isMigrated()
     {
-        return Schema::hasColumn('people', 'bank') && false;
+        return Schema::hasColumn('people', 'bank');
     }
 
     protected function migrateTable()

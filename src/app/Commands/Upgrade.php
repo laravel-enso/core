@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningRename;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
@@ -29,6 +30,7 @@ class Upgrade extends Command
         (new CompaniesUpgrade())->migrate();
         (new DataImportUpgrade())->migrate();
         (new FilesUpgrade())->migrate();
+        (new VersioningRename($this))->handle();
         (new RenamePermissions($this))->handle();
 
         if (Schema::hasTable('client_invoices')) {
