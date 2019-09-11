@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use LaravelEnso\Permissions\app\Models\Permission;
 
 class VersioningRename
 {
