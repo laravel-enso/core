@@ -13,13 +13,14 @@ class RenamePermissions
     {
         $this->console = $console;
     }
+
     public function handle()
     {
         $this->console->info('Renaming permissions');
 
         Permission::whereName('core.preferences.setPreferences')
             ->update(['name' => 'core.preferences.store']);
-        
+
         Permission::whereName('core.preferences.setDefaultPreferences')
             ->update(['name' => 'core.preferences.reset']);
 

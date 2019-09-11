@@ -27,7 +27,7 @@ class Update extends Controller
         if ($user->isDirty('group_id')) {
             $this->authorize('change-group', $user);
         }
-        
+
         if ($user->isDirty('role_id')) {
             $this->authorize('change-role', $user);
         }

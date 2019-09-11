@@ -7,7 +7,6 @@ use LaravelEnso\Core\app\Commands\Upgrade;
 use LaravelEnso\Core\app\Enums\UserGroups;
 use Illuminate\Http\Resources\Json\Resource;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
-use LaravelEnso\Core\app\Commands\RenameMigrations;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
