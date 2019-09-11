@@ -11,8 +11,6 @@ class UserGroupTable extends Table
 
     public function query()
     {
-        return UserGroup::selectRaw('
-            id as "dtRowId", name, description, created_at
-        ');
+        return UserGroup::selectRaw('id, name, description, created_at');
     }
 }

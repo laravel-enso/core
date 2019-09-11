@@ -7,9 +7,9 @@ use LaravelEnso\Core\app\Models\UserGroup;
 
 class UserGroupForm
 {
-    private const TemplatePath = __DIR__.'/../Templates/userGroup.json';
+    protected const TemplatePath = __DIR__.'/../Templates/userGroup.json';
 
-    private $form;
+    protected $form;
 
     public function __construct()
     {

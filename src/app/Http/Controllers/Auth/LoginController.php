@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -41,7 +42,7 @@ class LoginController extends Controller
             ));
         }
 
-        auth()->login($user, $request->input('remember'));
+        Auth::login($user, $request->input('remember'));
 
         return true;
     }
@@ -49,7 +50,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return response()->json([
-            'auth' => auth()->check(),
+            'auth' => Auth::check(),
             'csrfToken' => csrf_token(),
         ]);
     }

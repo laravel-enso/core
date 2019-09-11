@@ -11,8 +11,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 abstract class DatabaseUpgrade extends Command
 {
-    protected $title;
     private $time;
+    protected $title;
 
     public function __construct()
     {

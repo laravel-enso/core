@@ -19,27 +19,18 @@ class ResetPasswordNotification extends Notification implements ShouldQueue
         $this->token = $token;
     }
 
-    public function via($notifiable)
+    public function via()
     {
         return ['mail'];
     }
 
     public function toMail($notifiable)
     {
-        app()->setLocale($notifiable->lang());
-
         return (new MailMessage())
             ->subject(__(config('app.name')).': '.__('Reset Password Notification'))
             ->markdown('laravel-enso/core::emails.reset', [
                 'name' => $notifiable->person->name,
                 'url' => url('password/reset/'.$this->token),
             ]);
-    }
-
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

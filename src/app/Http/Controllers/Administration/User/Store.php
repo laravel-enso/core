@@ -5,13 +5,13 @@ namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use LaravelEnso\Core\app\Http\Requests\ValidateUserStore;
+use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
 
 class Store extends Controller
 {
     use AuthorizesRequests;
 
-    public function __invoke(ValidateUserStore $request, User $user)
+    public function __invoke(ValidateUserRequest $request, User $user)
     {
         $user->fill($request->validated());
 

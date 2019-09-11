@@ -26,7 +26,7 @@ class UpdateGlobalPreferences extends Command
         $this->defaultPreferences = $this->defaultPreferences();
 
         DB::transaction(function () {
-            Preference::chunk(1000, function ($preferences) {
+            Preference::chunkById(1000, function ($preferences) {
                 $preferences->each(function ($preference) {
                     $meta = $preference->value;
 
@@ -46,9 +46,7 @@ class UpdateGlobalPreferences extends Command
     {
         return collect($this->defaultPreferences->global)
             ->keys()
-            ->diff(
-                collect($meta->global)->keys()
-            );
+            ->diff(collect($meta->global)->keys());
     }
 
     private function defaultPreferences()

@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Roles\app\Traits\HasRoles;
 use LaravelEnso\Tables\app\Traits\TableCache;
@@ -20,7 +21,7 @@ class UserGroup extends Model
 
     public function delete()
     {
-        if ($this->users()->count()) {
+        if ($this->users()->exists()) {
             throw new ConflictHttpException(
                 __("The user group has users attached and can't be deleted")
             );
@@ -31,8 +32,8 @@ class UserGroup extends Model
 
     public function scopeVisible($query)
     {
-        return auth()->user()->belongsToAdminGroup()
+        return Auth::user()->belongsToAdminGroup()
             ? $query
-            : $query->whereId(auth()->user()->group_id);
+            : $query->whereId(Auth::user()->group_id);
     }
 }

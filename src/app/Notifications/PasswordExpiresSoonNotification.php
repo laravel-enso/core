@@ -11,7 +11,7 @@ class PasswordExpiresSoonNotification extends Notification implements ShouldQueu
 {
     use Queueable;
 
-    public function via($notifiable)
+    public function via()
     {
         return ['database', 'broadcast'];
     }

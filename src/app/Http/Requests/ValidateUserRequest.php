@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateUserStore extends FormRequest
+class ValidateUserRequest extends FormRequest
 {
     public function authorize()
     {

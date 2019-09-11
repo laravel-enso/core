@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Policies;
 
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Core\app\Enums\UserGroups;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -23,11 +24,20 @@ class UserPolicy
             && $targetUser->group_id === $user->group_id;
     }
 
-    public function update(User $user, User $targetUser)
+    public function changeGroup(User $user, User $targetUser)
     {
-        return $targetUser->isDirty('role_id')
-            ? $this->canChangeRole($user, $targetUser) && ! $targetUser->isDirty('group_id')
-            : ! $targetUser->isDirty('group_id');
+        return ! $targetUser->isAdmin()
+            && $user->isSupervisor()
+            && $targetUser->group_id !== UserGroups::Admin;
+    }
+
+    public function changeRole(User $user, User $targetUser)
+    {
+        return ! $targetUser->isAdmin()
+            && $user->id !== $targetUser->id
+            && Role::visible()
+                ->whereId($targetUser->role_id)
+                ->exists();
     }
 
     public function changePassword(User $user, User $targetUser)

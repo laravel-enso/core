@@ -22,15 +22,20 @@ class ValidatePasswordRequest extends FormRequest
 
     public function withValidator($validator)
     {
+        if ($this->filled('password')) {
+            $this->validatePassword($validator);
+        }
+    }
+
+    protected function validatePassword($validator)
+    {
         $user = $this->route('user')
             ?? User::whereEmail($this->get('email'))->first();
 
-        if ($this->filled('password')) {
-            $validator->after(function ($validator) use ($user) {
-                (new PasswordValidator(
-                    $this, $validator, $user)
-                )->handle();
-            });
-        }
+        $validator->after(function ($validator) use ($user) {
+            (new PasswordValidator(
+                $this, $validator, $user
+            ))->handle();
+        });
     }
 }

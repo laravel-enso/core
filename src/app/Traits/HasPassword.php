@@ -47,6 +47,7 @@ trait HasPassword
     {
         $this->notify(
             (new ResetPasswordNotification($token))
+                ->locale($this->lang())
                 ->onQueue('notifications')
         );
     }

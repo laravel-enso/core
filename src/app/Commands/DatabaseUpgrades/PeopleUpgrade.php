@@ -9,7 +9,7 @@ class PeopleUpgrade extends DatabaseUpgrade
 {
     protected function isMigrated()
     {
-        return Schema::hasColumn('people', 'bank');
+        return Schema::hasColumn('people', 'bank') && false;
     }
 
     protected function migrateTable()
@@ -17,6 +17,8 @@ class PeopleUpgrade extends DatabaseUpgrade
         Schema::table('people', function (Blueprint $table) {
             $table->string('bank')->nullable()->after('birthday');
             $table->string('bank_account')->nullable()->after('bank');
+            $table->string('appellative')->index()->change();
+            $table->string('name')->index()->change();
         });
     }
 

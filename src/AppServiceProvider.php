@@ -35,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
     private function addCommands()
     {
         $this->commands(
-            RenameMigrations::class,
             Upgrade::class,
             ClearPreferences::class,
             UpdateGlobalPreferences::class

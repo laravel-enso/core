@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core\app\Enums;
 
-use LaravelEnso\Helpers\app\Classes\Enum;
+use LaravelEnso\Enums\app\Services\Enum;
 
 class Themes extends Enum
 {

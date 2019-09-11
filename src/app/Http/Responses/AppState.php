@@ -2,10 +2,13 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
+use routes;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Enums\Themes;
+use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Enums\app\Facades\Enums;
-use LaravelEnso\Helpers\app\Classes\Enum;
+use LaravelEnso\Enums\app\Services\Enum;
 use LaravelEnso\Core\app\Services\Inspiring;
 use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
@@ -24,7 +27,7 @@ class AppState implements Responsable
     {
         $response = $this->response();
 
-        unset(auth()->user()->role);
+        unset(Auth::user()->role);
 
         return $response;
     }
@@ -40,14 +43,14 @@ class AppState implements Responsable
         $localState = config('enso.config.stateBuilder');
 
         return [
-            'user' => auth()->user()->load(['person', 'avatar']),
-            'preferences' => auth()->user()->preferences(),
+            'user' => Auth::user()->load(['person', 'avatar']),
+            'preferences' => Auth::user()->preferences(),
             'i18n' => $this->i18n($langs),
             'languages' => $langs,
             'rtl' => $this->rtl($languages),
             'themes' => Themes::all(),
             'routes' => $this->routes(),
-            'implicitRoute' => auth()->user()->role->menu->permission->name,
+            'implicitRoute' => Auth::user()->role->menu->permission->name,
             'menus' => (new TreeBuilder())->handle(),
             'impersonating' => session()->has('impersonating'),
             'websockets' => [
@@ -55,7 +58,7 @@ class AppState implements Responsable
                     'key' => config('broadcasting.connections.pusher.key'),
                     'options' => config('broadcasting.connections.pusher.options'),
                 ],
-                'privateChannel' => 'App.User.'.auth()->user()->id,
+                'privateChannel' => 'App.User.'.Auth::user()->id,
                 'ioChannel' => $this->ioChannel(),
             ],
             'meta' => $this->meta(),
@@ -106,7 +109,7 @@ class AppState implements Responsable
 
     private function routes()
     {
-        return auth()->user()->role
+        return Auth::user()->role
             ->permissions()
             ->pluck('name')
             ->reduce(function ($collection, $permission) {
@@ -123,12 +126,12 @@ class AppState implements Responsable
 
     private function ioChannel()
     {
-        $roles = App::make('roles');
+        $roles = App::make(Roles::class);
 
         return collect([$roles::Admin, $roles::Supervisor])
-            ->contains(auth()->user()->role_id)
+            ->contains(Auth::user()->role_id)
             ? 'operations'
-            : 'operations'.auth()->user()->id;
+            : 'operations'.Auth::user()->id;
     }
 
     private function localState(StateBuilder $state)

@@ -14,9 +14,4 @@ class EventServiceProvider extends ServiceProvider
         Login::class => [LoginListener::class],
         PasswordReset::class => [PasswordResetListener::class],
     ];
-
-    public function boot()
-    {
-        parent::boot();
-    }
 }

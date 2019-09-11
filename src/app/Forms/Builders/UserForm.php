@@ -2,16 +2,17 @@
 
 namespace LaravelEnso\Core\app\Forms\Builders;
 
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Forms\app\Services\Form;
 
 class UserForm
 {
-    private const TemplatePath = __DIR__.'/../Templates/user.json';
+    protected const TemplatePath = __DIR__.'/../Templates/user.json';
 
-    private const Tooltip = 'Personal information can only be edited via the person form';
+    protected const Tooltip = 'Personal information can only be edited via the person form';
 
-    private $form;
+    protected $form;
 
     public function __construct()
     {
@@ -20,7 +21,7 @@ class UserForm
 
     public function create($person)
     {
-        $this->setCommonValues($person);
+        $this->common($person);
 
         return $this->form
             ->value('email', $person->email)
@@ -30,9 +31,9 @@ class UserForm
 
     public function edit(User $user)
     {
-        $this->setCommonValues($user->person);
+        $this->common($user->person);
 
-        if (auth()->user()->can('change-password', $user)) {
+        if (Auth::user()->can('change-password', $user)) {
             $this->form->show([
                 'password', 'password_confirmation',
             ]);
@@ -45,10 +46,9 @@ class UserForm
             ->edit($user);
     }
 
-    private function setCommonValues($person)
+    protected function common($person)
     {
-        $this->form
-            ->value('title', $person->title)
+        $this->form->value('title', $person->title)
             ->value('name', $person->name)
             ->value('appellative', $person->appellative)
             ->meta('title', 'tooltip', self::Tooltip)

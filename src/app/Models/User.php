@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Models;
 
 use Illuminate\Support\Facades\App;
 use LaravelEnso\Files\app\Models\File;
+use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Files\app\Traits\Uploads;
@@ -15,16 +16,20 @@ use LaravelEnso\Avatars\app\Traits\HasAvatar;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
+use LaravelEnso\DynamicMethods\app\Traits\Relations;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
 use LaravelEnso\Core\app\Services\DefaultPreferences;
+use LaravelEnso\Rememberable\app\Traits\Rememberable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use LaravelEnso\Helpers\app\Traits\AvoidsDeletionConflicts;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable implements HasLocalePreference
 {
-    use ActionLogs, ActiveState, HasAvatar, HasPassword, Impersonates,
-        IsPerson, Notifiable, Uploads, TableCache;
+    use ActionLogs, ActiveState, AvoidsDeletionConflicts, HasAvatar,
+        HasPassword, Impersonates, IsPerson, Notifiable, Relations,
+        Rememberable, TableCache, Uploads;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
@@ -78,12 +83,12 @@ class User extends Authenticatable implements HasLocalePreference
 
     public function isAdmin()
     {
-        return $this->role_id === App::make('roles')::Admin;
+        return $this->role_id === App::make(Roles::class)::Admin;
     }
 
     public function isSupervisor()
     {
-        return $this->role_id === App::make('roles')::Supervisor;
+        return $this->role_id === App::make(Roles::class)::Supervisor;
     }
 
     public function belongsToAdminGroup()
@@ -96,9 +101,9 @@ class User extends Authenticatable implements HasLocalePreference
         return $this->person_id === $person->id;
     }
 
-    public function persistDefaultPreferences()
+    public function resetPreferences()
     {
-        $this->setPreferences($this->defaultPreferences());
+        $this->storePreferences($this->defaultPreferences());
     }
 
     public function preferences()
@@ -131,20 +136,20 @@ class User extends Authenticatable implements HasLocalePreference
         ]);
     }
 
-    public function setGlobalPreferences($global)
+    public function storeGlobalPreferences($global)
     {
         $preferences = $this->preferences();
         $preferences->global = $global;
 
-        $this->setPreferences($preferences);
+        $this->storePreferences($preferences);
     }
 
-    public function setLocalPreferences($route, $value)
+    public function storeLocalPreferences($route, $value)
     {
         $preferences = $this->preferences();
         $preferences->local->$route = $value;
 
-        $this->setPreferences($preferences);
+        $this->storePreferences($preferences);
     }
 
     public function delete()
@@ -164,7 +169,7 @@ class User extends Authenticatable implements HasLocalePreference
         }
     }
 
-    private function setPreferences($preferences)
+    private function storePreferences($preferences)
     {
         $this->preference()->updateOrCreate(
             ['user_id' => $this->id],
