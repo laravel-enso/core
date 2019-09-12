@@ -68,7 +68,6 @@
         "laravel-enso/teams": "2.1.*",
         "laravel-enso/track-who": "1.8.*",
         "laravel-enso/tutorials": "3.2.*",
-        "laravel-enso/versioning": "1.3.*",
         "laravel-enso/tables": "2.2.*"
     },
     "autoload": {
