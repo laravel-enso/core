@@ -22,7 +22,7 @@ class VersioningUpgrade extends DatabaseUpgrade
         Schema::table('versionings', function ($table) {
             $table->dropIndex(['versionable_type', 'versionable_id']);
         });
-        
+
         Schema::table('versionings', function ($table) {
             $table->unique(['versionable_type', 'versionable_id']);
         });
