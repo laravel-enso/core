@@ -11,7 +11,7 @@ class VersioningUpgrade extends DatabaseUpgrade
     {
         return DB::table('migrations')
             ->whereMigration('2018_05_01_100000_create_versionings_table')
-            ->doesntExist() && false;
+            ->doesntExist();
     }
 
     public function migrateTable()
