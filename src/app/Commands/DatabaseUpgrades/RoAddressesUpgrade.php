@@ -18,7 +18,7 @@ class RoAddressesUpgrade extends DatabaseUpgrade
             $table->dropForeign(['created_by']);
             $table->dropColumn('created_by');
         });
-        
+
         Schema::table('localities', function (Blueprint $table) {
             $table->dropForeign(['created_by']);
             $table->dropColumn('created_by');
