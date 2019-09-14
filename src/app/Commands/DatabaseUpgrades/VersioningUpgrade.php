@@ -24,10 +24,15 @@ class VersioningUpgrade extends DatabaseUpgrade
 
             Schema::dropIfExists('versionings');
 
+            DB::table('migrations')
+                ->whereMigration('2018_05_01_100000_create_versionings_table')
+                ->delete();
+
             return;
         }
 
-        DB::table('migrations')->whereMigration('2018_05_01_100000_create_versionings_table')
+        DB::table('migrations')
+            ->whereMigration('2018_05_01_100000_create_versionings_table')
             ->update(['migration' => '2017_01_01_009000_create_versionings_table']);
 
         Schema::table('versionings', function ($table) {
