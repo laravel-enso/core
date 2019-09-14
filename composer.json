@@ -44,7 +44,7 @@
         "laravel-enso/data-export": "1.4.*",
         "laravel-enso/data-import": "4.2.*",
         "laravel-enso/dynamic-methods": "1.0.*",
-        "laravel-enso/enums": "1.0.*",
+        "laravel-enso/enums": "1.1.*",
         "laravel-enso/files": "3.2.*",
         "laravel-enso/forms": "3.2.*",
         "laravel-enso/helpers": "1.12.*",
