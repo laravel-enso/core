@@ -22,7 +22,9 @@ class CompaniesUpgrade extends DatabaseUpgrade
             $table->tinyInteger('status')->nullable()->after('pays_vat');
         });
 
-        Company::update(['status' => CompanyStatuses::Active]);
+        Company::each(function ($company) {
+            $company->update(['status' => CompanyStatuses::Active]);
+        });
 
         Schema::table('companies', function (Blueprint $table) {
             $table->boolean('status')->nullable(false)->change();
