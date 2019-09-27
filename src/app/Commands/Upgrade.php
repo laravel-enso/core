@@ -12,6 +12,7 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
 class Upgrade extends Command
@@ -30,6 +31,7 @@ class Upgrade extends Command
         (new RoAddressesUpgrade())->migrate();
         (new PeopleUpgrade())->migrate();
         (new CompaniesUpgrade())->migrate();
+        (new DataImportIndexUpgrade())->migrate();
         (new DataImportUpgrade())->migrate();
         (new FilesUpgrade())->migrate();
         (new VersioningUpgrade())->migrate();
