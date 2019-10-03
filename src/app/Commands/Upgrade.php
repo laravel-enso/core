@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesFiscalCodeUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
@@ -41,5 +42,7 @@ class Upgrade extends Command
             (new InvoiceLineUpgrade())->migrate();
             (new AddingInvoiceLinePermissions())->migrate();
         }
+
+        //(new CompaniesFiscalCodeUpgrade())->handle();
     }
 }
