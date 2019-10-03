@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesFiscalCodeUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
@@ -14,6 +13,7 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesFiscalCodeUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
 class Upgrade extends Command
