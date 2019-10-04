@@ -27,7 +27,7 @@ class CompaniesUpgrade extends DatabaseUpgrade
         });
 
         Schema::table('companies', function (Blueprint $table) {
-            $table->boolean('status')->nullable(false)->change();
+            $table->tinyInteger('status')->nullable(false)->change();
         });
     }
 
