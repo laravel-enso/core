@@ -9,6 +9,7 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
@@ -43,6 +44,7 @@ class Upgrade extends Command
             (new AddingInvoiceLinePermissions())->migrate();
         }
 
+        (new SupplierProductPivotUpgrade())->handle();
         //(new CompaniesFiscalCodeUpgrade())->handle();
     }
 }
