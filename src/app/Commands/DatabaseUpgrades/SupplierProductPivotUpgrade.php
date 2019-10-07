@@ -2,12 +2,8 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Exception;
-use App\Enums\VatValues;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Helpers\app\Classes\Decimals;
-use LaravelEnso\Financials\app\Models\Clients\InvoiceLine;
 
 class SupplierProductPivotUpgrade extends DatabaseUpgrade
 {
