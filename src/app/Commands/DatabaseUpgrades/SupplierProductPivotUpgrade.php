@@ -2,15 +2,18 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Exception;
 use App\Enums\VatValues;
-use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Helpers\app\Classes\Decimals;
-use LaravelEnso\Financials\app\Models\Clients\InvoiceLine;
+use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Products\app\Models\Product;
+use LaravelEnso\Products\app\Models\ProductSupplier;
+use LaravelEnso\Roles\app\Models\Role;
 
 class SupplierProductPivotUpgrade extends DatabaseUpgrade
 {
+    private const Roles = ['admin', 'supervisor'];
     protected $title = 'adding acquisition_price to product_supplier';
 
     protected function isMigrated()
@@ -23,14 +26,15 @@ class SupplierProductPivotUpgrade extends DatabaseUpgrade
     {
         Schema::table('product_supplier', function (Blueprint $table) {
             $table->string('part_number')->after('acquisition_price')
-                ->unsigned()->nullable();
+                ->nullable();
             $table->timestamps();
         });
     }
 
     protected function migrateData()
     {
-        //
+        $this->updatePivot();
+        $this->addPermission();
     }
 
     protected function postMigrateTable()
@@ -43,5 +47,46 @@ class SupplierProductPivotUpgrade extends DatabaseUpgrade
         Schema::table('product_supplier', function (Blueprint $table) {
             $table->dropColumn(['acquisition_price', 'created_at', 'updated_at']);
         });
+    }
+
+    public function updatePivot(): void
+    {
+        $now = Carbon::now();
+
+        Product::has('suppliers')
+            ->with(['suppliers'])
+            ->chunkById(500, function ($products) use ($now) {
+                $products->each(function ($product) use ($now) {
+                    $product->suppliers()
+                        ->sync($this->payload($now, $product));
+                });
+            });
+    }
+
+    private function payload($now, $product)
+    {
+        return $product->suppliers->reduce(function ($arr, $supplier) use ($now, $product) {
+            $arr[$supplier->id] = [
+                'part_number' => $product->part_number,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            return $arr;
+        });
+    }
+
+    protected function addPermission(): void
+    {
+        $permission = Permission::create([
+            'name' => 'products.suppliers',
+            'description' => 'Get product supplier options for select',
+            'type' => 0,
+            'is_default' => false,
+        ]);
+
+        $roles = Role::whereIn('name', self::Roles)->get();
+
+        $permission->roles()->attach($roles->pluck('id'));
     }
 }
