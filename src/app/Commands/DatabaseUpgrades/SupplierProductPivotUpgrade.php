@@ -14,7 +14,7 @@ use LaravelEnso\Roles\app\Models\Role;
 class SupplierProductPivotUpgrade extends DatabaseUpgrade
 {
     private const Roles = ['admin', 'supervisor'];
-    protected $title = 'adding acquisition_price to product_supplier';
+    protected $title = 'adding part_number to product_supplier';
 
     protected function isMigrated()
     {
@@ -45,7 +45,7 @@ class SupplierProductPivotUpgrade extends DatabaseUpgrade
     protected function rollbackMigrateTable()
     {
         Schema::table('product_supplier', function (Blueprint $table) {
-            $table->dropColumn(['acquisition_price', 'created_at', 'updated_at']);
+            $table->dropColumn(['part_number', 'created_at', 'updated_at']);
         });
     }
 
