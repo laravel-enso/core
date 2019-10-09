@@ -14,6 +14,7 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesFiscalCodeUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
 class Upgrade extends Command
@@ -43,6 +44,7 @@ class Upgrade extends Command
             (new AddingInvoiceLinePermissions())->migrate();
         }
 
+        (new SupplierProductPivotUpgrade())->handle();
         //(new CompaniesFiscalCodeUpgrade())->handle();
     }
 }
