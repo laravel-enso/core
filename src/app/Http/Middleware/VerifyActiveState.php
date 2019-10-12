@@ -10,7 +10,7 @@ class VerifyActiveState
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->isDisabled()) {
+        if ($request->user()->isInactive()) {
             Auth::logout();
 
             throw new AuthenticationException(__(
