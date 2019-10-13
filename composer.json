@@ -68,7 +68,7 @@
         "laravel-enso/teams": "2.1.*",
         "laravel-enso/track-who": "1.8.*",
         "laravel-enso/tutorials": "3.2.*",
-        "laravel-enso/tables": "2.2.*"
+        "laravel-enso/tables": "3.0.*"
     },
     "autoload": {
         "psr-4": {
