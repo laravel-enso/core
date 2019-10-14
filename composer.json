@@ -64,7 +64,6 @@
         "laravel-enso/roles": "3.3.*",
         "laravel-enso/searchable": "1.2.*",
         "laravel-enso/select": "3.2.*",
-        "laravel-enso/cli": "3.2.*",
         "laravel-enso/teams": "2.1.*",
         "laravel-enso/track-who": "1.8.*",
         "laravel-enso/tutorials": "3.2.*",

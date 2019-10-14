@@ -15,6 +15,7 @@ use LaravelEnso\Core\app\Traits\HasPassword;
 use LaravelEnso\Avatars\app\Traits\HasAvatar;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Helpers\app\Traits\ActiveState;
+use LaravelEnso\Helpers\app\Contracts\Activatable;
 use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
 use LaravelEnso\DynamicMethods\app\Traits\Relations;
 use LaravelEnso\Impersonate\app\Traits\Impersonates;
@@ -25,7 +26,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use LaravelEnso\Helpers\app\Traits\AvoidsDeletionConflicts;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
-class User extends Authenticatable implements HasLocalePreference
+class User extends Authenticatable implements Activatable, HasLocalePreference
 {
     use ActionLogs, ActiveState, AvoidsDeletionConflicts, HasAvatar,
         HasPassword, Impersonates, IsPerson, Notifiable, Relations,
