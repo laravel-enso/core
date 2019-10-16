@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use LaravelEnso\Files\app\Models\File;
 use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Teams\app\Models\Team;
 use Illuminate\Notifications\Notifiable;
 use LaravelEnso\Files\app\Traits\Uploads;
 use LaravelEnso\People\app\Models\Person;
@@ -50,6 +51,11 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
     public function group()
     {
         return $this->belongsTo(UserGroup::class);
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
     }
 
     public function role()
