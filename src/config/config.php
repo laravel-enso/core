@@ -1,9 +1,9 @@
 <?php
 
-use App\Classes\LocalState;
+use App\Services\LocalState;
 
 return [
-    'version' => '3.4.x',
+    'version' => '3.6.x',
     'showQuote' => true,
     'stateBuilder' => LocalState::class,
     'defaultRole' => 'admin',
