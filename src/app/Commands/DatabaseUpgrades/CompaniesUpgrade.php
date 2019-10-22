@@ -19,7 +19,7 @@ class CompaniesUpgrade extends DatabaseUpgrade
         Schema::table('companies', function (Blueprint $table) {
             $table->string('reg_com_nr')->nullable()->after('name');
             $table->string('fiscal_code')->nullable()->after('name');
-            $table->tinyInteger('status')->nullable()->after('pays_vat');
+            $table->boolean('status')->nullable()->after('pays_vat');
         });
 
         Company::each(function ($company) {

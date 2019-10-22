@@ -36,7 +36,7 @@ class LoginController extends Controller
             ));
         }
 
-        if ($user->isDisabled()) {
+        if ($user->isInactive()) {
             throw new AuthenticationException(__(
                 'Your account has been disabled. Please contact the administrator'
             ));
