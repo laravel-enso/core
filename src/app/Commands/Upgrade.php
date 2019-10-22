@@ -16,9 +16,9 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarToEvents;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingEventPermissions;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarPermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesIndexesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarPermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
