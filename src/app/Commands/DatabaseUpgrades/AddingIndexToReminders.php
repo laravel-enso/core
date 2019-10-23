@@ -15,7 +15,7 @@ class AddingIndexToReminders extends DatabaseUpgrade
         $doctrineTable = $sm->listTableDetails('calendar_reminders');
         $foreignKey = $doctrineTable->getForeignKeys()[self::FOREIGN_KEY];
 
-        return $foreignKey->getForeignTableName() == 'calendar_events';
+        return $foreignKey->getForeignTableName() === 'calendar_events';
     }
 
     protected function migrateTable()

@@ -15,7 +15,7 @@ class AddingIndexToEventUsers extends DatabaseUpgrade
         $doctrineTable = $sm->listTableDetails('event_user');
         $foreignKey = $doctrineTable->getForeignKeys()[self::FOREIGN_KEY] ?? null;
 
-        return optional($foreignKey)->getForeignTableName() == 'calendar_events';
+        return optional($foreignKey)->getForeignTableName() === 'calendar_events';
     }
 
     protected function migrateTable()

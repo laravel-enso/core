@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Versioning\app\Models\Versioning;
 
 class RenameEvents extends DatabaseUpgrade
 {
