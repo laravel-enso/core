@@ -15,8 +15,8 @@ class AddingIndexToReminders extends DatabaseUpgrade
                 ->listTableDetails('calendar_reminders')
                 ->getForeignKeys()[self::FOREIGN_KEY] ?? null;
 
-        return $foreignKey == null ||
-            $foreignKey->getForeignTableName() === 'calendar_events';
+        return $foreignKey == null
+            || $foreignKey->getForeignTableName() === 'calendar_events';
     }
 
     protected function migrateTable()

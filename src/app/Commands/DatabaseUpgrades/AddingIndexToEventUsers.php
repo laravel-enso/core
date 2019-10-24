@@ -15,7 +15,8 @@ class AddingIndexToEventUsers extends DatabaseUpgrade
             ->listTableDetails('event_user')
             ->getForeignKeys()[self::FOREIGN_KEY] ?? null;
 
-        return optional($foreignKey)->getForeignTableName() === 'calendar_events';
+        return $foreignKey === null
+            || $foreignKey->getForeignTableName() === 'calendar_events';
     }
 
     protected function migrateTable()
