@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddingIndexToReminders extends DatabaseUpgrade
 {
-    const FOREIGN_KEY = 'calendar_reminders_event_id_foreign';
+    const FOREIGN_KEY = 'reminders_event_id_foreign';
 
     protected function isMigrated()
     {
@@ -15,7 +15,8 @@ class AddingIndexToReminders extends DatabaseUpgrade
                 ->listTableDetails('calendar_reminders')
                 ->getForeignKeys()[self::FOREIGN_KEY] ?? null;
 
-        return $foreignKey->getForeignTableName() === 'calendar_events';
+        return $foreignKey == null ||
+            $foreignKey->getForeignTableName() === 'calendar_events';
     }
 
     protected function migrateTable()
