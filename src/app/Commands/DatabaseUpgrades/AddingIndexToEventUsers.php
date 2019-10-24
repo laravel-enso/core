@@ -11,9 +11,9 @@ class AddingIndexToEventUsers extends DatabaseUpgrade
 
     protected function isMigrated()
     {
-        $sm = Schema::getConnection()->getDoctrineSchemaManager();
-        $doctrineTable = $sm->listTableDetails('event_user');
-        $foreignKey = $doctrineTable->getForeignKeys()[self::FOREIGN_KEY] ?? null;
+        $foreignKey = Schema::getConnection()->getDoctrineSchemaManager()
+            ->listTableDetails('event_user')
+            ->getForeignKeys()[self::FOREIGN_KEY] ?? null;
 
         return optional($foreignKey)->getForeignTableName() === 'calendar_events';
     }
