@@ -101,6 +101,7 @@ class AppState implements Responsable
             'quote' => Inspiring::quote(),
             'env' => app()->environment(),
             'dateFormat' => config('enso.config.dateFormat'),
+            'dateTimeFormat' => config('enso.config.dateFormat').' H:i:s',
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
             'ravenKey' => config('enso.config.ravenKey'),

@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateUserGroupStore extends FormRequest
+class ValidateUserGroupRequest extends FormRequest
 {
     public function authorize()
     {
@@ -23,6 +23,7 @@ class ValidateUserGroupStore extends FormRequest
 
     protected function nameUnique()
     {
-        return Rule::unique('user_groups', 'name');
+        return Rule::unique('user_groups', 'name')
+            ->ignore(optional($this->route('userGroup'))->id);
     }
 }

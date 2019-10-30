@@ -17,7 +17,12 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarEventUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarToEvents;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingEventPermissions;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingIndexToReminders;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingIndexToEventUsers;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesIndexesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarPermissions;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
 
 class Upgrade extends Command
@@ -36,6 +41,7 @@ class Upgrade extends Command
         (new RoAddressesUpgrade())->migrate();
         (new PeopleUpgrade())->migrate();
         (new CompaniesUpgrade())->migrate();
+        (new DataImportIndexUpgrade())->migrate();
         (new DataImportUpgrade())->migrate();
         (new FilesUpgrade())->migrate();
         (new VersioningUpgrade())->migrate();
@@ -45,11 +51,16 @@ class Upgrade extends Command
         (new RenameReminders())->handle();
         (new AddingCalendarToEvents())->handle();
         (new AddingEventPermissions())->handle();
+        (new AddingIndexToReminders())->handle();
+        (new AddingIndexToEventUsers())->handle();
         (new CalendarEventUpgrade())->handle();
 
         if (Schema::hasTable('client_invoices')) {
             (new InvoiceLineUpgrade())->migrate();
             (new AddingInvoiceLinePermissions())->migrate();
         }
+
+        (new SupplierProductPivotUpgrade())->handle();
+        (new CompaniesIndexesUpgrade())->handle();
     }
 }
