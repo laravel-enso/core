@@ -14,6 +14,7 @@ use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarEventUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarToEvents;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingEventPermissions;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingCalendarPermissions;
@@ -44,6 +45,7 @@ class Upgrade extends Command
         (new RenameReminders())->handle();
         (new AddingCalendarToEvents())->handle();
         (new AddingEventPermissions())->handle();
+        (new CalendarEventUpgrade())->handle();
 
         if (Schema::hasTable('client_invoices')) {
             (new InvoiceLineUpgrade())->migrate();
