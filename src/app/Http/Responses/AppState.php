@@ -58,7 +58,7 @@ class AppState implements Responsable
                     'key' => config('broadcasting.connections.pusher.key'),
                     'options' => config('broadcasting.connections.pusher.options'),
                 ],
-                'privateChannel' => 'App.User.'.Auth::user()->id,
+                'privateChannel' => $this->privateChannel(),
                 'ioChannel' => $this->ioChannel(),
             ],
             'meta' => $this->meta(),
@@ -123,6 +123,13 @@ class AppState implements Responsable
 
                 return $collection;
             }, []);
+    }
+
+    private function privateChannel()
+    {
+        return collect(
+            explode('\\', config('auth.providers.users.model'))
+        )->push(Auth::user()->id)->implode('.');
     }
 
     private function ioChannel()
