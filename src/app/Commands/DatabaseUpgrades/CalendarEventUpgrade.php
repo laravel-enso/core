@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Versioning\app\Models\Versioning;
 
 class CalendarEventUpgrade extends DatabaseUpgrade
 {
