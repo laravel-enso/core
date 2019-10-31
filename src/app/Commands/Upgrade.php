@@ -4,9 +4,9 @@ namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;

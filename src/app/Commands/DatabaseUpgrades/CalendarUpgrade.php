@@ -2,25 +2,24 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Calendar\app\Contracts\Calendar as CalendarInterface;
-use LaravelEnso\Calendar\app\Enums\Colors;
-use LaravelEnso\Calendar\app\Models\Calendar;
-use LaravelEnso\Calendar\app\Models\Event;
 use LaravelEnso\Menus\app\Models\Menu;
+use Illuminate\Database\Schema\Blueprint;
+use LaravelEnso\Calendar\app\Enums\Colors;
+use LaravelEnso\Calendar\app\Models\Event;
+use LaravelEnso\Calendar\app\Models\Calendar;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Calendar\app\Contracts\Calendar as CalendarInterface;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
-
     const NEW_PERMISSION = 'core.calendar.index';
     private $defaultCalendar;
 
     protected function isMigrated() //skip
     {
-        $hasNewPermission = Permission::whereName(self::NEW_PERMISSION)->first() !== null;;
+        $hasNewPermission = Permission::whereName(self::NEW_PERMISSION)->first() !== null;
 
         $hasNewPackage = interface_exists(CalendarInterface::class);
 
@@ -30,7 +29,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             && Schema::hasColumn('events', 'location')
             && Schema::hasColumn('events', 'recurrence_ends_at');
 
-        return $hasNewPermission || !$hasNewPackage || !$hasOldEvents;
+        return $hasNewPermission || ! $hasNewPackage || ! $hasOldEvents;
     }
 
     public function migrateTable()
@@ -62,7 +61,7 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function createCalendarsTable()
     {
         \Artisan::call('migrate', [
-            '--path'  => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
+            '--path' => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
             '--force' => true,
         ]);
 
@@ -72,8 +71,8 @@ class CalendarUpgrade extends DatabaseUpgrade
     public function createDefaultCalendar()
     {
         $this->defaultCalendar = Calendar::create([
-            'name'    => 'Default',
-            'color'   => Colors::Blue,
+            'name' => 'Default',
+            'color' => Colors::Blue,
             'private' => false,
         ]);
 
@@ -89,7 +88,6 @@ class CalendarUpgrade extends DatabaseUpgrade
 
         return $this;
     }
-
 
     private function startEventsTableUpdate()
     {
@@ -126,7 +124,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             ->update([
                 'calendar_id' => $this->defaultCalendar->id,
                 'starts_time' => '11:00',
-                'ends_time'   => '12:00',
+                'ends_time' => '12:00',
             ]);
 
         return $this;
