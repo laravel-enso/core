@@ -99,12 +99,12 @@ class CalendarUpgrade extends DatabaseUpgrade
             $table->renameColumn('starts_at', 'starts_date');
             $table->renameColumn('ends_at', 'ends_date');
 
-            $table->integer('calendar_id')->unsigned()->index()
+            $table->unsignedInteger('calendar_id')->index()
                 ->nullable()->after('id');
             $table->foreign('calendar_id')->index()
                 ->references('id')->on('calendars')->onDelete('cascade');
-            $table->integer('parent_id')->nullable()->unsigned()
-                ->index()->after('calendar_id');
+            $table->unsignedInteger('parent_id')->index()
+                ->nullable()->after('calendar_id');
         });
 
         Schema::table('calendar_events', function (Blueprint $table) {
@@ -134,7 +134,7 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function enforceRequiredColumns()
     {
         Schema::table('calendar_events', function (Blueprint $table) {
-            $table->integer('calendar_id')->nullable(false)->change();
+            $table->unsignedInteger('calendar_id')->nullable(false)->change();
 
             $table->date('starts_date')->index()->change();
             $table->date('ends_date')->index()->change();
