@@ -193,5 +193,9 @@ class CalendarUpgrade extends DatabaseUpgrade
         DB::table('migrations')
             ->whereMigration('2019_03_21_100100_create_reminders_table')
             ->update(['migration' => '2019_03_21_100100_create_calendar_reminders_table']);
+
+        DB::table('migrations')
+            ->whereMigration('2019_03_21_100200_create_event_user_pivot_table')
+            ->update(['migration' => '2019_03_21_100200_create_calendar_event_user_pivot_table']);
     }
 }
