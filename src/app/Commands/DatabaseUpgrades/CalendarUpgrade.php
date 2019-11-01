@@ -44,6 +44,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             ->startEventsTableUpdate()
             ->setDefaultValues()
             ->enforceRequiredColumns()
+            ->setForeignKey()
             ->updateRemindersTable()
             ->createPivotConstraints()
             ->updateMigrations();
@@ -68,7 +69,7 @@ class CalendarUpgrade extends DatabaseUpgrade
         return $this;
     }
 
-    public function createDefaultCalendar()
+    private function createDefaultCalendar()
     {
         $this->defaultCalendar = Calendar::create([
             'name' => 'Default',
@@ -101,15 +102,13 @@ class CalendarUpgrade extends DatabaseUpgrade
 
             $table->unsignedInteger('calendar_id')->index()
                 ->nullable()->after('id');
-            $table->foreign('calendar_id')->index()
-                ->references('id')->on('calendars')->onDelete('cascade');
             $table->unsignedInteger('parent_id')->index()
                 ->nullable()->after('calendar_id');
         });
 
         Schema::table('calendar_events', function (Blueprint $table) {
-            $table->time('starts_time')->nullable();
-            $table->time('ends_time')->nullable();
+            $table->time('starts_time')->nullable()->after('starts_date');
+            $table->time('ends_time')->nullable()->after('ends_date');
         });
 
         return $this;
@@ -141,6 +140,16 @@ class CalendarUpgrade extends DatabaseUpgrade
 
             $table->time('starts_time')->nullable(false)->change();
             $table->time('ends_time')->nullable(false)->change();
+        });
+
+        return $this;
+    }
+
+    private function setForeignKey()
+    {
+        Schema::table('calendar_events', function (Blueprint $table) {
+            $table->foreign('calendar_id')->index()
+                ->references('id')->on('calendars')->onDelete('cascade');
         });
 
         return $this;
