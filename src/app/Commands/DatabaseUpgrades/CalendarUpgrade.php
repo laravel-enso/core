@@ -40,8 +40,8 @@ class CalendarUpgrade extends DatabaseUpgrade
             ->updateMenu()
             ->createCalendarsTable()
             ->createDefaultCalendar()
-            ->renamePivotTable()
             ->dropPivotConstraints()
+            ->renamePivotTable()
             ->startEventsTableUpdate()
             ->setDefaultValues()
             ->enforceRequiredColumns()
@@ -81,19 +81,19 @@ class CalendarUpgrade extends DatabaseUpgrade
         return $this;
     }
 
-    private function renamePivotTable()
+    private function dropPivotConstraints()
     {
-        Schema::rename('event_user', 'calendar_event_user');
+        Schema::table('event_user', function (Blueprint $table) {
+            $table->dropForeign(['event_id']);
+            $table->dropForeign(['user_id']);
+        });
 
         return $this;
     }
 
-    private function dropPivotConstraints()
+    private function renamePivotTable()
     {
-        Schema::table('calendar_event_user', function (Blueprint $table) {
-            $table->dropForeign(['event_id']);
-            $table->dropForeign(['user_id']);
-        });
+        Schema::rename('event_user', 'calendar_event_user');
 
         return $this;
     }
@@ -105,8 +105,8 @@ class CalendarUpgrade extends DatabaseUpgrade
         Schema::table('calendar_events', function (Blueprint $table) {
             $table->dropColumn('calendar');
 
-            $table->renameColumn('starts_at', 'starts_date');
-            $table->renameColumn('ends_at', 'ends_date');
+            $table->renameColumn('starts_at', 'start_date');
+            $table->renameColumn('ends_at', 'end_date');
 
             $table->unsignedInteger('calendar_id')->index()
                 ->nullable()->after('id');
@@ -115,8 +115,8 @@ class CalendarUpgrade extends DatabaseUpgrade
         });
 
         Schema::table('calendar_events', function (Blueprint $table) {
-            $table->time('starts_time')->nullable()->after('starts_date');
-            $table->time('ends_time')->nullable()->after('ends_date');
+            $table->time('start_time')->nullable()->after('start_date');
+            $table->time('end_time')->nullable()->after('end_date');
         });
 
         return $this;
@@ -127,8 +127,8 @@ class CalendarUpgrade extends DatabaseUpgrade
         Event::each(function ($event) {
             $event->update([
                 'calendar_id' => $this->defaultCalendar->id,
-                'starts_time' => $event->starts_date->format('H:i'),
-                'ends_time' => $event->ends_date->format('H:i'),
+                'start_time' => $event->start_date->format('H:i'),
+                'end_time' => $event->end_date->format('H:i'),
             ]);
         });
 
@@ -140,11 +140,11 @@ class CalendarUpgrade extends DatabaseUpgrade
         Schema::table('calendar_events', function (Blueprint $table) {
             $table->unsignedInteger('calendar_id')->nullable(false)->change();
 
-            $table->date('starts_date')->index()->change();
-            $table->date('ends_date')->index()->change();
+            $table->date('start_date')->index()->change();
+            $table->date('end_date')->index()->change();
 
-            $table->time('starts_time')->nullable(false)->change();
-            $table->time('ends_time')->nullable(false)->change();
+            $table->time('start_time')->nullable(false)->change();
+            $table->time('end_time')->nullable(false)->change();
         });
 
         return $this;
