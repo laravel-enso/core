@@ -40,6 +40,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             ->updateMenu()
             ->createCalendarsTable()
             ->createDefaultCalendar()
+            ->renamePivotTable()
             ->dropPivotConstraints()
             ->startEventsTableUpdate()
             ->setDefaultValues()
@@ -80,9 +81,16 @@ class CalendarUpgrade extends DatabaseUpgrade
         return $this;
     }
 
+    private function renamePivotTable()
+    {
+        Schema::rename('event_user', 'calendar_event_user');
+
+        return $this;
+    }
+
     private function dropPivotConstraints()
     {
-        Schema::table('event_user', function (Blueprint $table) {
+        Schema::table('calendar_event_user', function (Blueprint $table) {
             $table->dropForeign(['event_id']);
             $table->dropForeign(['user_id']);
         });
@@ -122,9 +130,6 @@ class CalendarUpgrade extends DatabaseUpgrade
                 'starts_time' => $event->starts_date->format('H:i'),
                 'ends_time' => $event->ends_date->format('H:i'),
             ]);
-        });
-
-        Schema::table('calendar_events', function (Blueprint $table) {
         });
 
         return $this;
@@ -169,7 +174,7 @@ class CalendarUpgrade extends DatabaseUpgrade
 
     private function createPivotConstraints()
     {
-        Schema::table('event_user', function (Blueprint $table) {
+        Schema::table('calendar_event_user', function (Blueprint $table) {
             $table->foreign('event_id')->references('id')->on('calendar_events')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
