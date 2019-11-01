@@ -15,7 +15,6 @@ use LaravelEnso\Roles\app\Models\Role;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
-
     const NEW_PERMISSION = 'core.calendar.create';
     private $defaultCalendar;
 
@@ -31,7 +30,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             && Schema::hasColumn('events', 'location')
             && Schema::hasColumn('events', 'recurrence_ends_at');
 
-        return $hasNewPermission || !$hasNewPackage || !$hasOldEvents;
+        return $hasNewPermission || ! $hasNewPackage || ! $hasOldEvents;
     }
 
     public function migrateTable()
@@ -66,7 +65,7 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function createCalendarsTable()
     {
         \Artisan::call('migrate', [
-            '--path'  => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
+            '--path' => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
             '--force' => true,
         ]);
 
@@ -76,8 +75,8 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function createDefaultCalendar()
     {
         $this->defaultCalendar = Calendar::create([
-            'name'    => 'Default',
-            'color'   => Colors::Blue,
+            'name' => 'Default',
+            'color' => Colors::Blue,
             'private' => false,
         ]);
 
@@ -130,8 +129,8 @@ class CalendarUpgrade extends DatabaseUpgrade
         Event::each(function ($event) {
             $event->update([
                 'calendar_id' => $this->defaultCalendar->id,
-                'start_time'  => $event->start_date->format('H:i'),
-                'end_time'    => $event->end_date->format('H:i'),
+                'start_time' => $event->start_date->format('H:i'),
+                'end_time' => $event->end_date->format('H:i'),
             ]);
         });
 
@@ -208,8 +207,8 @@ class CalendarUpgrade extends DatabaseUpgrade
             'name' => 'core.calendar.events.index',
         ], [
             'description' => 'Get events',
-            'type'        => 0,
-            'is_default'  => true,
+            'type' => 0,
+            'is_default' => true,
         ]);
 
         $permission->roles()->sync(Role::pluck('id'));
