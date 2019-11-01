@@ -11,10 +11,12 @@ use LaravelEnso\Calendar\app\Models\Calendar;
 use LaravelEnso\Calendar\app\Models\Event;
 use LaravelEnso\Menus\app\Models\Menu;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Roles\app\Models\Role;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
-    const NEW_PERMISSION = 'core.calendar.index';
+
+    const NEW_PERMISSION = 'core.calendar.create';
     private $defaultCalendar;
 
     protected function isMigrated() //skip
@@ -29,7 +31,7 @@ class CalendarUpgrade extends DatabaseUpgrade
             && Schema::hasColumn('events', 'location')
             && Schema::hasColumn('events', 'recurrence_ends_at');
 
-        return $hasNewPermission || ! $hasNewPackage || ! $hasOldEvents;
+        return $hasNewPermission || !$hasNewPackage || !$hasOldEvents;
     }
 
     public function migrateTable()
@@ -37,6 +39,7 @@ class CalendarUpgrade extends DatabaseUpgrade
         (new AddNewCalendarPermissions())->migrate();
 
         $this
+            ->addOptionalPermission()
             ->updateMenu()
             ->createCalendarsTable()
             ->createDefaultCalendar()
@@ -63,7 +66,7 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function createCalendarsTable()
     {
         \Artisan::call('migrate', [
-            '--path' => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
+            '--path'  => 'vendor/laravel-enso/calendar/src/database/migrations/2019_03_20_100000_create_calendars_table.php',
             '--force' => true,
         ]);
 
@@ -73,8 +76,8 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function createDefaultCalendar()
     {
         $this->defaultCalendar = Calendar::create([
-            'name' => 'Default',
-            'color' => Colors::Blue,
+            'name'    => 'Default',
+            'color'   => Colors::Blue,
             'private' => false,
         ]);
 
@@ -127,8 +130,8 @@ class CalendarUpgrade extends DatabaseUpgrade
         Event::each(function ($event) {
             $event->update([
                 'calendar_id' => $this->defaultCalendar->id,
-                'start_time' => $event->start_date->format('H:i'),
-                'end_time' => $event->end_date->format('H:i'),
+                'start_time'  => $event->start_date->format('H:i'),
+                'end_time'    => $event->end_date->format('H:i'),
             ]);
         });
 
@@ -197,5 +200,20 @@ class CalendarUpgrade extends DatabaseUpgrade
         DB::table('migrations')
             ->whereMigration('2019_03_21_100200_create_event_user_pivot_table')
             ->update(['migration' => '2019_03_21_100200_create_calendar_event_user_pivot_table']);
+    }
+
+    private function addOptionalPermission()
+    {
+        $permission = Permission::updateOrCreate([
+            'name' => 'core.calendar.events.index',
+        ], [
+            'description' => 'Get events',
+            'type'        => 0,
+            'is_default'  => true,
+        ]);
+
+        $permission->roles()->sync(Role::pluck('id'));
+
+        return $this;
     }
 }
