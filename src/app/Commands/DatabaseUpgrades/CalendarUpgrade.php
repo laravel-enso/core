@@ -126,7 +126,6 @@ class CalendarUpgrade extends DatabaseUpgrade
         });
 
         Schema::table('calendar_events', function (Blueprint $table) {
-            
         });
 
         return $this;
