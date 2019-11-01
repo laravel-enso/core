@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\UserGroup;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\Core\app\Http\Requests\ValidateUserGroupRequest;
+use LaravelEnso\Core\app\Models\UserGroup;
 
 class Store extends Controller
 {

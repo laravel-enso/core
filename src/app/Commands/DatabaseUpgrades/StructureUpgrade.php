@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Roles\app\Models\Role;
 
 class StructureUpgrade extends DatabaseUpgrade
 {

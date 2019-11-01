@@ -4,19 +4,19 @@ namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesIndexesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\AddingInvoiceLinePermissions;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesIndexesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CompaniesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportIndexUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DataImportUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\FilesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\InvoiceLineUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\PeopleUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RenamePermissions;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\RoAddressesUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\SupplierProductPivotUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\VersioningUpgrade;
 
 class Upgrade extends Command
 {

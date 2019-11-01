@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Tables\Builders;
 
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Tables\app\Contracts\Table;
 
 class UserTable implements Table

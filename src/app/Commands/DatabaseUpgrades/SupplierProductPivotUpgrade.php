@@ -3,11 +3,11 @@
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Products\app\Models\Product;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Products\app\Models\Product;
+use LaravelEnso\Roles\app\Models\Role;
 
 class SupplierProductPivotUpgrade extends DatabaseUpgrade
 {

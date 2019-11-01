@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Companies\app\Models\Company;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Companies\app\Enums\CompanyStatuses;
+use LaravelEnso\Companies\app\Models\Company;
 
 class CompaniesUpgrade extends DatabaseUpgrade
 {

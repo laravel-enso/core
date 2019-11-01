@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Tables\app\Traits\Init;
 use LaravelEnso\Core\app\Tables\Builders\UserTable;
+use LaravelEnso\Tables\app\Traits\Init;
 
 class InitTable extends Controller
 {

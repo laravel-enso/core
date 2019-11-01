@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ValidateUserRequest extends FormRequest
 {

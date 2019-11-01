@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ForgotPasswordController extends Controller

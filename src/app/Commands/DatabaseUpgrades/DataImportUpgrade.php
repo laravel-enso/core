@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\DataImport\app\Models\DataImport;
 
 class DataImportUpgrade extends DatabaseUpgrade

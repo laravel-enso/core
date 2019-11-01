@@ -2,11 +2,11 @@
 
 namespace LaravelEnso\Core\app\Models;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use LaravelEnso\Rememberable\app\Traits\Rememberable;
 use LaravelEnso\Roles\app\Traits\HasRoles;
 use LaravelEnso\Tables\app\Traits\TableCache;
-use LaravelEnso\Rememberable\app\Traits\Rememberable;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class UserGroup extends Model

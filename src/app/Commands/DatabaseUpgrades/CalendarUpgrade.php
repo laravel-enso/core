@@ -2,15 +2,15 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Menus\app\Models\Menu;
-use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Calendar\app\Enums\Colors;
-use LaravelEnso\Calendar\app\Models\Event;
-use LaravelEnso\Calendar\app\Models\Calendar;
-use LaravelEnso\Permissions\app\Models\Permission;
 use LaravelEnso\Calendar\app\Contracts\Calendar as CalendarInterface;
+use LaravelEnso\Calendar\app\Enums\Colors;
+use LaravelEnso\Calendar\app\Models\Calendar;
+use LaravelEnso\Calendar\app\Models\Event;
+use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
