@@ -2,20 +2,16 @@
 
 use Illuminate\Database\Seeder;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\People\app\Enums\Titles;
 use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\Core\app\Models\UserGroup;
+use LaravelEnso\Roles\app\Models\Role;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
         $person = $this->person();
-
-        $dispatcher = User::getEventDispatcher();
-
-        User::unsetEventDispatcher();
 
         factory(User::class)->create([
             'person_id' => $person->id,
@@ -25,8 +21,6 @@ class UserSeeder extends Seeder
             'role_id' => Role::whereName('admin')->first()->id,
             'is_active' => true,
         ])->generateAvatar();
-
-        User::setEventDispatcher($dispatcher);
     }
 
     private function person()
