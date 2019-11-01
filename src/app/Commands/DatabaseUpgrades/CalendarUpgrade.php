@@ -104,13 +104,10 @@ class CalendarUpgrade extends DatabaseUpgrade
             $table->foreign('calendar_id')->index()
                 ->references('id')->on('calendars')->onDelete('cascade');
             $table->integer('parent_id')->nullable()->unsigned()
-                ->index()->after('id');
+                ->index()->after('calendar_id');
         });
 
         Schema::table('calendar_events', function (Blueprint $table) {
-            $table->date('starts_date')->index()->change();
-            $table->date('ends_date')->index()->change();
-
             $table->time('starts_time')->nullable();
             $table->time('ends_time')->nullable();
         });
@@ -120,12 +117,17 @@ class CalendarUpgrade extends DatabaseUpgrade
 
     private function setDefaultValues()
     {
-        Event::query()
-            ->update([
+        Event::each(function ($event) {
+            $event->update([
                 'calendar_id' => $this->defaultCalendar->id,
-                'starts_time' => '11:00',
-                'ends_time' => '12:00',
+                'starts_time' => $event->starts_date->format('H:i'),
+                'ends_time' => $event->ends_date->format('H:i'),
             ]);
+        });
+
+        Schema::table('calendar_events', function (Blueprint $table) {
+            
+        });
 
         return $this;
     }
@@ -133,8 +135,11 @@ class CalendarUpgrade extends DatabaseUpgrade
     private function enforceRequiredColumns()
     {
         Schema::table('calendar_events', function (Blueprint $table) {
-            $table->integer('calendar_id')->unsigned()
-                ->nullable(false)->change();
+            $table->integer('calendar_id')->nullable(false)->change();
+
+            $table->date('starts_date')->index()->change();
+            $table->date('ends_date')->index()->change();
+
             $table->time('starts_time')->nullable(false)->change();
             $table->time('ends_time')->nullable(false)->change();
         });
