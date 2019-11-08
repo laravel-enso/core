@@ -2,12 +2,12 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Exception;
 use App\Enums\VatValues;
-use Illuminate\Support\Facades\Schema;
+use Exception;
 use Illuminate\Database\Schema\Blueprint;
-use LaravelEnso\Helpers\app\Classes\Decimals;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Financials\app\Models\Clients\InvoiceLine;
+use LaravelEnso\Helpers\app\Classes\Decimals;
 
 class InvoiceLineUpgrade extends DatabaseUpgrade
 {

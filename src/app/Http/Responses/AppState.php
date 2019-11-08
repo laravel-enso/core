@@ -2,19 +2,19 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
-use routes;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Core\app\Enums\Themes;
-use LaravelEnso\Roles\app\Enums\Roles;
+use LaravelEnso\Core\app\Services\Inspiring;
 use LaravelEnso\Enums\app\Facades\Enums;
 use LaravelEnso\Enums\app\Services\Enum;
-use LaravelEnso\Core\app\Services\Inspiring;
-use Illuminate\Contracts\Support\Responsable;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Menus\app\Services\TreeBuilder;
-use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Localisation\app\Models\Language;
+use LaravelEnso\Menus\app\Services\TreeBuilder;
+use LaravelEnso\Roles\app\Enums\Roles;
+use routes;
 
 class AppState implements Responsable
 {
@@ -58,7 +58,7 @@ class AppState implements Responsable
                     'key' => config('broadcasting.connections.pusher.key'),
                     'options' => config('broadcasting.connections.pusher.options'),
                 ],
-                'privateChannel' => 'App.User.'.Auth::user()->id,
+                'privateChannel' => $this->privateChannel(),
                 'ioChannel' => $this->ioChannel(),
             ],
             'meta' => $this->meta(),
@@ -101,6 +101,7 @@ class AppState implements Responsable
             'quote' => Inspiring::quote(),
             'env' => app()->environment(),
             'dateFormat' => config('enso.config.dateFormat'),
+            'dateTimeFormat' => config('enso.config.dateFormat').' H:i:s',
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
             'ravenKey' => config('enso.config.ravenKey'),
@@ -122,6 +123,13 @@ class AppState implements Responsable
 
                 return $collection;
             }, []);
+    }
+
+    private function privateChannel()
+    {
+        return collect(
+            explode('\\', config('auth.providers.users.model'))
+        )->push(Auth::user()->id)->implode('.');
     }
 
     private function ioChannel()

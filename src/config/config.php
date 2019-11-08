@@ -1,13 +1,14 @@
 <?php
 
-use App\Classes\LocalState;
+use App\Services\LocalState;
 
 return [
-    'version' => '3.4.x',
+    'version' => '3.6.x',
     'showQuote' => true,
     'stateBuilder' => LocalState::class,
     'defaultRole' => 'admin',
     'dateFormat' => 'd-m-Y',
+    'dateTimeFormat' => 'd-m-Y H:i:s',
     'facebook' => 'https://facebook.com',
     'googleplus' => 'https://plus.google.com',
     'twitter' => 'https://twitter.com',

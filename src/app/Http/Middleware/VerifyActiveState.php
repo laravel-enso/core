@@ -3,14 +3,14 @@
 namespace LaravelEnso\Core\app\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Auth;
 
 class VerifyActiveState
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->isDisabled()) {
+        if ($request->user()->isInactive()) {
             Auth::logout();
 
             throw new AuthenticationException(__(

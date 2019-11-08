@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Requests;
 
-use LaravelEnso\Core\app\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use LaravelEnso\Core\app\Models\User;
 
 class ValidatePasswordRequest extends FormRequest
 {

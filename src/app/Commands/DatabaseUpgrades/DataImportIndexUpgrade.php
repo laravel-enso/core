@@ -5,20 +5,24 @@ namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FilesUpgrade extends DatabaseUpgrade
+class DataImportIndexUpgrade extends DatabaseUpgrade
 {
     protected function isMigrated()
     {
         return Schema::getConnection()
             ->getDoctrineSchemaManager()
-            ->listTableDetails('files')
-            ->hasIndex('files_original_name_index');
+            ->listTableDetails('data_imports')
+            ->hasIndex('data_imports_type_index');
     }
 
     protected function migrateTable()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->index('original_name');
+        Schema::table('data_imports', function (Blueprint $table) {
+            $table->index('type');
+        });
+
+        Schema::table('import_templates', function (Blueprint $table) {
+            $table->index('type');
         });
     }
 

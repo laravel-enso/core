@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Core\app\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use LaravelEnso\Core\app\Http\Requests\ValidatePasswordRequest;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 

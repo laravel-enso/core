@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Core\app\Policies;
 
+use Illuminate\Auth\Access\HandlesAuthorization;
+use LaravelEnso\Core\app\Enums\UserGroups;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Roles\app\Models\Role;
-use LaravelEnso\Core\app\Enums\UserGroups;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {

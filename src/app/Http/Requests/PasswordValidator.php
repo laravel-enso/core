@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Http\Requests;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 
 class PasswordValidator

@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Forms\Builders;
 
-use LaravelEnso\Forms\app\Services\Form;
 use LaravelEnso\Core\app\Models\UserGroup;
+use LaravelEnso\Forms\app\Services\Form;
 
 class UserGroupForm
 {

@@ -4,9 +4,9 @@ namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
 use DB;
 use Exception;
-use ReflectionClass;
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use ReflectionClass;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 abstract class DatabaseUpgrade extends Command

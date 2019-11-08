@@ -2,16 +2,16 @@
 
 namespace LaravelEnso\Core;
 
-use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Core\app\Commands\Upgrade;
-use LaravelEnso\Core\app\Enums\UserGroups;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\ServiceProvider;
+use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
+use LaravelEnso\Core\app\Commands\Upgrade;
+use LaravelEnso\Core\app\Enums\UserGroups;
 use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
-use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Permissions\app\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider

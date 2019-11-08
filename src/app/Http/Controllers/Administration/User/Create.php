@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\People\app\Models\Person;
 use LaravelEnso\Core\app\Forms\Builders\UserForm;
+use LaravelEnso\People\app\Models\Person;
 
 class Create extends Controller
 {
