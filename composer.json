@@ -36,7 +36,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "jenssegers/date": "^3.4",
         "laravel-enso/action-logger": "2.3.*",
-        "laravel-enso/activity-log": "3.0.*",
+        "laravel-enso/activity-log": "3.1.*",
         "laravel-enso/avatars": "2.4.*",
         "laravel-enso/charts": "3.1.*",
         "laravel-enso/companies": "2.3.*",
