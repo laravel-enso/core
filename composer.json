@@ -45,8 +45,8 @@
         "laravel-enso/dynamic-methods": "1.0.*",
         "laravel-enso/enums": "1.1.*",
         "laravel-enso/files": "3.3.*",
-        "laravel-enso/forms": "3.2.*",
-        "laravel-enso/helpers": "1.13.*",
+        "laravel-enso/forms": "3.3.*",
+        "laravel-enso/helpers": "1.14.*",
         "laravel-enso/history-tracker": "1.6.*",
         "laravel-enso/how-to": "3.2.*",
         "laravel-enso/impersonate": "2.4.*",
@@ -57,7 +57,7 @@
         "laravel-enso/menus": "3.3.*",
         "laravel-enso/multitenancy": "1.2.*",
         "laravel-enso/notifications": "3.1.*",
-        "laravel-enso/people": "2.3.*",
+        "laravel-enso/people": "2.4.*",
         "laravel-enso/permissions": "3.3.*",
         "laravel-enso/rememberable": "2.1.*",
         "laravel-enso/roles": "3.3.*",
@@ -66,7 +66,7 @@
         "laravel-enso/teams": "2.1.*",
         "laravel-enso/track-who": "1.8.*",
         "laravel-enso/tutorials": "3.2.*",
-        "laravel-enso/tables": "3.0.*"
+        "laravel-enso/tables": "3.1.*"
     },
     "autoload": {
         "psr-4": {
