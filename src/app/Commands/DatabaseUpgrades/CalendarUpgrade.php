@@ -2,14 +2,15 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
     protected function isMigrated()
     {
-        return Schema::hasColumn('calendar_events', 'frequency');
+        return ! Schema::hasTable('calendar_events')
+            || Schema::hasColumn('calendar_events', 'frequency');
     }
 
     protected function migrateTable()
