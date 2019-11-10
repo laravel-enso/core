@@ -3,9 +3,8 @@
 use App\Services\LocalState;
 
 return [
-    'version' => '3.6.x',
+    'version' => '3.7.x',
     'showQuote' => true,
-    'stateBuilder' => LocalState::class,
     'defaultRole' => 'admin',
     'dateFormat' => 'd-m-Y',
     'dateTimeFormat' => 'd-m-Y H:i:s',

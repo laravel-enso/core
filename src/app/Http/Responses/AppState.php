@@ -2,19 +2,20 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
-use Illuminate\Contracts\Support\Responsable;
+use routes;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Contracts\StateBuilder;
 use LaravelEnso\Core\app\Enums\Themes;
-use LaravelEnso\Core\app\Services\Inspiring;
+use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Enums\app\Facades\Enums;
 use LaravelEnso\Enums\app\Services\Enum;
+use LaravelEnso\Core\app\Services\Inspiring;
+use Illuminate\Contracts\Support\Responsable;
+use LaravelEnso\Core\app\Services\LocalState;
 use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Localisation\app\Models\Language;
 use LaravelEnso\Menus\app\Services\TreeBuilder;
-use LaravelEnso\Roles\app\Enums\Roles;
-use routes;
+use LaravelEnso\Core\app\Contracts\StateBuilder;
+use LaravelEnso\Localisation\app\Models\Language;
 
 class AppState implements Responsable
 {
@@ -40,7 +41,6 @@ class AppState implements Responsable
             ->get(['name', 'flag', 'is_rtl']);
 
         $langs = $languages->pluck('flag', 'name');
-        $localState = config('enso.config.stateBuilder');
 
         return [
             'user' => Auth::user()->load(['person', 'avatar']),
@@ -63,9 +63,7 @@ class AppState implements Responsable
             ],
             'meta' => $this->meta(),
             'enums' => Enums::all(),
-            'local' => class_exists($localState)
-                ? $this->localState(new $localState())
-                : null,
+            'local' => App::make(LocalState::class)->build(),
         ];
     }
 
@@ -140,10 +138,5 @@ class AppState implements Responsable
             ->contains(Auth::user()->role_id)
             ? 'operations'
             : 'operations'.Auth::user()->id;
-    }
-
-    private function localState(StateBuilder $state)
-    {
-        return $state->build();
     }
 }

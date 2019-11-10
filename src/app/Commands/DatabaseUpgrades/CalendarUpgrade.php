@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class CalendarUpgrade extends DatabaseUpgrade
 {
