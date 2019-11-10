@@ -1,7 +1,5 @@
 <?php
 
-use App\Services\LocalState;
-
 return [
     'version' => '3.7.x',
     'showQuote' => true,
