@@ -57,9 +57,11 @@ class AppState implements Responsable
                     'key' => config('broadcasting.connections.pusher.key'),
                     'options' => config('broadcasting.connections.pusher.options'),
                 ],
-                'privateChannel' => $this->privateChannel(),
-                'ioChannel' => $this->ioChannel(),
-                'applicationUpdates' => 'application-updates'
+                'channels' => [
+                    'privateChannel' => $this->privateChannel(),
+                    'ioChannel' => $this->ioChannel(),
+                    'applicationUpdates' => 'application-updates'
+                ],
             ],
             'meta' => $this->meta(),
             'enums' => Enums::all(),
