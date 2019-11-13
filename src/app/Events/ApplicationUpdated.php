@@ -10,7 +10,6 @@ use Illuminate\Queue\SerializesModels;
 
 class ApplicationUpdated implements ShouldBroadcast
 {
-
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $name;

@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\app\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Event;
 use LaravelEnso\Core\app\Events\ApplicationUpdated;
-use LaravelEnso\Core\app\Models\Preference;
 
 class AnnounceAppUpdate extends Command
 {
