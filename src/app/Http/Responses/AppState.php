@@ -59,6 +59,7 @@ class AppState implements Responsable
                 ],
                 'privateChannel' => $this->privateChannel(),
                 'ioChannel' => $this->ioChannel(),
+                'applicationUpdates' => 'application-updates'
             ],
             'meta' => $this->meta(),
             'enums' => Enums::all(),
