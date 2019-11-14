@@ -60,7 +60,7 @@ class AppState implements Responsable
                 'channels' => [
                     'privateChannel' => $this->privateChannel(),
                     'ioChannel' => $this->ioChannel(),
-                    'appUpdates' => 'app-updates'
+                    'appUpdates' => 'app-updates',
                 ],
             ],
             'meta' => $this->meta(),
