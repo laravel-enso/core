@@ -10,7 +10,7 @@ class BroadcastServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Broadcast::channel('application-updates', function () {
+        Broadcast::channel('app-updates', function () {
             return Auth::check();
         });
     }
