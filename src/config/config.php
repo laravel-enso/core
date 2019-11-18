@@ -3,7 +3,7 @@
 return [
     'version' => '3.7.x',
     'ownerCompanyId' => env('OWNER_COMPANY_ID', 1),
-    'showQuote' => true,
+    'showQuote' => env('SHOW_QUOTE', true),
     'defaultRole' => 'admin',
     'dateFormat' => 'd-m-Y',
     'dateTimeFormat' => 'd-m-Y H:i:s',
@@ -13,5 +13,5 @@ return [
     'ravenKey' => env('RAVEN_DSN', null),
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
     'ensoApiToken' => env('ENSO_API_TOKEN', null),
-    'extendedDocumentTitle' => false,
+    'extendedDocumentTitle' => env('EXTENDED_DOCUMENT_TITLE', true),
 ];
