@@ -2,6 +2,7 @@
 
 return [
     'version' => '3.7.x',
+    'ownerCompanyId' => env('OWNER_COMPANY_ID', 1),
     'showQuote' => true,
     'defaultRole' => 'admin',
     'dateFormat' => 'd-m-Y',
