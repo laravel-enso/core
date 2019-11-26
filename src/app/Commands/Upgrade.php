@@ -5,8 +5,8 @@ namespace LaravelEnso\Core\app\Commands;
 use Illuminate\Console\Command;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CountriesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\TutorialUpgrade;
 use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DocumentsUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\TutorialUpgrade;
 
 class Upgrade extends Command
 {
