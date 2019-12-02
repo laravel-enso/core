@@ -9,6 +9,7 @@ class ResetStorage extends Command
 {
     private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports'];
     private const TestingFolder = 'testing';
+    private const ImportFolder = 'imports';
 
     protected $signature = 'enso:reset-storage';
 
@@ -22,6 +23,10 @@ class ResetStorage extends Command
             })->each(function ($file) {
                 Storage::delete($file);
             });
+        });
+
+        collect(Storage::directories(self::ImportFolder))->each(function ($directory) {
+            Storage::deleteDirectory($directory);
         });
 
         if (collect(Storage::directories())->contains(self::TestingFolder)) {
