@@ -11,7 +11,7 @@ class ResetStorage extends Command
     private const TestingFolder = 'testing';
     private const ImportFolder = 'imports';
 
-    protected $signature = 'enso:reset-storage';
+    protected $signature = 'enso:storage:reset';
 
     protected $description = 'Run this command after php artisan migrate:fresh to clear the storage';
 
