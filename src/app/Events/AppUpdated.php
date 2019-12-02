@@ -25,7 +25,7 @@ class AppUpdated implements ShouldBroadcast
 
         $this->title = 'Important';
         $this->message = 'The application was updated, please save your work & refresh your browser';
-        $this->tooltip = 'Click here to refresh your page and update to the latest version';
+        $this->tooltip = 'Save your work then click here to refresh your page and update to the latest application version';
     }
 
     public function broadcastOn()
