@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\app\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\app\Commands\ClearPreferences;
+use LaravelEnso\Core\app\Commands\ResetStorage;
 use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\app\Commands\Upgrade;
 use LaravelEnso\Core\app\Enums\UserGroups;
@@ -36,9 +37,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->commands(
             AnnounceAppUpdate::class,
-            Upgrade::class,
             ClearPreferences::class,
-            UpdateGlobalPreferences::class
+            ResetStorage::class,
+            UpdateGlobalPreferences::class,
+            Upgrade::class,
         );
 
         return $this;
