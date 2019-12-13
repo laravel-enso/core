@@ -52,11 +52,4 @@ class UserPolicy
             && $user->id !== $targetUser->id
             && ! $user->isImpersonating();
     }
-
-    private function canChangeRole(User $user, User $targetUser)
-    {
-        return  $user->id !== $targetUser->id
-            && ! $targetUser->isAdmin()
-            && Role::visible()->whereId($targetUser->role_id)->first() !== null;
-    }
 }

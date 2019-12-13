@@ -136,13 +136,6 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
             ->lang;
     }
 
-    private function defaultPreferences()
-    {
-        return new Preference([
-            'value' => DefaultPreferences::data(),
-        ]);
-    }
-
     public function storeGlobalPreferences($global)
     {
         $preferences = $this->preferences();
@@ -169,11 +162,18 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
 
         try {
             parent::delete();
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             throw new ConflictHttpException(__(
                 'The user has assigned resources in the system and cannot be deleted'
             ));
         }
+    }
+
+    private function defaultPreferences()
+    {
+        return new Preference([
+            'value' => DefaultPreferences::data(),
+        ]);
     }
 
     private function storePreferences($preferences)

@@ -28,9 +28,8 @@ class ValidateUserRequest extends FormRequest
     {
         if ($this->filled('password')) {
             $validator->after(function ($validator) {
-                (new PasswordValidator(
-                    $this, $validator, $this->route('user'))
-                )->handle();
+                (new PasswordValidator($this, $validator, $this->route('user')))
+                    ->handle();
             });
         }
     }
