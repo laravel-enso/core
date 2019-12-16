@@ -3,15 +3,14 @@
 namespace LaravelEnso\Core\app\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CalendarUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CountriesUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\TutorialUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\CurrenciesUpgrade;
 
 class Upgrade extends Command
 {
+
     protected $signature = 'enso:upgrade';
 
-    protected $description = 'This command will upgrade Core from v3.6.* to 3.7.*';
+    protected $description = 'This command will upgrade any necessary packages from the previous release';
 
     public function handle()
     {
@@ -20,8 +19,6 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        (new CalendarUpgrade())->handle();
-        (new CountriesUpgrade())->handle();
-        (new TutorialUpgrade())->handle();
+        (new CurrenciesUpgrade())->handle();
     }
 }
