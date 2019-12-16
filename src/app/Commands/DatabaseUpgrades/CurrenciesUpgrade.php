@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CurrenciesUpgrade extends DatabaseUpgrade
 {
-
     protected function isMigrated()
     {
         return ! Schema::hasTable('currencies')
