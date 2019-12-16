@@ -40,9 +40,16 @@ class ProfileBuilder
 
     private function rating()
     {
-        $rating = Decimals::div(self::LoginRating * $this->user->loginCount, $this->user->daysSinceMember) +
-            Decimals::div(self::ActionRating * $this->user->actionLogCount, $this->user->daysSinceMember);
+        $loginRating = Decimals::div(
+            self::LoginRating * $this->user->loginCount,
+            $this->user->daysSinceMember
+        );
 
-        return Decimals::div($rating, 100, 0);
+        $actionRating = Decimals::div(
+            self::ActionRating * $this->user->actionLogCount,
+            $this->user->daysSinceMember
+        );
+
+        return Decimals::div(Decimals::add($loginRating, $actionRating), 100, 0);
     }
 }
