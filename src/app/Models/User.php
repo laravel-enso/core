@@ -25,7 +25,6 @@ use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Teams\app\Models\Team;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
@@ -136,13 +135,6 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
             ->lang;
     }
 
-    private function defaultPreferences()
-    {
-        return new Preference([
-            'value' => DefaultPreferences::data(),
-        ]);
-    }
-
     public function storeGlobalPreferences($global)
     {
         $preferences = $this->preferences();
@@ -159,21 +151,11 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         $this->storePreferences($preferences);
     }
 
-    public function delete()
+    private function defaultPreferences()
     {
-        if ($this->logins()->first() !== null) {
-            throw new ConflictHttpException(__(
-                'The user has activity in the system and cannot be deleted'
-            ));
-        }
-
-        try {
-            parent::delete();
-        } catch (\Exception $e) {
-            throw new ConflictHttpException(__(
-                'The user has assigned resources in the system and cannot be deleted'
-            ));
-        }
+        return new Preference([
+            'value' => DefaultPreferences::data(),
+        ]);
     }
 
     private function storePreferences($preferences)

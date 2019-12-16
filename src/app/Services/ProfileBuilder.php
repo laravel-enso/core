@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\app\Services;
 
 use Carbon\Carbon;
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Helpers\app\Classes\Decimals;
 
 class ProfileBuilder
 {
@@ -33,15 +34,22 @@ class ProfileBuilder
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->person->gender = $this->user->person->gender();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
-        $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;
+        $this->user->daysSinceMember = max(Carbon::parse($this->user->created_at)->diffInDays(), 1);
         $this->user->rating = $this->rating();
     }
 
     private function rating()
     {
-        return intval((
-            self::LoginRating * $this->user->loginCount / $this->user->daysSinceMember +
-            self::ActionRating * $this->user->actionLogCount / $this->user->daysSinceMember
-        ) / 100);
+        $loginRating = Decimals::div(
+            self::LoginRating * $this->user->loginCount,
+            $this->user->daysSinceMember
+        );
+
+        $actionRating = Decimals::div(
+            self::ActionRating * $this->user->actionLogCount,
+            $this->user->daysSinceMember
+        );
+
+        return Decimals::div(Decimals::add($loginRating, $actionRating), 100, 0);
     }
 }

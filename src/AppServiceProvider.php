@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         Resource::withoutWrapping();
 
         $this->app->bind('user-groups', function () {
-            return new UserGroups;
+            return new UserGroups();
         });
 
         $this->addCommands()

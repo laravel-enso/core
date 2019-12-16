@@ -22,6 +22,13 @@ class LoginController extends Controller
         $this->maxAttempts = config('enso.auth.maxLoginAttempts');
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+    }
+
     protected function attemptLogin(Request $request)
     {
         $user = User::whereEmail($request->input('email'))->first();
@@ -53,12 +60,5 @@ class LoginController extends Controller
             'auth' => Auth::check(),
             'csrfToken' => csrf_token(),
         ]);
-    }
-
-    public function logout(Request $request)
-    {
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
     }
 }

@@ -28,16 +28,13 @@ class ValidateUserRequest extends FormRequest
     {
         if ($this->filled('password')) {
             $validator->after(function ($validator) {
-                (new PasswordValidator(
-                    $this, $validator, $this->route('user'))
-                )->handle();
+                (new PasswordValidator($this, $validator, $this->route('user')))->handle();
             });
         }
     }
 
     protected function emailUnique()
     {
-        return Rule::unique('people', 'email')
-            ->ignore($this->get('person_id'));
+        return Rule::unique('people', 'email')->ignore($this->get('person_id'));
     }
 }

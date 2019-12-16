@@ -12,11 +12,11 @@ class AppUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $name;
-
     public $title;
     public $message;
     public $tooltip;
+
+    private $name;
 
     public function __construct()
     {

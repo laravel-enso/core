@@ -6,5 +6,5 @@ use LaravelEnso\Enums\app\Services\Enum;
 
 class UserGroups extends Enum
 {
-    const Admin = 1;
+    public const Admin = 1;
 }
