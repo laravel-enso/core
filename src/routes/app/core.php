@@ -10,5 +10,5 @@ Route::middleware(['web', 'auth', 'core'])
                 require 'core/preferences.php';
             });
 
-            require 'core/administration.php';
+        require 'core/administration.php';
     });
