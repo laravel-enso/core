@@ -25,7 +25,6 @@ use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Teams\app\Models\Team;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
