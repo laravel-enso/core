@@ -43,6 +43,6 @@ class ProfileBuilder
         $rating = Decimals::div(self::LoginRating * $this->user->loginCount, $this->user->daysSinceMember) +
             Decimals::div(self::ActionRating * $this->user->actionLogCount, $this->user->daysSinceMember);
 
-        return Decimals::div($rating,100, 0);
+        return Decimals::div($rating, 100, 0);
     }
 }
