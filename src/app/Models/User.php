@@ -152,23 +152,6 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         $this->storePreferences($preferences);
     }
 
-    public function delete()
-    {
-        if ($this->logins()->first() !== null) {
-            throw new ConflictHttpException(__(
-                'The user has activity in the system and cannot be deleted'
-            ));
-        }
-
-        try {
-            parent::delete();
-        } catch (\Exception $exception) {
-            throw new ConflictHttpException(__(
-                'The user has assigned resources in the system and cannot be deleted'
-            ));
-        }
-    }
-
     private function defaultPreferences()
     {
         return new Preference([
