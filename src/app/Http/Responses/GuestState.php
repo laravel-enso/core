@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
+use Route;
 use Illuminate\Contracts\Support\Responsable;
 
 class GuestState implements Responsable
@@ -50,12 +51,9 @@ class GuestState implements Responsable
     {
         $authRoutes = collect(['login', 'password.email', 'password.reset']);
 
-        return collect(\Route::getRoutes()->getRoutesByName())
-            ->filter(function ($route, $name) use ($authRoutes) {
-                return $authRoutes->contains($name);
-            })->map(function ($route) {
-                return collect($route)->only(['uri', 'methods'])
-                    ->put('domain', $route->domain());
-            });
+        return collect(Route::getRoutes()->getRoutesByName())
+            ->filter(fn($route, $name) => $authRoutes->contains($name))
+            ->map(fn($route) => collect($route)->only(['uri', 'methods'])
+            ->put('domain', $route->domain()));
     }
 }

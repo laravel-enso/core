@@ -76,9 +76,7 @@ class TestDatabaseMigration extends DatabaseUpgrade
 {
     protected function migrateTable()
     {
-        Schema::create('test', function ($table) {
-            $table->string('name');
-        });
+        Schema::create('test', fn($table) => $table->string('name'));
     }
 
     protected function migrateData()
@@ -99,9 +97,9 @@ class TestDatabaseMigration extends DatabaseUpgrade
 
     protected function postMigrateTable()
     {
-        Schema::table('test', function ($table) {
-            $table->string('post_migration')->nullable();
-        });
+        Schema::table('test', fn($table) => (
+            $table->string('post_migration')->nullable()
+        ));
     }
 
 

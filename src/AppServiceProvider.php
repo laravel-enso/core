@@ -22,9 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Resource::withoutWrapping();
 
-        $this->app->bind('user-groups', function () {
-            return new UserGroups();
-        });
+        $this->app->bind('user-groups', fn() => new UserGroups());
 
         $this->addCommands()
             ->loadMiddleware()

@@ -16,8 +16,8 @@ class CurrenciesUpgrade extends DatabaseUpgrade
 
     protected function migrateTable()
     {
-        Schema::table('currencies', function (Blueprint $table) {
-            $table->renameColumn('short_name', 'code');
-        });
+        Schema::table('currencies', fn (Blueprint $table) => (
+            $table->renameColumn('short_name', 'code')
+        ));
     }
 }

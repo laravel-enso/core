@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core\app\Http\Responses;
 
+use Route;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -71,11 +72,8 @@ class AppState implements Responsable
     private function i18n($languages)
     {
         return $languages->keys()
+            ->reject(fn($lang) => $lang === 'en')
             ->reduce(function ($i18n, $lang) {
-                if ($lang === 'en') {
-                    return $i18n;
-                }
-
                 $i18n[$lang] = (new JsonParser(
                     resource_path('lang'.DIRECTORY_SEPARATOR.$lang.'.json')
                 ))->object();
@@ -86,9 +84,8 @@ class AppState implements Responsable
 
     private function rtl($languages)
     {
-        return $languages->filter(function ($lang) {
-            return $lang->is_rtl;
-        })->pluck('name');
+        return $languages->filter(fn($lang) => $lang->is_rtl)
+            ->pluck('name');
     }
 
     private function meta()
@@ -113,7 +110,7 @@ class AppState implements Responsable
             ->permissions()
             ->pluck('name')
             ->reduce(function ($collection, $permission) {
-                $route = \Route::getRoutes()->getByName($permission);
+                $route = Route::getRoutes()->getByName($permission);
 
                 $collection[$permission] = $route
                     ? collect($route)->only(['uri', 'methods'])
