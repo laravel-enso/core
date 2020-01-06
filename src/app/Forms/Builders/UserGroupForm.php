@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Core\app\Forms\Builders;
+namespace LaravelEnso\Core\App\Forms\Builders;
 
-use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\Forms\app\Services\Form;
+use LaravelEnso\Core\App\Models\UserGroup;
+use LaravelEnso\Forms\App\Services\Form;
 
 class UserGroupForm
 {
     protected const TemplatePath = __DIR__.'/../Templates/userGroup.json';
 
-    protected $form;
+    protected Form $form;
 
     public function __construct()
     {
@@ -23,7 +23,6 @@ class UserGroupForm
 
     public function edit(UserGroup $userGroup)
     {
-        return $this->form
-            ->edit($userGroup);
+        return $this->form->edit($userGroup);
     }
 }

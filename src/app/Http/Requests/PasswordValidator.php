@@ -1,18 +1,20 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Requests;
+namespace LaravelEnso\Core\App\Http\Requests;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
+use LaravelEnso\Core\App\Models\User;
 
 class PasswordValidator
 {
-    private $request;
-    private $validator;
-    private $user;
+    private Request $request;
+    private Validator $validator;
+    private User $user;
 
-    public function __construct(Request $request, Validator $validator, $user)
+    public function __construct(Request $request, Validator $validator, User $user)
     {
         $this->request = $request;
         $this->validator = $validator;
@@ -22,25 +24,29 @@ class PasswordValidator
     public function handle()
     {
         if ($this->user->currentPasswordIs($this->request->get('password'))) {
-            $this->validator->errors()->add('password', __('You cannot use the existing password'));
+            $this->validator->errors()
+                ->add('password', __('You cannot use the existing password'));
         }
 
         if (! $this->hasMinUppercase()) {
-            $this->validator->errors()->add('password', __('Minimum upper case letters count is :number', [
-                'number' => config('enso.auth.password.minUpperCase'),
-            ]));
+            $this->validator->errors()
+                ->add('password', __('Minimum upper case letters count is :number', [
+                    'number' => config('enso.auth.password.minUpperCase'),
+                ]));
         }
 
         if (! $this->hasMinNumeric()) {
-            $this->validator->errors()->add('password', __('Minimum numeric characters count is :number', [
-                'number' => config('enso.auth.password.minNumeric'),
-            ]));
+            $this->validator->errors()
+                ->add('password', __('Minimum numeric characters count is :number', [
+                    'number' => config('enso.auth.password.minNumeric'),
+                ]));
         }
 
         if (! $this->hasMinSpecial()) {
-            $this->validator->errors()->add('password', __('Minimum special characters count is :number', [
-                'number' => config('enso.auth.password.minSpecial'),
-            ]));
+            $this->validator->errors()
+                ->add('password', __('Minimum special characters count is :number', [
+                    'number' => config('enso.auth.password.minSpecial'),
+                ]));
         }
     }
 
@@ -49,6 +55,7 @@ class PasswordValidator
         if (! config('enso.auth.password.minUpperCase')) {
             return true;
         }
+
         preg_match_all('/[A-Z]+/', $this->request->get('password'), $matches);
 
         return $this->length($matches) >= config('enso.auth.password.minUpperCase');
@@ -78,6 +85,6 @@ class PasswordValidator
 
     private function length($matches)
     {
-        return Str::length(collect($matches)->flatten()->implode(''));
+        return Str::length((new Collection($matches))->flatten()->implode(''));
     }
 }

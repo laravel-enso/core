@@ -1,6 +1,6 @@
 <?php
 
-use LaravelEnso\Migrator\app\Database\Migration;
+use LaravelEnso\Migrator\App\Database\Migration;
 
 class CreateStructureForSystem extends Migration
 {

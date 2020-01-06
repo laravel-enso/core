@@ -3,13 +3,13 @@
 namespace LaravelEnso\Core;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Core\app\Policies\UserPolicy;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Policies\User as Policy;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        User::class => UserPolicy::class,
+        User::class => Policy::class,
     ];
 
     public function boot()

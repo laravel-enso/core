@@ -1,20 +1,21 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands;
+namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use LaravelEnso\Core\app\Models\Preference;
-use LaravelEnso\Core\app\Services\DefaultPreferences;
+use LaravelEnso\Core\App\Models\Preference;
+use LaravelEnso\Core\App\Services\DefaultPreferences;
 
 class UpdateGlobalPreferences extends Command
 {
     protected $signature = 'enso:preferences:update-global';
 
-    protected $description = 'This command will add new global preferences keys for users';
+    protected $description = 'Adds new global preferences keys for users';
 
-    private $defaultPreferences;
+    private $default;
 
     public function handle()
     {
@@ -23,34 +24,31 @@ class UpdateGlobalPreferences extends Command
             '--force' => true,
         ]);
 
-        $this->defaultPreferences = $this->defaultPreferences();
-
         DB::transaction(function () {
-            Preference::chunkById(1000, function ($preferences) {
-                $preferences->each(function ($preference) {
-                    $meta = $preference->value;
-
-                    $this->diff($meta)->each(function ($key) use ($meta) {
-                        $meta->global->{$key} = $this->defaultPreferences->global->{$key};
-                    });
-
-                    $preference->update(['value' => $meta]);
-                });
-            });
+            Preference::each(fn ($preference) => $this->update($preference));
         });
 
         $this->info('Preferences were successfully updated.');
     }
 
-    private function diff($meta)
+    private function update($preference)
     {
-        return collect($this->defaultPreferences->global)
-            ->keys()
-            ->diff(collect($meta->global)->keys());
+        $meta = $preference->value;
+
+        $this->diff($meta)
+            ->each(fn ($key) => $meta->global->{$key} = $this->default()->global->{$key});
+
+        $preference->update(['value' => $meta]);
     }
 
-    private function defaultPreferences()
+    private function diff($meta)
     {
-        return DefaultPreferences::data();
+        return (new Collection($this->default()->global))->keys()
+            ->diff((new Collection($meta->global))->keys());
+    }
+
+    private function default()
+    {
+        return $this->default ??= DefaultPreferences::data();
     }
 }

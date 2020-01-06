@@ -1,15 +1,18 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Responses;
+namespace LaravelEnso\Core\App\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Route;
 
 class GuestState implements Responsable
 {
-    public function toResponse($request)
+    public function toResponse($request): array
     {
         if ($request->has('locale')) {
-            app()->setLocale($request->get('locale'));
+            App::setLocale($request->get('locale'));
         }
 
         return [
@@ -19,7 +22,7 @@ class GuestState implements Responsable
         ];
     }
 
-    protected function meta()
+    protected function meta(): array
     {
         return [
             'appName' => config('app.name'),
@@ -29,10 +32,10 @@ class GuestState implements Responsable
         ];
     }
 
-    protected function i18n()
+    protected function i18n(): array
     {
         return [
-            app()->getLocale() => [
+            App::getLocale() => [
                 'Email' => __('Email'),
                 'Password' => __('Password'),
                 'Remember me' => __('Remember me'),
@@ -46,16 +49,14 @@ class GuestState implements Responsable
         ];
     }
 
-    protected function routes()
+    protected function routes(): Collection
     {
-        $authRoutes = collect(['login', 'password.email', 'password.reset']);
+        $authRoutes = new Collection(['login', 'password.email', 'password.reset']);
 
-        return collect(\Route::getRoutes()->getRoutesByName())
-            ->filter(function ($route, $name) use ($authRoutes) {
-                return $authRoutes->contains($name);
-            })->map(function ($route) {
-                return collect($route)->only(['uri', 'methods'])
-                    ->put('domain', $route->domain());
-            });
+        return (new Collection(Route::getRoutes()->getRoutesByName()))
+            ->filter(fn ($route, $name) => $authRoutes->contains($name))
+            ->map(fn ($route) => (new Collection($route))
+                ->only(['uri', 'methods'])
+                ->put('domain', $route->domain()));
     }
 }

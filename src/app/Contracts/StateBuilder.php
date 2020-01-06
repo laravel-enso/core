@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Core\app\Contracts;
+namespace LaravelEnso\Core\App\Contracts;
 
 interface StateBuilder
 {
-    public function build();
+    public function build(): array;
 }

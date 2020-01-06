@@ -1,13 +1,15 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Auth;
+namespace LaravelEnso\Core\App\Http\Controllers\Auth;
 
+use App\Exceptions\Authentication;
 use App\Http\Controllers\Auth\LoginController as Controller;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Models\User;
+use Illuminate\Support\Facades\Event;
+use LaravelEnso\Core\App\Events\Login;
+use LaravelEnso\Core\App\Models\User;
 
 class LoginController extends Controller
 {
@@ -22,27 +24,26 @@ class LoginController extends Controller
         $this->maxAttempts = config('enso.auth.maxLoginAttempts');
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+    }
+
     protected function attemptLogin(Request $request)
     {
-        $user = User::whereEmail($request->input('email'))->first();
+        $user = $this->loggableUser($request);
 
-        if (! optional($user)->currentPasswordIs($request->input('password'))) {
+        if (! $user) {
             return false;
         }
 
-        if ($user->passwordExpired()) {
-            throw new AuthenticationException(__(
-                'Your password has expired. Please use the reset password form to set a new one'
-            ));
-        }
-
-        if ($user->isInactive()) {
-            throw new AuthenticationException(__(
-                'Your account has been disabled. Please contact the administrator'
-            ));
-        }
-
         Auth::login($user, $request->input('remember'));
+
+        Event::dispatch(new Login(
+            $user, $request->ip(), $request->header('User-Agent'),
+        ));
 
         return true;
     }
@@ -55,10 +56,22 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    private function loggableUser(Request $request)
     {
-        $this->guard()->logout();
+        $user = User::whereEmail($request->input('email'))->first();
 
-        $request->session()->invalidate();
+        if (! optional($user)->currentPasswordIs($request->input('password'))) {
+            return null;
+        }
+
+        if ($user->passwordExpired()) {
+            throw Authentication::expiredPassword();
+        }
+
+        if ($user->isInactive()) {
+            throw Authentication::disabledAccount();
+        }
+
+        return $user;
     }
 }

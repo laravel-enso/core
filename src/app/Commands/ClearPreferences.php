@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands;
+namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Core\app\Models\Preference;
+use LaravelEnso\Core\App\Models\Preference;
 
 class ClearPreferences extends Command
 {
     protected $signature = 'enso:preferences:clear';
 
-    protected $description = 'This command will clear enso preferences';
+    protected $description = 'Clears user preferences';
 
     public function handle()
     {

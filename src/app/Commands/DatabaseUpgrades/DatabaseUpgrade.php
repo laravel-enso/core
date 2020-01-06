@@ -1,41 +1,25 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
+namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 
-use DB;
 use Exception;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 abstract class DatabaseUpgrade extends Command
 {
-    private $time;
     protected $title;
+
+    private $time;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->output = new ConsoleOutput();
-    }
-
-    abstract protected function isMigrated();
-
-    protected function migrateTable()
-    {
-    }
-
-    protected function migrateData()
-    {
-    }
-
-    protected function postMigrateTable()
-    {
-    }
-
-    protected function rollbackMigrateTable()
-    {
     }
 
     public function getUpgradeName()
@@ -67,11 +51,11 @@ abstract class DatabaseUpgrade extends Command
             });
 
             $this->postMigrateTable();
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             $this->rollbackMigrateTable();
             $this->error($this->getUpgradeName().' was unsuccessfully, doing rollback');
 
-            throw  $e;
+            throw  $exception;
         }
 
         $this->completeMigration();
@@ -80,6 +64,24 @@ abstract class DatabaseUpgrade extends Command
     public function handle()
     {
         $this->migrate();
+    }
+
+    abstract protected function isMigrated();
+
+    protected function migrateTable()
+    {
+    }
+
+    protected function migrateData()
+    {
+    }
+
+    protected function postMigrateTable()
+    {
+    }
+
+    protected function rollbackMigrateTable()
+    {
     }
 
     private function startMigration()

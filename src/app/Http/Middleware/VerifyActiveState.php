@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Middleware;
+namespace LaravelEnso\Core\App\Http\Middleware;
 
+use App\Exceptions\Authentication;
 use Closure;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 
 class VerifyActiveState
@@ -13,9 +13,7 @@ class VerifyActiveState
         if ($request->user()->isInactive()) {
             Auth::logout();
 
-            throw new AuthenticationException(__(
-                'Your account has been disabled. Please contact the administrator.'
-            ));
+            throw Authentication::disabledAccount();
         }
 
         return $next($request);

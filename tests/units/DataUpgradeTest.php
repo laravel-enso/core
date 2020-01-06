@@ -4,7 +4,7 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\DatabaseUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DatabaseUpgrade;
 
 class DatabaseUpgradeTest extends TestCase
 {

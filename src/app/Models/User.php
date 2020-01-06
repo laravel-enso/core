@@ -1,31 +1,33 @@
 <?php
 
-namespace LaravelEnso\Core\app\Models;
+namespace LaravelEnso\Core\App\Models;
 
+use Exception;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
-use LaravelEnso\ActionLogger\app\Traits\ActionLogs;
-use LaravelEnso\Avatars\app\Traits\HasAvatar;
-use LaravelEnso\Calendar\app\Models\Event;
-use LaravelEnso\Core\app\Services\DefaultPreferences;
-use LaravelEnso\Core\app\Traits\HasPassword;
-use LaravelEnso\DynamicMethods\app\Traits\Relations;
-use LaravelEnso\Files\app\Models\File;
-use LaravelEnso\Files\app\Traits\Uploads;
-use LaravelEnso\Helpers\app\Contracts\Activatable;
-use LaravelEnso\Helpers\app\Traits\ActiveState;
-use LaravelEnso\Helpers\app\Traits\AvoidsDeletionConflicts;
-use LaravelEnso\Impersonate\app\Traits\Impersonates;
-use LaravelEnso\People\app\Models\Person;
-use LaravelEnso\People\app\Traits\IsPerson;
-use LaravelEnso\Rememberable\app\Traits\Rememberable;
-use LaravelEnso\Roles\app\Enums\Roles;
-use LaravelEnso\Roles\app\Models\Role;
-use LaravelEnso\Tables\app\Traits\TableCache;
-use LaravelEnso\Teams\app\Models\Team;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use LaravelEnso\ActionLogger\App\Traits\ActionLogs;
+use LaravelEnso\Avatars\App\Traits\HasAvatar;
+use LaravelEnso\Calendar\App\Models\Event;
+use LaravelEnso\Core\App\Enums\UserGroups;
+use LaravelEnso\Core\App\Exceptions\UserConflict;
+use LaravelEnso\Core\App\Services\DefaultPreferences;
+use LaravelEnso\Core\App\Traits\HasPassword;
+use LaravelEnso\DynamicMethods\App\Traits\Relations;
+use LaravelEnso\Files\App\Models\File;
+use LaravelEnso\Files\App\Traits\Uploads;
+use LaravelEnso\Helpers\App\Contracts\Activatable;
+use LaravelEnso\Helpers\App\Traits\ActiveState;
+use LaravelEnso\Helpers\App\Traits\AvoidsDeletionConflicts;
+use LaravelEnso\Impersonate\App\Traits\Impersonates;
+use LaravelEnso\People\App\Models\Person;
+use LaravelEnso\People\App\Traits\IsPerson;
+use LaravelEnso\Rememberable\App\Traits\Rememberable;
+use LaravelEnso\Roles\App\Enums\Roles;
+use LaravelEnso\Roles\App\Models\Role;
+use LaravelEnso\Tables\App\Traits\TableCache;
+use LaravelEnso\Teams\App\Models\Team;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
@@ -100,7 +102,7 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
 
     public function belongsToAdminGroup()
     {
-        return $this->group_id === App::make('user-groups')::Admin;
+        return $this->group_id === App::make(UserGroups::class)::Admin;
     }
 
     public function isPerson(Person $person)
@@ -131,16 +133,7 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
 
     public function lang()
     {
-        return $this->preferences()
-            ->global
-            ->lang;
-    }
-
-    private function defaultPreferences()
-    {
-        return new Preference([
-            'value' => DefaultPreferences::data(),
-        ]);
+        return $this->preferences()->global->lang;
     }
 
     public function storeGlobalPreferences($global)
@@ -161,18 +154,14 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
 
     public function delete()
     {
-        if ($this->logins()->first() !== null) {
-            throw new ConflictHttpException(__(
-                'The user has activity in the system and cannot be deleted'
-            ));
+        if ($this->logins()->exists()) {
+            throw UserConflict::hasActivity();
         }
 
         try {
             parent::delete();
-        } catch (\Exception $e) {
-            throw new ConflictHttpException(__(
-                'The user has assigned resources in the system and cannot be deleted'
-            ));
+        } catch (Exception $exception) {
+            throw UserConflict::hasActivity();
         }
     }
 
@@ -182,5 +171,12 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
             ['user_id' => $this->id],
             ['value' => $preferences]
         );
+    }
+
+    private function defaultPreferences()
+    {
+        return new Preference([
+            'value' => DefaultPreferences::data(),
+        ]);
     }
 }

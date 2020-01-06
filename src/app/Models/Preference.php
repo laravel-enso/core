@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\app\Models;
+namespace LaravelEnso\Core\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Rememberable\app\Traits\Rememberable;
+use LaravelEnso\Rememberable\App\Traits\Rememberable;
 
 class Preference extends Model
 {

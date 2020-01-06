@@ -1,57 +1,50 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Responses;
+namespace LaravelEnso\Core\App\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Enums\Themes;
-use LaravelEnso\Core\app\Services\Inspiring;
-use LaravelEnso\Core\app\Services\LocalState;
-use LaravelEnso\Enums\app\Facades\Enums;
-use LaravelEnso\Enums\app\Services\Enum;
-use LaravelEnso\Helpers\app\Classes\JsonParser;
-use LaravelEnso\Localisation\app\Models\Language;
-use LaravelEnso\Menus\app\Services\TreeBuilder;
-use LaravelEnso\Roles\app\Enums\Roles;
-use routes;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use LaravelEnso\Core\App\Enums\Themes;
+use LaravelEnso\Core\App\Services\Inspiring;
+use LaravelEnso\Core\App\Services\LocalState;
+use LaravelEnso\Enums\App\Facades\Enums;
+use LaravelEnso\Enums\App\Services\Enum;
+use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Menus\App\Services\TreeBuilder;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Roles\App\Enums\Roles;
+use LaravelEnso\Roles\App\Models\Role;
 
 class AppState implements Responsable
 {
-    public function toResponse($request)
+    private Role $role;
+    private Collection $languages;
+
+    public function toResponse($request): array
     {
-        return $this->state();
+        $this->prepare();
+
+        return $this->response();
     }
 
-    private function state()
+    private function response(): array
     {
-        $response = $this->response();
-
-        unset(Auth::user()->role);
-
-        return $response;
-    }
-
-    private function response()
-    {
-        Enum::localisation(false);
-
-        $languages = Language::active()
-            ->get(['name', 'flag', 'is_rtl']);
-
-        $langs = $languages->pluck('flag', 'name');
-
         return [
             'user' => Auth::user()->load(['person', 'avatar']),
             'preferences' => Auth::user()->preferences(),
-            'i18n' => $this->i18n($langs),
-            'languages' => $langs,
-            'rtl' => $this->rtl($languages),
+            'i18n' => $this->i18n(),
+            'languages' => $this->languages->pluck('flag', 'name'),
+            'rtl' => $this->rtl(),
             'themes' => Themes::all(),
             'routes' => $this->routes(),
-            'implicitRoute' => Auth::user()->role->menu->permission->name,
+            'implicitRoute' => $this->role->menu->permission->name,
             'menus' => (new TreeBuilder())->handle(),
-            'impersonating' => session()->has('impersonating'),
+            'impersonating' => Session::has('impersonating'),
             'websockets' => [
                 'pusher' => [
                     'key' => config('broadcasting.connections.pusher.key'),
@@ -69,37 +62,36 @@ class AppState implements Responsable
         ];
     }
 
-    private function i18n($languages)
+    private function i18n(): Collection
     {
-        return $languages->keys()
-            ->reduce(function ($i18n, $lang) {
-                if ($lang === 'en') {
-                    return $i18n;
-                }
-
-                $i18n[$lang] = (new JsonParser(
-                    resource_path('lang'.DIRECTORY_SEPARATOR.$lang.'.json')
-                ))->object();
-
-                return $i18n;
-            }, []);
+        return $this->languages
+            ->reject(fn ($language) => $language->name === 'en')
+            ->mapWithKeys(fn ($language) => [
+                $language->name => $this->lang($language),
+            ]);
     }
 
-    private function rtl($languages)
+    private function lang(Language $language)
     {
-        return $languages->filter(function ($lang) {
-            return $lang->is_rtl;
-        })->pluck('name');
+        return (new JsonParser(
+            resource_path('lang'.DIRECTORY_SEPARATOR."{$language->name}.json")
+        ))->object();
     }
 
-    private function meta()
+    private function rtl(): Collection
+    {
+        return $this->languages
+            ->filter(fn ($lang) => $lang->is_rtl)->pluck('name');
+    }
+
+    private function meta(): array
     {
         return [
             'appName' => config('app.name'),
             'appUrl' => url('/').'/',
             'version' => config('enso.config.version'),
             'quote' => Inspiring::quote(),
-            'env' => app()->environment(),
+            'env' => App::environment(),
             'dateFormat' => config('enso.config.dateFormat'),
             'dateTimeFormat' => config('enso.config.dateFormat').' H:i:s',
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
@@ -108,37 +100,49 @@ class AppState implements Responsable
         ];
     }
 
-    private function routes()
+    private function routes(): Collection
     {
-        return Auth::user()->role
-            ->permissions()
-            ->pluck('name')
-            ->reduce(function ($collection, $permission) {
-                $route = \Route::getRoutes()->getByName($permission);
-
-                $collection[$permission] = $route
-                    ? collect($route)->only(['uri', 'methods'])
-                        ->put('domain', $route->domain())
-                    : null;
-
-                return $collection;
-            }, []);
+        return $this->role->permissions
+            ->mapWithKeys(fn ($permission) => [
+                $permission->name => $this->route($permission),
+            ]);
     }
 
-    private function privateChannel()
+    private function route(Permission $permission): ?array
     {
-        return collect(
+        $route = Route::getRoutes()->getByName($permission->name);
+
+        return $route
+            ? (new Collection($route))->only(['uri', 'methods'])
+                ->put('domain', $route->domain())
+                ->toArray()
+            : null;
+    }
+
+    private function privateChannel(): string
+    {
+        return (new Collection(
             explode('\\', config('auth.providers.users.model'))
-        )->push(Auth::user()->id)->implode('.');
+        ))->push(Auth::user()->id)->implode('.');
     }
 
-    private function ioChannel()
+    private function ioChannel(): string
     {
         $roles = App::make(Roles::class);
 
-        return collect([$roles::Admin, $roles::Supervisor])
-            ->contains(Auth::user()->role_id)
+        return in_array(Auth::user()->role_id, [$roles::Admin, $roles::Supervisor])
             ? 'operations'
             : 'operations'.Auth::user()->id;
+    }
+
+    private function prepare(): void
+    {
+        $this->role = Auth::user()->role()
+            ->with('menu.permission', 'permissions')->first();
+
+        $this->languages = Language::active()
+            ->get(['name', 'flag', 'is_rtl']);
+
+        Enum::localisation(false);
     }
 }

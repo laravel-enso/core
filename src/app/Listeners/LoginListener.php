@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\app\Listeners;
+namespace LaravelEnso\Core\App\Listeners;
 
-use LaravelEnso\Core\app\Models\Login;
-use LaravelEnso\Core\app\Notifications\PasswordExpiresSoonNotification;
+use LaravelEnso\Core\App\Models\Login;
+use LaravelEnso\Core\App\Notifications\PasswordExpiresSoon;
 
 class LoginListener
 {
@@ -11,14 +11,13 @@ class LoginListener
     {
         Login::create([
             'user_id' => $event->user->id,
-            'ip' => request()->ip(),
-            'user_agent' => request()->header('User-Agent'),
+            'ip' => $event->ip,
+            'user_agent' => $event->userAgent,
         ]);
 
         if ($event->user->needsPasswordChange()) {
             $event->user->notify(
-                (new PasswordExpiresSoonNotification())
-                    ->onQueue('notifications')
+                (new PasswordExpiresSoon())->onQueue('notifications')
             );
         }
     }

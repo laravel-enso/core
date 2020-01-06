@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Preferences;
+namespace LaravelEnso\Core\App\Http\Controllers\Preferences;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

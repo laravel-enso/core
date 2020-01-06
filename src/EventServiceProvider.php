@@ -2,11 +2,11 @@
 
 namespace LaravelEnso\Core;
 
-use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use LaravelEnso\Core\app\Listeners\LoginListener;
-use LaravelEnso\Core\app\Listeners\PasswordResetListener;
+use LaravelEnso\Core\App\Events\Login;
+use LaravelEnso\Core\App\Listeners\LoginListener;
+use LaravelEnso\Core\App\Listeners\PasswordResetListener;
 
 class EventServiceProvider extends ServiceProvider
 {

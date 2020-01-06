@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Traits;
+namespace LaravelEnso\Core\App\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
-use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
+use LaravelEnso\Core\App\Notifications\ResetPassword;
 
 trait HasPassword
 {
@@ -46,8 +46,7 @@ trait HasPassword
     public function sendPasswordResetNotification($token)
     {
         $this->notify(
-            (new ResetPasswordNotification($token))
-                ->locale($this->lang())
+            (new ResetPassword($token))
                 ->onQueue('notifications')
         );
     }

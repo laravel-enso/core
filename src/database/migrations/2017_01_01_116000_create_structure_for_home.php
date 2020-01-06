@@ -1,10 +1,11 @@
 <?php
 
-use LaravelEnso\Migrator\app\Database\Migration;
+use LaravelEnso\Migrator\App\Database\Migration;
+use LaravelEnso\Permissions\App\Enums\Types;
 
 class CreateStructureForHome extends Migration
 {
     protected $permissions = [
-        ['name' => 'core.home.index', 'description' => 'App State Builder', 'type' => 0, 'is_default' => true],
+        ['name' => 'core.home.index', 'description' => 'App State Builder', 'type' => Types::Read, 'is_default' => true],
     ];
 }

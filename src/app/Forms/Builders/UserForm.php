@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Forms\Builders;
+namespace LaravelEnso\Core\App\Forms\Builders;
 
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Forms\app\Services\Form;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Forms\App\Services\Form;
 
 class UserForm
 {
@@ -12,7 +12,7 @@ class UserForm
 
     protected const Tooltip = 'Personal information can only be edited via the person form';
 
-    protected $form;
+    protected Form $form;
 
     public function __construct()
     {
@@ -23,8 +23,7 @@ class UserForm
     {
         $this->common($person);
 
-        return $this->form
-            ->value('email', $person->email)
+        return $this->form->value('email', $person->email)
             ->value('person_id', $person->id)
             ->create();
     }
@@ -39,8 +38,7 @@ class UserForm
             ]);
         }
 
-        return $this->form
-            ->value('password', null)
+        return $this->form->value('password', null)
             ->append('personId', $user->person_id)
             ->actions(['back', 'destroy', 'show', 'update'])
             ->edit($user);

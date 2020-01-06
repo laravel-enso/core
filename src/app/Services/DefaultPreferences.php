@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Core\app\Services;
+namespace LaravelEnso\Core\App\Services;
 
-use LaravelEnso\Helpers\app\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonParser;
 
 class DefaultPreferences
 {
-    public static function data()
+    public static function data(): object
     {
         return (new JsonParser(
             resource_path('preferences.json')

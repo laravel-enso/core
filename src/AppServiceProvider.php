@@ -4,17 +4,16 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\ActionLogger\app\Http\Middleware\ActionLogger;
-use LaravelEnso\Core\app\Commands\AnnounceAppUpdate;
-use LaravelEnso\Core\app\Commands\ClearPreferences;
-use LaravelEnso\Core\app\Commands\ResetStorage;
-use LaravelEnso\Core\app\Commands\UpdateGlobalPreferences;
-use LaravelEnso\Core\app\Commands\Upgrade;
-use LaravelEnso\Core\app\Enums\UserGroups;
-use LaravelEnso\Core\app\Http\Middleware\VerifyActiveState;
-use LaravelEnso\Impersonate\app\Http\Middleware\Impersonate;
-use LaravelEnso\Localisation\app\Http\Middleware\SetLanguage;
-use LaravelEnso\Permissions\app\Http\Middleware\VerifyRouteAccess;
+use LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger;
+use LaravelEnso\Core\App\Commands\AnnounceAppUpdate;
+use LaravelEnso\Core\App\Commands\ClearPreferences;
+use LaravelEnso\Core\App\Commands\ResetStorage;
+use LaravelEnso\Core\App\Commands\UpdateGlobalPreferences;
+use LaravelEnso\Core\App\Commands\Upgrade;
+use LaravelEnso\Core\App\Http\Middleware\VerifyActiveState;
+use LaravelEnso\Impersonate\App\Http\Middleware\Impersonate;
+use LaravelEnso\Localisation\App\Http\Middleware\SetLanguage;
+use LaravelEnso\Permissions\App\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,28 +21,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Resource::withoutWrapping();
 
-        $this->app->bind('user-groups', function () {
-            return new UserGroups;
-        });
-
-        $this->addCommands()
-            ->loadMiddleware()
+        $this->loadMiddleware()
             ->loadDependencies()
             ->publishDependencies()
-            ->publishResources();
-    }
-
-    private function addCommands()
-    {
-        $this->commands(
-            AnnounceAppUpdate::class,
-            ClearPreferences::class,
-            ResetStorage::class,
-            UpdateGlobalPreferences::class,
-            Upgrade::class,
-        );
-
-        return $this;
+            ->publishResources()
+            ->commands(
+                AnnounceAppUpdate::class,
+                ClearPreferences::class,
+                ResetStorage::class,
+                UpdateGlobalPreferences::class,
+                Upgrade::class
+            );
     }
 
     private function loadMiddleware()
@@ -84,35 +72,19 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/config' => config_path('enso'),
-        ], 'core-config');
-
-        $this->publishes([
-            __DIR__.'/config' => config_path('enso'),
-        ], 'enso-config');
+        ], ['core-config', 'enso-config']);
 
         $this->publishes([
             __DIR__.'/resources/preferences.json' => resource_path('preferences.json'),
-        ], 'core-preferences');
-
-        $this->publishes([
-            __DIR__.'/resources/preferences.json' => resource_path('preferences.json'),
-        ], 'enso-preferences');
+        ], ['core-preferences', 'enso-preferences']);
 
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
-        ], 'core-factories');
-
-        $this->publishes([
-            __DIR__.'/database/factories' => database_path('factories'),
-        ], 'enso-factories');
+        ], ['core-factories', 'enso-factories']);
 
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'core-seeders');
-
-        $this->publishes([
-            __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'enso-seeders');
+        ], ['core-seeders', 'enso-seeders']);
 
         return $this;
     }
@@ -130,5 +102,7 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
         ], 'enso-email');
+
+        return $this;
     }
 }

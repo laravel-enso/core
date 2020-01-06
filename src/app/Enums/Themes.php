@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Core\app\Enums;
+namespace LaravelEnso\Core\App\Enums;
 
-use LaravelEnso\Enums\app\Services\Enum;
+use LaravelEnso\Enums\App\Services\Enum;
 
 class Themes extends Enum
 {
-    protected static function attributes()
+    protected static function data(): array
     {
         return config('enso.themes');
     }

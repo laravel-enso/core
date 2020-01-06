@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\Core\app\Services;
+namespace LaravelEnso\Core\App\Services;
 
-use LaravelEnso\Core\app\Contracts\StateBuilder;
+use LaravelEnso\Core\App\Contracts\StateBuilder;
 
 class LocalState implements StateBuilder
 {
-    public function build()
+    public function build(): array
     {
         return [];
     }

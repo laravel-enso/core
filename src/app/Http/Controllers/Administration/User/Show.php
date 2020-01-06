@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
+namespace LaravelEnso\Core\App\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Core\app\Services\ProfileBuilder;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Services\ProfileBuilder;
 
 class Show extends Controller
 {

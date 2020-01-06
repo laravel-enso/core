@@ -1,13 +1,13 @@
 <?php
 
-namespace LaravelEnso\Core\app\Notifications;
+namespace LaravelEnso\Core\App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 
-class PasswordExpiresSoonNotification extends Notification implements ShouldQueue
+class PasswordExpiresSoon extends Notification implements ShouldQueue
 {
     use Queueable;
 

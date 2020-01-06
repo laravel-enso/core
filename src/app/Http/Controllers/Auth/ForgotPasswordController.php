@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Auth;
+namespace LaravelEnso\Core\App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Foundation\Validation\ValidatesRequests;

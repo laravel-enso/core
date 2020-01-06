@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
+namespace LaravelEnso\Core\App\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Core\app\Forms\Builders\UserForm;
-use LaravelEnso\People\app\Models\Person;
+use LaravelEnso\Core\App\Forms\Builders\UserForm;
+use LaravelEnso\People\App\Models\Person;
 
 class Create extends Controller
 {

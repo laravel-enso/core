@@ -1,8 +1,9 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands;
+namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
 class ResetStorage extends Command
@@ -13,23 +14,19 @@ class ResetStorage extends Command
 
     protected $signature = 'enso:storage:reset';
 
-    protected $description = 'Run this command after php artisan migrate:fresh to clear the storage';
+    protected $description = 'Run this after php artisan migrate:fresh to clear the storage';
 
     public function handle()
     {
-        collect(self::Folders)->each(function ($folder) {
-            collect(Storage::files($folder))->reject(function ($file) {
-                return strpos($file, '.gitignore') !== false;
-            })->each(function ($file) {
-                Storage::delete($file);
-            });
-        });
+        (new Collection(self::Folders))
+            ->each(fn ($folder) => (new Collection(Storage::files($folder)))
+                ->reject(fn ($file) => strpos($file, '.gitignore') !== false)
+                ->each(fn ($file) => Storage::delete($file)));
 
-        collect(Storage::directories(self::ImportFolder))->each(function ($directory) {
-            Storage::deleteDirectory($directory);
-        });
+        (new Collection(Storage::directories(self::ImportFolder)))
+            ->each(fn ($directory) => Storage::deleteDirectory($directory));
 
-        if (collect(Storage::directories())->contains(self::TestingFolder)) {
+        if (in_array(self::TestingFolder, Storage::directories())) {
             Storage::deleteDirectory(self::TestingFolder);
         }
     }

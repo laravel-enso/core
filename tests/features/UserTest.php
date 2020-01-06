@@ -1,13 +1,14 @@
 <?php
 
 use Faker\Factory;
-use Tests\TestCase;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Forms\app\TestTraits\EditForm;
-use LaravelEnso\Forms\app\TestTraits\DestroyForm;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Tables\app\Traits\Tests\Datatable;
-use LaravelEnso\Core\app\Notifications\ResetPasswordNotification;
+use Illuminate\Support\Facades\Notification;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Notifications\ResetPassword;
+use LaravelEnso\Forms\App\TestTraits\DestroyForm;
+use LaravelEnso\Forms\App\TestTraits\EditForm;
+use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use Tests\TestCase;
 
 class UserTest extends TestCase
 {
@@ -40,7 +41,7 @@ class UserTest extends TestCase
     /** @test */
     public function can_store_user()
     {
-        \Notification::fake();
+        Notification::fake();
 
         $response = $this->post(
             route('administration.users.store', [], false),
@@ -57,7 +58,7 @@ class UserTest extends TestCase
                 'param' => ['user' => $user->id],
             ]);
 
-        \Notification::assertSentTo($user, ResetPasswordNotification::class);
+        Notification::assertSentTo($user, ResetPassword::class);
     }
 
     /** @test */

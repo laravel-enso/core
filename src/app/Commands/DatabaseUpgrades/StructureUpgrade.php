@@ -1,9 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
+namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Roles\app\Models\Role;
+use Illuminate\Support\Collection;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Roles\App\Models\Role;
 
 class StructureUpgrade extends DatabaseUpgrade
 {
@@ -11,26 +12,26 @@ class StructureUpgrade extends DatabaseUpgrade
 
     protected function isMigrated()
     {
-        return collect($this->permissions)->isEmpty()
+        return empty($this->permissions)
             || Permission::whereName($this->permissions[0]['name'])->first() !== null;
-    }
-
-    protected function getRoles(Permission $permission)
-    {
-        if ($permission->is_default) {
-            return Role::pluck('id');
-        }
-
-        return Role::whereName(config('enso.config.defaultRole'))
-            ->first()
-            ->id;
     }
 
     protected function migrateData()
     {
-        collect($this->permissions)->each(function ($permission) {
-            $p = Permission::create($permission);
-            $p->roles()->sync($this->getRoles($p));
-        });
+        (new Collection($this->permissions))
+            ->each(fn ($permission) => $this->permission($permission));
+    }
+
+    protected function getRoles(Permission $permission)
+    {
+        return $permission->is_default
+            ? Role::pluck('id')
+            : Role::whereName(config('enso.config.defaultRole'))->first()->id;
+    }
+
+    private function permission(array $permission)
+    {
+        $permission = Permission::create($permission);
+        $permission->roles()->sync($this->getRoles($permission));
     }
 }

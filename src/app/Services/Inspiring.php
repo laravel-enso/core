@@ -1,11 +1,13 @@
 <?php
 
-namespace LaravelEnso\Core\app\Services;
+namespace LaravelEnso\Core\App\Services;
+
+use Illuminate\Support\Collection;
 
 class Inspiring
 {
-    public static function quote()
+    public static function quote(): string
     {
-        return collect(config('enso.inspiring.quotes'))->random();
+        return (new Collection(config('enso.inspiring.quotes')))->random();
     }
 }

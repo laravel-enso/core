@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Administration\UserGroup;
+namespace LaravelEnso\Core\App\Http\Controllers\Administration\UserGroup;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Core\app\Http\Requests\ValidateUserGroupRequest;
-use LaravelEnso\Core\app\Models\UserGroup;
+use LaravelEnso\Core\App\Http\Requests\ValidateUserGroupRequest;
+use LaravelEnso\Core\App\Models\UserGroup;
 
 class Store extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Events;
+namespace LaravelEnso\Core\App\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -8,15 +8,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AppUpdated implements ShouldBroadcast
+class AppUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $name;
+    public string $title;
+    public string $message;
+    public string $tooltip;
 
-    public $title;
-    public $message;
-    public $tooltip;
+    private string $name;
 
     public function __construct()
     {

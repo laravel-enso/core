@@ -1,11 +1,12 @@
 <?php
 
-use LaravelEnso\Migrator\app\Database\Migration;
+use LaravelEnso\Migrator\App\Database\Migration;
+use LaravelEnso\Permissions\App\Enums\Types;
 
 class CreateStructureForDashboard extends Migration
 {
     protected $permissions = [
-        ['name' => 'dashboard.index', 'description' => 'Dashboard page', 'type' => 0, 'is_default' => true],
+        ['name' => 'dashboard.index', 'description' => 'Dashboard page', 'type' => Types::Read, 'is_default' => true],
     ];
 
     protected $menu = [

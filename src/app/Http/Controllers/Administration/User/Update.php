@@ -1,13 +1,14 @@
 <?php
 
-namespace LaravelEnso\Core\app\Http\Controllers\Administration\User;
+namespace LaravelEnso\Core\App\Http\Controllers\Administration\User;
 
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
-use LaravelEnso\Core\app\Http\Requests\ValidateUserRequest;
-use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Core\App\Http\Requests\ValidateUserRequest;
+use LaravelEnso\Core\App\Models\User;
 
 class Update extends Controller
 {
@@ -34,7 +35,7 @@ class Update extends Controller
 
         $user->save();
 
-        if (collect($user->getChanges())->keys()->contains('password')) {
+        if ((new Collection($user->getChanges()))->keys()->contains('password')) {
             Event::dispatch(new PasswordReset($user));
         }
 

@@ -1,10 +1,10 @@
 <?php
 
 use Tests\TestCase;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\StructureUpgrade;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\StructureUpgrade;
 
 class StructureUpgradeTest extends TestCase
 {

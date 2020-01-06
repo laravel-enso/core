@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Core\app\Enums;
+namespace LaravelEnso\Core\App\Enums;
 
-use LaravelEnso\Enums\app\Services\Enum;
+use LaravelEnso\Enums\App\Services\Enum;
 
 class UserGroups extends Enum
 {
-    const Admin = 1;
+    public const Admin = 1;
 }

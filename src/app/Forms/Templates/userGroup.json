@@ -1,32 +1,38 @@
 {
     "routePrefix": "administration.userGroups",
-    "sections": [{
-        "columns": 2,
-        "fields": [{
-            "label": "Name",
-            "name": "name",
-            "value": "",
-            "meta": {
-                "type": "input",
-                "content": "text"
-            }
-        }, {
-            "label": "Description",
-            "name": "description",
-            "value": "",
-            "meta": {
-                "type": "input",
-                "content": "text"
-            }
-        }, {
-            "label": "Roles",
-            "name": "roles",
-            "value": [],
-            "meta": {
-                "type": "select",
-                "multiple": true,
-                "source": "system.roles.options"
-            }
-        }]
-    }]
+    "sections": [
+        {
+            "columns": 2,
+            "fields": [
+                {
+                    "label": "Name",
+                    "name": "name",
+                    "value": "",
+                    "meta": {
+                        "type": "input",
+                        "content": "text"
+                    }
+                },
+                {
+                    "label": "Description",
+                    "name": "description",
+                    "value": "",
+                    "meta": {
+                        "type": "input",
+                        "content": "text"
+                    }
+                },
+                {
+                    "label": "Roles",
+                    "name": "roles",
+                    "value": [],
+                    "meta": {
+                        "type": "select",
+                        "multiple": true,
+                        "source": "system.roles.options"
+                    }
+                }
+            ]
+        }
+    ]
 }
