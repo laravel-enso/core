@@ -18,7 +18,6 @@ abstract class DatabaseUpgrade extends Command
     public function __construct()
     {
         parent::__construct();
-
         $this->output = new ConsoleOutput();
     }
 

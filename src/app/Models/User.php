@@ -152,7 +152,7 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         $this->storePreferences($preferences);
     }
 
-    public function delete()
+    private function defaultPreferences()
     {
         if ($this->logins()->exists()) {
             throw UserConflict::hasActivity();

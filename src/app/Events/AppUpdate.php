@@ -18,6 +18,8 @@ class AppUpdate implements ShouldBroadcast
 
     private string $name;
 
+    private $name;
+
     public function __construct()
     {
         $this->name = 'new-update';

@@ -34,7 +34,7 @@ class ProfileBuilder
         $this->user->loginCount = $this->user->logins()->count();
         $this->user->person->gender = $this->user->person->gender();
         $this->user->actionLogCount = $this->user->actionLogs()->count();
-        $this->user->daysSinceMember = Carbon::parse($this->user->created_at)->diffInDays() ?: 1;
+        $this->user->daysSinceMember = max(Carbon::parse($this->user->created_at)->diffInDays(), 1);
         $this->user->rating = $this->rating();
     }
 
