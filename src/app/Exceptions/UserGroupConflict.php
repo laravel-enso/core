@@ -2,7 +2,9 @@
 
 namespace LaravelEnso\Core\App\Exceptions;
 
-class UserGroupConflict
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+
+class UserGroupConflict extends ConflictHttpException
 {
     public static function hasUsers()
     {
