@@ -1,4 +1,5 @@
 <?php
+
 namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 
 use Illuminate\Support\Collection;
@@ -7,9 +8,9 @@ use LaravelEnso\Permissions\App\Models\Permission;
 class RolesUpgrade extends StructureUpgrade
 {
     protected $permissions = [
-        'system.roles.permissions.get' => 'system.roles.getPermissions',
-        'system.roles.permissions.set' => 'system.roles.setPermissions',
-        'system.roles.permissions.write' => 'system.roles.writeConfig',
+        'system.roles.getPermissions' => 'system.roles.permissions.get',
+        'system.roles.setPermissions' => 'system.roles.permissions.set',
+        'system.roles.writeConfig' => 'system.roles.permissions.write',
     ];
 
     protected function isMigrated()
@@ -24,7 +25,7 @@ class RolesUpgrade extends StructureUpgrade
 
         (new Collection($this->permissions))
             ->each(
-                fn ($oldPermission, $newPermission) => Permission::whereName($oldPermission)
+                fn ($newPermission, $oldPermission) => Permission::whereName($oldPermission)
                     ->update(['name' => $newPermission])
             );
     }
