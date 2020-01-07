@@ -13,7 +13,7 @@ class StructureUpgrade extends DatabaseUpgrade
     protected function isMigrated()
     {
         return empty($this->permissions)
-            || Permission::whereName($this->permissions[0]['name'])->first() !== null;
+            || Permission::whereName($this->permissions[0]['name'])->exists();
     }
 
     protected function migrateData()

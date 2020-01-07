@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\RolesUpgrade;
 
 class Upgrade extends Command
 {
@@ -19,5 +20,6 @@ class Upgrade extends Command
     private function upgrade()
     {
         (new DocumentsUpgrade())->handle();
+        (new RolesUpgrade())->handle();
     }
 }
