@@ -24,9 +24,6 @@ class RolesUpgrade extends StructureUpgrade
             ->update(['name' => 'core.countries.options']);
 
         (new Collection($this->permissions))
-            ->each(
-                fn ($newPermission, $oldPermission) => Permission::whereName($oldPermission)
-                    ->update(['name' => $newPermission])
-            );
+            ->each(fn ($new, $old) => Permission::whereName($old)->update(['name' => $new]));
     }
 }
