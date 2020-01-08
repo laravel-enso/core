@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\app\Commands\DatabaseUpgrades;
+namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
