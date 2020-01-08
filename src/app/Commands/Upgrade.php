@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\App\Commands;
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsUpgrade;
-use LaravelEnso\Core\app\Commands\DatabaseUpgrades\MenusUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\MenusUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\RolesUpgrade;
 
 class Upgrade extends Command
