@@ -3,7 +3,9 @@
 namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsUpgrade;
+use LaravelEnso\Core\app\Commands\DatabaseUpgrades\MenusUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\RolesUpgrade;
 
 class Upgrade extends Command
@@ -12,6 +14,13 @@ class Upgrade extends Command
 
     protected $description = 'This command will upgrade Enso from v3.7.* to 3.8.*';
 
+    private $upgrades = [
+        DocumentsUpgrade::class,
+        AddressesUpgrade::class,
+        RolesUpgrade::class,
+        MenusUpgrade::class,
+    ];
+
     public function handle()
     {
         $this->upgrade();
@@ -19,7 +28,7 @@ class Upgrade extends Command
 
     private function upgrade()
     {
-        (new DocumentsUpgrade())->handle();
-        (new RolesUpgrade())->handle();
+        collect($this->upgrades)
+            ->each(fn ($upgrade) => (new $upgrade())->handle());
     }
 }
