@@ -16,9 +16,9 @@ class AppUpdate implements ShouldBroadcast
     public string $message;
     public string $tooltip;
 
-    private string $name;
+    public $queue;
 
-    private $name;
+    private string $name;
 
     public function __construct()
     {
