@@ -3,8 +3,13 @@
 namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\CommentsNamespaceUpdate;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DiscussionsNamespaceUpdate;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\FilesNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\MenusUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\RolesUpgrade;
 
@@ -19,6 +24,11 @@ class Upgrade extends Command
         AddressesUpgrade::class,
         RolesUpgrade::class,
         MenusUpgrade::class,
+        FilesNamespaceUpdate::class,
+        AddressesNamespaceUpdate::class,
+        CommentsNamespaceUpdate::class,
+        DocumentsNamespaceUpdate::class,
+        DiscussionsNamespaceUpdate::class,
     ];
 
     public function handle()
@@ -29,6 +39,6 @@ class Upgrade extends Command
     private function upgrade()
     {
         collect($this->upgrades)
-            ->each(fn ($upgrade) => (new $upgrade())->handle());
+            ->each(fn($upgrade) => (new $upgrade())->handle());
     }
 }
