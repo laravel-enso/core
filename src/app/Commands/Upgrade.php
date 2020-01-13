@@ -39,6 +39,6 @@ class Upgrade extends Command
     private function upgrade()
     {
         collect($this->upgrades)
-            ->each(fn($upgrade) => (new $upgrade())->handle());
+            ->each(fn ($upgrade) => (new $upgrade())->handle());
     }
 }
