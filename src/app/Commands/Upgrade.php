@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\CommentsNamespaceUpdate;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\CurrenciesPermissionUpgrade;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\CurrenciesUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DiscussionsNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DocumentsUpgrade;
@@ -27,6 +29,8 @@ class Upgrade extends Command
         FilesNamespaceUpdate::class,
         AddressesNamespaceUpdate::class,
         CommentsNamespaceUpdate::class,
+        CurrenciesUpgrade::class,
+        CurrenciesPermissionUpgrade::class,
         DocumentsNamespaceUpdate::class,
         DiscussionsNamespaceUpdate::class,
     ];
