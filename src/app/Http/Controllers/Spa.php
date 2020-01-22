@@ -9,6 +9,6 @@ class Spa extends Controller
 {
     public function __invoke()
     {
-        return new AppState();
+        return App::make(AppState::class);
     }
 }

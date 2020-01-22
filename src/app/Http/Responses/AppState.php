@@ -22,8 +22,8 @@ use LaravelEnso\Roles\App\Models\Role;
 
 class AppState implements Responsable
 {
-    private Role $role;
-    private Collection $languages;
+    protected Role $role;
+    protected Collection $languages;
 
     public function toResponse($request): array
     {
@@ -32,7 +32,7 @@ class AppState implements Responsable
         return $this->response();
     }
 
-    private function response(): array
+    protected function response(): array
     {
         return [
             'user' => Auth::user()->load(['person', 'avatar']),
@@ -43,7 +43,7 @@ class AppState implements Responsable
             'themes' => Themes::all(),
             'routes' => $this->routes(),
             'implicitRoute' => $this->role->menu->permission->name,
-            'menus' => (new TreeBuilder())->handle(),
+            'menus' => App::make(TreeBuilder::class)->handle(),
             'impersonating' => Session::has('impersonating'),
             'websockets' => [
                 'pusher' => [
@@ -62,7 +62,7 @@ class AppState implements Responsable
         ];
     }
 
-    private function i18n(): Collection
+    protected function i18n(): Collection
     {
         return $this->languages
             ->reject(fn ($language) => $language->name === 'en')
@@ -71,20 +71,20 @@ class AppState implements Responsable
             ]);
     }
 
-    private function lang(Language $language)
+    protected function lang(Language $language)
     {
         return (new JsonParser(
             resource_path('lang'.DIRECTORY_SEPARATOR."{$language->name}.json")
         ))->object();
     }
 
-    private function rtl(): Collection
+    protected function rtl(): Collection
     {
         return $this->languages
             ->filter(fn ($lang) => $lang->is_rtl)->pluck('name');
     }
 
-    private function meta(): array
+    protected function meta(): array
     {
         return [
             'appName' => config('app.name'),
@@ -100,7 +100,7 @@ class AppState implements Responsable
         ];
     }
 
-    private function routes(): Collection
+    protected function routes(): Collection
     {
         return $this->role->permissions
             ->mapWithKeys(fn ($permission) => [
@@ -108,7 +108,7 @@ class AppState implements Responsable
             ]);
     }
 
-    private function route(Permission $permission): ?array
+    protected function route(Permission $permission): ?array
     {
         $route = Route::getRoutes()->getByName($permission->name);
 
@@ -119,14 +119,14 @@ class AppState implements Responsable
             : null;
     }
 
-    private function privateChannel(): string
+    protected function privateChannel(): string
     {
         return (new Collection(
             explode('\\', config('auth.providers.users.model'))
         ))->push(Auth::user()->id)->implode('.');
     }
 
-    private function ioChannel(): string
+    protected function ioChannel(): string
     {
         $roles = App::make(Roles::class);
 
@@ -135,7 +135,7 @@ class AppState implements Responsable
             : 'operations'.Auth::user()->id;
     }
 
-    private function prepare(): void
+    protected function prepare(): void
     {
         $this->role = Auth::user()->role()
             ->with('menu.permission', 'permissions')->first();
