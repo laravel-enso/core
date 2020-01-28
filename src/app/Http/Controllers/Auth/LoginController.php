@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\LoginController as Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Models\User;
 
@@ -41,9 +40,7 @@ class LoginController extends Controller
 
         Auth::login($user, $request->input('remember'));
 
-        Event::dispatch(new Login(
-            $user, $request->ip(), $request->header('User-Agent'),
-        ));
+        Login::dispatch($user, $request->ip(), $request->header('User-Agent'));
 
         return true;
     }
