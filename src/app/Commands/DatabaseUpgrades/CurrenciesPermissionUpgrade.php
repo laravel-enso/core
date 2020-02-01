@@ -5,7 +5,7 @@ namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Permissions\App\Enums\Types;
 use LaravelEnso\Permissions\App\Models\Permission;
-use LaravelEnso\Roles\app\Enums\Roles;
+use LaravelEnso\Roles\App\Enums\Roles;
 
 class CurrenciesPermissionUpgrade extends StructureUpgrade
 {
