@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\App\Commands\DatabaseUpgrades\ActionLogsIndex;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesNamespaceUpdate;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\AddressesUpgrade;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\CommentsNamespaceUpdate;
@@ -24,6 +25,7 @@ class Upgrade extends Command
     private $upgrades = [
         DocumentsUpgrade::class,
         AddressesUpgrade::class,
+        ActionLogsIndex::class,
         RolesUpgrade::class,
         MenusUpgrade::class,
         FilesNamespaceUpdate::class,

@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\App\Commands\DatabaseUpgrades;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -93,5 +94,11 @@ abstract class DatabaseUpgrade extends Command
     {
         $time = (int) ((microtime(true) - $this->time) * 1000);
         $this->info($this->getUpgradeName().' was done ('.$time.' ms)');
+    }
+
+    protected function indexExists($index, $table): bool
+    {
+        return array_key_exists($index, Schema::getConnection()
+            ->getDoctrineSchemaManager()->listTableIndexes($table));
     }
 }
