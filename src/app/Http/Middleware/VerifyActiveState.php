@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Core\App\Http\Middleware;
 
-use App\Exceptions\Authentication;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use LaravelEnso\Core\App\Exceptions\Authentication;
 
 class VerifyActiveState
 {

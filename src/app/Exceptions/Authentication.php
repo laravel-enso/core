@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace LaravelEnso\Core\App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 
