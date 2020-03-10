@@ -114,8 +114,8 @@ class AppState implements Responsable
 
         return $route
             ? (new Collection($route))->only(['uri', 'methods'])
-                ->put('domain', $route->domain())
-                ->toArray()
+            ->put('domain', $route->domain())
+            ->toArray()
             : null;
     }
 

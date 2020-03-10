@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\Core;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\App\Commands\AnnounceAppUpdate;
@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Resource::withoutWrapping();
+        JsonResource::withoutWrapping();
 
         $this->loadMiddleware()
             ->loadDependencies()
@@ -37,7 +37,8 @@ class AppServiceProvider extends ServiceProvider
     private function loadMiddleware()
     {
         $this->app['router']->aliasMiddleware(
-            'verify-active-state', VerifyActiveState::class
+            'verify-active-state',
+            VerifyActiveState::class
         );
 
         $this->app['router']->middlewareGroup('core', [

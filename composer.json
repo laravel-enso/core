@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "^6.0",
+        "laravel/framework": "^7.0",
         "guzzlehttp/guzzle": "~6.0",
         "jenssegers/date": "^3.4",
         "laravel-enso/action-logger": "2.4.*",
