@@ -5,6 +5,7 @@
         "laravel-enso",
         "enso-core",
         "laravel-boilerplate",
+        "enso-aggregator",
         "vue-bulma",
         "vue-spa"
     ],
