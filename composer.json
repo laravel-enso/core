@@ -34,7 +34,6 @@
     "require": {
         "laravel/framework": "^7.0",
         "guzzlehttp/guzzle": "~6.0",
-        "jenssegers/date": "^3.4",
         "laravel-enso/action-logger": "2.4.*",
         "laravel-enso/activity-log": "3.2.*",
         "laravel-enso/avatars": "2.5.*",
