@@ -13,7 +13,7 @@ use LaravelEnso\Core\App\Services\Inspiring;
 use LaravelEnso\Core\App\Services\LocalState;
 use LaravelEnso\Enums\App\Facades\Enums;
 use LaravelEnso\Enums\App\Services\Enum;
-use LaravelEnso\Helpers\App\Classes\JsonParser;
+use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
 use LaravelEnso\Menus\App\Services\TreeBuilder;
 use LaravelEnso\Permissions\App\Models\Permission;
@@ -73,7 +73,7 @@ class AppState implements Responsable
 
     protected function lang(Language $language)
     {
-        return (new JsonParser(
+        return (new JsonReader(
             resource_path('lang'.DIRECTORY_SEPARATOR."{$language->name}.json")
         ))->object();
     }
