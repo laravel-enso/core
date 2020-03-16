@@ -1,10 +1,10 @@
 <?php
 
-use Tests\TestCase;
-use LaravelEnso\Roles\App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\StructureUpgrade;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Roles\App\Models\Role;
+use Tests\TestCase;
 
 class StructureUpgradeTest extends TestCase
 {
@@ -22,14 +22,13 @@ class StructureUpgradeTest extends TestCase
         $this->defaultRole = $this->createTestRole(config('enso.config.defaultRole'));
 
         $this->nonDefaultRole = $this->createTestRole('nonDefaultRole');
-
     }
 
     /** @test */
     public function cannot_migrate_when_permission_already_exists()
     {
         $this->migration->permissions = [
-            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true]
+            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true],
         ];
 
         $this->migration->migrate();
@@ -42,7 +41,7 @@ class StructureUpgradeTest extends TestCase
     public function can_migrate_default_permission()
     {
         $this->migration->permissions = [
-            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true]
+            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true],
         ];
 
         $this->migration->migrate();
@@ -55,7 +54,7 @@ class StructureUpgradeTest extends TestCase
     public function can_migrate_non_default_permission()
     {
         $this->migration->permissions = [
-            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => false]
+            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => false],
         ];
 
         $this->migration->migrate();
@@ -64,12 +63,11 @@ class StructureUpgradeTest extends TestCase
         $this->assertEmpty($this->nonDefaultRole->permissions);
     }
 
-
     /** @test */
     public function can_migrate()
     {
         $this->migration->permissions = [
-            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true]
+            ['name' => 'test', 'description' => 'test', 'type' => 0, 'is_default' => true],
         ];
 
         $this->migration->migrate();
@@ -80,11 +78,9 @@ class StructureUpgradeTest extends TestCase
     protected function createTestRole($name)
     {
         return factory(Role::class)->create([
-            'name' => $name
+            'name' => $name,
         ]);
     }
-
-
 }
 
 class TestStructureMigration extends StructureUpgrade
@@ -98,7 +94,4 @@ class TestStructureMigration extends StructureUpgrade
     public function error($string, $verbosity = null)
     {
     }
-
 }
-
-

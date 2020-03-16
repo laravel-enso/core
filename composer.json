@@ -66,6 +66,7 @@
         "laravel-enso/track-who": "1.9.*",
         "laravel-enso/tutorials": "3.3.*",
         "laravel-enso/tables": "3.2.*",
+        "laravel-enso/upgrade": "1.0.*",
         "php": ">=7.4.0"
     },
     "autoload": {

@@ -3,7 +3,8 @@
 namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\Core\App\Commands\DatabaseUpgrades\Permissions;
+use LaravelEnso\Core\App\Services\Upgrades\Permissions;
+use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
 class Upgrade extends Command
 {
@@ -17,12 +18,6 @@ class Upgrade extends Command
 
     public function handle()
     {
-        $this->upgrade();
-    }
-
-    private function upgrade()
-    {
-        collect($this->upgrades)
-            ->each(fn ($upgrade) => (new $upgrade())->handle());
+        (new Service($this->upgrades))->handle();
     }
 }

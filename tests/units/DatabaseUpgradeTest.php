@@ -1,10 +1,10 @@
 <?php
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Core\App\Commands\DatabaseUpgrades\DatabaseUpgrade;
+use Tests\TestCase;
 
 class DatabaseUpgradeTest extends TestCase
 {
@@ -58,7 +58,6 @@ class DatabaseUpgradeTest extends TestCase
         $this->assertNotEmpty(DB::table('test')->get());
     }
 
-
     /** @test */
     public function cannot_migrate_twice()
     {
@@ -69,7 +68,6 @@ class DatabaseUpgradeTest extends TestCase
 
         $this->assertCount(1, DB::table('test')->get());
     }
-
 }
 
 class TestDatabaseMigration extends DatabaseUpgrade
@@ -104,7 +102,6 @@ class TestDatabaseMigration extends DatabaseUpgrade
         });
     }
 
-
     public function info($string, $verbosity = null)
     {
     }
@@ -112,7 +109,6 @@ class TestDatabaseMigration extends DatabaseUpgrade
     public function error($string, $verbosity = null)
     {
     }
-
 }
 
 class ExceptionalDataMigrationTest extends TestDatabaseMigration
