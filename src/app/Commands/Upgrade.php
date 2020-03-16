@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\App\Services\Upgrades\Companies;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
@@ -14,6 +15,7 @@ class Upgrade extends Command
 
     private $upgrades = [
         Permissions::class,
+        Companies::class,
     ];
 
     public function handle()
