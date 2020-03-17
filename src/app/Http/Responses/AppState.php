@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use LaravelEnso\Core\App\Enums\Themes;
+use LaravelEnso\Core\App\Http\Resources\User;
 use LaravelEnso\Core\App\Services\Inspiring;
 use LaravelEnso\Core\App\Services\LocalState;
 use LaravelEnso\Enums\App\Facades\Enums;
 use LaravelEnso\Enums\App\Services\Enum;
 use LaravelEnso\Helpers\App\Classes\JsonReader;
 use LaravelEnso\Localisation\App\Models\Language;
+use LaravelEnso\Menus\App\Http\Resources\Menu;
 use LaravelEnso\Menus\App\Services\TreeBuilder;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Roles\App\Enums\Roles;
@@ -35,7 +37,7 @@ class AppState implements Responsable
     protected function response(): array
     {
         return [
-            'user' => Auth::user()->load(['person', 'avatar']),
+            'user' => new User(Auth::user()->load(['person', 'avatar', 'role', 'group'])),
             'preferences' => Auth::user()->preferences(),
             'i18n' => $this->i18n(),
             'languages' => $this->languages->pluck('flag', 'name'),
@@ -43,7 +45,7 @@ class AppState implements Responsable
             'themes' => Themes::all(),
             'routes' => $this->routes(),
             'implicitRoute' => $this->role->menu->permission->name,
-            'menus' => App::make(TreeBuilder::class)->handle(),
+            'menus' => Menu::collection(App::make(TreeBuilder::class)->handle()),
             'impersonating' => Session::has('impersonating'),
             'websockets' => [
                 'pusher' => [
