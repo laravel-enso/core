@@ -19,7 +19,7 @@ class Sentry
 
         App::make('sentry')->captureException($exception);
 
-        if (Auth::check()) {
+        if (Auth::check() && App::isProduction()) {
             self::storeEventId();
         }
     }
