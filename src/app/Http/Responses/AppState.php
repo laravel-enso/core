@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use LaravelEnso\Core\App\Enums\Themes;
@@ -49,8 +50,8 @@ class AppState implements Responsable
             'impersonating' => Session::has('impersonating'),
             'websockets' => [
                 'pusher' => [
-                    'key' => config('broadcasting.connections.pusher.key'),
-                    'options' => config('broadcasting.connections.pusher.options'),
+                    'key' => Config::get('broadcasting.connections.pusher.key'),
+                    'options' => Config::get('broadcasting.connections.pusher.options'),
                 ],
                 'channels' => [
                     'privateChannel' => $this->privateChannel(),
@@ -89,16 +90,16 @@ class AppState implements Responsable
     protected function meta(): array
     {
         return [
-            'appName' => config('app.name'),
+            'appName' => Config::get('app.name'),
             'appUrl' => url('/').'/',
-            'version' => config('enso.config.version'),
+            'version' => Config::get('enso.config.version'),
             'quote' => Inspiring::quote(),
             'env' => App::environment(),
-            'dateFormat' => config('enso.config.dateFormat'),
-            'dateTimeFormat' => config('enso.config.dateFormat').' H:i:s',
-            'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
+            'dateFormat' => Config::get('enso.config.dateFormat'),
+            'dateTimeFormat' => Config::get('enso.config.dateFormat').' H:i:s',
+            'extendedDocumentTitle' => Config::get('enso.config.extendedDocumentTitle'),
             'csrfToken' => csrf_token(),
-            'ravenKey' => config('enso.config.ravenKey'),
+            'sentryDsn' => Config::get('sentry.dsn'),
         ];
     }
 
@@ -124,7 +125,7 @@ class AppState implements Responsable
     protected function privateChannel(): string
     {
         return (new Collection(
-            explode('\\', config('auth.providers.users.model'))
+            explode('\\', Config::get('auth.providers.users.model'))
         ))->push(Auth::user()->id)->implode('.');
     }
 
