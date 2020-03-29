@@ -2,7 +2,7 @@
     "routePrefix": "administration.userGroups",
     "sections": [
         {
-            "columns": 2,
+            "columns": 1,
             "fields": [
                 {
                     "label": "Name",

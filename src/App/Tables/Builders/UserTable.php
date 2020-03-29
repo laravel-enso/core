@@ -14,14 +14,13 @@ class UserTable implements Table
 
     public function query(): Builder
     {
-        return User::selectRaw('
-            users.id, avatars.id as avatarId, user_groups.name as userGroup,
-            people.name, people.appellative, people.phone, users.email, roles.name as role,
-            users.is_active, users.created_at
+        return User::with('person:id,appellative,name', 'avatar:id,user_id')->selectRaw('
+            users.id, user_groups.name as userGroup, people.name, people.appellative,
+            people.phone, users.email, roles.name as role, users.is_active,
+            users.created_at, users.person_id
         ')->join('people', 'users.person_id', '=', 'people.id')
-        ->join('user_groups', 'users.group_id', '=', 'user_groups.id')
-        ->join('roles', 'users.role_id', '=', 'roles.id')
-        ->leftJoin('avatars', 'users.id', '=', 'avatars.user_id');
+            ->join('user_groups', 'users.group_id', '=', 'user_groups.id')
+            ->join('roles', 'users.role_id', '=', 'roles.id');
     }
 
     public function templatePath(): string
