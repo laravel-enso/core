@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
+use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
@@ -16,6 +17,7 @@ class Upgrade extends Command
 
     private $upgrades = [
         ActionLogsIndex::class,
+        Avatars::class,
         Companies::class,
         Permissions::class,
     ];
