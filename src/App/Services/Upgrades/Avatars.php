@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\App\Services\Upgrades;
 
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
-use LaravelEnso\Upgrade\App\Services\Table;
+use LaravelEnso\Upgrade\App\Helpers\Table;
 
 class Avatars implements MigratesTable
 {
