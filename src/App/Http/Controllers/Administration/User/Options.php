@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\App\Http\Controllers\Administration\User;
 
 use Illuminate\Routing\Controller;
+use LaravelEnso\Core\App\Http\Resources\User as Resource;
 use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Select\App\Traits\OptionsBuilder;
 
@@ -11,6 +12,8 @@ class Options extends Controller
     use OptionsBuilder;
 
     protected $queryAttributes = ['email', 'person.name', 'person.appellative'];
+
+    protected $resource = Resource::class;
 
     public function query()
     {
