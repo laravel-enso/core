@@ -2,7 +2,9 @@
 
 namespace LaravelEnso\Core\App\Exceptions;
 
-class UserConflict
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+
+class UserConflict extends ConflictHttpException
 {
     public static function hasActivity()
     {
