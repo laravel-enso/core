@@ -14,7 +14,7 @@ class Categories implements MigratesTable, MigratesData, MigratesPostDataMigrati
 {
     public function isMigrated(): bool
     {
-        return ! Schema::hasTable('categories')
+        return ! class_exists(Category::class)
             || Schema::hasColumn('categories', 'order_index');
     }
 
