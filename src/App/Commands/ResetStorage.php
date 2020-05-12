@@ -4,11 +4,12 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class ResetStorage extends Command
 {
-    private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports'];
+    private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports', 'pictures'];
     private const TestingFolder = 'testing';
     private const ImportFolder = 'imports';
 
@@ -19,15 +20,21 @@ class ResetStorage extends Command
     public function handle()
     {
         (new Collection(self::Folders))
-            ->each(fn ($folder) => (new Collection(Storage::files($folder)))
-                ->reject(fn ($file) => strpos($file, '.gitignore') !== false)
-                ->each(fn ($file) => Storage::delete($file)));
-
-        (new Collection(Storage::directories(self::ImportFolder)))
-            ->each(fn ($directory) => Storage::deleteDirectory($directory));
+            ->each(fn ($directory) => $this->reset($directory));
 
         if (in_array(self::TestingFolder, Storage::directories())) {
             Storage::deleteDirectory(self::TestingFolder);
         }
+
+        Artisan::call('storage:link');
+    }
+
+    private function reset($directory)
+    {
+        if (Storage::has($directory)) {
+            Storage::deleteDirectory($directory);
+        }
+
+        Storage::makeDirectory($directory);
     }
 }
