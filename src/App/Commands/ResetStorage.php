@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ResetStorage extends Command
 {
-    private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports'];
+    private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports', 'pictures'];
     private const TestingFolder = 'testing';
-    private const ImportFolder = 'imports';
 
     protected $signature = 'enso:storage:reset';
 
@@ -19,15 +18,20 @@ class ResetStorage extends Command
     public function handle()
     {
         (new Collection(self::Folders))
-            ->each(fn ($folder) => (new Collection(Storage::files($folder)))
-                ->reject(fn ($file) => strpos($file, '.gitignore') !== false)
-                ->each(fn ($file) => Storage::delete($file)));
-
-        (new Collection(Storage::directories(self::ImportFolder)))
-            ->each(fn ($directory) => Storage::deleteDirectory($directory));
+            ->each(fn ($directory) => $this->reset($directory));
 
         if (in_array(self::TestingFolder, Storage::directories())) {
             Storage::deleteDirectory(self::TestingFolder);
         }
+    }
+
+    private function reset($directory)
+    {
+        if (Storage::has($directory)) {
+            (new Collection(Storage::files($directory)))
+                ->each(fn ($file) => Storage::delete($file));
+        }
+
+        Storage::makeDirectory($directory);
     }
 }
