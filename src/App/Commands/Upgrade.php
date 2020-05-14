@@ -7,6 +7,7 @@ use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
+use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
@@ -22,6 +23,7 @@ class Upgrade extends Command
         Categories::class,
         Companies::class,
         Permissions::class,
+        FilesIndex::class,
     ];
 
     public function handle()
