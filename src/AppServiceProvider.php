@@ -98,7 +98,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/images' => resource_path('images'),
-        ], 'core-images');
+        ], 'core-assets');
 
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
