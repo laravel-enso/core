@@ -19,8 +19,7 @@ class UserMorphKey implements MigratesData
     {
         DB::table('notifications')
             ->where('notifiable_type', 'like', '%App\\\\Models\\\\User')
-            ->orWhere
-            ->where('notifiable_type', 'like', '%App\\\\User')
+            ->orWhere('notifiable_type', 'like', '%App\\\\User')
             ->update(['notifiable_type' => User::morphMapKey()]);
     }
 }
