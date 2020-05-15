@@ -9,6 +9,7 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.tableData', 'description' => 'Get table data for users', 'is_default' => false],
         ['name' => 'administration.users.exportExcel', 'description' => 'Export excel for users', 'is_default' => false],
         ['name' => 'administration.users.options', 'description' => 'Get options for select', 'is_default' => false],
+        ['name' => 'administration.users.taggableOptions', 'description' => 'Get taggable options for select', 'is_default' => false],
         ['name' => 'administration.users.create', 'description' => 'Create user', 'is_default' => false],
         ['name' => 'administration.users.edit', 'description' => 'Edit existing user', 'is_default' => false],
         ['name' => 'administration.users.index', 'description' => 'Show users', 'is_default' => false],

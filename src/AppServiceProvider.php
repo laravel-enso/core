@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger;
@@ -11,6 +12,7 @@ use LaravelEnso\Core\App\Commands\ResetStorage;
 use LaravelEnso\Core\App\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\App\Commands\Upgrade;
 use LaravelEnso\Core\App\Http\Middleware\VerifyActiveState;
+use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Impersonate\App\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\App\Http\Middleware\SetLanguage;
 use LaravelEnso\Permissions\App\Http\Middleware\VerifyRouteAccess;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             ->loadDependencies()
             ->publishDependencies()
             ->publishResources()
+            ->mapMorphs()
             ->commands(
                 AnnounceAppUpdate::class,
                 ClearPreferences::class,
@@ -98,11 +101,20 @@ class AppServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/resources/images' => resource_path('images'),
-        ], 'core-assets');
+        ], 'core-images');
 
         $this->publishes([
             __DIR__.'/resources/views/mail' => resource_path('views/vendor/mail'),
         ], 'enso-email');
+
+        return $this;
+    }
+
+    private function mapMorphs()
+    {
+        Relation::morphMap([
+            User::morphMapKey() => User::class,
+        ]);
 
         return $this;
     }

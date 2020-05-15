@@ -19,6 +19,7 @@ class Destroy extends Controller
         return [
             'message' => __('The user was successfully deleted'),
             'redirect' => 'administration.users.index',
+            'users' => $user,
         ];
     }
 }

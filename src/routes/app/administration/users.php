@@ -17,6 +17,7 @@ Route::namespace('User')
         Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
 
         Route::get('options', 'Options')->name('options');
+        Route::get('taggableOptions', 'TaggableOptions')->name('taggableOptions');
 
         Route::get('{user}', 'Show')->name('show');
     });
