@@ -20,6 +20,7 @@ use LaravelEnso\Files\App\Traits\Uploads;
 use LaravelEnso\Helpers\App\Contracts\Activatable;
 use LaravelEnso\Helpers\App\Traits\ActiveState;
 use LaravelEnso\Helpers\App\Traits\AvoidsDeletionConflicts;
+use LaravelEnso\Helpers\App\Traits\CascadesMorphMap;
 use LaravelEnso\Impersonate\App\Traits\Impersonates;
 use LaravelEnso\People\App\Models\Person;
 use LaravelEnso\People\App\Traits\IsPerson;
@@ -31,9 +32,9 @@ use LaravelEnso\Teams\App\Models\Team;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
-    use ActionLogs, ActiveState, AvoidsDeletionConflicts, HasAvatar,
-        HasPassword, Impersonates, IsPerson, Notifiable, Relations,
-        Rememberable, TableCache, Uploads;
+    use ActionLogs, ActiveState, AvoidsDeletionConflicts, CascadesMorphMap,
+        HasAvatar, HasPassword, Impersonates, IsPerson, Notifiable,
+        Relations, Rememberable, TableCache, Uploads;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
