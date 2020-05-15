@@ -7,6 +7,7 @@ use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use LaravelEnso\ActionLogger\App\Traits\ActionLogs;
 use LaravelEnso\Avatars\App\Traits\HasAvatar;
 use LaravelEnso\Calendar\App\Models\Event;
@@ -153,6 +154,15 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         $this->storePreferences($preferences);
     }
 
+    public function erase(bool $person = false)
+    {
+        if ($person) {
+            return DB::transaction(fn () => tap($this)->delete()->person->delete());
+        }
+
+        return $this->delete();
+    }
+
     public function delete()
     {
         if ($this->logins()->exists()) {
@@ -160,7 +170,7 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         }
 
         try {
-            parent::delete();
+            return parent::delete();
         } catch (Exception $exception) {
             throw UserConflict::hasActivity();
         }
