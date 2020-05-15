@@ -8,11 +8,11 @@ use LaravelEnso\Core\App\Services\Upgrades\AvatarMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
-use LaravelEnso\Core\App\Services\Upgrades\DataExportMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\DataImportCleanup;
 use LaravelEnso\Core\App\Services\Upgrades\DataImportMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\DocumentMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
+use LaravelEnso\Core\App\Services\Upgrades\MorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
@@ -31,10 +31,7 @@ class Upgrade extends Command
         Permissions::class,
         FilesIndex::class,
         UserMorphKey::class,
-        AvatarMorphKey::class,
-        DataExportMorphKey::class,
-        DocumentMorphKey::class,
-        MorphKey::class,
+        MorphKeys::class,
         DataImportCleanup::class,
     ];
 

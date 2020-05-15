@@ -6,10 +6,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 
-class MorphKey implements MigratesData
+class MorphKeys implements MigratesData
 {
 
     private array $namespaces = [
+        'LaravelEnso\\Avatars\\App\\Models\\Avatar',
+        'LaravelEnso\\DataExport\\App\\Models\\DataExport',
         'LaravelEnso\\Documents\\App\\Models\\Document',
         'LaravelEnso\\DataImport\\App\\Models\\DataImport',
         'LaravelEnso\\DataImport\\App\\Models\\ImportTemplate',
