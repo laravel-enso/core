@@ -4,13 +4,10 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
-use LaravelEnso\Core\App\Services\Upgrades\AvatarMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
 use LaravelEnso\Core\App\Services\Upgrades\DataImportCleanup;
-use LaravelEnso\Core\App\Services\Upgrades\DataImportMorphKey;
-use LaravelEnso\Core\App\Services\Upgrades\DocumentMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\MorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
