@@ -8,7 +8,6 @@ use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 
 class DocumentsMorphKeys implements MigratesData
 {
-
     private array $namespaces = [
         'LaravelEnso\\People\\App\\Models\\Person',
         'LaravelEnso\\Companies\\App\\Models\\Company',
@@ -25,8 +24,8 @@ class DocumentsMorphKeys implements MigratesData
     public function migrateData(): void
     {
         (new Collection($this->namespaces))
-            ->reject(fn($namespace) => ! class_exists($namespace))
-            ->each(fn($namespace) => DB::table('documents')
+            ->reject(fn ($namespace) => ! class_exists($namespace))
+            ->each(fn ($namespace) => DB::table('documents')
                 ->where('documentable_type', $namespace)
                 ->update(['documentable_type' => $namespace::morphMapKey()]));
     }
