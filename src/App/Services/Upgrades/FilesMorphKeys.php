@@ -8,7 +8,6 @@ use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 
 class FilesMorphKeys implements MigratesData
 {
-
     private array $namespaces = [
         'LaravelEnso\\Avatars\\App\\Models\\Avatar',
         'LaravelEnso\\DataExport\\App\\Models\\DataExport',
@@ -30,7 +29,7 @@ class FilesMorphKeys implements MigratesData
     public function migrateData(): void
     {
         (new Collection($this->namespaces))
-            ->each(fn($namespace) => DB::table('files')
+            ->each(fn ($namespace) => DB::table('files')
                 ->where('attachable_type', $namespace)
                 ->update(['attachable_type' => $namespace::morphMapKey()]));
     }
