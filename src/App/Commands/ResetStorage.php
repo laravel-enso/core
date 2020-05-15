@@ -25,11 +25,13 @@ class ResetStorage extends Command
         }
     }
 
-    private function reset($directory)
+    private function reset($directory): void
     {
         if (Storage::has($directory)) {
             (new Collection(Storage::files($directory)))
                 ->each(fn ($file) => Storage::delete($file));
+
+            return;
         }
 
         Storage::makeDirectory($directory);

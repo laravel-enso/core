@@ -4,9 +4,14 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
+use LaravelEnso\Core\App\Services\Upgrades\AvatarMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
+use LaravelEnso\Core\App\Services\Upgrades\DataExportMorphKey;
+use LaravelEnso\Core\App\Services\Upgrades\DataImportCleanup;
+use LaravelEnso\Core\App\Services\Upgrades\DataImportMorphKey;
+use LaravelEnso\Core\App\Services\Upgrades\DocumentMorphKey;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
@@ -16,7 +21,7 @@ class Upgrade extends Command
 {
     protected $signature = 'enso:upgrade';
 
-    protected $description = 'This command will upgrade Enso from v3.7.* to 3.8.*';
+    protected $description = 'This command will upgrade Enso';
 
     private $upgrades = [
         ActionLogsIndex::class,
@@ -26,6 +31,11 @@ class Upgrade extends Command
         Permissions::class,
         FilesIndex::class,
         UserMorphKey::class,
+        AvatarMorphKey::class,
+        DataExportMorphKey::class,
+        DocumentMorphKey::class,
+        MorphKey::class,
+        DataImportCleanup::class,
     ];
 
     public function handle()
