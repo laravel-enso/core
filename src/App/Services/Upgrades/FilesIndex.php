@@ -9,7 +9,6 @@ use LaravelEnso\Files\App\Models\File;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 use LaravelEnso\Upgrade\App\Helpers\Table;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\Output;
 
 class FilesIndex implements MigratesTable
 {
@@ -22,22 +21,21 @@ class FilesIndex implements MigratesTable
     {
         $duplicated = $this->getDuplicates();
 
-        if($duplicated->isNotEmpty()) {
-
+        if ($duplicated->isNotEmpty()) {
             $this->logDuplicates($duplicated);
 
             return;
         }
 
         Schema::table('files', fn (Blueprint $table) => $table
-            ->unique(['attachable_type','attachable_id']));
+            ->unique(['attachable_type', 'attachable_id']));
     }
 
     private function getDuplicates(): Collection
     {
         return File::selectRaw('attachable_id, attachable_type')
-            ->groupBy('attachable_id','attachable_type')
-            ->havingRaw('COUNT(attachable_id) > ?',[1])
+            ->groupBy('attachable_id', 'attachable_type')
+            ->havingRaw('COUNT(attachable_id) > ?', [1])
             ->get();
     }
 
@@ -45,9 +43,9 @@ class FilesIndex implements MigratesTable
     {
         $out = new ConsoleOutput();
 
-        $out->writeln("Unable to add unique index, the following id/type pair are duplicated");
+        $out->writeln('Unable to add unique index, the following id/type pair are duplicated');
 
-        $duplicated->each(fn($file) => $out
+        $duplicated->each(fn ($file) => $out
             ->writeln("['attachable_type' => '{$file->attachable_type}', 'attachable_id' => '{$file->attachable_id}'],"));
     }
 }

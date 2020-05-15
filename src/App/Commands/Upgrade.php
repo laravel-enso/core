@@ -9,6 +9,7 @@ use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
+use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
 class Upgrade extends Command
@@ -24,6 +25,7 @@ class Upgrade extends Command
         Companies::class,
         Permissions::class,
         FilesIndex::class,
+        UserMorphKey::class,
     ];
 
     public function handle()
