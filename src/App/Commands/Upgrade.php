@@ -15,6 +15,7 @@ use LaravelEnso\Core\App\Services\Upgrades\DocumentsMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\FilesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
+use LaravelEnso\Core\App\Services\Upgrades\TaggableUsers;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
