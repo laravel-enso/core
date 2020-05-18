@@ -30,6 +30,7 @@ class Upgrade extends Command
         Categories::class,
         Companies::class,
         Permissions::class,
+        TaggableUsers::class,
         FilesIndex::class,
         UserMorphKey::class,
         FilesMorphKeys::class,
