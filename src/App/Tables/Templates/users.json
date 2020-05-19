@@ -5,16 +5,13 @@
         "excel",
         "show",
         "edit",
-        "destroy"
-    ],
-    "filters": [
         {
-            "type": "select",
-            "label": "Role",
-            "data": "users.role_id",
-            "value": [],
-            "route": "system.roles.options",
-            "multiple": true
+            "type": "row",
+            "icon": "trash-alt",
+            "class": "is-row-button",
+            "event": "destroy",
+            "routeSuffix": "destroy",
+            "slot": "destroy-button"
         }
     ],
     "columns": [
