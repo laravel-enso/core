@@ -46,7 +46,7 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
             ]);
         });
 
-        Permission::whereName('commercial.sales.addresses',)
+        Permission::whereName('commercial.sales.addresses', )
             ->update(['name' => 'core.addresses.options']);
     }
 
