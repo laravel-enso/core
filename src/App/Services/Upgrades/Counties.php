@@ -51,6 +51,6 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
 
         DB::table('migrations')
             ->whereMigration('2017_12_11_100000_create_counties_table')
-            ->update(['migration' => '2017_12_11_100000_create_regions_table']);
+            ->update(['migration' => '2017_12_07_150001_create_regions_table']);
     }
 }

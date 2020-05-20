@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\App\Services\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
@@ -19,5 +20,12 @@ class Localities implements MigratesTable
             $table->renameColumn('county_id', 'region_id');
             $table->renameIndex('localities_county_id_index', 'localities_region_id_index');
         });
+    }
+
+    public function migratePostDataMigration(): void
+    {
+        DB::table('migrations')
+            ->whereMigration('2017_12_11_101000_create_localities_table')
+            ->update(['migration' => '2017_12_07_150002_create_localities_table']);
     }
 }
