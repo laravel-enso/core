@@ -3,9 +3,13 @@
 namespace LaravelEnso\Core\App\Services\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Addresses\App\Models\Region;
 use LaravelEnso\Countries\App\Models\Country;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\RoAddresses\App\Models\Locality;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
@@ -21,7 +25,7 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
     {
         Schema::rename('counties', 'regions');
         Schema::table('regions', function (Blueprint $table) {
-            $table->unsignedInteger('country_id')->index()->nullable();
+            $table->unsignedInteger('country_id')->index()->nullable()->after('id');
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
         });
@@ -32,25 +36,33 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
         $romania = Country::whereName('Romania')->first();
 
         DB::table('regions')
-            ->whereNull('country_id')
             ->update(['country_id' => $romania->id]);
     }
 
     public function migratePostDataMigration(): void
     {
         Schema::table('regions', function (Blueprint $table) {
-            $table->unsignedInteger('country_id')->nullable('false')
-                ->after('id')->change();
+            $table->unsignedInteger('country_id')->nullable('false')->change();
         });
 
         DB::table('migrations')
             ->whereIn('migration', [
+                '2017_12_11_102000_alter_addresses_table',
                 '2019_06_27_104000_create_structure_for_counties',
                 '2017_12_11_103000_create_structure_for_localities',
             ])->delete();
 
         DB::table('migrations')
             ->whereMigration('2017_12_11_100000_create_counties_table')
-            ->update(['migration' => '2017_12_07_150001_create_regions_table']);
+            ->update(['migration' => '2017_12_07_150500_create_regions_table']);
+
+        Permission::whereName('core.addresses.countiesOptions')
+            ->update(['name' => 'core.addresses.regions']);
+
+
+        if(! Region::exists()) {
+            Artisan::call('db:seed --class=RegionSeeder --force');
+            Artisan::call('db:seed --class=StateSeeder --force');
+        }
     }
 }

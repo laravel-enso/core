@@ -36,13 +36,10 @@ class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigratio
     {
         Address::each(function (Address $address) {
             $address->update([
-                'street' => $this->street($address),
-                'additional' => $this->additional($address),
+                'street' => Str::ucfirst($this->street($address)),
+                'additional' => Str::ucfirst($this->additional($address)),
             ]);
         });
-
-        Permission::whereName('core.addresses.countiesOptions')
-            ->update(['name' => 'core.addresses.regionsOptions']);
     }
 
     public function migratePostDataMigration(): void
@@ -68,19 +65,19 @@ class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigratio
     private function additional(Address $address)
     {
         $buildingType = $address->building
-            ? __($address->building_type ?? 'Building')
+            ? __($address->building_type ?? 'building')
             : null;
 
         $entryPrefix = $address->entry
-            ? __('Entry')
+            ? __('entry')
             : null;
 
         $floorPrefix = $address->floor
-            ? __('Floor')
+            ? __('floor')
             : null;
 
         $apartamentPrefix = $address->apartament
-            ? __('Apartment')
+            ? __('ap.')
             : null;
 
         return $this->implode(

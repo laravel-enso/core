@@ -3,8 +3,11 @@
 namespace LaravelEnso\Core\App\Services\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\RoAddresses\App\Models\Locality;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
 class Localities implements MigratesTable
@@ -26,6 +29,13 @@ class Localities implements MigratesTable
     {
         DB::table('migrations')
             ->whereMigration('2017_12_11_101000_create_localities_table')
-            ->update(['migration' => '2017_12_07_150002_create_localities_table']);
+            ->update(['migration' => '2017_12_07_150700_create_localities_table']);
+
+        Permission::whereName('core.addresses.localitiesOptions')
+            ->update(['name' => 'core.addresses.localities']);
+
+        if(! Locality::exists()) {
+            Artisan::call('db:seed --class=LocalitySeeder --force');
+        }
     }
 }

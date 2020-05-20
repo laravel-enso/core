@@ -6,6 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use LaravelEnso\Addresses\App\Models\Address;
 use LaravelEnso\Addresses\App\Models\Locality;
 use LaravelEnso\Permissions\App\Models\Permission;
@@ -38,13 +39,10 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
 
         Address::each(function (Address $address) {
             $address->update([
-                'street' => $this->street($address),
-                'additional' => $this->additional($address),
+                'street' => Str::ucfirst($this->street($address)),
+                'additional' => Str::ucfirst($this->additional($address)),
             ]);
         });
-
-        Permission::whereName('core.addresses.countiesOptions')
-            ->update(['name' => 'core.addresses.regionsOptions']);
     }
 
     public function migratePostDataMigration(): void
@@ -69,19 +67,19 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
     private function additional(Address $address)
     {
         $buildingType = $address->building
-            ? __($address->building_type ?? 'Building')
+            ? __($address->building_type ?? 'bloc')
             : null;
 
         $entryPrefix = $address->entry
-            ? __('Entry')
+            ? 'scara'
             : null;
 
         $floorPrefix = $address->floor
-            ? __('Floor')
+            ? 'etaj'
             : null;
 
         $apartamentPrefix = $address->apartament
-            ? __('Apartment')
+            ? 'ap.'
             : null;
 
         return $this->implode(
