@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\App\Services\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\App\Models\Address;
 use LaravelEnso\Permissions\App\Models\Permission;
@@ -52,7 +51,7 @@ class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigratio
             $table->dropColumn([
                 'apartment', 'floor', 'entry',
                 'building', 'building_type', 'number', 'street_type',
-                'sub_administrative_area', 'administrative_area'
+                'sub_administrative_area', 'administrative_area',
             ]);
         });
     }
