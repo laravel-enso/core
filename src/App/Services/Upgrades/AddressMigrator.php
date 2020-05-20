@@ -33,15 +33,6 @@ class AddressMigrator
             ->update(['name' => 'core.addresses.regionsOptions']);
     }
 
-    protected function street(Address $address)
-    {
-        return $this->implode(
-            [
-                __($address->street_type), $address->street, $address->number,
-            ],
-            ' ');
-    }
-
     public function migratePostDataMigration(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
@@ -50,6 +41,15 @@ class AddressMigrator
                 'building', 'building_type', 'number', 'street_type',
             ]);
         });
+    }
+
+    protected function street(Address $address)
+    {
+        return $this->implode(
+            [
+                __($address->street_type), $address->street, $address->number,
+            ],
+            ' ');
     }
 
     protected function additional(Address $address)
