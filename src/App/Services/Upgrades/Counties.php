@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\App\Models\Region;
 use LaravelEnso\Countries\App\Models\Country;
 use LaravelEnso\Permissions\App\Models\Permission;
-use LaravelEnso\RoAddresses\App\Models\Locality;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
@@ -59,8 +58,7 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
         Permission::whereName('core.addresses.countiesOptions')
             ->update(['name' => 'core.addresses.regions']);
 
-
-        if(! Region::exists()) {
+        if (! Region::exists()) {
             Artisan::call('db:seed --class=RegionSeeder --force');
             Artisan::call('db:seed --class=StateSeeder --force');
         }
