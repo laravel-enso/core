@@ -1,8 +1,6 @@
 <?php
 
-
 namespace LaravelEnso\Core\App\Services\Upgrades;
-
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
