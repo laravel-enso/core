@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use LaravelEnso\Addresses\App\Models\Address;
 use LaravelEnso\Addresses\App\Models\Locality;
-use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;

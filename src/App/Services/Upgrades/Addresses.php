@@ -6,7 +6,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\App\Models\Address;
-use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
