@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\RoAddresses\App\Models\Locality;
+use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
-class Localities implements MigratesTable
+class Localities implements MigratesTable, MigratesData
 {
     public function isMigrated(): bool
     {
@@ -25,7 +26,7 @@ class Localities implements MigratesTable
         });
     }
 
-    public function migratePostDataMigration(): void
+    public function migrateData(): void
     {
         DB::table('migrations')
             ->whereMigration('2017_12_11_101000_create_localities_table')

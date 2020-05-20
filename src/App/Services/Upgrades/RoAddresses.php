@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use LaravelEnso\Addresses\App\Models\Address;
 use LaravelEnso\Addresses\App\Models\Locality;
+use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
@@ -25,10 +26,12 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
     public function migrateTable(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->renameColumn('county_id', 'region_id');
-            $table->renameIndex('addresses_county_id_index', 'addresses_region_id_index');
             $table->string('city')->nullable()->after('locality_id');
             $table->string('additional')->nullable()->after('street');
+            $table->renameIndex('addresses_county_id_index', 'addresses_region_id_index');
+            $table->renameColumn('county_id', 'region_id');
+            $table->renameColumn('obs', 'notes');
+            $table->renameColumn('postal_area', 'postcode');
         });
     }
 
@@ -42,6 +45,9 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
                 'additional' => Str::ucfirst($this->additional($address)),
             ]);
         });
+
+        Permission::whereName('commercial.sales.addresses',)
+            ->update(['name' => 'core.addresses.options']);
     }
 
     public function migratePostDataMigration(): void
