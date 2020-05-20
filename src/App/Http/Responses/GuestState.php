@@ -12,6 +12,7 @@ class GuestState implements Responsable
     public function toResponse($request): array
     {
         if ($request->has('locale')) {
+\Log::debug($request->get('locale'));
             App::setLocale($request->get('locale'));
         }
 
