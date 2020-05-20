@@ -7,25 +7,21 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\App\Models\Address;
-use LaravelEnso\Addresses\App\Models\Locality;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
-class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigration
+class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigration
 {
     public function isMigrated(): bool
     {
-        return Locality::exists()
-            && Schema::hasColumn('addresses', 'region_id');
+        return Schema::hasColumn('addresses', 'region_id');
     }
 
     public function migrateTable(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->renameColumn('county_id', 'region_id');
-            $table->renameIndex('addresses_county_id_index', 'addresses_region_id_index');
             $table->string('city')->nullable()->after('locality_id');
             $table->string('additional')->nullable()->after('street');
         });
@@ -33,8 +29,6 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
 
     public function migrateData(): void
     {
-        App::setLocale('ro');
-
         Address::each(function (Address $address) {
             $address->update([
                 'street' => $this->street($address),
@@ -50,8 +44,9 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
     {
         Schema::table('addresses', function (Blueprint $table) {
             $table->dropColumn([
-                'sector', 'neighbourhood', 'apartment', 'floor', 'entry',
+                'apartment', 'floor', 'entry',
                 'building', 'building_type', 'number', 'street_type',
+                'sub_administrative_area', 'administrative_area'
             ]);
         });
     }
@@ -89,6 +84,8 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
                 $this->implode([$entryPrefix, $address->entry], ' '),
                 $this->implode([$floorPrefix, $address->floor], ' '),
                 $this->implode([$apartamentPrefix, $address->apartament], ' '),
+                $address->administrative_area,
+                $address->sub_administrative_area,
             ],
             ', '
         );

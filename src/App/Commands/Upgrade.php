@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
+use LaravelEnso\Core\App\Services\Upgrades\Addresses;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
@@ -46,6 +47,7 @@ class Upgrade extends Command
         Counties::class,
         Localities::class,
         RoAddresses::class,
+        Addresses::class,
     ];
 
     public function handle()

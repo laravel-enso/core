@@ -1,31 +1,20 @@
 <?php
 
+
 namespace LaravelEnso\Core\App\Services\Upgrades;
+
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\App\Models\Address;
-use LaravelEnso\Addresses\App\Models\Locality;
 use LaravelEnso\Permissions\App\Models\Permission;
-use LaravelEnso\Upgrade\App\Contracts\MigratesData;
-use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;
-use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
-class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigration
+class AddressMigrator
 {
-    public function isMigrated(): bool
-    {
-        return Locality::exists()
-            && Schema::hasColumn('addresses', 'region_id');
-    }
-
     public function migrateTable(): void
     {
         Schema::table('addresses', function (Blueprint $table) {
-            $table->renameColumn('county_id', 'region_id');
-            $table->renameIndex('addresses_county_id_index', 'addresses_region_id_index');
             $table->string('city')->nullable()->after('locality_id');
             $table->string('additional')->nullable()->after('street');
         });
@@ -33,8 +22,6 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
 
     public function migrateData(): void
     {
-        App::setLocale('ro');
-
         Address::each(function (Address $address) {
             $address->update([
                 'street' => $this->street($address),
@@ -46,17 +33,7 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
             ->update(['name' => 'core.addresses.regionsOptions']);
     }
 
-    public function migratePostDataMigration(): void
-    {
-        Schema::table('addresses', function (Blueprint $table) {
-            $table->dropColumn([
-                'sector', 'neighbourhood', 'apartment', 'floor', 'entry',
-                'building', 'building_type', 'number', 'street_type',
-            ]);
-        });
-    }
-
-    private function street(Address $address)
+    protected function street(Address $address)
     {
         return $this->implode(
             [
@@ -65,7 +42,17 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
             ' ');
     }
 
-    private function additional(Address $address)
+    public function migratePostDataMigration(): void
+    {
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->dropColumn([
+                'apartment', 'floor', 'entry',
+                'building', 'building_type', 'number', 'street_type',
+            ]);
+        });
+    }
+
+    protected function additional(Address $address)
     {
         $buildingType = $address->building
             ? __($address->building_type ?? 'Building')
@@ -94,7 +81,7 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
         );
     }
 
-    private function implode(array $elements, string $glue)
+    protected function implode(array $elements, string $glue)
     {
         return (new Collection($elements))
             ->filter()
