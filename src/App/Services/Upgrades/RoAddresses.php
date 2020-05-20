@@ -19,7 +19,7 @@ class RoAddresses implements MigratesTable, MigratesData, MigratesPostDataMigrat
         return false;
 
         return ! Schema::hasTable('addresses')
-            || Schema::hasColumn('addresses', 'region_id');;
+            || Schema::hasColumn('addresses', 'region_id');
     }
 
     public function migrateTable(): void

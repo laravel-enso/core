@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\App\Services\Upgrades;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Countries\App\Models\Country;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesPostDataMigration;

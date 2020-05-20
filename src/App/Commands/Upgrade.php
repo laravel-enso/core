@@ -4,8 +4,6 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
-use LaravelEnso\Core\App\Services\Upgrades\Localities;
-use LaravelEnso\Core\App\Services\Upgrades\RoAddresses;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
@@ -17,7 +15,9 @@ use LaravelEnso\Core\App\Services\Upgrades\DiscussionsMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\DocumentsMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\FilesMorphKeys;
+use LaravelEnso\Core\App\Services\Upgrades\Localities;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
+use LaravelEnso\Core\App\Services\Upgrades\RoAddresses;
 use LaravelEnso\Core\App\Services\Upgrades\TaggableUsers;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
