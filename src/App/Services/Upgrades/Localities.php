@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Permissions\App\Models\Permission;
-use LaravelEnso\RoAddresses\App\Models\Locality;
+use LaravelEnso\Addresses\App\Models\Locality;
 use LaravelEnso\Upgrade\App\Contracts\MigratesData;
 use LaravelEnso\Upgrade\App\Contracts\MigratesTable;
 
