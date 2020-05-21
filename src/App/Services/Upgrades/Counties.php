@@ -61,7 +61,6 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
 
         if (! Region::whereName('AB')->exists()) {
             Artisan::call('db:seed --class=RegionSeeder --force');
-
         }
 
         if (! Region::whereName('AL')->exists()) {
