@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
 use LaravelEnso\Core\App\Services\Upgrades\Addresses;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesMorphKeys;
+use LaravelEnso\Core\App\Services\Upgrades\AddressesPermissions;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\CommentsMorphKeys;
@@ -48,6 +49,7 @@ class Upgrade extends Command
         Localities::class,
         RoAddresses::class,
         Addresses::class,
+        AddressesPermissions::class,
     ];
 
     public function handle()

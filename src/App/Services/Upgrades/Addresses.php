@@ -61,7 +61,8 @@ class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigratio
             [
                 __($address->street_type), $address->street, $address->number,
             ],
-            ' ');
+            ' '
+        );
     }
 
     private function additional(Address $address)
