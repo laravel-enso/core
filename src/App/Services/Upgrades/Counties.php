@@ -27,6 +27,7 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
             $table->unsignedInteger('country_id')->index()->nullable()->after('id');
             $table->foreign('country_id')->references('id')->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
+            $table->unique(['country_id', 'abbreviation']);
         });
     }
 
@@ -58,8 +59,12 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
         Permission::whereName('core.addresses.countiesOptions')
             ->update(['name' => 'core.addresses.regions']);
 
-        if (! Region::exists()) {
+        if (! Region::whereName('AB')->exists()) {
             Artisan::call('db:seed --class=RegionSeeder --force');
+
+        }
+
+        if (! Region::whereName('AL')->exists()) {
             Artisan::call('db:seed --class=StateSeeder --force');
         }
     }
