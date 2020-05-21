@@ -16,7 +16,7 @@
     ],
     "columns": [
         {
-            "label": "Avatar",
+            "label": "",
             "name": "avatarId",
             "data": "avatars.avatarId",
             "meta": [
