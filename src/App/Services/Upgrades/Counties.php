@@ -58,13 +58,5 @@ class Counties implements MigratesTable, MigratesData, MigratesPostDataMigration
 
         Permission::whereName('core.addresses.countiesOptions')
             ->update(['name' => 'core.addresses.regions']);
-
-        if (! Region::whereAbbreviation('AB')->exists()) {
-            Artisan::call('db:seed --class=RegionSeeder --force');
-        }
-
-        if (! Region::whereAbbreviation('AL')->exists()) {
-            Artisan::call('db:seed --class=StateSeeder --force');
-        }
     }
 }

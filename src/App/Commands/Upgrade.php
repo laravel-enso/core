@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\App\Commands;
 
 use Illuminate\Console\Command;
 use LaravelEnso\Core\App\Services\Upgrades\ActionLogsIndex;
+use LaravelEnso\Core\App\Services\Upgrades\AddressDataSeeds;
 use LaravelEnso\Core\App\Services\Upgrades\Addresses;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesPermissions;
@@ -48,6 +49,7 @@ class Upgrade extends Command
         Counties::class,
         Localities::class,
         RoAddresses::class,
+        AddressDataSeeds::class,
         Addresses::class,
         AddressesPermissions::class,
     ];

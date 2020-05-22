@@ -34,9 +34,5 @@ class Localities implements MigratesTable, MigratesData
 
         Permission::whereName('core.addresses.localitiesOptions')
             ->update(['name' => 'core.addresses.localities']);
-
-        if (! Locality::exists()) {
-            Artisan::call('db:seed --class=LocalitySeeder --force');
-        }
     }
 }
