@@ -29,6 +29,7 @@ class Addresses implements MigratesTable, MigratesData, MigratesPostDataMigratio
             $table->foreign('locality_id')->references('id')->on('localities');
 
             $table->string('additional')->nullable()->after('street');
+            $table->string('city')->nullable(true)->change();
             $table->renameColumn('obs', 'notes');
             $table->renameColumn('postal_area', 'postcode');
         });
