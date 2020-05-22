@@ -16,7 +16,6 @@ class AddressDataSeeds implements MigratesData
             && Locality::exists();
     }
 
-
     public function migrateData(): void
     {
         if (! Region::whereAbbreviation('AB')->exists()) {
