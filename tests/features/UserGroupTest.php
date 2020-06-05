@@ -1,14 +1,13 @@
 <?php
 
-use Faker\Factory;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Core\App\Models\UserGroup;
-use LaravelEnso\Forms\App\TestTraits\EditForm;
 use LaravelEnso\Forms\App\TestTraits\CreateForm;
 use LaravelEnso\Forms\App\TestTraits\DestroyForm;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelEnso\Forms\App\TestTraits\EditForm;
 use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use Tests\TestCase;
 
 class UserGroupTest extends TestCase
 {

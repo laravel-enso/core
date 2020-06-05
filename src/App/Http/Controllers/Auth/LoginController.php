@@ -1,21 +1,43 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\Auth\Login;
+namespace LaravelEnso\Core\App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\LoginController as Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Exceptions\Authentication;
 use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Services\Login\Api;
+use LaravelEnso\Core\App\Services\Login\Login as Service;
+use LaravelEnso\Core\App\Services\Login\Spa;
 
-abstract class LoginController extends Controller
+class LoginController extends Controller
 {
     use AuthenticatesUsers;
+
+    protected Service $login;
 
     public function __construct()
     {
         $this->maxAttempts = config('enso.auth.maxLoginAttempts');
+    }
+
+    public function logout(Request $request)
+    {
+        $this->service($request)->logout($request->user());
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        return $this->service($request)
+            ->login(Auth::user());
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate($this->service($request)->validation());
     }
 
     protected function attemptLogin(Request $request)
@@ -26,7 +48,7 @@ abstract class LoginController extends Controller
             return false;
         }
 
-        $this->loginAs($user, $request);
+        $this->service($request)->loginAs($user);
 
         Login::dispatch($user, $request->ip(), $request->header('User-Agent'));
 
@@ -52,5 +74,10 @@ abstract class LoginController extends Controller
         return $user;
     }
 
-    abstract protected function loginAs($user, Request $request);
+    private function service(Request $request): Service
+    {
+        return $this->login ??= $request->attributes->get('sanctum')
+            ? new Spa(request())
+            : new Api(request());
+    }
 }
