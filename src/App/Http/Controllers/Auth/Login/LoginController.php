@@ -1,33 +1,21 @@
 <?php
 
-namespace LaravelEnso\Core\App\Http\Controllers\Auth;
+namespace LaravelEnso\Core\App\Http\Controllers\Auth\Login;
 
-use App\Http\Controllers\Auth\LoginController as Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Exceptions\Authentication;
-use LaravelEnso\Core\App\Models\User;
+use App\Http\Controllers\Auth\LoginController as Controller;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+abstract class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
-
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-
         $this->maxAttempts = config('enso.auth.maxLoginAttempts');
-    }
-
-    public function logout(Request $request)
-    {
-        $this->guard()->logout();
-
-        $request->session()->invalidate();
     }
 
     protected function attemptLogin(Request $request)
@@ -38,19 +26,11 @@ class LoginController extends Controller
             return false;
         }
 
-        Auth::login($user, $request->input('remember'));
+        $this->loginAs($user, $request);
 
         Login::dispatch($user, $request->ip(), $request->header('User-Agent'));
 
         return true;
-    }
-
-    protected function authenticated(Request $request, $user)
-    {
-        return response()->json([
-            'auth' => Auth::check(),
-            'csrfToken' => csrf_token(),
-        ]);
     }
 
     private function loggableUser(Request $request)
@@ -71,4 +51,6 @@ class LoginController extends Controller
 
         return $user;
     }
+
+    abstract protected function loginAs($user, Request $request);
 }

@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\App\Models;
 
 use Exception;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -33,7 +34,7 @@ use LaravelEnso\Teams\App\Models\Team;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
-    use ActionLogs, ActiveState, AvoidsDeletionConflicts, CascadesMorphMap,
+    use HasApiTokens, ActionLogs, ActiveState, AvoidsDeletionConflicts, CascadesMorphMap,
         HasAvatar, HasPassword, Impersonates, IsPerson, Notifiable,
         Relations, Rememberable, TableCache, Uploads;
 

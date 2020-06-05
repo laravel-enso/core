@@ -34,6 +34,7 @@
     ],
     "require": {
         "laravel/framework": "^7.0",
+        "laravel/sanctum": "^2.3",
         "guzzlehttp/guzzle": "~6.0",
         "laravel-enso/action-logger": "2.4.*",
         "laravel-enso/activity-log": "3.2.*",
