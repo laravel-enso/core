@@ -26,13 +26,14 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $this->service($request)->logout($request->user());
+        $this->service($request)
+            ->logout();
     }
 
     protected function sendLoginResponse(Request $request)
     {
         return $this->service($request)
-            ->login(Auth::user());
+            ->login();
     }
 
     protected function validateLogin(Request $request)

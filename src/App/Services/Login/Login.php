@@ -4,11 +4,13 @@ namespace LaravelEnso\Core\App\Services\Login;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use LaravelEnso\Core\App\Models\User;
 
 class Login
 {
     use ThrottlesLogins;
     protected Request $request;
+    protected User $user;
 
     public function __construct(Request $request)
     {
@@ -27,6 +29,6 @@ class Login
 
     protected function username()
     {
-        return $this->request->user()->email;
+        return $this->user->email;
     }
 }

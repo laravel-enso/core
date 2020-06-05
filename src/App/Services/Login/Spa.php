@@ -8,13 +8,14 @@ class Spa extends Login
 {
     public function logout()
     {
-        $this->request->logout();
+        Auth::guard('web')
+            ->logout();
 
         $this->request
             ->session()->invalidate();
     }
 
-    public function login($user)
+    public function login()
     {
         $this->clearLoginAttempts($this->request);
         $this->request->session()->regenerate();
@@ -27,6 +28,8 @@ class Spa extends Login
 
     public function loginAs($user)
     {
+        $this->user = $user;
+
         Auth::guard('web')
             ->login($user, $this->request->input('remember'));
     }

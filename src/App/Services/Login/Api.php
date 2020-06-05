@@ -3,22 +3,23 @@
 namespace LaravelEnso\Core\App\Services\Login;
 
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\Sanctum;
+use LaravelEnso\Core\App\Models\User;
 
 class Api extends Login
 {
     public function logout()
     {
         $this->request->user()
-            ->currentAccessToken()
-            ->delete();
+            ->currentAccessToken()->delete();
     }
 
-    public function login($user)
+    public function login()
     {
         $this->clearLoginAttempts($this->request);
 
         return [
-            'token' => $user->createToken($this->request->get('device_name'))
+            'token' => $this->user->createToken($this->request->get('device_name'))
                 ->plainTextToken,
         ];
     }
@@ -32,7 +33,6 @@ class Api extends Login
 
     public function loginAs($user)
     {
-        Auth::guard('web')
-            ->login($user, $this->request->input('remember'));
+        $this->user = $user;
     }
 }
