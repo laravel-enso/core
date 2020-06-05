@@ -2,9 +2,9 @@
 
 namespace LaravelEnso\Core\App\Http\Controllers\Auth\Login;
 
-use Laravel\Sanctum\Sanctum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\Sanctum;
 
 class ApiLoginController extends LoginController
 {
@@ -30,7 +30,7 @@ class ApiLoginController extends LoginController
         parent::validateLogin($request);
 
         $request->validate([
-            'device_name' => 'required|string'
+            'device_name' => 'required|string',
         ]);
     }
 

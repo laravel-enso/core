@@ -2,12 +2,12 @@
 
 namespace LaravelEnso\Core\App\Http\Controllers\Auth\Login;
 
-use LaravelEnso\Core\App\Models\User;
+use App\Http\Controllers\Auth\LoginController as Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Exceptions\Authentication;
-use App\Http\Controllers\Auth\LoginController as Controller;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use LaravelEnso\Core\App\Models\User;
 
 abstract class LoginController extends Controller
 {
