@@ -26,6 +26,12 @@ class SpaLoginController extends LoginController
 
     protected function loginAs($user, Request $request)
     {
-        Auth::login($user, $request->input('remember'));
+        $this->guard()
+            ->login($user, $request->input('remember'));
+    }
+
+    protected function guard()
+    {
+        return Auth::guard('web');
     }
 }

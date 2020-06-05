@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\App\Http\Controllers\Auth\Login;
 
 use Laravel\Sanctum\Sanctum;
-use LaravelEnso\Core\App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
