@@ -17,7 +17,6 @@ class Login
         $this->request = $request;
     }
 
-
     public function validation()
     {
         return [
@@ -25,7 +24,6 @@ class Login
             'password' => 'required|string',
         ];
     }
-
 
     protected function username()
     {

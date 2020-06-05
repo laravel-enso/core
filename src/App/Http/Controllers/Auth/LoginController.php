@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\App\Http\Controllers\Auth;
 use App\Http\Controllers\Auth\LoginController as Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Exceptions\Authentication;
 use LaravelEnso\Core\App\Models\User;

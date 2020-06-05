@@ -2,10 +2,6 @@
 
 namespace LaravelEnso\Core\App\Services\Login;
 
-use Illuminate\Support\Facades\Auth;
-use Laravel\Sanctum\Sanctum;
-use LaravelEnso\Core\App\Models\User;
-
 class Api extends Login
 {
     public function logout()
