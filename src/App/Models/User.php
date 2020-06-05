@@ -3,12 +3,12 @@
 namespace LaravelEnso\Core\App\Models;
 
 use Exception;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\HasApiTokens;
 use LaravelEnso\ActionLogger\App\Traits\ActionLogs;
 use LaravelEnso\Avatars\App\Traits\HasAvatar;
 use LaravelEnso\Calendar\App\Models\Event;
