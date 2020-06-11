@@ -5,54 +5,82 @@ namespace LaravelEnso\Core\App\Http\Controllers\Auth;
 use App\Http\Controllers\Auth\LoginController as Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use LaravelEnso\Core\App\Events\Login;
 use LaravelEnso\Core\App\Exceptions\Authentication;
 use LaravelEnso\Core\App\Models\User;
-use LaravelEnso\Core\App\Services\Login\Api;
-use LaravelEnso\Core\App\Services\Login\Login as Service;
-use LaravelEnso\Core\App\Services\Login\Spa;
 
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected Service $login;
+    protected $redirectTo = '/';
+
+    private ?User $user;
 
     public function __construct()
     {
-        $this->maxAttempts = config('enso.auth.maxLoginAttempts');
+        $this->maxAttempts = Config::get('enso.auth.maxLoginAttempts');
     }
 
     public function logout(Request $request)
     {
-        $this->service($request)
-            ->logout();
-    }
-
-    protected function sendLoginResponse(Request $request)
-    {
-        return $this->service($request)
-            ->login();
-    }
-
-    protected function validateLogin(Request $request)
-    {
-        $request->validate($this->service($request)->validation());
+        if ($request->attributes->get('sanctum')) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+        } else {
+            $request->user()->currentAccessToken()->delete();
+        }
     }
 
     protected function attemptLogin(Request $request)
     {
-        $user = $this->loggableUser($request);
+        $this->user = $this->loggableUser($request);
 
-        if (! $user) {
+        if (! $this->user) {
             return false;
         }
 
-        $this->service($request)->loginAs($user);
+        if ($request->attributes->get('sanctum')) {
+            Auth::guard('web')->login($this->user, $request->input('remember'));
+        }
 
-        Login::dispatch($user, $request->ip(), $request->header('User-Agent'));
+        Login::dispatch($this->user, $request->ip(), $request->header('User-Agent'));
 
         return true;
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $this->clearLoginAttempts($request);
+
+        if ($request->attributes->get('sanctum')) {
+            $request->session()->regenerate();
+
+            return [
+                'auth' => Auth::check(),
+                'csrfToken' => csrf_token(),
+            ];
+        }
+
+        $token = $this->user->createToken($request->get('device_name'));
+
+        return ['token' => $token->plainTextToken];
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $attributes = [
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ];
+
+        if (! $request->attributes->get('sanctum')) {
+            $attributes['device_name'] = 'required|string';
+        }
+
+        $request->validate($attributes);
     }
 
     private function loggableUser(Request $request)
@@ -72,12 +100,5 @@ class LoginController extends Controller
         }
 
         return $user;
-    }
-
-    private function service(Request $request): Service
-    {
-        return $this->login ??= $request->attributes->get('sanctum')
-            ? new Spa(request())
-            : new Api(request());
     }
 }

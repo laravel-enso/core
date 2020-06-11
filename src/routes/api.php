@@ -9,10 +9,10 @@ Route::namespace('LaravelEnso\Core\App\Http\Controllers')
 
         require 'app/auth.php';
 
-        Route::middleware(['web', 'auth'])
+        Route::middleware(['api', 'auth'])
             ->group(fn () => Route::get('/sentry', 'Sentry')->name('sentry'));
 
-        Route::middleware(['web', 'auth', 'core'])
+        Route::middleware(['api', 'auth', 'core'])
             ->group(function () {
                 require 'app/core.php';
                 require 'app/administration.php';

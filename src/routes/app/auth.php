@@ -10,6 +10,7 @@ Route::namespace('Auth')
             Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
             Route::post('password/reset', 'ResetPasswordController@attemptReset')->name('password.reset');
         });
+
         Route::middleware('auth')->group(function () {
             Route::post('logout', 'LoginController@logout')->name('logout');
         });

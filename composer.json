@@ -12,8 +12,7 @@
     "homepage": "https://github.com/laravel-enso/Core",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
+    "authors": [{
             "name": "Adrian Ocneanu",
             "email": "aocneanu@gmail.com",
             "homepage": "https://laravel-enso.com",
@@ -33,9 +32,10 @@
         }
     ],
     "require": {
+        "php": ">=7.4.0",
+        "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.3",
-        "guzzlehttp/guzzle": "~6.0",
         "laravel-enso/action-logger": "2.4.*",
         "laravel-enso/activity-log": "3.2.*",
         "laravel-enso/avatars": "2.5.*",
@@ -67,8 +67,7 @@
         "laravel-enso/track-who": "1.9.*",
         "laravel-enso/tutorials": "3.3.*",
         "laravel-enso/tables": "3.2.*",
-        "laravel-enso/upgrade": "1.0.*",
-        "php": ">=7.4.0"
+        "laravel-enso/upgrade": "1.0.*"
     },
     "autoload": {
         "psr-4": {

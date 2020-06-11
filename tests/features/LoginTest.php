@@ -12,7 +12,8 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    const PASSWORD = 'password';
+    private const Password = 'password';
+    private const WrongPassword = 'wrong_password';
     private $permissionGroup = 'administration.users';
     private $testModel;
     private $spaGuard;
@@ -27,21 +28,19 @@ class LoginTest extends TestCase
 
         $this->testModel = factory(User::class)
             ->create([
-                'password' => Hash::make(self::PASSWORD),
+                'password' => Hash::make(self::Password),
                 'is_active' => true,
             ]);
 
-        $this->spaGuard = config('sanctum.guard', 'web');
+        $this->spaGuard = Config::get('sanctum.guard', 'web');
     }
 
     /** @test */
     public function can_login_from_spa()
     {
-        $resp = $this->loginSpa();
+        $response = $this->loginSpa();
 
-        $resp->assertJson([
-            'auth' => true
-        ]);
+        $response->assertJson(['auth' => true]);
 
         $this->assertAuthenticatedAs($this->testModel, $this->spaGuard);
     }
@@ -49,10 +48,10 @@ class LoginTest extends TestCase
     /** @test */
     public function can_login_from_api()
     {
-        $resp = $this->loginApi();
+        $response = $this->loginApi();
+        $token = PersonalAccessToken::findToken($response->json('token'));
 
-        $this->assertEquals(PersonalAccessToken::findToken($resp->json('token'))
-            ->tokenable->id, $this->testModel->id);
+        $this->assertTrue($token->tokenable->is($this->testModel));
     }
 
     /** @test */
@@ -68,11 +67,13 @@ class LoginTest extends TestCase
     /** @test */
     public function can_logout_from_api()
     {
-        $resp = $this->loginApi();
+        $response = $this->loginApi();
 
-        $resp = $this->post(route('logout'), [], [
-            'Authorization' => 'Bearer ' . $resp->json('token')
+        $response = $this->post(route('logout'), [], [
+            'Authorization' => 'Bearer '.$response->json('token'),
         ]);
+
+        $this->assertFalse($this->isAuthenticated('sanctum'));
 
         $this->assertTrue($this->testModel->tokens->isEmpty());
     }
@@ -80,7 +81,7 @@ class LoginTest extends TestCase
     /** @test */
     public function cannot_login_from_api()
     {
-        $this->loginApi('WRONG_PASSWORD');
+        $this->loginApi(self::WrongPassword);
 
         $this->assertFalse($this->isAuthenticated('sanctum'));
     }
@@ -88,7 +89,7 @@ class LoginTest extends TestCase
     /** @test */
     public function cannot_login_from_spa()
     {
-        $this->loginSpa('WRONG_PASSWORD');
+        $this->loginSpa(self::WrongPassword);
 
         $this->assertFalse($this->isAuthenticated());
     }
@@ -97,7 +98,7 @@ class LoginTest extends TestCase
     {
         return $this->post(route('login'), [
             'email' => $this->testModel->email,
-            'password' => $password ?? self::PASSWORD,
+            'password' => $password ?? self::Password,
             'device_name' => 'mobile',
         ]);
     }
@@ -106,7 +107,7 @@ class LoginTest extends TestCase
     {
         return $this->postSpa('login', [
             'email' => $this->testModel->email,
-            'password' => $password ?? self::PASSWORD,
+            'password' => $password ?? self::Password,
         ]);
     }
 
@@ -115,7 +116,7 @@ class LoginTest extends TestCase
         Config::set('sanctum.stateful', ['spa.test']);
 
         return $this->post(route($route), $params, [
-            'referer' => 'spa.test'
+            'referer' => 'spa.test',
         ]);
     }
 }
