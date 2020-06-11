@@ -20,6 +20,7 @@ use LaravelEnso\Core\App\Services\Upgrades\FilesIndex;
 use LaravelEnso\Core\App\Services\Upgrades\FilesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Localities;
 use LaravelEnso\Core\App\Services\Upgrades\Permissions;
+use LaravelEnso\Core\App\Services\Upgrades\Products;
 use LaravelEnso\Core\App\Services\Upgrades\RoAddresses;
 use LaravelEnso\Core\App\Services\Upgrades\TaggableUsers;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
@@ -52,6 +53,7 @@ class Upgrade extends Command
         AddressDataSeeds::class,
         Addresses::class,
         AddressesPermissions::class,
+        Products::class,
     ];
 
     public function handle()
