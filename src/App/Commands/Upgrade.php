@@ -8,6 +8,7 @@ use LaravelEnso\Core\App\Services\Upgrades\AddressDataSeeds;
 use LaravelEnso\Core\App\Services\Upgrades\Addresses;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\AddressesPermissions;
+use LaravelEnso\Core\App\Services\Upgrades\AddressLocalization;
 use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\CommentsMorphKeys;
@@ -52,6 +53,7 @@ class Upgrade extends Command
         RoAddresses::class,
         AddressDataSeeds::class,
         Addresses::class,
+        AddressLocalization::class,
         AddressesPermissions::class,
         Products::class,
     ];
