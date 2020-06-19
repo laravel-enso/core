@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Notification;
 use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Core\App\Notifications\ResetPassword;
@@ -47,7 +48,7 @@ class UserTest extends TestCase
             $this->testModel->toArray()
         );
 
-        $user = User::whereEmail($this->testModel->email)
+        $user = App::make(User::class)->whereEmail($this->testModel->email)
             ->first();
 
         $response->assertStatus(200)
