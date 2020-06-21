@@ -66,7 +66,9 @@ class LoginController extends Controller
 
         $token = $this->user->createToken($request->get('device_name'));
 
-        return ['token' => $token->plainTextToken];
+        return response()->json(['token' => $token->plainTextToken])
+            ->cookie('is-webview', true)
+            ->cookie('Authorization', $token->plainTextToken);
     }
 
     protected function validateLogin(Request $request)
