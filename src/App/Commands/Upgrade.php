@@ -12,6 +12,7 @@ use LaravelEnso\Core\App\Services\Upgrades\Avatars;
 use LaravelEnso\Core\App\Services\Upgrades\Categories;
 use LaravelEnso\Core\App\Services\Upgrades\CommentsMorphKeys;
 use LaravelEnso\Core\App\Services\Upgrades\Companies;
+use LaravelEnso\Core\App\Services\Upgrades\ControlPanel;
 use LaravelEnso\Core\App\Services\Upgrades\Counties;
 use LaravelEnso\Core\App\Services\Upgrades\DataImportCleanup;
 use LaravelEnso\Core\App\Services\Upgrades\DiscussionsMorphKeys;
@@ -52,6 +53,7 @@ class Upgrade extends Command
         AddressDataSeeds::class,
         Addresses::class,
         AddressesPermissions::class,
+        ControlPanel::class,
     ];
 
     public function handle()
