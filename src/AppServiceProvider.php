@@ -2,9 +2,7 @@
 
 namespace LaravelEnso\Core;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\App\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\App\Commands\AnnounceAppUpdate;
