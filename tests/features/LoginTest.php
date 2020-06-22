@@ -14,6 +14,8 @@ class LoginTest extends TestCase
 
     private const Password = 'password';
     private const WrongPassword = 'wrong_password';
+    private const SpaUrl = 'spa.test';
+
     private $permissionGroup = 'administration.users';
     private $testModel;
     private $spaGuard;
@@ -26,13 +28,11 @@ class LoginTest extends TestCase
 
         $this->seed();
 
-        $this->testModel = factory(User::class)
-            ->create([
-                'password' => Hash::make(self::Password),
-                'is_active' => true,
-            ]);
+        $this->testModel = $this->user();
 
         $this->spaGuard = Config::get('sanctum.guard', 'web');
+
+        Config::set('sanctum.stateful', [self::SpaUrl]);
     }
 
     /** @test */
@@ -49,9 +49,40 @@ class LoginTest extends TestCase
     public function can_login_from_api()
     {
         $response = $this->loginApi();
-        $token = PersonalAccessToken::findToken($response->json('token'));
 
-        $this->assertTrue($token->tokenable->is($this->testModel));
+        $this->assertTokenAuthenticate($response->json('token'));
+    }
+
+    /** @test */
+    public function can_login_from_webview()
+    {
+        $response = $this->disableCookieEncryption()
+            ->withCookie('webview', true)
+            ->loginApi(null, self::SpaUrl);
+
+        $this->assertTokenAuthenticate($response->json('token'));
+    }
+
+
+    /** @test */
+    public function can_authenticate_token_api()
+    {
+        $response = $this->loginApi();
+
+        $this->get(route('core.home.index'), [
+            'Authorization' => 'Bearer '.$response->json('token'),
+        ])->assertOk();
+    }
+
+    /** @test */
+    public function can_authenticate_cookie_api()
+    {
+        $response = $this->loginApi();
+
+        $this->disableCookieEncryption()
+            ->withCookie('Authorization', $response->json('token'))
+            ->get(route('core.home.index'))
+            ->assertOk();
     }
 
     /** @test */
@@ -59,7 +90,9 @@ class LoginTest extends TestCase
     {
         $this->loginSpa();
 
-        $this->postSpa('logout');
+        $this->post(route('logout'), [], [
+            'referer' => self::SpaUrl,
+        ]);
 
         $this->assertFalse($this->isAuthenticated($this->spaGuard));
     }
@@ -94,29 +127,37 @@ class LoginTest extends TestCase
         $this->assertFalse($this->isAuthenticated());
     }
 
-    private function loginApi($password = null): TestResponse
+    private function loginApi($password = null, $referer = null): TestResponse
     {
         return $this->post(route('login'), [
             'email' => $this->testModel->email,
             'password' => $password ?? self::Password,
             'device_name' => 'mobile',
+        ], [
+            'referer' => $referer,
         ]);
     }
 
     private function loginSpa($password = null): TestResponse
     {
-        return $this->postSpa('login', [
+        return $this->post(route('login'), [
             'email' => $this->testModel->email,
             'password' => $password ?? self::Password,
-        ]);
+        ], ['referer' => self::SpaUrl]);
     }
 
-    private function postSpa($route, $params = [])
+    private function user(): User
     {
-        Config::set('sanctum.stateful', ['spa.test']);
+        $user = User::first();
+        $user->password = Hash::make(self::Password);
+        $user->is_active = true;
 
-        return $this->post(route($route), $params, [
-            'referer' => 'spa.test',
-        ]);
+        return tap($user)->save();
+    }
+
+    protected function assertTokenAuthenticate($token): void
+    {
+        $token = PersonalAccessToken::findToken($token);
+        $this->assertTrue($token->tokenable->is($this->testModel));
     }
 }
