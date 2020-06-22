@@ -58,7 +58,7 @@ class ControlPanel implements MigratesData
             'menu_id' => null,
             'name' => 'api',
             'display_name' => 'Api',
-            'description' => 'Api role.'
+            'description' => 'Api role.',
         ]);
 
         $role->permissions()->sync(Permission::controlPanel()->pluck('id'));
