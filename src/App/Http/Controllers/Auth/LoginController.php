@@ -67,7 +67,7 @@ class LoginController extends Controller
         $token = $this->user->createToken($request->get('device_name'));
 
         return response()->json(['token' => $token->plainTextToken])
-            ->cookie('is-webview', true)
+            ->cookie('webview', true)
             ->cookie('Authorization', $token->plainTextToken);
     }
 
