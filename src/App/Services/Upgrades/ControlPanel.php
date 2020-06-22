@@ -24,7 +24,7 @@ class ControlPanel implements MigratesData
             'password' => '!',
             'role_id' => $this->role()->id,
             'is_active' => true,
-        ])->generateAvatar();
+        ]);
     }
 
     public function isMigrated(): bool
@@ -34,6 +34,10 @@ class ControlPanel implements MigratesData
 
     private function person()
     {
+        if ($person = Person::whereName('Monitoring')->first()) {
+            return $person;
+        }
+
         return $this->person ??= factory(Person::class)->create([
             'title' => Titles::Mr,
             'name' => 'Monitoring',
@@ -46,6 +50,10 @@ class ControlPanel implements MigratesData
 
     private function group()
     {
+        if ($userGroup = UserGroup::whereName('Api')->first()) {
+            return $userGroup;
+        }
+
         return factory(UserGroup::class)->create([
             'name' => 'Api',
             'description' => 'Api group',
@@ -54,6 +62,10 @@ class ControlPanel implements MigratesData
 
     private function role()
     {
+        if ($role = Role::whereName('api')->first()) {
+            return $role;
+        }
+
         $role = factory(Role::class)->create([
             'menu_id' => null,
             'name' => 'api',
