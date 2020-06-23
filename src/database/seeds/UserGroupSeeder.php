@@ -1,19 +1,16 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
 use LaravelEnso\Core\App\Models\UserGroup;
+use LaravelEnso\Roles\App\Models\Role;
 
 class UserGroupSeeder extends Seeder
 {
-    private const UserGroups = [
-        ['name' => 'Administrators', 'description' => 'Administrator users group'],
-        ['name' => 'Api', 'description' => 'Api users group'],
-    ];
-
     public function run()
     {
-        (new Collection(self::UserGroups))
-            ->each(fn ($userGroup) => factory(UserGroup::class)->create($userGroup));
+        factory(UserGroup::class)->create([
+            'name' => 'Administrators',
+            'description' => 'Administrator users group',
+        ])->roles()->sync(Role::pluck('id'));
     }
 }
