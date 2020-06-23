@@ -19,4 +19,6 @@ Route::namespace('User')
         Route::get('options', 'Options')->name('options');
 
         Route::get('{user}', 'Show')->name('show');
+
+        Route::post('{user}/token', 'Token')->name('token');
     });

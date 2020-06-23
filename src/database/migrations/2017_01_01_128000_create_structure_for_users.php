@@ -16,6 +16,8 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.store', 'description' => 'Store newly created user', 'is_default' => false],
         ['name' => 'administration.users.update', 'description' => 'Update edited user', 'is_default' => false],
         ['name' => 'administration.users.destroy', 'description' => 'Delete user', 'is_default' => false],
+
+        ['name' => 'administration.users.token', 'description' => 'Generate token for the user', 'is_default' => false],
     ];
 
     protected $menu = [

@@ -24,6 +24,7 @@ use LaravelEnso\Core\App\Services\Upgrades\Permissions;
 use LaravelEnso\Core\App\Services\Upgrades\RoAddresses;
 use LaravelEnso\Core\App\Services\Upgrades\TaggableUsers;
 use LaravelEnso\Core\App\Services\Upgrades\UserMorphKey;
+use LaravelEnso\Core\App\Services\Upgrades\UserPermissions;
 use LaravelEnso\Upgrade\App\Services\Upgrade as Service;
 
 class Upgrade extends Command
@@ -54,6 +55,7 @@ class Upgrade extends Command
         Addresses::class,
         AddressesPermissions::class,
         ControlPanel::class,
+        UserPermissions::class,
     ];
 
     public function handle()
