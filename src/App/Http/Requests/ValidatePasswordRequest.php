@@ -22,7 +22,7 @@ class ValidatePasswordRequest extends FormRequest
 
     public function withValidator($validator)
     {
-        if ($this->filled('password')) {
+        if ($this->filled('email', 'password')) {
             $this->validatePassword($validator);
         }
     }
