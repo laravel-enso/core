@@ -3,11 +3,11 @@
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Notification;
-use LaravelEnso\Core\App\Models\User;
-use LaravelEnso\Core\App\Notifications\ResetPassword;
-use LaravelEnso\Forms\App\TestTraits\DestroyForm;
-use LaravelEnso\Forms\App\TestTraits\EditForm;
-use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\Core\Notifications\ResetPassword;
+use LaravelEnso\Forms\TestTraits\DestroyForm;
+use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Tables\Traits\Tests\Datatable;
 use Tests\TestCase;
 
 class UserTest extends TestCase

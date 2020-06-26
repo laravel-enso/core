@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Core\App\Models\User;
-use LaravelEnso\Core\App\Models\UserGroup;
-use LaravelEnso\Forms\App\TestTraits\CreateForm;
-use LaravelEnso\Forms\App\TestTraits\DestroyForm;
-use LaravelEnso\Forms\App\TestTraits\EditForm;
-use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\Core\Models\UserGroup;
+use LaravelEnso\Forms\TestTraits\CreateForm;
+use LaravelEnso\Forms\TestTraits\DestroyForm;
+use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Tables\Traits\Tests\Datatable;
 use Tests\TestCase;
 
 class UserGroupTest extends TestCase

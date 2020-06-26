@@ -1,6 +1,6 @@
 # Core
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba5e8fe6e1dc427590d9bad7721ca037)](https://www.codacy.com/app/laravel-enso/core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/core&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cd39c3fa899a4975815209209f5c6fb9)](https://www.codacy.com/gh/laravel-enso/core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/core&amp;utm_campaign=Badge_Grade)
 [![StyleCI](https://github.styleci.io/repos/85807594/shield?branch=master)](https://github.styleci.io/repos/85807594)
 [![License](https://poser.pugx.org/laravel-enso/core/license)](https://packagist.org/packages/laravel-enso/core)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/core/downloads)](https://packagist.org/packages/laravel-enso/core)
