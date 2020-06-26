@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\Services\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Companies\Models\Company;
 use LaravelEnso\Upgrade\Contracts\MigratesTable;
 
 class Companies implements MigratesTable
