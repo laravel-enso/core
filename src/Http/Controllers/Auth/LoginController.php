@@ -7,8 +7,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\ValidationException;
 use LaravelEnso\Core\Events\Login;
-use LaravelEnso\Core\Exceptions\Authentication;
 use LaravelEnso\Core\Models\User;
 
 class LoginController extends Controller
@@ -94,11 +94,15 @@ class LoginController extends Controller
         }
 
         if ($user->passwordExpired()) {
-            throw Authentication::expiredPassword();
+            throw ValidationException::withMessages([
+                'email' => 'Password expired. Please set a new one.',
+            ]);
         }
 
         if ($user->isInactive()) {
-            throw Authentication::disabledAccount();
+            throw ValidationException::withMessages([
+                'email' => 'Account disabled. Please contact the administrator.',
+            ]);
         }
 
         return $user;
