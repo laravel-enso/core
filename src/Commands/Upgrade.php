@@ -6,8 +6,14 @@ use Illuminate\Console\Command;
 use LaravelEnso\Core\Services\Upgrades\Addresses;
 use LaravelEnso\Core\Services\Upgrades\AddressesPermissions;
 use LaravelEnso\Core\Services\Upgrades\AddressLocalization;
+use LaravelEnso\Core\Services\Upgrades\ClientInvoices;
+use LaravelEnso\Core\Services\Upgrades\ClientPayments;
+use LaravelEnso\Core\Services\Upgrades\Companies;
 use LaravelEnso\Core\Services\Upgrades\ControlPanel;
+use LaravelEnso\Core\Services\Upgrades\People;
 use LaravelEnso\Core\Services\Upgrades\Products;
+use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
+use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
 use LaravelEnso\Core\Services\Upgrades\UserPermissions;
 use LaravelEnso\Upgrade\Services\Upgrade as Service;
 
@@ -24,6 +30,12 @@ class Upgrade extends Command
         Products::class,
         ControlPanel::class,
         UserPermissions::class,
+        Companies::class,
+        People::class,
+        SupplierInvoices::class,
+        ClientInvoices::class,
+        SupplierPayments::class,
+        ClientPayments::class,
     ];
 
     public function handle()
