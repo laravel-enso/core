@@ -146,7 +146,7 @@ class RenameMigrations implements MigratesData
             DB::table('migrations')
                 ->whereMigration($old)
                 ->update([
-                    'migration' => $new
+                    'migration' => $new,
                 ]);
         }
         DB::commit();
