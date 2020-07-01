@@ -87,11 +87,11 @@ class RenameMigrations implements MigratesData
         '2020_04_13_175534_create_structure_for_financials_stats' => '2020_04_13_110000_create_structure_for_financials_stats',
 
         //how-to
-        '2017_01_01_149125_create_how_to_posters_table' => '2017_01_01_100000_create_how_to_posters_table',
+        '2017_01_01_149000_create_how_to_videos_table' => '2017_01_01_100000_create_how_to_videos_table',
         '2017_01_01_149250_create_how_to_tags_table' => '2017_01_01_101000_create_how_to_tags_table',
-        '2017_01_01_149750_create_structure_for_how_to' => '2017_01_01_102000_create_structure_for_how_to',
-        '2017_01_01_149000_create_how_to_videos_table' => '2017_01_01_103000_create_how_to_videos_table',
-        '2017_01_01_149500_create_how_to_tag_how_to_video_pivot_table' => '2017_01_01_104000_create_how_to_tag_how_to_video_pivot_table',
+        '2017_01_01_149500_create_how_to_tag_how_to_video_pivot_table' => '2017_01_01_102000_create_how_to_tag_how_to_video_pivot_table',
+        '2017_01_01_149125_create_how_to_posters_table' => '2017_01_01_103000_create_how_to_posters_table',
+        '2017_01_01_149750_create_structure_for_how_to' => '2017_01_01_104000_create_structure_for_how_to',
 
         //inventory
         '2018_11_26_095047_create_warehouses_table' => '2018_11_26_100000_create_warehouses_table',
