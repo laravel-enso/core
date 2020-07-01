@@ -149,13 +149,13 @@ class RenameMigrations implements MigratesData
                     'migration' => $new
                 ]);
         }
-        DB::rollBack();
+        DB::commit();
     }
 
     public function isMigrated(): bool
     {
         return DB::table('migrations')
             ->whereIn('migration', array_keys($this->migrations))
-            ->exists();
+            ->doesntExist();
     }
 }
