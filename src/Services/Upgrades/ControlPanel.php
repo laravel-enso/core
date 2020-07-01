@@ -9,6 +9,8 @@ use LaravelEnso\Upgrade\Contracts\MigratesData;
 
 class ControlPanel implements MigratesData
 {
+    private const email = 'monitoring@laravel-enso.com';
+
     public function migrateData(): void
     {
         Artisan::call('db:seed --class=ControlPanelApiSeeder');

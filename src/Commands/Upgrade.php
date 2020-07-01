@@ -12,6 +12,7 @@ use LaravelEnso\Core\Services\Upgrades\Companies;
 use LaravelEnso\Core\Services\Upgrades\ControlPanel;
 use LaravelEnso\Core\Services\Upgrades\People;
 use LaravelEnso\Core\Services\Upgrades\Products;
+use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
 use LaravelEnso\Core\Services\Upgrades\UserPermissions;
@@ -36,6 +37,7 @@ class Upgrade extends Command
         ClientInvoices::class,
         SupplierPayments::class,
         ClientPayments::class,
+        RenameMigrations::class,
     ];
 
     public function handle()
