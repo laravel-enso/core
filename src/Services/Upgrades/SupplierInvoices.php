@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\Services\Upgrades;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Financials\AppServiceProvider;
-use LaravelEnso\Financials\Models\Suppliers\Invoice;
 use LaravelEnso\Upgrade\Contracts\MigratesTable;
 
 class SupplierInvoices implements MigratesTable

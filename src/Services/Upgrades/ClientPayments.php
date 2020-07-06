@@ -5,7 +5,6 @@ namespace LaravelEnso\Core\Services\Upgrades;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Financials\AppServiceProvider;
-use LaravelEnso\Financials\Models\Clients\Payment;
 use LaravelEnso\Upgrade\Contracts\MigratesTable;
 
 class ClientPayments implements MigratesTable
