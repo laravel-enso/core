@@ -13,7 +13,10 @@ class ControlPanel implements MigratesData
 
     public function migrateData(): void
     {
-        Artisan::call('db:seed --class=ControlPanelApiSeeder --force');
+        Artisan::call('db:seed', [
+            '--class' => 'ControlPanelApiSeeder',
+            '--force' => true
+        ]);
     }
 
     public function isMigrated(): bool
