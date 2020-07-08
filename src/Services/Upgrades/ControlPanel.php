@@ -15,7 +15,7 @@ class ControlPanel implements MigratesData
     {
         Artisan::call('db:seed', [
             '--class' => 'ControlPanelApiSeeder',
-            '--force' => true
+            '--force' => true,
         ]);
     }
 
