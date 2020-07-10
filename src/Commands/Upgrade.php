@@ -16,6 +16,7 @@ use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
 use LaravelEnso\Core\Services\Upgrades\UserPermissions;
+use LaravelEnso\Core\Services\Upgrades\UserResetPasswordPermissions;
 use LaravelEnso\Upgrade\Services\Upgrade as Service;
 
 class Upgrade extends Command
@@ -38,6 +39,7 @@ class Upgrade extends Command
         SupplierPayments::class,
         ClientPayments::class,
         RenameMigrations::class,
+        UserResetPasswordPermissions::class,
     ];
 
     public function handle()

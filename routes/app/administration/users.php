@@ -21,4 +21,6 @@ Route::namespace('User')
         Route::get('{user}', 'Show')->name('show');
 
         Route::post('{user}/token', 'Token')->name('token');
+
+        Route::post('{user}/resetPassword', 'ResetPassword')->name('resetPassword');
     });

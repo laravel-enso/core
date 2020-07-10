@@ -18,6 +18,7 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.destroy', 'description' => 'Delete user', 'is_default' => false],
 
         ['name' => 'administration.users.token', 'description' => 'Generate token for the user', 'is_default' => false],
+        ['name' => 'administration.users.resetPassword', 'description' => 'Manually Reset password for the user', 'is_default' => false],
     ];
 
     protected array $menu = [
