@@ -18,7 +18,7 @@ class ResetPassword extends Controller
         Password::broker()->sendResetLink($user->only('email'));
 
         return [
-            'message' => __('We have e-mailed password reset link!')
+            'message' => __('We have e-mailed password reset link!'),
         ];
     }
 }

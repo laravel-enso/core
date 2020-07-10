@@ -58,7 +58,6 @@ class User
             && ! $user->isImpersonating();
     }
 
-
     protected function isSuperior(Model $user, Model $targetUser): bool
     {
         return $user->isSupervisor() && ! $targetUser->isSupervisor()
