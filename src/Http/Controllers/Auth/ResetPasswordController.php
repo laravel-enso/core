@@ -13,7 +13,7 @@ class ResetPasswordController extends Controller
 {
     use ValidatesRequests, ResetsPasswords;
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
 
     public function attemptReset(ValidatePasswordRequest $request)
     {
@@ -23,6 +23,12 @@ class ResetPasswordController extends Controller
     protected function sendResetResponse(Request $request, $response)
     {
         return ['status' => trans($response)];
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+        $user->save();
     }
 
     protected function sendResetFailedResponse(Request $request, $response)

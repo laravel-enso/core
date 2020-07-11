@@ -40,7 +40,14 @@ class User
 
     public function changePassword(Model $user, Model $targetUser)
     {
-        return $user->id === $targetUser->id;
+        return $user->id === $targetUser->id
+            || $this->isSuperior($user, $targetUser);
+    }
+
+    public function resetPassword(Model $user, Model $targetUser)
+    {
+        return $user->id === $targetUser->id
+            || $this->isSuperior($user, $targetUser);
     }
 
     public function impersonate(Model $user, Model $targetUser)
@@ -49,5 +56,11 @@ class User
             && ! $targetUser->isAdmin()
             && $user->id !== $targetUser->id
             && ! $user->isImpersonating();
+    }
+
+    protected function isSuperior(Model $user, Model $targetUser): bool
+    {
+        return $user->isSupervisor() && ! $targetUser->isSupervisor()
+            && ! $targetUser->isAdmin();
     }
 }
