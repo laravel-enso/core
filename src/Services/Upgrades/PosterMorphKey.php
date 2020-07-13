@@ -10,8 +10,7 @@ class PosterMorphKey implements MigratesData
 {
     public function isMigrated(): bool
     {
-        return DB::table('files')->doesntExist()
-            || DB::table('files')
+        return DB::table('files')
             ->whereAttachableType(Poster::morphMapKey())
             ->exists();
     }
