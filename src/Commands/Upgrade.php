@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\App\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Addresses;
 use LaravelEnso\Core\Services\Upgrades\AddressesPermissions;
 use LaravelEnso\Core\Services\Upgrades\AddressLocalization;
@@ -40,6 +41,7 @@ class Upgrade extends Command
         ClientPayments::class,
         RenameMigrations::class,
         UserResetPasswordPermissions::class,
+        PosterMorphKey::class,
     ];
 
     public function handle()
