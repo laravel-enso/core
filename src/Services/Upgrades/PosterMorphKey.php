@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\App\Services\Upgrades;
+namespace LaravelEnso\Core\Services\Upgrades;
 
 use Illuminate\Support\Facades\DB;
 use LaravelEnso\HowTo\Models\Poster;
