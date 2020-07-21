@@ -13,6 +13,7 @@ class AddressesPermissions implements MigratesStructure
         ['name' => 'core.addresses.options', 'description' => 'Get addresses for select', 'is_default' => false],
         ['name' => 'core.addresses.localities', 'description' => 'Get localities for the select', 'is_default' => false],
         ['name' => 'core.addresses.regions', 'description' => 'Get regions for the select', 'is_default' => false],
+        ['name' => 'core.addresses.show', 'description' => 'Get Address', 'is_default' => false],
     ];
 
     protected $roles = ['admin', 'supervisor'];
