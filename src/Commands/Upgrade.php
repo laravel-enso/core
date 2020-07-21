@@ -3,6 +3,8 @@
 namespace LaravelEnso\Core\Commands;
 
 use Illuminate\Console\Command;
+use LaravelEnso\Core\Services\Upgrades\ControlPanelApiPermission;
+use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Addresses;
 use LaravelEnso\Core\Services\Upgrades\AddressesPermissions;
 use LaravelEnso\Core\Services\Upgrades\AddressLocalization;
@@ -11,7 +13,6 @@ use LaravelEnso\Core\Services\Upgrades\ClientPayments;
 use LaravelEnso\Core\Services\Upgrades\Companies;
 use LaravelEnso\Core\Services\Upgrades\ControlPanel;
 use LaravelEnso\Core\Services\Upgrades\People;
-use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Products;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
@@ -42,6 +43,7 @@ class Upgrade extends Command
         RenameMigrations::class,
         UserResetPasswordPermissions::class,
         PosterMorphKey::class,
+        ControlPanelApiPermission::class,
     ];
 
     public function handle()
