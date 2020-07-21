@@ -17,7 +17,7 @@ class ControlPanelApiPermission implements MigratesData
     public function migrateData(): void
     {
         (new Collection($this->permissions))
-            ->each(fn($to, $from) => Permission::whereName($from)->update(['name' => $to]));
+            ->each(fn ($to, $from) => Permission::whereName($from)->update(['name' => $to]));
     }
 
     public function isMigrated(): bool
