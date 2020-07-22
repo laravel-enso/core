@@ -18,9 +18,9 @@ use LaravelEnso\Core\Services\Upgrades\Products;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
-use LaravelEnso\Core\Services\Upgrades\UserTokenPermissions;
 use LaravelEnso\Core\Services\Upgrades\UserResetPasswordPermissions;
 use LaravelEnso\Core\Services\Upgrades\UserSessionPermissions;
+use LaravelEnso\Core\Services\Upgrades\UserTokenPermissions;
 use LaravelEnso\Upgrade\Services\Upgrade as Service;
 
 class Upgrade extends Command

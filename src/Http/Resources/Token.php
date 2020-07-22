@@ -14,5 +14,4 @@ class Token extends JsonResource
             'lastUsedAt' => $this->last_used_at,
         ];
     }
-
 }

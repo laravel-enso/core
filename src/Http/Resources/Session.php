@@ -21,5 +21,4 @@ class Session extends JsonResource
             'lastActivity' => Carbon::createFromTimestamp($this->last_activity),
         ];
     }
-
 }

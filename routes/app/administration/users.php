@@ -20,7 +20,6 @@ Route::namespace('User')
 
         Route::get('{user}', 'Show')->name('show');
 
-
         Route::namespace('Token')
             ->prefix('token')
             ->as('tokens.')
