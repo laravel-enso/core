@@ -20,7 +20,22 @@ Route::namespace('User')
 
         Route::get('{user}', 'Show')->name('show');
 
-        Route::post('{user}/token', 'Token')->name('token');
 
-        Route::post('{user}/resetPassword', 'ResetPassword')->name('resetPassword');
+        Route::namespace('Token')
+            ->prefix('token')
+            ->as('tokens.')
+            ->group(function () {
+                Route::get('{user}', 'Create')->name('create');
+                Route::post('{user}', 'Store')->name('store');
+                Route::get('{user}/index', 'Index')->name('index');
+                Route::delete('{user}', 'Destroy')->name('destroy');
+            });
+
+        Route::namespace('Session')
+            ->prefix('session')
+            ->as('sessions.')
+            ->group(function () {
+                Route::get('{user}/index', 'Index')->name('index');
+                Route::delete('{user}', 'Destroy')->name('destroy');
+            });
     });

@@ -11,14 +11,16 @@ use LaravelEnso\Core\Services\Upgrades\ClientPayments;
 use LaravelEnso\Core\Services\Upgrades\Companies;
 use LaravelEnso\Core\Services\Upgrades\ControlPanel;
 use LaravelEnso\Core\Services\Upgrades\ControlPanelApiPermission;
+use LaravelEnso\Core\Services\Upgrades\DeleteUserPermission;
 use LaravelEnso\Core\Services\Upgrades\People;
 use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Products;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
-use LaravelEnso\Core\Services\Upgrades\UserPermissions;
+use LaravelEnso\Core\Services\Upgrades\UserTokenPermissions;
 use LaravelEnso\Core\Services\Upgrades\UserResetPasswordPermissions;
+use LaravelEnso\Core\Services\Upgrades\UserSessionPermissions;
 use LaravelEnso\Upgrade\Services\Upgrade as Service;
 
 class Upgrade extends Command
@@ -33,7 +35,6 @@ class Upgrade extends Command
         AddressesPermissions::class,
         Products::class,
         ControlPanel::class,
-        UserPermissions::class,
         Companies::class,
         People::class,
         SupplierInvoices::class,
@@ -44,6 +45,9 @@ class Upgrade extends Command
         UserResetPasswordPermissions::class,
         PosterMorphKey::class,
         ControlPanelApiPermission::class,
+        UserTokenPermissions::class,
+        UserSessionPermissions::class,
+        DeleteUserPermission::class,
     ];
 
     public function handle()
