@@ -14,8 +14,15 @@
             "slot": "destroy-button"
         }
     ],
-    "columns": [
-        {
+    "filters": [{
+        "label": "Role",
+        "data": "users.role_id",
+        "type": "select",
+        "value": [],
+        "route": "system.roles.options",
+        "multiple": true
+    }],
+    "columns": [{
             "label": "",
             "name": "avatarId",
             "data": "avatars.avatarId",
