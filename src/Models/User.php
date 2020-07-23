@@ -33,9 +33,19 @@ use LaravelEnso\Teams\Models\Team;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
-    use HasApiTokens, ActiveState, AvoidsDeletionConflicts, CascadesMorphMap,
-        HasAvatar, HasPassword, Impersonates, IsPerson, Notifiable,
-        Abilities, Rememberable, TableCache, Uploads;
+    use ActiveState,
+        AvoidsDeletionConflicts,
+        CascadesMorphMap,
+        HasApiTokens,
+        HasAvatar,
+        HasPassword,
+        Impersonates,
+        IsPerson,
+        Notifiable,
+        Abilities,
+        Rememberable,
+        TableCache,
+        Uploads;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
