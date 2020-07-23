@@ -9,7 +9,7 @@ class UserTokenPermissions implements MigratesStructure
 {
     use StructureMigration;
 
-    protected $permissions = [ //TODO :: Update migration too
+    protected $permissions = [
         ['name' => 'administration.users.tokens.create', 'description' => 'Create Token', 'is_default' => false],
         ['name' => 'administration.users.tokens.store', 'description' => 'Generate token for user', 'is_default' => false],
         ['name' => 'administration.users.tokens.destroy', 'description' => 'Delete token', 'is_default' => false],

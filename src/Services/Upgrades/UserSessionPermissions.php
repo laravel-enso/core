@@ -9,7 +9,7 @@ class UserSessionPermissions implements MigratesStructure
 {
     use StructureMigration;
 
-    protected array $permissions = [ //TODO :: Update migration too
+    protected array $permissions = [
         ['name' => 'administration.users.sessions.destroy', 'description' => 'Delete token', 'is_default' => false],
         ['name' => 'administration.users.sessions.index', 'description' => 'Get Tokens', 'is_default' => false],
     ];
