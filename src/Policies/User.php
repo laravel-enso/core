@@ -50,6 +50,11 @@ class User
             || $this->isSuperior($user, $targetUser);
     }
 
+    public function sessions(Model $user, Model $targetUser)
+    {
+        return $user->id === $targetUser->id;
+    }
+
     public function impersonate(Model $user, Model $targetUser)
     {
         return $user->can('access-route', 'core.impersonate.start')

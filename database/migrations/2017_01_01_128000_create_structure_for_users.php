@@ -17,7 +17,14 @@ class CreateStructureForUsers extends Migration
         ['name' => 'administration.users.update', 'description' => 'Update edited user', 'is_default' => false],
         ['name' => 'administration.users.destroy', 'description' => 'Delete user', 'is_default' => false],
 
-        ['name' => 'administration.users.token', 'description' => 'Generate token for the user', 'is_default' => false],
+        ['name' => 'administration.users.tokens.create', 'description' => 'Create Token', 'is_default' => false],
+        ['name' => 'administration.users.tokens.store', 'description' => 'Generate token for user', 'is_default' => false],
+        ['name' => 'administration.users.tokens.destroy', 'description' => 'Delete token', 'is_default' => false],
+        ['name' => 'administration.users.tokens.index', 'description' => 'Get Tokens', 'is_default' => false],
+
+        ['name' => 'administration.users.sessions.destroy', 'description' => 'Delete token', 'is_default' => false],
+        ['name' => 'administration.users.sessions.index', 'description' => 'Get Tokens', 'is_default' => false],
+
         ['name' => 'administration.users.resetPassword', 'description' => 'Manually Reset password for the user', 'is_default' => false],
     ];
 
