@@ -10,15 +10,17 @@ class PosterMorphKey implements MigratesData
 {
     public function isMigrated(): bool
     {
-        return DB::table('files')
-            ->whereAttachableType(Poster::morphMapKey())
-            ->exists();
+        return ! class_exists(Poster::class) || DB::table('files')
+            ->where('attachable_type', 'LaravelEnso\\HowTo\\App\\Models\\Poster')
+            ->orWhere('attachable_type', 'LaravelEnso\\HowTo\\Models\\Poster')
+            ->doesntExist();
     }
 
     public function migrateData(): void
     {
         DB::table('files')
-            ->where('attachable_type', 'LaravelEnso\\\HowTo\\\App\\\Models\\\Poster')
+            ->where('attachable_type', 'LaravelEnso\\HowTo\\App\\Models\\Poster')
+            ->orWhere('attachable_type', 'LaravelEnso\\HowTo\\Models\\Poster')
             ->update(['attachable_type' => Poster::morphMapKey()]);
     }
 }
