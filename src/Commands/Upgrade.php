@@ -34,7 +34,6 @@ class Upgrade extends Command
     private $upgrades = [
         Addresses::class,
         AddressLocalization::class,
-        AddressesPermissions::class,
         Products::class,
         ControlPanel::class,
         Companies::class,
@@ -51,6 +50,7 @@ class Upgrade extends Command
         UserTokenPermissions::class,
         UserSessionPermissions::class,
         DeleteUserPermission::class,
+        AddressesPermissions::class,
         LocalisationPermission::class,
     ];
 
