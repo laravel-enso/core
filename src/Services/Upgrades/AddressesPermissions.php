@@ -15,6 +15,8 @@ class AddressesPermissions implements MigratesStructure
         ['name' => 'core.addresses.regions', 'description' => 'Get regions for the select', 'is_default' => false],
         ['name' => 'core.addresses.show', 'description' => 'Get Address', 'is_default' => false],
         ['name' => 'core.addresses.postcode', 'description' => 'Get address based on the postcode', 'is_default' => false],
+        ['name' => 'core.addresses.makeShipping', 'description' => 'Make address shipping', 'is_default' => false],
+        ['name' => 'core.addresses.makeBilling', 'description' => 'Make address billing', 'is_default' => false],
     ];
 
     protected $roles = ['admin', 'supervisor'];
