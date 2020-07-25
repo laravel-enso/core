@@ -16,6 +16,7 @@ use LaravelEnso\Core\Services\Upgrades\DeleteUserPermission;
 use LaravelEnso\Core\Services\Upgrades\LocalisationPermission;
 use LaravelEnso\Core\Services\Upgrades\People;
 use LaravelEnso\Core\Services\Upgrades\Postcode;
+use LaravelEnso\Core\Services\Upgrades\PostcodeTable;
 use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Products;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
@@ -53,6 +54,7 @@ class Upgrade extends Command
         DeleteUserPermission::class,
         AddressesPermissions::class,
         LocalisationPermission::class,
+        PostcodeTable::class,
         Postcode::class,
     ];
 
