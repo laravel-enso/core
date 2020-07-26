@@ -14,6 +14,7 @@ class Postcode implements MigratesData
 
         Artisan::call('db:seed', [
             '--class' => 'PostcodeSeeder',
+            '--force' => true,
         ]);
     }
 
