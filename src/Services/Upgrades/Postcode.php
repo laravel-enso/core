@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\Services\Upgrades;
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schema;
 use LaravelEnso\Addresses\Models\Postcode as Model;
 use LaravelEnso\Upgrade\Contracts\MigratesData;
 
@@ -20,6 +21,6 @@ class Postcode implements MigratesData
 
     public function isMigrated(): bool
     {
-        return Model::exists();
+        return ! Schema::hasTable('postcodes') || Model::exists();
     }
 }
