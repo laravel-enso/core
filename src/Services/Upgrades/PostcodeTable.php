@@ -10,7 +10,7 @@ class PostcodeTable implements MigratesTable
 {
     public function isMigrated(): bool
     {
-        return ! Schema::hasTable('postcodes') 
+        return ! Schema::hasTable('postcodes')
             || Schema::hasColumn('postcodes', 'street');
     }
 
