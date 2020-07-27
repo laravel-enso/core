@@ -34,7 +34,6 @@ class Upgrade extends Command
     protected $description = 'This command will upgrade Enso to the lastest v3.9.x';
 
     private $upgrades = [
-        Addresses::class,
         AddressLocalization::class,
         Products::class,
         ControlPanel::class,
@@ -56,6 +55,7 @@ class Upgrade extends Command
         LocalisationPermission::class,
         PostcodeTable::class,
         Postcode::class,
+        Addresses::class,
     ];
 
     public function handle()
