@@ -30,6 +30,8 @@ Route::namespace('User')
                 Route::delete('{user}', 'Destroy')->name('destroy');
             });
 
+        Route::post('{user}/resetPassword', 'ResetPassword')->name('resetPassword');
+
         Route::namespace('Session')
             ->prefix('session')
             ->as('sessions.')
