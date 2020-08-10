@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\Exceptions\Authentication;
 use LaravelEnso\Core\Traits\Logout;
 
