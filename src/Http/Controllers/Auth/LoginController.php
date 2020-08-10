@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use LaravelEnso\Core\Events\Login;
 use LaravelEnso\Core\Models\User;
+use LaravelEnso\Core\Traits\Logout;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, Logout {
+        Logout::logout insteadof AuthenticatesUsers;
+    }
 
     protected $redirectTo = '/';
 
@@ -22,16 +25,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->maxAttempts = Config::get('enso.auth.maxLoginAttempts');
-    }
-
-    public function logout(Request $request)
-    {
-        if ($request->attributes->get('sanctum')) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-        } else {
-            $request->user()->currentAccessToken()->delete();
-        }
     }
 
     protected function attemptLogin(Request $request)
