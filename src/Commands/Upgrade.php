@@ -19,6 +19,7 @@ use LaravelEnso\Core\Services\Upgrades\Postcode;
 use LaravelEnso\Core\Services\Upgrades\PostcodeTable;
 use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Products;
+use LaravelEnso\Core\Services\Upgrades\RegionSeeder;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
@@ -56,6 +57,7 @@ class Upgrade extends Command
         PostcodeTable::class,
         Postcode::class,
         Addresses::class,
+        RegionSeeder::class,
     ];
 
     public function handle()
