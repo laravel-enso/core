@@ -44,10 +44,10 @@ class Region implements MigratesTable, MigratesPostDataMigration
 
     public function migratePostDataMigration(): void
     {
-        (new Collection($this->newRegions))->each(function ($region) {
-            Model::create($region + [
-                'country_id' => Country::whereName('United States')->first()->id
-            ]);
-        });
+        $usa = Country::whereName('United States')->first();
+
+        (new Collection($this->newRegions))->each(fn ($region) => Model::create($region + [
+            'country_id' => $usa->id
+        ]));
     }
 }
