@@ -16,18 +16,18 @@ class RegionSeeder implements MigratesTable, MigratesPostDataMigration
         [
             'abbreviation' => 'FPO',
             'name' => 'Fleet Post Office',
-            'is_active' => 1
+            'is_active' => 1,
         ],
         [
             'abbreviation' => 'APO',
             'name' => 'Army Post Office',
-            'is_active' => 1
+            'is_active' => 1,
         ],
         [
             'abbreviation' => 'DPO',
             'name' => 'Diplomatic Post Office',
-            'is_active' => 1
-        ]
+            'is_active' => 1,
+        ],
     ];
 
     public function isMigrated(): bool
@@ -46,7 +46,7 @@ class RegionSeeder implements MigratesTable, MigratesPostDataMigration
     {
         (new Collection($this->newRegions))->each(function ($region) {
             Region::create($region + [
-                'country_id' => Country::whereName('United States')->first()->id
+                'country_id' => Country::whereName('United States')->first()->id,
             ]);
         });
     }
