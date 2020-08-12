@@ -5,12 +5,12 @@ namespace LaravelEnso\Core\Services\Upgrades;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\Addresses\Models\Region;
+use LaravelEnso\Addresses\Models\Region as Model;
 use LaravelEnso\Countries\Models\Country;
 use LaravelEnso\Upgrade\Contracts\MigratesPostDataMigration;
 use LaravelEnso\Upgrade\Contracts\MigratesTable;
 
-class RegionSeeder implements MigratesTable, MigratesPostDataMigration
+class Region implements MigratesTable, MigratesPostDataMigration
 {
     private array $newRegions = [
         [
@@ -32,7 +32,7 @@ class RegionSeeder implements MigratesTable, MigratesPostDataMigration
 
     public function isMigrated(): bool
     {
-        return Region::whereAbbreviation('APO')->exists();
+        return Model::whereAbbreviation('APO')->exists();
     }
 
     public function migrateTable(): void
@@ -45,7 +45,7 @@ class RegionSeeder implements MigratesTable, MigratesPostDataMigration
     public function migratePostDataMigration(): void
     {
         (new Collection($this->newRegions))->each(function ($region) {
-            Region::create($region + [
+            Model::create($region + [
                 'country_id' => Country::whereName('United States')->first()->id
             ]);
         });

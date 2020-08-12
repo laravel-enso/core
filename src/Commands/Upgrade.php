@@ -11,6 +11,7 @@ use LaravelEnso\Core\Services\Upgrades\ClientPayments;
 use LaravelEnso\Core\Services\Upgrades\Companies;
 use LaravelEnso\Core\Services\Upgrades\ControlPanel;
 use LaravelEnso\Core\Services\Upgrades\ControlPanelApiPermission;
+use LaravelEnso\Core\Services\Upgrades\DataImport;
 use LaravelEnso\Core\Services\Upgrades\DataImportPermissions;
 use LaravelEnso\Core\Services\Upgrades\DeleteUserPermission;
 use LaravelEnso\Core\Services\Upgrades\LocalisationPermission;
@@ -19,7 +20,7 @@ use LaravelEnso\Core\Services\Upgrades\Postcode;
 use LaravelEnso\Core\Services\Upgrades\PostcodeTable;
 use LaravelEnso\Core\Services\Upgrades\PosterMorphKey;
 use LaravelEnso\Core\Services\Upgrades\Products;
-use LaravelEnso\Core\Services\Upgrades\RegionSeeder;
+use LaravelEnso\Core\Services\Upgrades\Region;
 use LaravelEnso\Core\Services\Upgrades\RenameMigrations;
 use LaravelEnso\Core\Services\Upgrades\SupplierInvoices;
 use LaravelEnso\Core\Services\Upgrades\SupplierPayments;
@@ -57,7 +58,8 @@ class Upgrade extends Command
         PostcodeTable::class,
         Postcode::class,
         Addresses::class,
-        RegionSeeder::class,
+        Region::class,
+        DataImport::class,
     ];
 
     public function handle()
