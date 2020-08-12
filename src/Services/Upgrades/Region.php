@@ -16,18 +16,18 @@ class Region implements MigratesTable, MigratesPostDataMigration
         [
             'abbreviation' => 'FPO',
             'name' => 'Fleet Post Office',
-            'is_active' => 1
+            'is_active' => 1,
         ],
         [
             'abbreviation' => 'APO',
             'name' => 'Army Post Office',
-            'is_active' => 1
+            'is_active' => 1,
         ],
         [
             'abbreviation' => 'DPO',
             'name' => 'Diplomatic Post Office',
-            'is_active' => 1
-        ]
+            'is_active' => 1,
+        ],
     ];
 
     public function isMigrated(): bool
@@ -47,7 +47,7 @@ class Region implements MigratesTable, MigratesPostDataMigration
         $usa = Country::whereName('United States')->first();
 
         (new Collection($this->newRegions))->each(fn ($region) => Model::create($region + [
-            'country_id' => $usa->id
+            'country_id' => $usa->id,
         ]));
     }
 }
