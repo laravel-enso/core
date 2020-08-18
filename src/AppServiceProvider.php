@@ -11,6 +11,7 @@ use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Commands\Upgrade;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
+use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
@@ -41,6 +42,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware(
             'verify-active-state',
             VerifyActiveState::class
+        );
+
+        $this->app['router']->aliasMiddleware(
+            'xss-sanitizer',
+            XssSanitizer::class
         );
 
         $this->app['router']->middlewareGroup('core-api', [
