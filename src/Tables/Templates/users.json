@@ -79,7 +79,7 @@
         },
         {
             "label": "Group",
-            "name": "userGroup",
+            "name": "group",
             "data": "user_groups.name",
             "meta": [
                 "searchable",
