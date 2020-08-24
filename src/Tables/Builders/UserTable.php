@@ -14,10 +14,11 @@ class UserTable implements Table
 
     public function query(): Builder
     {
-        return User::with('person:id,appellative,name', 'avatar:id,user_id')->selectRaw('
-            users.id, user_groups.name as group, people.name, people.appellative,
-            people.phone, users.email, roles.name as role, users.is_active,
-            users.created_at, users.person_id
+        return User::with('person:id,appellative,name', 'avatar:id,user_id')
+            ->selectRaw('
+                users.id, user_groups.name as "group", people.name, people.appellative,
+                people.phone, users.email, roles.name as role, users.is_active,
+                users.created_at, users.person_id
         ')->join('people', 'users.person_id', '=', 'people.id')
             ->join('user_groups', 'users.group_id', '=', 'user_groups.id')
             ->join('roles', 'users.role_id', '=', 'roles.id');
