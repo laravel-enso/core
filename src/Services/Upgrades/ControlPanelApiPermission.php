@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\Services\Upgrades;
+namespace LaravelEnso\Core\Upgrades;
 
 use Illuminate\Support\Collection;
 use LaravelEnso\Permissions\Models\Permission;

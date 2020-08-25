@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\Services\Upgrades;
+namespace LaravelEnso\Core\Upgrades;
 
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Upgrade\Contracts\MigratesData;

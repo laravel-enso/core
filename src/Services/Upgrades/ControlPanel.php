@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\Services\Upgrades;
+namespace LaravelEnso\Core\Upgrades;
 
 use Illuminate\Support\Facades\Artisan;
 use LaravelEnso\ControlPanelApi\AppServiceProvider;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Core\Services\Upgrades;
+namespace LaravelEnso\Core\Upgrades;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
@@ -47,7 +47,8 @@ class AddressMigrator
             [
                 __($address->street_type), $address->street, $address->number,
             ],
-            ' ');
+            ' '
+        );
     }
 
     protected function additional(Address $address)
