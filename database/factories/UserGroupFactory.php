@@ -1,9 +1,19 @@
 <?php
 
-use Faker\Generator as Faker;
-use LaravelEnso\Core\Models\UserGroup;
+namespace LaravelEnso\Core\Database\Factories;
 
-$factory->define(UserGroup::class, fn (Faker $faker) => [
-    'name' => $faker->name,
-    'description' => $faker->sentence,
-]);
+use LaravelEnso\Core\Models\UserGroup;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UserGroupFactory extends Factory
+{
+    protected $model = UserGroup::class;
+
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'description' => $this->faker->sentence,
+        ];
+    }
+}

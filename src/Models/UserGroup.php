@@ -5,6 +5,7 @@ namespace LaravelEnso\Core\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\Exceptions\UserGroupConflict;
+use LaravelEnso\Helpers\Traits\HasFactory;
 use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Roles\Traits\HasRoles;
@@ -12,7 +13,7 @@ use LaravelEnso\Tables\Traits\TableCache;
 
 class UserGroup extends Model
 {
-    use HasRoles, Rememberable, TableCache;
+    use HasFactory, HasRoles, Rememberable, TableCache;
 
     protected $guarded = ['id'];
 

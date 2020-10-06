@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Core\Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Models\UserGroup;
@@ -13,7 +15,7 @@ class UserSeeder extends Seeder
     {
         $person = $this->person();
 
-        factory(User::class)->create([
+        User::factory()->create([
             'person_id' => $person->id,
             'group_id' => UserGroup::whereName('Administrators')->first()->id,
             'email' => $person->email,
@@ -25,7 +27,7 @@ class UserSeeder extends Seeder
 
     private function person()
     {
-        return factory(Person::class)->create([
+        return Person::factory()->create([
             'title' => Titles::Mr,
             'name' => 'Admin Root',
             'appellative' => 'Admin',
