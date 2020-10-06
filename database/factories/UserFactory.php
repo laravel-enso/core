@@ -17,7 +17,7 @@ class UserFactory extends Factory
         return [
             'person_id' => Person::factory(),
             'group_id' => UserGroup::factory(),
-            'email' => fn ($attributes)  => Person::find($attributes['person_id'])->email,
+            'email' => fn ($attributes) => Person::find($attributes['person_id'])->email,
             'role_id' => Role::factory(),
             'is_active' => $this->faker->boolean,
         ];

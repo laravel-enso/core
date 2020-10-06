@@ -10,7 +10,7 @@ class UserGroupSeeder extends Seeder
 {
     public function run()
     {
-       UserGroup:: factory()->create([
+        UserGroup:: factory()->create([
             'name' => 'Administrators',
             'description' => 'Administrator users group',
         ])->roles()->sync(Role::pluck('id'));

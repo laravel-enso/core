@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\Database\Factories;
 
-use LaravelEnso\Core\Models\UserGroup;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use LaravelEnso\Core\Models\UserGroup;
 
 class UserGroupFactory extends Factory
 {
