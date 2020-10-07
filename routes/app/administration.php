@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::namespace('Administration')
-    ->prefix('administration')
+Route::prefix('administration')
     ->as('administration.')
     ->group(function () {
         require 'administration/userGroups.php';
