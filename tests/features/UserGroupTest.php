@@ -25,8 +25,7 @@ class UserGroupTest extends TestCase
         $this->seed()
             ->actingAs(User::first());
 
-        $this->testModel = factory(UserGroup::class)
-            ->make();
+        $this->testModel = UserGroup::factory()->make();
     }
 
     /** @test */
@@ -73,7 +72,7 @@ class UserGroupTest extends TestCase
         $this->testModel->save();
 
         $this->testModel->users()->save(
-            factory(User::class)->make()
+            User::factory()->make()
         );
 
         $this->delete(route('administration.userGroups.destroy', $this->testModel->id, false))

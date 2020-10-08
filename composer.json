@@ -35,7 +35,7 @@
         "php": ">=7.4.0",
         "guzzlehttp/guzzle": "~6.0",
         "jenssegers/agent": "^2.6",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.3",
         "laravel-enso/action-logger": "^3.0",
         "laravel-enso/avatars": "^3.0",
@@ -70,7 +70,9 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Core\\": "src/"
+            "LaravelEnso\\Core\\": "src/",
+            "LaravelEnso\\Core\\Database\\Factories\\": "database/factories/",
+            "LaravelEnso\\Core\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {

@@ -102,7 +102,7 @@ class LoginTest extends TestCase
     {
         $response = $this->loginApi();
 
-        $response = $this->post(route('logout'), [], [
+        $this->post(route('logout'), [], [
             'Authorization' => 'Bearer '.$response->json('token'),
         ]);
 
