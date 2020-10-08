@@ -33,7 +33,6 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "guzzlehttp/guzzle": "~6.0",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.3",
