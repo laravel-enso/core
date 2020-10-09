@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\Models;
 
 use Exception;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
@@ -22,7 +23,6 @@ use LaravelEnso\Helpers\Contracts\Activatable;
 use LaravelEnso\Helpers\Traits\ActiveState;
 use LaravelEnso\Helpers\Traits\AvoidsDeletionConflicts;
 use LaravelEnso\Helpers\Traits\CascadesMorphMap;
-use LaravelEnso\Helpers\Traits\HasFactory;
 use LaravelEnso\Impersonate\Traits\Impersonates;
 use LaravelEnso\People\Models\Person;
 use LaravelEnso\People\Traits\IsPerson;
