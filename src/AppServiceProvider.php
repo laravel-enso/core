@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
@@ -12,6 +13,7 @@ use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Models\User;
+use LaravelEnso\Helpers\Services\FactoryResolver;
 use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
 use LaravelEnso\Permissions\Http\Middleware\VerifyRouteAccess;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             ->publishDependencies()
             ->publishResources()
             ->mapMorphs()
+            ->setFactoryResolver()
             ->commands(
                 AnnounceAppUpdate::class,
                 ClearPreferences::class,
@@ -123,6 +126,13 @@ class AppServiceProvider extends ServiceProvider
     private function mapMorphs()
     {
         User::morphMap();
+
+        return $this;
+    }
+
+    private function setFactoryResolver()
+    {
+        Factory::guessFactoryNamesUsing(new FactoryResolver());
 
         return $this;
     }
