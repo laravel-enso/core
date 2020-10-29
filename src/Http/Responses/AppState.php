@@ -57,6 +57,7 @@ class AppState implements Responsable
                     'privateChannel' => $this->privateChannel(),
                     'ioChannel' => $this->ioChannel(),
                     'appUpdates' => 'app-updates',
+                    'taskChannel' => 'tasks.'.Auth::user()->id,
                 ],
             ],
             'meta' => $this->meta(),
@@ -135,7 +136,7 @@ class AppState implements Responsable
 
         return in_array(Auth::user()->role_id, [$roles::Admin, $roles::Supervisor])
             ? 'operations'
-            : 'operations'.Auth::user()->id;
+            : 'operations.'.Auth::user()->id;
     }
 
     protected function prepare(): void
