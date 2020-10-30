@@ -61,6 +61,7 @@
         "laravel-enso/roles": "^4.0",
         "laravel-enso/searchable": "^2.0",
         "laravel-enso/select": "^4.0",
+        "laravel-enso/tasks": "^1.0",
         "laravel-enso/teams": "^3.0",
         "laravel-enso/track-who": "^2.0",
         "laravel-enso/tables": "^4.0",
