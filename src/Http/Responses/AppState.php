@@ -21,7 +21,6 @@ use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Menus\Http\Resources\Menu;
 use LaravelEnso\Menus\Services\TreeBuilder;
 use LaravelEnso\Permissions\Models\Permission;
-use LaravelEnso\Roles\Enums\Roles;
 use LaravelEnso\Roles\Models\Role;
 
 class AppState implements Responsable
