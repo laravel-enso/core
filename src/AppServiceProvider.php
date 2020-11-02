@@ -13,6 +13,7 @@ use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Models\User;
+use LaravelEnso\Core\Services\Websockets;
 use LaravelEnso\Helpers\Services\FactoryResolver;
 use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
@@ -20,6 +21,10 @@ use LaravelEnso\Permissions\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        'websockets' => Websockets::class,
+    ];
+
     public function boot()
     {
         JsonResource::withoutWrapping();

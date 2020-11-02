@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use LaravelEnso\Core\Enums\Themes;
+use LaravelEnso\Core\Facades\Websockets;
 use LaravelEnso\Core\Http\Resources\User;
 use LaravelEnso\Core\Services\Inspiring;
 use LaravelEnso\Core\Services\LocalState;
@@ -53,12 +54,7 @@ class AppState implements Responsable
                     'key' => Config::get('broadcasting.connections.pusher.key'),
                     'options' => Config::get('broadcasting.connections.pusher.options'),
                 ],
-                'channels' => [
-                    'privateChannel' => $this->privateChannel(),
-                    'ioChannel' => $this->ioChannel(),
-                    'appUpdates' => 'app-updates',
-                    'taskChannel' => 'tasks.'.Auth::user()->id,
-                ],
+                'channels' => Websockets::all(),
             ],
             'meta' => $this->meta(),
             'enums' => Enums::all(),
@@ -121,22 +117,6 @@ class AppState implements Responsable
             ->put('domain', $route->domain())
             ->toArray()
             : null;
-    }
-
-    protected function privateChannel(): string
-    {
-        return (new Collection(
-            explode('\\', Config::get('auth.providers.users.model'))
-        ))->push(Auth::user()->id)->implode('.');
-    }
-
-    protected function ioChannel(): string
-    {
-        $roles = App::make(Roles::class);
-
-        return in_array(Auth::user()->role_id, [$roles::Admin, $roles::Supervisor])
-            ? 'operations'
-            : 'operations.'.Auth::user()->id;
     }
 
     protected function prepare(): void
