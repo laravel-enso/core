@@ -30,7 +30,6 @@ class Websockets
     public function all()
     {
         return $this->channels
-            ->filter(fn ($channel) => is_string($channel) || $channel instanceof \Closure)
             ->map(fn ($channel) => is_string($channel) ? $channel : $channel->call($this, Auth::user()));
     }
 }
