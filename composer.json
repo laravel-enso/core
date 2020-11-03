@@ -41,7 +41,6 @@
         "laravel-enso/charts": "^4.0",
         "laravel-enso/companies": "^3.0",
         "laravel-enso/data-export": "^2.0",
-        "laravel-enso/data-import": "^5.0",
         "laravel-enso/dynamic-methods": "^2.0",
         "laravel-enso/enums": "^2.0",
         "laravel-enso/files": "^4.0",
