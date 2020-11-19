@@ -16,20 +16,21 @@ class Websockets
 
     public function register($channels)
     {
-        (new Collection($channels))->each(fn ($channel, $key) => $this->channels->put(
-            $key,
-            $channel
-        ));
+        (new Collection($channels))
+            ->each(fn ($channel, $key) => $this->channels
+                ->put($key, $channel));
     }
 
     public function remove($aliases)
     {
-        (new Collection($aliases))->each(fn ($alias) => $this->channels->forget($alias));
+        (new Collection($aliases))
+            ->each(fn ($alias) => $this->channels->forget($alias));
     }
 
     public function all()
     {
-        return $this->channels
-            ->map(fn ($channel) => is_string($channel) ? $channel : $channel->call($this, Auth::user()));
+        return $this->channels->map(fn ($channel) => is_string($channel)
+            ? $channel
+            : $channel->call($this, Auth::user()));
     }
 }

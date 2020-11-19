@@ -38,7 +38,7 @@ class AppState implements Responsable
     protected function response(): array
     {
         return [
-            'user' => new User(Auth::user()->load(['person', 'avatar', 'role', 'group'])),
+            'user' => new User(Auth::user()),
             'preferences' => Auth::user()->preferences(),
             'i18n' => $this->i18n(),
             'languages' => $this->languages->pluck('flag', 'name'),
@@ -120,6 +120,8 @@ class AppState implements Responsable
 
     protected function prepare(): void
     {
+        Auth::user()->load(['person', 'avatar', 'role', 'group']);
+
         $this->role = Auth::user()->role()
             ->with('menu.permission', 'permissions')->first();
 
