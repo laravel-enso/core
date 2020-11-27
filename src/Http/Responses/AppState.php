@@ -20,7 +20,6 @@ use LaravelEnso\Helpers\Services\JsonReader;
 use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Menus\Http\Resources\Menu;
 use LaravelEnso\Menus\Services\TreeBuilder;
-use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
 
 class AppState implements Responsable
@@ -103,13 +102,13 @@ class AppState implements Responsable
     {
         return $this->role->permissions
             ->mapWithKeys(fn ($permission) => [
-                $permission->name => $this->route($permission),
-            ]);
+                $permission->name => $this->route($permission->name),
+            ])->merge(['login' => $this->route('login')]);
     }
 
-    protected function route(Permission $permission): ?array
+    protected function route(string $name): ?array
     {
-        $route = Route::getRoutes()->getByName($permission->name);
+        $route = Route::getRoutes()->getByName($name);
 
         return $route
             ? (new Collection($route))->only(['uri', 'methods'])
