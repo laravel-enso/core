@@ -18,7 +18,6 @@ use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Core\Traits\HasPassword;
 use LaravelEnso\DynamicMethods\Traits\Abilities;
 use LaravelEnso\Files\Models\File;
-use LaravelEnso\Files\Traits\Uploads;
 use LaravelEnso\Helpers\Contracts\Activatable;
 use LaravelEnso\Helpers\Traits\ActiveState;
 use LaravelEnso\Helpers\Traits\AvoidsDeletionConflicts;
@@ -46,8 +45,7 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         Notifiable,
         Abilities,
         Rememberable,
-        TableCache,
-        Uploads;
+        TableCache;
 
     protected $hidden = ['password', 'remember_token', 'password_updated_at'];
 
