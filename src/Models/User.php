@@ -10,7 +10,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
-use LaravelEnso\Avatars\Traits\HasAvatar;
 use LaravelEnso\Calendar\Models\Event;
 use LaravelEnso\Core\Enums\UserGroups;
 use LaravelEnso\Core\Exceptions\UserConflict;
@@ -36,7 +35,6 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         AvoidsDeletionConflicts,
         CascadesMorphMap,
         HasApiTokens,
-        HasAvatar,
         HasFactory,
         HasPassword,
         IsPerson,
