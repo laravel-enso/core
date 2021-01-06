@@ -16,7 +16,7 @@ class UserForm
 
     public function __construct()
     {
-        $this->form = new Form(self::TemplatePath);
+        $this->form = new Form(static::TemplatePath);
     }
 
     public function create($person)
