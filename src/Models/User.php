@@ -27,7 +27,6 @@ use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Enums\Roles;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\TableCache;
-use LaravelEnso\Teams\Models\Team;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {
@@ -61,11 +60,6 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
     public function group()
     {
         return $this->belongsTo(UserGroup::class);
-    }
-
-    public function teams()
-    {
-        return $this->belongsToMany(Team::class);
     }
 
     public function role()
