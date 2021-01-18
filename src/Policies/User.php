@@ -18,6 +18,11 @@ class User
         }
     }
 
+    public function profile(Model $user, Model $targetUser)
+    {
+        return $user->isSupervisor() || $user->is($targetUser);
+    }
+
     public function handle(Model $user, Model $targetUser)
     {
         return ! $targetUser->isAdmin()
