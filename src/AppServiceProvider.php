@@ -4,6 +4,7 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
@@ -14,6 +15,7 @@ use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Services\Websockets;
+use LaravelEnso\Helpers\Services\Dummy;
 use LaravelEnso\Helpers\Services\FactoryResolver;
 use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
 use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
@@ -138,6 +140,10 @@ class AppServiceProvider extends ServiceProvider
     private function setFactoryResolver()
     {
         Factory::guessFactoryNamesUsing(new FactoryResolver());
+
+        if (! class_exists('\Faker\Generator')) {
+            App::bind(\Faker\Generator::class, Dummy::class);
+        }
 
         return $this;
     }
