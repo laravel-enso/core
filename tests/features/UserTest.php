@@ -2,14 +2,9 @@
 
 namespace LaravelEnso\Core\Tests;
 
-use App\Enums\Roles;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Notification;
-use LaravelEnso\Addresses\Models\Locality;
-use LaravelEnso\Addresses\Models\Region;
-use LaravelEnso\Companies\Models\Company;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Notifications\ResetPassword;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
@@ -78,11 +73,10 @@ class UserTest extends TestCase
             route('administration.users.update', $this->testModel->id, false),
             $this->testModel->toArray()
         )->assertStatus(200)
-        ->assertJsonStructure(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals($this->testModel->is_active, $this->testModel->fresh()->is_active);
     }
-
 
     /** @test */
     public function get_option_list()
@@ -90,12 +84,11 @@ class UserTest extends TestCase
         $this->testModel->is_active = true;
         $this->testModel->save();
 
-        $result = $this->get(route('administration.users.options', [
+        $this->get(route('administration.users.options', [
             'query' => $this->testModel->person->name,
             'limit' => 10,
-        ], false));
-        echo $result->content();
-        $result->assertStatus(200)
-        ->assertJsonFragment(['name' => $this->testModel->person->name]);
+        ], false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['name' => $this->testModel->person->name]);
     }
 }
