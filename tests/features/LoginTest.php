@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Core\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
