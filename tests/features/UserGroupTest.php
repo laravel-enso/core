@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Core\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Models\UserGroup;

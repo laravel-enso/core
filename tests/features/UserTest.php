@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Core\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Notification;
@@ -71,7 +73,7 @@ class UserTest extends TestCase
             route('administration.users.update', $this->testModel->id, false),
             $this->testModel->toArray()
         )->assertStatus(200)
-        ->assertJsonStructure(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals($this->testModel->is_active, $this->testModel->fresh()->is_active);
     }
@@ -86,7 +88,7 @@ class UserTest extends TestCase
             'query' => $this->testModel->person->name,
             'limit' => 10,
         ], false))
-        ->assertStatus(200)
-        ->assertJsonFragment(['name' => $this->testModel->person->name]);
+            ->assertStatus(200)
+            ->assertJsonFragment(['name' => $this->testModel->person->name]);
     }
 }
