@@ -60,14 +60,6 @@ class User
         return $user->id === $targetUser->id;
     }
 
-    public function impersonate(Model $user, Model $targetUser)
-    {
-        return $user->can('access-route', 'core.impersonate.start')
-            && ! $targetUser->isAdmin()
-            && $user->id !== $targetUser->id
-            && ! $user->isImpersonating();
-    }
-
     protected function isSuperior(Model $user, Model $targetUser): bool
     {
         return $user->isSupervisor() && ! $targetUser->isSupervisor()
