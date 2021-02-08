@@ -11,6 +11,7 @@ use LaravelEnso\Core\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\Commands\ClearPreferences;
 use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
+use LaravelEnso\Core\Commands\Version;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Models\User;
@@ -41,7 +42,8 @@ class AppServiceProvider extends ServiceProvider
                 AnnounceAppUpdate::class,
                 ClearPreferences::class,
                 ResetStorage::class,
-                UpdateGlobalPreferences::class
+                UpdateGlobalPreferences::class,
+                Version::class,
             );
     }
 
