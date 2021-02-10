@@ -3,9 +3,6 @@
 namespace LaravelEnso\Core\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Event;
-use LaravelEnso\Core\Events\AppUpdate;
 use LaravelEnso\Core\Services\Version as Service;
 
 class Version extends Command
@@ -20,7 +17,7 @@ class Version extends Command
         $this->info("Current version is {$version->current()}");
         $this->info("Latest version is {$version->latest()}");
 
-        if ($version->isOutdated() && $this->confirm("Your application version is outdated, Do you want to update to the latest?")) {
+        if ($version->isOutdated() && $this->confirm('Your application version is outdated, Do you want to update to the latest?')) {
             $version->update();
 
             $this->info("Your version is {$version->latest()} now");
