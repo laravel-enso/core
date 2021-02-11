@@ -25,9 +25,16 @@ class Version
         return $this->release['tag_name'] ?? null;
     }
 
+    public function coreVersion()
+    {
+        $coreConifg = require __DIR__.'/../../config/config.php';
+
+        return $coreConifg['version'];
+    }
+
     public function isOutdated()
     {
-        return $this->latest() !== $this->current();
+        return $this->coreVersion() !== $this->current();
     }
 
     public function current()
@@ -39,7 +46,7 @@ class Version
     {
         $config = File::get(config_path('enso/config.php'));
 
-        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->latest()}',", $config);
+        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->coreVersion()}',", $config);
 
         File::put(config_path('enso/config.php'), $config);
     }

@@ -16,11 +16,12 @@ class Version extends Command
         $version = (new Service());
         $this->info("Current version is {$version->current()}");
         $this->info("Latest version is {$version->latest()}");
+        $this->info("Core version is {$version->coreVersion()}");
 
-        if ($version->isOutdated() && $this->confirm('Your application version is outdated, Do you want to update to the latest?')) {
+        if ($version->isOutdated() && $this->confirm('Your application version is outdated, Do you want to update to the core version?')) {
             $version->update();
 
-            $this->info("Your version is {$version->latest()} now");
+            $this->info("Your version is {$version->coreVersion()} now");
         }
     }
 }
