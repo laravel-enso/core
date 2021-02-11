@@ -18,7 +18,7 @@ class Version
         $this->channels = new Collection();
     }
 
-    public function current()
+    public function latest()
     {
         $this->release ??= Http::get(self::Endpoint)->json();
 
@@ -27,10 +27,10 @@ class Version
 
     public function isOutdated()
     {
-        return $this->current() !== $this->config();
+        return $this->latest() !== $this->current();
     }
 
-    public function config()
+    public function current()
     {
         return Config::get('enso.config.version');
     }
@@ -39,7 +39,7 @@ class Version
     {
         $config = File::get(config_path('enso/config.php'));
 
-        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->current()}',", $config);
+        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->latest()}',", $config);
 
         File::put(config_path('enso/config.php'), $config);
     }
