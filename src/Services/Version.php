@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 
 class Version
 {
+    private const Endpoint = 'https://api.github.com/repos/laravel-enso/enso/releases/latest';
+
     private $release;
 
     public function __construct()
@@ -16,20 +18,19 @@ class Version
         $this->channels = new Collection();
     }
 
-    public function latest()
+    public function current()
     {
-        $this->release ??= $release = Http::get('https://api.github.com/repos/laravel-enso/enso/releases/latest')
-            ->json();
+        $this->release ??= Http::get(self::Endpoint)->json();
 
         return $this->release['tag_name'] ?? null;
     }
 
     public function isOutdated()
     {
-        return $this->latest() !== $this->current();
+        return $this->current() !== $this->config();
     }
 
-    public function current()
+    public function config()
     {
         return Config::get('enso.config.version');
     }
@@ -38,7 +39,7 @@ class Version
     {
         $config = File::get(config_path('enso/config.php'));
 
-        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->latest()}',", $config);
+        $config = preg_replace("/'version'.*=>.*,/", "'version' => '{$this->current()}',", $config);
 
         File::put(config_path('enso/config.php'), $config);
     }
