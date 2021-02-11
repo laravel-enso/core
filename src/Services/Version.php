@@ -4,7 +4,6 @@ namespace LaravelEnso\Core\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
 class Version
@@ -29,7 +28,7 @@ class Version
     {
         return Config::get('enso.config.version');
     }
-    
+
     public function isOutdated()
     {
         return $this->current() !== $this->latest();
