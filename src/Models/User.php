@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\Models;
 
 use Exception;
 use Illuminate\Contracts\Translation\HasLocalePreference;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -174,6 +175,16 @@ class User extends Authenticatable implements Activatable, HasLocalePreference
         } catch (Exception $exception) {
             throw UserConflict::hasActivity();
         }
+    }
+
+    public function scopeAdmins(Builder $builder): Builder
+    {
+        return $builder->whereRoleId(App::make(Roles::class)::Admin);
+    }
+
+    public function scopeSupervisors(Builder $builder): Builder
+    {
+        return $builder->whereRoleId(App::make(Roles::class)::Supervisor);
     }
 
     private function storePreferences($preferences)
