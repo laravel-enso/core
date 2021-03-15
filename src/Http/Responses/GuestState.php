@@ -37,6 +37,7 @@ class GuestState implements Responsable
         return [
             App::getLocale() => [
                 'Email' => __('Email'),
+                'Mobile' => __('Mobile'),
                 'Password' => __('Password'),
                 'Remember me' => __('Remember me'),
                 'Forgot password' => __('Forgot password'),
