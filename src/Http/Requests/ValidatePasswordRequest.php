@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Config;
 use LaravelEnso\Core\Models\User;
 
 class ValidatePasswordRequest extends FormRequest
@@ -16,7 +17,7 @@ class ValidatePasswordRequest extends FormRequest
     {
         return [
             'email' => 'exists:users,email',
-            'password' => 'nullable|confirmed|min:'.config('enso.auth.password.minLength'),
+            'password' => 'nullable|confirmed|min:'.Config::get('enso.auth.password.minLength'),
         ];
     }
 
@@ -32,8 +33,8 @@ class ValidatePasswordRequest extends FormRequest
         $user = $this->route('user')
             ?? User::whereEmail($this->get('email'))->first();
 
-        $validator->after(fn ($validator) => (new PasswordValidator(
-            $this, $validator, $user
-        ))->handle());
+        $passwordValidator = (new PasswordValidator($this, $validator, $user));
+
+        $validator->after(fn ($validator) => $passwordValidator->handle());
     }
 }
