@@ -65,7 +65,6 @@ class LoginTest extends TestCase
         $this->assertTokenAuthenticate($response->json('token'));
     }
 
-
     /** @test */
     public function can_authenticate_token_api()
     {

@@ -61,7 +61,7 @@ class UserGroupTest extends TestCase
             $this->testModel->toArray() + [
                 'roles' => $this->testModel->roles()
                     ->pluck('id')
-                    ->toArray()
+                    ->toArray(),
             ])->assertStatus(200)
             ->assertJsonStructure(['message']);
 
