@@ -33,6 +33,10 @@ class ValidatePasswordRequest extends FormRequest
         $user = $this->route('user')
             ?? User::whereEmail($this->get('email'))->first();
 
+        if (! $user) {
+            return;
+        }
+
         $passwordValidator = (new PasswordValidator($this, $validator, $user));
 
         $validator->after(fn ($validator) => $passwordValidator->handle());
