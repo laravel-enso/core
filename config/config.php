@@ -8,6 +8,7 @@ return [
     'dateFormat' => 'd-m-Y',
     'dateTimeFormat' => 'd-m-Y H:i:s',
     'facebook' => 'https://facebook.com',
+    'instagram' => 'https://www.instagram.com',
     'googleplus' => 'https://plus.google.com',
     'twitter' => 'https://twitter.com',
     'ravenKey' => env('RAVEN_DSN', null),
