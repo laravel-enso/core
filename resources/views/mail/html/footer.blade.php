@@ -6,22 +6,30 @@
                     <p>
                     @if(config('enso.config.facebook'))
                         <a href="{{ config('enso.config.facebook') }}">
-                            <img src="{{ url('images/emails/facebook.png') }}" alt="facebook">
+                            <img src="{{ url('images/emails/facebook.svg') }}"
+                                alt="facebook"
+                                style="max-width: 48px">
                         </a>
                     @endif
                     @if(config('enso.config.instagram'))
                         <a href="{{ config('enso.config.facebook') }}">
-                            <img src="{{ url('images/emails/instagram.png') }}" alt="instagram">
+                            <img src="{{ url('images/emails/instagram.svg') }}"
+                                alt="instagram"
+                                style="max-width: 48px">
                         </a>
                     @endif
                     @if(config('enso.config.googleplus'))
                         <a href="{{ config('enso.config.googleplus') }}">
-                            <img src="{{ url('images/emails/googleplus.png') }}" alt="googleplus">
+                            <img src="{{ url('images/emails/googleplus.svg') }}"
+                                alt="googleplus"
+                                style="max-width: 48px">
                         </a>
                     @endif
                     @if(config('enso.config.twitter'))
                         <a href="{{ config('enso.config.twitter') }}">
-                            <img src="{{ url('images/emails/twitter.png') }}" alt="twitter">
+                            <img src="{{ url('images/emails/twitter.svg') }}"
+                                alt="twitter"
+                                style="max-width: 48px">
                         </a>
                     @endif
                     </p> 

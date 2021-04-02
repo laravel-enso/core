@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
+
 return [
     'version' => '4.6.0',
     'ownerCompanyId' => env('OWNER_COMPANY_ID', 1),
@@ -7,6 +9,7 @@ return [
     'defaultRole' => 'admin',
     'dateFormat' => 'd-m-Y',
     'dateTimeFormat' => 'd-m-Y H:i:s',
+    'url' => config('app.url'),
     'facebook' => 'https://facebook.com',
     'instagram' => 'https://www.instagram.com',
     'googleplus' => 'https://plus.google.com',

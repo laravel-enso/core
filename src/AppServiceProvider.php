@@ -119,15 +119,15 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../storage' => storage_path('app'),
-        ], 'core-storage');
+        ], ['core-storage', 'enso-storage']);
 
         $this->publishes([
             __DIR__.'/../resources/images' => resource_path('images'),
-        ], 'core-assets');
+        ], ['core-assets', 'enso-assets']);
 
         $this->publishes([
             __DIR__.'/../resources/views/mail' => resource_path('views/vendor/mail'),
-        ], 'enso-email');
+        ], ['core-email', 'enso-email']);
 
         return $this;
     }
