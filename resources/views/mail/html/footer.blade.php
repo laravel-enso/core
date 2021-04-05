@@ -18,13 +18,6 @@
                                 style="max-width: 48px">
                         </a>
                     @endif
-                    @if(config('enso.config.googleplus'))
-                        <a href="{{ config('enso.config.googleplus') }}">
-                            <img src="{{ url('images/emails/googleplus.svg') }}"
-                                alt="googleplus"
-                                style="max-width: 48px">
-                        </a>
-                    @endif
                     @if(config('enso.config.twitter'))
                         <a href="{{ config('enso.config.twitter') }}">
                             <img src="{{ url('images/emails/twitter.svg') }}"

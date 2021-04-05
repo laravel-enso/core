@@ -12,7 +12,6 @@ return [
     'url' => config('app.url'),
     'facebook' => 'https://facebook.com',
     'instagram' => 'https://www.instagram.com',
-    'googleplus' => 'https://plus.google.com',
     'twitter' => 'https://twitter.com',
     'ravenKey' => env('RAVEN_DSN', null),
     'cacheLifetime' => env('CACHE_LIFETIME', 60),
