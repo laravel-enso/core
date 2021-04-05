@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
-
 return [
     'version' => '4.6.0',
     'ownerCompanyId' => env('OWNER_COMPANY_ID', 1),
