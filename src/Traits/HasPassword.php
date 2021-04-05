@@ -45,9 +45,7 @@ trait HasPassword
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(
-            (new ResetPassword($token))
-                ->onQueue('notifications')
-        );
+        $this->notify((new ResetPassword($token))
+            ->onQueue('notifications'));
     }
 }
