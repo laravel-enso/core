@@ -12,7 +12,7 @@
                         </a>
                     @endif
                     @if(config('enso.config.instagram'))
-                        <a href="{{ config('enso.config.facebook') }}">
+                        <a href="{{ config('enso.config.instagram') }}">
                             <img src="{{ url('images/emails/instagram.svg') }}"
                                 alt="instagram"
                                 style="max-width: 48px">
