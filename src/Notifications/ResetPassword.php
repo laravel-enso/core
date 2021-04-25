@@ -38,6 +38,6 @@ class ResetPassword extends Notification implements ShouldQueue
 
     private function title(): string
     {
-        return __('Reset Password Notification');
+        return __('Reset password request');
     }
 }
