@@ -15,7 +15,7 @@ class ValidateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'person_id' => 'exists:people,id',
+            'person_id' => ['exists:people,id', $this->personUnique()],
             'group_id' => 'required|exists:user_groups,id',
             'role_id' => 'required|exists:roles,id',
             'email' => ['email', 'required', $this->emailUnique()],
@@ -36,5 +36,10 @@ class ValidateUserRequest extends FormRequest
     protected function emailUnique()
     {
         return Rule::unique('people', 'email')->ignore($this->get('person_id'));
+    }
+
+    protected function personUnique()
+    {
+        return Rule::unique('users', 'person_id')->ignore($this->get('person_id'));
     }
 }
