@@ -4,9 +4,9 @@ namespace LaravelEnso\Core\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use LaravelEnso\Core\Models\User;
-use LaravelEnso\Core\Models\UserGroup;
 use LaravelEnso\People\Models\Person;
 use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\UserGroups\Models\UserGroup;
 
 class UserFactory extends Factory
 {

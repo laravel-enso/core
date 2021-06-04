@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 use LaravelEnso\Calendar\Models\Event;
-use LaravelEnso\Core\Enums\UserGroups;
 use LaravelEnso\Core\Exceptions\UserConflict;
 use LaravelEnso\Core\Services\DefaultPreferences;
 use LaravelEnso\Core\Traits\HasPassword;
@@ -28,6 +27,8 @@ use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Enums\Roles;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\TableCache;
+use LaravelEnso\UserGroups\Enums\UserGroups;
+use LaravelEnso\UserGroups\Models\UserGroup;
 
 class User extends Authenticatable implements Activatable, HasLocalePreference
 {

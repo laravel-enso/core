@@ -3,9 +3,9 @@
 namespace LaravelEnso\Core\Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use LaravelEnso\Core\Enums\UserGroups;
 use LaravelEnso\Core\Models\User as Model;
 use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\UserGroups\Enums\UserGroups;
 
 class User
 {

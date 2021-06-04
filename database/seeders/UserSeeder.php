@@ -4,10 +4,10 @@ namespace LaravelEnso\Core\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use LaravelEnso\Core\Models\User;
-use LaravelEnso\Core\Models\UserGroup;
 use LaravelEnso\People\Enums\Titles;
 use LaravelEnso\People\Models\Person;
 use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\UserGroups\Models\UserGroup;
 
 class UserSeeder extends Seeder
 {
