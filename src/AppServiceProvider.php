@@ -14,7 +14,6 @@ use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Commands\Version;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Services\Websockets;
 use LaravelEnso\Helpers\Services\Dummy;
 use LaravelEnso\Helpers\Services\FactoryResolver;
@@ -36,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
             ->loadDependencies()
             ->publishDependencies()
             ->publishResources()
-            ->mapMorphs()
             ->setFactoryResolver()
             ->commands(
                 AnnounceAppUpdate::class,
@@ -128,13 +126,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views/mail' => resource_path('views/vendor/mail'),
         ], ['core-email', 'enso-email']);
-
-        return $this;
-    }
-
-    private function mapMorphs()
-    {
-        User::morphMap();
 
         return $this;
     }

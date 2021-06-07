@@ -16,6 +16,5 @@ Route::prefix('api')
         Route::middleware(['api', 'auth', 'core'])
             ->group(function () {
                 require 'app/core.php';
-                require 'app/administration.php';
             });
     });

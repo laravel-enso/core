@@ -63,6 +63,7 @@
         "laravel-enso/track-who": "^2.0",
         "laravel-enso/tables": "^4.0",
         "laravel-enso/upgrade": "^2.0",
+        "laravel-enso/users": "^1.0",
         "voku/anti-xss": "^4.1"
     },
     "autoload": {
