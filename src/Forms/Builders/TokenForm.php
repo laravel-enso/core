@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\Forms\Builders;
 
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Forms\Services\Form;
+use LaravelEnso\Users\Models\User;
 
 class TokenForm
 {

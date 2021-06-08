@@ -5,7 +5,9 @@ namespace LaravelEnso\Core;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\Commands\ClearPreferences;
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
             ->publishDependencies()
             ->publishResources()
             ->setFactoryResolver()
+            ->setPasswordDefaults()
             ->commands(
                 AnnounceAppUpdate::class,
                 ClearPreferences::class,
@@ -103,10 +106,6 @@ class AppServiceProvider extends ServiceProvider
         ], ['core-preferences', 'enso-preferences']);
 
         $this->publishes([
-            __DIR__.'/../database/factories' => database_path('factories'),
-        ], ['core-factories', 'enso-factories']);
-
-        $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
         ], ['core-seeders', 'enso-seeders']);
 
@@ -139,5 +138,21 @@ class AppServiceProvider extends ServiceProvider
         }
 
         return $this;
+    }
+
+    private function setPasswordDefaults()
+    {
+        Password::defaults(fn () => Password::min($this->passwordConfig('minLength'))
+            ->when($this->passwordConfig('minNumeric'), fn ($password) => $password
+                ->numeric())
+            ->when($this->passwordConfig('minSpecial'), fn ($password) => $password
+                ->symbols())
+            ->when($this->passwordConfig('minUpperCase'), fn ($password) => $password
+                ->mixedCase()));
+    }
+
+    private function passwordConfig(string $key): bool
+    {
+        return Config::get("enso.auth.password.{$key}");
     }
 }

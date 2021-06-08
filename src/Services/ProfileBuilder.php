@@ -3,8 +3,8 @@
 namespace LaravelEnso\Core\Services;
 
 use Carbon\Carbon;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Helpers\Services\Decimals;
+use LaravelEnso\Users\Models\User;
 
 class ProfileBuilder
 {
@@ -23,7 +23,9 @@ class ProfileBuilder
     {
         $this->user->load(
             'person:id,name,title,appellative,birthday,phone',
-            'group:id,name', 'role:id,name', 'avatar:id,user_id'
+            'group:id,name',
+            'role:id,name',
+            'avatar:id,user_id'
         );
 
         $this->build();

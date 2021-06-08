@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\Facades\Websockets;
-use LaravelEnso\Core\Models\User;
+use LaravelEnso\Users\Models\User;
 
 class WebsocketServiceProvider extends ServiceProvider
 {

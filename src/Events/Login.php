@@ -4,7 +4,7 @@ namespace LaravelEnso\Core\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use LaravelEnso\Core\Models\User;
+use LaravelEnso\Users\Models\User;
 
 class Login
 {
