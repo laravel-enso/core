@@ -21,8 +21,8 @@ class ValidatePasswordRequest extends FormRequest
                 'nullable',
                 'confirmed',
                 Password::defaults(),
-                fn ($value, $fail) => $this
-                    ->distinctPassword($value, $fail),
+                fn ($field, $password, $fail) => $this
+                    ->distinctPassword($password, $fail),
             ],
         ];
     }
@@ -34,13 +34,13 @@ class ValidatePasswordRequest extends FormRequest
         }
     }
 
-    protected function distinctPassword($value, $fail)
+    protected function distinctPassword($password, $fail)
     {
         if ($this->filled('password')) {
             $user = $this->route('user')
                 ?? User::whereEmail($this->get('email'))->first();
 
-            if ($user->currentPasswordIs($value)) {
+            if ($user->currentPasswordIs($password)) {
                 $fail(__('You cannot use the existing password'));
             }
         }

@@ -149,6 +149,8 @@ class AppServiceProvider extends ServiceProvider
                 ->symbols())
             ->when($this->passwordConfig('minUpperCase'), fn ($password) => $password
                 ->mixedCase()));
+
+        return $this;
     }
 
     private function passwordConfig(string $key): bool

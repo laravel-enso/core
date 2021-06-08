@@ -77,7 +77,6 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Core\\AppServiceProvider",
-                "LaravelEnso\\Core\\AuthServiceProvider",
                 "LaravelEnso\\Core\\BroadcastServiceProvider",
                 "LaravelEnso\\Core\\WebsocketServiceProvider",
                 "LaravelEnso\\Core\\EventServiceProvider"

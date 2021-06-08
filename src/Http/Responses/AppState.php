@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use LaravelEnso\Core\Enums\Themes;
 use LaravelEnso\Core\Facades\Websockets;
-use LaravelEnso\Core\Http\Resources\User;
 use LaravelEnso\Core\Services\Inspiring;
 use LaravelEnso\Core\Services\LocalState;
 use LaravelEnso\Enums\Facades\Enums;
@@ -21,6 +20,7 @@ use LaravelEnso\Localisation\Models\Language;
 use LaravelEnso\Menus\Http\Resources\Menu;
 use LaravelEnso\Menus\Services\TreeBuilder;
 use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\Users\Http\Resources\User;
 
 class AppState implements Responsable
 {
