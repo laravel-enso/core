@@ -47,6 +47,7 @@
         "laravel-enso/permissions": "^4.0",
         "laravel-enso/rememberable": "^3.0",
         "laravel-enso/roles": "^4.0",
+        "laravel-enso/searchable": "^2.1",
         "laravel-enso/upgrade": "^2.0",
         "laravel-enso/users": "^1.0",
         "voku/anti-xss": "^4.1"
