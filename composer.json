@@ -37,31 +37,15 @@
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.3",
         "laravel-enso/action-logger": "^3.0",
-        "laravel-enso/avatars": "^3.0",
-        "laravel-enso/charts": "^4.0",
-        "laravel-enso/companies": "^3.0",
-        "laravel-enso/data-export": "^2.0",
-        "laravel-enso/dynamic-methods": "^2.0",
         "laravel-enso/enums": "^2.0",
-        "laravel-enso/files": "^4.0",
-        "laravel-enso/forms": "^4.0",
         "laravel-enso/helpers": "^2.0",
-        "laravel-enso/history-tracker": "^2.0",
         "laravel-enso/impersonate": "^3.0",
-        "laravel-enso/io": "^2.0",
         "laravel-enso/localisation": "^4.0",
-        "laravel-enso/logs": "^4.0",
         "laravel-enso/migrator": "^2.0",
         "laravel-enso/menus": "^4.0",
-        "laravel-enso/notifications": "^4.0",
-        "laravel-enso/people": "^3.0",
         "laravel-enso/permissions": "^4.0",
         "laravel-enso/rememberable": "^3.0",
         "laravel-enso/roles": "^4.0",
-        "laravel-enso/searchable": "^2.0",
-        "laravel-enso/select": "^4.0",
-        "laravel-enso/track-who": "^2.0",
-        "laravel-enso/tables": "^4.0",
         "laravel-enso/upgrade": "^2.0",
         "laravel-enso/users": "^1.0",
         "voku/anti-xss": "^4.1"
@@ -78,8 +62,9 @@
             "providers": [
                 "LaravelEnso\\Core\\AppServiceProvider",
                 "LaravelEnso\\Core\\BroadcastServiceProvider",
-                "LaravelEnso\\Core\\WebsocketServiceProvider",
-                "LaravelEnso\\Core\\EventServiceProvider"
+                "LaravelEnso\\Core\\EventServiceProvider",
+                "LaravelEnso\\Core\\PasswordServiceProvider",
+                "LaravelEnso\\Core\\WebsocketServiceProvider"
             ]
         }
     }

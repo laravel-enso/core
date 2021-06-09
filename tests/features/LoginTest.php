@@ -26,8 +26,6 @@ class LoginTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
-
         $this->seed();
 
         $this->testModel = $this->user();
