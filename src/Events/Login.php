@@ -10,15 +10,11 @@ class Login
 {
     use Dispatchable, SerializesModels;
 
-    private User $user;
-    private string $ip;
-    private string $userAgent;
-
-    public function __construct(User $user, string $ip, string $userAgent)
-    {
-        $this->user = $user;
-        $this->ip = $ip;
-        $this->userAgent = $userAgent;
+    public function __construct(
+        private User $user,
+        private string $ip,
+        private string $userAgent
+    ) {
     }
 
     public function user(): User

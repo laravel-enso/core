@@ -82,7 +82,7 @@ class LoginController extends Controller
     {
         $user = User::whereEmail($request->input('email'))->first();
 
-        if (! optional($user)->currentPasswordIs($request->input('password'))) {
+        if (! $user?->currentPasswordIs($request->input('password'))) {
             return;
         }
 

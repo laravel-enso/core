@@ -83,6 +83,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/auth.php', 'enso.auth');
 
+        $this->mergeConfigFrom(__DIR__.'/../config/state.php', 'enso.state');
+
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
@@ -111,10 +113,6 @@ class AppServiceProvider extends ServiceProvider
 
     private function publishResources()
     {
-        $this->publishes([
-            __DIR__.'/../storage' => storage_path('app'),
-        ], ['core-storage', 'enso-storage']);
-
         $this->publishes([
             __DIR__.'/../resources/images' => resource_path('images'),
         ], ['core-assets', 'enso-assets']);

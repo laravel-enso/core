@@ -12,7 +12,8 @@
     "homepage": "https://github.com/laravel-enso/Core",
     "type": "library",
     "license": "MIT",
-    "authors": [{
+    "authors": [
+        {
             "name": "Adrian Ocneanu",
             "email": "aocneanu@gmail.com",
             "homepage": "https://laravel-enso.com",
@@ -32,7 +33,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
+        "php": ">=8.0",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.3",

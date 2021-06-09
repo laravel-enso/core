@@ -14,16 +14,16 @@ class Websockets
         $this->channels = new Collection();
     }
 
-    public function register($channels)
+    public function register($channels): void
     {
-        (new Collection($channels))
+        Collection::wrap($channels)
             ->each(fn ($channel, $key) => $this->channels
                 ->put($key, $channel));
     }
 
-    public function remove($aliases)
+    public function remove($aliases): void
     {
-        (new Collection($aliases))
+        Collection::wrap($aliases)
             ->each(fn ($alias) => $this->channels->forget($alias));
     }
 

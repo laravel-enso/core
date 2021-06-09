@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Core\Services;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
@@ -10,26 +9,20 @@ class Version
 {
     private const Endpoint = 'https://api.github.com/repos/laravel-enso/enso/releases/latest';
 
-    private $release;
+    private string $release;
 
-    public function __construct()
+    public function latest(): string
     {
-        $this->channels = new Collection();
+        return $this->release
+            ??= Http::get(self::Endpoint)->throw()->json('tag_name');
     }
 
-    public function latest()
-    {
-        $this->release ??= Http::get(self::Endpoint)->json();
-
-        return $this->release['tag_name'] ?? null;
-    }
-
-    public function current()
+    public function current(): string
     {
         return Config::get('enso.config.version');
     }
 
-    public function isOutdated()
+    public function isOutdated(): bool
     {
         return $this->current() !== $this->latest();
     }

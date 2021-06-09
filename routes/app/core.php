@@ -8,5 +8,5 @@ Route::prefix('core')
     ->group(function () {
         Route::get('home', Spa::class)->name('home.index');
 
-        require 'core/preferences.php';
+        require __DIR__.'/core/preferences.php';
     });

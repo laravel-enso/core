@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Core;
 
+use Closure;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -23,9 +24,14 @@ class WebsocketServiceProvider extends ServiceProvider
     {
         Websockets::register([
             'appUpdates' => 'app-updates',
-            'private' => fn (User $user) => (new Collection(
-                explode('\\', Config::get('auth.providers.users.model'))
-            ))->push($user->id)->implode('.'),
+            'private' => $this->private(),
         ]);
+    }
+
+    private function private(): Closure
+    {
+        $segments = explode('\\', Config::get('auth.providers.users.model'));
+
+        return fn (User $user) => Collection::wrap([...$segments, $user->id])->implode('.');
     }
 }
