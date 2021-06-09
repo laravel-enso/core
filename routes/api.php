@@ -14,5 +14,5 @@ Route::prefix('api')
             ->group(fn () => Route::get('/sentry', Sentry::class)->name('sentry'));
 
         Route::middleware(['api', 'auth', 'core'])
-            ->group(fn () require __DIR__.'/app/core.php');
+            ->group(fn () => require __DIR__.'/app/core.php');
     });
