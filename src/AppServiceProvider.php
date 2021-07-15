@@ -12,6 +12,7 @@ use LaravelEnso\Core\Commands\ClearPreferences;
 use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Commands\Version;
+use LaravelEnso\Core\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Services\Websockets;
@@ -55,6 +56,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware(
             'xss-sanitizer',
             XssSanitizer::class
+        );
+
+        $this->app['router']->aliasMiddleware(
+            'ensure-frontent-requests-are-stateful',
+            EnsureFrontendRequestsAreStateful::class
         );
 
         $this->app['router']->middlewareGroup('core-api', [
