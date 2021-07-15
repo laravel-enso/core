@@ -4,6 +4,7 @@ namespace LaravelEnso\Core;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
+use LaravelEnso\Core\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
@@ -22,6 +23,11 @@ class MiddlewareServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware(
             'xss-sanitizer',
             XssSanitizer::class
+        );
+
+        $this->app['router']->aliasMiddleware(
+            'ensure-frontent-requests-are-stateful',
+            EnsureFrontendRequestsAreStateful::class
         );
 
         $this->app['router']->middlewareGroup('core-api', [
