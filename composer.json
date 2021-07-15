@@ -82,6 +82,7 @@
                 "LaravelEnso\\Core\\BroadcastServiceProvider",
                 "LaravelEnso\\Core\\EventServiceProvider",
                 "LaravelEnso\\Core\\PasswordServiceProvider",
+                "LaravelEnso\\Core\\MiddlewareServiceProvider",
                 "LaravelEnso\\Core\\WebsocketServiceProvider"
             ]
         }
