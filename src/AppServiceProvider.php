@@ -6,21 +6,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\Commands\ClearPreferences;
 use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Commands\Version;
-use LaravelEnso\Core\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
-use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use LaravelEnso\Core\Services\Websockets;
 use LaravelEnso\Helpers\Services\Dummy;
 use LaravelEnso\Helpers\Services\FactoryResolver;
-use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
-use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
-use LaravelEnso\Permissions\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,8 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         JsonResource::withoutWrapping();
 
-        $this->loadMiddleware()
-            ->loadDependencies()
+        $this->loadDependencies()
             ->publishDependencies()
             ->publishResources()
             ->setFactoryResolver()
@@ -44,41 +36,6 @@ class AppServiceProvider extends ServiceProvider
                 UpdateGlobalPreferences::class,
                 Version::class,
             );
-    }
-
-    private function loadMiddleware()
-    {
-        $this->app['router']->aliasMiddleware(
-            'verify-active-state',
-            VerifyActiveState::class
-        );
-
-        $this->app['router']->aliasMiddleware(
-            'xss-sanitizer',
-            XssSanitizer::class
-        );
-
-        $this->app['router']->aliasMiddleware(
-            'ensure-frontent-requests-are-stateful',
-            EnsureFrontendRequestsAreStateful::class
-        );
-
-        $this->app['router']->middlewareGroup('core-api', [
-            VerifyActiveState::class,
-            ActionLogger::class,
-            VerifyRouteAccess::class,
-            SetLanguage::class,
-        ]);
-
-        $this->app['router']->middlewareGroup('core', [
-            VerifyActiveState::class,
-            ActionLogger::class,
-            Impersonate::class,
-            VerifyRouteAccess::class,
-            SetLanguage::class,
-        ]);
-
-        return $this;
     }
 
     private function loadDependencies()
