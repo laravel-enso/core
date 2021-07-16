@@ -24,13 +24,6 @@ class MiddlewareServiceProvider extends ServiceProvider
         $this->app['router']
             ->aliasMiddleware('ensure-frontent-requests-are-stateful', Stateful::class);
 
-        $this->app['router']->middlewareGroup('core-api', [
-            VerifyActiveState::class,
-            ActionLogger::class,
-            VerifyRouteAccess::class,
-            SetLanguage::class,
-        ]);
-
         $this->app['router']->middlewareGroup('core', [
             VerifyActiveState::class,
             ActionLogger::class,
