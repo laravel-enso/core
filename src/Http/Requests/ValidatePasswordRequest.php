@@ -3,7 +3,9 @@
 namespace LaravelEnso\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use LaravelEnso\Core\Models\User;
+use Illuminate\Validation\Rules\Password;
+use LaravelEnso\Core\Rules\DistinctPassword;
+use LaravelEnso\Users\Models\User;
 
 class ValidatePasswordRequest extends FormRequest
 {
@@ -16,24 +18,18 @@ class ValidatePasswordRequest extends FormRequest
     {
         return [
             'email' => 'exists:users,email',
-            'password' => 'nullable|confirmed|min:'.config('enso.auth.password.minLength'),
+            'password' => [
+                'nullable',
+                'confirmed',
+                Password::defaults(),
+                new DistinctPassword($this->currentUser()),
+            ],
         ];
     }
 
-    public function withValidator($validator)
+    protected function currentUser()
     {
-        if ($this->filled('email', 'password')) {
-            $this->validatePassword($validator);
-        }
-    }
-
-    protected function validatePassword($validator)
-    {
-        $user = $this->route('user')
+        return $this->route('user')
             ?? User::whereEmail($this->get('email'))->first();
-
-        $validator->after(fn ($validator) => (new PasswordValidator(
-            $this, $validator, $user
-        ))->handle());
     }
 }

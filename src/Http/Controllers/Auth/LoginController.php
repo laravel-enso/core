@@ -2,15 +2,15 @@
 
 namespace LaravelEnso\Core\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\LoginController as Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use LaravelEnso\Core\Events\Login;
-use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Traits\Logout;
+use LaravelEnso\Users\Models\User;
 
 class LoginController extends Controller
 {
@@ -82,7 +82,7 @@ class LoginController extends Controller
     {
         $user = User::whereEmail($request->input('email'))->first();
 
-        if (! optional($user)->currentPasswordIs($request->input('password'))) {
+        if (! $user?->currentPasswordIs($request->input('password'))) {
             return;
         }
 

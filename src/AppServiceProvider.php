@@ -2,63 +2,40 @@
 
 namespace LaravelEnso\Core;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\Commands\ClearPreferences;
 use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
-use LaravelEnso\Core\Commands\Upgrade;
-use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
-use LaravelEnso\Localisation\Http\Middleware\SetLanguage;
-use LaravelEnso\Permissions\Http\Middleware\VerifyRouteAccess;
+use LaravelEnso\Core\Commands\Version;
+use LaravelEnso\Core\Services\Websockets;
+use LaravelEnso\Helpers\Services\Dummy;
+use LaravelEnso\Helpers\Services\FactoryResolver;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public $singletons = [
+        'websockets' => Websockets::class,
+    ];
+
     public function boot()
     {
         JsonResource::withoutWrapping();
 
-        $this->loadMiddleware()
-            ->loadDependencies()
+        $this->loadDependencies()
             ->publishDependencies()
             ->publishResources()
-            ->mapMorphs()
+            ->setFactoryResolver()
             ->commands(
                 AnnounceAppUpdate::class,
                 ClearPreferences::class,
                 ResetStorage::class,
                 UpdateGlobalPreferences::class,
-                Upgrade::class
+                Version::class,
             );
-    }
-
-    private function loadMiddleware()
-    {
-        $this->app['router']->aliasMiddleware(
-            'verify-active-state',
-            VerifyActiveState::class
-        );
-
-        $this->app['router']->middlewareGroup('core-api', [
-            VerifyActiveState::class,
-            ActionLogger::class,
-            VerifyRouteAccess::class,
-            SetLanguage::class,
-        ]);
-
-        $this->app['router']->middlewareGroup('core', [
-            VerifyActiveState::class,
-            ActionLogger::class,
-            Impersonate::class,
-            VerifyRouteAccess::class,
-            SetLanguage::class,
-        ]);
-
-        return $this;
     }
 
     private function loadDependencies()
@@ -68,6 +45,8 @@ class AppServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'enso.config');
 
         $this->mergeConfigFrom(__DIR__.'/../config/auth.php', 'enso.auth');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/state.php', 'enso.state');
 
         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 
@@ -89,10 +68,6 @@ class AppServiceProvider extends ServiceProvider
         ], ['core-preferences', 'enso-preferences']);
 
         $this->publishes([
-            __DIR__.'/../database/factories' => database_path('factories'),
-        ], ['core-factories', 'enso-factories']);
-
-        $this->publishes([
             __DIR__.'/../database/seeds' => database_path('seeds'),
         ], ['core-seeders', 'enso-seeders']);
 
@@ -102,23 +77,23 @@ class AppServiceProvider extends ServiceProvider
     private function publishResources()
     {
         $this->publishes([
-            __DIR__.'/../storage' => storage_path('app'),
-        ], 'core-storage');
-
-        $this->publishes([
             __DIR__.'/../resources/images' => resource_path('images'),
-        ], 'core-assets');
+        ], ['core-assets', 'enso-assets']);
 
         $this->publishes([
             __DIR__.'/../resources/views/mail' => resource_path('views/vendor/mail'),
-        ], 'enso-email');
+        ], ['core-email', 'enso-email']);
 
         return $this;
     }
 
-    private function mapMorphs()
+    private function setFactoryResolver()
     {
-        User::morphMap();
+        Factory::guessFactoryNamesUsing(new FactoryResolver());
+
+        if (! class_exists('\Faker\Generator')) {
+            App::bind(\Faker\Generator::class, Dummy::class);
+        }
 
         return $this;
     }

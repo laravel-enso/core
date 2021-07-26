@@ -12,7 +12,8 @@
     "homepage": "https://github.com/laravel-enso/Core",
     "type": "library",
     "license": "MIT",
-    "authors": [{
+    "authors": [
+        {
             "name": "Adrian Ocneanu",
             "email": "aocneanu@gmail.com",
             "homepage": "https://laravel-enso.com",
@@ -32,17 +33,15 @@
         }
     ],
     "require": {
-        "php": ">=7.4.0",
-        "guzzlehttp/guzzle": "~6.0",
+        "php": ">=8.0",
         "jenssegers/agent": "^2.6",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.3",
         "laravel-enso/action-logger": "^3.0",
         "laravel-enso/avatars": "^3.0",
         "laravel-enso/charts": "^4.0",
         "laravel-enso/companies": "^3.0",
         "laravel-enso/data-export": "^2.0",
-        "laravel-enso/data-import": "^5.0",
         "laravel-enso/dynamic-methods": "^2.0",
         "laravel-enso/enums": "^2.0",
         "laravel-enso/files": "^4.0",
@@ -61,24 +60,30 @@
         "laravel-enso/rememberable": "^3.0",
         "laravel-enso/roles": "^4.0",
         "laravel-enso/searchable": "^2.0",
+        "laravel-enso/sentry": "^1.0",
         "laravel-enso/select": "^4.0",
-        "laravel-enso/teams": "^3.0",
         "laravel-enso/track-who": "^2.0",
         "laravel-enso/tables": "^4.0",
-        "laravel-enso/upgrade": "^2.0"
+        "laravel-enso/upgrade": "^2.0",
+        "laravel-enso/users": "^1.0",
+        "voku/anti-xss": "^4.1"
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Core\\": "src/"
+            "LaravelEnso\\Core\\": "src/",
+            "LaravelEnso\\Core\\Database\\Factories\\": "database/factories/",
+            "LaravelEnso\\Core\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
                 "LaravelEnso\\Core\\AppServiceProvider",
-                "LaravelEnso\\Core\\AuthServiceProvider",
                 "LaravelEnso\\Core\\BroadcastServiceProvider",
-                "LaravelEnso\\Core\\EventServiceProvider"
+                "LaravelEnso\\Core\\EventServiceProvider",
+                "LaravelEnso\\Core\\PasswordServiceProvider",
+                "LaravelEnso\\Core\\MiddlewareServiceProvider",
+                "LaravelEnso\\Core\\WebsocketServiceProvider"
             ]
         }
     }

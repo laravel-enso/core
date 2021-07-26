@@ -5,19 +5,22 @@ namespace LaravelEnso\Core\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ResetStorage extends Command
 {
     private const Folders = ['avatars', 'exports', 'files', 'howToVideos', 'imports', 'pictures'];
     private const TestingFolder = 'testing';
 
-    protected $signature = 'enso:storage:reset';
+    protected $signature = 'enso:storage:reset {--include=}';
 
     protected $description = 'Run this after php artisan migrate:fresh to clear the storage';
 
     public function handle()
     {
-        (new Collection(self::Folders))
+        $include = Str::of($this->option('include'))->explode(',');
+
+        Collection::wrap(self::Folders)->concat($include)->filter()
             ->each(fn ($directory) => $this->reset($directory));
 
         if (in_array(self::TestingFolder, Storage::directories())) {
@@ -28,7 +31,7 @@ class ResetStorage extends Command
     private function reset($directory): void
     {
         if (Storage::has($directory)) {
-            (new Collection(Storage::files($directory)))
+            Collection::wrap(Storage::files($directory))
                 ->each(fn ($file) => Storage::delete($file));
 
             return;

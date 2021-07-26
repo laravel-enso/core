@@ -37,6 +37,7 @@ class GuestState implements Responsable
         return [
             App::getLocale() => [
                 'Email' => __('Email'),
+                'Mobile' => __('Mobile'),
                 'Password' => __('Password'),
                 'Remember me' => __('Remember me'),
                 'Forgot password' => __('Forgot password'),
@@ -53,7 +54,7 @@ class GuestState implements Responsable
     {
         $authRoutes = new Collection(['login', 'password.email', 'password.reset']);
 
-        return (new Collection(Route::getRoutes()->getRoutesByName()))
+        return Collection::wrap(Route::getRoutes()->getRoutesByName())
             ->filter(fn ($route, $name) => $authRoutes->contains($name))
             ->map(fn ($route) => (new Collection($route))
                 ->only(['uri', 'methods'])

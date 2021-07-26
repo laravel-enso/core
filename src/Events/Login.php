@@ -4,21 +4,17 @@ namespace LaravelEnso\Core\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use LaravelEnso\Core\Models\User;
+use LaravelEnso\Users\Models\User;
 
 class Login
 {
     use Dispatchable, SerializesModels;
 
-    private User $user;
-    private string $ip;
-    private string $userAgent;
-
-    public function __construct(User $user, string $ip, string $userAgent)
-    {
-        $this->user = $user;
-        $this->ip = $ip;
-        $this->userAgent = $userAgent;
+    public function __construct(
+        private User $user,
+        private string $ip,
+        private string $userAgent
+    ) {
     }
 
     public function user(): User

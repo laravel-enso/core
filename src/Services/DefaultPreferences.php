@@ -8,8 +8,8 @@ class DefaultPreferences
 {
     public static function data(): object
     {
-        return (new JsonReader(
-            resource_path('preferences.json')
-        ))->object();
+        $path = resource_path('preferences.json');
+
+        return (new JsonReader($path))->object();
     }
 }

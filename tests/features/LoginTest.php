@@ -1,11 +1,13 @@
 <?php
 
+namespace LaravelEnso\Core\Tests;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\PersonalAccessToken;
-use LaravelEnso\Core\Models\User;
+use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -23,8 +25,6 @@ class LoginTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        // $this->withoutExceptionHandling();
 
         $this->seed();
 
@@ -62,7 +62,6 @@ class LoginTest extends TestCase
 
         $this->assertTokenAuthenticate($response->json('token'));
     }
-
 
     /** @test */
     public function can_authenticate_token_api()
@@ -102,7 +101,7 @@ class LoginTest extends TestCase
     {
         $response = $this->loginApi();
 
-        $response = $this->post(route('logout'), [], [
+        $this->post(route('logout'), [], [
             'Authorization' => 'Bearer '.$response->json('token'),
         ]);
 

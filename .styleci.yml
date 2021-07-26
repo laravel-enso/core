@@ -1,6 +1,7 @@
 risky: true
 
 preset: laravel
+version: 8
 
 enabled:
   - strict

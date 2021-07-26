@@ -43,8 +43,8 @@ class UpdateGlobalPreferences extends Command
 
     private function diff($meta)
     {
-        return (new Collection($this->default()->global))->keys()
-            ->diff((new Collection($meta->global))->keys());
+        return Collection::wrap($this->default()->global)->keys()
+            ->diff(Collection::wrap($meta->global)->keys());
     }
 
     private function default()

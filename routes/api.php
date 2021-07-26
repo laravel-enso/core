@@ -1,20 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use LaravelEnso\Core\Http\Controllers\Guest;
 
-Route::namespace('LaravelEnso\Core\Http\Controllers')
-    ->prefix('api')
+Route::prefix('api')
     ->group(function () {
-        Route::get('/meta', 'Guest')->name('meta');
+        Route::get('/meta', Guest::class)->name('meta');
 
-        require 'app/auth.php';
-
-        Route::middleware(['api', 'auth'])
-            ->group(fn () => Route::get('/sentry', 'Sentry')->name('sentry'));
+        require __DIR__.'/app/auth.php';
 
         Route::middleware(['api', 'auth', 'core'])
-            ->group(function () {
-                require 'app/core.php';
-                require 'app/administration.php';
-            });
+            ->group(fn () => require __DIR__.'/app/core.php');
     });

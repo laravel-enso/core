@@ -3,7 +3,6 @@
 namespace LaravelEnso\Core\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Event;
 use LaravelEnso\Core\Events\AppUpdate;
 
 class AnnounceAppUpdate extends Command
@@ -14,7 +13,7 @@ class AnnounceAppUpdate extends Command
 
     public function handle()
     {
-        Event::dispatch(new AppUpdate());
+        AppUpdate::dispatch();
 
         $this->info('Users will be notified.');
     }

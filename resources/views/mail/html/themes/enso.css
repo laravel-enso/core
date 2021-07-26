@@ -179,6 +179,18 @@ img {
     -premailer-width: 100%;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
 .table th {
     color: #3c4751;
     border-bottom: 1px solid #edeff2;
@@ -189,7 +201,7 @@ img {
     color: #3c4751;
     font-size: 15px;
     line-height: 18px;
-    padding: 10px 0;
+    padding: 10px 2px;
 }
 
 .content-cell {

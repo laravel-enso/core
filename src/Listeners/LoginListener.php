@@ -17,9 +17,8 @@ class LoginListener
         ]);
 
         if ($event->user()->needsPasswordChange()) {
-            $event->user()->notify(
-                (new PasswordExpiresSoon())->onQueue('notifications')
-            );
+            $event->user()->notify((new PasswordExpiresSoon())
+                ->onQueue('notifications'));
         }
     }
 }

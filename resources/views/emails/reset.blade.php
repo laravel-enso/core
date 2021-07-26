@@ -8,6 +8,7 @@
 {{ __('Set your new password') }}
 @endcomponent
 
-{{ __('Thank you') }},<br>
-{{ __(config('app.name')) }}
+@lang('Regards'),
+<br>
+{{ config('app.name') }}
 @endcomponent
