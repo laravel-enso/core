@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\Services\State;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -30,7 +31,7 @@ class Builder
     private function state(Source $source): Collection
     {
         return $source->providers()
-            ->map(fn ($provider) => new $provider)
+            ->map(fn ($provider) => App::make($provider))
             ->map(fn ($provider) => [
                 'mutation' => $provider->mutation(),
                 'state' => $provider->state(),
