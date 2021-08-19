@@ -12,22 +12,15 @@ class AppUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string $title;
     public string $message;
-    public string $tooltip;
 
     public $queue;
 
-    private string $name;
-
     public function __construct()
     {
-        $this->name = 'new-update';
         $this->queue = 'notifications';
 
-        $this->title = 'Important';
-        $this->message = 'The application was updated, please save your work & refresh your browser';
-        $this->tooltip = 'Save your work then click here to refresh your page and update to the latest application version';
+        $this->message = 'The application was updated, please refresh your page to load the latest application version';
     }
 
     public function broadcastOn()
@@ -37,6 +30,6 @@ class AppUpdate implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return $this->name;
+        return 'app-update';
     }
 }
