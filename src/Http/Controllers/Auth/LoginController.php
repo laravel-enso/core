@@ -8,14 +8,16 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
-use LaravelEnso\Core\Events\Login;
+use LaravelEnso\Core\Events\Login as Event;
+use LaravelEnso\Core\Traits\Login as Login;
 use LaravelEnso\Core\Traits\Logout;
 use LaravelEnso\Users\Models\User;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers, Logout {
+    use AuthenticatesUsers, Logout, Login {
         Logout::logout insteadof AuthenticatesUsers;
+        Login::login insteadof AuthenticatesUsers;
     }
 
     protected $redirectTo = '/';
@@ -39,7 +41,7 @@ class LoginController extends Controller
             Auth::guard('web')->login($this->user, $request->input('remember'));
         }
 
-        Login::dispatch($this->user, $request->ip(), $request->header('User-Agent'));
+        Event::dispatch($this->user, $request->ip(), $request->header('User-Agent'));
 
         return true;
     }
