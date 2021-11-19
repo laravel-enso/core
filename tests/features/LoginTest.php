@@ -3,6 +3,7 @@
 namespace LaravelEnso\Core\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\TestResponse;
@@ -30,7 +31,7 @@ class LoginTest extends TestCase
 
         $this->testModel = $this->user();
 
-        $this->spaGuard = Config::get('sanctum.guard', 'web');
+        $this->spaGuard = Arr::wrap(Config::get('sanctum.guard', 'web'))[0];
 
         Config::set('sanctum.stateful', [self::SpaUrl]);
     }
