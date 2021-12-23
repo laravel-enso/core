@@ -25,7 +25,6 @@ class Meta implements ProvidesState
             'dateFormat' => Config::get('enso.config.dateFormat'),
             'dateTimeFormat' => Config::get('enso.config.dateFormat').' H:i:s',
             'extendedDocumentTitle' => Config::get('enso.config.extendedDocumentTitle'),
-            'csrfToken' => csrf_token(),
             'sentryDsn' => Config::get('sentry.dsn'),
         ];
     }
