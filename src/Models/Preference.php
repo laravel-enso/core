@@ -9,8 +9,8 @@ class Preference extends Model
 {
     use Rememberable;
 
+    protected array $rememberableKeys = ['id', 'user_id'];
     protected $guarded = ['id'];
-
     protected $casts = ['value' => 'object'];
 
     public function user()
