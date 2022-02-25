@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Validation\ValidationException;
 use LaravelEnso\Core\Events\Login as Event;
-use LaravelEnso\Core\Traits\Login as Login;
+use LaravelEnso\Core\Traits\Login;
 use LaravelEnso\Core\Traits\Logout;
 use LaravelEnso\Users\Models\User;
 
