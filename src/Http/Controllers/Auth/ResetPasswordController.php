@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use LaravelEnso\Core\Http\Requests\ValidatePasswordRequest;
+use LaravelEnso\Core\Http\Requests\ValidatePassword;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ResetPasswordController extends Controller
@@ -18,7 +18,7 @@ class ResetPasswordController extends Controller
 
     protected $redirectTo = '/login';
 
-    public function attemptReset(ValidatePasswordRequest $request)
+    public function attemptReset(ValidatePassword $request)
     {
         return $this->reset($request);
     }
