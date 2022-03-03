@@ -22,7 +22,7 @@ class ValidatePassword extends FormRequest
                 'nullable',
                 'confirmed',
                 Password::defaults(),
-                new DistinctPassword($this->currentUser()),
+                $this->distinctPassword(),
             ],
         ];
     }
@@ -31,5 +31,14 @@ class ValidatePassword extends FormRequest
     {
         return $this->route('user')
             ?? User::whereEmail($this->get('email'))->first();
+    }
+
+    private function distinctPassword(): ?DistinctPassword
+    {
+        $user = $this->currentUser();
+
+        return $user
+            ? new DistinctPassword($this->currentUser())
+            : null;
     }
 }
