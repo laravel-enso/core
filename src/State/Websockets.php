@@ -20,6 +20,7 @@ class Websockets implements ProvidesState
                 'key' => Config::get('broadcasting.connections.pusher.key'),
                 'options' => Config::get('broadcasting.connections.pusher.options'),
             ],
+            'authEndpoint' => '/api/broadcasting/auth',
             'channels' => Facade::all(),
         ];
     }

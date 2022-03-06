@@ -19,13 +19,14 @@ class Meta implements ProvidesState
         return [
             'appName' => Config::get('app.name'),
             'appUrl' => url('/').'/',
-            'version' => Config::get('enso.config.version'),
-            'quote' => Inspiring::quote(),
-            'env' => App::environment(),
+            'csrfToken' => csrf_token(),
             'dateFormat' => Config::get('enso.config.dateFormat'),
             'dateTimeFormat' => Config::get('enso.config.dateFormat').' H:i:s',
+            'env' => App::environment(),
             'extendedDocumentTitle' => Config::get('enso.config.extendedDocumentTitle'),
+            'quote' => Inspiring::quote(),
             'sentryDsn' => Config::get('sentry.dsn'),
+            'version' => Config::get('enso.config.version'),
         ];
     }
 }
