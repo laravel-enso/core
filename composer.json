@@ -45,7 +45,7 @@
         "laravel-enso/dynamic-methods": "^3.0",
         "laravel-enso/files": "^5.0",
         "laravel-enso/forms": "^4.0",
-        "laravel-enso/helpers": "^2.0",
+        "laravel-enso/helpers": "^3.0",
         "laravel-enso/history-tracker": "^2.0",
         "laravel-enso/impersonate": "^3.2",
         "laravel-enso/io": "^2.3",
