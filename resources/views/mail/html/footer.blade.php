@@ -8,21 +8,28 @@
                         <a href="{{ config('enso.config.facebook') }}">
                             <img src="{{ url('images/emails/facebook.svg') }}"
                                 alt="facebook"
-                                style="max-width: 48px">
+                                style="max-width: 32px">
                         </a>
                     @endif
                     @if(config('enso.config.instagram'))
                         <a href="{{ config('enso.config.instagram') }}">
                             <img src="{{ url('images/emails/instagram.svg') }}"
                                 alt="instagram"
-                                style="max-width: 48px">
+                                style="max-width: 32px">
                         </a>
                     @endif
                     @if(config('enso.config.twitter'))
                         <a href="{{ config('enso.config.twitter') }}">
                             <img src="{{ url('images/emails/twitter.svg') }}"
                                 alt="twitter"
-                                style="max-width: 48px">
+                                style="max-width: 32px">
+                        </a>
+                    @endif
+                    @if(config('enso.config.tiktok'))
+                        <a href="{{ config('enso.config.tiktok') }}">
+                            <img src="{{ url('images/emails/tiktok.svg') }}"
+                                alt="tiktok"
+                                style="max-width: 32px">
                         </a>
                     @endif
                     </p> 
