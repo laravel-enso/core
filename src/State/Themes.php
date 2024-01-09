@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Core\State;
 
+use Illuminate\Support\Facades\Config;
 use LaravelEnso\Core\Contracts\ProvidesState;
-use LaravelEnso\Core\Enums\Themes as Enum;
 
 class Themes implements ProvidesState
 {
@@ -14,6 +14,6 @@ class Themes implements ProvidesState
 
     public function state(): mixed
     {
-        return Enum::all();
+        return Config::get('enso.themes');
     }
 }
