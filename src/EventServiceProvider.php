@@ -11,7 +11,7 @@ use LaravelEnso\Core\Listeners\PasswordResetListener;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        Login::class => [LoginListener::class],
+        Login::class         => [LoginListener::class],
         PasswordReset::class => [PasswordResetListener::class],
     ];
 }

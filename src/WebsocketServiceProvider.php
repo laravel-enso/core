@@ -24,7 +24,7 @@ class WebsocketServiceProvider extends ServiceProvider
     {
         Websockets::register([
             'appUpdates' => 'app-updates',
-            'private' => $this->private(),
+            'private'    => $this->private(),
         ]);
     }
 

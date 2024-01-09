@@ -9,7 +9,8 @@ use Illuminate\Routing\Controller;
 
 class ForgotPasswordController extends Controller
 {
-    use ValidatesRequests, SendsPasswordResetEmails;
+    use ValidatesRequests;
+    use SendsPasswordResetEmails;
 
     protected function sendResetLinkResponse(Request $request, $response)
     {

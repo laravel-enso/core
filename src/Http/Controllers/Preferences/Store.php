@@ -17,7 +17,8 @@ class Store extends Controller
         }
 
         Auth::user()->storeLocalPreferences(
-            $request->get('route'), $request->get('value')
+            $request->get('route'),
+            $request->get('value')
         );
     }
 }

@@ -20,7 +20,7 @@ class UpdateGlobalPreferences extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', [
-            '--tag' => 'core-preferences',
+            '--tag'   => 'core-preferences',
             '--force' => true,
         ]);
 

@@ -11,8 +11,8 @@ class LoginListener
     public function handle(Event $event)
     {
         Login::create([
-            'user_id' => $event->user()->id,
-            'ip' => $event->ip(),
+            'user_id'    => $event->user()->id,
+            'ip'         => $event->ip(),
             'user_agent' => $event->userAgent(),
         ]);
 

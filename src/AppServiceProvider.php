@@ -91,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Factory::guessFactoryNamesUsing(new FactoryResolver());
 
-        if (! class_exists('\Faker\Generator')) {
+        if (!class_exists('\Faker\Generator')) {
             App::bind(\Faker\Generator::class, Dummy::class);
         }
 

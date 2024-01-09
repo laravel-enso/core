@@ -30,7 +30,7 @@ class PasswordExpiresSoon extends Notification implements ShouldQueue
         return (new BroadcastMessage([
             'level' => 'warning',
             'title' => __('Your password will expire soon'),
-            'body' => $this->body($notifiable),
+            'body'  => $this->body($notifiable),
         ]))->onQueue($this->queue);
     }
 

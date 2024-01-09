@@ -17,11 +17,11 @@ class Websockets implements ProvidesState
     {
         return [
             'pusher' => [
-                'key' => Config::get('broadcasting.connections.pusher.key'),
+                'key'     => Config::get('broadcasting.connections.pusher.key'),
                 'options' => Config::get('broadcasting.connections.pusher.options'),
             ],
             'authEndpoint' => '/api/broadcasting/auth',
-            'channels' => Facade::all(),
+            'channels'     => Facade::all(),
         ];
     }
 }

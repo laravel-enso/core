@@ -16,7 +16,7 @@ class DistinctPassword implements Rule
 
     public function passes($attribute, $value)
     {
-        return ! $value || ! $this->user->currentPasswordIs($value);
+        return !$value || !$this->user->currentPasswordIs($value);
     }
 
     public function message()

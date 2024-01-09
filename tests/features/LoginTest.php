@@ -130,8 +130,8 @@ class LoginTest extends TestCase
     private function loginApi($password = null, $referer = null): TestResponse
     {
         return $this->post(route('login'), [
-            'email' => $this->testModel->email,
-            'password' => $password ?? self::Password,
+            'email'       => $this->testModel->email,
+            'password'    => $password ?? self::Password,
             'device_name' => 'mobile',
         ], [
             'referer' => $referer,
@@ -141,7 +141,7 @@ class LoginTest extends TestCase
     private function loginSpa($password = null): TestResponse
     {
         return $this->post(route('login'), [
-            'email' => $this->testModel->email,
+            'email'    => $this->testModel->email,
             'password' => $password ?? self::Password,
         ], ['referer' => self::SpaUrl]);
     }

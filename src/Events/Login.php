@@ -8,7 +8,8 @@ use LaravelEnso\Users\Models\User;
 
 class Login
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public function __construct(
         private User $user,

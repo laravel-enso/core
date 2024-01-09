@@ -17,7 +17,7 @@ class ValidatePassword extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'exists:users,email',
+            'email'    => 'exists:users,email',
             'password' => [
                 'nullable',
                 'confirmed',

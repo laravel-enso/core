@@ -34,7 +34,7 @@ class Builder
             ->map(fn ($provider) => App::make($provider))
             ->map(fn ($provider) => [
                 'mutation' => $provider->mutation(),
-                'state' => $provider->state(),
+                'state'    => $provider->state(),
             ]);
     }
 }

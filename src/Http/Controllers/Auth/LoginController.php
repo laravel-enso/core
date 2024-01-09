@@ -33,7 +33,7 @@ class LoginController extends Controller
     {
         $this->user = $this->loggableUser($request);
 
-        if (! $this->user) {
+        if (!$this->user) {
             return false;
         }
 
@@ -54,7 +54,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return [
-                'auth' => Auth::check(),
+                'auth'      => Auth::check(),
                 'csrfToken' => csrf_token(),
             ];
         }
@@ -70,10 +70,10 @@ class LoginController extends Controller
     {
         $attributes = [
             $this->username() => 'required|string',
-            'password' => 'required|string',
+            'password'        => 'required|string',
         ];
 
-        if (! $request->attributes->get('sanctum')) {
+        if (!$request->attributes->get('sanctum')) {
             $attributes['device_name'] = 'required|string';
         }
 
@@ -84,7 +84,7 @@ class LoginController extends Controller
     {
         $user = User::whereEmail($request->input('email'))->first();
 
-        if (! $user?->currentPasswordIs($request->input('password'))) {
+        if (!$user?->currentPasswordIs($request->input('password'))) {
             return;
         }
 

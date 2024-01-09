@@ -16,8 +16,8 @@ class GuestState implements Responsable
         }
 
         return [
-            'meta' => $this->meta(),
-            'i18n' => $this->i18n(),
+            'meta'   => $this->meta(),
+            'i18n'   => $this->i18n(),
             'routes' => $this->routes(),
         ];
     }
@@ -25,10 +25,10 @@ class GuestState implements Responsable
     protected function meta(): array
     {
         return [
-            'appName' => config('app.name'),
-            'appUrl' => url('/').'/',
+            'appName'               => config('app.name'),
+            'appUrl'                => url('/').'/',
             'extendedDocumentTitle' => config('enso.config.extendedDocumentTitle'),
-            'showQuote' => config('enso.config.showQuote'),
+            'showQuote'             => config('enso.config.showQuote'),
         ];
     }
 
@@ -36,16 +36,16 @@ class GuestState implements Responsable
     {
         return [
             App::getLocale() => [
-                'Email' => __('Email'),
-                'Mobile' => __('Mobile'),
-                'Password' => __('Password'),
-                'Remember me' => __('Remember me'),
-                'Forgot password' => __('Forgot password'),
-                'Login' => __('Login'),
+                'Email'                      => __('Email'),
+                'Mobile'                     => __('Mobile'),
+                'Password'                   => __('Password'),
+                'Remember me'                => __('Remember me'),
+                'Forgot password'            => __('Forgot password'),
+                'Login'                      => __('Login'),
                 'Send a reset password link' => __('Send a reset password link'),
-                'Repeat Password' => __('Repeat Password'),
-                'Success' => __('Success'),
-                'Error' => __('Error'),
+                'Repeat Password'            => __('Repeat Password'),
+                'Success'                    => __('Success'),
+                'Error'                      => __('Error'),
             ],
         ];
     }

@@ -14,7 +14,8 @@ use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 class ResetPasswordController extends Controller
 {
-    use ValidatesRequests, ResetsPasswords;
+    use ValidatesRequests;
+    use ResetsPasswords;
 
     protected $redirectTo = '/login';
 
