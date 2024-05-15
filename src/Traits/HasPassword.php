@@ -10,7 +10,7 @@ trait HasPassword
 {
     public function currentPasswordIs(string $password)
     {
-        return Hash::check($password, $this->password);
+        return $this->password && Hash::check($password, $this->password);
     }
 
     public function passwordExpired()
