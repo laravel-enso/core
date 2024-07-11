@@ -4,6 +4,7 @@ namespace LaravelEnso\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Rememberable\Traits\Rememberable;
+use LaravelEnso\Users\Models\User;
 
 class Preference extends Model
 {
