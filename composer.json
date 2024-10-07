@@ -33,10 +33,10 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": "^8.2",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^11.0",
-        "laravel/sanctum": "^3.2",
+        "laravel/sanctum": "^4.0",
         "laravel-enso/action-logger": "^3.1",
         "laravel-enso/avatars": "^4.0",
         "laravel-enso/charts": "^4.0",
