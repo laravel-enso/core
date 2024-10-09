@@ -32,7 +32,7 @@ trait HasPassword
 
     public function passwordExpiresIn()
     {
-        return $this->password_updated_at
+        return (int) $this->password_updated_at
             ->addDays((int) config('enso.auth.password.lifetime'))
             ->diffInDays(Carbon::now(), true);
     }
