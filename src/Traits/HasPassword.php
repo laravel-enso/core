@@ -17,8 +17,10 @@ trait HasPassword
     {
         $lifetime = (int) config('enso.auth.password.lifetime');
 
-        return $lifetime > 0 && ($this->password_updated_at === null
-            || ((int) now()->diffInDays($this->password_updated_at, true)) > $lifetime);
+        $updatedAt = $this->password_updated_at;
+
+        return $lifetime > 0 && ($updatedAt === null
+            || (int) Carbon::now()->diffInDays($updatedAt, true) > $lifetime);
     }
 
     public function needsPasswordChange()
@@ -30,7 +32,7 @@ trait HasPassword
 
     public function passwordExpiresIn()
     {
-        return $this->password_updated_at
+        return (int) $this->password_updated_at
             ->addDays((int) config('enso.auth.password.lifetime'))
             ->diffInDays(Carbon::now(), true);
     }
