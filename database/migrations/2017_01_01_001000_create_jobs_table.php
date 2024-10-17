@@ -14,9 +14,9 @@ return new class() extends Migration {
             $table->longText('payload');
             $table->tinyInteger('attempts')->unsigned();
 
-            $table->unsignedInteger('reserved_at')->nullable();
-            $table->unsignedInteger('available_at');
-            $table->unsignedInteger('created_at');
+            $table->integer('reserved_at')->unsigned()->nullable();
+            $table->integer('available_at')->unsigned();
+            $table->integer('created_at')->unsigned();
 
             $table->index(['queue', 'reserved_at']);
         });
