@@ -14,6 +14,7 @@ class Version extends Command
     public function handle()
     {
         $version = (new Service());
+
         $this->info("Current version is {$version->current()}");
 
         if ($version->isOutdated()) {

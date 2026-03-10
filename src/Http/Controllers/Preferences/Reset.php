@@ -9,6 +9,6 @@ class Reset extends Controller
 {
     public function __invoke(Request $request)
     {
-        $request->user()->resetPreferences();
+        $request->user()->preferences->reset();
     }
 }

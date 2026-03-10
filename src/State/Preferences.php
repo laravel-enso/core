@@ -12,8 +12,8 @@ class Preferences implements ProvidesState
         return 'preferences/set';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
-        return Auth::user()->preferences();
+        return Auth::user()->preferences->value;
     }
 }
