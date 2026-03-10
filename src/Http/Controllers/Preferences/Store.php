@@ -10,15 +10,12 @@ class Store extends Controller
 {
     public function __invoke(Request $request)
     {
+        $preferences = Auth::user()->preferences;
+
         if ($request->has('global')) {
-            Auth::user()->storeGlobalPreferences($request->get('global'));
-
-            return;
+            $preferences->setGlobal($request->get('global'));
+        } else {
+            $preferences->setLocal($request->get('route'), $request->get('value'));
         }
-
-        Auth::user()->storeLocalPreferences(
-            $request->get('route'),
-            $request->get('value')
-        );
     }
 }

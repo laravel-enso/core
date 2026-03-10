@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
-use LaravelEnso\Core\Commands\ClearPreferences;
+use LaravelEnso\Core\Commands\ResetPreferences;
 use LaravelEnso\Core\Commands\ResetStorage;
 use LaravelEnso\Core\Commands\UpdateGlobalPreferences;
 use LaravelEnso\Core\Commands\Version;
@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             ->setFactoryResolver()
             ->commands(
                 AnnounceAppUpdate::class,
-                ClearPreferences::class,
+                ResetPreferences::class,
                 ResetStorage::class,
                 UpdateGlobalPreferences::class,
                 Version::class,
@@ -64,10 +64,6 @@ class AppServiceProvider extends ServiceProvider
         ], ['core-config', 'enso-config']);
 
         $this->publishes([
-            __DIR__.'/../resources/preferences.json' => resource_path('preferences.json'),
-        ], ['core-preferences', 'enso-preferences']);
-
-        $this->publishes([
             __DIR__.'/../database/seeders' => database_path('seeders'),
         ], ['core-seeders', 'enso-seeders']);
 
@@ -91,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Factory::guessFactoryNamesUsing(new FactoryResolver());
 
-        if (!class_exists('\Faker\Generator')) {
+        if (! class_exists('\Faker\Generator')) {
             App::bind(\Faker\Generator::class, Dummy::class);
         }
 

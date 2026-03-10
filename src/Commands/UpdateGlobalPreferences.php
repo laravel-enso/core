@@ -4,10 +4,8 @@ namespace LaravelEnso\Core\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
-use LaravelEnso\Core\Models\Preference;
-use LaravelEnso\Core\Services\DefaultPreferences;
+use LaravelEnso\Core\Models\Preferences;
 
 class UpdateGlobalPreferences extends Command
 {
@@ -15,17 +13,12 @@ class UpdateGlobalPreferences extends Command
 
     protected $description = 'Adds new global preferences keys for users';
 
-    private $default;
+    private Preferences $default;
 
     public function handle()
     {
-        Artisan::call('vendor:publish', [
-            '--tag'   => 'core-preferences',
-            '--force' => true,
-        ]);
-
         DB::transaction(function () {
-            Preference::each(fn ($preference) => $this->update($preference));
+            Preferences::each(fn ($preference) => $this->update($preference));
         });
 
         $this->info('Preferences were successfully updated.');
@@ -33,22 +26,26 @@ class UpdateGlobalPreferences extends Command
 
     private function update($preference)
     {
-        $meta = $preference->value;
+        $current = $preference->global();
 
-        $this->diff($meta)
-            ->each(fn ($key) => $meta->global->{$key} = $this->default()->global->{$key});
+        $this->diff($current)
+            ->each(fn ($key) => $current[$key] = $this->default()->global($key));
 
-        $preference->update(['value' => $meta]);
+        $preference->value['global'] = $current;
+
+        $preference->update(['value' => $preference->value]);
     }
 
-    private function diff($meta)
+    private function diff($current)
     {
-        return Collection::wrap($this->default()->global)->keys()
-            ->diff(Collection::wrap($meta->global)->keys());
+        $global = $this->default->global();
+
+        return Collection::wrap($global)->keys()
+            ->diff(Collection::wrap($current)->keys());
     }
 
     private function default()
     {
-        return $this->default ??= DefaultPreferences::data();
+        return $this->default ??= Preferences::factory()->make();
     }
 }
