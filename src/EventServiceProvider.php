@@ -14,7 +14,7 @@ use LaravelEnso\Users\Models\User;
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        Login::class => [LoginListener::class],
+        Login::class         => [LoginListener::class],
         PasswordReset::class => [PasswordResetListener::class],
     ];
 

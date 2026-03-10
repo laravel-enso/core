@@ -20,12 +20,12 @@ class PreferencesFactory extends Factory
         return [
             'value' => [
                 'global' => [
-                    'lang' => 'en',
-                    'dtStateSave' => true,
+                    'lang'            => 'en',
+                    'dtStateSave'     => true,
                     'expandedSidebar' => true,
-                    'bookmarks' => true,
-                    'theme' => 'light',
-                    'toastrPosition' => 'bottom-right',
+                    'bookmarks'       => true,
+                    'theme'           => 'light',
+                    'toastrPosition'  => 'bottom-right',
                 ],
                 'local' => [],
             ],

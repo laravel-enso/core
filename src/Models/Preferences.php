@@ -10,7 +10,8 @@ use LaravelEnso\Users\Models\User;
 
 class Preferences extends Model
 {
-    use HasFactory, Rememberable;
+    use HasFactory;
+    use Rememberable;
 
     protected array $rememberableKeys = ['id', 'user_id'];
 
