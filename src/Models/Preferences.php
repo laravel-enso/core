@@ -42,16 +42,18 @@ class Preferences extends Model
 
     public function setGlobal(mixed $global): void
     {
-        $this->value['global'] = $global;
+        $value = $this->value;
+        $value['global'] = $global;
 
-        $this->update(['value' => $this->value]);
+        $this->update(['value' => $value]);
     }
 
     public function setLocal(string $route, mixed $local): void
     {
-        $this->value['local'][$route] = $local;
+        $value = $this->value;
+        $value['local'][$route] = $local;
 
-        $this->update(['value' => $this->value]);
+        $this->update(['value' => $value]);
     }
 
     public function setTheme(string $theme): void
