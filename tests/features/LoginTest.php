@@ -10,6 +10,7 @@ use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\PersonalAccessToken;
 use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LoginTest extends TestCase
 {
@@ -36,7 +37,7 @@ class LoginTest extends TestCase
         Config::set('sanctum.stateful', [self::SpaUrl]);
     }
 
-    /** @test */
+    #[Test]
     public function can_login_from_spa()
     {
         $response = $this->loginSpa();
@@ -46,7 +47,7 @@ class LoginTest extends TestCase
         $this->assertAuthenticatedAs($this->testModel, $this->spaGuard);
     }
 
-    /** @test */
+    #[Test]
     public function can_login_from_api()
     {
         $response = $this->loginApi();
@@ -54,7 +55,7 @@ class LoginTest extends TestCase
         $this->assertTokenAuthenticate($response->json('token'));
     }
 
-    /** @test */
+    #[Test]
     public function can_login_from_webview()
     {
         $response = $this->disableCookieEncryption()
@@ -64,7 +65,7 @@ class LoginTest extends TestCase
         $this->assertTokenAuthenticate($response->json('token'));
     }
 
-    /** @test */
+    #[Test]
     public function can_authenticate_token_api()
     {
         $response = $this->loginApi();
@@ -74,7 +75,7 @@ class LoginTest extends TestCase
         ])->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function can_authenticate_cookie_api()
     {
         $response = $this->loginApi();
@@ -85,7 +86,7 @@ class LoginTest extends TestCase
             ->assertOk();
     }
 
-    /** @test */
+    #[Test]
     public function can_logout_from_spa()
     {
         $this->loginSpa();
@@ -97,7 +98,7 @@ class LoginTest extends TestCase
         $this->assertFalse($this->isAuthenticated($this->spaGuard));
     }
 
-    /** @test */
+    #[Test]
     public function can_logout_from_api()
     {
         $response = $this->loginApi();
@@ -111,7 +112,7 @@ class LoginTest extends TestCase
         $this->assertTrue($this->testModel->tokens->isEmpty());
     }
 
-    /** @test */
+    #[Test]
     public function cannot_login_from_api()
     {
         $this->loginApi(self::WrongPassword);
@@ -119,7 +120,7 @@ class LoginTest extends TestCase
         $this->assertFalse($this->isAuthenticated('sanctum'));
     }
 
-    /** @test */
+    #[Test]
     public function cannot_login_from_spa()
     {
         $this->loginSpa(self::WrongPassword);

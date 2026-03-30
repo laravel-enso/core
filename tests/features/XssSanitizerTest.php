@@ -4,10 +4,11 @@ namespace LaravelEnso\Core\Tests;
 
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class XssSanitizerTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_sanitizes_nested_string_payloads(): void
     {
         $request = new class
@@ -41,7 +42,7 @@ class XssSanitizerTest extends TestCase
         $this->assertSame('World', $request->data()['meta']['body']);
     }
 
-    /** @test */
+    #[Test]
     public function it_leaves_non_string_values_untouched(): void
     {
         $request = new class
