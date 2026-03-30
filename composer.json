@@ -35,7 +35,7 @@
     "require": {
         "php": "^8.2",
         "jenssegers/agent": "^2.6",
-        "laravel/framework": "^13.0",
+        "laravel/framework": "^12.0|^13.0",
         "laravel/sanctum": "^4.0",
         "laravel-enso/action-logger": "^3.1",
         "laravel-enso/avatars": "^4.0",
@@ -64,8 +64,7 @@
         "laravel-enso/track-who": "^2.0",
         "laravel-enso/tables": "^4.0",
         "laravel-enso/upgrade": "^2.5",
-        "laravel-enso/users": "^2.0",
-        "voku/anti-xss": "^4.1"
+        "laravel-enso/users": "^2.0"
     },
     "autoload": {
         "psr-4": {
