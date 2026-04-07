@@ -3,19 +3,18 @@
 namespace LaravelEnso\Core\Tests;
 
 use LaravelEnso\Core\Http\Middleware\XssSanitizer;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 
 class XssSanitizerTest extends TestCase
 {
     #[Test]
     public function it_sanitizes_nested_string_payloads(): void
     {
-        $request = new class
-        {
+        $request = new class() {
             private array $data = [
                 'title' => '<b>Hello</b>',
-                'meta' => ['body' => '<div style="color:red" onclick="alert(1)">World</div>'],
+                'meta'  => ['body' => '<div style="color:red" onclick="alert(1)">World</div>'],
             ];
 
             public function all(array $fields): array
@@ -45,8 +44,7 @@ class XssSanitizerTest extends TestCase
     #[Test]
     public function it_leaves_non_string_values_untouched(): void
     {
-        $request = new class
-        {
+        $request = new class() {
             private array $data = [
                 'count' => 5,
                 'flags' => [true, false, null],

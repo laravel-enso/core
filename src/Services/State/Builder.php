@@ -44,7 +44,7 @@ class Builder
         return $source->providers()
             ->map(fn ($provider) => App::make($provider))
             ->map(fn ($provider) => [
-                'store' => $provider->store(),
+                'store'    => $provider->store(),
                 'state'    => $provider->state(),
             ]);
     }
