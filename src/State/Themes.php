@@ -7,13 +7,13 @@ use LaravelEnso\Core\Contracts\ProvidesState;
 
 class Themes implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'layout/setThemes';
+        return 'layout';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
-        return Config::get('enso.themes');
+        return ['themes' => Config::get('enso.themes')];
     }
 }

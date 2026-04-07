@@ -9,14 +9,14 @@ use LaravelEnso\Core\Services\Inspiring;
 
 class Meta implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'setMeta';
+        return 'app';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
-        return [
+        return ['meta' => [
             'appName'               => Config::get('app.name'),
             'appUrl'                => url('/').'/',
             'csrfToken'             => csrf_token(),
@@ -27,6 +27,6 @@ class Meta implements ProvidesState
             'quote'                 => Inspiring::quote(),
             'sentryDsn'             => Config::get('sentry.dsn'),
             'version'               => Config::get('enso.config.version'),
-        ];
+        ]];
     }
 }

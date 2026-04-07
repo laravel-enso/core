@@ -7,9 +7,9 @@ use LaravelEnso\Core\Contracts\ProvidesState;
 
 class Preferences implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'preferences/set';
+        return 'preferences';
     }
 
     public function state(): array

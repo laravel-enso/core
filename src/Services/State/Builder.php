@@ -15,6 +15,17 @@ class Builder
             ->map(fn ($source) => $this->state($source))
             ->filter->isNotEmpty()
             ->collapse()
+            ->groupBy('store')
+            ->map(fn ($states, $store) => [
+                'store' => $store,
+                'state' => $states
+                    ->pluck('state')
+                    ->reduce(
+                        fn ($merged, $state) => array_merge($merged, $state),
+                        []
+                    ),
+            ])
+            ->values()
             ->toArray();
     }
 
@@ -33,7 +44,7 @@ class Builder
         return $source->providers()
             ->map(fn ($provider) => App::make($provider))
             ->map(fn ($provider) => [
-                'mutation' => $provider->mutation(),
+                'store' => $provider->store(),
                 'state'    => $provider->state(),
             ]);
     }
