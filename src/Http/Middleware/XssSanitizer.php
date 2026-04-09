@@ -2,17 +2,8 @@
 
 namespace LaravelEnso\Core\Http\Middleware;
 
-use voku\helper\AntiXSS;
-
 class XssSanitizer
 {
-    private AntiXSS $antiXss;
-
-    public function __construct(AntiXSS $antiXss)
-    {
-        $this->antiXss = $antiXss;
-    }
-
     public function handle($request, $next, ...$fields)
     {
         $request->merge($this->clean($request->all($fields)));
@@ -20,9 +11,19 @@ class XssSanitizer
         return $next($request);
     }
 
-    private function clean($input)
+    private function clean(mixed $input): mixed
     {
-        return $this->antiXss->removeEvilAttributes(['style'])
-            ->xss_clean($input);
+        if (is_array($input)) {
+            return array_map(fn (mixed $value): mixed => $this->clean($value), $input);
+        }
+
+        if (!is_string($input)) {
+            return $input;
+        }
+
+        $sanitized = preg_replace('/\sstyle\s*=\s*("|\').*?\1/i', '', $input) ?? $input;
+        $sanitized = preg_replace('/\son[a-z]+\s*=\s*("|\').*?\1/i', '', $sanitized) ?? $sanitized;
+
+        return strip_tags($sanitized);
     }
 }

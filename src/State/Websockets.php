@@ -8,12 +8,12 @@ use LaravelEnso\Core\Facades\Websockets as Facade;
 
 class Websockets implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'websockets/configure';
+        return 'websockets';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
         return [
             'pusher' => [
