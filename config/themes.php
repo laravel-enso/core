@@ -1,8 +1,7 @@
 <?php
 
 return [
-    'light'     => 'light',
-    'dark'      => 'dark',
-    'light-rtl' => 'light-rtl',
-    'dark-rtl'  => 'dark-rtl',
+    'light'  => 'light',
+    'dark'   => 'dark',
+    'system' => 'system',
 ];
