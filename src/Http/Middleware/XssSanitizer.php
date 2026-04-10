@@ -17,7 +17,7 @@ class XssSanitizer
             return array_map(fn (mixed $value): mixed => $this->clean($value), $input);
         }
 
-        if (! is_string($input)) {
+        if (!is_string($input)) {
             return $input;
         }
 
