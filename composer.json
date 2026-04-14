@@ -39,7 +39,7 @@
         "laravel-enso/countries": "^2.0",
         "laravel-enso/data-export": "^3.8",
         "laravel-enso/helpers": "^4.0",
-        "laravel-enso/history-tracker": "^2.0",
+        "laravel-enso/history-tracker": "^3.0",
         "laravel-enso/impersonate": "^3.2",
         "laravel-enso/localisation": "^5.0",
         "laravel-enso/logs": "^4.0",
