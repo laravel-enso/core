@@ -46,7 +46,7 @@ class CoreCommandsTest extends TestCase
         Preferences::query()->update([
             'value' => [
                 'global' => ['theme' => 'dark'],
-                'local' => ['users.index' => ['collapsed' => true]],
+                'local'  => ['users.index' => ['collapsed' => true]],
             ],
         ]);
 

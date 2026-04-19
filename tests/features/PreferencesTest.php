@@ -40,8 +40,8 @@ class PreferencesTest extends TestCase
         $language = Language::first();
 
         $preferences->setGlobal([
-            'lang' => 'en',
-            'theme' => 'dark',
+            'lang'      => 'en',
+            'theme'     => 'dark',
             'bookmarks' => false,
         ]);
         $preferences->setLocal('products.index', ['filters' => ['active' => true]]);
@@ -68,12 +68,12 @@ class PreferencesTest extends TestCase
     public function preferences_store_endpoint_updates_global_preferences(): void
     {
         $global = [
-            'lang' => 'en',
-            'dtStateSave' => false,
+            'lang'            => 'en',
+            'dtStateSave'     => false,
             'expandedSidebar' => false,
-            'bookmarks' => false,
-            'theme' => 'dark',
-            'toastrPosition' => 'top-left',
+            'bookmarks'       => false,
+            'theme'           => 'dark',
+            'toastrPosition'  => 'top-left',
         ];
 
         $this->actingAs($this->user)

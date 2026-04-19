@@ -1,7 +1,6 @@
 <?php
 
 namespace CoreStateFixtures\FirstPackage\State {
-
     use LaravelEnso\Core\Contracts\ProvidesState;
 
     class AppStateProvider implements ProvidesState
@@ -36,7 +35,6 @@ namespace CoreStateFixtures\FirstPackage\State {
 }
 
 namespace CoreStateFixtures\SecondPackage\State {
-
     use LaravelEnso\Core\Contracts\ProvidesState;
 
     class AppStateOverrideProvider implements ProvidesState
@@ -54,13 +52,11 @@ namespace CoreStateFixtures\SecondPackage\State {
 }
 
 namespace LaravelEnso\Core\Tests {
-
     use Illuminate\Foundation\Testing\RefreshDatabase;
     use Illuminate\Support\Collection;
     use Illuminate\Support\Facades\Config;
     use Illuminate\Support\Facades\File;
     use LaravelEnso\ActionLogger\Http\Middleware\ActionLogger;
-    use LaravelEnso\Core\Http\Middleware\VerifyActiveState;
     use LaravelEnso\Core\Services\State\Builder;
     use LaravelEnso\Core\Services\State\Source;
     use LaravelEnso\Impersonate\Http\Middleware\Impersonate;
@@ -123,7 +119,7 @@ namespace LaravelEnso\Core\Tests {
             $this->assertTrue($states->has('app'));
             $this->assertTrue($states->has('layout'));
             $this->assertSame([
-                'first' => true,
+                'first'  => true,
                 'shared' => 'second',
                 'second' => true,
             ], $states->get('app'));
