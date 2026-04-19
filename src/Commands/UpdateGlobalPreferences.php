@@ -27,25 +27,31 @@ class UpdateGlobalPreferences extends Command
     private function update($preference)
     {
         $current = $preference->global();
+        $default = $this->defaultGlobal();
 
-        $this->diff($current)
-            ->each(fn ($key) => $current[$key] = $this->default()->global($key));
+        foreach ($this->diff($current) as $key) {
+            $current[$key] = $default[$key];
+        }
 
-        $preference->value['global'] = $current;
+        $value = $preference->value;
+        $value['global'] = $current;
 
-        $preference->update(['value' => $preference->value]);
+        $preference->update(['value' => $value]);
     }
 
     private function diff($current)
     {
-        $global = $this->default->global();
-
-        return Collection::wrap($global)->keys()
+        return Collection::wrap($this->defaultGlobal())->keys()
             ->diff(Collection::wrap($current)->keys());
     }
 
     private function default()
     {
         return $this->default ??= Preferences::factory()->make();
+    }
+
+    private function defaultGlobal(): array
+    {
+        return data_get($this->default()->value, 'global', []);
     }
 }
