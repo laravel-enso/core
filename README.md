@@ -165,7 +165,7 @@ Capabilities:
 
 ### Commands
 
-- `enso:version`
+- `enso:version` (works with a github token, if neccesary)
 - `enso:preferences:reset`
 - `enso:preferences:update-global`
 - `enso:storage:reset`
