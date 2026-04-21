@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/core",
-    "description": "Main requirement & dependency aggregator for Laravel Enso",
+    "description": "The backend shell of a Laravel Enso application",
     "keywords": [
         "laravel-enso",
         "enso-core",

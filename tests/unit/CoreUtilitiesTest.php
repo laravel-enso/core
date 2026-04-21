@@ -19,6 +19,7 @@ class CoreUtilitiesTest extends TestCase
     public function version_service_and_command_report_current_and_latest_versions(): void
     {
         Config::set('enso.config.version', '1.0.0');
+        Config::set('enso.config.githubToken', 'github-token');
 
         Http::fake([
             'api.github.com/repos/laravel-enso/enso/releases/latest' => Http::response([
@@ -31,6 +32,9 @@ class CoreUtilitiesTest extends TestCase
         $this->assertSame('1.0.0', $service->current());
         $this->assertSame('1.1.0', $service->latest());
         $this->assertTrue($service->isOutdated());
+
+        Http::assertSent(fn ($request) => $request->url() === 'https://api.github.com/repos/laravel-enso/enso/releases/latest'
+            && $request->hasHeader('Authorization', 'Bearer github-token'));
 
         $this->artisan('enso:version')
             ->expectsOutput('Current version is 1.0.0')
