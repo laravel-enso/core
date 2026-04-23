@@ -70,7 +70,7 @@ namespace LaravelEnso\Core\Tests {
     {
         use RefreshDatabase;
 
-        private string $fixturesVendor = '/Users/adi/code/solarlink/vendor/core-state-fixtures';
+        private string $fixturesVendor = __DIR__.'/../../../../core-state-fixtures';
 
         protected function tearDown(): void
         {
