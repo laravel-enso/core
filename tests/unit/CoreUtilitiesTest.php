@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use LaravelEnso\Core\Rules\DistinctPassword;
+use LaravelEnso\Core\Services\Inspiring;
 use LaravelEnso\Core\Services\Version;
 use LaravelEnso\Users\Models\User;
 use PHPUnit\Framework\Attributes\Test;
@@ -59,6 +60,20 @@ class CoreUtilitiesTest extends TestCase
         $this->assertSame(
             __('You cannot use the existing password'),
             $rule->message()
+        );
+    }
+
+    #[Test]
+    public function inspiring_service_returns_only_configured_quotes(): void
+    {
+        Config::set('enso.inspiring.quotes', [
+            'First quote',
+            'Second quote',
+        ]);
+
+        $this->assertContains(
+            Inspiring::quote(),
+            Config::get('enso.inspiring.quotes')
         );
     }
 }
