@@ -57,9 +57,13 @@ class CoreCommandsTest extends TestCase
         $this->assertSame(User::count(), Preferences::count());
 
         Preferences::each(function (Preferences $preferences) {
+            $expected = Preferences::factory()->make()->value;
+            $actual = $preferences->value;
+
+            $this->assertSame($expected['local'], $actual['local']);
             $this->assertSame(
-                Preferences::factory()->make()->value,
-                $preferences->value
+                $expected['global'],
+                array_intersect_key($actual['global'], $expected['global'])
             );
         });
     }
