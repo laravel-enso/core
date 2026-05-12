@@ -12,8 +12,12 @@ class Login implements Table
 
     public function query(): Builder
     {
-        return Model::with(['user.avatar', 'user.person'])
-            ->select(['id', 'user_id', 'ip', 'user_agent', 'created_at']);
+        return Model::with(['user.avatar', 'user.person', 'user.role'])->selectRaw('
+            logins.id, logins.user_id, people.name, users.email, roles.name as role,
+            logins.ip, logins.user_agent, logins.created_at
+        ')->join('users', 'logins.user_id', '=', 'users.id')
+            ->join('people', 'users.person_id', '=', 'people.id')
+            ->join('roles', 'users.role_id', '=', 'roles.id');
     }
 
     public function templatePath(): string

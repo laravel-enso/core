@@ -2,19 +2,38 @@
     "name": "Logins",
     "routePrefix": "system.logins",
     "crtNo": true,
-    "defaultSortDirection": "DESC",
+    "defaultSort": "logins.created_at",
+    "defaultSortDirection": "desc",
     "buttons": [
         "excel"
     ],
     "columns": [
         {
-            "label": "User",
-            "name": "user",
-            "data": "user",
-            "resource": "LaravelEnso\\Users\\Http\\Resources\\User",
+            "label": "Name",
+            "name": "name",
+            "data": "people.name",
             "meta": [
-                "slot",
-                "notExportable"
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Email",
+            "name": "email",
+            "data": "users.email",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Role",
+            "name": "role",
+            "data": "roles.name",
+            "meta": [
+                "searchable",
+                "sortable",
+                "slot"
             ]
         },
         {
@@ -24,7 +43,8 @@
             "meta": [
                 "searchable",
                 "sortable"
-            ]
+            ],
+            "class": "is-number"
         },
         {
             "label": "User Agent",
@@ -34,6 +54,17 @@
                 "searchable",
                 "sortable"
             ]
+        },
+        {
+            "label": "",
+            "name": "avatar",
+            "data": "user",
+            "resource": "LaravelEnso\\Users\\Http\\Resources\\User",
+            "meta": [
+                "slot",
+                "notExportable"
+            ],
+            "class": "is-paddingless"
         },
         {
             "label": "Created at",

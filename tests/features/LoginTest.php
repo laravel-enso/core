@@ -177,6 +177,39 @@ class LoginTest extends TestCase
     }
 
     #[Test]
+    public function filters_logins_by_role()
+    {
+        $other = User::where('role_id', '<>', $this->testModel->role_id)
+            ->firstOrFail();
+
+        LoginModel::create([
+            'user_id' => $this->testModel->id,
+            'ip' => '127.0.0.1',
+            'user_agent' => 'PHPUnit',
+        ]);
+
+        LoginModel::create([
+            'user_id' => $other->id,
+            'ip' => '127.0.0.2',
+            'user_agent' => 'PHPUnit',
+        ]);
+
+        $params = $this->tableParams([
+            'filters' => [
+                'users' => [
+                    'role_id' => $this->testModel->role_id,
+                ],
+            ],
+        ]);
+
+        $this->actingAs($this->testModel)
+            ->get(route('system.logins.tableData', $params, false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['ip' => '127.0.0.1'])
+            ->assertJsonMissing(['ip' => '127.0.0.2']);
+    }
+
+    #[Test]
     public function filters_logins_by_created_at_interval()
     {
         LoginModel::create([
