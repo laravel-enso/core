@@ -2,6 +2,7 @@
     "name": "Logins",
     "routePrefix": "system.logins",
     "crtNo": true,
+    "defaultSortDirection": "DESC",
     "buttons": [
         "excel"
     ],
