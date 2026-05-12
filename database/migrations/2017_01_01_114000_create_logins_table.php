@@ -17,6 +17,8 @@ return new class() extends Migration {
             $table->text('user_agent');
 
             $table->timestamps();
+
+            $table->index('created_at');
         });
     }
 
