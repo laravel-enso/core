@@ -10,3 +10,7 @@ Route::prefix('core')
 
         require __DIR__.'/core/preferences.php';
     });
+
+Route::prefix('system/logins')
+    ->as('system.logins.')
+    ->group(fn () => require __DIR__.'/core/logins.php');

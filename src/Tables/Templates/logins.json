@@ -1,0 +1,47 @@
+{
+    "name": "Logins",
+    "routePrefix": "system.logins",
+    "crtNo": true,
+    "buttons": [
+        "excel"
+    ],
+    "columns": [
+        {
+            "label": "User",
+            "name": "user",
+            "data": "user",
+            "resource": "LaravelEnso\\Users\\Http\\Resources\\User",
+            "meta": [
+                "slot",
+                "notExportable"
+            ]
+        },
+        {
+            "label": "IP",
+            "name": "ip",
+            "data": "logins.ip",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "User Agent",
+            "name": "user_agent",
+            "data": "logins.user_agent",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Created at",
+            "name": "created_at",
+            "data": "logins.created_at",
+            "meta": [
+                "sortable",
+                "datetime"
+            ]
+        }
+    ]
+}

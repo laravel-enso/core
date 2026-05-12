@@ -50,6 +50,7 @@ The package automatically:
 ## Features
 
 - Provides the base Enso API shell, including guest meta, SPA home state, auth routes, and preferences routes.
+- Provides a read-only `System > Logins` table for login history, with user and datetime interval filtering.
 - Registers the `core` middleware group used by authenticated Enso routes.
 - Configures password policy defaults from `enso.auth.password`.
 - Builds the SPA boot state from state providers discovered across Enso packages.
@@ -114,6 +115,12 @@ Authenticated core endpoints:
 - `GET /api/core/home`
 - `PATCH /api/core/preferences/store/{route?}`
 - `POST /api/core/preferences/reset/{route?}`
+
+Authenticated system login table endpoints:
+
+- `GET /api/system/logins/initTable`
+- `GET /api/system/logins/tableData`
+- `GET /api/system/logins/exportExcel`
 
 ### Middleware
 
@@ -183,6 +190,18 @@ Notifications:
 - `PasswordExpiresSoon`
 - `ResetPassword`
 
+### Login History
+
+Model:
+
+- `LaravelEnso\Core\Models\Login`
+
+The package records successful logins and exposes them through the `system.logins` Enso table. The table includes user, IP, user agent, and login datetime columns. Login history is read-only and supports filtering by user and by `created_at` interval.
+
+Upgrade support:
+
+- `LaravelEnso\Core\Upgrades\LoginCreatedAtIndex` adds the `logins.created_at` index for existing installations.
+
 ## Depends On
 
 Required Enso packages:
@@ -203,6 +222,7 @@ Required Enso packages:
 - [`laravel-enso/rememberable`](https://docs.laravel-enso.com/backend/rememberable.html) [↗](https://github.com/laravel-enso/rememberable)
 - [`laravel-enso/roles`](https://docs.laravel-enso.com/backend/roles.html) [↗](https://github.com/laravel-enso/roles)
 - [`laravel-enso/sentry`](https://docs.laravel-enso.com/backend/sentry.html) [↗](https://github.com/laravel-enso/sentry)
+- [`laravel-enso/tables`](https://docs.laravel-enso.com/backend/tables.html) [↗](https://github.com/laravel-enso/tables)
 - [`laravel-enso/upgrade`](https://docs.laravel-enso.com/backend/upgrade.html) [↗](https://github.com/laravel-enso/upgrade)
 - [`laravel-enso/user-groups`](https://docs.laravel-enso.com/backend/user-groups.html) [↗](https://github.com/laravel-enso/user-groups)
 - [`laravel-enso/users`](https://docs.laravel-enso.com/backend/users.html) [↗](https://github.com/laravel-enso/users)

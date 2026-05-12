@@ -50,6 +50,7 @@
         "laravel-enso/rememberable": "^4.0",
         "laravel-enso/roles": "^5.0",
         "laravel-enso/sentry": "^2.0",
+        "laravel-enso/tables": "^5.0",
         "laravel-enso/upgrade": "^2.14",
         "laravel-enso/user-groups": "^2.0",
         "laravel-enso/users": "^2.0",

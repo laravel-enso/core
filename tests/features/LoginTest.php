@@ -2,12 +2,17 @@
 
 namespace LaravelEnso\Core\Tests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\PersonalAccessToken;
+use LaravelEnso\Core\Models\Login as LoginModel;
+use LaravelEnso\Menus\Models\Menu;
+use LaravelEnso\Permissions\Models\Permission;
+use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -15,12 +20,15 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     use RefreshDatabase;
+    use Datatable {
+        can_view_index as private canViewLoginsTable;
+    }
 
     private const Password = 'password';
     private const WrongPassword = 'wrong_password';
     private const SpaUrl = 'spa.test';
 
-    private $permissionGroup = 'administration.users';
+    private $permissionGroup = 'system.logins';
     private $testModel;
     private $spaGuard;
 
@@ -128,6 +136,95 @@ class LoginTest extends TestCase
         $this->assertFalse($this->isAuthenticated());
     }
 
+    #[Test]
+    public function can_view_index()
+    {
+        $this->actingAs($this->testModel);
+
+        $this->canViewLoginsTable();
+    }
+
+    #[Test]
+    public function filters_logins_by_user()
+    {
+        $other = User::whereKeyNot($this->testModel->id)->firstOrFail();
+
+        LoginModel::create([
+            'user_id' => $this->testModel->id,
+            'ip' => '127.0.0.1',
+            'user_agent' => 'PHPUnit',
+        ]);
+
+        LoginModel::create([
+            'user_id' => $other->id,
+            'ip' => '127.0.0.2',
+            'user_agent' => 'PHPUnit',
+        ]);
+
+        $params = $this->tableParams([
+            'filters' => [
+                'logins' => [
+                    'user_id' => $this->testModel->id,
+                ],
+            ],
+        ]);
+
+        $this->actingAs($this->testModel)
+            ->get(route('system.logins.tableData', $params, false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['ip' => '127.0.0.1'])
+            ->assertJsonMissing(['ip' => '127.0.0.2']);
+    }
+
+    #[Test]
+    public function filters_logins_by_created_at_interval()
+    {
+        LoginModel::create([
+            'user_id' => $this->testModel->id,
+            'ip' => '127.0.0.1',
+            'user_agent' => 'PHPUnit',
+            'created_at' => Carbon::parse('2026-05-12 10:00:00'),
+        ]);
+
+        LoginModel::create([
+            'user_id' => $this->testModel->id,
+            'ip' => '127.0.0.2',
+            'user_agent' => 'PHPUnit',
+            'created_at' => Carbon::parse('2026-05-10 10:00:00'),
+        ]);
+
+        $params = $this->tableParams([
+            'intervals' => [
+                'logins' => [
+                    'created_at' => [
+                        'min' => '2026-05-12 00:00:00',
+                        'max' => '2026-05-12 23:59:59',
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->actingAs($this->testModel)
+            ->get(route('system.logins.tableData', $params, false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['ip' => '127.0.0.1'])
+            ->assertJsonMissing(['ip' => '127.0.0.2']);
+    }
+
+    #[Test]
+    public function creates_logins_structure()
+    {
+        $this->assertTrue(Permission::whereName('system.logins.index')->exists());
+        $this->assertTrue(Permission::whereName('system.logins.initTable')->exists());
+        $this->assertTrue(Permission::whereName('system.logins.tableData')->exists());
+        $this->assertTrue(Permission::whereName('system.logins.exportExcel')->exists());
+
+        $this->assertTrue(Menu::whereName('Logins')
+            ->whereHas('permission', fn ($query) => $query
+                ->whereName('system.logins.index'))
+            ->exists());
+    }
+
     private function loginApi($password = null, $referer = null): TestResponse
     {
         return $this->post(route('login'), [
@@ -145,6 +242,16 @@ class LoginTest extends TestCase
             'email'    => $this->testModel->email,
             'password' => $password ?? self::Password,
         ], ['referer' => self::SpaUrl]);
+    }
+
+    private function tableParams(array $params = []): array
+    {
+        return [
+            'columns' => [],
+            'meta' => '{"start":0,"length":10,"sort":false,"search":"","forceInfo":false,"searchMode":"full"}',
+            'filters' => json_encode($params['filters'] ?? [], JSON_THROW_ON_ERROR),
+            'intervals' => json_encode($params['intervals'] ?? [], JSON_THROW_ON_ERROR),
+        ];
     }
 
     private function user(): User
