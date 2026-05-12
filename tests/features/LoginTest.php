@@ -147,7 +147,7 @@ class LoginTest extends TestCase
     #[Test]
     public function filters_logins_by_user()
     {
-        $other = User::whereKeyNot($this->testModel->id)->firstOrFail();
+        $other = User::factory()->create();
 
         LoginModel::create([
             'user_id' => $this->testModel->id,
