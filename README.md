@@ -211,7 +211,6 @@ Required Enso packages:
 - [`laravel-enso/countries`](https://docs.laravel-enso.com/backend/countries.html) [↗](https://github.com/laravel-enso/countries)
 - [`laravel-enso/data-export`](https://docs.laravel-enso.com/backend/data-export.html) [↗](https://github.com/laravel-enso/data-export)
 - [`laravel-enso/helpers`](https://docs.laravel-enso.com/backend/helpers.html) [↗](https://github.com/laravel-enso/helpers)
-- [`laravel-enso/history-tracker`](https://docs.laravel-enso.com/backend/history-tracker.html) [↗](https://github.com/laravel-enso/history-tracker)
 - [`laravel-enso/impersonate`](https://docs.laravel-enso.com/backend/impersonate.html) [↗](https://github.com/laravel-enso/impersonate)
 - [`laravel-enso/localisation`](https://docs.laravel-enso.com/backend/localisation.html) [↗](https://github.com/laravel-enso/localisation)
 - [`laravel-enso/logs`](https://docs.laravel-enso.com/backend/logs.html) [↗](https://github.com/laravel-enso/logs)
