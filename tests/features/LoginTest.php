@@ -179,8 +179,7 @@ class LoginTest extends TestCase
     #[Test]
     public function filters_logins_by_role()
     {
-        $other = User::where('role_id', '<>', $this->testModel->role_id)
-            ->firstOrFail();
+        $other = User::factory()->create();
 
         LoginModel::create([
             'user_id' => $this->testModel->id,
