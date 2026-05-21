@@ -25,7 +25,7 @@ class MailTest extends TestCase
         );
 
         $this->assertSame(
-            'laravel-enso/core::emails.reset',
+            'laravel-enso/core::emails.set',
             $registry->get('password-set')->view()
         );
     }
@@ -55,8 +55,8 @@ class MailTest extends TestCase
 
         $this->assertStringContainsString('Set your password', $html);
         $this->assertStringContainsString('This link can be used only once', $html);
-        $this->assertStringContainsString('https://example.com/password/set/token', $html);
-        $this->assertStringContainsString('<a href="https://example.com/password/set/token"', $html);
+        $this->assertStringContainsString('https://example.com/password/reset/token', $html);
+        $this->assertStringContainsString('<a href="https://example.com/password/reset/token"', $html);
     }
 
     #[Test]

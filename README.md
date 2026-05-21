@@ -56,7 +56,7 @@ The package automatically:
 - Builds the SPA boot state from state providers discovered across Enso packages.
 - Persists per-user global and route-level preferences.
 - Publishes shared image assets.
-- Registers reset and set password mail previews in the shared Enso mail preview catalog.
+- Registers reset and set password mail notifications and previews in the shared Enso mail preview catalog.
 - Registers operational commands for version reporting, storage resets, preference resets, preference upgrades, and app-update notifications.
 - Integrates login tracking, password reset flows, websocket support, route authorization, localisation, impersonation, and action logging through the wider Enso stack.
 
@@ -190,6 +190,12 @@ Notifications:
 
 - `PasswordExpiresSoon`
 - `ResetPassword`
+- `SetPassword`
+
+Password helpers on the user model:
+
+- `sendResetPasswordEmail()`
+- `sendSetPasswordEmail()`
 
 ### Login History
 

@@ -5,7 +5,6 @@ namespace LaravelEnso\Core;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\Commands\AnnounceAppUpdate;
 use LaravelEnso\Core\Commands\ResetPreferences;
@@ -95,20 +94,18 @@ class AppServiceProvider extends ServiceProvider
                 'name' => 'Jane',
                 'url' => 'https://example.com/password/reset/token',
             ],
+            section: PreviewDefinition::Core,
         ));
 
         $registry->register(new PreviewDefinition(
             key: 'password-set',
             name: 'Password Set',
-            view: 'laravel-enso/core::emails.reset',
+            view: 'laravel-enso/core::emails.set',
             data: [
                 'name' => 'Jane',
-                'url' => 'https://example.com/password/set/token',
-                'title' => Lang::get('Set your password'),
-                'intro' => Lang::get('An account was created for you. Set your password to activate access and finish the first login.'),
-                'action' => Lang::get('Set password'),
-                'notice' => Lang::get('This link can be used only once and expires automatically.'),
+                'url' => 'https://example.com/password/reset/token',
             ],
+            section: PreviewDefinition::Core,
         ));
 
         return $this;
