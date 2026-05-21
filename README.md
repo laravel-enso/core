@@ -11,7 +11,7 @@
 
 Core is the backend shell of a Laravel Enso application.
 
-It aggregates the packages required for a standard Enso installation, registers the framework-level service providers and middleware stack, exposes the base authentication and SPA endpoints, builds the frontend boot state, manages user preferences, publishes shared assets and mail resources, and provides a handful of operational commands used across Enso projects.
+It aggregates the packages required for a standard Enso installation, registers the framework-level service providers and middleware stack, exposes the base authentication and SPA endpoints, builds the frontend boot state, manages user preferences, publishes shared assets, registers core mail previews, and provides a handful of operational commands used across Enso projects.
 
 It is the package that turns the rest of the Enso ecosystem into a coherent application runtime.
 
@@ -36,14 +36,14 @@ If you want to publish the package resources, the relevant tags are:
 php artisan vendor:publish --tag=core-config
 php artisan vendor:publish --tag=core-seeders
 php artisan vendor:publish --tag=core-assets
-php artisan vendor:publish --tag=core-email
 ```
 
 The package automatically:
 
 - loads API routes
 - loads migrations
-- loads mail views
+- loads core mail views
+- registers core mail previews through `laravel-enso/mails`
 - registers Enso service providers
 - configures the Eloquent factory resolver for package models
 
@@ -55,7 +55,8 @@ The package automatically:
 - Configures password policy defaults from `enso.auth.password`.
 - Builds the SPA boot state from state providers discovered across Enso packages.
 - Persists per-user global and route-level preferences.
-- Publishes shared email templates and image assets.
+- Publishes shared image assets.
+- Registers reset and set password mail previews in the shared Enso mail preview catalog.
 - Registers operational commands for version reporting, storage resets, preference resets, preference upgrades, and app-update notifications.
 - Integrates login tracking, password reset flows, websocket support, route authorization, localisation, impersonation, and action logging through the wider Enso stack.
 

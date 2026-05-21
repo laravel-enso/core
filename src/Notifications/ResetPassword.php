@@ -7,24 +7,25 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 
 class ResetPassword extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $token;
+    public string $token;
 
-    public function __construct($token)
+    public function __construct(string $token)
     {
         $this->token = $token;
     }
 
-    public function via()
+    public function via(): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         $appName = Config::get('app.name');
 
@@ -32,7 +33,7 @@ class ResetPassword extends Notification implements ShouldQueue
             ->subject("[ {$appName} ] {$this->title()}")
             ->markdown('laravel-enso/core::emails.reset', [
                 'name' => $notifiable->person->name,
-                'url'  => url("password/reset/{$this->token}"),
+                'url'  => URL::to("password/reset/{$this->token}"),
             ]);
     }
 

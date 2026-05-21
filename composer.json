@@ -42,6 +42,7 @@
         "laravel-enso/impersonate": "^3.2",
         "laravel-enso/localisation": "^5.0",
         "laravel-enso/logs": "^4.0",
+        "laravel-enso/mails": "^1.0",
         "laravel-enso/menus": "^5.0",
         "laravel-enso/migrator": "^2.0",
         "laravel-enso/notifications": "^4.1",
