@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Core\AppServiceProvider;
+use LaravelEnso\Core\MailServiceProvider;
 use LaravelEnso\Mails\Preview\PreviewRegistry;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -13,6 +14,13 @@ use Tests\TestCase;
 class MailTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->register(MailServiceProvider::class);
+    }
 
     #[Test]
     public function registers_owned_mail_previews(): void

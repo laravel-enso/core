@@ -14,8 +14,6 @@ use LaravelEnso\Core\Commands\Version;
 use LaravelEnso\Core\Services\Websockets;
 use LaravelEnso\Helpers\Services\Dummy;
 use LaravelEnso\Helpers\Services\FactoryResolver;
-use LaravelEnso\Mails\Preview\PreviewDefinition;
-use LaravelEnso\Mails\Preview\PreviewRegistry;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
         $this->loadDependencies()
             ->publishDependencies()
             ->publishResources()
-            ->registerPreviews()
             ->setFactoryResolver()
             ->commands(
                 AnnounceAppUpdate::class,
@@ -78,35 +75,6 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/images' => $this->app->resourcePath('images'),
         ], ['core-assets', 'enso-assets']);
-
-        return $this;
-    }
-
-    private function registerPreviews(): self
-    {
-        $registry = $this->app->make(PreviewRegistry::class);
-
-        $registry->register(new PreviewDefinition(
-            key: 'password-reset',
-            name: 'Password Reset',
-            view: 'laravel-enso/core::emails.reset',
-            data: [
-                'name' => 'Jane',
-                'url' => 'https://example.com/password/reset/token',
-            ],
-            section: PreviewDefinition::Core,
-        ));
-
-        $registry->register(new PreviewDefinition(
-            key: 'password-set',
-            name: 'Password Set',
-            view: 'laravel-enso/core::emails.set',
-            data: [
-                'name' => 'Jane',
-                'url' => 'https://example.com/password/reset/token',
-            ],
-            section: PreviewDefinition::Core,
-        ));
 
         return $this;
     }
