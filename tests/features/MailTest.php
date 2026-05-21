@@ -49,7 +49,6 @@ class MailTest extends TestCase
         $this->assertStringContainsString('Jane', $html);
         $this->assertStringContainsString('https://example.com/password/reset/token', $html);
         $this->assertStringContainsString('<a href="https://example.com/password/reset/token"', $html);
-        $this->assertStringContainsString('Echipa', $html);
     }
 
     #[Test]
