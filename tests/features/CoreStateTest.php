@@ -141,7 +141,10 @@ namespace LaravelEnso\Core\Tests {
                 ->assertJsonPath('meta.extendedDocumentTitle', true)
                 ->assertJsonPath('meta.showQuote', false)
                 ->assertJsonPath('routes.login.uri', 'api/login')
-                ->assertJsonPath('i18n.ro.Email', __('Email'));
+                ->assertJsonPath('i18n.ro.Email', __('Email'))
+                ->assertJsonPath('i18n.ro.Reset Password', __('Reset Password'))
+                ->assertJsonPath('i18n.ro.New Password', __('New Password'))
+                ->assertJsonPath('i18n.ro.Set a new password', __('Set a new password'));
 
             $this->assertSame('api/password/email', $routes['password.email']['uri']);
             $this->assertSame('api/password/reset', $routes['password.reset']['uri']);
